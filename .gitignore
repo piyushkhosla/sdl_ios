@@ -80,6 +80,6 @@ xcuserdata
 .pliste
 .pbxproje
 
-# Random temporary files #
+#  Custom Ignored Files  #
 ##########################
 SmartDeviceLinkTester/SmartDeviceLink.framework
