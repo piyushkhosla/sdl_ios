@@ -33,7 +33,7 @@
 #import <AppLink/FMCSyncTransport.h>
 #import <AppLink/FMCTransportListener.h>
 #import <AppLink/FMCTTSChunkFactory.h>
-#import <AppLink/FMCWiProProtocol.h>
+#import <AppLink/FMCAppLinkProtocol.h>
 
 //RPCs
 #import <AppLink/FMCAddCommand.h>

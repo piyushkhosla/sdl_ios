@@ -375,7 +375,7 @@ const int POLICIES_CORRELATION_ID = 65535;
         [self destroyHandshakeTimer];
         
         //Print Proxy Version To Console
-        [FMCDebugTool logInfo:@"SyncProxyVersion: %@", [self getProxyVersion]];
+        [FMCDebugTool logInfo:@"Framework Version: %@", [self getProxyVersion]];
         
         //Print external library versions to Console
         if (externalLibraries) {

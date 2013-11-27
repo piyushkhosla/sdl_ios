@@ -40,9 +40,9 @@
 +(FMCProtocolFrameHeader*) startSessionWithSessionType:(FMCSessionType) sessionType messageID:(UInt32)messageID version:(Byte)version {
 	FMCProtocolFrameHeader* header = [[[FMCProtocolFrameHeader alloc] init] autorelease];
     header._version = version;
-	header._frameType = FMFrameType_Control;
+	header._frameType = FMCFrameType_Control;
 	header._sessionType = sessionType;
-	header._frameData = FMFrameData_StartSession;
+	header._frameData = FMCFrameData_StartSession;
     header._messageID = messageID;
 	
 	return header;
@@ -52,10 +52,10 @@
 +(FMCProtocolFrameHeader*) endSessionWithSessionType:(FMCSessionType)sessionType sessionID:(Byte)sessionID messageID:(UInt32)messageID version:(Byte)version {
 	FMCProtocolFrameHeader* header = [[[FMCProtocolFrameHeader alloc] init] autorelease];
     header._version = version;
-	header._frameType = FMFrameType_Control;
+	header._frameType = FMCFrameType_Control;
 	header._sessionType = sessionType;
 	header._sessionID = sessionID;
-	header._frameData = FMFrameData_EndSession;
+	header._frameData = FMCFrameData_EndSession;
     header._messageID = messageID;
 
 	return header;
@@ -65,7 +65,7 @@
     header._version = version;
 	header._sessionType = sessionType;
 	header._sessionID = sessionID;
-	header._frameType = FMFrameType_Single;
+	header._frameType = FMCFrameType_Single;
 	header._dataSize = dataSize;
     header._messageID = messageID;
 	
@@ -77,7 +77,7 @@
     header._version = version;
 	header._sessionType = sessionType;
 	header._sessionID = sessionID;
-	header._frameType = FMFrameType_First;
+	header._frameType = FMCFrameType_First;
 	header._dataSize = 8;
     header._messageID = messageID;
 	
@@ -89,7 +89,7 @@
     header._version = version;
 	header._sessionType = sessionType;
 	header._sessionID = sessionID;
-	header._frameType = FMFrameType_Consecutive;
+	header._frameType = FMCFrameType_Consecutive;
 	header._dataSize = dataSize;
     header._messageID = messageID;
 	

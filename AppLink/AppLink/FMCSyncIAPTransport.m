@@ -145,7 +145,7 @@
 			@try {		
 				// Initialize and schedule the input stream:
 				if(self.inStream != nil) {
-                    [FMCDebugTool logInfo:@"FMSyncIAPTransport: connect:usedProtocol: Initializing input steam"];
+                    [FMCDebugTool logInfo:@"iAP: connect:usedProtocol: Initializing input steam"];
 					self.inStream.delegate = self;
 					[self.inStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 					[self.inStream open];
@@ -155,7 +155,7 @@
 				
 				// Initialize and schedule the output stream:
 				if(self.outStream != nil) {
-                    [FMCDebugTool logInfo:@"FMSyncIAPTransport: connect:usedProtocol: Initializing output steam"];
+                    [FMCDebugTool logInfo:@"iAP: connect:usedProtocol: Initializing output steam"];
 					self.outStream.delegate = self;
 					[self.outStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 					[self.outStream open];
@@ -167,7 +167,7 @@
 				return NO;
 			}//end catch
 		} else {
-            [FMCDebugTool logInfo:@"FMSyncIAPTransport: connect:usedProtocol: Session and Accessory not set"];
+            [FMCDebugTool logInfo:@"iAP: connect:usedProtocol: Session and Accessory not set"];
 			return NO;
 		}
 	}

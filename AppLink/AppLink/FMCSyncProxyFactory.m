@@ -7,13 +7,13 @@
 #import <AppLink/FMCDebugTool.h>
 #import <AppLink/FMCSyncIAPTransport.h>
 #import <AppLink/FMCSyncTcpTransport.h>
-#import <AppLink/FMCWiProProtocol.h>
+#import <AppLink/FMCAppLinkProtocol.h>
 
 @implementation FMCSyncProxyFactory
 
 +(FMCSyncProxy*) buildSyncProxyWithListener:(NSObject<FMCProxyListener>*) delegate {
     FMCSyncIAPTransport* transport = [[FMCSyncIAPTransport alloc] init];
-    FMCWiProProtocol* protocol = [[FMCWiProProtocol alloc] init];
+    FMCAppLinkProtocol* protocol = [[FMCAppLinkProtocol alloc] init];
     
     FMCSyncProxy *ret = [[FMCSyncProxy alloc] initWithTransport:transport protocol:protocol delegate:delegate];
     
@@ -28,7 +28,7 @@
                                    tcpPort: (NSString*) port {
     
     FMCSyncTcpTransport* transport = [[FMCSyncTcpTransport alloc] initWithEndpoint:ipaddress endpointParam:port];
-    FMCWiProProtocol* protocol = [[FMCWiProProtocol alloc] init];
+    FMCAppLinkProtocol* protocol = [[FMCAppLinkProtocol alloc] init];
     
     FMCSyncProxy *ret = [[FMCSyncProxy alloc] initWithTransport:transport protocol:protocol delegate:delegate];
     

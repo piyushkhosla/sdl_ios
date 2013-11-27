@@ -414,8 +414,8 @@
 		597C066817DEFF50003E6E1A /* FMCWarningLightStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04CF17DEFF50003E6E1A /* FMCWarningLightStatus.m */; };
 		597C066917DEFF50003E6E1A /* FMCWiperStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04D017DEFF50003E6E1A /* FMCWiperStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C066A17DEFF50003E6E1A /* FMCWiperStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04D117DEFF50003E6E1A /* FMCWiperStatus.m */; };
-		597C066B17DEFF51003E6E1A /* FMCWiProProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04D217DEFF50003E6E1A /* FMCWiProProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C066C17DEFF51003E6E1A /* FMCWiProProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04D317DEFF50003E6E1A /* FMCWiProProtocol.m */; };
+		597C066B17DEFF51003E6E1A /* FMCAppLinkProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04D217DEFF50003E6E1A /* FMCAppLinkProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		597C066C17DEFF51003E6E1A /* FMCAppLinkProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04D317DEFF50003E6E1A /* FMCAppLinkProtocol.m */; };
 		597C067A17DEFF51003E6E1A /* AppLink.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04E117DEFF50003E6E1A /* AppLink.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FBAC28E1181FEAF4003210A2 /* FMCExternalLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = FBAC28E0181FEAF4003210A2 /* FMCExternalLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -817,8 +817,8 @@
 		597C04CF17DEFF50003E6E1A /* FMCWarningLightStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCWarningLightStatus.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C04D017DEFF50003E6E1A /* FMCWiperStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCWiperStatus.h; sourceTree = "<group>"; };
 		597C04D117DEFF50003E6E1A /* FMCWiperStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCWiperStatus.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		597C04D217DEFF50003E6E1A /* FMCWiProProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCWiProProtocol.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		597C04D317DEFF50003E6E1A /* FMCWiProProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCWiProProtocol.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		597C04D217DEFF50003E6E1A /* FMCAppLinkProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCAppLinkProtocol.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		597C04D317DEFF50003E6E1A /* FMCAppLinkProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCAppLinkProtocol.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C04E117DEFF50003E6E1A /* AppLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppLink.h; sourceTree = "<group>"; };
 		FBAC28E0181FEAF4003210A2 /* FMCExternalLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCExternalLibrary.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1256,8 +1256,8 @@
 				597C04CF17DEFF50003E6E1A /* FMCWarningLightStatus.m */,
 				597C04D017DEFF50003E6E1A /* FMCWiperStatus.h */,
 				597C04D117DEFF50003E6E1A /* FMCWiperStatus.m */,
-				597C04D217DEFF50003E6E1A /* FMCWiProProtocol.h */,
-				597C04D317DEFF50003E6E1A /* FMCWiProProtocol.m */,
+				597C04D217DEFF50003E6E1A /* FMCAppLinkProtocol.h */,
+				597C04D317DEFF50003E6E1A /* FMCAppLinkProtocol.m */,
 				5913386117DEFC5E00CF214C /* Supporting Files */,
 			);
 			path = AppLink;
@@ -1474,7 +1474,7 @@
 				597C066517DEFF50003E6E1A /* FMCVrHelpItem.h in Headers */,
 				597C066717DEFF50003E6E1A /* FMCWarningLightStatus.h in Headers */,
 				597C066917DEFF50003E6E1A /* FMCWiperStatus.h in Headers */,
-				597C066B17DEFF51003E6E1A /* FMCWiProProtocol.h in Headers */,
+				597C066B17DEFF51003E6E1A /* FMCAppLinkProtocol.h in Headers */,
 				597C067A17DEFF51003E6E1A /* AppLink.h in Headers */,
 				5931469617E03CFD005C49C5 /* FMCBitConverter.h in Headers */,
 				597C058917DEFF50003E6E1A /* FMCNames.h in Headers */,
@@ -1756,7 +1756,7 @@
 				597C066617DEFF50003E6E1A /* FMCVrHelpItem.m in Sources */,
 				597C066817DEFF50003E6E1A /* FMCWarningLightStatus.m in Sources */,
 				597C066A17DEFF50003E6E1A /* FMCWiperStatus.m in Sources */,
-				597C066C17DEFF51003E6E1A /* FMCWiProProtocol.m in Sources */,
+				597C066C17DEFF51003E6E1A /* FMCAppLinkProtocol.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1798,7 +1798,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -1821,7 +1821,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
