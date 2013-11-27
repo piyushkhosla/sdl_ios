@@ -190,29 +190,29 @@
 
 -(void) checkConnectedSyncAccessory {
     
-    //TODO:DEBUGOUTS
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Looking For Sync"]];
-    [FMCDebugTool logInfo:@"iAP: Looking For Sync"];
-    //TODO:ENDDEBUGOUTS
+//    //TODO:DEBUGOUTS
+//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Looking For Sync"]];
+//    [FMCDebugTool logInfo:@"iAP: Looking For Sync"];
+//    //TODO:ENDDEBUGOUTS
     
     for (EAAccessory* anAccessory in [[EAAccessoryManager sharedAccessoryManager] connectedAccessories]) {
         
-        //TODO:DEBUGOUTS
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Accessory Found"]];
-        [FMCDebugTool logInfo:@"iAP: Accessory Found"];
-        //TODO:ENDDEBUGOUTS
+//        //TODO:DEBUGOUTS
+//        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Accessory Found"]];
+//        [FMCDebugTool logInfo:@"iAP: Accessory Found"];
+//        //TODO:ENDDEBUGOUTS
         
 		for (NSString *aProtocolString in [anAccessory protocolStrings]) {
-            //TODO:DEBUGOUTS
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Found Protocol String"]];
-            [FMCDebugTool logInfo:@"iAP: Found protocol string: %@", aProtocolString];
-            ///TODO:ENDDEBUGOUTS
+//            //TODO:DEBUGOUTS
+//            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Found Protocol String"]];
+//            [FMCDebugTool logInfo:@"iAP: Found protocol string: %@", aProtocolString];
+//            ///TODO:ENDDEBUGOUTS
 			
             if ([aProtocolString isEqualToString:SYNC_PROTOCOL_STRING]) {
-                //TODO:DEBUGOUTS
-                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Found Sync"]];
-                [FMCDebugTool logInfo:@"iAP: Found SYNC accessory: %@", anAccessory.name];
-                ///TODO:ENDDEBUGOUTS
+//                //TODO:DEBUGOUTS
+//                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Found Sync"]];
+//                [FMCDebugTool logInfo:@"iAP: Found SYNC accessory: %@", anAccessory.name];
+//                ///TODO:ENDDEBUGOUTS
                 
                 if (connectedSyncAccessory != nil) {
                     [connectedSyncAccessory release];
@@ -267,10 +267,10 @@
 }
 
 -(void) accessoryConnected:(NSNotification*) connectNotification {
-    //TODO:DEBUGOUTS
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Accessory Connected"]];
-    [FMCDebugTool logInfo:@"iAP: Accessory Connected"];
-    //TODO:ENDDEBUGOUTS
+//    //TODO:DEBUGOUTS
+//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Accessory Connected"]];
+//    [FMCDebugTool logInfo:@"iAP: Accessory Connected"];
+//    //TODO:ENDDEBUGOUTS
     
     EAAccessory *connectedAccessory = [self getSyncAccessoryFromNotification:connectNotification];
     
@@ -292,10 +292,10 @@
 
 -(void) accessoryDisconnected:(NSNotification*) connectNotification {
     
-    //TODO:DEBUGOUTS
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Accessory Disconnected"]];
-    [FMCDebugTool logInfo:@"iAP: Accessory Disconnected"];
-    //TODO:ENDDEBUGOUTS
+//    //TODO:DEBUGOUTS
+//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Accessory Disconnected"]];
+//    [FMCDebugTool logInfo:@"iAP: Accessory Disconnected"];
+//    //TODO:ENDDEBUGOUTS
     
     EAAccessory *disconnectedAccessory = [self getSyncAccessoryFromNotification:connectNotification];
     
@@ -352,10 +352,10 @@
 }
 
 - (void) disconnect {
-    //TODO:DEBUGOUTS
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Disconnect"]];
-    [FMCDebugTool logInfo:@"iAP: Disconnect"];
-    //TODO:ENDDEBUGOUTS
+//    //TODO:DEBUGOUTS
+//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Disconnect"]];
+//    [FMCDebugTool logInfo:@"iAP: Disconnect"];
+//    //TODO:ENDDEBUGOUTS
     
     @synchronized (transportLock) {
 		
@@ -389,10 +389,10 @@
     
     [self disconnect];
     
-    //TODO:DEBUGOUTS
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Dealloc"]];
-    [FMCDebugTool logInfo:@"iAP: Dealloc"];
-    //TODO:ENDDEBUGOUTS
+//    //TODO:DEBUGOUTS
+//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Dealloc"]];
+//    [FMCDebugTool logInfo:@"iAP: Dealloc"];
+//    //TODO:ENDDEBUGOUTS
     
     if (registeredForNotifications) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:EAAccessoryDidConnectNotification object:nil];
