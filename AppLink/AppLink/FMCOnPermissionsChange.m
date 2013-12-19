@@ -31,7 +31,16 @@
 }
 
 -(NSMutableArray*) permissionItem {
-    return [parameters objectForKey:NAMES_PermissionItem];
+    NSMutableArray* array = [parameters objectForKey:NAMES_PermissionItem];
+    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCPermissionItem.class]) {
+        return array;
+    } else {
+        NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
+        for (NSDictionary* dict in array) {
+            [newList addObject:[[[FMCPermissionItem alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+        }
+        return newList;
+    }
 }
 
 @end

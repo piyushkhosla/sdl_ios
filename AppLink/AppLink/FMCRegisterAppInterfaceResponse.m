@@ -222,12 +222,16 @@
     }
 }
 
--(FMCAudioPassThruCapabilities*) audioPassThruCapabilities {
-    NSObject* obj = [parameters objectForKey:NAMES_audioPassThruCapabilities];
-    if ([obj isKindOfClass:FMCAudioPassThruCapabilities.class]) {
-        return (FMCAudioPassThruCapabilities*)obj;
+-(NSMutableArray*) audioPassThruCapabilities {
+    NSMutableArray* array = [parameters objectForKey:NAMES_audioPassThruCapabilities];
+    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCAudioPassThruCapabilities.class]) {
+        return array;
     } else {
-        return [[[FMCAudioPassThruCapabilities alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
+        for (NSString* enumString in array) {
+            [newList addObject:[FMCAudioPassThruCapabilities valueOf:enumString]];
+        }
+        return newList;
     }
 }
 
