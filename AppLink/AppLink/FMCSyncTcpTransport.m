@@ -78,8 +78,8 @@ static void TCPCallback(CFSocketRef socket, CFSocketCallBackType type, CFDataRef
     int sock_fd = call_socket([endpointName UTF8String], [endpointParam UTF8String]);
 	if (sock_fd < 0) {
         //TODO:DEBUGOUTS
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Server Not Ready, Connection Failed"]];
-		[FMCDebugTool logInfo:@"Server Not Ready, Connection Failed"];
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Failed To Connect"]];
+		[FMCDebugTool logInfo:@"Failed To Connect"];
         //TODO:ENDDEBUGOUTS
 		return NO;
 	}

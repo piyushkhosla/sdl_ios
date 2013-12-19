@@ -5,6 +5,10 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCResponse.h>
 
+/**
+ * FMCAddSubMenuResponse is sent, when FMCAddSubMenu has been called
+ * Since <b>AppLink 1.0</b>
+ */
 @interface FMCAddSubMenuResponse : FMCRPCResponse {}
 
 -(id) init;

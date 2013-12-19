@@ -5,6 +5,11 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCResponse.h>
 
+/**
+ * FMCEncodedSyncPDataResponse is sent, when FMCEncodedSyncPData has been called
+ *
+ * Since <b>AppLink 1.0</b>
+ */
 @interface FMCEncodedSyncPDataResponse: FMCRPCResponse {}
 
 -(id) init;
