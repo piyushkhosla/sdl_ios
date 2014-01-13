@@ -413,7 +413,6 @@ const int POLICIES_CORRELATION_ID = 65535;
                 NSDictionary *encodedSyncPData = (NSDictionary *)[rpcMsg getParameters:@"data"];
                 NSNumber *encodedSyncPTimeout = (NSNumber *) [rpcMsg getParameters:@"Timeout"];
                 [self sendEncodedSyncPData:encodedSyncPData toURL:urlString withTimeout:encodedSyncPTimeout];
-                return;
             }
             //TODO:DEBUGOUTS
             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"URL is nil, pass to app"]];
@@ -427,7 +426,6 @@ const int POLICIES_CORRELATION_ID = 65535;
             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Duplicate Policy Update Request, Ignoring"]];
             [FMCDebugTool logInfo:@"Duplicate Policy Update Request, Ignoring"];
             //TODO:ENDDEBUGOUTS
-            return;
         }
     }
     
