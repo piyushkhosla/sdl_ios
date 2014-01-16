@@ -9,6 +9,7 @@ FMCFileType* FMCFileType_GRAPHIC_JPEG = nil;
 FMCFileType* FMCFileType_GRAPHIC_PNG = nil;
 FMCFileType* FMCFileType_AUDIO_WAVE = nil;
 FMCFileType* FMCFileType_AUDIO_MP3 = nil;
+FMCFileType* FMCFileType_BINARY = nil;
 
 NSMutableArray* FMCFileType_values = nil;
 @implementation FMCFileType
@@ -25,12 +26,13 @@ NSMutableArray* FMCFileType_values = nil;
 +(NSMutableArray*) values {
     if (FMCFileType_values == nil) {
         FMCFileType_values = [[NSMutableArray alloc] initWithObjects:
-                             FMCFileType.GRAPHIC_BMP,
-                             FMCFileType.GRAPHIC_JPEG,
-                             FMCFileType.GRAPHIC_PNG,
-                             FMCFileType.AUDIO_WAVE,
-                             FMCFileType.AUDIO_MP3,
-                             nil];
+                              FMCFileType.GRAPHIC_BMP,
+                              FMCFileType.GRAPHIC_JPEG,
+                              FMCFileType.GRAPHIC_PNG,
+                              FMCFileType.AUDIO_WAVE,
+                              FMCFileType.AUDIO_MP3,
+                              FMCFileType.BINARY,
+                              nil];
     }
     return FMCFileType_values;
 }
@@ -68,6 +70,13 @@ NSMutableArray* FMCFileType_values = nil;
         FMCFileType_AUDIO_MP3 = [[FMCFileType alloc] initWithValue:@"AUDIO_MP3"];
     }
     return FMCFileType_AUDIO_MP3;
+}
+
++(FMCFileType*) BINARY {
+    if (FMCFileType_BINARY == nil) {
+        FMCFileType_BINARY = [[FMCFileType alloc] initWithValue:@"BINARY"];
+    }
+    return FMCFileType_BINARY;
 }
 
 @end

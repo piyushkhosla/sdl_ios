@@ -15,5 +15,6 @@
 +(FMCFileType*) GRAPHIC_PNG;
 +(FMCFileType*) AUDIO_WAVE;
 +(FMCFileType*) AUDIO_MP3;
++(FMCFileType*) BINARY;
 
 @end

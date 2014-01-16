@@ -13,6 +13,7 @@
 +(FMCWarningLightStatus*) OFF;
 +(FMCWarningLightStatus*) ON;
 +(FMCWarningLightStatus*) FLASH;
++(FMCWarningLightStatus*) NOT_USED;
 
 @end
 

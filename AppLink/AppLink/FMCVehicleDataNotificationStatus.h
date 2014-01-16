@@ -13,6 +13,7 @@
 +(FMCVehicleDataNotificationStatus*) NOT_SUPPORTED;
 +(FMCVehicleDataNotificationStatus*) NORMAL;
 +(FMCVehicleDataNotificationStatus*) ACTIVE;
++(FMCVehicleDataNotificationStatus*) NOT_USED;
 
 @end
 

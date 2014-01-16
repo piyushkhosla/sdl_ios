@@ -18,6 +18,8 @@ FMCPRNDL* FMCPRNDL_FIFTH = nil;
 FMCPRNDL* FMCPRNDL_SIXTH = nil;
 FMCPRNDL* FMCPRNDL_SEVENTH = nil;
 FMCPRNDL* FMCPRNDL_EIGTH = nil;
+FMCPRNDL* FMCPRNDL_UNKNOWN = nil;
+FMCPRNDL* FMCPRNDL_FAULT = nil;
 
 NSMutableArray* FMCPRNDL_values = nil; 
 
@@ -49,7 +51,9 @@ NSMutableArray* FMCPRNDL_values = nil;
                                     FMCPRNDL.SIXTH,
                                     FMCPRNDL.SEVENTH,
                                     FMCPRNDL.EIGTH,
-									nil];
+                                    FMCPRNDL.UNKNOWN,
+                                    FMCPRNDL.FAULT,
+                                    nil];
 	} 
 	return FMCPRNDL_values; 
 }
@@ -150,6 +154,20 @@ NSMutableArray* FMCPRNDL_values = nil;
 		FMCPRNDL_EIGTH = [[FMCPRNDL alloc] initWithValue:@"EIGTH"];
 	}
 	return FMCPRNDL_EIGTH;
+}
+
++(FMCPRNDL*) UNKNOWN {
+	if (FMCPRNDL_UNKNOWN == nil) {
+		FMCPRNDL_UNKNOWN = [[FMCPRNDL alloc] initWithValue:@"UNKNOWN"];
+	}
+	return FMCPRNDL_UNKNOWN;
+}
+
++(FMCPRNDL*) FAULT {
+	if (FMCPRNDL_FAULT == nil) {
+		FMCPRNDL_FAULT = [[FMCPRNDL alloc] initWithValue:@"FAULT"];
+	}
+	return FMCPRNDL_FAULT;
 }
 
 @end

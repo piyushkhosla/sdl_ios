@@ -7,6 +7,7 @@
 FMCVehicleDataNotificationStatus* FMCVehicleDataNotificationStatus_NOT_SUPPORTED = nil;
 FMCVehicleDataNotificationStatus* FMCVehicleDataNotificationStatus_NORMAL = nil;
 FMCVehicleDataNotificationStatus* FMCVehicleDataNotificationStatus_ACTIVE = nil;
+FMCVehicleDataNotificationStatus* FMCVehicleDataNotificationStatus_NOT_USED = nil;
 
 NSMutableArray* FMCVehicleDataNotificationStatus_values = nil; 
 
@@ -27,7 +28,8 @@ NSMutableArray* FMCVehicleDataNotificationStatus_values = nil;
                                     FMCVehicleDataNotificationStatus.NOT_SUPPORTED,
                                     FMCVehicleDataNotificationStatus.NORMAL,
                                     FMCVehicleDataNotificationStatus.ACTIVE,
-									nil];                        
+                                    FMCVehicleDataNotificationStatus.NOT_USED,
+                                    nil];
 	} 
 	return FMCVehicleDataNotificationStatus_values; 
 }
@@ -51,6 +53,13 @@ NSMutableArray* FMCVehicleDataNotificationStatus_values = nil;
 		FMCVehicleDataNotificationStatus_ACTIVE = [[FMCVehicleDataNotificationStatus alloc] initWithValue:@"ACTIVE"];
 	}
 	return FMCVehicleDataNotificationStatus_ACTIVE;
+}
+
++(FMCVehicleDataNotificationStatus*) NOT_USED {
+	if (FMCVehicleDataNotificationStatus_NOT_USED == nil) {
+		FMCVehicleDataNotificationStatus_NOT_USED = [[FMCVehicleDataNotificationStatus alloc] initWithValue:@"NOT_USED"];
+	}
+	return FMCVehicleDataNotificationStatus_NOT_USED;
 }
 
 @end

@@ -233,6 +233,7 @@
 #define NAMES_Slider @"Slider"
 #define NAMES_sliderFooter @"sliderFooter"
 #define NAMES_sliderHeader @"sliderHeader"
+#define NAMES_sliderPosition @"sliderPosition"
 #define NAMES_softButtonCapabilities @"softButtonCapabilities"
 #define NAMES_softButtonID @"softButtonID"
 #define NAMES_softButtons @"softButtons"
