@@ -84,6 +84,18 @@
 			ret = [[BulkAssembler alloc] initWithListeners:protocolListeners];
 		}
         
+        if (ret == nil || sessionIDKey == nil) {
+            [FMCDebugTool logInfo:@"Nil encountered for FrameAssembler!"];
+            [FMCDebugTool logInfo:@"Frame Header - Session Type: %d", header._sessionType];
+            [FMCDebugTool logInfo:@"Frame Header - Session ID: %u", header._sessionID];
+            [FMCDebugTool logInfo:@"Frame Header - Message ID: %u", header._messageID];
+            [FMCDebugTool logInfo:@"Frame Header - Frame Type: %d", header._frameType];
+            [FMCDebugTool logInfo:@"Frame Header - Version: %u", header._version];
+            [FMCDebugTool logInfo:@"Frame Header - Compressed: %d", header._compressed];
+            [FMCDebugTool logInfo:@"Frame Header - Frame Data: %u", header._frameData];
+            [FMCDebugTool logInfo:@"Frame Header - Data Size: %u", header._dataSize];
+        }
+        
 		[frameAssemblerForSessionID setObject:ret forKey:sessionIDKey];
         return [ret autorelease];
 	}
