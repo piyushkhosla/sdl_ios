@@ -1,6 +1,6 @@
 //  FMCDeviceStatus.m
 //  SyncProxy
-//  Copyright (c) 2013 Ford Motor Company. All rights reserved.
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <AppLink/FMCDeviceStatus.h>
 
