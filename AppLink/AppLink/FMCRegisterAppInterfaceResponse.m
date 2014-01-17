@@ -228,8 +228,8 @@
         return array;
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
-        for (NSString* enumString in array) {
-            [newList addObject:[FMCAudioPassThruCapabilities valueOf:enumString]];
+        for (NSDictionary* dict in array) {
+            [newList addObject:[[[FMCAudioPassThruCapabilities alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
         }
         return newList;
     }

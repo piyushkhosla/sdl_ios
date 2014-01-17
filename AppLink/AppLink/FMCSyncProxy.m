@@ -401,12 +401,12 @@ const int POLICIES_CORRELATION_ID = 65535;
     
     // Intercept OnEncodedSyncPData. If URL != nil, perform HTTP Post and don't pass the notification to FMProxyListeners
     if ([functionName isEqualToString:@"OnEncodedSyncPData"]) {        
-        if (!httpPolicyUpdateInProgress) {
-            //TODO:DEBUGOUTS
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"OESPData Notif"]];
-            [FMCDebugTool logInfo:@"OESPData Notif"];
-            //TODO:ENDDEBUGOUTS
-            
+//        if (!httpPolicyUpdateInProgress) {
+//            //TODO:DEBUGOUTS
+//            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"OESPData Notif"]];
+//            [FMCDebugTool logInfo:@"OESPData Notif"];
+//            //TODO:ENDDEBUGOUTS
+        
             NSString *urlString = (NSString *)[rpcMsg getParameters:@"URL"];
             if (urlString != nil) {
                 httpPolicyUpdateInProgress = YES;
@@ -414,19 +414,19 @@ const int POLICIES_CORRELATION_ID = 65535;
                 NSNumber *encodedSyncPTimeout = (NSNumber *) [rpcMsg getParameters:@"Timeout"];
                 [self sendEncodedSyncPData:encodedSyncPData toURL:urlString withTimeout:encodedSyncPTimeout];
             }
-            //TODO:DEBUGOUTS
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"URL is nil, pass to app"]];
-            [FMCDebugTool logInfo:@"URL is nil, pass to app"];
-            //TODO:ENDDEBUGOUTS
-        }
-        else
-        {
-            //There is already a policy update occuring
-            //TODO:DEBUGOUTS
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Duplicate Policy Update Request, Ignoring"]];
-            [FMCDebugTool logInfo:@"Duplicate Policy Update Request, Ignoring"];
-            //TODO:ENDDEBUGOUTS
-        }
+//            //TODO:DEBUGOUTS
+//            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"URL is nil, pass to app"]];
+//            [FMCDebugTool logInfo:@"URL is nil, pass to app"];
+//            //TODO:ENDDEBUGOUTS
+//        }
+//        else
+//        {
+//            //There is already a policy update occuring
+//            //TODO:DEBUGOUTS
+//            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Duplicate Policy Update Request, Ignoring"]];
+//            [FMCDebugTool logInfo:@"Duplicate Policy Update Request, Ignoring"];
+//            //TODO:ENDDEBUGOUTS
+//        }
     }
     
 	NSString* functionClassName = [NSString stringWithFormat:@"FMC%@", functionName];
