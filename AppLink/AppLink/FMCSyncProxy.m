@@ -414,10 +414,12 @@ const int POLICIES_CORRELATION_ID = 65535;
                 NSNumber *encodedSyncPTimeout = (NSNumber *) [rpcMsg getParameters:@"Timeout"];
                 [self sendEncodedSyncPData:encodedSyncPData toURL:urlString withTimeout:encodedSyncPTimeout];
             }
-            //TODO:DEBUGOUTS
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"URL is nil, pass to app"]];
-            [FMCDebugTool logInfo:@"URL is nil, pass to app"];
-            //TODO:ENDDEBUGOUTS
+            else {
+                //TODO:DEBUGOUTS
+                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"URL is nil, pass to app"]];
+                [FMCDebugTool logInfo:@"URL is nil, pass to app"];
+                //TODO:ENDDEBUGOUTS
+            }
         }
         else
         {
