@@ -517,7 +517,7 @@ correlationID{
     msg.eta = eta;
     msg.totalDistance = totalDistance;
     
-    msg.turnIcon = [[turnIcon mutableCopy] autorelease];
+    msg.turnIcon = [[turnIcon retain] autorelease];
 	
     msg.distanceToManeuver = distanceToManeuver;
     msg.distanceToManeuverScale = distanceToManeuverScale;
