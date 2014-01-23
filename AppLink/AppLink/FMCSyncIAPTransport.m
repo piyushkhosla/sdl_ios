@@ -33,7 +33,6 @@
 		spaceAvailable = NO;
         
         if (!registeredForNotifications) {
-//            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Notif Reg"]];
             registeredForNotifications = YES;
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessoryConnected:) name:EAAccessoryDidConnectNotification object:nil];
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessoryDisconnected:) name:EAAccessoryDidDisconnectNotification object:nil];
@@ -46,8 +45,6 @@
         } else {
             appInBackground = NO;
         }
-        
-        [self checkConnectedSyncAccessory];
         
         transportUsable = YES;
         [FMCSiphonServer init];
@@ -165,14 +162,15 @@
 			}
 			@catch (id streamEx) {
 				return NO;
-			}//end catch
-		} else {
+			}
+		
+        } else {
             [FMCDebugTool logInfo:@"iAP: connect:usedProtocol: Session and Accessory not set"];
 			return NO;
 		}
 	}
 	return YES;
-}//end connect
+}
 
 - (bool) connect {
     if (connectedSyncAccessory != nil) {
@@ -225,14 +223,6 @@
 			}
 		}
 	}
-}
-
--(void)applicationDidBecomeActive:(NSNotification *) notification {
-//    //TODO:DEBUGOUTS
-//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Did Become Active"]];
-//    [FMCDebugTool logInfo:@"iAP: Did Become Active"];
-//    //TODO:ENDDEBUGOUTS
-    [self connect];
 }
 
 -(void)applicationWillEnterForeground:(NSNotification *)notification {
@@ -357,12 +347,13 @@
     [FMCDebugTool logInfo:@"iAP: Disconnect"];
     //TODO:ENDDEBUGOUTS
     
+    [self notifyTransportDisconnected];
+    
     @synchronized (transportLock) {
 		
         transportUsable = NO;
         
 		if (session != nil) {
-			[self notifyTransportDisconnected];
 			
             [outStream close];
 			[outStream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
