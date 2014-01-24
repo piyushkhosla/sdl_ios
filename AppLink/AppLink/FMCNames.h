@@ -1,6 +1,6 @@
 //  FMCNames.h
 //  SyncProxy
-//  Copyright (c) 2013 Ford Motor Company. All rights reserved.
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <Foundation/Foundation.h>
 
@@ -233,6 +233,7 @@
 #define NAMES_Slider @"Slider"
 #define NAMES_sliderFooter @"sliderFooter"
 #define NAMES_sliderHeader @"sliderHeader"
+#define NAMES_sliderPosition @"sliderPosition"
 #define NAMES_softButtonCapabilities @"softButtonCapabilities"
 #define NAMES_softButtonID @"softButtonID"
 #define NAMES_softButtons @"softButtons"

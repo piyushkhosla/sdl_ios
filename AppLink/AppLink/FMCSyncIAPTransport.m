@@ -1,6 +1,6 @@
 //  FMCSyncIAPTransport.m
 //  SyncProxy
-//  Copyright (c) 2013 Ford Motor Company. All rights reserved.
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <UIKit/UIKit.h>
 #import <AppLink/FMCSyncIAPTransport.h>
@@ -33,7 +33,6 @@
 		spaceAvailable = NO;
         
         if (!registeredForNotifications) {
-//            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Notif Reg"]];
             registeredForNotifications = YES;
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessoryConnected:) name:EAAccessoryDidConnectNotification object:nil];
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessoryDisconnected:) name:EAAccessoryDidDisconnectNotification object:nil];
@@ -46,8 +45,6 @@
         } else {
             appInBackground = NO;
         }
-        
-        [self checkConnectedSyncAccessory];
         
         transportUsable = YES;
         [FMCSiphonServer init];
@@ -145,7 +142,7 @@
 			@try {		
 				// Initialize and schedule the input stream:
 				if(self.inStream != nil) {
-                    [FMCDebugTool logInfo:@"FMSyncIAPTransport: connect:usedProtocol: Initializing input steam"];
+                    [FMCDebugTool logInfo:@"iAP: connect:usedProtocol: Initializing input steam"];
 					self.inStream.delegate = self;
 					[self.inStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 					[self.inStream open];
@@ -155,7 +152,7 @@
 				
 				// Initialize and schedule the output stream:
 				if(self.outStream != nil) {
-                    [FMCDebugTool logInfo:@"FMSyncIAPTransport: connect:usedProtocol: Initializing output steam"];
+                    [FMCDebugTool logInfo:@"iAP: connect:usedProtocol: Initializing output steam"];
 					self.outStream.delegate = self;
 					[self.outStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 					[self.outStream open];
@@ -165,14 +162,15 @@
 			}
 			@catch (id streamEx) {
 				return NO;
-			}//end catch
-		} else {
-            [FMCDebugTool logInfo:@"FMSyncIAPTransport: connect:usedProtocol: Session and Accessory not set"];
+			}
+		
+        } else {
+            [FMCDebugTool logInfo:@"iAP: connect:usedProtocol: Session and Accessory not set"];
 			return NO;
 		}
 	}
 	return YES;
-}//end connect
+}
 
 - (bool) connect {
     if (connectedSyncAccessory != nil) {
@@ -225,14 +223,6 @@
 			}
 		}
 	}
-}
-
--(void)applicationDidBecomeActive:(NSNotification *) notification {
-//    //TODO:DEBUGOUTS
-//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Did Become Active"]];
-//    [FMCDebugTool logInfo:@"iAP: Did Become Active"];
-//    //TODO:ENDDEBUGOUTS
-    [self connect];
 }
 
 -(void)applicationWillEnterForeground:(NSNotification *)notification {
@@ -357,12 +347,13 @@
     [FMCDebugTool logInfo:@"iAP: Disconnect"];
     //TODO:ENDDEBUGOUTS
     
+    [self notifyTransportDisconnected];
+    
     @synchronized (transportLock) {
 		
         transportUsable = NO;
         
 		if (session != nil) {
-			[self notifyTransportDisconnected];
 			
             [outStream close];
 			[outStream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];

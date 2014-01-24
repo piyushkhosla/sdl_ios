@@ -1,6 +1,6 @@
 //  FMCRPCRequestFactory.m
 //  SyncProxy
-//  Copyright (c) 2013 Ford Motor Company. All rights reserved.
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <AppLink/FMCRPCRequestFactory.h>
 
@@ -517,7 +517,7 @@ correlationID{
     msg.eta = eta;
     msg.totalDistance = totalDistance;
     
-    msg.turnIcon = [[turnIcon mutableCopy] autorelease];
+    msg.turnIcon = [[turnIcon retain] autorelease];
 	
     msg.distanceToManeuver = distanceToManeuver;
     msg.distanceToManeuverScale = distanceToManeuverScale;

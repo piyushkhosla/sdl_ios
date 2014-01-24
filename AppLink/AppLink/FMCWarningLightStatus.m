@@ -1,12 +1,13 @@
 //  FMCWarningLightStatus.h
 //  SyncProxy
-//  Copyright (c) 2013 Ford Motor Company. All rights reserved.
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <AppLink/FMCWarningLightStatus.h>
 
 FMCWarningLightStatus* FMCWarningLightStatus_OFF = nil;
 FMCWarningLightStatus* FMCWarningLightStatus_ON = nil;
 FMCWarningLightStatus* FMCWarningLightStatus_FLASH = nil;
+FMCWarningLightStatus* FMCWarningLightStatus_NOT_USED = nil;
 
 NSMutableArray* FMCWarningLightStatus_values = nil; 
 
@@ -23,11 +24,12 @@ NSMutableArray* FMCWarningLightStatus_values = nil;
 
 +(NSMutableArray *) values {           
 	if (FMCWarningLightStatus_values == nil) {                               
-		FMCWarningLightStatus_values = [[NSMutableArray alloc] initWithObjects: 
-                                    FMCWarningLightStatus.OFF,
-                                    FMCWarningLightStatus.ON,
-                                    FMCWarningLightStatus.FLASH,
-									nil];
+		FMCWarningLightStatus_values = [[NSMutableArray alloc] initWithObjects:
+                                        FMCWarningLightStatus.OFF,
+                                        FMCWarningLightStatus.ON,
+                                        FMCWarningLightStatus.FLASH,
+                                        FMCWarningLightStatus.NOT_USED,
+                                        nil];
 	} 
 	return FMCWarningLightStatus_values; 
 }
@@ -51,6 +53,13 @@ NSMutableArray* FMCWarningLightStatus_values = nil;
 		FMCWarningLightStatus_FLASH = [[FMCWarningLightStatus alloc] initWithValue:@"FLASH"];
 	}
 	return FMCWarningLightStatus_FLASH;
+}
+
++(FMCWarningLightStatus*) NOT_USED {
+	if (FMCWarningLightStatus_NOT_USED == nil) {
+		FMCWarningLightStatus_NOT_USED = [[FMCWarningLightStatus alloc] initWithValue:@"NOT_USED"];
+	}
+	return FMCWarningLightStatus_NOT_USED;
 }
 
 @end

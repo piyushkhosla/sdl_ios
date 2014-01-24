@@ -1,6 +1,6 @@
 //  FMCPRNDL.h
 //  SyncProxy
-//  Copyright (c) 2013 Ford Motor Company. All rights reserved.
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <Foundation/Foundation.h> 
 #import <AppLink/FMCEnum.h>   
@@ -90,6 +90,8 @@
    * @result return FMCPRNDL : <font color=gray><i> EIGTH </i></font>
    */
 +(FMCPRNDL*) EIGTH;
++(FMCPRNDL*) UNKNOWN;
++(FMCPRNDL*) FAULT;
 
 @end
 

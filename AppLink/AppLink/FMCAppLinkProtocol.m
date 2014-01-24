@@ -1,8 +1,8 @@
-//  FMCWiProProtocol.m
+//  FMCAppLinkProtocol.m
 //  SyncProxy
-//  Copyright (c) 2013 Ford Motor Company. All rights reserved.
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <AppLink/FMCWiProProtocol.h>
+#import <AppLink/FMCAppLinkProtocol.h>
 
 #import <UIKit/UIKit.h>
 #import <AppLink/FMCBitConverter.h>
@@ -18,7 +18,7 @@
 //from.h
 //-(FMMessageType) messageTypeForFrameHeader:(FMCProtocolFrameHeader*)header;
 
-@implementation FMCWiProProtocol
+@implementation FMCAppLinkProtocol
 
 -(id) init {
 	if (self = [super init]) {
@@ -468,8 +468,8 @@
         _version = header._version;
     }
     
-    if (header._frameType == FMFrameType_Control) {
-        if (header._frameData == FMFrameData_StartSessionACK) {
+    if (header._frameType == FMCFrameType_Control) {
+        if (header._frameData == FMCFrameData_StartSessionACK) {
             if (_version == 2) {
                 _hashID = header._messageID;
             }
@@ -484,7 +484,7 @@
             [localListeners release];
         }
     } else {
-        if (header._frameType == FMFrameType_First || header._frameType == FMFrameType_Consecutive) {
+        if (header._frameType == FMCFrameType_First || header._frameType == FMCFrameType_Consecutive) {
             [self handleMultiFrame:header data:data];
         } else {
             FMCProtocolMessage * message = [[FMCProtocolMessage alloc] init];

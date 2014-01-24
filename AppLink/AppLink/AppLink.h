@@ -1,3 +1,7 @@
+//  AppLink.h
+//  SyncProxy
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
+
 //AppLink
 #import <AppLink/FMCAbstractProtocol.h>
 #import <AppLink/FMCAbstractSyncTransport.h>
@@ -33,7 +37,7 @@
 #import <AppLink/FMCSyncTransport.h>
 #import <AppLink/FMCTransportListener.h>
 #import <AppLink/FMCTTSChunkFactory.h>
-#import <AppLink/FMCWiProProtocol.h>
+#import <AppLink/FMCAppLinkProtocol.h>
 
 //RPCs
 #import <AppLink/FMCAddCommand.h>

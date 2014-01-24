@@ -1,14 +1,14 @@
 //  FMCProtocolFrameHeader.h
 //  SyncProxy
-//  Copyright (c) 2013 Ford Motor Company. All rights reserved.
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <Foundation/Foundation.h>
 
 typedef enum FMCFrameType {
-	FMFrameType_Control = 0x00,
-	FMFrameType_Single = 0x01,
-	FMFrameType_First = 0x02,
-	FMFrameType_Consecutive = 0x03,
+	FMCFrameType_Control = 0x00,
+	FMCFrameType_Single = 0x01,
+	FMCFrameType_First = 0x02,
+	FMCFrameType_Consecutive = 0x03,
 	
 } FMCFrameType;
 
@@ -18,14 +18,14 @@ typedef enum FMCSessionType {
 } FMCSessionType;
 
 typedef enum FMCFrameData {
-	FMFrameData_Heartbeat = 0x00,
-	FMFrameData_StartSession = 0x01,
-	FMFrameData_StartSessionACK = 0x02,
-	FMFrameData_StartSessionNACK = 0x03,
-	FMFrameData_EndSession = 0x04,
+	FMCFrameData_Heartbeat = 0x00,
+	FMCFrameData_StartSession = 0x01,
+	FMCFrameData_StartSessionACK = 0x02,
+	FMCFrameData_StartSessionNACK = 0x03,
+	FMCFrameData_EndSession = 0x04,
 	
-	FMFrameData_SingleFrame = 0x00,
-	FMFrameData_FirstFrame = 0x00,
+	FMCFrameData_SingleFrame = 0x00,
+	FMCFrameData_FirstFrame = 0x00,
 } FMCFrameData;
 
 @interface FMCProtocolFrameHeader : NSObject {

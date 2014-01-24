@@ -1,6 +1,6 @@
 //  FMCProtocolFrameHeader.m
 //  SyncProxy
-//  Copyright (c) 2013 Ford Motor Company. All rights reserved.
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <AppLink/FMCProtocolMessage.h>
 
@@ -20,7 +20,7 @@
 	if (self = [super init]) {
 		_version = 1;
 		_compressed = false;
-		_frameType = FMFrameType_Control;
+		_frameType = FMCFrameType_Control;
 		_sessionType = FMCSessionType_RPC;
 		_frameData = 0;
 		_sessionID = 0;

@@ -1,6 +1,6 @@
 //  FMCVehicleDataNotificationStatus.h
 //  SyncProxy
-//  Copyright (c) 2013 Ford Motor Company. All rights reserved.
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <Foundation/Foundation.h> 
 #import <AppLink/FMCEnum.h>   
@@ -36,6 +36,7 @@
  @abstract FMCVehicleDataNotificationStatus : <font color=gray><i> ACTIVE </i></font>
  */
 +(FMCVehicleDataNotificationStatus*) ACTIVE;
++(FMCVehicleDataNotificationStatus*) NOT_USED;
 
 @end
 

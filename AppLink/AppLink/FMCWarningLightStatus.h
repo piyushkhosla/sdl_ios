@@ -1,6 +1,6 @@
 //  FMCWarningLightStatus.h
 //  SyncProxy
-//  Copyright (c) 2013 Ford Motor Company. All rights reserved.
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <Foundation/Foundation.h> 
 #import <AppLink/FMCEnum.h>   
@@ -39,6 +39,7 @@
  @result return FMCWarningLightStatus instance with value of <font color=gray><i> FLASH </i></font>
  */
 +(FMCWarningLightStatus*) FLASH;
++(FMCWarningLightStatus*) NOT_USED;
 
 @end
 
