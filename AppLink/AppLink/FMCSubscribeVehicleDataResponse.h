@@ -7,9 +7,23 @@
 
 #import <AppLink/FMCVehicleDataResult.h>
 
+/**
+ * Subscribe Vehicle Data Response is sent, when FMCSubscribeVehicleData has been called
+ *
+ * Since AppLink 2.0
+ */
 @interface FMCSubscribeVehicleDataResponse : FMCRPCResponse {}
 
+/**
+ * @abstract Constructs a new FMCSubscribeVehicleDataResponse object
+ */
 -(id) init;
+
+/**
+ * @abstract Constructs a new FMCSubscribeVehicleDataResponse object indicated by the NSMutableDictionary
+ * parameter
+ * @param dict The NSMutableDictionary to use
+ */
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
 @property(assign) FMCVehicleDataResult* gps;

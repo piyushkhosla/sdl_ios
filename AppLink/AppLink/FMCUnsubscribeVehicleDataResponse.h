@@ -7,9 +7,23 @@
 
 #import <AppLink/FMCVehicleDataResult.h>
 
+/**
+ * Unsubscribe Vehicle Data Response is sent, when UnsubscribeVehicleData has been called
+ *
+ * Since AppLink 2.0
+ */
 @interface FMCUnsubscribeVehicleDataResponse : FMCRPCResponse {}
 
+/**
+ * @abstract Constructs a new FMCUnsubscribeVehicleDataResponse object
+ */
 -(id) init;
+
+/**
+ * @abstract Constructs a new FMCUnsubscribeVehicleDataResponse object indicated by the NSMutableDictionary
+ * parameter
+ * @param dict The NSMutableDictionary to use
+ */
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
 @property(assign) FMCVehicleDataResult* gps;
