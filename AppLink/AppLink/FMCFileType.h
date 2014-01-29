@@ -49,6 +49,10 @@
  @result FMCFileType with value of <font color=gray><i> AUDIO_MP3 </i></font>
  */
 +(FMCFileType*) AUDIO_MP3;
+/*!
+ @abstract file type : BINARY
+ @result FMCFileType with value of <font color=gray><i> BINARY </i></font>
+ */
 +(FMCFileType*) BINARY;
 
 @end

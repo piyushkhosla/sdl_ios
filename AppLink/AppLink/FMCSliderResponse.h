@@ -23,6 +23,9 @@
  */
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
+/**
+ * @abstract The selected position of the slider.
+ */
 @property(assign) NSNumber* sliderPosition;
 
 @end

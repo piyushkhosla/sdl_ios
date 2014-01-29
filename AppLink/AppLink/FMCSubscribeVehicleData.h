@@ -126,6 +126,11 @@
  * subscribed.
  */
 @property(assign) NSNumber* accPedalPosition;
+
+/**
+ * @abstract A boolean value. If true, means the steeringWheelAngle data has been
+ * subscribed.
+ */
 @property(assign) NSNumber* steeringWheelAngle;
 
 @end

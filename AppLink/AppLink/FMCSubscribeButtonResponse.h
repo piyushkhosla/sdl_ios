@@ -6,7 +6,7 @@
 #import <AppLink/FMCRPCResponse.h>
 
 /**
- * Sub scribeButton Response is sent, when FMCSubscribeButton has been called
+ * SubscribeButton Response is sent, when FMCSubscribeButton has been called
  *
  * Since AppLink 1.0
  */

@@ -86,11 +86,19 @@
  */
 +(FMCPRNDL*) SEVENTH;
 /**
-   * @abstract Eighth gear
-   * @result return FMCPRNDL : <font color=gray><i> EIGTH </i></font>
-   */
+ * @abstract Eighth gear
+ * @result return FMCPRNDL : <font color=gray><i> EIGHTH </i></font>
+ */
 +(FMCPRNDL*) EIGTH;
+/**
+ * @abstract Unknown
+ * @result return FMCPRNDL : <font color=gray><i> UNKNOWN </i></font>
+ */
 +(FMCPRNDL*) UNKNOWN;
+/**
+ * @abstract Fault
+ * @result return FMCPRNDL : <font color=gray><i> FAULT </i></font>
+ */
 +(FMCPRNDL*) FAULT;
 
 @end

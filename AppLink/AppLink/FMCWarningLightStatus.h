@@ -39,6 +39,10 @@
  @result return FMCWarningLightStatus instance with value of <font color=gray><i> FLASH </i></font>
  */
 +(FMCWarningLightStatus*) FLASH;
+/*!
+ @abstract Not used
+ @result return FMCWarningLightStatus instance with value of <font color=gray><i> NOT_USED </i></font>
+ */
 +(FMCWarningLightStatus*) NOT_USED;
 
 @end

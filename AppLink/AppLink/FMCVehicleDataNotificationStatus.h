@@ -36,6 +36,9 @@
  @abstract FMCVehicleDataNotificationStatus : <font color=gray><i> ACTIVE </i></font>
  */
 +(FMCVehicleDataNotificationStatus*) ACTIVE;
+/*!
+ @abstract FMCVehicleDataNotificationStatus : <font color=gray><i> NOT_USED </i></font>
+ */
 +(FMCVehicleDataNotificationStatus*) NOT_USED;
 
 @end
