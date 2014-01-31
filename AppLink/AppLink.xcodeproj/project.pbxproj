@@ -36,10 +36,6 @@
 		597C04ED17DEFF50003E6E1A /* FMCAddSubMenuResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C035417DEFF4F003E6E1A /* FMCAddSubMenuResponse.m */; };
 		597C04EE17DEFF50003E6E1A /* FMCAlert.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C035517DEFF4F003E6E1A /* FMCAlert.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C04EF17DEFF50003E6E1A /* FMCAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C035617DEFF4F003E6E1A /* FMCAlert.m */; };
-		597C04F017DEFF50003E6E1A /* FMCAlertManeuver.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C035717DEFF4F003E6E1A /* FMCAlertManeuver.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C04F117DEFF50003E6E1A /* FMCAlertManeuver.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C035817DEFF4F003E6E1A /* FMCAlertManeuver.m */; };
-		597C04F217DEFF50003E6E1A /* FMCAlertManeuverResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C035917DEFF4F003E6E1A /* FMCAlertManeuverResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C04F317DEFF50003E6E1A /* FMCAlertManeuverResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C035A17DEFF4F003E6E1A /* FMCAlertManeuverResponse.m */; };
 		597C04F417DEFF50003E6E1A /* FMCAlertResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C035B17DEFF4F003E6E1A /* FMCAlertResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C04F517DEFF50003E6E1A /* FMCAlertResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C035C17DEFF4F003E6E1A /* FMCAlertResponse.m */; };
 		597C04F617DEFF50003E6E1A /* FMCAppHMIType.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C035D17DEFF4F003E6E1A /* FMCAppHMIType.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -211,8 +207,6 @@
 		597C059D17DEFF50003E6E1A /* FMCOnPermissionsChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C040417DEFF4F003E6E1A /* FMCOnPermissionsChange.m */; };
 		597C059E17DEFF50003E6E1A /* FMCOnSyncPData.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C040517DEFF4F003E6E1A /* FMCOnSyncPData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C059F17DEFF50003E6E1A /* FMCOnSyncPData.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C040617DEFF4F003E6E1A /* FMCOnSyncPData.m */; };
-		597C05A017DEFF50003E6E1A /* FMCOnTBTClientState.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C040717DEFF4F003E6E1A /* FMCOnTBTClientState.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C05A117DEFF50003E6E1A /* FMCOnTBTClientState.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C040817DEFF4F003E6E1A /* FMCOnTBTClientState.m */; };
 		597C05A217DEFF50003E6E1A /* FMCOnVehicleData.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C040917DEFF4F003E6E1A /* FMCOnVehicleData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C05A317DEFF50003E6E1A /* FMCOnVehicleData.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C040A17DEFF4F003E6E1A /* FMCOnVehicleData.m */; };
 		597C05A417DEFF50003E6E1A /* FMCParameterPermissions.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C040B17DEFF4F003E6E1A /* FMCParameterPermissions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -298,10 +292,6 @@
 		597C05F417DEFF50003E6E1A /* FMCSetMediaClockTimerResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C045B17DEFF4F003E6E1A /* FMCSetMediaClockTimerResponse.m */; };
 		597C05F517DEFF50003E6E1A /* FMCShow.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C045C17DEFF4F003E6E1A /* FMCShow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C05F617DEFF50003E6E1A /* FMCShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C045D17DEFF4F003E6E1A /* FMCShow.m */; };
-		597C05F717DEFF50003E6E1A /* FMCShowConstantTBT.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C045E17DEFF4F003E6E1A /* FMCShowConstantTBT.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C05F817DEFF50003E6E1A /* FMCShowConstantTBT.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C045F17DEFF4F003E6E1A /* FMCShowConstantTBT.m */; };
-		597C05F917DEFF50003E6E1A /* FMCShowConstantTBTResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C046017DEFF4F003E6E1A /* FMCShowConstantTBTResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C05FA17DEFF50003E6E1A /* FMCShowConstantTBTResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C046117DEFF4F003E6E1A /* FMCShowConstantTBTResponse.m */; };
 		597C05FB17DEFF50003E6E1A /* FMCShowResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C046217DEFF4F003E6E1A /* FMCShowResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C05FC17DEFF50003E6E1A /* FMCShowResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C046317DEFF4F003E6E1A /* FMCShowResponse.m */; };
 		597C05FD17DEFF50003E6E1A /* FMCSingleTireStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C046417DEFF4F003E6E1A /* FMCSingleTireStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -353,8 +343,6 @@
 		597C062B17DEFF50003E6E1A /* FMCSystemAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C049217DEFF4F003E6E1A /* FMCSystemAction.m */; };
 		597C062C17DEFF50003E6E1A /* FMCSystemContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C049317DEFF4F003E6E1A /* FMCSystemContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C062D17DEFF50003E6E1A /* FMCSystemContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C049417DEFF4F003E6E1A /* FMCSystemContext.m */; };
-		597C062E17DEFF50003E6E1A /* FMCTBTState.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C049517DEFF4F003E6E1A /* FMCTBTState.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C062F17DEFF50003E6E1A /* FMCTBTState.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C049617DEFF4F003E6E1A /* FMCTBTState.m */; };
 		597C063017DEFF50003E6E1A /* FMCTextAlignment.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C049717DEFF4F003E6E1A /* FMCTextAlignment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C063117DEFF50003E6E1A /* FMCTextAlignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C049817DEFF4F003E6E1A /* FMCTextAlignment.m */; };
 		597C063217DEFF50003E6E1A /* FMCTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C049917DEFF50003E6E1A /* FMCTextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -370,8 +358,6 @@
 		597C063C17DEFF50003E6E1A /* FMCTTSChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04A317DEFF50003E6E1A /* FMCTTSChunk.m */; };
 		597C063D17DEFF50003E6E1A /* FMCTTSChunkFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04A417DEFF50003E6E1A /* FMCTTSChunkFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C063E17DEFF50003E6E1A /* FMCTTSChunkFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04A517DEFF50003E6E1A /* FMCTTSChunkFactory.m */; };
-		597C063F17DEFF50003E6E1A /* FMCTurn.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04A617DEFF50003E6E1A /* FMCTurn.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C064017DEFF50003E6E1A /* FMCTurn.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04A717DEFF50003E6E1A /* FMCTurn.m */; };
 		597C064117DEFF50003E6E1A /* FMCUnregisterAppInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04A817DEFF50003E6E1A /* FMCUnregisterAppInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C064217DEFF50003E6E1A /* FMCUnregisterAppInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04A917DEFF50003E6E1A /* FMCUnregisterAppInterface.m */; };
 		597C064317DEFF50003E6E1A /* FMCUnregisterAppInterfaceResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04AA17DEFF50003E6E1A /* FMCUnregisterAppInterfaceResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -386,10 +372,6 @@
 		597C064C17DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04B317DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.m */; };
 		597C064D17DEFF50003E6E1A /* FMCUpdateMode.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04B417DEFF50003E6E1A /* FMCUpdateMode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C064E17DEFF50003E6E1A /* FMCUpdateMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04B517DEFF50003E6E1A /* FMCUpdateMode.m */; };
-		597C064F17DEFF50003E6E1A /* FMCUpdateTurnList.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04B617DEFF50003E6E1A /* FMCUpdateTurnList.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C065017DEFF50003E6E1A /* FMCUpdateTurnList.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04B717DEFF50003E6E1A /* FMCUpdateTurnList.m */; };
-		597C065117DEFF50003E6E1A /* FMCUpdateTurnListResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04B817DEFF50003E6E1A /* FMCUpdateTurnListResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C065217DEFF50003E6E1A /* FMCUpdateTurnListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04B917DEFF50003E6E1A /* FMCUpdateTurnListResponse.m */; };
 		597C065317DEFF50003E6E1A /* FMCVehicleDataActiveStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04BA17DEFF50003E6E1A /* FMCVehicleDataActiveStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C065417DEFF50003E6E1A /* FMCVehicleDataActiveStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04BB17DEFF50003E6E1A /* FMCVehicleDataActiveStatus.m */; };
 		597C065517DEFF50003E6E1A /* FMCVehicleDataEventStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04BC17DEFF50003E6E1A /* FMCVehicleDataEventStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -438,10 +420,6 @@
 		597C035417DEFF4F003E6E1A /* FMCAddSubMenuResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCAddSubMenuResponse.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C035517DEFF4F003E6E1A /* FMCAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCAlert.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		597C035617DEFF4F003E6E1A /* FMCAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCAlert.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		597C035717DEFF4F003E6E1A /* FMCAlertManeuver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCAlertManeuver.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		597C035817DEFF4F003E6E1A /* FMCAlertManeuver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCAlertManeuver.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		597C035917DEFF4F003E6E1A /* FMCAlertManeuverResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCAlertManeuverResponse.h; sourceTree = "<group>"; };
-		597C035A17DEFF4F003E6E1A /* FMCAlertManeuverResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCAlertManeuverResponse.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C035B17DEFF4F003E6E1A /* FMCAlertResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCAlertResponse.h; sourceTree = "<group>"; };
 		597C035C17DEFF4F003E6E1A /* FMCAlertResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCAlertResponse.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C035D17DEFF4F003E6E1A /* FMCAppHMIType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCAppHMIType.h; sourceTree = "<group>"; };
@@ -614,8 +592,6 @@
 		597C040417DEFF4F003E6E1A /* FMCOnPermissionsChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCOnPermissionsChange.m; sourceTree = "<group>"; };
 		597C040517DEFF4F003E6E1A /* FMCOnSyncPData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCOnSyncPData.h; sourceTree = "<group>"; };
 		597C040617DEFF4F003E6E1A /* FMCOnSyncPData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCOnSyncPData.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		597C040717DEFF4F003E6E1A /* FMCOnTBTClientState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCOnTBTClientState.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		597C040817DEFF4F003E6E1A /* FMCOnTBTClientState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCOnTBTClientState.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C040917DEFF4F003E6E1A /* FMCOnVehicleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCOnVehicleData.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		597C040A17DEFF4F003E6E1A /* FMCOnVehicleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCOnVehicleData.m; sourceTree = "<group>"; };
 		597C040B17DEFF4F003E6E1A /* FMCParameterPermissions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCParameterPermissions.h; sourceTree = "<group>"; };
@@ -701,10 +677,6 @@
 		597C045B17DEFF4F003E6E1A /* FMCSetMediaClockTimerResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCSetMediaClockTimerResponse.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C045C17DEFF4F003E6E1A /* FMCShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCShow.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		597C045D17DEFF4F003E6E1A /* FMCShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCShow.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		597C045E17DEFF4F003E6E1A /* FMCShowConstantTBT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCShowConstantTBT.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		597C045F17DEFF4F003E6E1A /* FMCShowConstantTBT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCShowConstantTBT.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		597C046017DEFF4F003E6E1A /* FMCShowConstantTBTResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCShowConstantTBTResponse.h; sourceTree = "<group>"; };
-		597C046117DEFF4F003E6E1A /* FMCShowConstantTBTResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCShowConstantTBTResponse.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C046217DEFF4F003E6E1A /* FMCShowResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCShowResponse.h; sourceTree = "<group>"; };
 		597C046317DEFF4F003E6E1A /* FMCShowResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCShowResponse.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C046417DEFF4F003E6E1A /* FMCSingleTireStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCSingleTireStatus.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -756,8 +728,6 @@
 		597C049217DEFF4F003E6E1A /* FMCSystemAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCSystemAction.m; sourceTree = "<group>"; };
 		597C049317DEFF4F003E6E1A /* FMCSystemContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCSystemContext.h; sourceTree = "<group>"; };
 		597C049417DEFF4F003E6E1A /* FMCSystemContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCSystemContext.m; sourceTree = "<group>"; };
-		597C049517DEFF4F003E6E1A /* FMCTBTState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCTBTState.h; sourceTree = "<group>"; };
-		597C049617DEFF4F003E6E1A /* FMCTBTState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCTBTState.m; sourceTree = "<group>"; };
 		597C049717DEFF4F003E6E1A /* FMCTextAlignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCTextAlignment.h; sourceTree = "<group>"; };
 		597C049817DEFF4F003E6E1A /* FMCTextAlignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCTextAlignment.m; sourceTree = "<group>"; };
 		597C049917DEFF50003E6E1A /* FMCTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCTextField.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -773,8 +743,6 @@
 		597C04A317DEFF50003E6E1A /* FMCTTSChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCTTSChunk.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C04A417DEFF50003E6E1A /* FMCTTSChunkFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCTTSChunkFactory.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		597C04A517DEFF50003E6E1A /* FMCTTSChunkFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCTTSChunkFactory.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		597C04A617DEFF50003E6E1A /* FMCTurn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCTurn.h; sourceTree = "<group>"; };
-		597C04A717DEFF50003E6E1A /* FMCTurn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCTurn.m; sourceTree = "<group>"; };
 		597C04A817DEFF50003E6E1A /* FMCUnregisterAppInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCUnregisterAppInterface.h; sourceTree = "<group>"; };
 		597C04A917DEFF50003E6E1A /* FMCUnregisterAppInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCUnregisterAppInterface.m; sourceTree = "<group>"; };
 		597C04AA17DEFF50003E6E1A /* FMCUnregisterAppInterfaceResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCUnregisterAppInterfaceResponse.h; sourceTree = "<group>"; };
@@ -789,10 +757,6 @@
 		597C04B317DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCUnsubscribeVehicleDataResponse.m; sourceTree = "<group>"; };
 		597C04B417DEFF50003E6E1A /* FMCUpdateMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCUpdateMode.h; sourceTree = "<group>"; };
 		597C04B517DEFF50003E6E1A /* FMCUpdateMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCUpdateMode.m; sourceTree = "<group>"; };
-		597C04B617DEFF50003E6E1A /* FMCUpdateTurnList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCUpdateTurnList.h; sourceTree = "<group>"; };
-		597C04B717DEFF50003E6E1A /* FMCUpdateTurnList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCUpdateTurnList.m; sourceTree = "<group>"; };
-		597C04B817DEFF50003E6E1A /* FMCUpdateTurnListResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCUpdateTurnListResponse.h; sourceTree = "<group>"; };
-		597C04B917DEFF50003E6E1A /* FMCUpdateTurnListResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCUpdateTurnListResponse.m; sourceTree = "<group>"; };
 		597C04BA17DEFF50003E6E1A /* FMCVehicleDataActiveStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCVehicleDataActiveStatus.h; sourceTree = "<group>"; };
 		597C04BB17DEFF50003E6E1A /* FMCVehicleDataActiveStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCVehicleDataActiveStatus.m; sourceTree = "<group>"; };
 		597C04BC17DEFF50003E6E1A /* FMCVehicleDataEventStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCVehicleDataEventStatus.h; sourceTree = "<group>"; };
@@ -938,8 +902,6 @@
 				597C049E17DEFF50003E6E1A /* FMCTireStatus.m */,
 				597C04A217DEFF50003E6E1A /* FMCTTSChunk.h */,
 				597C04A317DEFF50003E6E1A /* FMCTTSChunk.m */,
-				597C04A617DEFF50003E6E1A /* FMCTurn.h */,
-				597C04A717DEFF50003E6E1A /* FMCTurn.m */,
 				597C04C017DEFF50003E6E1A /* FMCVehicleDataResult.h */,
 				597C04C117DEFF50003E6E1A /* FMCVehicleDataResult.m */,
 				597C04C817DEFF50003E6E1A /* FMCVehicleType.h */,
@@ -1036,8 +998,6 @@
 				597C035217DEFF4F003E6E1A /* FMCAddSubMenu.m */,
 				597C035517DEFF4F003E6E1A /* FMCAlert.h */,
 				597C035617DEFF4F003E6E1A /* FMCAlert.m */,
-				597C035717DEFF4F003E6E1A /* FMCAlertManeuver.h */,
-				597C035817DEFF4F003E6E1A /* FMCAlertManeuver.m */,
 				597C037917DEFF4F003E6E1A /* FMCChangeRegistration.h */,
 				597C037A17DEFF4F003E6E1A /* FMCChangeRegistration.m */,
 				597C038717DEFF4F003E6E1A /* FMCCreateInteractionChoiceSet.h */,
@@ -1084,8 +1044,6 @@
 				597C045917DEFF4F003E6E1A /* FMCSetMediaClockTimer.m */,
 				597C045C17DEFF4F003E6E1A /* FMCShow.h */,
 				597C045D17DEFF4F003E6E1A /* FMCShow.m */,
-				597C045E17DEFF4F003E6E1A /* FMCShowConstantTBT.h */,
-				597C045F17DEFF4F003E6E1A /* FMCShowConstantTBT.m */,
 				597C046817DEFF4F003E6E1A /* FMCSlider.h */,
 				597C046917DEFF4F003E6E1A /* FMCSlider.m */,
 				597C047217DEFF4F003E6E1A /* FMCSpeak.h */,
@@ -1102,8 +1060,6 @@
 				597C04AD17DEFF50003E6E1A /* FMCUnsubscribeButton.m */,
 				597C04B017DEFF50003E6E1A /* FMCUnsubscribeVehicleData.h */,
 				597C04B117DEFF50003E6E1A /* FMCUnsubscribeVehicleData.m */,
-				597C04B617DEFF50003E6E1A /* FMCUpdateTurnList.h */,
-				597C04B717DEFF50003E6E1A /* FMCUpdateTurnList.m */,
 			);
 			name = "RPC Request";
 			sourceTree = "<group>";
@@ -1115,8 +1071,6 @@
 				597C035017DEFF4F003E6E1A /* FMCAddCommandResponse.m */,
 				597C035317DEFF4F003E6E1A /* FMCAddSubMenuResponse.h */,
 				597C035417DEFF4F003E6E1A /* FMCAddSubMenuResponse.m */,
-				597C035917DEFF4F003E6E1A /* FMCAlertManeuverResponse.h */,
-				597C035A17DEFF4F003E6E1A /* FMCAlertManeuverResponse.m */,
 				597C035B17DEFF4F003E6E1A /* FMCAlertResponse.h */,
 				597C035C17DEFF4F003E6E1A /* FMCAlertResponse.m */,
 				597C037B17DEFF4F003E6E1A /* FMCChangeRegistrationResponse.h */,
@@ -1165,8 +1119,6 @@
 				597C045717DEFF4F003E6E1A /* FMCSetGlobalPropertiesResponse.m */,
 				597C045A17DEFF4F003E6E1A /* FMCSetMediaClockTimerResponse.h */,
 				597C045B17DEFF4F003E6E1A /* FMCSetMediaClockTimerResponse.m */,
-				597C046017DEFF4F003E6E1A /* FMCShowConstantTBTResponse.h */,
-				597C046117DEFF4F003E6E1A /* FMCShowConstantTBTResponse.m */,
 				597C046217DEFF4F003E6E1A /* FMCShowResponse.h */,
 				597C046317DEFF4F003E6E1A /* FMCShowResponse.m */,
 				597C046A17DEFF4F003E6E1A /* FMCSliderResponse.h */,
@@ -1185,8 +1137,6 @@
 				597C04AF17DEFF50003E6E1A /* FMCUnsubscribeButtonResponse.m */,
 				597C04B217DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.h */,
 				597C04B317DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.m */,
-				597C04B817DEFF50003E6E1A /* FMCUpdateTurnListResponse.h */,
-				597C04B917DEFF50003E6E1A /* FMCUpdateTurnListResponse.m */,
 			);
 			name = "RPC Response";
 			sourceTree = "<group>";
@@ -1216,8 +1166,6 @@
 				597C040417DEFF4F003E6E1A /* FMCOnPermissionsChange.m */,
 				597C040517DEFF4F003E6E1A /* FMCOnSyncPData.h */,
 				597C040617DEFF4F003E6E1A /* FMCOnSyncPData.m */,
-				597C040717DEFF4F003E6E1A /* FMCOnTBTClientState.h */,
-				597C040817DEFF4F003E6E1A /* FMCOnTBTClientState.m */,
 				597C040917DEFF4F003E6E1A /* FMCOnVehicleData.h */,
 				597C040A17DEFF4F003E6E1A /* FMCOnVehicleData.m */,
 			);
@@ -1312,8 +1260,6 @@
 				597C049217DEFF4F003E6E1A /* FMCSystemAction.m */,
 				597C049317DEFF4F003E6E1A /* FMCSystemContext.h */,
 				597C049417DEFF4F003E6E1A /* FMCSystemContext.m */,
-				597C049517DEFF4F003E6E1A /* FMCTBTState.h */,
-				597C049617DEFF4F003E6E1A /* FMCTBTState.m */,
 				597C049717DEFF4F003E6E1A /* FMCTextAlignment.h */,
 				597C049817DEFF4F003E6E1A /* FMCTextAlignment.m */,
 				597C049B17DEFF50003E6E1A /* FMCTextFieldName.h */,
@@ -1358,8 +1304,6 @@
 				597C04EA17DEFF50003E6E1A /* FMCAddSubMenu.h in Headers */,
 				597C04EC17DEFF50003E6E1A /* FMCAddSubMenuResponse.h in Headers */,
 				597C04EE17DEFF50003E6E1A /* FMCAlert.h in Headers */,
-				597C04F017DEFF50003E6E1A /* FMCAlertManeuver.h in Headers */,
-				597C04F217DEFF50003E6E1A /* FMCAlertManeuverResponse.h in Headers */,
 				597C04F417DEFF50003E6E1A /* FMCAlertResponse.h in Headers */,
 				597C04F617DEFF50003E6E1A /* FMCAppHMIType.h in Headers */,
 				597C04F817DEFF50003E6E1A /* FMCAppInterfaceUnregisteredReason.h in Headers */,
@@ -1444,7 +1388,6 @@
 				597C059A17DEFF50003E6E1A /* FMCOnLanguageChange.h in Headers */,
 				597C059C17DEFF50003E6E1A /* FMCOnPermissionsChange.h in Headers */,
 				597C059E17DEFF50003E6E1A /* FMCOnSyncPData.h in Headers */,
-				597C05A017DEFF50003E6E1A /* FMCOnTBTClientState.h in Headers */,
 				597C05A217DEFF50003E6E1A /* FMCOnVehicleData.h in Headers */,
 				597C05A417DEFF50003E6E1A /* FMCParameterPermissions.h in Headers */,
 				597C05A617DEFF50003E6E1A /* FMCPerformAudioPassThru.h in Headers */,
@@ -1489,8 +1432,6 @@
 				597C05F117DEFF50003E6E1A /* FMCSetMediaClockTimer.h in Headers */,
 				597C05F317DEFF50003E6E1A /* FMCSetMediaClockTimerResponse.h in Headers */,
 				597C05F517DEFF50003E6E1A /* FMCShow.h in Headers */,
-				597C05F717DEFF50003E6E1A /* FMCShowConstantTBT.h in Headers */,
-				597C05F917DEFF50003E6E1A /* FMCShowConstantTBTResponse.h in Headers */,
 				597C05FB17DEFF50003E6E1A /* FMCShowResponse.h in Headers */,
 				597C05FD17DEFF50003E6E1A /* FMCSingleTireStatus.h in Headers */,
 				597C05FF17DEFF50003E6E1A /* FMCSiphonServer.h in Headers */,
@@ -1515,7 +1456,6 @@
 				597C062917DEFF50003E6E1A /* FMCSyncTransport.h in Headers */,
 				597C062A17DEFF50003E6E1A /* FMCSystemAction.h in Headers */,
 				597C062C17DEFF50003E6E1A /* FMCSystemContext.h in Headers */,
-				597C062E17DEFF50003E6E1A /* FMCTBTState.h in Headers */,
 				597C063017DEFF50003E6E1A /* FMCTextAlignment.h in Headers */,
 				597C063217DEFF50003E6E1A /* FMCTextField.h in Headers */,
 				597C063417DEFF50003E6E1A /* FMCTextFieldName.h in Headers */,
@@ -1524,7 +1464,6 @@
 				597C063917DEFF50003E6E1A /* FMCTriggerSource.h in Headers */,
 				597C063B17DEFF50003E6E1A /* FMCTTSChunk.h in Headers */,
 				597C063D17DEFF50003E6E1A /* FMCTTSChunkFactory.h in Headers */,
-				597C063F17DEFF50003E6E1A /* FMCTurn.h in Headers */,
 				597C064117DEFF50003E6E1A /* FMCUnregisterAppInterface.h in Headers */,
 				597C064317DEFF50003E6E1A /* FMCUnregisterAppInterfaceResponse.h in Headers */,
 				597C064517DEFF50003E6E1A /* FMCUnsubscribeButton.h in Headers */,
@@ -1532,8 +1471,6 @@
 				597C064917DEFF50003E6E1A /* FMCUnsubscribeVehicleData.h in Headers */,
 				597C064B17DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.h in Headers */,
 				597C064D17DEFF50003E6E1A /* FMCUpdateMode.h in Headers */,
-				597C064F17DEFF50003E6E1A /* FMCUpdateTurnList.h in Headers */,
-				597C065117DEFF50003E6E1A /* FMCUpdateTurnListResponse.h in Headers */,
 				597C065317DEFF50003E6E1A /* FMCVehicleDataActiveStatus.h in Headers */,
 				597C065517DEFF50003E6E1A /* FMCVehicleDataEventStatus.h in Headers */,
 				597C065717DEFF50003E6E1A /* FMCVehicleDataNotificationStatus.h in Headers */,
@@ -1643,8 +1580,6 @@
 				597C04EB17DEFF50003E6E1A /* FMCAddSubMenu.m in Sources */,
 				597C04ED17DEFF50003E6E1A /* FMCAddSubMenuResponse.m in Sources */,
 				597C04EF17DEFF50003E6E1A /* FMCAlert.m in Sources */,
-				597C04F117DEFF50003E6E1A /* FMCAlertManeuver.m in Sources */,
-				597C04F317DEFF50003E6E1A /* FMCAlertManeuverResponse.m in Sources */,
 				597C04F517DEFF50003E6E1A /* FMCAlertResponse.m in Sources */,
 				597C04F717DEFF50003E6E1A /* FMCAppHMIType.m in Sources */,
 				597C04F917DEFF50003E6E1A /* FMCAppInterfaceUnregisteredReason.m in Sources */,
@@ -1729,7 +1664,6 @@
 				597C059B17DEFF50003E6E1A /* FMCOnLanguageChange.m in Sources */,
 				597C059D17DEFF50003E6E1A /* FMCOnPermissionsChange.m in Sources */,
 				597C059F17DEFF50003E6E1A /* FMCOnSyncPData.m in Sources */,
-				597C05A117DEFF50003E6E1A /* FMCOnTBTClientState.m in Sources */,
 				597C05A317DEFF50003E6E1A /* FMCOnVehicleData.m in Sources */,
 				597C05A517DEFF50003E6E1A /* FMCParameterPermissions.m in Sources */,
 				597C05A717DEFF50003E6E1A /* FMCPerformAudioPassThru.m in Sources */,
@@ -1771,8 +1705,6 @@
 				597C05F217DEFF50003E6E1A /* FMCSetMediaClockTimer.m in Sources */,
 				597C05F417DEFF50003E6E1A /* FMCSetMediaClockTimerResponse.m in Sources */,
 				597C05F617DEFF50003E6E1A /* FMCShow.m in Sources */,
-				597C05F817DEFF50003E6E1A /* FMCShowConstantTBT.m in Sources */,
-				597C05FA17DEFF50003E6E1A /* FMCShowConstantTBTResponse.m in Sources */,
 				597C05FC17DEFF50003E6E1A /* FMCShowResponse.m in Sources */,
 				597C05FE17DEFF50003E6E1A /* FMCSingleTireStatus.m in Sources */,
 				597C060017DEFF50003E6E1A /* FMCSiphonServer.m in Sources */,
@@ -1798,7 +1730,6 @@
 				597C062817DEFF50003E6E1A /* FMCSyncTcpTransport.m in Sources */,
 				597C062B17DEFF50003E6E1A /* FMCSystemAction.m in Sources */,
 				597C062D17DEFF50003E6E1A /* FMCSystemContext.m in Sources */,
-				597C062F17DEFF50003E6E1A /* FMCTBTState.m in Sources */,
 				597C063117DEFF50003E6E1A /* FMCTextAlignment.m in Sources */,
 				597C063317DEFF50003E6E1A /* FMCTextField.m in Sources */,
 				597C063517DEFF50003E6E1A /* FMCTextFieldName.m in Sources */,
@@ -1806,7 +1737,6 @@
 				597C063A17DEFF50003E6E1A /* FMCTriggerSource.m in Sources */,
 				597C063C17DEFF50003E6E1A /* FMCTTSChunk.m in Sources */,
 				597C063E17DEFF50003E6E1A /* FMCTTSChunkFactory.m in Sources */,
-				597C064017DEFF50003E6E1A /* FMCTurn.m in Sources */,
 				597C064217DEFF50003E6E1A /* FMCUnregisterAppInterface.m in Sources */,
 				597C064417DEFF50003E6E1A /* FMCUnregisterAppInterfaceResponse.m in Sources */,
 				597C064617DEFF50003E6E1A /* FMCUnsubscribeButton.m in Sources */,
@@ -1814,8 +1744,6 @@
 				597C064A17DEFF50003E6E1A /* FMCUnsubscribeVehicleData.m in Sources */,
 				597C064C17DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.m in Sources */,
 				597C064E17DEFF50003E6E1A /* FMCUpdateMode.m in Sources */,
-				597C065017DEFF50003E6E1A /* FMCUpdateTurnList.m in Sources */,
-				597C065217DEFF50003E6E1A /* FMCUpdateTurnListResponse.m in Sources */,
 				597C065417DEFF50003E6E1A /* FMCVehicleDataActiveStatus.m in Sources */,
 				597C065617DEFF50003E6E1A /* FMCVehicleDataEventStatus.m in Sources */,
 				597C065817DEFF50003E6E1A /* FMCVehicleDataNotificationStatus.m in Sources */,
