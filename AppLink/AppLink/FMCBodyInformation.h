@@ -8,6 +8,9 @@
 #import <AppLink/FMCIgnitionStableStatus.h>
 #import <AppLink/FMCIgnitionStatus.h>
 
+/**
+ * The body information including power modes.
+ */
 @interface FMCBodyInformation : FMCRPCStruct {}
 
 /**

@@ -5,6 +5,9 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCMessage.h>
 
+/**
+ * Status of the head lamps
+ */
 @interface FMCHeadLampStatus : FMCRPCStruct {}
 
 /**

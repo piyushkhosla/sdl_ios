@@ -7,6 +7,9 @@
 
 #import <AppLink/FMCMaintenanceModeStatus.h>
 
+/**
+ * engineInfo class
+ */
 @interface FMCEngineInfo : FMCRPCStruct {}
 
 /**
