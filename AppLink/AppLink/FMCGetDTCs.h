@@ -39,8 +39,7 @@
 
 
 /**
- * DTC Mask Byte to be sent in diagnostic request to module.
- * @param NSNumber* dtcMask Minvalue:0; Maxvalue:255
+ * @abstract  DTC Mask Byte to be sent in diagnostic request to module. NSNumber* dtcMask Minvalue:0; Maxvalue:255
  */
 @property(assign) NSNumber* dtcMask;
 
