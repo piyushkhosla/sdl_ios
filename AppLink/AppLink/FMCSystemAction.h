@@ -5,6 +5,10 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCEnum.h>
 
+/**
+ *
+ * Enumeration that describes system actions that can be triggered.
+ */
 @interface FMCSystemAction : FMCEnum {}
 
 /**

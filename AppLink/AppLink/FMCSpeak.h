@@ -78,7 +78,7 @@
 -(id) init;
 /**
  * @abstract Constructs a new FMCSpeak object indicated by the NSMutableDictionary parameter
- * @discussion dict The NSMutableDictionary to use
+ * @param dict The NSMutableDictionary to use
  */
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 

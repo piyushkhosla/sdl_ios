@@ -10,10 +10,13 @@
  */
 @interface FMCVehicleDataActiveStatus : FMCEnum {}
 
-/*!
- @abstract get FMCVehicleDataActiveStatus instance according to string value
+/**
+ * @abstract Convert String to FMCVehicleDataActiveStatus
+ * @param value NSString
+ * @result FMCVehicleDataActiveStatus
  */
 +(FMCVehicleDataActiveStatus*) valueOf:(NSString*) value;
+
 /*!
  @abstract return the array that store all possible FMCVehicleDataActiveStatus values
  */

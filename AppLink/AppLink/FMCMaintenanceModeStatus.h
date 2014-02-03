@@ -5,6 +5,10 @@
 #import <Foundation/Foundation.h> 
 #import <AppLink/FMCEnum.h>   
 
+/**
+ *
+ * The FMCMaintenanceModeStatus class.
+ */
 @interface FMCMaintenanceModeStatus : FMCEnum {}
 
 /*!

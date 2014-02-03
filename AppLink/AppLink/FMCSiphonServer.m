@@ -24,11 +24,11 @@
 #include <unistd.h>
 #import <AppLink/FMCDebugTool.h>
 
-typedef enum {
-    fromApp = 0x01
-    ,fromSync = 0x00
-    ,appLog = 0x02
-	,formattedTrace = 0x03
+typedef enum SiphonDataType {
+    fromApp = 0x01,
+    fromSync = 0x00,
+    appLog = 0x02,
+    formattedTrace = 0x03
 } SiphonDataType;
 
 const Byte siphonMsgVersionNumber = 1;

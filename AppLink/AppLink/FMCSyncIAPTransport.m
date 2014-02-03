@@ -9,6 +9,11 @@
 
 #define SYNC_PROTOCOL_STRING @"com.ford.sync.prot0"
 
+/**
+ *
+ * The FMCSyncIAPTransport class.
+ *
+ */
 @interface FMCSyncIAPTransport ()
 
 -(void) accessoryConnected:(NSNotification*) connectNotification;
@@ -225,6 +230,15 @@
 	}
 }
 
+
+
+/**
+ *
+ * Same as UIApplicationDelegate
+ *
+ *
+ * @param notification The NSNotification object.
+ */
 -(void)applicationWillEnterForeground:(NSNotification *)notification {
 //    //TODO:DEBUGOUTS
 //    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Will Enter Foreground"]];
@@ -235,6 +249,13 @@
     [self connect];
 }
 
+/**
+ *
+ * Same as UIApplicationDelegate
+ *
+ *
+ * @param notification The NSNotification object.
+ */
 -(void)applicationDidEnterBackground:(NSNotification *)notification {
 //    //TODO:DEBUGOUTS
 //    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Did Enter Background"]];
