@@ -5,7 +5,6 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCAddCommandResponse.h>
 #import <AppLink/FMCAddSubMenuResponse.h>
-#import <AppLink/FMCAlertManeuverResponse.h>
 #import <AppLink/FMCAlertResponse.h>
 #import <AppLink/FMCChangeRegistrationResponse.h>
 #import <AppLink/FMCCreateInteractionChoiceSetResponse.h>
@@ -27,7 +26,6 @@
 #import <AppLink/FMCOnHMIStatus.h>
 #import <AppLink/FMCOnLanguageChange.h>
 #import <AppLink/FMCOnPermissionsChange.h>
-#import <AppLink/FMCOnTBTClientState.h>
 #import <AppLink/FMCOnVehicleData.h>
 #import <AppLink/FMCPerformAudioPassThruResponse.h>
 #import <AppLink/FMCPerformInteractionResponse.h>
@@ -40,7 +38,6 @@
 #import <AppLink/FMCSetDisplayLayoutResponse.h>
 #import <AppLink/FMCSetGlobalPropertiesResponse.h>
 #import <AppLink/FMCSetMediaClockTimerResponse.h>
-#import <AppLink/FMCShowConstantTBTResponse.h>
 #import <AppLink/FMCShowResponse.h>
 #import <AppLink/FMCSliderResponse.h>
 #import <AppLink/FMCSpeakResponse.h>
@@ -49,7 +46,6 @@
 #import <AppLink/FMCUnregisterAppInterfaceResponse.h>
 #import <AppLink/FMCUnsubscribeButtonResponse.h>
 #import <AppLink/FMCUnsubscribeVehicleDataResponse.h>
-#import <AppLink/FMCUpdateTurnListResponse.h>
 
 @protocol FMCProxyListener
 
@@ -62,7 +58,6 @@
 
 -(void) onAddCommandResponse:(FMCAddCommandResponse*) response;
 -(void) onAddSubMenuResponse:(FMCAddSubMenuResponse*) response;
--(void) onAlertManeuverResponse:(FMCAlertManeuverResponse*) response;
 -(void) onAlertResponse:(FMCAlertResponse*) response;
 -(void) onChangeRegistrationResponse:(FMCChangeRegistrationResponse*) response;
 -(void) onCreateInteractionChoiceSetResponse:(FMCCreateInteractionChoiceSetResponse*) response;
@@ -83,7 +78,6 @@
 -(void) onOnCommand:(FMCOnCommand*) notification;
 -(void) onOnLanguageChange:(FMCOnLanguageChange*) notification;
 -(void) onOnPermissionsChange:(FMCOnPermissionsChange*) notification;
--(void) onOnTBTClientState:(FMCOnTBTClientState*) notification;
 -(void) onOnVehicleData:(FMCOnVehicleData*) notification;
 -(void) onPerformAudioPassThruResponse:(FMCPerformAudioPassThruResponse*) response;
 -(void) onPerformInteractionResponse:(FMCPerformInteractionResponse*) response;
@@ -96,7 +90,6 @@
 -(void) onSetDisplayLayoutResponse:(FMCSetDisplayLayoutResponse*) response;
 -(void) onSetGlobalPropertiesResponse:(FMCSetGlobalPropertiesResponse*) response;
 -(void) onSetMediaClockTimerResponse:(FMCSetMediaClockTimerResponse*) response;
--(void) onShowConstantTBTResponse:(FMCShowConstantTBTResponse*) response;
 -(void) onShowResponse:(FMCShowResponse*) response;
 -(void) onSliderResponse:(FMCSliderResponse*) response;
 -(void) onSpeakResponse:(FMCSpeakResponse*) response;
@@ -105,7 +98,6 @@
 -(void) onUnregisterAppInterfaceResponse:(FMCUnregisterAppInterfaceResponse*) response;
 -(void) onUnsubscribeButtonResponse:(FMCUnsubscribeButtonResponse*) response;
 -(void) onUnsubscribeVehicleDataResponse:(FMCUnsubscribeVehicleDataResponse*) response;
--(void) onUpdateTurnListResponse:(FMCUpdateTurnListResponse*) response;
 
 
 @end

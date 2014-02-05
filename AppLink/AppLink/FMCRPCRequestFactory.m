@@ -124,15 +124,6 @@ correlationID{
 //*****
 
 
-+(FMCAlertManeuver*) buildAlertManeuverWithTTSChunks:(NSMutableArray*) ttsChunks softButtons:(NSMutableArray*) softButtons correlationID:(NSNumber*) correlationID {
-    
-    FMCAlertManeuver* msg = [[[FMCAlertManeuver alloc] init] autorelease];
-    msg.ttsChunks = [[ttsChunks mutableCopy] autorelease];
-    msg.softButtons = [[softButtons mutableCopy] autorelease];
-    msg.correlationID = correlationID;
-    return msg;
-}
-
 +(FMCChangeRegistration*) buildChangeRegistrationWithLanguage:(FMCLanguage*) language hmiDisplayLanguage:(FMCLanguage*) hmiDisplayLanguage correlationID:(NSNumber*) correlationID {
 	
     FMCChangeRegistration* msg = [[[FMCChangeRegistration alloc] init] autorelease];
@@ -508,29 +499,6 @@ correlationID{
 //*****
 
 
-+(FMCShowConstantTBT*) buildShowConstantTBTWithNavigationText1:(NSString*) navigationText1 navigationText2:(NSString*) navigationText2 eta:(NSString*) eta totalDistance:(NSString*) totalDistance turnIcon:(FMCImage*) turnIcon distanceToManeuver:(NSNumber*) distanceToManeuver distanceToManeuverScale:(NSNumber*) distanceToManeuverScale maneuverComplete:(NSNumber*) maneuverComplete softButtons:(NSArray*) softButtons correlationID:(NSNumber*) correlationID {
-    
-    FMCShowConstantTBT* msg = [[[FMCShowConstantTBT alloc] init] autorelease];
-    
-    msg.navigationText1 = navigationText1;
-    msg.navigationText2 = navigationText2;
-    msg.eta = eta;
-    msg.totalDistance = totalDistance;
-    
-    msg.turnIcon = [[turnIcon retain] autorelease];
-	
-    msg.distanceToManeuver = distanceToManeuver;
-    msg.distanceToManeuverScale = distanceToManeuverScale;
-    msg.maneuverComplete = maneuverComplete;
-    
-    msg.softButtons = [[softButtons mutableCopy] autorelease];
-    
-    msg.correlationID = correlationID;
-    
-    return msg;
-}
-
-
 //***** Slider *****
 +(FMCSlider*) buildSliderDynamicFooterWithNumTicks:(NSNumber*) numTicks position:(NSNumber*) position sliderHeader:(NSString*) sliderHeader sliderFooter:(NSArray*) sliderFooter timeout:(NSNumber*) timeout correlationID:(NSNumber*) correlationID {	FMCSlider* msg = [[[FMCSlider alloc] init] autorelease];
 	msg.correlationID = correlationID;
@@ -659,16 +627,6 @@ correlationID{
 	msg.correlationID = correlationID;
 	
 	return msg;
-}
-
-+(FMCUpdateTurnList*) buildUpdateTurnList:(NSArray*) turnList softButtons:(NSArray*) softButtons correlationID:(NSNumber*) correlationID {
-    
-    FMCUpdateTurnList* msg = [[[FMCUpdateTurnList alloc] init] autorelease];
-    msg.turnList = [[turnList mutableCopy] autorelease];
-    msg.softButtons = [[softButtons mutableCopy] autorelease];
-    msg.correlationID = correlationID;
-    
-    return msg;
 }
 
 @end

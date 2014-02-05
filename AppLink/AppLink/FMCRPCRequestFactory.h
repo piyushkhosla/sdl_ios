@@ -7,7 +7,6 @@
 #import <AppLink/FMCAddCommand.h>
 #import <AppLink/FMCAddSubMenu.h>
 #import <AppLink/FMCAlert.h>
-#import <AppLink/FMCAlertManeuver.h>
 #import <AppLink/FMCAppHMIType.h>
 #import <AppLink/FMCChangeRegistration.h>
 #import <AppLink/FMCCreateInteractionChoiceSet.h>
@@ -31,7 +30,6 @@
 #import <AppLink/FMCSetGlobalProperties.h>
 #import <AppLink/FMCSetMediaClockTimer.h>
 #import <AppLink/FMCShow.h>
-#import <AppLink/FMCShowConstantTBT.h>
 #import <AppLink/FMCSlider.h>
 #import <AppLink/FMCSpeak.h>
 #import <AppLink/FMCSubscribeButton.h>
@@ -39,7 +37,6 @@
 #import <AppLink/FMCUnregisterAppInterface.h>
 #import <AppLink/FMCUnsubscribeButton.h>
 #import <AppLink/FMCUnsubscribeVehicleData.h>
-#import <AppLink/FMCUpdateTurnList.h>
 
 @interface FMCRPCRequestFactory : NSObject {}
 
@@ -80,8 +77,6 @@ correlationID;
 +(FMCAlert*) buildAlertWithAlertText1:(NSString*) alertText1 alertText2:(NSString*) alertText2 duration:(NSNumber*) duration correlationID:(NSNumber*) correlationID;
 //*****
 
-
-+(FMCAlertManeuver*) buildAlertManeuverWithTTSChunks:(NSArray*) ttsChunks softButtons:(NSArray*) softButtons correlationID:(NSNumber*) correlationID;
 
 +(FMCChangeRegistration*) buildChangeRegistrationWithLanguage:(FMCLanguage*) language hmiDisplayLanguage:(FMCLanguage*) hmiDisplayLanguage correlationID:(NSNumber*) correlationID;
 
@@ -165,9 +160,6 @@ correlationID;
 //*****
 
 
-+(FMCShowConstantTBT*) buildShowConstantTBTWithNavigationText1:(NSString*) navigationText1 navigationText2:(NSString*) navigationText2 eta:(NSString*) eta totalDistance:(NSString*) totalDistance turnIcon:(FMCImage*) turnIcon distanceToManeuver:(NSNumber*) distanceToManeuver distanceToManeuverScale:(NSNumber*) distanceToManeuverScale maneuverComplete:(NSNumber*) maneuverComplete softButtons:(NSArray*) softButtons correlationID:(NSNumber*) correlationID;
-
-
 //***** Slider *****
 +(FMCSlider*) buildSliderDynamicFooterWithNumTicks:(NSNumber*) numTicks position:(NSNumber*) position sliderHeader:(NSString*) sliderHeader sliderFooter:(NSArray*) sliderFooter timeout:(NSNumber*) timeout correlationID:(NSNumber*) correlationID;
 
@@ -192,7 +184,5 @@ correlationID;
 +(FMCUnsubscribeButton*) buildUnsubscribeButtonWithName:(FMCButtonName*) buttonName correlationID:(NSNumber*) correlationID;
 
 +(FMCUnsubscribeVehicleData*) buildUnsubscribeVehicleDataWithGPS:(NSNumber*) gps speed:(NSNumber*) speed rpm:(NSNumber*) rpm fuelLevel:(NSNumber*) fuelLevel fuelLevelState:(NSNumber*) fuelLevelState instantFuelConsumption:(NSNumber*) instantFuelConsumption externalTemperature:(NSNumber*) externalTemperature prndl:(NSNumber*) prndl tirePressure:(NSNumber*) tirePressure odometer:(NSNumber*) odometer beltStatus:(NSNumber*) beltStatus bodyInformation:(NSNumber*) bodyInformation deviceStatus:(NSNumber*) deviceStatus driverBraking:(NSNumber*) driverBraking wiperStatus:(NSNumber*) wiperStatus headLampStatus:(NSNumber*) headLampStatus engineTorque:(NSNumber*) engineTorque accPedalPosition:(NSNumber*) accPedalPosition steeringWheelAngle:(NSNumber*) steeringWheelAngle correlationID:(NSNumber*) correlationID;
-
-+(FMCUpdateTurnList*) buildUpdateTurnList:(NSArray*) turnList softButtons:(NSArray*) softButtons correlationID:(NSNumber*) correlationID;
 
 @end

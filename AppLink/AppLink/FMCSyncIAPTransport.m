@@ -206,10 +206,10 @@
         //TODO:ENDDEBUGOUTS
         
 		for (NSString *aProtocolString in [anAccessory protocolStrings]) {
-            //TODO:DEBUGOUTS
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Found Protocol String"]];
-            [FMCDebugTool logInfo:@"iAP: Found protocol string: %@", aProtocolString];
-            ///TODO:ENDDEBUGOUTS
+//            //TODO:DEBUGOUTS
+//            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Found Protocol String"]];
+//            [FMCDebugTool logInfo:@"iAP: Found protocol string: %@", aProtocolString];
+//            ///TODO:ENDDEBUGOUTS
 			
             if ([aProtocolString isEqualToString:SYNC_PROTOCOL_STRING]) {
                 //TODO:DEBUGOUTS
