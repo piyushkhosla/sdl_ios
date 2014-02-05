@@ -382,6 +382,20 @@ const int POLICIES_CORRELATION_ID = 65535;
         }
     }
    
+    if ([functionName isEqualToString:@"EncodedSyncPDataResponse"]) {
+        //TODO:DEBUGOUTS
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"ESPData Response"]];
+        [FMCDebugTool logInfo:@"ESPData Response"];
+        //TODO:ENDDEBUGOUTS
+        
+//        return;
+        
+        //        if ([[function objectForKey:NAMES_correlationID] intValue] == POLICIES_CORRELATION_ID) {
+        //            return;
+        //        }
+    }
+
+    
     // Intercept OnEncodedSyncPData. If URL != nil, perform HTTP Post and don't pass the notification to FMProxyListeners
     if ([functionName isEqualToString:@"OnEncodedSyncPData"]) {        
 //        if (!httpPolicyUpdateInProgress) {
