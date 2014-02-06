@@ -82,6 +82,8 @@ const int POLICIES_CORRELATION_ID = 65535;
         rpcSessionID = 0;
         
         alreadyDestructed = NO;
+
+        externalLibraries = nil;
         
         [transport addTransportListener:protocol];
         [protocol addProtocolListener:self];
@@ -154,6 +156,11 @@ const int POLICIES_CORRELATION_ID = 65535;
         }
         [externalLibraries addObject:externalLibrary];
     }
+}
+
+- (NSArray*)registeredLibraries
+{
+    return [externalLibraries copy];
 }
 
 -(NSString*) getProxyVersion {
