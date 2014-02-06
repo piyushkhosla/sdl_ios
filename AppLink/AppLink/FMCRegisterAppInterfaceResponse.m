@@ -1,6 +1,6 @@
 //  FMCRegisterAppInterfaceResponse.m
 //  SyncProxy
-//  Copyright (c) 2013 Ford Motor Company. All rights reserved.
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <AppLink/FMCRegisterAppInterfaceResponse.h>
 
@@ -222,12 +222,16 @@
     }
 }
 
--(FMCAudioPassThruCapabilities*) audioPassThruCapabilities {
-    NSObject* obj = [parameters objectForKey:NAMES_audioPassThruCapabilities];
-    if ([obj isKindOfClass:FMCAudioPassThruCapabilities.class]) {
-        return (FMCAudioPassThruCapabilities*)obj;
+-(NSMutableArray*) audioPassThruCapabilities {
+    NSMutableArray* array = [parameters objectForKey:NAMES_audioPassThruCapabilities];
+    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCAudioPassThruCapabilities.class]) {
+        return array;
     } else {
-        return [[[FMCAudioPassThruCapabilities alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
+        for (NSDictionary* dict in array) {
+            [newList addObject:[[[FMCAudioPassThruCapabilities alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+        }
+        return newList;
     }
 }
 

@@ -1,6 +1,6 @@
 //  FMCFileType.h
 //  SyncProxy
-//  Copyright (c) 2013 Ford Motor Company. All rights reserved.
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCEnum.h>
@@ -15,5 +15,6 @@
 +(FMCFileType*) GRAPHIC_PNG;
 +(FMCFileType*) AUDIO_WAVE;
 +(FMCFileType*) AUDIO_MP3;
++(FMCFileType*) BINARY;
 
 @end

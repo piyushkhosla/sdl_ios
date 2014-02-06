@@ -1,3 +1,7 @@
+//  AppLink.h
+//  SyncProxy
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
+
 //AppLink
 #import <AppLink/FMCAbstractProtocol.h>
 #import <AppLink/FMCAbstractSyncTransport.h>
@@ -41,8 +45,6 @@
 #import <AppLink/FMCAddSubMenu.h>
 #import <AppLink/FMCAddSubMenuResponse.h>
 #import <AppLink/FMCAlert.h>
-#import <AppLink/FMCAlertManeuver.h>
-#import <AppLink/FMCAlertManeuverResponse.h>
 #import <AppLink/FMCAlertResponse.h>
 #import <AppLink/FMCAppHMIType.h>
 #import <AppLink/FMCAppInterfaceUnregisteredReason.h>
@@ -96,7 +98,6 @@
 #import <AppLink/FMCOnHMIStatus.h>
 #import <AppLink/FMCOnLanguageChange.h>
 #import <AppLink/FMCOnPermissionsChange.h>
-#import <AppLink/FMCOnTBTClientState.h>
 #import <AppLink/FMCParameterPermissions.h>
 #import <AppLink/FMCPerformAudioPassThru.h>
 #import <AppLink/FMCPerformAudioPassThruResponse.h>
@@ -125,8 +126,6 @@
 #import <AppLink/FMCSetMediaClockTimer.h>
 #import <AppLink/FMCSetMediaClockTimerResponse.h>
 #import <AppLink/FMCShow.h>
-#import <AppLink/FMCShowConstantTBT.h>
-#import <AppLink/FMCShowConstantTBTResponse.h>
 #import <AppLink/FMCShowResponse.h>
 #import <AppLink/FMCSlider.h>
 #import <AppLink/FMCSliderResponse.h>
@@ -142,20 +141,16 @@
 #import <AppLink/FMCSyncMsgVersion.h>
 #import <AppLink/FMCSystemAction.h>
 #import <AppLink/FMCSystemContext.h>
-#import <AppLink/FMCTBTState.h>
 #import <AppLink/FMCTextAlignment.h>
 #import <AppLink/FMCTextField.h>
 #import <AppLink/FMCTextFieldName.h>
 #import <AppLink/FMCTriggerSource.h>
 #import <AppLink/FMCTTSChunk.h>
-#import <AppLink/FMCTurn.h>
 #import <AppLink/FMCUnregisterAppInterface.h>
 #import <AppLink/FMCUnregisterAppInterfaceResponse.h>
 #import <AppLink/FMCUnsubscribeButton.h>
 #import <AppLink/FMCUnsubscribeButtonResponse.h>
 #import <AppLink/FMCUpdateMode.h>
-#import <AppLink/FMCUpdateTurnList.h>
-#import <AppLink/FMCUpdateTurnListResponse.h>
 #import <AppLink/FMCVrCapabilities.h>
 #import <AppLink/FMCVrHelpItem.h>
 

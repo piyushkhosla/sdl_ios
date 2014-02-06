@@ -1,6 +1,6 @@
 //  FMCShow.h
 //  SyncProxy
-//  Copyright (c) 2013 Ford Motor Company. All rights reserved.
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCRequest.h>
@@ -23,7 +23,7 @@
 @property(assign) NSString* mediaClock;
 @property(assign) NSString* mediaTrack;
 @property(assign) FMCImage* graphic;
-@property(assign) FMCSoftButton* softButtons;
+@property(assign) NSMutableArray* softButtons;
 @property(assign) NSMutableArray* customPresets;
 
 @end

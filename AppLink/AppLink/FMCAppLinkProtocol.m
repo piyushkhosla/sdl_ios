@@ -1,6 +1,6 @@
 //  FMCAppLinkProtocol.m
 //  SyncProxy
-//  Copyright (c) 2013 Ford Motor Company. All rights reserved.
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <AppLink/FMCAppLinkProtocol.h>
 
@@ -82,7 +82,10 @@
 			ret = [[FrameAssembler alloc] initWithListeners:protocolListeners];
 		} else if (header._sessionType == FMCSessionType_BulkData) {
 			ret = [[BulkAssembler alloc] initWithListeners:protocolListeners];
-		}
+		} else {
+            //Invalid Header Session Type, Proxy Restart
+            return nil;
+        }
         
 		[frameAssemblerForSessionID setObject:ret forKey:sessionIDKey];
         return [ret autorelease];
@@ -148,7 +151,19 @@
         // Fill the buffer and call the handler!
 		[dataBuf appendBytes:receivedBytes + receivedBytesReadPos length:bytesNeeded];
 		receivedBytesReadPos += bytesNeeded;
-		FrameAssembler *assembler = [self getFrameAssemblerForFrameHeader:currentHeader];
+        FrameAssembler *assembler = [self getFrameAssemblerForFrameHeader:currentHeader];
+        
+        //Invalid Header Session Type, Proxy Restart
+        if (assembler == nil){
+            //TODO:DEBUGOUTS
+            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Invalid Header Session Type, Proxy Restart"]];
+            [FMCDebugTool logInfo:@"Invalid Header Session Type, Proxy Restart"];
+            //TODO:ENDDEBUGOUTS
+            [self onTransportDisconnected];
+            [self resetHeaderAndData];
+            return;
+        }
+        
 		[assembler handleFrame:currentHeader data:dataBuf];
 		[self resetHeaderAndData];
 		

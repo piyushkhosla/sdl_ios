@@ -36,10 +36,6 @@
 		597C04ED17DEFF50003E6E1A /* FMCAddSubMenuResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C035417DEFF4F003E6E1A /* FMCAddSubMenuResponse.m */; };
 		597C04EE17DEFF50003E6E1A /* FMCAlert.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C035517DEFF4F003E6E1A /* FMCAlert.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C04EF17DEFF50003E6E1A /* FMCAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C035617DEFF4F003E6E1A /* FMCAlert.m */; };
-		597C04F017DEFF50003E6E1A /* FMCAlertManeuver.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C035717DEFF4F003E6E1A /* FMCAlertManeuver.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C04F117DEFF50003E6E1A /* FMCAlertManeuver.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C035817DEFF4F003E6E1A /* FMCAlertManeuver.m */; };
-		597C04F217DEFF50003E6E1A /* FMCAlertManeuverResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C035917DEFF4F003E6E1A /* FMCAlertManeuverResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C04F317DEFF50003E6E1A /* FMCAlertManeuverResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C035A17DEFF4F003E6E1A /* FMCAlertManeuverResponse.m */; };
 		597C04F417DEFF50003E6E1A /* FMCAlertResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C035B17DEFF4F003E6E1A /* FMCAlertResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C04F517DEFF50003E6E1A /* FMCAlertResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C035C17DEFF4F003E6E1A /* FMCAlertResponse.m */; };
 		597C04F617DEFF50003E6E1A /* FMCAppHMIType.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C035D17DEFF4F003E6E1A /* FMCAppHMIType.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -211,8 +207,6 @@
 		597C059D17DEFF50003E6E1A /* FMCOnPermissionsChange.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C040417DEFF4F003E6E1A /* FMCOnPermissionsChange.m */; };
 		597C059E17DEFF50003E6E1A /* FMCOnSyncPData.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C040517DEFF4F003E6E1A /* FMCOnSyncPData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C059F17DEFF50003E6E1A /* FMCOnSyncPData.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C040617DEFF4F003E6E1A /* FMCOnSyncPData.m */; };
-		597C05A017DEFF50003E6E1A /* FMCOnTBTClientState.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C040717DEFF4F003E6E1A /* FMCOnTBTClientState.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C05A117DEFF50003E6E1A /* FMCOnTBTClientState.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C040817DEFF4F003E6E1A /* FMCOnTBTClientState.m */; };
 		597C05A217DEFF50003E6E1A /* FMCOnVehicleData.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C040917DEFF4F003E6E1A /* FMCOnVehicleData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C05A317DEFF50003E6E1A /* FMCOnVehicleData.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C040A17DEFF4F003E6E1A /* FMCOnVehicleData.m */; };
 		597C05A417DEFF50003E6E1A /* FMCParameterPermissions.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C040B17DEFF4F003E6E1A /* FMCParameterPermissions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -298,10 +292,6 @@
 		597C05F417DEFF50003E6E1A /* FMCSetMediaClockTimerResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C045B17DEFF4F003E6E1A /* FMCSetMediaClockTimerResponse.m */; };
 		597C05F517DEFF50003E6E1A /* FMCShow.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C045C17DEFF4F003E6E1A /* FMCShow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C05F617DEFF50003E6E1A /* FMCShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C045D17DEFF4F003E6E1A /* FMCShow.m */; };
-		597C05F717DEFF50003E6E1A /* FMCShowConstantTBT.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C045E17DEFF4F003E6E1A /* FMCShowConstantTBT.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C05F817DEFF50003E6E1A /* FMCShowConstantTBT.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C045F17DEFF4F003E6E1A /* FMCShowConstantTBT.m */; };
-		597C05F917DEFF50003E6E1A /* FMCShowConstantTBTResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C046017DEFF4F003E6E1A /* FMCShowConstantTBTResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C05FA17DEFF50003E6E1A /* FMCShowConstantTBTResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C046117DEFF4F003E6E1A /* FMCShowConstantTBTResponse.m */; };
 		597C05FB17DEFF50003E6E1A /* FMCShowResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C046217DEFF4F003E6E1A /* FMCShowResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C05FC17DEFF50003E6E1A /* FMCShowResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C046317DEFF4F003E6E1A /* FMCShowResponse.m */; };
 		597C05FD17DEFF50003E6E1A /* FMCSingleTireStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C046417DEFF4F003E6E1A /* FMCSingleTireStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -353,8 +343,6 @@
 		597C062B17DEFF50003E6E1A /* FMCSystemAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C049217DEFF4F003E6E1A /* FMCSystemAction.m */; };
 		597C062C17DEFF50003E6E1A /* FMCSystemContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C049317DEFF4F003E6E1A /* FMCSystemContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C062D17DEFF50003E6E1A /* FMCSystemContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C049417DEFF4F003E6E1A /* FMCSystemContext.m */; };
-		597C062E17DEFF50003E6E1A /* FMCTBTState.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C049517DEFF4F003E6E1A /* FMCTBTState.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C062F17DEFF50003E6E1A /* FMCTBTState.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C049617DEFF4F003E6E1A /* FMCTBTState.m */; };
 		597C063017DEFF50003E6E1A /* FMCTextAlignment.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C049717DEFF4F003E6E1A /* FMCTextAlignment.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C063117DEFF50003E6E1A /* FMCTextAlignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C049817DEFF4F003E6E1A /* FMCTextAlignment.m */; };
 		597C063217DEFF50003E6E1A /* FMCTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C049917DEFF50003E6E1A /* FMCTextField.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -370,8 +358,6 @@
 		597C063C17DEFF50003E6E1A /* FMCTTSChunk.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04A317DEFF50003E6E1A /* FMCTTSChunk.m */; };
 		597C063D17DEFF50003E6E1A /* FMCTTSChunkFactory.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04A417DEFF50003E6E1A /* FMCTTSChunkFactory.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C063E17DEFF50003E6E1A /* FMCTTSChunkFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04A517DEFF50003E6E1A /* FMCTTSChunkFactory.m */; };
-		597C063F17DEFF50003E6E1A /* FMCTurn.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04A617DEFF50003E6E1A /* FMCTurn.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C064017DEFF50003E6E1A /* FMCTurn.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04A717DEFF50003E6E1A /* FMCTurn.m */; };
 		597C064117DEFF50003E6E1A /* FMCUnregisterAppInterface.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04A817DEFF50003E6E1A /* FMCUnregisterAppInterface.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C064217DEFF50003E6E1A /* FMCUnregisterAppInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04A917DEFF50003E6E1A /* FMCUnregisterAppInterface.m */; };
 		597C064317DEFF50003E6E1A /* FMCUnregisterAppInterfaceResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04AA17DEFF50003E6E1A /* FMCUnregisterAppInterfaceResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -386,10 +372,6 @@
 		597C064C17DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04B317DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.m */; };
 		597C064D17DEFF50003E6E1A /* FMCUpdateMode.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04B417DEFF50003E6E1A /* FMCUpdateMode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C064E17DEFF50003E6E1A /* FMCUpdateMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04B517DEFF50003E6E1A /* FMCUpdateMode.m */; };
-		597C064F17DEFF50003E6E1A /* FMCUpdateTurnList.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04B617DEFF50003E6E1A /* FMCUpdateTurnList.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C065017DEFF50003E6E1A /* FMCUpdateTurnList.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04B717DEFF50003E6E1A /* FMCUpdateTurnList.m */; };
-		597C065117DEFF50003E6E1A /* FMCUpdateTurnListResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04B817DEFF50003E6E1A /* FMCUpdateTurnListResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		597C065217DEFF50003E6E1A /* FMCUpdateTurnListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04B917DEFF50003E6E1A /* FMCUpdateTurnListResponse.m */; };
 		597C065317DEFF50003E6E1A /* FMCVehicleDataActiveStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04BA17DEFF50003E6E1A /* FMCVehicleDataActiveStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C065417DEFF50003E6E1A /* FMCVehicleDataActiveStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04BB17DEFF50003E6E1A /* FMCVehicleDataActiveStatus.m */; };
 		597C065517DEFF50003E6E1A /* FMCVehicleDataEventStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04BC17DEFF50003E6E1A /* FMCVehicleDataEventStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -438,10 +420,6 @@
 		597C035417DEFF4F003E6E1A /* FMCAddSubMenuResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCAddSubMenuResponse.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C035517DEFF4F003E6E1A /* FMCAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCAlert.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		597C035617DEFF4F003E6E1A /* FMCAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCAlert.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		597C035717DEFF4F003E6E1A /* FMCAlertManeuver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCAlertManeuver.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		597C035817DEFF4F003E6E1A /* FMCAlertManeuver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCAlertManeuver.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		597C035917DEFF4F003E6E1A /* FMCAlertManeuverResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCAlertManeuverResponse.h; sourceTree = "<group>"; };
-		597C035A17DEFF4F003E6E1A /* FMCAlertManeuverResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCAlertManeuverResponse.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C035B17DEFF4F003E6E1A /* FMCAlertResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCAlertResponse.h; sourceTree = "<group>"; };
 		597C035C17DEFF4F003E6E1A /* FMCAlertResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCAlertResponse.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C035D17DEFF4F003E6E1A /* FMCAppHMIType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCAppHMIType.h; sourceTree = "<group>"; };
@@ -614,8 +592,6 @@
 		597C040417DEFF4F003E6E1A /* FMCOnPermissionsChange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCOnPermissionsChange.m; sourceTree = "<group>"; };
 		597C040517DEFF4F003E6E1A /* FMCOnSyncPData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCOnSyncPData.h; sourceTree = "<group>"; };
 		597C040617DEFF4F003E6E1A /* FMCOnSyncPData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCOnSyncPData.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		597C040717DEFF4F003E6E1A /* FMCOnTBTClientState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCOnTBTClientState.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		597C040817DEFF4F003E6E1A /* FMCOnTBTClientState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCOnTBTClientState.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C040917DEFF4F003E6E1A /* FMCOnVehicleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCOnVehicleData.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		597C040A17DEFF4F003E6E1A /* FMCOnVehicleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCOnVehicleData.m; sourceTree = "<group>"; };
 		597C040B17DEFF4F003E6E1A /* FMCParameterPermissions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCParameterPermissions.h; sourceTree = "<group>"; };
@@ -701,10 +677,6 @@
 		597C045B17DEFF4F003E6E1A /* FMCSetMediaClockTimerResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCSetMediaClockTimerResponse.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C045C17DEFF4F003E6E1A /* FMCShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCShow.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		597C045D17DEFF4F003E6E1A /* FMCShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCShow.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		597C045E17DEFF4F003E6E1A /* FMCShowConstantTBT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCShowConstantTBT.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		597C045F17DEFF4F003E6E1A /* FMCShowConstantTBT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCShowConstantTBT.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		597C046017DEFF4F003E6E1A /* FMCShowConstantTBTResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCShowConstantTBTResponse.h; sourceTree = "<group>"; };
-		597C046117DEFF4F003E6E1A /* FMCShowConstantTBTResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCShowConstantTBTResponse.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C046217DEFF4F003E6E1A /* FMCShowResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCShowResponse.h; sourceTree = "<group>"; };
 		597C046317DEFF4F003E6E1A /* FMCShowResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCShowResponse.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C046417DEFF4F003E6E1A /* FMCSingleTireStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCSingleTireStatus.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -756,8 +728,6 @@
 		597C049217DEFF4F003E6E1A /* FMCSystemAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCSystemAction.m; sourceTree = "<group>"; };
 		597C049317DEFF4F003E6E1A /* FMCSystemContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCSystemContext.h; sourceTree = "<group>"; };
 		597C049417DEFF4F003E6E1A /* FMCSystemContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCSystemContext.m; sourceTree = "<group>"; };
-		597C049517DEFF4F003E6E1A /* FMCTBTState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCTBTState.h; sourceTree = "<group>"; };
-		597C049617DEFF4F003E6E1A /* FMCTBTState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCTBTState.m; sourceTree = "<group>"; };
 		597C049717DEFF4F003E6E1A /* FMCTextAlignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCTextAlignment.h; sourceTree = "<group>"; };
 		597C049817DEFF4F003E6E1A /* FMCTextAlignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCTextAlignment.m; sourceTree = "<group>"; };
 		597C049917DEFF50003E6E1A /* FMCTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCTextField.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -773,8 +743,6 @@
 		597C04A317DEFF50003E6E1A /* FMCTTSChunk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCTTSChunk.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C04A417DEFF50003E6E1A /* FMCTTSChunkFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCTTSChunkFactory.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		597C04A517DEFF50003E6E1A /* FMCTTSChunkFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCTTSChunkFactory.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		597C04A617DEFF50003E6E1A /* FMCTurn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCTurn.h; sourceTree = "<group>"; };
-		597C04A717DEFF50003E6E1A /* FMCTurn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCTurn.m; sourceTree = "<group>"; };
 		597C04A817DEFF50003E6E1A /* FMCUnregisterAppInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCUnregisterAppInterface.h; sourceTree = "<group>"; };
 		597C04A917DEFF50003E6E1A /* FMCUnregisterAppInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCUnregisterAppInterface.m; sourceTree = "<group>"; };
 		597C04AA17DEFF50003E6E1A /* FMCUnregisterAppInterfaceResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCUnregisterAppInterfaceResponse.h; sourceTree = "<group>"; };
@@ -789,10 +757,6 @@
 		597C04B317DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCUnsubscribeVehicleDataResponse.m; sourceTree = "<group>"; };
 		597C04B417DEFF50003E6E1A /* FMCUpdateMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCUpdateMode.h; sourceTree = "<group>"; };
 		597C04B517DEFF50003E6E1A /* FMCUpdateMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCUpdateMode.m; sourceTree = "<group>"; };
-		597C04B617DEFF50003E6E1A /* FMCUpdateTurnList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCUpdateTurnList.h; sourceTree = "<group>"; };
-		597C04B717DEFF50003E6E1A /* FMCUpdateTurnList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCUpdateTurnList.m; sourceTree = "<group>"; };
-		597C04B817DEFF50003E6E1A /* FMCUpdateTurnListResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCUpdateTurnListResponse.h; sourceTree = "<group>"; };
-		597C04B917DEFF50003E6E1A /* FMCUpdateTurnListResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCUpdateTurnListResponse.m; sourceTree = "<group>"; };
 		597C04BA17DEFF50003E6E1A /* FMCVehicleDataActiveStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCVehicleDataActiveStatus.h; sourceTree = "<group>"; };
 		597C04BB17DEFF50003E6E1A /* FMCVehicleDataActiveStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCVehicleDataActiveStatus.m; sourceTree = "<group>"; };
 		597C04BC17DEFF50003E6E1A /* FMCVehicleDataEventStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCVehicleDataEventStatus.h; sourceTree = "<group>"; };
@@ -862,155 +826,140 @@
 			isa = PBXGroup;
 			children = (
 				597C04E117DEFF50003E6E1A /* AppLink.h */,
-				597C034917DEFF4F003E6E1A /* FMCAbstractProtocol.h */,
-				597C034A17DEFF4F003E6E1A /* FMCAbstractProtocol.m */,
-				597C034B17DEFF4F003E6E1A /* FMCAbstractSyncTransport.h */,
-				597C034C17DEFF4F003E6E1A /* FMCAbstractSyncTransport.m */,
-				597C034D17DEFF4F003E6E1A /* FMCAddCommand.h */,
-				597C034E17DEFF4F003E6E1A /* FMCAddCommand.m */,
-				597C034F17DEFF4F003E6E1A /* FMCAddCommandResponse.h */,
-				597C035017DEFF4F003E6E1A /* FMCAddCommandResponse.m */,
-				597C035117DEFF4F003E6E1A /* FMCAddSubMenu.h */,
-				597C035217DEFF4F003E6E1A /* FMCAddSubMenu.m */,
-				597C035317DEFF4F003E6E1A /* FMCAddSubMenuResponse.h */,
-				597C035417DEFF4F003E6E1A /* FMCAddSubMenuResponse.m */,
-				597C035517DEFF4F003E6E1A /* FMCAlert.h */,
-				597C035617DEFF4F003E6E1A /* FMCAlert.m */,
-				597C035717DEFF4F003E6E1A /* FMCAlertManeuver.h */,
-				597C035817DEFF4F003E6E1A /* FMCAlertManeuver.m */,
-				597C035917DEFF4F003E6E1A /* FMCAlertManeuverResponse.h */,
-				597C035A17DEFF4F003E6E1A /* FMCAlertManeuverResponse.m */,
-				597C035B17DEFF4F003E6E1A /* FMCAlertResponse.h */,
-				597C035C17DEFF4F003E6E1A /* FMCAlertResponse.m */,
-				597C035D17DEFF4F003E6E1A /* FMCAppHMIType.h */,
-				597C035E17DEFF4F003E6E1A /* FMCAppHMIType.m */,
-				597C035F17DEFF4F003E6E1A /* FMCAppInterfaceUnregisteredReason.h */,
-				597C036017DEFF4F003E6E1A /* FMCAppInterfaceUnregisteredReason.m */,
+				59F8E66F18888CB000B7C56B /* Proxy */,
+				59F8E66D18888B3F00B7C56B /* Protocol */,
+				59F8E66E18888B4F00B7C56B /* Transport */,
+				59F8E674188896A400B7C56B /* Debug */,
+				59F8E67018888E5200B7C56B /* RPC Request */,
+				59F8E67218888E9800B7C56B /* RPC Response */,
+				59F8E673188895B400B7C56B /* RPC Notification */,
+				59F8E6751888986100B7C56B /* Enum */,
+				598655B91888F2AA009F7156 /* Struct */,
+				5913386117DEFC5E00CF214C /* Supporting Files */,
+			);
+			path = AppLink;
+			sourceTree = "<group>";
+		};
+		5913386117DEFC5E00CF214C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5913386217DEFC5E00CF214C /* AppLink-Info.plist */,
+				5913386317DEFC5E00CF214C /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		598655B91888F2AA009F7156 /* Struct */ = {
+			isa = PBXGroup;
+			children = (
 				597C036117DEFF4F003E6E1A /* FMCAudioPassThruCapabilities.h */,
 				597C036217DEFF4F003E6E1A /* FMCAudioPassThruCapabilities.m */,
-				597C036317DEFF4F003E6E1A /* FMCAudioStreamingState.h */,
-				597C036417DEFF4F003E6E1A /* FMCAudioStreamingState.m */,
-				597C036517DEFF4F003E6E1A /* FMCAudioType.h */,
-				597C036617DEFF4F003E6E1A /* FMCAudioType.m */,
 				597C036717DEFF4F003E6E1A /* FMCBeltStatus.h */,
 				597C036817DEFF4F003E6E1A /* FMCBeltStatus.m */,
-				597C036917DEFF4F003E6E1A /* FMCBinaryFrameHeader.h */,
-				597C036A17DEFF4F003E6E1A /* FMCBinaryFrameHeader.m */,
-				597C036B17DEFF4F003E6E1A /* FMCBitConverter.h */,
-				597C036C17DEFF4F003E6E1A /* FMCBitConverter.m */,
-				597C036D17DEFF4F003E6E1A /* FMCBitsPerSample.h */,
-				597C036E17DEFF4F003E6E1A /* FMCBitsPerSample.m */,
 				597C036F17DEFF4F003E6E1A /* FMCBodyInformation.h */,
 				597C037017DEFF4F003E6E1A /* FMCBodyInformation.m */,
 				597C037117DEFF4F003E6E1A /* FMCButtonCapabilities.h */,
 				597C037217DEFF4F003E6E1A /* FMCButtonCapabilities.m */,
-				597C037317DEFF4F003E6E1A /* FMCButtonEventMode.h */,
-				597C037417DEFF4F003E6E1A /* FMCButtonEventMode.m */,
-				597C037517DEFF4F003E6E1A /* FMCButtonName.h */,
-				597C037617DEFF4F003E6E1A /* FMCButtonName.m */,
-				597C037717DEFF4F003E6E1A /* FMCButtonPressMode.h */,
-				597C037817DEFF4F003E6E1A /* FMCButtonPressMode.m */,
-				597C037917DEFF4F003E6E1A /* FMCChangeRegistration.h */,
-				597C037A17DEFF4F003E6E1A /* FMCChangeRegistration.m */,
-				597C037B17DEFF4F003E6E1A /* FMCChangeRegistrationResponse.h */,
-				597C037C17DEFF4F003E6E1A /* FMCChangeRegistrationResponse.m */,
-				597C037D17DEFF4F003E6E1A /* FMCCharacterSet.h */,
-				597C037E17DEFF4F003E6E1A /* FMCCharacterSet.m */,
 				597C037F17DEFF4F003E6E1A /* FMCChoice.h */,
 				597C038017DEFF4F003E6E1A /* FMCChoice.m */,
-				597C038117DEFF4F003E6E1A /* FMCCompassDirection.h */,
-				597C038217DEFF4F003E6E1A /* FMCCompassDirection.m */,
-				597C038317DEFF4F003E6E1A /* FMCComponentVolumeStatus.h */,
-				597C038417DEFF4F003E6E1A /* FMCComponentVolumeStatus.m */,
-				597C038517DEFF4F003E6E1A /* FMCConsoleController.h */,
-				597C038617DEFF4F003E6E1A /* FMCConsoleController.m */,
-				597C038717DEFF4F003E6E1A /* FMCCreateInteractionChoiceSet.h */,
-				597C038817DEFF4F003E6E1A /* FMCCreateInteractionChoiceSet.m */,
-				597C038917DEFF4F003E6E1A /* FMCCreateInteractionChoiceSetResponse.h */,
-				597C038A17DEFF4F003E6E1A /* FMCCreateInteractionChoiceSetResponse.m */,
-				597C038B17DEFF4F003E6E1A /* FMCDebugTool.h */,
-				597C038C17DEFF4F003E6E1A /* FMCDebugTool.m */,
-				597C038D17DEFF4F003E6E1A /* FMCDecoder.h */,
-				597C038E17DEFF4F003E6E1A /* FMCDeleteCommand.h */,
-				597C038F17DEFF4F003E6E1A /* FMCDeleteCommand.m */,
-				597C039017DEFF4F003E6E1A /* FMCDeleteCommandResponse.h */,
-				597C039117DEFF4F003E6E1A /* FMCDeleteCommandResponse.m */,
-				597C039217DEFF4F003E6E1A /* FMCDeleteFile.h */,
-				597C039317DEFF4F003E6E1A /* FMCDeleteFile.m */,
-				597C039417DEFF4F003E6E1A /* FMCDeleteFileResponse.h */,
-				597C039517DEFF4F003E6E1A /* FMCDeleteFileResponse.m */,
-				597C039617DEFF4F003E6E1A /* FMCDeleteInteractionChoiceSet.h */,
-				597C039717DEFF4F003E6E1A /* FMCDeleteInteractionChoiceSet.m */,
-				597C039817DEFF4F003E6E1A /* FMCDeleteInteractionChoiceSetResponse.h */,
-				597C039917DEFF4F003E6E1A /* FMCDeleteInteractionChoiceSetResponse.m */,
-				597C039A17DEFF4F003E6E1A /* FMCDeleteSubMenu.h */,
-				597C039B17DEFF4F003E6E1A /* FMCDeleteSubMenu.m */,
-				597C039C17DEFF4F003E6E1A /* FMCDeleteSubMenuResponse.h */,
-				597C039D17DEFF4F003E6E1A /* FMCDeleteSubMenuResponse.m */,
-				597C039E17DEFF4F003E6E1A /* FMCDeviceLevelStatus.h */,
-				597C039F17DEFF4F003E6E1A /* FMCDeviceLevelStatus.m */,
 				597C03A017DEFF4F003E6E1A /* FMCDeviceStatus.h */,
 				597C03A117DEFF4F003E6E1A /* FMCDeviceStatus.m */,
 				597C03A217DEFF4F003E6E1A /* FMCDIDResult.h */,
 				597C03A317DEFF4F003E6E1A /* FMCDIDResult.m */,
-				597C03A417DEFF4F003E6E1A /* FMCDimension.h */,
-				597C03A517DEFF4F003E6E1A /* FMCDimension.m */,
 				597C03A617DEFF4F003E6E1A /* FMCDisplayCapabilities.h */,
 				597C03A717DEFF4F003E6E1A /* FMCDisplayCapabilities.m */,
-				597C03A817DEFF4F003E6E1A /* FMCDisplayType.h */,
-				597C03A917DEFF4F003E6E1A /* FMCDisplayType.m */,
-				597C03AA17DEFF4F003E6E1A /* FMCDriverDistractionState.h */,
-				597C03AB17DEFF4F003E6E1A /* FMCDriverDistractionState.m */,
-				597C03AC17DEFF4F003E6E1A /* FMCEncodedSyncPData.h */,
-				597C03AD17DEFF4F003E6E1A /* FMCEncodedSyncPData.m */,
-				597C03AE17DEFF4F003E6E1A /* FMCEncodedSyncPDataResponse.h */,
-				597C03AF17DEFF4F003E6E1A /* FMCEncodedSyncPDataResponse.m */,
-				597C03B017DEFF4F003E6E1A /* FMCEncoder.h */,
-				597C03B117DEFF4F003E6E1A /* FMCEndAudioPassThru.h */,
-				597C03B217DEFF4F003E6E1A /* FMCEndAudioPassThru.m */,
-				597C03B317DEFF4F003E6E1A /* FMCEndAudioPassThruResponse.h */,
-				597C03B417DEFF4F003E6E1A /* FMCEndAudioPassThruResponse.m */,
 				597C03B517DEFF4F003E6E1A /* FMCEngineInfo.h */,
 				597C03B617DEFF4F003E6E1A /* FMCEngineInfo.m */,
-				597C03B717DEFF4F003E6E1A /* FMCEnum.h */,
-				597C03B817DEFF4F003E6E1A /* FMCEnum.m */,
-				FBAC28E0181FEAF4003210A2 /* FMCExternalLibrary.h */,
-				597C03B917DEFF4F003E6E1A /* FMCFileType.h */,
-				597C03BA17DEFF4F003E6E1A /* FMCFileType.m */,
-				597C03BB17DEFF4F003E6E1A /* FMCFunctionID.h */,
-				597C03BC17DEFF4F003E6E1A /* FMCFunctionID.m */,
-				597C03BD17DEFF4F003E6E1A /* FMCGenericResponse.h */,
-				597C03BE17DEFF4F003E6E1A /* FMCGenericResponse.m */,
-				597C03BF17DEFF4F003E6E1A /* FMCGetDTCs.h */,
-				597C03C017DEFF4F003E6E1A /* FMCGetDTCs.m */,
-				597C03C117DEFF4F003E6E1A /* FMCGetDTCsResponse.h */,
-				597C03C217DEFF4F003E6E1A /* FMCGetDTCsResponse.m */,
-				597C03C317DEFF4F003E6E1A /* FMCGetVehicleData.h */,
-				597C03C417DEFF4F003E6E1A /* FMCGetVehicleData.m */,
-				597C03C517DEFF4F003E6E1A /* FMCGetVehicleDataResponse.h */,
-				597C03C617DEFF4F003E6E1A /* FMCGetVehicleDataResponse.m */,
-				597C03C717DEFF4F003E6E1A /* FMCGlobalProperty.h */,
-				597C03C817DEFF4F003E6E1A /* FMCGlobalProperty.m */,
 				597C03C917DEFF4F003E6E1A /* FMCGPSData.h */,
 				597C03CA17DEFF4F003E6E1A /* FMCGPSData.m */,
 				597C03CB17DEFF4F003E6E1A /* FMCHeadLampStatus.h */,
 				597C03CC17DEFF4F003E6E1A /* FMCHeadLampStatus.m */,
-				597C03CD17DEFF4F003E6E1A /* FMCHMILevel.h */,
-				597C03CE17DEFF4F003E6E1A /* FMCHMILevel.m */,
 				597C03CF17DEFF4F003E6E1A /* FMCHMIPermissions.h */,
 				597C03D017DEFF4F003E6E1A /* FMCHMIPermissions.m */,
-				597C03D117DEFF4F003E6E1A /* FMCHMIZoneCapabilities.h */,
-				597C03D217DEFF4F003E6E1A /* FMCHMIZoneCapabilities.m */,
-				597C03D317DEFF4F003E6E1A /* FMCIgnitionStableStatus.h */,
-				597C03D417DEFF4F003E6E1A /* FMCIgnitionStableStatus.m */,
-				597C03D517DEFF4F003E6E1A /* FMCIgnitionStatus.h */,
-				597C03D617DEFF4F003E6E1A /* FMCIgnitionStatus.m */,
 				597C03D717DEFF4F003E6E1A /* FMCImage.h */,
 				597C03D817DEFF4F003E6E1A /* FMCImage.m */,
-				597C03D917DEFF4F003E6E1A /* FMCImageType.h */,
-				597C03DA17DEFF4F003E6E1A /* FMCImageType.m */,
-				597C03DB17DEFF4F003E6E1A /* FMCInteractionMode.h */,
-				597C03DC17DEFF4F003E6E1A /* FMCInteractionMode.m */,
+				597C03EE17DEFF4F003E6E1A /* FMCMenuParams.h */,
+				597C03EF17DEFF4F003E6E1A /* FMCMenuParams.m */,
+				597C040B17DEFF4F003E6E1A /* FMCParameterPermissions.h */,
+				597C040C17DEFF4F003E6E1A /* FMCParameterPermissions.m */,
+				597C041517DEFF4F003E6E1A /* FMCPermissionItem.h */,
+				597C041617DEFF4F003E6E1A /* FMCPermissionItem.m */,
+				597C041917DEFF4F003E6E1A /* FMCPresetBankCapabilities.h */,
+				597C041A17DEFF4F003E6E1A /* FMCPresetBankCapabilities.m */,
+				597C046417DEFF4F003E6E1A /* FMCSingleTireStatus.h */,
+				597C046517DEFF4F003E6E1A /* FMCSingleTireStatus.m */,
+				597C046C17DEFF4F003E6E1A /* FMCSoftButton.h */,
+				597C046D17DEFF4F003E6E1A /* FMCSoftButton.m */,
+				597C046E17DEFF4F003E6E1A /* FMCSoftButtonCapabilities.h */,
+				597C046F17DEFF4F003E6E1A /* FMCSoftButtonCapabilities.m */,
+				597C047817DEFF4F003E6E1A /* FMCStartTime.h */,
+				597C047917DEFF4F003E6E1A /* FMCStartTime.m */,
+				597C048417DEFF4F003E6E1A /* FMCSyncMsgVersion.h */,
+				597C048517DEFF4F003E6E1A /* FMCSyncMsgVersion.m */,
+				597C049917DEFF50003E6E1A /* FMCTextField.h */,
+				597C049A17DEFF50003E6E1A /* FMCTextField.m */,
+				597C049D17DEFF50003E6E1A /* FMCTireStatus.h */,
+				597C049E17DEFF50003E6E1A /* FMCTireStatus.m */,
+				597C04A217DEFF50003E6E1A /* FMCTTSChunk.h */,
+				597C04A317DEFF50003E6E1A /* FMCTTSChunk.m */,
+				597C04C017DEFF50003E6E1A /* FMCVehicleDataResult.h */,
+				597C04C117DEFF50003E6E1A /* FMCVehicleDataResult.m */,
+				597C04C817DEFF50003E6E1A /* FMCVehicleType.h */,
+				597C04C917DEFF50003E6E1A /* FMCVehicleType.m */,
+				597C04CC17DEFF50003E6E1A /* FMCVrHelpItem.h */,
+				597C04CD17DEFF50003E6E1A /* FMCVrHelpItem.m */,
+			);
+			name = Struct;
+			sourceTree = "<group>";
+		};
+		59F8E66D18888B3F00B7C56B /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				597C034917DEFF4F003E6E1A /* FMCAbstractProtocol.h */,
+				597C034A17DEFF4F003E6E1A /* FMCAbstractProtocol.m */,
+				597C04D217DEFF50003E6E1A /* FMCAppLinkProtocol.h */,
+				597C04D317DEFF50003E6E1A /* FMCAppLinkProtocol.m */,
+				597C036917DEFF4F003E6E1A /* FMCBinaryFrameHeader.h */,
+				597C036A17DEFF4F003E6E1A /* FMCBinaryFrameHeader.m */,
+				597C036B17DEFF4F003E6E1A /* FMCBitConverter.h */,
+				597C036C17DEFF4F003E6E1A /* FMCBitConverter.m */,
+				597C041F17DEFF4F003E6E1A /* FMCProtocol.h */,
+				597C042017DEFF4F003E6E1A /* FMCProtocolFrameHeader.h */,
+				597C042117DEFF4F003E6E1A /* FMCProtocolFrameHeader.m */,
+				597C042217DEFF4F003E6E1A /* FMCProtocolFrameHeaderFactory.h */,
+				597C042317DEFF4F003E6E1A /* FMCProtocolFrameHeaderFactory.m */,
+				597C042417DEFF4F003E6E1A /* FMCProtocolListener.h */,
+				597C042517DEFF4F003E6E1A /* FMCProtocolMessage.h */,
+				597C042617DEFF4F003E6E1A /* FMCProtocolMessage.m */,
+			);
+			name = Protocol;
+			sourceTree = "<group>";
+		};
+		59F8E66E18888B4F00B7C56B /* Transport */ = {
+			isa = PBXGroup;
+			children = (
+				597C034B17DEFF4F003E6E1A /* FMCAbstractSyncTransport.h */,
+				597C034C17DEFF4F003E6E1A /* FMCAbstractSyncTransport.m */,
+				597C048217DEFF4F003E6E1A /* FMCSyncIAPTransport.h */,
+				597C048317DEFF4F003E6E1A /* FMCSyncIAPTransport.m */,
+				597C048E17DEFF4F003E6E1A /* FMCSyncTcpTransport.h */,
+				597C048F17DEFF4F003E6E1A /* FMCSyncTcpTransport.m */,
+				597C049017DEFF4F003E6E1A /* FMCSyncTransport.h */,
+				597C049F17DEFF50003E6E1A /* FMCTransportListener.h */,
+			);
+			name = Transport;
+			sourceTree = "<group>";
+		};
+		59F8E66F18888CB000B7C56B /* Proxy */ = {
+			isa = PBXGroup;
+			children = (
+				597C038D17DEFF4F003E6E1A /* FMCDecoder.h */,
+				597C03B017DEFF4F003E6E1A /* FMCEncoder.h */,
+				597C03B717DEFF4F003E6E1A /* FMCEnum.h */,
+				597C03B817DEFF4F003E6E1A /* FMCEnum.m */,
+				FBAC28E0181FEAF4003210A2 /* FMCExternalLibrary.h */,
+				597C03BB17DEFF4F003E6E1A /* FMCFunctionID.h */,
+				597C03BC17DEFF4F003E6E1A /* FMCFunctionID.m */,
 				597C03DD17DEFF4F003E6E1A /* FMCISyncProxy.h */,
 				597C03DE17DEFF4F003E6E1A /* FMCJingle.h */,
 				597C03DF17DEFF4F003E6E1A /* FMCJingle.m */,
@@ -1018,19 +967,183 @@
 				597C03E117DEFF4F003E6E1A /* FMCJsonDecoder.m */,
 				597C03E217DEFF4F003E6E1A /* FMCJsonEncoder.h */,
 				597C03E317DEFF4F003E6E1A /* FMCJsonEncoder.m */,
-				597C03E417DEFF4F003E6E1A /* FMCLanguage.h */,
-				597C03E517DEFF4F003E6E1A /* FMCLanguage.m */,
+				597C03F017DEFF4F003E6E1A /* FMCNames.h */,
+				597C042717DEFF4F003E6E1A /* FMCProxyListener.h */,
+				597C043A17DEFF4F003E6E1A /* FMCRPCMessage.h */,
+				597C043B17DEFF4F003E6E1A /* FMCRPCMessage.m */,
+				597C043E17DEFF4F003E6E1A /* FMCRPCNotification.h */,
+				597C043F17DEFF4F003E6E1A /* FMCRPCNotification.m */,
+				597C044017DEFF4F003E6E1A /* FMCRPCRequest.h */,
+				597C044117DEFF4F003E6E1A /* FMCRPCRequest.m */,
+				597C044217DEFF4F003E6E1A /* FMCRPCRequestFactory.h */,
+				597C044317DEFF4F003E6E1A /* FMCRPCRequestFactory.m */,
+				597C044417DEFF4F003E6E1A /* FMCRPCResponse.h */,
+				597C044517DEFF4F003E6E1A /* FMCRPCResponse.m */,
+				597C048A17DEFF4F003E6E1A /* FMCSyncProxy.h */,
+				597C048B17DEFF4F003E6E1A /* FMCSyncProxy.m */,
+				597C048C17DEFF4F003E6E1A /* FMCSyncProxyFactory.h */,
+				597C048D17DEFF4F003E6E1A /* FMCSyncProxyFactory.m */,
+				597C04A417DEFF50003E6E1A /* FMCTTSChunkFactory.h */,
+				597C04A517DEFF50003E6E1A /* FMCTTSChunkFactory.m */,
+			);
+			name = Proxy;
+			sourceTree = "<group>";
+		};
+		59F8E67018888E5200B7C56B /* RPC Request */ = {
+			isa = PBXGroup;
+			children = (
+				597C034D17DEFF4F003E6E1A /* FMCAddCommand.h */,
+				597C034E17DEFF4F003E6E1A /* FMCAddCommand.m */,
+				597C035117DEFF4F003E6E1A /* FMCAddSubMenu.h */,
+				597C035217DEFF4F003E6E1A /* FMCAddSubMenu.m */,
+				597C035517DEFF4F003E6E1A /* FMCAlert.h */,
+				597C035617DEFF4F003E6E1A /* FMCAlert.m */,
+				597C037917DEFF4F003E6E1A /* FMCChangeRegistration.h */,
+				597C037A17DEFF4F003E6E1A /* FMCChangeRegistration.m */,
+				597C038717DEFF4F003E6E1A /* FMCCreateInteractionChoiceSet.h */,
+				597C038817DEFF4F003E6E1A /* FMCCreateInteractionChoiceSet.m */,
+				597C038E17DEFF4F003E6E1A /* FMCDeleteCommand.h */,
+				597C038F17DEFF4F003E6E1A /* FMCDeleteCommand.m */,
+				597C039217DEFF4F003E6E1A /* FMCDeleteFile.h */,
+				597C039317DEFF4F003E6E1A /* FMCDeleteFile.m */,
+				597C039617DEFF4F003E6E1A /* FMCDeleteInteractionChoiceSet.h */,
+				597C039717DEFF4F003E6E1A /* FMCDeleteInteractionChoiceSet.m */,
+				597C039A17DEFF4F003E6E1A /* FMCDeleteSubMenu.h */,
+				597C039B17DEFF4F003E6E1A /* FMCDeleteSubMenu.m */,
+				597C03AC17DEFF4F003E6E1A /* FMCEncodedSyncPData.h */,
+				597C03AD17DEFF4F003E6E1A /* FMCEncodedSyncPData.m */,
+				597C03B117DEFF4F003E6E1A /* FMCEndAudioPassThru.h */,
+				597C03B217DEFF4F003E6E1A /* FMCEndAudioPassThru.m */,
+				597C03BF17DEFF4F003E6E1A /* FMCGetDTCs.h */,
+				597C03C017DEFF4F003E6E1A /* FMCGetDTCs.m */,
+				597C03C317DEFF4F003E6E1A /* FMCGetVehicleData.h */,
+				597C03C417DEFF4F003E6E1A /* FMCGetVehicleData.m */,
 				597C03E617DEFF4F003E6E1A /* FMCListFiles.h */,
 				597C03E717DEFF4F003E6E1A /* FMCListFiles.m */,
+				597C040D17DEFF4F003E6E1A /* FMCPerformAudioPassThru.h */,
+				597C040E17DEFF4F003E6E1A /* FMCPerformAudioPassThru.m */,
+				597C041117DEFF4F003E6E1A /* FMCPerformInteraction.h */,
+				597C041217DEFF4F003E6E1A /* FMCPerformInteraction.m */,
+				597C042817DEFF4F003E6E1A /* FMCPutFile.h */,
+				597C042917DEFF4F003E6E1A /* FMCPutFile.m */,
+				597C042C17DEFF4F003E6E1A /* FMCReadDID.h */,
+				597C042D17DEFF4F003E6E1A /* FMCReadDID.m */,
+				597C043017DEFF4F003E6E1A /* FMCRegisterAppInterface.h */,
+				597C043117DEFF4F003E6E1A /* FMCRegisterAppInterface.m */,
+				597C043417DEFF4F003E6E1A /* FMCResetGlobalProperties.h */,
+				597C043517DEFF4F003E6E1A /* FMCResetGlobalProperties.m */,
+				597C044817DEFF4F003E6E1A /* FMCScrollableMessage.h */,
+				597C044917DEFF4F003E6E1A /* FMCScrollableMessage.m */,
+				597C044C17DEFF4F003E6E1A /* FMCSetAppIcon.h */,
+				597C044D17DEFF4F003E6E1A /* FMCSetAppIcon.m */,
+				597C045017DEFF4F003E6E1A /* FMCSetDisplayLayout.h */,
+				597C045117DEFF4F003E6E1A /* FMCSetDisplayLayout.m */,
+				597C045417DEFF4F003E6E1A /* FMCSetGlobalProperties.h */,
+				597C045517DEFF4F003E6E1A /* FMCSetGlobalProperties.m */,
+				597C045817DEFF4F003E6E1A /* FMCSetMediaClockTimer.h */,
+				597C045917DEFF4F003E6E1A /* FMCSetMediaClockTimer.m */,
+				597C045C17DEFF4F003E6E1A /* FMCShow.h */,
+				597C045D17DEFF4F003E6E1A /* FMCShow.m */,
+				597C046817DEFF4F003E6E1A /* FMCSlider.h */,
+				597C046917DEFF4F003E6E1A /* FMCSlider.m */,
+				597C047217DEFF4F003E6E1A /* FMCSpeak.h */,
+				597C047317DEFF4F003E6E1A /* FMCSpeak.m */,
+				597C047A17DEFF4F003E6E1A /* FMCSubscribeButton.h */,
+				597C047B17DEFF4F003E6E1A /* FMCSubscribeButton.m */,
+				597C047E17DEFF4F003E6E1A /* FMCSubscribeVehicleData.h */,
+				597C047F17DEFF4F003E6E1A /* FMCSubscribeVehicleData.m */,
+				597C048617DEFF4F003E6E1A /* FMCSyncPData.h */,
+				597C048717DEFF4F003E6E1A /* FMCSyncPData.m */,
+				597C04A817DEFF50003E6E1A /* FMCUnregisterAppInterface.h */,
+				597C04A917DEFF50003E6E1A /* FMCUnregisterAppInterface.m */,
+				597C04AC17DEFF50003E6E1A /* FMCUnsubscribeButton.h */,
+				597C04AD17DEFF50003E6E1A /* FMCUnsubscribeButton.m */,
+				597C04B017DEFF50003E6E1A /* FMCUnsubscribeVehicleData.h */,
+				597C04B117DEFF50003E6E1A /* FMCUnsubscribeVehicleData.m */,
+			);
+			name = "RPC Request";
+			sourceTree = "<group>";
+		};
+		59F8E67218888E9800B7C56B /* RPC Response */ = {
+			isa = PBXGroup;
+			children = (
+				597C034F17DEFF4F003E6E1A /* FMCAddCommandResponse.h */,
+				597C035017DEFF4F003E6E1A /* FMCAddCommandResponse.m */,
+				597C035317DEFF4F003E6E1A /* FMCAddSubMenuResponse.h */,
+				597C035417DEFF4F003E6E1A /* FMCAddSubMenuResponse.m */,
+				597C035B17DEFF4F003E6E1A /* FMCAlertResponse.h */,
+				597C035C17DEFF4F003E6E1A /* FMCAlertResponse.m */,
+				597C037B17DEFF4F003E6E1A /* FMCChangeRegistrationResponse.h */,
+				597C037C17DEFF4F003E6E1A /* FMCChangeRegistrationResponse.m */,
+				597C038917DEFF4F003E6E1A /* FMCCreateInteractionChoiceSetResponse.h */,
+				597C038A17DEFF4F003E6E1A /* FMCCreateInteractionChoiceSetResponse.m */,
+				597C039017DEFF4F003E6E1A /* FMCDeleteCommandResponse.h */,
+				597C039117DEFF4F003E6E1A /* FMCDeleteCommandResponse.m */,
+				597C039417DEFF4F003E6E1A /* FMCDeleteFileResponse.h */,
+				597C039517DEFF4F003E6E1A /* FMCDeleteFileResponse.m */,
+				597C039817DEFF4F003E6E1A /* FMCDeleteInteractionChoiceSetResponse.h */,
+				597C039917DEFF4F003E6E1A /* FMCDeleteInteractionChoiceSetResponse.m */,
+				597C039C17DEFF4F003E6E1A /* FMCDeleteSubMenuResponse.h */,
+				597C039D17DEFF4F003E6E1A /* FMCDeleteSubMenuResponse.m */,
+				597C03AE17DEFF4F003E6E1A /* FMCEncodedSyncPDataResponse.h */,
+				597C03AF17DEFF4F003E6E1A /* FMCEncodedSyncPDataResponse.m */,
+				597C03B317DEFF4F003E6E1A /* FMCEndAudioPassThruResponse.h */,
+				597C03B417DEFF4F003E6E1A /* FMCEndAudioPassThruResponse.m */,
+				597C03BD17DEFF4F003E6E1A /* FMCGenericResponse.h */,
+				597C03BE17DEFF4F003E6E1A /* FMCGenericResponse.m */,
+				597C03C117DEFF4F003E6E1A /* FMCGetDTCsResponse.h */,
+				597C03C217DEFF4F003E6E1A /* FMCGetDTCsResponse.m */,
+				597C03C517DEFF4F003E6E1A /* FMCGetVehicleDataResponse.h */,
+				597C03C617DEFF4F003E6E1A /* FMCGetVehicleDataResponse.m */,
 				597C03E817DEFF4F003E6E1A /* FMCListFilesResponse.h */,
 				597C03E917DEFF4F003E6E1A /* FMCListFilesResponse.m */,
-				597C03EA17DEFF4F003E6E1A /* FMCMaintenanceModeStatus.h */,
-				597C03EB17DEFF4F003E6E1A /* FMCMaintenanceModeStatus.m */,
-				597C03EC17DEFF4F003E6E1A /* FMCMediaClockFormat.h */,
-				597C03ED17DEFF4F003E6E1A /* FMCMediaClockFormat.m */,
-				597C03EE17DEFF4F003E6E1A /* FMCMenuParams.h */,
-				597C03EF17DEFF4F003E6E1A /* FMCMenuParams.m */,
-				597C03F017DEFF4F003E6E1A /* FMCNames.h */,
+				597C040F17DEFF4F003E6E1A /* FMCPerformAudioPassThruResponse.h */,
+				597C041017DEFF4F003E6E1A /* FMCPerformAudioPassThruResponse.m */,
+				597C041317DEFF4F003E6E1A /* FMCPerformInteractionResponse.h */,
+				597C041417DEFF4F003E6E1A /* FMCPerformInteractionResponse.m */,
+				597C042A17DEFF4F003E6E1A /* FMCPutFileResponse.h */,
+				597C042B17DEFF4F003E6E1A /* FMCPutFileResponse.m */,
+				597C042E17DEFF4F003E6E1A /* FMCReadDIDResponse.h */,
+				597C042F17DEFF4F003E6E1A /* FMCReadDIDResponse.m */,
+				597C043217DEFF4F003E6E1A /* FMCRegisterAppInterfaceResponse.h */,
+				597C043317DEFF4F003E6E1A /* FMCRegisterAppInterfaceResponse.m */,
+				597C043617DEFF4F003E6E1A /* FMCResetGlobalPropertiesResponse.h */,
+				597C043717DEFF4F003E6E1A /* FMCResetGlobalPropertiesResponse.m */,
+				597C044A17DEFF4F003E6E1A /* FMCScrollableMessageResponse.h */,
+				597C044B17DEFF4F003E6E1A /* FMCScrollableMessageResponse.m */,
+				597C044E17DEFF4F003E6E1A /* FMCSetAppIconResponse.h */,
+				597C044F17DEFF4F003E6E1A /* FMCSetAppIconResponse.m */,
+				597C045217DEFF4F003E6E1A /* FMCSetDisplayLayoutResponse.h */,
+				597C045317DEFF4F003E6E1A /* FMCSetDisplayLayoutResponse.m */,
+				597C045617DEFF4F003E6E1A /* FMCSetGlobalPropertiesResponse.h */,
+				597C045717DEFF4F003E6E1A /* FMCSetGlobalPropertiesResponse.m */,
+				597C045A17DEFF4F003E6E1A /* FMCSetMediaClockTimerResponse.h */,
+				597C045B17DEFF4F003E6E1A /* FMCSetMediaClockTimerResponse.m */,
+				597C046217DEFF4F003E6E1A /* FMCShowResponse.h */,
+				597C046317DEFF4F003E6E1A /* FMCShowResponse.m */,
+				597C046A17DEFF4F003E6E1A /* FMCSliderResponse.h */,
+				597C046B17DEFF4F003E6E1A /* FMCSliderResponse.m */,
+				597C047417DEFF4F003E6E1A /* FMCSpeakResponse.h */,
+				597C047517DEFF4F003E6E1A /* FMCSpeakResponse.m */,
+				597C047C17DEFF4F003E6E1A /* FMCSubscribeButtonResponse.h */,
+				597C047D17DEFF4F003E6E1A /* FMCSubscribeButtonResponse.m */,
+				597C048017DEFF4F003E6E1A /* FMCSubscribeVehicleDataResponse.h */,
+				597C048117DEFF4F003E6E1A /* FMCSubscribeVehicleDataResponse.m */,
+				597C048817DEFF4F003E6E1A /* FMCSyncPDataResponse.h */,
+				597C048917DEFF4F003E6E1A /* FMCSyncPDataResponse.m */,
+				597C04AA17DEFF50003E6E1A /* FMCUnregisterAppInterfaceResponse.h */,
+				597C04AB17DEFF50003E6E1A /* FMCUnregisterAppInterfaceResponse.m */,
+				597C04AE17DEFF50003E6E1A /* FMCUnsubscribeButtonResponse.h */,
+				597C04AF17DEFF50003E6E1A /* FMCUnsubscribeButtonResponse.m */,
+				597C04B217DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.h */,
+				597C04B317DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.m */,
+			);
+			name = "RPC Response";
+			sourceTree = "<group>";
+		};
+		59F8E673188895B400B7C56B /* RPC Notification */ = {
+			isa = PBXGroup;
+			children = (
 				597C03F117DEFF4F003E6E1A /* FMCOnAppInterfaceUnregistered.h */,
 				597C03F217DEFF4F003E6E1A /* FMCOnAppInterfaceUnregistered.m */,
 				597C03F317DEFF4F003E6E1A /* FMCOnAudioPassThru.h */,
@@ -1053,223 +1166,128 @@
 				597C040417DEFF4F003E6E1A /* FMCOnPermissionsChange.m */,
 				597C040517DEFF4F003E6E1A /* FMCOnSyncPData.h */,
 				597C040617DEFF4F003E6E1A /* FMCOnSyncPData.m */,
-				597C040717DEFF4F003E6E1A /* FMCOnTBTClientState.h */,
-				597C040817DEFF4F003E6E1A /* FMCOnTBTClientState.m */,
 				597C040917DEFF4F003E6E1A /* FMCOnVehicleData.h */,
 				597C040A17DEFF4F003E6E1A /* FMCOnVehicleData.m */,
-				597C040B17DEFF4F003E6E1A /* FMCParameterPermissions.h */,
-				597C040C17DEFF4F003E6E1A /* FMCParameterPermissions.m */,
-				597C040D17DEFF4F003E6E1A /* FMCPerformAudioPassThru.h */,
-				597C040E17DEFF4F003E6E1A /* FMCPerformAudioPassThru.m */,
-				597C040F17DEFF4F003E6E1A /* FMCPerformAudioPassThruResponse.h */,
-				597C041017DEFF4F003E6E1A /* FMCPerformAudioPassThruResponse.m */,
-				597C041117DEFF4F003E6E1A /* FMCPerformInteraction.h */,
-				597C041217DEFF4F003E6E1A /* FMCPerformInteraction.m */,
-				597C041317DEFF4F003E6E1A /* FMCPerformInteractionResponse.h */,
-				597C041417DEFF4F003E6E1A /* FMCPerformInteractionResponse.m */,
-				597C041517DEFF4F003E6E1A /* FMCPermissionItem.h */,
-				597C041617DEFF4F003E6E1A /* FMCPermissionItem.m */,
+			);
+			name = "RPC Notification";
+			sourceTree = "<group>";
+		};
+		59F8E674188896A400B7C56B /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				597C038517DEFF4F003E6E1A /* FMCConsoleController.h */,
+				597C038617DEFF4F003E6E1A /* FMCConsoleController.m */,
+				597C038B17DEFF4F003E6E1A /* FMCDebugTool.h */,
+				597C038C17DEFF4F003E6E1A /* FMCDebugTool.m */,
+				597C046617DEFF4F003E6E1A /* FMCSiphonServer.h */,
+				597C046717DEFF4F003E6E1A /* FMCSiphonServer.m */,
+			);
+			name = Debug;
+			sourceTree = "<group>";
+		};
+		59F8E6751888986100B7C56B /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				597C035D17DEFF4F003E6E1A /* FMCAppHMIType.h */,
+				597C035E17DEFF4F003E6E1A /* FMCAppHMIType.m */,
+				597C035F17DEFF4F003E6E1A /* FMCAppInterfaceUnregisteredReason.h */,
+				597C036017DEFF4F003E6E1A /* FMCAppInterfaceUnregisteredReason.m */,
+				597C036317DEFF4F003E6E1A /* FMCAudioStreamingState.h */,
+				597C036417DEFF4F003E6E1A /* FMCAudioStreamingState.m */,
+				597C036517DEFF4F003E6E1A /* FMCAudioType.h */,
+				597C036617DEFF4F003E6E1A /* FMCAudioType.m */,
+				597C036D17DEFF4F003E6E1A /* FMCBitsPerSample.h */,
+				597C036E17DEFF4F003E6E1A /* FMCBitsPerSample.m */,
+				597C037317DEFF4F003E6E1A /* FMCButtonEventMode.h */,
+				597C037417DEFF4F003E6E1A /* FMCButtonEventMode.m */,
+				597C037517DEFF4F003E6E1A /* FMCButtonName.h */,
+				597C037617DEFF4F003E6E1A /* FMCButtonName.m */,
+				597C037717DEFF4F003E6E1A /* FMCButtonPressMode.h */,
+				597C037817DEFF4F003E6E1A /* FMCButtonPressMode.m */,
+				597C037D17DEFF4F003E6E1A /* FMCCharacterSet.h */,
+				597C037E17DEFF4F003E6E1A /* FMCCharacterSet.m */,
+				597C038117DEFF4F003E6E1A /* FMCCompassDirection.h */,
+				597C038217DEFF4F003E6E1A /* FMCCompassDirection.m */,
+				597C038317DEFF4F003E6E1A /* FMCComponentVolumeStatus.h */,
+				597C038417DEFF4F003E6E1A /* FMCComponentVolumeStatus.m */,
+				597C03A417DEFF4F003E6E1A /* FMCDimension.h */,
+				597C03A517DEFF4F003E6E1A /* FMCDimension.m */,
+				597C03A817DEFF4F003E6E1A /* FMCDisplayType.h */,
+				597C03A917DEFF4F003E6E1A /* FMCDisplayType.m */,
+				597C03AA17DEFF4F003E6E1A /* FMCDriverDistractionState.h */,
+				597C03AB17DEFF4F003E6E1A /* FMCDriverDistractionState.m */,
+				597C039E17DEFF4F003E6E1A /* FMCDeviceLevelStatus.h */,
+				597C039F17DEFF4F003E6E1A /* FMCDeviceLevelStatus.m */,
+				597C03B917DEFF4F003E6E1A /* FMCFileType.h */,
+				597C03BA17DEFF4F003E6E1A /* FMCFileType.m */,
+				597C03C717DEFF4F003E6E1A /* FMCGlobalProperty.h */,
+				597C03C817DEFF4F003E6E1A /* FMCGlobalProperty.m */,
+				597C03CD17DEFF4F003E6E1A /* FMCHMILevel.h */,
+				597C03CE17DEFF4F003E6E1A /* FMCHMILevel.m */,
+				597C03D117DEFF4F003E6E1A /* FMCHMIZoneCapabilities.h */,
+				597C03D217DEFF4F003E6E1A /* FMCHMIZoneCapabilities.m */,
+				597C03D317DEFF4F003E6E1A /* FMCIgnitionStableStatus.h */,
+				597C03D417DEFF4F003E6E1A /* FMCIgnitionStableStatus.m */,
+				597C03D517DEFF4F003E6E1A /* FMCIgnitionStatus.h */,
+				597C03D617DEFF4F003E6E1A /* FMCIgnitionStatus.m */,
+				597C03D917DEFF4F003E6E1A /* FMCImageType.h */,
+				597C03DA17DEFF4F003E6E1A /* FMCImageType.m */,
+				597C03DB17DEFF4F003E6E1A /* FMCInteractionMode.h */,
+				597C03DC17DEFF4F003E6E1A /* FMCInteractionMode.m */,
+				597C03E417DEFF4F003E6E1A /* FMCLanguage.h */,
+				597C03E517DEFF4F003E6E1A /* FMCLanguage.m */,
+				597C03EA17DEFF4F003E6E1A /* FMCMaintenanceModeStatus.h */,
+				597C03EB17DEFF4F003E6E1A /* FMCMaintenanceModeStatus.m */,
+				597C03EC17DEFF4F003E6E1A /* FMCMediaClockFormat.h */,
+				597C03ED17DEFF4F003E6E1A /* FMCMediaClockFormat.m */,
 				597C041717DEFF4F003E6E1A /* FMCPermissionStatus.h */,
 				597C041817DEFF4F003E6E1A /* FMCPermissionStatus.m */,
-				597C041917DEFF4F003E6E1A /* FMCPresetBankCapabilities.h */,
-				597C041A17DEFF4F003E6E1A /* FMCPresetBankCapabilities.m */,
 				597C041B17DEFF4F003E6E1A /* FMCPrimaryAudioSource.h */,
 				597C041C17DEFF4F003E6E1A /* FMCPrimaryAudioSource.m */,
 				597C041D17DEFF4F003E6E1A /* FMCPRNDL.h */,
 				597C041E17DEFF4F003E6E1A /* FMCPRNDL.m */,
-				597C041F17DEFF4F003E6E1A /* FMCProtocol.h */,
-				597C042017DEFF4F003E6E1A /* FMCProtocolFrameHeader.h */,
-				597C042117DEFF4F003E6E1A /* FMCProtocolFrameHeader.m */,
-				597C042217DEFF4F003E6E1A /* FMCProtocolFrameHeaderFactory.h */,
-				597C042317DEFF4F003E6E1A /* FMCProtocolFrameHeaderFactory.m */,
-				597C042417DEFF4F003E6E1A /* FMCProtocolListener.h */,
-				597C042517DEFF4F003E6E1A /* FMCProtocolMessage.h */,
-				597C042617DEFF4F003E6E1A /* FMCProtocolMessage.m */,
-				597C042717DEFF4F003E6E1A /* FMCProxyListener.h */,
-				597C042817DEFF4F003E6E1A /* FMCPutFile.h */,
-				597C042917DEFF4F003E6E1A /* FMCPutFile.m */,
-				597C042A17DEFF4F003E6E1A /* FMCPutFileResponse.h */,
-				597C042B17DEFF4F003E6E1A /* FMCPutFileResponse.m */,
-				597C042C17DEFF4F003E6E1A /* FMCReadDID.h */,
-				597C042D17DEFF4F003E6E1A /* FMCReadDID.m */,
-				597C042E17DEFF4F003E6E1A /* FMCReadDIDResponse.h */,
-				597C042F17DEFF4F003E6E1A /* FMCReadDIDResponse.m */,
-				597C043017DEFF4F003E6E1A /* FMCRegisterAppInterface.h */,
-				597C043117DEFF4F003E6E1A /* FMCRegisterAppInterface.m */,
-				597C043217DEFF4F003E6E1A /* FMCRegisterAppInterfaceResponse.h */,
-				597C043317DEFF4F003E6E1A /* FMCRegisterAppInterfaceResponse.m */,
-				597C043417DEFF4F003E6E1A /* FMCResetGlobalProperties.h */,
-				597C043517DEFF4F003E6E1A /* FMCResetGlobalProperties.m */,
-				597C043617DEFF4F003E6E1A /* FMCResetGlobalPropertiesResponse.h */,
-				597C043717DEFF4F003E6E1A /* FMCResetGlobalPropertiesResponse.m */,
 				597C043817DEFF4F003E6E1A /* FMCResult.h */,
 				597C043917DEFF4F003E6E1A /* FMCResult.m */,
-				597C043A17DEFF4F003E6E1A /* FMCRPCMessage.h */,
-				597C043B17DEFF4F003E6E1A /* FMCRPCMessage.m */,
 				597C043C17DEFF4F003E6E1A /* FMCRPCMessageType.h */,
 				597C043D17DEFF4F003E6E1A /* FMCRPCMessageType.m */,
-				597C043E17DEFF4F003E6E1A /* FMCRPCNotification.h */,
-				597C043F17DEFF4F003E6E1A /* FMCRPCNotification.m */,
-				597C044017DEFF4F003E6E1A /* FMCRPCRequest.h */,
-				597C044117DEFF4F003E6E1A /* FMCRPCRequest.m */,
-				597C044217DEFF4F003E6E1A /* FMCRPCRequestFactory.h */,
-				597C044317DEFF4F003E6E1A /* FMCRPCRequestFactory.m */,
-				597C044417DEFF4F003E6E1A /* FMCRPCResponse.h */,
-				597C044517DEFF4F003E6E1A /* FMCRPCResponse.m */,
 				597C044617DEFF4F003E6E1A /* FMCSamplingRate.h */,
 				597C044717DEFF4F003E6E1A /* FMCSamplingRate.m */,
-				597C044817DEFF4F003E6E1A /* FMCScrollableMessage.h */,
-				597C044917DEFF4F003E6E1A /* FMCScrollableMessage.m */,
-				597C044A17DEFF4F003E6E1A /* FMCScrollableMessageResponse.h */,
-				597C044B17DEFF4F003E6E1A /* FMCScrollableMessageResponse.m */,
-				597C044C17DEFF4F003E6E1A /* FMCSetAppIcon.h */,
-				597C044D17DEFF4F003E6E1A /* FMCSetAppIcon.m */,
-				597C044E17DEFF4F003E6E1A /* FMCSetAppIconResponse.h */,
-				597C044F17DEFF4F003E6E1A /* FMCSetAppIconResponse.m */,
-				597C045017DEFF4F003E6E1A /* FMCSetDisplayLayout.h */,
-				597C045117DEFF4F003E6E1A /* FMCSetDisplayLayout.m */,
-				597C045217DEFF4F003E6E1A /* FMCSetDisplayLayoutResponse.h */,
-				597C045317DEFF4F003E6E1A /* FMCSetDisplayLayoutResponse.m */,
-				597C045417DEFF4F003E6E1A /* FMCSetGlobalProperties.h */,
-				597C045517DEFF4F003E6E1A /* FMCSetGlobalProperties.m */,
-				597C045617DEFF4F003E6E1A /* FMCSetGlobalPropertiesResponse.h */,
-				597C045717DEFF4F003E6E1A /* FMCSetGlobalPropertiesResponse.m */,
-				597C045817DEFF4F003E6E1A /* FMCSetMediaClockTimer.h */,
-				597C045917DEFF4F003E6E1A /* FMCSetMediaClockTimer.m */,
-				597C045A17DEFF4F003E6E1A /* FMCSetMediaClockTimerResponse.h */,
-				597C045B17DEFF4F003E6E1A /* FMCSetMediaClockTimerResponse.m */,
-				597C045C17DEFF4F003E6E1A /* FMCShow.h */,
-				597C045D17DEFF4F003E6E1A /* FMCShow.m */,
-				597C045E17DEFF4F003E6E1A /* FMCShowConstantTBT.h */,
-				597C045F17DEFF4F003E6E1A /* FMCShowConstantTBT.m */,
-				597C046017DEFF4F003E6E1A /* FMCShowConstantTBTResponse.h */,
-				597C046117DEFF4F003E6E1A /* FMCShowConstantTBTResponse.m */,
-				597C046217DEFF4F003E6E1A /* FMCShowResponse.h */,
-				597C046317DEFF4F003E6E1A /* FMCShowResponse.m */,
-				597C046417DEFF4F003E6E1A /* FMCSingleTireStatus.h */,
-				597C046517DEFF4F003E6E1A /* FMCSingleTireStatus.m */,
-				597C046617DEFF4F003E6E1A /* FMCSiphonServer.h */,
-				597C046717DEFF4F003E6E1A /* FMCSiphonServer.m */,
-				597C046817DEFF4F003E6E1A /* FMCSlider.h */,
-				597C046917DEFF4F003E6E1A /* FMCSlider.m */,
-				597C046A17DEFF4F003E6E1A /* FMCSliderResponse.h */,
-				597C046B17DEFF4F003E6E1A /* FMCSliderResponse.m */,
-				597C046C17DEFF4F003E6E1A /* FMCSoftButton.h */,
-				597C046D17DEFF4F003E6E1A /* FMCSoftButton.m */,
-				597C046E17DEFF4F003E6E1A /* FMCSoftButtonCapabilities.h */,
-				597C046F17DEFF4F003E6E1A /* FMCSoftButtonCapabilities.m */,
 				597C047017DEFF4F003E6E1A /* FMCSoftButtonType.h */,
 				597C047117DEFF4F003E6E1A /* FMCSoftButtonType.m */,
-				597C047217DEFF4F003E6E1A /* FMCSpeak.h */,
-				597C047317DEFF4F003E6E1A /* FMCSpeak.m */,
-				597C047417DEFF4F003E6E1A /* FMCSpeakResponse.h */,
-				597C047517DEFF4F003E6E1A /* FMCSpeakResponse.m */,
 				597C047617DEFF4F003E6E1A /* FMCSpeechCapabilities.h */,
 				597C047717DEFF4F003E6E1A /* FMCSpeechCapabilities.m */,
-				597C047817DEFF4F003E6E1A /* FMCStartTime.h */,
-				597C047917DEFF4F003E6E1A /* FMCStartTime.m */,
-				597C047A17DEFF4F003E6E1A /* FMCSubscribeButton.h */,
-				597C047B17DEFF4F003E6E1A /* FMCSubscribeButton.m */,
-				597C047C17DEFF4F003E6E1A /* FMCSubscribeButtonResponse.h */,
-				597C047D17DEFF4F003E6E1A /* FMCSubscribeButtonResponse.m */,
-				597C047E17DEFF4F003E6E1A /* FMCSubscribeVehicleData.h */,
-				597C047F17DEFF4F003E6E1A /* FMCSubscribeVehicleData.m */,
-				597C048017DEFF4F003E6E1A /* FMCSubscribeVehicleDataResponse.h */,
-				597C048117DEFF4F003E6E1A /* FMCSubscribeVehicleDataResponse.m */,
-				597C048217DEFF4F003E6E1A /* FMCSyncIAPTransport.h */,
-				597C048317DEFF4F003E6E1A /* FMCSyncIAPTransport.m */,
-				597C048417DEFF4F003E6E1A /* FMCSyncMsgVersion.h */,
-				597C048517DEFF4F003E6E1A /* FMCSyncMsgVersion.m */,
-				597C048617DEFF4F003E6E1A /* FMCSyncPData.h */,
-				597C048717DEFF4F003E6E1A /* FMCSyncPData.m */,
-				597C048817DEFF4F003E6E1A /* FMCSyncPDataResponse.h */,
-				597C048917DEFF4F003E6E1A /* FMCSyncPDataResponse.m */,
-				597C048A17DEFF4F003E6E1A /* FMCSyncProxy.h */,
-				597C048B17DEFF4F003E6E1A /* FMCSyncProxy.m */,
-				597C048C17DEFF4F003E6E1A /* FMCSyncProxyFactory.h */,
-				597C048D17DEFF4F003E6E1A /* FMCSyncProxyFactory.m */,
-				597C048E17DEFF4F003E6E1A /* FMCSyncTcpTransport.h */,
-				597C048F17DEFF4F003E6E1A /* FMCSyncTcpTransport.m */,
-				597C049017DEFF4F003E6E1A /* FMCSyncTransport.h */,
 				597C049117DEFF4F003E6E1A /* FMCSystemAction.h */,
 				597C049217DEFF4F003E6E1A /* FMCSystemAction.m */,
 				597C049317DEFF4F003E6E1A /* FMCSystemContext.h */,
 				597C049417DEFF4F003E6E1A /* FMCSystemContext.m */,
-				597C049517DEFF4F003E6E1A /* FMCTBTState.h */,
-				597C049617DEFF4F003E6E1A /* FMCTBTState.m */,
 				597C049717DEFF4F003E6E1A /* FMCTextAlignment.h */,
 				597C049817DEFF4F003E6E1A /* FMCTextAlignment.m */,
-				597C049917DEFF50003E6E1A /* FMCTextField.h */,
-				597C049A17DEFF50003E6E1A /* FMCTextField.m */,
 				597C049B17DEFF50003E6E1A /* FMCTextFieldName.h */,
 				597C049C17DEFF50003E6E1A /* FMCTextFieldName.m */,
-				597C049D17DEFF50003E6E1A /* FMCTireStatus.h */,
-				597C049E17DEFF50003E6E1A /* FMCTireStatus.m */,
-				597C049F17DEFF50003E6E1A /* FMCTransportListener.h */,
 				597C04A017DEFF50003E6E1A /* FMCTriggerSource.h */,
 				597C04A117DEFF50003E6E1A /* FMCTriggerSource.m */,
-				597C04A217DEFF50003E6E1A /* FMCTTSChunk.h */,
-				597C04A317DEFF50003E6E1A /* FMCTTSChunk.m */,
-				597C04A417DEFF50003E6E1A /* FMCTTSChunkFactory.h */,
-				597C04A517DEFF50003E6E1A /* FMCTTSChunkFactory.m */,
-				597C04A617DEFF50003E6E1A /* FMCTurn.h */,
-				597C04A717DEFF50003E6E1A /* FMCTurn.m */,
-				597C04A817DEFF50003E6E1A /* FMCUnregisterAppInterface.h */,
-				597C04A917DEFF50003E6E1A /* FMCUnregisterAppInterface.m */,
-				597C04AA17DEFF50003E6E1A /* FMCUnregisterAppInterfaceResponse.h */,
-				597C04AB17DEFF50003E6E1A /* FMCUnregisterAppInterfaceResponse.m */,
-				597C04AC17DEFF50003E6E1A /* FMCUnsubscribeButton.h */,
-				597C04AD17DEFF50003E6E1A /* FMCUnsubscribeButton.m */,
-				597C04AE17DEFF50003E6E1A /* FMCUnsubscribeButtonResponse.h */,
-				597C04AF17DEFF50003E6E1A /* FMCUnsubscribeButtonResponse.m */,
-				597C04B017DEFF50003E6E1A /* FMCUnsubscribeVehicleData.h */,
-				597C04B117DEFF50003E6E1A /* FMCUnsubscribeVehicleData.m */,
-				597C04B217DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.h */,
-				597C04B317DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.m */,
 				597C04B417DEFF50003E6E1A /* FMCUpdateMode.h */,
 				597C04B517DEFF50003E6E1A /* FMCUpdateMode.m */,
-				597C04B617DEFF50003E6E1A /* FMCUpdateTurnList.h */,
-				597C04B717DEFF50003E6E1A /* FMCUpdateTurnList.m */,
-				597C04B817DEFF50003E6E1A /* FMCUpdateTurnListResponse.h */,
-				597C04B917DEFF50003E6E1A /* FMCUpdateTurnListResponse.m */,
 				597C04BA17DEFF50003E6E1A /* FMCVehicleDataActiveStatus.h */,
 				597C04BB17DEFF50003E6E1A /* FMCVehicleDataActiveStatus.m */,
 				597C04BC17DEFF50003E6E1A /* FMCVehicleDataEventStatus.h */,
 				597C04BD17DEFF50003E6E1A /* FMCVehicleDataEventStatus.m */,
 				597C04BE17DEFF50003E6E1A /* FMCVehicleDataNotificationStatus.h */,
 				597C04BF17DEFF50003E6E1A /* FMCVehicleDataNotificationStatus.m */,
-				597C04C017DEFF50003E6E1A /* FMCVehicleDataResult.h */,
-				597C04C117DEFF50003E6E1A /* FMCVehicleDataResult.m */,
 				597C04C217DEFF50003E6E1A /* FMCVehicleDataResultCode.h */,
 				597C04C317DEFF50003E6E1A /* FMCVehicleDataResultCode.m */,
 				597C04C417DEFF50003E6E1A /* FMCVehicleDataStatus.h */,
 				597C04C517DEFF50003E6E1A /* FMCVehicleDataStatus.m */,
 				597C04C617DEFF50003E6E1A /* FMCVehicleDataType.h */,
 				597C04C717DEFF50003E6E1A /* FMCVehicleDataType.m */,
-				597C04C817DEFF50003E6E1A /* FMCVehicleType.h */,
-				597C04C917DEFF50003E6E1A /* FMCVehicleType.m */,
 				597C04CA17DEFF50003E6E1A /* FMCVrCapabilities.h */,
 				597C04CB17DEFF50003E6E1A /* FMCVrCapabilities.m */,
-				597C04CC17DEFF50003E6E1A /* FMCVrHelpItem.h */,
-				597C04CD17DEFF50003E6E1A /* FMCVrHelpItem.m */,
 				597C04CE17DEFF50003E6E1A /* FMCWarningLightStatus.h */,
 				597C04CF17DEFF50003E6E1A /* FMCWarningLightStatus.m */,
 				597C04D017DEFF50003E6E1A /* FMCWiperStatus.h */,
 				597C04D117DEFF50003E6E1A /* FMCWiperStatus.m */,
-				597C04D217DEFF50003E6E1A /* FMCAppLinkProtocol.h */,
-				597C04D317DEFF50003E6E1A /* FMCAppLinkProtocol.m */,
-				5913386117DEFC5E00CF214C /* Supporting Files */,
 			);
-			path = AppLink;
-			sourceTree = "<group>";
-		};
-		5913386117DEFC5E00CF214C /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				5913386217DEFC5E00CF214C /* AppLink-Info.plist */,
-				5913386317DEFC5E00CF214C /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
+			name = Enum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1286,8 +1304,6 @@
 				597C04EA17DEFF50003E6E1A /* FMCAddSubMenu.h in Headers */,
 				597C04EC17DEFF50003E6E1A /* FMCAddSubMenuResponse.h in Headers */,
 				597C04EE17DEFF50003E6E1A /* FMCAlert.h in Headers */,
-				597C04F017DEFF50003E6E1A /* FMCAlertManeuver.h in Headers */,
-				597C04F217DEFF50003E6E1A /* FMCAlertManeuverResponse.h in Headers */,
 				597C04F417DEFF50003E6E1A /* FMCAlertResponse.h in Headers */,
 				597C04F617DEFF50003E6E1A /* FMCAppHMIType.h in Headers */,
 				597C04F817DEFF50003E6E1A /* FMCAppInterfaceUnregisteredReason.h in Headers */,
@@ -1372,7 +1388,6 @@
 				597C059A17DEFF50003E6E1A /* FMCOnLanguageChange.h in Headers */,
 				597C059C17DEFF50003E6E1A /* FMCOnPermissionsChange.h in Headers */,
 				597C059E17DEFF50003E6E1A /* FMCOnSyncPData.h in Headers */,
-				597C05A017DEFF50003E6E1A /* FMCOnTBTClientState.h in Headers */,
 				597C05A217DEFF50003E6E1A /* FMCOnVehicleData.h in Headers */,
 				597C05A417DEFF50003E6E1A /* FMCParameterPermissions.h in Headers */,
 				597C05A617DEFF50003E6E1A /* FMCPerformAudioPassThru.h in Headers */,
@@ -1417,8 +1432,6 @@
 				597C05F117DEFF50003E6E1A /* FMCSetMediaClockTimer.h in Headers */,
 				597C05F317DEFF50003E6E1A /* FMCSetMediaClockTimerResponse.h in Headers */,
 				597C05F517DEFF50003E6E1A /* FMCShow.h in Headers */,
-				597C05F717DEFF50003E6E1A /* FMCShowConstantTBT.h in Headers */,
-				597C05F917DEFF50003E6E1A /* FMCShowConstantTBTResponse.h in Headers */,
 				597C05FB17DEFF50003E6E1A /* FMCShowResponse.h in Headers */,
 				597C05FD17DEFF50003E6E1A /* FMCSingleTireStatus.h in Headers */,
 				597C05FF17DEFF50003E6E1A /* FMCSiphonServer.h in Headers */,
@@ -1443,7 +1456,6 @@
 				597C062917DEFF50003E6E1A /* FMCSyncTransport.h in Headers */,
 				597C062A17DEFF50003E6E1A /* FMCSystemAction.h in Headers */,
 				597C062C17DEFF50003E6E1A /* FMCSystemContext.h in Headers */,
-				597C062E17DEFF50003E6E1A /* FMCTBTState.h in Headers */,
 				597C063017DEFF50003E6E1A /* FMCTextAlignment.h in Headers */,
 				597C063217DEFF50003E6E1A /* FMCTextField.h in Headers */,
 				597C063417DEFF50003E6E1A /* FMCTextFieldName.h in Headers */,
@@ -1452,7 +1464,6 @@
 				597C063917DEFF50003E6E1A /* FMCTriggerSource.h in Headers */,
 				597C063B17DEFF50003E6E1A /* FMCTTSChunk.h in Headers */,
 				597C063D17DEFF50003E6E1A /* FMCTTSChunkFactory.h in Headers */,
-				597C063F17DEFF50003E6E1A /* FMCTurn.h in Headers */,
 				597C064117DEFF50003E6E1A /* FMCUnregisterAppInterface.h in Headers */,
 				597C064317DEFF50003E6E1A /* FMCUnregisterAppInterfaceResponse.h in Headers */,
 				597C064517DEFF50003E6E1A /* FMCUnsubscribeButton.h in Headers */,
@@ -1460,8 +1471,6 @@
 				597C064917DEFF50003E6E1A /* FMCUnsubscribeVehicleData.h in Headers */,
 				597C064B17DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.h in Headers */,
 				597C064D17DEFF50003E6E1A /* FMCUpdateMode.h in Headers */,
-				597C064F17DEFF50003E6E1A /* FMCUpdateTurnList.h in Headers */,
-				597C065117DEFF50003E6E1A /* FMCUpdateTurnListResponse.h in Headers */,
 				597C065317DEFF50003E6E1A /* FMCVehicleDataActiveStatus.h in Headers */,
 				597C065517DEFF50003E6E1A /* FMCVehicleDataEventStatus.h in Headers */,
 				597C065717DEFF50003E6E1A /* FMCVehicleDataNotificationStatus.h in Headers */,
@@ -1555,7 +1564,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Sets the target folders and the final framework product.\nFMK_NAME=${PROJECT_NAME}\nFMK_VERSION=1   # replace with your version for the framework folder\n\n# Install dir will be the final output to the framework.\n# The following line create it in the root folder of the current project.\nINSTALL_DIR=${SRCROOT}/Products/${FMK_NAME}.framework\n\n# Working dir will be deleted after the framework creation.\nWRK_DIR=build\nDEVICE_DIR=${WRK_DIR}/Release-iphoneos/${FMK_NAME}.framework\nSIMULATOR_DIR=${WRK_DIR}/Release-iphonesimulator/${FMK_NAME}.framework\n\n#Set Version String In FMCSyncProxy.h & FMCSyncProxy.m\nVERSION_STRING=AppLink-2.0-$(date +%Y%m%d-%H%M%S)-LOCAL-iOS\nsed -ie \"s/##Version##/${VERSION_STRING}/g\" ${SRCROOT}/AppLink/FMCSyncProxy.h\nsed -ie \"s/##Version##/${VERSION_STRING}/g\" ${SRCROOT}/AppLink/FMCSyncProxy.m\n\n# Building both architectures.\nxcodebuild -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphoneos\nxcodebuild -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphonesimulator\n\n#Reset Version String In SyncProxy.h & FMCSyncProxy.m to ##Version##\nsed -ie \"s/${VERSION_STRING}/##Version##/g\" ${SRCROOT}/AppLink/FMCSyncProxy.h\nsed -ie \"s/${VERSION_STRING}/##Version##/g\" ${SRCROOT}/AppLink/FMCSyncProxy.m\n\n# Cleaning the oldest.\nif [ -d \"${INSTALL_DIR}\" ]\nthen\nrm -rf \"${INSTALL_DIR}\"\nfi\n\n# Creates and renews the final product folder.\nmkdir -p \"${INSTALL_DIR}\"\nmkdir -p \"${INSTALL_DIR}/Versions\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Headers\"\n\n# Creates the internal links.\n# It MUST uses relative path, otherwise will not work when the folder is copied/moved.\nln -s \"${FMK_VERSION}\" \"${INSTALL_DIR}/Versions/Current\"\nln -s \"Versions/Current/Headers\" \"${INSTALL_DIR}/Headers\"\nln -s \"Versions/Current/Resources\" \"${INSTALL_DIR}/Resources\"\nln -s \"Versions/Current/${FMK_NAME}\" \"${INSTALL_DIR}/${FMK_NAME}\"\n\n# Copies the headers and resources files to the final product folder.\ncp -R \"${DEVICE_DIR}/Headers/\" \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Headers/\"\ncp -R \"${DEVICE_DIR}/\" \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources/\"\n\n# Removes the binary and header from the resources folder.\nrm -r \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources/Headers\" \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources/${FMK_NAME}\"\n\n# Uses the Lipo Tool to merge both binary files (i386 + armv6/armv7) into one Universal final product.\nlipo -create \"${DEVICE_DIR}/${FMK_NAME}\" \"${SIMULATOR_DIR}/${FMK_NAME}\" -output \"${INSTALL_DIR}/Versions/${FMK_VERSION}/${FMK_NAME}\"\nrm -r \"${WRK_DIR}\"";
+			shellScript = "# Sets the target folders and the final framework product.\nFMK_NAME=${PROJECT_NAME}\nFMK_VERSION=1   # replace with your version for the framework folder\n\n# Install dir will be the final output to the framework.\n# The following line create it in the root folder of the current project.\nINSTALL_DIR=${SRCROOT}/Products/${FMK_NAME}.framework\n\n# Working dir will be deleted after the framework creation.\nWRK_DIR=build\nDEVICE_DIR=${WRK_DIR}/Release-iphoneos/${FMK_NAME}.framework\nSIMULATOR_DIR=${WRK_DIR}/Release-iphonesimulator/${FMK_NAME}.framework\n\n#Set Version String In FMCSyncProxy.h & FMCSyncProxy.m\nVERSION_STRING=AppLink-$(date +%Y%m%d-%H%M%S)-LOCAL-iOS\nsed -ie \"s/##Version##/${VERSION_STRING}/g\" ${SRCROOT}/AppLink/FMCSyncProxy.h\nsed -ie \"s/##Version##/${VERSION_STRING}/g\" ${SRCROOT}/AppLink/FMCSyncProxy.m\n\n# Building both architectures.\nxcodebuild -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphoneos\nxcodebuild -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphonesimulator\n\n#Reset Version String In SyncProxy.h & FMCSyncProxy.m to ##Version##\nsed -ie \"s/${VERSION_STRING}/##Version##/g\" ${SRCROOT}/AppLink/FMCSyncProxy.h\nsed -ie \"s/${VERSION_STRING}/##Version##/g\" ${SRCROOT}/AppLink/FMCSyncProxy.m\n\n# Cleaning the oldest.\nif [ -d \"${INSTALL_DIR}\" ]\nthen\nrm -rf \"${INSTALL_DIR}\"\nfi\n\n# Creates and renews the final product folder.\nmkdir -p \"${INSTALL_DIR}\"\nmkdir -p \"${INSTALL_DIR}/Versions\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Headers\"\n\n# Creates the internal links.\n# It MUST uses relative path, otherwise will not work when the folder is copied/moved.\nln -s \"${FMK_VERSION}\" \"${INSTALL_DIR}/Versions/Current\"\nln -s \"Versions/Current/Headers\" \"${INSTALL_DIR}/Headers\"\nln -s \"Versions/Current/Resources\" \"${INSTALL_DIR}/Resources\"\nln -s \"Versions/Current/${FMK_NAME}\" \"${INSTALL_DIR}/${FMK_NAME}\"\n\n# Copies the headers and resources files to the final product folder.\ncp -R \"${DEVICE_DIR}/Headers/\" \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Headers/\"\ncp -R \"${DEVICE_DIR}/\" \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources/\"\n\n# Removes the binary and header from the resources folder.\nrm -r \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources/Headers\" \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources/${FMK_NAME}\"\n\n# Uses the Lipo Tool to merge both binary files (i386 + armv6/armv7) into one Universal final product.\nlipo -create \"${DEVICE_DIR}/${FMK_NAME}\" \"${SIMULATOR_DIR}/${FMK_NAME}\" -output \"${INSTALL_DIR}/Versions/${FMK_VERSION}/${FMK_NAME}\"\nrm -r \"${WRK_DIR}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1571,8 +1580,6 @@
 				597C04EB17DEFF50003E6E1A /* FMCAddSubMenu.m in Sources */,
 				597C04ED17DEFF50003E6E1A /* FMCAddSubMenuResponse.m in Sources */,
 				597C04EF17DEFF50003E6E1A /* FMCAlert.m in Sources */,
-				597C04F117DEFF50003E6E1A /* FMCAlertManeuver.m in Sources */,
-				597C04F317DEFF50003E6E1A /* FMCAlertManeuverResponse.m in Sources */,
 				597C04F517DEFF50003E6E1A /* FMCAlertResponse.m in Sources */,
 				597C04F717DEFF50003E6E1A /* FMCAppHMIType.m in Sources */,
 				597C04F917DEFF50003E6E1A /* FMCAppInterfaceUnregisteredReason.m in Sources */,
@@ -1657,7 +1664,6 @@
 				597C059B17DEFF50003E6E1A /* FMCOnLanguageChange.m in Sources */,
 				597C059D17DEFF50003E6E1A /* FMCOnPermissionsChange.m in Sources */,
 				597C059F17DEFF50003E6E1A /* FMCOnSyncPData.m in Sources */,
-				597C05A117DEFF50003E6E1A /* FMCOnTBTClientState.m in Sources */,
 				597C05A317DEFF50003E6E1A /* FMCOnVehicleData.m in Sources */,
 				597C05A517DEFF50003E6E1A /* FMCParameterPermissions.m in Sources */,
 				597C05A717DEFF50003E6E1A /* FMCPerformAudioPassThru.m in Sources */,
@@ -1699,8 +1705,6 @@
 				597C05F217DEFF50003E6E1A /* FMCSetMediaClockTimer.m in Sources */,
 				597C05F417DEFF50003E6E1A /* FMCSetMediaClockTimerResponse.m in Sources */,
 				597C05F617DEFF50003E6E1A /* FMCShow.m in Sources */,
-				597C05F817DEFF50003E6E1A /* FMCShowConstantTBT.m in Sources */,
-				597C05FA17DEFF50003E6E1A /* FMCShowConstantTBTResponse.m in Sources */,
 				597C05FC17DEFF50003E6E1A /* FMCShowResponse.m in Sources */,
 				597C05FE17DEFF50003E6E1A /* FMCSingleTireStatus.m in Sources */,
 				597C060017DEFF50003E6E1A /* FMCSiphonServer.m in Sources */,
@@ -1726,7 +1730,6 @@
 				597C062817DEFF50003E6E1A /* FMCSyncTcpTransport.m in Sources */,
 				597C062B17DEFF50003E6E1A /* FMCSystemAction.m in Sources */,
 				597C062D17DEFF50003E6E1A /* FMCSystemContext.m in Sources */,
-				597C062F17DEFF50003E6E1A /* FMCTBTState.m in Sources */,
 				597C063117DEFF50003E6E1A /* FMCTextAlignment.m in Sources */,
 				597C063317DEFF50003E6E1A /* FMCTextField.m in Sources */,
 				597C063517DEFF50003E6E1A /* FMCTextFieldName.m in Sources */,
@@ -1734,7 +1737,6 @@
 				597C063A17DEFF50003E6E1A /* FMCTriggerSource.m in Sources */,
 				597C063C17DEFF50003E6E1A /* FMCTTSChunk.m in Sources */,
 				597C063E17DEFF50003E6E1A /* FMCTTSChunkFactory.m in Sources */,
-				597C064017DEFF50003E6E1A /* FMCTurn.m in Sources */,
 				597C064217DEFF50003E6E1A /* FMCUnregisterAppInterface.m in Sources */,
 				597C064417DEFF50003E6E1A /* FMCUnregisterAppInterfaceResponse.m in Sources */,
 				597C064617DEFF50003E6E1A /* FMCUnsubscribeButton.m in Sources */,
@@ -1742,8 +1744,6 @@
 				597C064A17DEFF50003E6E1A /* FMCUnsubscribeVehicleData.m in Sources */,
 				597C064C17DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.m in Sources */,
 				597C064E17DEFF50003E6E1A /* FMCUpdateMode.m in Sources */,
-				597C065017DEFF50003E6E1A /* FMCUpdateTurnList.m in Sources */,
-				597C065217DEFF50003E6E1A /* FMCUpdateTurnListResponse.m in Sources */,
 				597C065417DEFF50003E6E1A /* FMCVehicleDataActiveStatus.m in Sources */,
 				597C065617DEFF50003E6E1A /* FMCVehicleDataEventStatus.m in Sources */,
 				597C065817DEFF50003E6E1A /* FMCVehicleDataNotificationStatus.m in Sources */,
