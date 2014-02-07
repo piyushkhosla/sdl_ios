@@ -235,8 +235,8 @@ NSMutableArray* FMCLanguage_values = nil;
 }
 
 +(FMCLanguage*) NO_NO {
-    if (FMCLanguage_DA_DK == nil) {
-        FMCLanguage_DA_DK = [[FMCLanguage alloc] initWithValue:@"NO-NO"];
+    if (FMCLanguage_NO_NO == nil) {
+        FMCLanguage_NO_NO = [[FMCLanguage alloc] initWithValue:@"NO-NO"];
     }
     return FMCLanguage_NO_NO;
 }

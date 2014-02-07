@@ -26,6 +26,8 @@ NSMutableArray* FMCGlobalProperty_values = nil;
         FMCGlobalProperty_values = [[NSMutableArray alloc] initWithObjects:
                 FMCGlobalProperty.HELPPROMPT,
                 FMCGlobalProperty.TIMEOUTPROMPT,
+                FMCGlobalProperty.VRHELPTITLE,
+                FMCGlobalProperty.VRHELPITEMS,
                 nil];
     }
     return FMCGlobalProperty_values;
