@@ -15,9 +15,6 @@
 #define PROT2_HEADER_BUF_LENGTH 12
 #define MTU_SIZE 512
 
-//from.h
-//-(FMMessageType) messageTypeForFrameHeader:(FMCProtocolFrameHeader*)header;
-
 @implementation FMCAppLinkProtocol
 
 -(id) init {
@@ -70,7 +67,7 @@
 	[alertView show];
 	[alertView release];
 	
-}//end action
+}
 
 -(FrameAssembler*) getFrameAssemblerForFrameHeader:(FMCProtocolFrameHeader*) header {
 	id sessionIDKey = [NSNumber numberWithInt:header._sessionID];
@@ -83,7 +80,7 @@
 		} else if (header._sessionType == FMCSessionType_BulkData) {
 			ret = [[BulkAssembler alloc] initWithListeners:protocolListeners];
 		} else {
-            //Invalid Header Session Type, Proxy Restart
+            //Invalid header session type, return nil
             return nil;
         }
         
@@ -153,13 +150,10 @@
 		receivedBytesReadPos += bytesNeeded;
         FrameAssembler *assembler = [self getFrameAssemblerForFrameHeader:currentHeader];
         
-        //Invalid Header Session Type, Proxy Restart
+        //Invalid Header Session Type
         if (assembler == nil){
-            //TODO:DEBUGOUTS
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Invalid Header Session Type, Proxy Restart"]];
-            [FMCDebugTool logInfo:@"Invalid Header Session Type, Proxy Restart"];
-            //TODO:ENDDEBUGOUTS
-            [self onTransportDisconnected];
+            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: Invalid Header Session Type"]];
+            [FMCDebugTool logInfo:@"Proxy: Invalid Header Session Type"];
             [self resetHeaderAndData];
             return;
         }
@@ -340,10 +334,8 @@
 }
 
 -(void) sendStartSessionWithType:(FMCSessionType) sessionType {
-    //TODO:DEBUGOUTS
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"StartSession (request)"]];
-    [FMCDebugTool logInfo:@"StartSession (request)"];
-    //TODO:ENDDEBUGOUTS
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: StartSession (request)"]];
+    [FMCDebugTool logInfo:@"Proxy: StartSession (request)"];
     
     FMCProtocolFrameHeader *header = [FMCProtocolFrameHeaderFactory startSessionWithSessionType:sessionType messageID:0x00 version:_version];
 	
@@ -541,27 +533,6 @@
         }
     }
 }
-
-//FIXME
-
-/*
--(FMMessageType) messageTypeForFrameHeader:(FMCProtocolFrameHeader*)header {
-	if (header.frameType == FMFrameType_Control) {
-		if (header.frameData == FMFrameData_StartSession) {
-			return FMMessageType_StartSession;
-		} else if (header.frameData == FMFrameData_StartSessionACK) {
-			return FMMessageType_StartSessionACK;
-		} else if (header.frameData == FMFrameData_StartSessionNACK) {
-			return FMMessageType_StartSessionNACK;
-		} else {
-            //if (frameData == FrameData.EndSession.value())
-			return FMMessageType_EndSession;
-		}
-	} else {
-		return FMMessageType_Data;
-	}
-}
-*/
 
 -(void) dealloc {
 

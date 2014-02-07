@@ -23,10 +23,9 @@
 @synthesize outStream;
 
 -(id) init {
-    //TODO:DEBUGOUTS
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Init"]];
     [FMCDebugTool logInfo:@"iAP: Init"];
-    //TODO:ENDDEBUGOUTS
+
     if (self = [super initWithEndpoint:nil endpointParam:nil]) {
 		transportLock = [[NSObject alloc] init];
 		writeQueue = [[NSMutableArray alloc] initWithCapacity:10];
@@ -53,7 +52,14 @@
 }
 
 - (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
-//    [FMCDebugTool logInfo:@"FMSyncIAPTransport: stream:handleEvent: begins (eventCode = %@)", [self stringForEventCode:eventCode]];
+    
+//    //TODO:DEBUGOUTS
+//    if (eventCode != NSStreamEventHasBytesAvailable && eventCode != NSStreamEventHasSpaceAvailable) {
+//        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:[NSString stringWithFormat:@"iAP: %@ Stream Event: %@", ((aStream == inStream) ? @"In" : @"Out"), [self stringForEventCode:eventCode]]]];
+//        [FMCDebugTool logInfo:[NSString stringWithFormat:@"iAP: %@ Stream Event: %@", ((aStream == inStream) ? @"In" : @"Out"), [self stringForEventCode:eventCode]]];
+//    }
+//    ///TODO:ENDDEBUGOUTS
+    
 	if (aStream == inStream) {
 		if (eventCode == NSStreamEventHasBytesAvailable || eventCode == NSStreamEventOpenCompleted) {
 			UInt8 buf[1024];
@@ -126,11 +132,7 @@
 }
 
 - (BOOL)connect:(EAAccessory*)accessoryItem usedProtocol:(NSString*)protocolName
-{    
-//    //TODO:DEBUGOUTS
-//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Connecting To Sync"]];
-//    [FMCDebugTool logInfo:@"iAP: Connecting To Sync"];
-//    //TODO:ENDDEBUGOUTS
+{
     @synchronized (transportLock) {
 		// Select the first accessory:
         self.session = [[[EASession alloc] initWithAccessory:accessoryItem forProtocol:protocolName] autorelease];        
@@ -142,22 +144,30 @@
 			@try {		
 				// Initialize and schedule the input stream:
 				if(self.inStream != nil) {
-                    [FMCDebugTool logInfo:@"iAP: connect:usedProtocol: Initializing input steam"];
 					self.inStream.delegate = self;
 					[self.inStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 					[self.inStream open];
 				} else {	
-					return NO;
+//                    //TODO:DEBUGOUTS
+//                    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: connect:usedProtocol:  outStream not set"]];
+//                    [FMCDebugTool logInfo:@"iAP: connect:usedProtocol: outStream not set"];
+//                    //TODO:ENDDEBUGOUTS
+                    
+                    return NO;
 				}
 				
 				// Initialize and schedule the output stream:
 				if(self.outStream != nil) {
-                    [FMCDebugTool logInfo:@"iAP: connect:usedProtocol: Initializing output steam"];
 					self.outStream.delegate = self;
 					[self.outStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 					[self.outStream open];
 				} else {	
-					return NO;
+//                    //TODO:DEBUGOUTS
+//                    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: connect:usedProtocol:  outStream not set"]];
+//                    [FMCDebugTool logInfo:@"iAP: connect:usedProtocol: outStream not set"];
+//                    //TODO:ENDDEBUGOUTS
+                    
+                    return NO;
 				}
 			}
 			@catch (id streamEx) {
@@ -165,11 +175,20 @@
 			}
 		
         } else {
-            [FMCDebugTool logInfo:@"iAP: connect:usedProtocol: Session and Accessory not set"];
+            
+//            //TODO:DEBUGOUTS
+//            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: connect:usedProtocol: Session and Accessory not set"]];
+//            [FMCDebugTool logInfo:@"iAP: connect:usedProtocol: Session and Accessory not set"];
+//            //TODO:ENDDEBUGOUTS
+            
 			return NO;
 		}
 	}
-	return YES;
+    
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Connected To Sync"]];
+    [FMCDebugTool logInfo:@"iAP: Connected To Sync"];
+	
+    return YES;
 }
 
 - (bool) connect {
@@ -195,10 +214,10 @@
     
     for (EAAccessory* anAccessory in [[EAAccessoryManager sharedAccessoryManager] connectedAccessories]) {
         
-        //TODO:DEBUGOUTS
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Accessory Found"]];
-        [FMCDebugTool logInfo:@"iAP: Accessory Found"];
-        //TODO:ENDDEBUGOUTS
+//        //TODO:DEBUGOUTS
+//        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Accessory Found"]];
+//        [FMCDebugTool logInfo:@"iAP: Accessory Found"];
+//        //TODO:ENDDEBUGOUTS
         
 		for (NSString *aProtocolString in [anAccessory protocolStrings]) {
 //            //TODO:DEBUGOUTS
@@ -207,11 +226,10 @@
 //            ///TODO:ENDDEBUGOUTS
 			
             if ([aProtocolString isEqualToString:SYNC_PROTOCOL_STRING]) {
-                //TODO:DEBUGOUTS
-                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Found Sync"]];
-                [FMCDebugTool logInfo:@"iAP: Found SYNC accessory: %@", anAccessory.name];
-                ///TODO:ENDDEBUGOUTS
                 
+                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Found Sync"]];
+                [FMCDebugTool logInfo:@"iAP: Found Sync"];
+
                 if (connectedSyncAccessory != nil) {
                     [connectedSyncAccessory release];
                     connectedSyncAccessory = nil;
@@ -257,10 +275,9 @@
 }
 
 -(void) accessoryConnected:(NSNotification*) connectNotification {
-    //TODO:DEBUGOUTS
+    
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Accessory Connected"]];
     [FMCDebugTool logInfo:@"iAP: Accessory Connected"];
-    //TODO:ENDDEBUGOUTS
     
     EAAccessory *connectedAccessory = [self getSyncAccessoryFromNotification:connectNotification];
     
@@ -282,10 +299,8 @@
 
 -(void) accessoryDisconnected:(NSNotification*) connectNotification {
     
-    //TODO:DEBUGOUTS
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Accessory Disconnected"]];
     [FMCDebugTool logInfo:@"iAP: Accessory Disconnected"];
-    //TODO:ENDDEBUGOUTS
     
     EAAccessory *disconnectedAccessory = [self getSyncAccessoryFromNotification:connectNotification];
     
@@ -342,15 +357,12 @@
 }
 
 - (void) disconnect {
-    //TODO:DEBUGOUTS
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Disconnect"]];
     [FMCDebugTool logInfo:@"iAP: Disconnect"];
-    //TODO:ENDDEBUGOUTS
-    
-    [self notifyTransportDisconnected];
     
     @synchronized (transportLock) {
-		
+        
+        [self notifyTransportDisconnected];
         transportUsable = NO;
         
 		if (session != nil) {
@@ -380,10 +392,10 @@
     
     [self disconnect];
     
-    //TODO:DEBUGOUTS
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Dealloc"]];
-    [FMCDebugTool logInfo:@"iAP: Dealloc"];
-    //TODO:ENDDEBUGOUTS
+//    //TODO:DEBUGOUTS
+//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Dealloc"]];
+//    [FMCDebugTool logInfo:@"iAP: Dealloc"];
+//    //TODO:ENDDEBUGOUTS
     
     if (registeredForNotifications) {
         [[NSNotificationCenter defaultCenter] removeObserver:self name:EAAccessoryDidConnectNotification object:nil];
