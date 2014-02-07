@@ -54,20 +54,16 @@
 
 @implementation FMCSyncProxy
 
-//const float handshakeTime = 5.0;
 const float handshakeTime = 30.0;
 const float notifyProxyClosedDelay = 0.1;
-bool httpPolicyUpdateInProgress = NO;
 
 const int POLICIES_CORRELATION_ID = 65535;
 
 - (void)handshakeTimerFired {
     [self destroyHandshakeTimer];
     
-    //TODO:DEBUGOUTS
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Initial Handshake Timeout"]];
-    [FMCDebugTool logInfo:@"Initial Handshake Timeout"];
-    //TODO:ENDDEBUGOUTS
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: Init Handshake Timeout"]];
+    [FMCDebugTool logInfo:@"Proxy: Init Handshake Timeout"];
     
     [self performSelector:@selector(notifyProxyClosed) withObject:nil afterDelay:notifyProxyClosedDelay];
 }
@@ -82,6 +78,8 @@ const int POLICIES_CORRELATION_ID = 65535;
         rpcSessionID = 0;
         
         alreadyDestructed = NO;
+
+        externalLibraries = nil;
         
         [transport addTransportListener:protocol];
         [protocol addProtocolListener:self];
@@ -156,6 +154,11 @@ const int POLICIES_CORRELATION_ID = 65535;
     }
 }
 
+- (NSArray*)registeredLibraries
+{
+    return [externalLibraries copy];
+}
+
 -(NSString*) getProxyVersion {
     return VERSION_STRING;
 }
@@ -178,10 +181,10 @@ const int POLICIES_CORRELATION_ID = 65535;
 // Send an RPC Request without checking for reserved correlation IDs	
 -(void) sendRPCRequestPrivate:(FMCRPCRequest*) msg {
 	@try {
-//TODO:DEBUGOUTS
-//        [FMCDebugTool logInfo:@"FMSyncProxy: sendRPCRequest: encoding message: %@", msg];
+        //TODO:DEBUGOUTS
+        //[FMCDebugTool logInfo:@"FMSyncProxy: sendRPCRequest: encoding message: %@", msg];
 		//NSData* msgData = [[FMJsonEncoder instance] encodeDictionary:[msg serializeAsDictionary:_version]];
-//TODO:ENDDEBUGOUTS
+        //TODO:ENDDEBUGOUTS
         
         FMCProtocolMessage* pm = [[FMCProtocolMessage alloc] init];
         pm._version = _version;
@@ -206,10 +209,9 @@ const int POLICIES_CORRELATION_ID = 65535;
 }
 
 -(void) handleProtocolSessionStarted:(FMCSessionType) sessionType sessionID:(Byte) sessionID version:(Byte) version {
-    //TODO:DEBUGOUTS
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"StartSession (response)"]];
-    [FMCDebugTool logInfo:@"StartSession (response)"];
-    //TODO:ENDDEBUGOUTS
+
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: StartSession (response)"]];
+    [FMCDebugTool logInfo:@"Proxy: StartSession (response)"];
 
     if (_version <= 1) {
         if (version == 2) {
@@ -219,7 +221,9 @@ const int POLICIES_CORRELATION_ID = 65535;
     
     if (sessionType == FMCSessionType_RPC || _version == 2) {
         rpcSessionID = sessionID;
-//        [FMCDebugTool logInfo:@"Got rpcSessionID = %i", rpcSessionID];
+        //TODO: DEBUGOUTS
+        //[FMCDebugTool logInfo:@"Got rpcSessionID = %i", rpcSessionID];
+        //TODO:ENDDEBUGOUTS
         
         NSArray *localListeners = nil;
         @synchronized (proxyListeners) {
@@ -383,48 +387,25 @@ const int POLICIES_CORRELATION_ID = 65535;
     }
    
     if ([functionName isEqualToString:@"EncodedSyncPDataResponse"]) {
-        //TODO:DEBUGOUTS
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"ESPData Response"]];
-        [FMCDebugTool logInfo:@"ESPData Response"];
-        //TODO:ENDDEBUGOUTS
-        
-//        return;
-        
-        //        if ([[function objectForKey:NAMES_correlationID] intValue] == POLICIES_CORRELATION_ID) {
-        //            return;
-        //        }
+
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: ESPD (response)"]];
+        [FMCDebugTool logInfo:@"Proxy: ESPD (response)"];
+
     }
 
     
     // Intercept OnEncodedSyncPData. If URL != nil, perform HTTP Post and don't pass the notification to FMProxyListeners
     if ([functionName isEqualToString:@"OnEncodedSyncPData"]) {        
-//        if (!httpPolicyUpdateInProgress) {
-//            //TODO:DEBUGOUTS
-//            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"OESPData Notif"]];
-//            [FMCDebugTool logInfo:@"OESPData Notif"];
-//            //TODO:ENDDEBUGOUTS
+
+            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OESPD (notification)"]];
+            [FMCDebugTool logInfo:@"Proxy: OESPD (notification)"];
         
             NSString *urlString = (NSString *)[rpcMsg getParameters:@"URL"];
             if (urlString != nil) {
-                httpPolicyUpdateInProgress = YES;
                 NSDictionary *encodedSyncPData = (NSDictionary *)[rpcMsg getParameters:@"data"];
                 NSNumber *encodedSyncPTimeout = (NSNumber *) [rpcMsg getParameters:@"Timeout"];
                 [self sendEncodedSyncPData:encodedSyncPData toURL:urlString withTimeout:encodedSyncPTimeout];
             }
-            else {
-                //TODO:DEBUGOUTS
-                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"URL is nil, pass to app"]];
-                [FMCDebugTool logInfo:@"URL is nil, pass to app"];
-                //TODO:ENDDEBUGOUTS
-            }
-//        else
-//        {
-//            //There is already a policy update occuring
-//            //TODO:DEBUGOUTS
-//            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Duplicate Policy Update Request, Ignoring"]];
-//            [FMCDebugTool logInfo:@"Duplicate Policy Update Request, Ignoring"];
-//            //TODO:ENDDEBUGOUTS
-//        }
     }
     
 	NSString* functionClassName = [NSString stringWithFormat:@"FMC%@", functionName];
@@ -452,7 +433,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 			[self performSelectorOnMainThread:@selector(performCallback:) withObject:callback waitUntilDone:NO];
 			// [callback release]; Moved to performCallback to avoid thread race condition
 		} else {
-			[FMCDebugTool logInfo:@"Proxy: Proxy listener doesn't respond to selector: %@", handlerName];
+			[FMCDebugTool logInfo:@"Proxy: Proxy listener does not respond to selector: %@", handlerName];
 		}
 	}
 	[localListeners release];
@@ -577,12 +558,9 @@ const int POLICIES_CORRELATION_ID = 65535;
     [connection release]; // Release the connection we allocated in sendEncodedSyncPData
     
     if ([httpResponseData length] == 0){
-//TODO:DEBUGOUTS
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"No Vaild HTTP Response"]];
-        [FMCDebugTool logInfo:@"No Vaild HTTP Response"];
-//TODO:ENDDEBUGOUTS
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OESPD (invalid)"]];
+        [FMCDebugTool logInfo:@"Proxy: OESPD (invalid)"];
         
-        httpPolicyUpdateInProgress = NO;
         return;
     }
         
@@ -594,38 +572,32 @@ const int POLICIES_CORRELATION_ID = 65535;
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
     NSMutableArray *encodedSyncPDataArray = [responseDictionary objectForKey:@"data"];
     
-//TODO:DEBUGOUTS
-//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:responseString]];
-//    [FMCDebugTool logInfo:responseString];
-//TODO:ENDDEBUGOUTS
-    
-    
+    //TODO:DEBUGOUTS
+    //[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:responseString]];
+    //[FMCDebugTool logInfo:responseString];
+    //TODO:ENDDEBUGOUTS
     
     // Build encodedSyncPData request
     FMCEncodedSyncPData *request = [[[FMCEncodedSyncPData alloc] init] autorelease];
     request.data = encodedSyncPDataArray;
     request.correlationID = [NSNumber numberWithInt:POLICIES_CORRELATION_ID];
     
-//TODO:DEBUGOUTS
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"ESPData Request"]];
-    [FMCDebugTool logInfo:@"ESPData Request"];
-//TODO:ENDDEBUGOUTS
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: ESPD (request)"]];
+    [FMCDebugTool logInfo:@"Proxy: ESPD (request)"];
 
-    httpPolicyUpdateInProgress = NO;
     [self sendRPCRequestPrivate:request];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     
-    //TODO:DEBUGOUTS
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"HTTP Timeout"]];
-    [FMCDebugTool logInfo:@"HTTP Timeout"];
-    //TODO:ENDDEBUGOUTS
-        
-    [FMCDebugTool logInfo:@"%s, Connection failed with error: %@", __PRETTY_FUNCTION__, [error localizedDescription]];
-    [connection release];
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OESPD (error)"]];
+    [FMCDebugTool logInfo:@"Proxy: OESPD (error)"];
     
-    httpPolicyUpdateInProgress = NO;
+    //TODO:DEBUGOUTS
+    //[FMCDebugTool logInfo:@"%s, Connection failed with error: %@", __PRETTY_FUNCTION__, [error localizedDescription]];
+    //TODO:ENDDEBUGOUTS
+    
+    [connection release];
 }
 
 @end

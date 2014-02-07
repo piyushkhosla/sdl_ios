@@ -35,6 +35,7 @@
 -(void) addDelegate:(NSObject<FMCProxyListener>*) delegate;
 
 -(void) registerLibrary:(id<FMCExternalLibrary>) externalLibrary;
+- (NSArray*)registeredLibraries;
 
 -(void) sendRPCRequest:(FMCRPCMessage*) msg;
 -(void) handleRpcMessage:(NSDictionary*) msg;

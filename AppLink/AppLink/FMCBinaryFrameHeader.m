@@ -31,7 +31,7 @@
 }
 
 +(FMCBinaryFrameHeader*) parseBinaryHeader:(NSData*) binHeader {
-	//FMBinaryFrameHeader* msg = [[[FMBinaryFrameHeader alloc] init] autorelease];
+
 	FMCBinaryFrameHeader* msg = [[FMCBinaryFrameHeader alloc] init];
 
 	Byte rpcType = (Byte)(((Byte*)binHeader.bytes)[0] >> 4);
