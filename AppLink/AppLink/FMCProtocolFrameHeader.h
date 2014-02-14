@@ -26,6 +26,7 @@ typedef enum FMCFrameData {
 	
 	FMCFrameData_SingleFrame = 0x00,
 	FMCFrameData_FirstFrame = 0x00,
+    FMCFrameData_ConsecutiveLastFrame = 0x00
 } FMCFrameData;
 
 @interface FMCProtocolFrameHeader : NSObject {
