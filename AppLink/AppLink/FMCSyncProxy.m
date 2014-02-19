@@ -433,7 +433,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 			[self performSelectorOnMainThread:@selector(performCallback:) withObject:callback waitUntilDone:NO];
 			// [callback release]; Moved to performCallback to avoid thread race condition
 		} else {
-			[FMCDebugTool logInfo:@"Proxy: Proxy listener does not respond to selector: %@", handlerName];
+			[FMCDebugTool logInfo:@"Proxy: App does not listen for callback: %@", handlerName];
 		}
 	}
 	[localListeners release];
