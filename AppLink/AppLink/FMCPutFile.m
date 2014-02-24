@@ -59,5 +59,56 @@
     return [parameters objectForKey:NAMES_persistentFile];
 }
 
+- (void)setSystemFile:(NSNumber*)systemFile
+{
+    if (systemFile)
+    {
+        [parameters setObject:systemFile forKey:NAMES_systemFile];
+    }
+    else
+    {
+        [parameters removeObjectForKey:NAMES_systemFile];
+    }
+}
+
+- (NSNumber*)systemFile
+{
+    return [parameters objectForKey:NAMES_systemFile];
+}
+
+- (void)setOffset:(NSNumber*)value
+{
+    if (value)
+    {
+        [parameters setObject:value forKey:NAMES_offset];
+    }
+    else
+    {
+        [parameters removeObjectForKey:NAMES_offset];
+    }
+}
+
+- (NSNumber*)offset
+{
+    return [parameters objectForKey:NAMES_offset];
+}
+
+- (void)setLength:(NSNumber*)value
+{
+    if (value)
+    {
+        [parameters setObject:value forKey:NAMES_length];
+    }
+    else
+    {
+        [parameters removeObjectForKey:NAMES_length];
+    }
+}
+
+- (NSNumber*)length
+{
+    return [parameters objectForKey:NAMES_length];
+}
+
 
 @end

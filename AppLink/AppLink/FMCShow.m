@@ -136,6 +136,31 @@
     }
 }
 
+- (void)setSecondaryGraphic:(FMCImage*)secondaryGraphic
+{
+    if (secondaryGraphic)
+    {
+        [parameters setObject:secondaryGraphic forKey:NAMES_secondaryGraphic];
+    }
+    else
+    {
+        [parameters removeObjectForKey:NAMES_secondaryGraphic];
+    }
+}
+
+- (FMCImage*)secondaryGraphic
+{
+    NSObject* obj = [parameters objectForKey:NAMES_secondaryGraphic];
+    if ([obj isKindOfClass:FMCImage.class])
+    {
+        return (FMCImage*)obj;
+    }
+    else
+    {
+        return [[[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+    }
+}
+
 -(void) setSoftButtons:(NSMutableArray *) softButtons {
     if (softButtons != nil) {
         [parameters setObject:softButtons forKey:NAMES_softButtons];

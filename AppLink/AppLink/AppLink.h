@@ -82,9 +82,11 @@
 #import <AppLink/FMCHMIPermissions.h>
 #import <AppLink/FMCHMIZoneCapabilities.h>
 #import <AppLink/FMCImage.h>
+#import <AppLink/FMCImageFieldName.h>
 #import <AppLink/FMCImageType.h>
 #import <AppLink/FMCInteractionMode.h>
 #import <AppLink/FMCLanguage.h>
+#import <AppLink/FMCLayoutMode.h>
 #import <AppLink/FMCListFiles.h>
 #import <AppLink/FMCListFilesResponse.h>
 #import <AppLink/FMCMediaClockFormat.h>
@@ -105,11 +107,14 @@
 #import <AppLink/FMCPerformInteractionResponse.h>
 #import <AppLink/FMCPermissionItem.h>
 #import <AppLink/FMCPermissionStatus.h>
+#import <AppLink/FMCPredefinedLayout.h>
+#import <AppLink/FMCPrerecordedSpeech.h>
 #import <AppLink/FMCPresetBankCapabilities.h>
 #import <AppLink/FMCPutFile.h>
 #import <AppLink/FMCPutFileResponse.h>
 #import <AppLink/FMCRegisterAppInterface.h>
 #import <AppLink/FMCRegisterAppInterfaceResponse.h>
+#import <AppLink/FMCRequestType.h>
 #import <AppLink/FMCResetGlobalProperties.h>
 #import <AppLink/FMCResetGlobalPropertiesResponse.h>
 #import <AppLink/FMCResult.h>
@@ -144,6 +149,7 @@
 #import <AppLink/FMCTextAlignment.h>
 #import <AppLink/FMCTextField.h>
 #import <AppLink/FMCTextFieldName.h>
+#import <AppLink/FMCTouchType.h>
 #import <AppLink/FMCTriggerSource.h>
 #import <AppLink/FMCTTSChunk.h>
 #import <AppLink/FMCUnregisterAppInterface.h>
@@ -155,6 +161,7 @@
 #import <AppLink/FMCVrHelpItem.h>
 
 //Vehicle Data
+#import <AppLink/FMCAmbientLightStatus.h>
 #import <AppLink/FMCBeltStatus.h>
 #import <AppLink/FMCBodyInformation.h>
 #import <AppLink/FMCCompassDirection.h>

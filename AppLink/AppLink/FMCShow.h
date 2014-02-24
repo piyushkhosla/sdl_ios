@@ -23,6 +23,7 @@
 @property(assign) NSString* mediaClock;
 @property(assign) NSString* mediaTrack;
 @property(assign) FMCImage* graphic;
+@property(assign) FMCImage* secondaryGraphic;
 @property(assign) NSMutableArray* softButtons;
 @property(assign) NSMutableArray* customPresets;
 

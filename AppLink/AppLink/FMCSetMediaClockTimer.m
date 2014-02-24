@@ -35,6 +35,31 @@
     }
 }
 
+- (void)setEndTime:(FMCStartTime*)endTime
+{
+    if (endTime)
+    {
+        [parameters setObject:endTime forKey:NAMES_endTime];
+    }
+    else
+    {
+        [parameters removeObjectForKey:NAMES_endTime];
+    }
+}
+
+- (FMCStartTime*)endTime
+{
+    NSObject* obj = [parameters objectForKey:NAMES_endTime];
+    if ([obj isKindOfClass:FMCStartTime.class])
+    {
+        return (FMCStartTime*)obj;
+    }
+    else
+    {
+        return [[[FMCStartTime alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+    }
+}
+
 -(void) setUpdateMode:(FMCUpdateMode*) updateMode {
     if (updateMode != nil) {
         [parameters setObject:updateMode forKey:NAMES_updateMode];

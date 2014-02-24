@@ -2,12 +2,22 @@
 //  FMCRequestType.h
 //  AppLink
 //
-//  Created by Yates, Hugh (H.R.) on 2/19/14.
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 //
 //
 
-#import <AppLink/AppLink.h>
+#import <Foundation/Foundation.h>
+#import <AppLink/FMCEnum.h>
 
 @interface FMCRequestType : FMCEnum
 
++ (NSMutableArray*)values;
++ (FMCRequestType*)valueOf:(NSString*) value;
++ (FMCRequestType*)HTTP;
++ (FMCRequestType*)FILE_RESUME;
++ (FMCRequestType*)AUTH_REQUEST;
++ (FMCRequestType*)AUTH_CHALLENGE;
++ (FMCRequestType*)AUTH_ACK;
+
 @end
+

@@ -184,7 +184,7 @@
 		597C058617DEFF50003E6E1A /* FMCMediaClockFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C03ED17DEFF4F003E6E1A /* FMCMediaClockFormat.m */; };
 		597C058717DEFF50003E6E1A /* FMCMenuParams.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C03EE17DEFF4F003E6E1A /* FMCMenuParams.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C058817DEFF50003E6E1A /* FMCMenuParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C03EF17DEFF4F003E6E1A /* FMCMenuParams.m */; };
-		597C058917DEFF50003E6E1A /* FMCNames.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C03F017DEFF4F003E6E1A /* FMCNames.h */; settings = {ATTRIBUTES = (); }; };
+		597C058917DEFF50003E6E1A /* FMCNames.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C03F017DEFF4F003E6E1A /* FMCNames.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C058A17DEFF50003E6E1A /* FMCOnAppInterfaceUnregistered.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C03F117DEFF4F003E6E1A /* FMCOnAppInterfaceUnregistered.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C058B17DEFF50003E6E1A /* FMCOnAppInterfaceUnregistered.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C03F217DEFF4F003E6E1A /* FMCOnAppInterfaceUnregistered.m */; };
 		597C058C17DEFF50003E6E1A /* FMCOnAudioPassThru.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C03F317DEFF4F003E6E1A /* FMCOnAudioPassThru.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -399,6 +399,30 @@
 		597C066B17DEFF51003E6E1A /* FMCAppLinkProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04D217DEFF50003E6E1A /* FMCAppLinkProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C066C17DEFF51003E6E1A /* FMCAppLinkProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04D317DEFF50003E6E1A /* FMCAppLinkProtocol.m */; };
 		597C067A17DEFF51003E6E1A /* AppLink.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04E117DEFF50003E6E1A /* AppLink.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E901D34218B5006A0011693E /* FMCImageFieldName.h in Headers */ = {isa = PBXBuildFile; fileRef = E901D34018B5006A0011693E /* FMCImageFieldName.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E901D34318B5006A0011693E /* FMCImageFieldName.m in Sources */ = {isa = PBXBuildFile; fileRef = E901D34118B5006A0011693E /* FMCImageFieldName.m */; };
+		E901D34618B50F7C0011693E /* FMCAmbientLightStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = E901D34418B50F7C0011693E /* FMCAmbientLightStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E901D34718B50F7C0011693E /* FMCAmbientLightStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = E901D34518B50F7C0011693E /* FMCAmbientLightStatus.m */; };
+		E901D34A18B52B350011693E /* FMCTouchType.h in Headers */ = {isa = PBXBuildFile; fileRef = E901D34818B52B350011693E /* FMCTouchType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E901D34B18B52B350011693E /* FMCTouchType.m in Sources */ = {isa = PBXBuildFile; fileRef = E901D34918B52B350011693E /* FMCTouchType.m */; };
+		E901D34E18B52D7D0011693E /* FMCRequestType.h in Headers */ = {isa = PBXBuildFile; fileRef = E901D34C18B52D7D0011693E /* FMCRequestType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E901D34F18B52D7D0011693E /* FMCRequestType.m in Sources */ = {isa = PBXBuildFile; fileRef = E901D34D18B52D7D0011693E /* FMCRequestType.m */; };
+		E901D35218B52F920011693E /* FMCPredefinedLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = E901D35018B52F920011693E /* FMCPredefinedLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E901D35318B52F920011693E /* FMCPredefinedLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E901D35118B52F920011693E /* FMCPredefinedLayout.m */; };
+		E901D35618B6876E0011693E /* FMCImageResolution.h in Headers */ = {isa = PBXBuildFile; fileRef = E901D35418B6876E0011693E /* FMCImageResolution.h */; };
+		E901D35718B6876E0011693E /* FMCImageResolution.m in Sources */ = {isa = PBXBuildFile; fileRef = E901D35518B6876E0011693E /* FMCImageResolution.m */; };
+		E901D35A18B68C190011693E /* FMCImageField.h in Headers */ = {isa = PBXBuildFile; fileRef = E901D35818B68C190011693E /* FMCImageField.h */; };
+		E901D35B18B68C190011693E /* FMCImageField.m in Sources */ = {isa = PBXBuildFile; fileRef = E901D35918B68C190011693E /* FMCImageField.m */; };
+		E901D35E18B692930011693E /* FMCTouchCoord.h in Headers */ = {isa = PBXBuildFile; fileRef = E901D35C18B692930011693E /* FMCTouchCoord.h */; };
+		E901D35F18B692930011693E /* FMCTouchCoord.m in Sources */ = {isa = PBXBuildFile; fileRef = E901D35D18B692930011693E /* FMCTouchCoord.m */; };
+		E901D36218B694820011693E /* FMCTouchEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = E901D36018B694820011693E /* FMCTouchEvent.h */; };
+		E901D36318B694820011693E /* FMCTouchEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = E901D36118B694820011693E /* FMCTouchEvent.m */; };
+		E901D36618B6A0270011693E /* FMCTouchEventCapabilities.h in Headers */ = {isa = PBXBuildFile; fileRef = E901D36418B6A0270011693E /* FMCTouchEventCapabilities.h */; };
+		E901D36718B6A0270011693E /* FMCTouchEventCapabilities.m in Sources */ = {isa = PBXBuildFile; fileRef = E901D36518B6A0270011693E /* FMCTouchEventCapabilities.m */; };
+		E9A2C1D318B3D9DD00D8F453 /* FMCLayoutMode.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A2C1D118B3D9DC00D8F453 /* FMCLayoutMode.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9A2C1D418B3D9DD00D8F453 /* FMCLayoutMode.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A2C1D218B3D9DD00D8F453 /* FMCLayoutMode.m */; };
+		E9A2C1DA18B3F21600D8F453 /* FMCPrerecordedSpeech.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A2C1D818B3F21600D8F453 /* FMCPrerecordedSpeech.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9A2C1DB18B3F21600D8F453 /* FMCPrerecordedSpeech.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A2C1D918B3F21600D8F453 /* FMCPrerecordedSpeech.m */; };
 		FBAC28E1181FEAF4003210A2 /* FMCExternalLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = FBAC28E0181FEAF4003210A2 /* FMCExternalLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -784,6 +808,30 @@
 		597C04D217DEFF50003E6E1A /* FMCAppLinkProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCAppLinkProtocol.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		597C04D317DEFF50003E6E1A /* FMCAppLinkProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCAppLinkProtocol.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C04E117DEFF50003E6E1A /* AppLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppLink.h; sourceTree = "<group>"; };
+		E901D34018B5006A0011693E /* FMCImageFieldName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCImageFieldName.h; sourceTree = "<group>"; };
+		E901D34118B5006A0011693E /* FMCImageFieldName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCImageFieldName.m; sourceTree = "<group>"; };
+		E901D34418B50F7C0011693E /* FMCAmbientLightStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCAmbientLightStatus.h; sourceTree = "<group>"; };
+		E901D34518B50F7C0011693E /* FMCAmbientLightStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCAmbientLightStatus.m; sourceTree = "<group>"; };
+		E901D34818B52B350011693E /* FMCTouchType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCTouchType.h; sourceTree = "<group>"; };
+		E901D34918B52B350011693E /* FMCTouchType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCTouchType.m; sourceTree = "<group>"; };
+		E901D34C18B52D7D0011693E /* FMCRequestType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCRequestType.h; sourceTree = "<group>"; };
+		E901D34D18B52D7D0011693E /* FMCRequestType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCRequestType.m; sourceTree = "<group>"; };
+		E901D35018B52F920011693E /* FMCPredefinedLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCPredefinedLayout.h; sourceTree = "<group>"; };
+		E901D35118B52F920011693E /* FMCPredefinedLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCPredefinedLayout.m; sourceTree = "<group>"; };
+		E901D35418B6876E0011693E /* FMCImageResolution.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCImageResolution.h; sourceTree = "<group>"; };
+		E901D35518B6876E0011693E /* FMCImageResolution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCImageResolution.m; sourceTree = "<group>"; };
+		E901D35818B68C190011693E /* FMCImageField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCImageField.h; sourceTree = "<group>"; };
+		E901D35918B68C190011693E /* FMCImageField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCImageField.m; sourceTree = "<group>"; };
+		E901D35C18B692930011693E /* FMCTouchCoord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCTouchCoord.h; sourceTree = "<group>"; };
+		E901D35D18B692930011693E /* FMCTouchCoord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCTouchCoord.m; sourceTree = "<group>"; };
+		E901D36018B694820011693E /* FMCTouchEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCTouchEvent.h; sourceTree = "<group>"; };
+		E901D36118B694820011693E /* FMCTouchEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCTouchEvent.m; sourceTree = "<group>"; };
+		E901D36418B6A0270011693E /* FMCTouchEventCapabilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCTouchEventCapabilities.h; sourceTree = "<group>"; };
+		E901D36518B6A0270011693E /* FMCTouchEventCapabilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCTouchEventCapabilities.m; sourceTree = "<group>"; };
+		E9A2C1D118B3D9DC00D8F453 /* FMCLayoutMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCLayoutMode.h; sourceTree = "<group>"; };
+		E9A2C1D218B3D9DD00D8F453 /* FMCLayoutMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCLayoutMode.m; sourceTree = "<group>"; };
+		E9A2C1D818B3F21600D8F453 /* FMCPrerecordedSpeech.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCPrerecordedSpeech.h; sourceTree = "<group>"; };
+		E9A2C1D918B3F21600D8F453 /* FMCPrerecordedSpeech.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCPrerecordedSpeech.m; sourceTree = "<group>"; };
 		FBAC28E0181FEAF4003210A2 /* FMCExternalLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCExternalLibrary.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -908,6 +956,16 @@
 				597C04C917DEFF50003E6E1A /* FMCVehicleType.m */,
 				597C04CC17DEFF50003E6E1A /* FMCVrHelpItem.h */,
 				597C04CD17DEFF50003E6E1A /* FMCVrHelpItem.m */,
+				E901D35418B6876E0011693E /* FMCImageResolution.h */,
+				E901D35518B6876E0011693E /* FMCImageResolution.m */,
+				E901D35818B68C190011693E /* FMCImageField.h */,
+				E901D35918B68C190011693E /* FMCImageField.m */,
+				E901D35C18B692930011693E /* FMCTouchCoord.h */,
+				E901D35D18B692930011693E /* FMCTouchCoord.m */,
+				E901D36018B694820011693E /* FMCTouchEvent.h */,
+				E901D36118B694820011693E /* FMCTouchEvent.m */,
+				E901D36418B6A0270011693E /* FMCTouchEventCapabilities.h */,
+				E901D36518B6A0270011693E /* FMCTouchEventCapabilities.m */,
 			);
 			name = Struct;
 			sourceTree = "<group>";
@@ -1230,18 +1288,24 @@
 				597C03D417DEFF4F003E6E1A /* FMCIgnitionStableStatus.m */,
 				597C03D517DEFF4F003E6E1A /* FMCIgnitionStatus.h */,
 				597C03D617DEFF4F003E6E1A /* FMCIgnitionStatus.m */,
+				E901D34018B5006A0011693E /* FMCImageFieldName.h */,
+				E901D34118B5006A0011693E /* FMCImageFieldName.m */,
 				597C03D917DEFF4F003E6E1A /* FMCImageType.h */,
 				597C03DA17DEFF4F003E6E1A /* FMCImageType.m */,
 				597C03DB17DEFF4F003E6E1A /* FMCInteractionMode.h */,
 				597C03DC17DEFF4F003E6E1A /* FMCInteractionMode.m */,
 				597C03E417DEFF4F003E6E1A /* FMCLanguage.h */,
 				597C03E517DEFF4F003E6E1A /* FMCLanguage.m */,
+				E9A2C1D118B3D9DC00D8F453 /* FMCLayoutMode.h */,
+				E9A2C1D218B3D9DD00D8F453 /* FMCLayoutMode.m */,
 				597C03EA17DEFF4F003E6E1A /* FMCMaintenanceModeStatus.h */,
 				597C03EB17DEFF4F003E6E1A /* FMCMaintenanceModeStatus.m */,
 				597C03EC17DEFF4F003E6E1A /* FMCMediaClockFormat.h */,
 				597C03ED17DEFF4F003E6E1A /* FMCMediaClockFormat.m */,
 				597C041717DEFF4F003E6E1A /* FMCPermissionStatus.h */,
 				597C041817DEFF4F003E6E1A /* FMCPermissionStatus.m */,
+				E9A2C1D818B3F21600D8F453 /* FMCPrerecordedSpeech.h */,
+				E9A2C1D918B3F21600D8F453 /* FMCPrerecordedSpeech.m */,
 				597C041B17DEFF4F003E6E1A /* FMCPrimaryAudioSource.h */,
 				597C041C17DEFF4F003E6E1A /* FMCPrimaryAudioSource.m */,
 				597C041D17DEFF4F003E6E1A /* FMCPRNDL.h */,
@@ -1286,6 +1350,14 @@
 				597C04CF17DEFF50003E6E1A /* FMCWarningLightStatus.m */,
 				597C04D017DEFF50003E6E1A /* FMCWiperStatus.h */,
 				597C04D117DEFF50003E6E1A /* FMCWiperStatus.m */,
+				E901D34418B50F7C0011693E /* FMCAmbientLightStatus.h */,
+				E901D34518B50F7C0011693E /* FMCAmbientLightStatus.m */,
+				E901D34818B52B350011693E /* FMCTouchType.h */,
+				E901D34918B52B350011693E /* FMCTouchType.m */,
+				E901D34C18B52D7D0011693E /* FMCRequestType.h */,
+				E901D34D18B52D7D0011693E /* FMCRequestType.m */,
+				E901D35018B52F920011693E /* FMCPredefinedLayout.h */,
+				E901D35118B52F920011693E /* FMCPredefinedLayout.m */,
 			);
 			name = Enum;
 			sourceTree = "<group>";
@@ -1313,8 +1385,10 @@
 				597C050017DEFF50003E6E1A /* FMCBeltStatus.h in Headers */,
 				597C050217DEFF50003E6E1A /* FMCBinaryFrameHeader.h in Headers */,
 				597C050617DEFF50003E6E1A /* FMCBitsPerSample.h in Headers */,
+				E901D36218B694820011693E /* FMCTouchEvent.h in Headers */,
 				597C050817DEFF50003E6E1A /* FMCBodyInformation.h in Headers */,
 				597C050A17DEFF50003E6E1A /* FMCButtonCapabilities.h in Headers */,
+				E901D35A18B68C190011693E /* FMCImageField.h in Headers */,
 				597C050C17DEFF50003E6E1A /* FMCButtonEventMode.h in Headers */,
 				597C050E17DEFF50003E6E1A /* FMCButtonName.h in Headers */,
 				597C051017DEFF50003E6E1A /* FMCButtonPressMode.h in Headers */,
@@ -1392,6 +1466,7 @@
 				597C05A817DEFF50003E6E1A /* FMCPerformAudioPassThruResponse.h in Headers */,
 				597C05AA17DEFF50003E6E1A /* FMCPerformInteraction.h in Headers */,
 				597C05AC17DEFF50003E6E1A /* FMCPerformInteractionResponse.h in Headers */,
+				E901D36618B6A0270011693E /* FMCTouchEventCapabilities.h in Headers */,
 				597C05AE17DEFF50003E6E1A /* FMCPermissionItem.h in Headers */,
 				597C05B017DEFF50003E6E1A /* FMCPermissionStatus.h in Headers */,
 				597C05B217DEFF50003E6E1A /* FMCPresetBankCapabilities.h in Headers */,
@@ -1409,6 +1484,7 @@
 				597C05C717DEFF50003E6E1A /* FMCReadDIDResponse.h in Headers */,
 				597C05C917DEFF50003E6E1A /* FMCRegisterAppInterface.h in Headers */,
 				597C05CB17DEFF50003E6E1A /* FMCRegisterAppInterfaceResponse.h in Headers */,
+				E901D35E18B692930011693E /* FMCTouchCoord.h in Headers */,
 				597C05CD17DEFF50003E6E1A /* FMCResetGlobalProperties.h in Headers */,
 				597C05CF17DEFF50003E6E1A /* FMCResetGlobalPropertiesResponse.h in Headers */,
 				597C05D117DEFF50003E6E1A /* FMCResult.h in Headers */,
@@ -1439,6 +1515,7 @@
 				597C060717DEFF50003E6E1A /* FMCSoftButtonCapabilities.h in Headers */,
 				597C060917DEFF50003E6E1A /* FMCSoftButtonType.h in Headers */,
 				597C060B17DEFF50003E6E1A /* FMCSpeak.h in Headers */,
+				E901D35618B6876E0011693E /* FMCImageResolution.h in Headers */,
 				597C060D17DEFF50003E6E1A /* FMCSpeakResponse.h in Headers */,
 				597C060F17DEFF50003E6E1A /* FMCSpeechCapabilities.h in Headers */,
 				597C061117DEFF50003E6E1A /* FMCStartTime.h in Headers */,
@@ -1479,12 +1556,19 @@
 				597C066117DEFF50003E6E1A /* FMCVehicleType.h in Headers */,
 				597C066317DEFF50003E6E1A /* FMCVrCapabilities.h in Headers */,
 				597C066517DEFF50003E6E1A /* FMCVrHelpItem.h in Headers */,
+				E901D35218B52F920011693E /* FMCPredefinedLayout.h in Headers */,
+				E9A2C1DA18B3F21600D8F453 /* FMCPrerecordedSpeech.h in Headers */,
+				E9A2C1D318B3D9DD00D8F453 /* FMCLayoutMode.h in Headers */,
+				E901D34618B50F7C0011693E /* FMCAmbientLightStatus.h in Headers */,
+				E901D34E18B52D7D0011693E /* FMCRequestType.h in Headers */,
+				E901D34218B5006A0011693E /* FMCImageFieldName.h in Headers */,
+				597C058917DEFF50003E6E1A /* FMCNames.h in Headers */,
+				E901D34A18B52B350011693E /* FMCTouchType.h in Headers */,
 				597C066717DEFF50003E6E1A /* FMCWarningLightStatus.h in Headers */,
 				597C066917DEFF50003E6E1A /* FMCWiperStatus.h in Headers */,
 				597C066B17DEFF51003E6E1A /* FMCAppLinkProtocol.h in Headers */,
 				597C067A17DEFF51003E6E1A /* AppLink.h in Headers */,
 				5931469617E03CFD005C49C5 /* FMCBitConverter.h in Headers */,
-				597C058917DEFF50003E6E1A /* FMCNames.h in Headers */,
 				FBAC28E1181FEAF4003210A2 /* FMCExternalLibrary.h in Headers */,
 				597C054517DEFF50003E6E1A /* FMCEncodedSyncPData.h in Headers */,
 				597C054717DEFF50003E6E1A /* FMCEncodedSyncPDataResponse.h in Headers */,
@@ -1581,6 +1665,7 @@
 				597C04ED17DEFF50003E6E1A /* FMCAddSubMenuResponse.m in Sources */,
 				597C04EF17DEFF50003E6E1A /* FMCAlert.m in Sources */,
 				597C04F517DEFF50003E6E1A /* FMCAlertResponse.m in Sources */,
+				E901D34F18B52D7D0011693E /* FMCRequestType.m in Sources */,
 				597C04F717DEFF50003E6E1A /* FMCAppHMIType.m in Sources */,
 				597C04F917DEFF50003E6E1A /* FMCAppInterfaceUnregisteredReason.m in Sources */,
 				597C04FB17DEFF50003E6E1A /* FMCAudioPassThruCapabilities.m in Sources */,
@@ -1589,6 +1674,7 @@
 				597C050117DEFF50003E6E1A /* FMCBeltStatus.m in Sources */,
 				597C050317DEFF50003E6E1A /* FMCBinaryFrameHeader.m in Sources */,
 				597C050517DEFF50003E6E1A /* FMCBitConverter.m in Sources */,
+				E901D34318B5006A0011693E /* FMCImageFieldName.m in Sources */,
 				597C050717DEFF50003E6E1A /* FMCBitsPerSample.m in Sources */,
 				597C050917DEFF50003E6E1A /* FMCBodyInformation.m in Sources */,
 				597C050B17DEFF50003E6E1A /* FMCButtonCapabilities.m in Sources */,
@@ -1621,6 +1707,7 @@
 				597C054217DEFF50003E6E1A /* FMCDisplayType.m in Sources */,
 				597C054417DEFF50003E6E1A /* FMCDriverDistractionState.m in Sources */,
 				597C054617DEFF50003E6E1A /* FMCEncodedSyncPData.m in Sources */,
+				E9A2C1DB18B3F21600D8F453 /* FMCPrerecordedSpeech.m in Sources */,
 				597C054817DEFF50003E6E1A /* FMCEncodedSyncPDataResponse.m in Sources */,
 				597C054B17DEFF50003E6E1A /* FMCEndAudioPassThru.m in Sources */,
 				597C054D17DEFF50003E6E1A /* FMCEndAudioPassThruResponse.m in Sources */,
@@ -1638,6 +1725,7 @@
 				597C056517DEFF50003E6E1A /* FMCHeadLampStatus.m in Sources */,
 				597C056717DEFF50003E6E1A /* FMCHMILevel.m in Sources */,
 				597C056917DEFF50003E6E1A /* FMCHMIPermissions.m in Sources */,
+				E901D35B18B68C190011693E /* FMCImageField.m in Sources */,
 				597C056B17DEFF50003E6E1A /* FMCHMIZoneCapabilities.m in Sources */,
 				597C056D17DEFF50003E6E1A /* FMCIgnitionStableStatus.m in Sources */,
 				597C056F17DEFF50003E6E1A /* FMCIgnitionStatus.m in Sources */,
@@ -1671,6 +1759,7 @@
 				597C05AB17DEFF50003E6E1A /* FMCPerformInteraction.m in Sources */,
 				597C05AD17DEFF50003E6E1A /* FMCPerformInteractionResponse.m in Sources */,
 				597C05AF17DEFF50003E6E1A /* FMCPermissionItem.m in Sources */,
+				E901D35F18B692930011693E /* FMCTouchCoord.m in Sources */,
 				597C05B117DEFF50003E6E1A /* FMCPermissionStatus.m in Sources */,
 				597C05B317DEFF50003E6E1A /* FMCPresetBankCapabilities.m in Sources */,
 				597C05B517DEFF50003E6E1A /* FMCPrimaryAudioSource.m in Sources */,
@@ -1689,6 +1778,7 @@
 				597C05D217DEFF50003E6E1A /* FMCResult.m in Sources */,
 				597C05D417DEFF50003E6E1A /* FMCRPCMessage.m in Sources */,
 				597C05D617DEFF50003E6E1A /* FMCRPCMessageType.m in Sources */,
+				E901D34B18B52B350011693E /* FMCTouchType.m in Sources */,
 				597C05D817DEFF50003E6E1A /* FMCRPCNotification.m in Sources */,
 				597C05DA17DEFF50003E6E1A /* FMCRPCRequest.m in Sources */,
 				597C05DC17DEFF50003E6E1A /* FMCRPCRequestFactory.m in Sources */,
@@ -1700,6 +1790,7 @@
 				597C05E817DEFF50003E6E1A /* FMCSetAppIconResponse.m in Sources */,
 				597C05EA17DEFF50003E6E1A /* FMCSetDisplayLayout.m in Sources */,
 				597C05EC17DEFF50003E6E1A /* FMCSetDisplayLayoutResponse.m in Sources */,
+				E901D36318B694820011693E /* FMCTouchEvent.m in Sources */,
 				597C05EE17DEFF50003E6E1A /* FMCSetGlobalProperties.m in Sources */,
 				597C05F017DEFF50003E6E1A /* FMCSetGlobalPropertiesResponse.m in Sources */,
 				597C05F217DEFF50003E6E1A /* FMCSetMediaClockTimer.m in Sources */,
@@ -1725,8 +1816,10 @@
 				597C061E17DEFF50003E6E1A /* FMCSyncMsgVersion.m in Sources */,
 				597C062017DEFF50003E6E1A /* FMCSyncPData.m in Sources */,
 				597C062217DEFF50003E6E1A /* FMCSyncPDataResponse.m in Sources */,
+				E901D35718B6876E0011693E /* FMCImageResolution.m in Sources */,
 				597C062417DEFF50003E6E1A /* FMCSyncProxy.m in Sources */,
 				597C062617DEFF50003E6E1A /* FMCSyncProxyFactory.m in Sources */,
+				E901D34718B50F7C0011693E /* FMCAmbientLightStatus.m in Sources */,
 				597C062817DEFF50003E6E1A /* FMCSyncTcpTransport.m in Sources */,
 				597C062B17DEFF50003E6E1A /* FMCSystemAction.m in Sources */,
 				597C062D17DEFF50003E6E1A /* FMCSystemContext.m in Sources */,
@@ -1745,14 +1838,17 @@
 				597C064C17DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.m in Sources */,
 				597C064E17DEFF50003E6E1A /* FMCUpdateMode.m in Sources */,
 				597C065417DEFF50003E6E1A /* FMCVehicleDataActiveStatus.m in Sources */,
+				E901D35318B52F920011693E /* FMCPredefinedLayout.m in Sources */,
 				597C065617DEFF50003E6E1A /* FMCVehicleDataEventStatus.m in Sources */,
 				597C065817DEFF50003E6E1A /* FMCVehicleDataNotificationStatus.m in Sources */,
 				597C065A17DEFF50003E6E1A /* FMCVehicleDataResult.m in Sources */,
 				597C065C17DEFF50003E6E1A /* FMCVehicleDataResultCode.m in Sources */,
 				597C065E17DEFF50003E6E1A /* FMCVehicleDataStatus.m in Sources */,
 				597C066017DEFF50003E6E1A /* FMCVehicleDataType.m in Sources */,
+				E9A2C1D418B3D9DD00D8F453 /* FMCLayoutMode.m in Sources */,
 				597C066217DEFF50003E6E1A /* FMCVehicleType.m in Sources */,
 				597C066417DEFF50003E6E1A /* FMCVrCapabilities.m in Sources */,
+				E901D36718B6A0270011693E /* FMCTouchEventCapabilities.m in Sources */,
 				597C066617DEFF50003E6E1A /* FMCVrHelpItem.m in Sources */,
 				597C066817DEFF50003E6E1A /* FMCWarningLightStatus.m in Sources */,
 				597C066A17DEFF50003E6E1A /* FMCWiperStatus.m in Sources */,

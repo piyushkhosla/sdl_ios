@@ -8,6 +8,7 @@
 #import <AppLink/FMCButtonCapabilities.h>
 #import <AppLink/FMCHMIZoneCapabilities.h>
 #import <AppLink/FMCNames.h>
+#import <AppLink/FMCPrerecordedSpeech.h>
 #import <AppLink/FMCSpeechCapabilities.h>
 #import <AppLink/FMCSoftButtonCapabilities.h>
 #import <AppLink/FMCVrCapabilities.h>
@@ -184,10 +185,39 @@
     NSMutableArray* array = [parameters objectForKey:NAMES_speechCapabilities];
     if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCSpeechCapabilities.class]) {
         return array;
-    } else { 
+    } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSString* enumString in array) {
             [newList addObject:[FMCSpeechCapabilities valueOf:enumString]];
+        }
+        return newList;
+    }
+}
+
+-(void) setPrerecordedSpeech:(NSMutableArray*)values {
+    if (values)
+    {
+        [parameters setObject:values forKey:NAMES_prerecordedSpeech];
+    }
+    else
+    {
+        [parameters removeObjectForKey:NAMES_prerecordedSpeech];
+    }
+}
+
+-(NSMutableArray*) prerecordedSpeech {
+    NSMutableArray* array = [parameters objectForKey:NAMES_prerecordedSpeech];
+    if ([array count] == 0 ||
+        [[array objectAtIndex:0] isKindOfClass:FMCPrerecordedSpeech.class])
+    {
+        return array;
+    }
+    else
+    {
+        NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
+        for (NSString* enumString in array)
+        {
+            [newList addObject:[FMCPrerecordedSpeech valueOf:enumString]];
         }
         return newList;
     }

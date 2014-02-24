@@ -24,6 +24,9 @@ FMCTextFieldName* FMCTextFieldName_audioPassThruDisplayText1 = nil;
 FMCTextFieldName* FMCTextFieldName_audioPassThruDisplayText2 = nil;
 FMCTextFieldName* FMCTextFieldName_sliderHeader = nil;
 FMCTextFieldName* FMCTextFieldName_sliderFooter = nil;
+FMCTextFieldName* FMCTextFieldName_menuName = nil;
+FMCTextFieldName* FMCTextFieldName_secondaryText = nil;
+FMCTextFieldName* FMCTextFieldName_tertiaryText = nil;
 
 NSMutableArray* FMCTextFieldName_values = nil;
 @implementation FMCTextFieldName
@@ -40,27 +43,29 @@ NSMutableArray* FMCTextFieldName_values = nil;
 +(NSMutableArray*) values {
     if (FMCTextFieldName_values == nil) {
         FMCTextFieldName_values = [[NSMutableArray alloc] initWithObjects:
-                FMCTextFieldName.mainField1,
-                FMCTextFieldName.mainField2,
-                FMCTextFieldName.mainField3,
-                FMCTextFieldName.mainField4,
-                FMCTextFieldName.statusBar,
-                FMCTextFieldName.mediaClock,
-                FMCTextFieldName.mediaTrack,
-                FMCTextFieldName.alertText1,
-                FMCTextFieldName.alertText2,
-                FMCTextFieldName.alertText3,
-                FMCTextFieldName.scrollableMessageBody,
-                FMCTextFieldName.initialInteractionText,
-                FMCTextFieldName.navigationText1,
-                FMCTextFieldName.navigationText2,
-                FMCTextFieldName.ETA,
-                FMCTextFieldName.totalDistance,
-                FMCTextFieldName.audioPassThruDisplayText1,
-                FMCTextFieldName.audioPassThruDisplayText2,
-                FMCTextFieldName.sliderHeader,
-                FMCTextFieldName.sliderFooter,
-                nil];
+                                   FMCTextFieldName.mainField1,
+                                   FMCTextFieldName.mainField2,
+                                   FMCTextFieldName.mainField3,
+                                   FMCTextFieldName.mainField4,
+                                   FMCTextFieldName.statusBar,
+                                   FMCTextFieldName.mediaClock,
+                                   FMCTextFieldName.mediaTrack,
+                                   FMCTextFieldName.alertText1,
+                                   FMCTextFieldName.alertText2,
+                                   FMCTextFieldName.alertText3,
+                                   FMCTextFieldName.scrollableMessageBody,
+                                   FMCTextFieldName.initialInteractionText,
+                                   FMCTextFieldName.navigationText1,
+                                   FMCTextFieldName.navigationText2,
+                                   FMCTextFieldName.ETA,
+                                   FMCTextFieldName.totalDistance,
+                                   FMCTextFieldName.audioPassThruDisplayText1,
+                                   FMCTextFieldName.audioPassThruDisplayText2,
+                                   FMCTextFieldName.sliderHeader,
+                                   FMCTextFieldName.menuName,
+                                   FMCTextFieldName.secondaryText,
+                                   FMCTextFieldName.tertiaryText,
+                                   nil];
     }
     return FMCTextFieldName_values;
 }
@@ -203,6 +208,27 @@ NSMutableArray* FMCTextFieldName_values = nil;
         FMCTextFieldName_sliderFooter = [[FMCTextFieldName alloc] initWithValue:@"sliderFooter"];
     }
     return FMCTextFieldName_sliderFooter;
+}
+
++(FMCTextFieldName*) menuName {
+    if (FMCTextFieldName_menuName == nil) {
+        FMCTextFieldName_menuName = [[FMCTextFieldName alloc] initWithValue:@"menuName"];
+    }
+    return FMCTextFieldName_menuName;
+}
+
++(FMCTextFieldName*) secondaryText {
+    if (FMCTextFieldName_secondaryText == nil) {
+        FMCTextFieldName_secondaryText = [[FMCTextFieldName alloc] initWithValue:@"secondaryText"];
+    }
+    return FMCTextFieldName_secondaryText;
+}
+
++(FMCTextFieldName*) tertiaryText {
+    if (FMCTextFieldName_tertiaryText == nil) {
+        FMCTextFieldName_tertiaryText = [[FMCTextFieldName alloc] initWithValue:@"tertiaryText"];
+    }
+    return FMCTextFieldName_tertiaryText;
 }
 
 @end

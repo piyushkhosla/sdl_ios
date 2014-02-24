@@ -25,6 +25,7 @@
 @property(assign) FMCPresetBankCapabilities* presetBankCapabilities;
 @property(assign) NSMutableArray* hmiZoneCapabilities;
 @property(assign) NSMutableArray* speechCapabilities;
+@property(assign) NSMutableArray* prerecordedSpeech;
 @property(assign) NSMutableArray* vrCapabilities;
 @property(assign) NSMutableArray* audioPassThruCapabilities;
 @property(assign) FMCVehicleType* vehicleType;

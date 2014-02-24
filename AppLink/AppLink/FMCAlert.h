@@ -16,6 +16,7 @@
 @property(assign) NSMutableArray* ttsChunks;
 @property(assign) NSNumber* duration;
 @property(assign) NSNumber* playTone;
+@property(assign) NSNumber* progressIndicator;
 @property(assign) NSMutableArray* softButtons;
 
 @end

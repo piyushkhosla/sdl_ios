@@ -14,7 +14,9 @@
 
 @property(assign) FMCDisplayType* displayType;
 @property(assign) NSMutableArray* textFields;
+@property(assign) NSMutableArray* imageFields;
 @property(assign) NSMutableArray* mediaClockFormats;
 @property(assign) NSNumber* graphicSupported;
+@property(assign) NSNumber* numCustomPresetsAvailable;
 
 @end

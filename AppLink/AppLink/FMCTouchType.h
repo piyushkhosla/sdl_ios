@@ -2,12 +2,20 @@
 //  FMCTouchType.h
 //  AppLink
 //
-//  Created by Yates, Hugh (H.R.) on 2/19/14.
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 //
 //
 
-#import <AppLink/AppLink.h>
+#import <Foundation/Foundation.h>
+#import <AppLink/FMCEnum.h>
 
 @interface FMCTouchType : FMCEnum
 
++ (NSMutableArray*)values;
++ (FMCTouchType*)valueOf:(NSString*) value;
++ (FMCTouchType*)BEGIN;
++ (FMCTouchType*)MOVE;
++ (FMCTouchType*)END;
+
 @end
+

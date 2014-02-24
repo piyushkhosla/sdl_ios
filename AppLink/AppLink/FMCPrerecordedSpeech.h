@@ -1,13 +1,19 @@
 //
 //  FMCPrerecordedSpeech.h
-//  AppLink
-//
-//  Created by Yates, Hugh (H.R.) on 2/18/14.
-//
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 //
 
-#import <AppLink/AppLink.h>
+#import <Foundation/Foundation.h>
+#import <AppLink/FMCEnum.h>
 
 @interface FMCPrerecordedSpeech : FMCEnum
+
++ (NSMutableArray*)values;
++ (FMCPrerecordedSpeech*)valueOf:(NSString*) value;
++ (FMCPrerecordedSpeech*)HELP_JINGLE;
++ (FMCPrerecordedSpeech*)INITIAL_JINGLE;
++ (FMCPrerecordedSpeech*)LISTEN_JINGLE;
++ (FMCPrerecordedSpeech*)POSITIVE_JINGLE;
++ (FMCPrerecordedSpeech*)NEGATIVE_JINGLE;
 
 @end

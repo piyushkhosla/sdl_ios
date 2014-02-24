@@ -13,6 +13,7 @@
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
 @property(assign) NSNumber* choiceID;
+@property(assign) NSString* manualTextEntry;
 @property(assign) FMCTriggerSource* triggerSource;
 
 @end

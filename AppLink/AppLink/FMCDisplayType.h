@@ -17,6 +17,7 @@
 +(FMCDisplayType*) GEN2_4_DMA;
 +(FMCDisplayType*) GEN2_8_DMA;
 +(FMCDisplayType*) GEN2_4_HUD;
++(FMCDisplayType*) GEN3_8_INCH;
 +(FMCDisplayType*) MFD3;
 +(FMCDisplayType*) MFD4;
 +(FMCDisplayType*) MFD5;

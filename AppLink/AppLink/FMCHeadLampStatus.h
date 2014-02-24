@@ -4,6 +4,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCMessage.h>
+#import <AppLink/FMCAmbientLightStatus.h>
 
 @interface FMCHeadLampStatus : FMCRPCStruct {}
 
@@ -12,5 +13,6 @@
 
 @property(assign) NSNumber* lowBeamsOn;
 @property(assign) NSNumber* highBeamsOn;
+@property(assign) FMCAmbientLightStatus* ambientLightSensorStatus;
 
 @end

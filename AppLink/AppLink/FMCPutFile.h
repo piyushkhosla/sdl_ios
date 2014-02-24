@@ -15,5 +15,8 @@
 @property(assign) NSString* syncFileName;
 @property(assign) FMCFileType* fileType;
 @property(assign) NSNumber* persistentFile;
+@property(assign) NSNumber* systemFile;
+@property(assign) NSNumber* offset;
+@property(assign) NSNumber* length;
 
 @end

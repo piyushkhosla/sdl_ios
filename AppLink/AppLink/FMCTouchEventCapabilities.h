@@ -1,13 +1,14 @@
-//
 //  FMCTouchEventCapabilities.h
-//  AppLink
-//
-//  Created by Yates, Hugh (H.R.) on 2/20/14.
-//
-//
+//  SyncProxy
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <AppLink/AppLink.h>
+#import <Foundation/Foundation.h>
+#import <AppLink/FMCRPCMessage.h>
 
 @interface FMCTouchEventCapabilities : FMCRPCStruct
+
+@property (assign) NSNumber* pressAvailable;
+@property (assign) NSNumber* multiTouchAvailable;
+@property (assign) NSNumber* doublePressAvailable;
 
 @end

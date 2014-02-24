@@ -30,5 +30,8 @@
 +(FMCTextFieldName*) audioPassThruDisplayText2;
 +(FMCTextFieldName*) sliderHeader;
 +(FMCTextFieldName*) sliderFooter;
++(FMCTextFieldName*) menuName;
++(FMCTextFieldName*) secondaryText;
++(FMCTextFieldName*) tertiaryText;
 
 @end

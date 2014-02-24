@@ -1,13 +1,15 @@
-//
 //  FMCTouchEvent.h
-//  AppLink
-//
-//  Created by Yates, Hugh (H.R.) on 2/20/14.
-//
-//
+//  SyncProxy
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <AppLink/AppLink.h>
+#import <Foundation/Foundation.h>
+#import <AppLink/FMCRPCMessage.h>
+#import <AppLink/FMCTouchCoord.h>
 
 @interface FMCTouchEvent : FMCRPCStruct
+
+@property (assign) NSNumber* touchEventId;
+@property (assign) NSNumber* timestamp;
+@property (assign) FMCTouchCoord* coord;
 
 @end
