@@ -16,7 +16,7 @@
 #import <AppLink/FMCSiphonServer.h>
 #import <AppLink/FMCSyncProxy.h>
 
-#define VERSION_STRING @"AppLink-20140312-223905-LOCAL-iOS"
+#define VERSION_STRING @"##Version##"
 
 @interface FMCCallback : NSObject {
 	NSObject* target;
@@ -630,15 +630,14 @@ const int POLICIES_CORRELATION_ID = 65535;
             if(len > 0)
             {
                 NSData* data = [NSData dataWithBytes:buf length:len];
-                FMCPutFile* putFileRPCRequest = (FMCPutFile*)objc_getAssociatedObject(stream, @"FMCPutFile");
-                [putFileRPCRequest setBulkData:data];
-                [putFileRPCRequest setLength:[NSNumber numberWithUnsignedInt:len]];
-
                 NSUInteger baseOffset = [(NSNumber*)objc_getAssociatedObject(stream, @"BaseOffset") unsignedIntegerValue];
                 NSUInteger newOffset = baseOffset + currentStreamOffset;
-                [putFileRPCRequest setOffset:[NSNumber numberWithUnsignedInteger:newOffset]];
 
-                NSLog(@"Sending streamed putFile with %u bytes and offset = %u data = %@", len, newOffset, data);
+                FMCPutFile* putFileRPCRequest = (FMCPutFile*)objc_getAssociatedObject(stream, @"FMCPutFile");
+                [putFileRPCRequest setOffset:[NSNumber numberWithUnsignedInteger:newOffset]];
+                [putFileRPCRequest setLength:[NSNumber numberWithUnsignedInt:len]];
+                [putFileRPCRequest setBulkData:data];
+
                 [self sendRPCRequest:putFileRPCRequest];
 
             }
@@ -656,7 +655,7 @@ const int POLICIES_CORRELATION_ID = 65535;
             [putFileRPCRequest release];
             NSNumber* baseOffset = (NSNumber*)objc_getAssociatedObject(stream, @"BaseOffset");
             [baseOffset release];
-            
+
             // Cleanup the stream
             [stream close];
             [stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
