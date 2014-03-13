@@ -16,7 +16,7 @@
 #import <AppLink/FMCSiphonServer.h>
 #import <AppLink/FMCSyncProxy.h>
 
-#define VERSION_STRING @"##Version##"
+#define VERSION_STRING @"AppLink-20140312-223905-LOCAL-iOS"
 
 @interface FMCCallback : NSObject {
 	NSObject* target;
@@ -598,6 +598,82 @@ const int POLICIES_CORRELATION_ID = 65535;
     //TODO:ENDDEBUGOUTS
     
     [connection release];
+}
+
+
+#pragma mark - PutFile Streaming
+- (void)putFileStream:(NSInputStream*)inputStream :(FMCPutFile*)putFileRPCRequest
+{
+    [inputStream retain];
+    [putFileRPCRequest retain];
+
+    inputStream.delegate = self;
+    objc_setAssociatedObject(inputStream, @"FMCPutFile", putFileRPCRequest, OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(inputStream, @"BaseOffset", [putFileRPCRequest offset], OBJC_ASSOCIATION_RETAIN);
+
+    [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [inputStream open];
+}
+
+- (void)stream:(NSStream *)stream handleEvent:(NSStreamEvent)eventCode
+{
+
+    switch(eventCode)
+    {
+        case NSStreamEventHasBytesAvailable:
+        {
+            NSUInteger currentStreamOffset = [[stream propertyForKey:NSStreamFileCurrentOffsetKey] unsignedIntegerValue];
+
+            const int bufferSize = 1024;
+            uint8_t buf[bufferSize];
+            int len = [(NSInputStream *)stream read:buf maxLength:bufferSize];
+            if(len > 0)
+            {
+                NSData* data = [NSData dataWithBytes:buf length:len];
+                FMCPutFile* putFileRPCRequest = (FMCPutFile*)objc_getAssociatedObject(stream, @"FMCPutFile");
+                [putFileRPCRequest setBulkData:data];
+                [putFileRPCRequest setLength:[NSNumber numberWithUnsignedInt:len]];
+
+                NSUInteger baseOffset = [(NSNumber*)objc_getAssociatedObject(stream, @"BaseOffset") unsignedIntegerValue];
+                NSUInteger newOffset = baseOffset + currentStreamOffset;
+                [putFileRPCRequest setOffset:[NSNumber numberWithUnsignedInteger:newOffset]];
+
+                NSLog(@"Sending streamed putFile with %u bytes and offset = %u data = %@", len, newOffset, data);
+                [self sendRPCRequest:putFileRPCRequest];
+
+            }
+            else if (len < 0)
+            {
+                [FMCDebugTool logInfo:@"Stream read failure."];
+            }
+
+            break;
+        }
+        case NSStreamEventEndEncountered:
+        {
+            // Stream done. Release the custom property on it.
+            FMCPutFile* putFileRPCRequest = (FMCPutFile*)objc_getAssociatedObject(stream, @"FMCPutFile");
+            [putFileRPCRequest release];
+            NSNumber* baseOffset = (NSNumber*)objc_getAssociatedObject(stream, @"BaseOffset");
+            [baseOffset release];
+            
+            // Cleanup the stream
+            [stream close];
+            [stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+            [stream release];
+
+            break;
+        }
+        case NSStreamEventErrorOccurred:
+        {
+            [FMCDebugTool logInfo:@"Stream Event: Error"];
+            break;
+        }
+        default:
+        {
+            break;
+        }
+    }
 }
 
 @end

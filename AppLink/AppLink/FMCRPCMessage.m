@@ -146,9 +146,10 @@
 -(void) setBulkData:(NSData*) bulkData
 {
     if(bulkData != _bulkData)
+    {
         [_bulkData release];
-
-    _bulkData = [NSData dataWithData:bulkData];
+        _bulkData = [[NSData dataWithData:bulkData] retain];
+    }
 }
 
 -(void) dealloc {
