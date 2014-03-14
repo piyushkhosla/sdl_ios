@@ -11,7 +11,7 @@
 #import <AppLink/FMCSyncTransport.h>
 #import <AppLink/FMCExternalLibrary.h>
 
-@interface FMCSyncProxy : NSObject<FMCProtocolListener, NSURLConnectionDelegate> {
+@interface FMCSyncProxy : NSObject<FMCProtocolListener, NSURLConnectionDelegate, NSStreamDelegate> {
     Byte _version;
     
 	NSObject<FMCSyncTransport>* transport;
@@ -50,5 +50,7 @@
 
 -(NSObject<FMCSyncTransport>*)getTransport;
 -(NSObject<FMCProtocol>*)getProtocol;
+
+- (void)putFileStream:(NSInputStream*)inputStream :(FMCPutFile*)putFileRPCRequest;
 
 @end

@@ -75,10 +75,20 @@
  */
 @property(assign) NSMutableArray* mediaClockFormats;
 /**
+ * @abstract an array of FMCImageField elements
+ * @discussion A set of all fields that support images. See FMCImageField.
+ */
+@property(assign) NSMutableArray* imageFields;
+/**
  * @abstract the display's persistent screen supports.
  * @discussion
  * Since <b>AppLink 2.0</b>
  */
 @property(assign) NSNumber* graphicSupported;
+/**
+ * @abstract Number of presets the screen supports.
+ * @discussion The number of on-screen custom presets available (if any)
+ */
+@property(assign) NSNumber* numCustomPresetsAvailable;
 
 @end

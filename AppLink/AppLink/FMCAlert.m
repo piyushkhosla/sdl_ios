@@ -101,6 +101,23 @@
     return [parameters objectForKey:NAMES_playTone];
 }
 
+- (void)setProgressIndicator:(NSNumber*)value
+{
+    if (value)
+    {
+        [parameters setObject:value forKey:NAMES_progressIndicator];
+    }
+    else
+    {
+        [parameters removeObjectForKey:NAMES_progressIndicator];
+    }
+}
+
+- (NSNumber*)progressIndicator
+{
+    return [parameters objectForKey:NAMES_progressIndicator];
+}
+
 -(void) setSoftButtons:(NSMutableArray *) softButtons {
     if (softButtons != nil) {
         [parameters setObject:softButtons forKey:NAMES_softButtons];

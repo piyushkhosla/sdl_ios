@@ -42,4 +42,21 @@
     return [store objectForKey:NAMES_highBeamsOn];
 }
 
+- (void)setAmbientLightSensorStatus:(FMCAmbientLightStatus*)ambientLightSensorStatus
+{
+    if (ambientLightSensorStatus)
+    {
+        [store setObject:ambientLightSensorStatus forKey:NAMES_ambientLightSensorStatus];
+    }
+    else
+    {
+        [store removeObjectForKey:NAMES_ambientLightSensorStatus];
+    }
+}
+
+- (FMCAmbientLightStatus*)ambientLightSensorStatus
+{
+    return [store objectForKey:NAMES_ambientLightSensorStatus];
+}
+
 @end

@@ -30,6 +30,18 @@
     return [parameters objectForKey:NAMES_choiceID];
 }
 
+-(void) setManualTextEntry:(NSNumber*) manualTextEntry {
+    if (manualTextEntry != nil) {
+        [parameters setObject:manualTextEntry forKey:NAMES_manualTextEntry];
+    } else {
+        [parameters removeObjectForKey:NAMES_manualTextEntry];
+    }
+}
+
+-(NSNumber*) manualTextEntry {
+    return [parameters objectForKey:NAMES_manualTextEntry];
+}
+
 -(void) setTriggerSource:(FMCTriggerSource*) triggerSource {
     if (triggerSource != nil) {
         [parameters setObject:triggerSource forKey:NAMES_triggerSource];

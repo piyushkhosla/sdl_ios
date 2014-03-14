@@ -54,5 +54,15 @@
  @result FMCFileType with value of <font color=gray><i> BINARY </i></font>
  */
 +(FMCFileType*) BINARY;
+/*!
+ @abstract file type : AAC
+ @result FMCFileType with value of <font color=gray><i> AUDIO_AAC </i></font>
+ */
++(FMCFileType*) AUDIO_AAC;
+/*!
+ @abstract file type : JSON
+ @result FMCFileType with value of <font color=gray><i> JSON </i></font>
+ */
++(FMCFileType*) JSON;
 
 @end

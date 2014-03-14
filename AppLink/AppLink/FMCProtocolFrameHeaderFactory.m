@@ -84,12 +84,13 @@
 	return header;
 }
 
-+(FMCProtocolFrameHeader*) consecutiveFrameWithSessionType:(FMCSessionType) sessionType sessionID:(Byte) sessionID dataSize:(NSInteger) dataSize messageID:(UInt32)messageID version:(Byte)version {
++(FMCProtocolFrameHeader*) consecutiveFrameWithSessionType:(FMCSessionType) sessionType sessionID:(Byte) sessionID frameData:(Byte) frameData dataSize:(NSInteger) dataSize messageID:(UInt32)messageID version:(Byte)version {
 	FMCProtocolFrameHeader* header = [[[FMCProtocolFrameHeader alloc] init] autorelease];
     header._version = version;
 	header._sessionType = sessionType;
 	header._sessionID = sessionID;
 	header._frameType = FMCFrameType_Consecutive;
+    header._frameData = frameData;
 	header._dataSize = dataSize;
     header._messageID = messageID;
 	

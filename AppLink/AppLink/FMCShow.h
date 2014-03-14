@@ -189,6 +189,16 @@
  */
 @property(assign) FMCImage* graphic;
 /**
+ * @abstract An image to be shown on supported displays
+ *
+ * @discussion The value representing the image shown on supported displays
+ *            <p>
+ *            <b>Notes: </b>If omitted on supported displays, the displayed
+ *            graphic shall not change<br/>
+ * @since AppLink 2.0
+ */
+@property(assign) FMCImage* secondaryGraphic;
+/**
  * @abstract The the Soft buttons defined by the App
  *
  * @discussion A Vector value represemting the Soft buttons defined by the

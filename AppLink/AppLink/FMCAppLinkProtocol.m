@@ -28,6 +28,7 @@
         
         _version = 1;
         _messageID = 0;
+        _consecFrameNumber = 0;
 	}
 	return self;
 }
@@ -321,13 +322,27 @@
             
             for (int i = 0; i < frameCount; i++) {
                 int bytesToWrite = protocolMsg._data.length - currentOffset;
-                if (bytesToWrite > maxDataSize) { bytesToWrite = maxDataSize
-                    ; }
-                FMCProtocolFrameHeader *consecHeader = [FMCProtocolFrameHeaderFactory consecutiveFrameWithSessionType:sessionType sessionID:sessionID dataSize:bytesToWrite messageID:_messageID version:_version];
+                if (bytesToWrite > maxDataSize) {
+                    bytesToWrite = maxDataSize;
+                }
+                
+                _consecFrameNumber++;
+
+                if (_consecFrameNumber == 0) {
+                    _consecFrameNumber++;
+                }
+
+                if ( (i+1) >= frameCount) {
+                    _consecFrameNumber = FMCFrameData_ConsecutiveLastFrame;
+                }
+
+                FMCProtocolFrameHeader *consecHeader = [FMCProtocolFrameHeaderFactory consecutiveFrameWithSessionType:sessionType sessionID:sessionID frameData:_consecFrameNumber dataSize:bytesToWrite messageID:_messageID version:_version];
                 [self sendFrameToTransport:consecHeader withData:protocolMsg._data offset:currentOffset length:bytesToWrite];
                 currentOffset += bytesToWrite;
-                
             }
+            
+            _consecFrameNumber = 0;
+
         }
 		
 	}

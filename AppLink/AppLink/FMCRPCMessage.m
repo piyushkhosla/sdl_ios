@@ -143,14 +143,12 @@
     return _bulkData;
 }
 
--(void) setBulkData:(NSData*) bulkData {
-    if (bulkData != nil) {
-        Byte* mallocPtr = malloc(bulkData.length);
-        if (mallocPtr == nil) {
-            @throw [NSException exceptionWithName:@"OutOfMemoryException" reason:@"malloc failed" userInfo:nil];
-        }
-        _bulkData = [[NSData alloc] initWithBytesNoCopy:mallocPtr length:bulkData.length];
-        memcpy((void*)_bulkData.bytes, bulkData, bulkData.length);
+-(void) setBulkData:(NSData*) bulkData
+{
+    if(bulkData != _bulkData)
+    {
+        [_bulkData release];
+        _bulkData = [[NSData dataWithData:bulkData] retain];
     }
 }
 

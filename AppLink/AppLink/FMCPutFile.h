@@ -46,5 +46,8 @@
  * omitted, the value will be set to false
  */
 @property(assign) NSNumber* persistentFile;
+@property(assign) NSNumber* systemFile;
+@property(assign) NSNumber* offset;
+@property(assign) NSNumber* length;
 
 @end

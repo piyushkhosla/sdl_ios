@@ -7,6 +7,7 @@
 #import <AppLink/FMCMediaClockFormat.h>
 #import <AppLink/FMCNames.h>
 #import <AppLink/FMCTextField.h>
+#import <AppLink/FMCImageField.h>
 
 @implementation FMCDisplayCapabilities
 
@@ -58,6 +59,27 @@
     }
 }
 
+-(void) setImageFields:(NSMutableArray*) imageFields {
+    if (imageFields != nil) {
+        [store setObject:imageFields forKey:NAMES_imageFields];
+    } else {
+        [store removeObjectForKey:NAMES_imageFields];
+    }
+}
+
+-(NSMutableArray*) imageFields {
+    NSMutableArray* array = [store objectForKey:NAMES_imageFields];
+    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCImageField.class]) {
+        return array;
+    } else {
+        NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
+        for (NSDictionary* dict in array) {
+            [newList addObject:[[[FMCImageField alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+        }
+        return newList;
+    }
+}
+
 -(void) setMediaClockFormats:(NSMutableArray*) mediaClockFormats {
     if (mediaClockFormats != nil) {
         [store setObject:mediaClockFormats forKey:NAMES_mediaClockFormats];
@@ -90,5 +112,18 @@
 -(NSNumber*) graphicSupported {
     return [store objectForKey:NAMES_graphicSupported];
 }
+
+-(void) setNumCustomPresetsAvailable:(NSNumber*) numCustomPresetsAvailable {
+    if (numCustomPresetsAvailable != nil) {
+        [store setObject:numCustomPresetsAvailable forKey:NAMES_numCustomPresetsAvailable];
+    } else {
+        [store removeObjectForKey:NAMES_numCustomPresetsAvailable];
+    }
+}
+
+-(NSNumber*) numCustomPresetsAvailable {
+    return [store objectForKey:NAMES_numCustomPresetsAvailable];
+}
+
 
 @end

@@ -58,5 +58,11 @@
  *            </ul>
  */
 @property(assign) FMCUpdateMode* updateMode;
+/**
+ * @abstract An END time of type FMCStartTime, specifying hour, minute, second values
+ *
+ * @discussion An FMCStartTime object with specifying hour, minute, second values
+ */
+@property(assign) FMCStartTime* endTime;
 
 @end

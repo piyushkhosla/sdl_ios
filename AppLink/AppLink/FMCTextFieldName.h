@@ -140,5 +140,8 @@
  * @since <font color=red><b> AppLink 2.0 </b></font>
  */
 +(FMCTextFieldName*) sliderFooter;
++(FMCTextFieldName*) menuName;
++(FMCTextFieldName*) secondaryText;
++(FMCTextFieldName*) tertiaryText;
 
 @end

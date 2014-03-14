@@ -11,6 +11,7 @@ FMCDisplayType* FMCDisplayType_NGN = nil;
 FMCDisplayType* FMCDisplayType_GEN2_4_DMA = nil;
 FMCDisplayType* FMCDisplayType_GEN2_8_DMA = nil;
 FMCDisplayType* FMCDisplayType_GEN2_4_HUD = nil;
+FMCDisplayType* FMCDisplayType_GEN3_8_INCH = nil;
 FMCDisplayType* FMCDisplayType_MFD3 = nil;
 FMCDisplayType* FMCDisplayType_MFD4 = nil;
 FMCDisplayType* FMCDisplayType_MFD5 = nil;
@@ -31,17 +32,18 @@ NSMutableArray* FMCDisplayType_values = nil;
 +(NSMutableArray*) values {
     if (FMCDisplayType_values == nil) {
         FMCDisplayType_values = [[NSMutableArray alloc] initWithObjects:
-                FMCDisplayType.CID,
-                FMCDisplayType.TYPE2,
-                FMCDisplayType.TYPE5,
-                FMCDisplayType.NGN,
-                FMCDisplayType.GEN2_4_DMA,
-                FMCDisplayType.GEN2_8_DMA,
-                FMCDisplayType.GEN2_4_HUD,
-                FMCDisplayType.MFD3,
-                FMCDisplayType.MFD4,
-                FMCDisplayType.MFD5,
-                nil];
+                                 FMCDisplayType.CID,
+                                 FMCDisplayType.TYPE2,
+                                 FMCDisplayType.TYPE5,
+                                 FMCDisplayType.NGN,
+                                 FMCDisplayType.GEN2_4_DMA,
+                                 FMCDisplayType.GEN2_8_DMA,
+                                 FMCDisplayType.GEN2_4_HUD,
+                                 FMCDisplayType.GEN3_8_INCH,
+                                 FMCDisplayType.MFD3,
+                                 FMCDisplayType.MFD4,
+                                 FMCDisplayType.MFD5,
+                                 nil];
     }
     return FMCDisplayType_values;
 }
@@ -89,10 +91,17 @@ NSMutableArray* FMCDisplayType_values = nil;
 }
 
 +(FMCDisplayType*) GEN2_4_HUD {
-    	if (FMCDisplayType_GEN2_4_HUD == nil) {
-        		FMCDisplayType_GEN2_4_HUD = [[FMCDisplayType alloc] initWithValue:@"GEN2_4_HUD"];
-    	}
-    	return FMCDisplayType_GEN2_4_HUD;
+    if (FMCDisplayType_GEN2_4_HUD == nil) {
+        FMCDisplayType_GEN2_4_HUD = [[FMCDisplayType alloc] initWithValue:@"GEN2_4_HUD"];
+    }
+    return FMCDisplayType_GEN2_4_HUD;
+}
+
++(FMCDisplayType*) GEN3_8_INCH {
+    if (FMCDisplayType_GEN3_8_INCH == nil) {
+        FMCDisplayType_GEN3_8_INCH = [[FMCDisplayType alloc] initWithValue:@"GEN3_8-INCH"];
+    }
+    return FMCDisplayType_GEN3_8_INCH;
 }
 
 +(FMCDisplayType*) MFD3 {

@@ -129,6 +129,7 @@
  *            </ul>
  * @since AppLink 2.0
  */
+@property(assign) NSNumber* progressIndicator;
 @property(assign) NSMutableArray* softButtons;
 
 @end

@@ -7,8 +7,6 @@
 #import <AppLink/FMCMenuParams.h>
 #import <AppLink/FMCTTSChunkFactory.h>
 
-#define NGN_MEDIA_SCREEN_APP_NAME_MAX_LENGTH 5
-
 @implementation FMCRPCRequestFactory
 
 //***** AddCommand *****
@@ -338,11 +336,7 @@ correlationID{
     msg.syncMsgVersion = version;
 	msg.appName = appName;
     msg.ttsName = ttsName;
-	NSString* ngnMediaAppName = [[appName copy] autorelease];
-	if (ngnMediaAppName.length > NGN_MEDIA_SCREEN_APP_NAME_MAX_LENGTH) {
-		ngnMediaAppName = [ngnMediaAppName substringToIndex:NGN_MEDIA_SCREEN_APP_NAME_MAX_LENGTH];
-	}
-	msg.ngnMediaScreenAppName = ngnMediaAppName;
+	msg.ngnMediaScreenAppName = appName;
 	msg.vrSynonyms = vrSynonyms;
 	msg.isMediaApplication = isMediaApp;
     msg.languageDesired = languageDesired;

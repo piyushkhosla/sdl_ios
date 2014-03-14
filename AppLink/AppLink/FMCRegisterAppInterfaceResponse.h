@@ -87,6 +87,10 @@
  */
 @property(assign) NSMutableArray* vrCapabilities;
 /**
+ * @abstract Gets/Sets prerecordedSpeech when application interface is registered.
+ */
+@property(assign) NSMutableArray* prerecordedSpeech;
+/**
  * @abstract Gets/Sets AudioPassThruCapabilities when application interface is registered.
  */
 @property(assign) NSMutableArray* audioPassThruCapabilities;

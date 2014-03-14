@@ -33,5 +33,9 @@
  * @abstract A <I>TriggerSource</I> object which will be shown in the HMI</p>
  */
 @property(assign) FMCTriggerSource* triggerSource;
+/**
+ * @abstract A string containing the entered text</p>
+ */
+@property(assign) NSString* manualTextEntry;
 
 @end

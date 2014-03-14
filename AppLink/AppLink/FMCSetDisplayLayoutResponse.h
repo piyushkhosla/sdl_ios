@@ -4,6 +4,10 @@
 
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCResponse.h>
+#import <AppLink/FMCDisplayCapabilities.h>
+#import <AppLink/FMCButtonCapabilities.h>
+#import <AppLink/FMCSoftButtonCapabilities.h>
+#import <AppLink/FMCPresetBankCapabilities.h>
 
 /**
  * Set Display Layout Response is sent, when SetDisplayLayout has been called
@@ -16,11 +20,10 @@
  * @abstract Constructs a new FMCSetDisplayLayoutResponse object
  */
 -(id) init;
-/**
- * @abstract Constructs a new FMCSetDisplayLayoutResponse object indicated by the NSMutableDictionary
- * parameter
- * @param dict The NSMutableDictionary to use
- */
--(id) initWithDictionary:(NSMutableDictionary*) dict;
+
+@property (assign) FMCDisplayCapabilities* displayCapabilities;
+@property (assign) FMCButtonCapabilities* buttonCapabilities;
+@property (assign) FMCSoftButtonCapabilities* softButtonCapabilities;
+@property (assign) FMCPresetBankCapabilities* presetBankCapabilities;
 
 @end

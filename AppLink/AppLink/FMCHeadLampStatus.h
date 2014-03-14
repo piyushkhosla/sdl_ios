@@ -4,6 +4,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCMessage.h>
+#import <AppLink/FMCAmbientLightStatus.h>
 
 /**
  * Status of the head lamps
@@ -31,5 +32,6 @@
  * @abstract A boolean value. Status of the high beam lamps.
  */
 @property(assign) NSNumber* highBeamsOn;
+@property(assign) FMCAmbientLightStatus* ambientLightSensorStatus;
 
 @end
