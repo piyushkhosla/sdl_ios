@@ -46,8 +46,19 @@
  * omitted, the value will be set to false
  */
 @property(assign) NSNumber* persistentFile;
+/**
+ * @abstract Indicates if the file is meant to be passed thru core to elsewhere on the system.
+ If set to TRUE, then the system will instead pass the data thru as it arrives to a predetermined area outside of core.
+ If omitted, the value will be set to false.
+ */
 @property(assign) NSNumber* systemFile;
+/**
+ * @abstract Optional offset in bytes for resuming partial data chunks.
+ */
 @property(assign) NSNumber* offset;
+/**
+ * @abstract Optional length in bytes for resuming partial data chunks
+ */
 @property(assign) NSNumber* length;
 
 @end
