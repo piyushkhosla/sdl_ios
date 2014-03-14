@@ -63,7 +63,7 @@
 @property(assign) NSMutableArray* sliderFooter;
 /**
  * @abstract An App defined timeout
- * @discussion An Integer value representing an App defined timeout
+ * @discussion An Integer value representing an App defined timeout in milliseconds
  *            <p>
  *            <b>Notes: </b>Minvalue=0; Maxvalue=65535; Defvalue=10000
  */

@@ -36,9 +36,9 @@
  */
 @property(assign) NSString* scrollableMessageBody;
 /**
- * @abstract Gets/Sets an App defined timeout. Indicates how long of a timeout from the
+ * @abstract Gets/Sets an App defined timeout. Indicates how long of a timeout in milliseconds from the
  * last action
- * @discussion An Integer value representing an App defined timeout
+ * @discussion An Integer value representing an App defined timeout in milliseconds
  *            <p>
  *            <b>Notes</b>:Minval=0; Maxval=65535;Default=30000
  */
