@@ -150,10 +150,11 @@
  */
 @property(assign) NSString* statusBar;
 /**
- * @abstract The value for the MediaClock field using a format described in the
+ * @abstract This property is deprecated use SetMediaClockTimer instead.
+ * <p> The value for the MediaClock field using a format described in the
  * MediaClockFormat enumeration
  *
- * @discussion A String value for the MdaiaClock
+ * @discussion A String value for the MediaClock
  *            <p>
  *            <b>Notes: </b><br/>
  *            <ul>
