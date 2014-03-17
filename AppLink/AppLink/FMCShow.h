@@ -20,7 +20,7 @@
 @property(assign) NSString* mainField4;
 @property(assign) FMCTextAlignment* alignment;
 @property(assign) NSString* statusBar;
-@property(assign) NSString* mediaClock;
+@property(assign) NSString* mediaClock DEPRECATED_MSG_ATTRIBUTE("Use SetMediaClockTimer instead.");
 @property(assign) NSString* mediaTrack;
 @property(assign) FMCImage* graphic;
 @property(assign) FMCImage* secondaryGraphic;
