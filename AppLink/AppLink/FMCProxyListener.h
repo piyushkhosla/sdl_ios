@@ -26,6 +26,7 @@
 #import <AppLink/FMCOnHMIStatus.h>
 #import <AppLink/FMCOnLanguageChange.h>
 #import <AppLink/FMCOnPermissionsChange.h>
+#import <AppLink/FMCOnSystemRequest.h>
 #import <AppLink/FMCOnVehicleData.h>
 #import <AppLink/FMCPerformAudioPassThruResponse.h>
 #import <AppLink/FMCPerformInteractionResponse.h>
@@ -78,6 +79,7 @@
 -(void) onOnCommand:(FMCOnCommand*) notification;
 -(void) onOnLanguageChange:(FMCOnLanguageChange*) notification;
 -(void) onOnPermissionsChange:(FMCOnPermissionsChange*) notification;
+-(void) onOnSystemRequest:(FMCOnSystemRequest*) notification;
 -(void) onOnVehicleData:(FMCOnVehicleData*) notification;
 -(void) onPerformAudioPassThruResponse:(FMCPerformAudioPassThruResponse*) response;
 -(void) onPerformInteractionResponse:(FMCPerformInteractionResponse*) response;

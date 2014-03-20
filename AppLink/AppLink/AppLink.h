@@ -100,6 +100,7 @@
 #import <AppLink/FMCOnHMIStatus.h>
 #import <AppLink/FMCOnLanguageChange.h>
 #import <AppLink/FMCOnPermissionsChange.h>
+#import <AppLink/FMCOnSystemRequest.h>
 #import <AppLink/FMCParameterPermissions.h>
 #import <AppLink/FMCPerformAudioPassThru.h>
 #import <AppLink/FMCPerformAudioPassThruResponse.h>
@@ -146,6 +147,8 @@
 #import <AppLink/FMCSyncMsgVersion.h>
 #import <AppLink/FMCSystemAction.h>
 #import <AppLink/FMCSystemContext.h>
+#import <AppLink/FMCSystemRequest.h>
+#import <AppLink/FMCSystemRequestResponse.h>
 #import <AppLink/FMCTextAlignment.h>
 #import <AppLink/FMCTextField.h>
 #import <AppLink/FMCTextFieldName.h>

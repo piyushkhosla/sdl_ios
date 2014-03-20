@@ -216,6 +216,7 @@
 #define NAMES_reason @"reason"
 #define NAMES_RegisterAppInterface @"RegisterAppInterface"
 #define NAMES_request @"request"
+#define NAMES_requestType @"requestType"
 #define NAMES_reserved @"reserved"
 #define NAMES_ResetGlobalProperties @"ResetGlobalProperties"
 #define NAMES_resolutionHeight @"resolutionHeight"
