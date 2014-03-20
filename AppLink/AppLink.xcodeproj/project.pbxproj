@@ -424,10 +424,10 @@
 		E9A2C1DA18B3F21600D8F453 /* FMCPrerecordedSpeech.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A2C1D818B3F21600D8F453 /* FMCPrerecordedSpeech.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9A2C1DB18B3F21600D8F453 /* FMCPrerecordedSpeech.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A2C1D918B3F21600D8F453 /* FMCPrerecordedSpeech.m */; };
 		E9FAACE218D91A65005D2563 /* FMCSystemRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FAACE118D91A65005D2563 /* FMCSystemRequest.m */; };
-		E9FAACE318D9CFFA005D2563 /* FMCSystemRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = E9FAACE018D91883005D2563 /* FMCSystemRequest.h */; };
-		E9FAACE618D9D85E005D2563 /* FMCSystemRequestResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = E9FAACE418D9D85E005D2563 /* FMCSystemRequestResponse.h */; };
+		E9FAACE318D9CFFA005D2563 /* FMCSystemRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = E9FAACE018D91883005D2563 /* FMCSystemRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9FAACE618D9D85E005D2563 /* FMCSystemRequestResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = E9FAACE418D9D85E005D2563 /* FMCSystemRequestResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9FAACE718D9D85E005D2563 /* FMCSystemRequestResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FAACE518D9D85E005D2563 /* FMCSystemRequestResponse.m */; };
-		E9FAACEA18D9DD41005D2563 /* FMCOnSystemRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = E9FAACE818D9DD41005D2563 /* FMCOnSystemRequest.h */; };
+		E9FAACEA18D9DD41005D2563 /* FMCOnSystemRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = E9FAACE818D9DD41005D2563 /* FMCOnSystemRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9FAACEB18D9DD41005D2563 /* FMCOnSystemRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FAACE918D9DD41005D2563 /* FMCOnSystemRequest.m */; };
 		FBAC28E1181FEAF4003210A2 /* FMCExternalLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = FBAC28E0181FEAF4003210A2 /* FMCExternalLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -1389,6 +1389,9 @@
 			files = (
 				597C04E217DEFF50003E6E1A /* FMCAbstractProtocol.h in Headers */,
 				597C04E417DEFF50003E6E1A /* FMCAbstractSyncTransport.h in Headers */,
+				E9FAACEA18D9DD41005D2563 /* FMCOnSystemRequest.h in Headers */,
+				E9FAACE618D9D85E005D2563 /* FMCSystemRequestResponse.h in Headers */,
+				E9FAACE318D9CFFA005D2563 /* FMCSystemRequest.h in Headers */,
 				597C04E617DEFF50003E6E1A /* FMCAddCommand.h in Headers */,
 				597C04E817DEFF50003E6E1A /* FMCAddCommandResponse.h in Headers */,
 				597C04EA17DEFF50003E6E1A /* FMCAddSubMenu.h in Headers */,
@@ -1438,7 +1441,6 @@
 				597C054317DEFF50003E6E1A /* FMCDriverDistractionState.h in Headers */,
 				597C054917DEFF50003E6E1A /* FMCEncoder.h in Headers */,
 				597C054A17DEFF50003E6E1A /* FMCEndAudioPassThru.h in Headers */,
-				E9FAACEA18D9DD41005D2563 /* FMCOnSystemRequest.h in Headers */,
 				597C054C17DEFF50003E6E1A /* FMCEndAudioPassThruResponse.h in Headers */,
 				597C054E17DEFF50003E6E1A /* FMCEngineInfo.h in Headers */,
 				597C055017DEFF50003E6E1A /* FMCEnum.h in Headers */,
@@ -1580,12 +1582,10 @@
 				E9A2C1D318B3D9DD00D8F453 /* FMCLayoutMode.h in Headers */,
 				E901D34618B50F7C0011693E /* FMCAmbientLightStatus.h in Headers */,
 				E901D34E18B52D7D0011693E /* FMCRequestType.h in Headers */,
-				E9FAACE618D9D85E005D2563 /* FMCSystemRequestResponse.h in Headers */,
 				E901D34218B5006A0011693E /* FMCImageFieldName.h in Headers */,
 				597C058917DEFF50003E6E1A /* FMCNames.h in Headers */,
 				E901D34A18B52B350011693E /* FMCTouchType.h in Headers */,
 				597C066717DEFF50003E6E1A /* FMCWarningLightStatus.h in Headers */,
-				E9FAACE318D9CFFA005D2563 /* FMCSystemRequest.h in Headers */,
 				597C066917DEFF50003E6E1A /* FMCWiperStatus.h in Headers */,
 				597C066B17DEFF51003E6E1A /* FMCAppLinkProtocol.h in Headers */,
 				597C067A17DEFF51003E6E1A /* AppLink.h in Headers */,
