@@ -4,8 +4,8 @@
 
 #import <AppLink/FMCCreateInteractionChoiceSet.h>
 
-#import <AppLink/FMCChoice.h>
 #import <AppLink/FMCNames.h>
+#import <AppLink/FMCChoice.h>
 
 @implementation FMCCreateInteractionChoiceSet
 

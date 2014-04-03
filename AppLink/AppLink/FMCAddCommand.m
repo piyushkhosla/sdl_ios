@@ -55,7 +55,7 @@
     }
 }
 
--(NSMutableArray*) vrCommands { 
+-(NSMutableArray*) vrCommands {
     return [parameters objectForKey:NAMES_vrCommands];
 }
 

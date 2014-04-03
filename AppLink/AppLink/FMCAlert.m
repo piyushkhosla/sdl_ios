@@ -5,8 +5,8 @@
 #import <AppLink/FMCAlert.h>
 
 #import <AppLink/FMCNames.h>
-#import <AppLink/FMCSoftButton.h>
 #import <AppLink/FMCTTSChunk.h>
+#import <AppLink/FMCSoftButton.h>
 
 @implementation FMCAlert
 

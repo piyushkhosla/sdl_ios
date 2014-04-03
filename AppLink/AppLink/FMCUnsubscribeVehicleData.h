@@ -5,8 +5,6 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCRequest.h>
 
-#import <AppLink/FMCVehicleDataType.h>
-
 @interface FMCUnsubscribeVehicleData : FMCRPCRequest {}
 
 -(id) init;

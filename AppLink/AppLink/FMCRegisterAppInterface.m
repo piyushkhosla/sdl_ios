@@ -4,9 +4,9 @@
 
 #import <AppLink/FMCRegisterAppInterface.h>
 
-#import <AppLink/FMCAppHMIType.h>
 #import <AppLink/FMCNames.h>
 #import <AppLink/FMCTTSChunk.h>
+#import <AppLink/FMCAppHMIType.h>
 
 @implementation FMCRegisterAppInterface
 
@@ -90,7 +90,7 @@
     }
 }
 
--(NSMutableArray*) vrSynonyms { 
+-(NSMutableArray*) vrSynonyms {
     return [parameters objectForKey:NAMES_vrSynonyms];
 }
 
@@ -118,7 +118,7 @@
     NSObject* obj = [parameters objectForKey:NAMES_languageDesired];
     if ([obj isKindOfClass:FMCLanguage.class]) {
         return (FMCLanguage*)obj;
-    } else { 
+    } else {
         return [FMCLanguage valueOf:(NSString*)obj];
     }
 }

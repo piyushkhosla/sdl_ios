@@ -4,8 +4,8 @@
 
 #import <AppLink/FMCPerformAudioPassThru.h>
 
-#import <AppLink/FMCTTSChunk.h>
 #import <AppLink/FMCNames.h>
+#import <AppLink/FMCTTSChunk.h>
 
 @implementation FMCPerformAudioPassThru
 
@@ -64,7 +64,7 @@
     return [parameters objectForKey:NAMES_audioPassThruDisplayText2];
 }
 
--(void) setSamplingRate:(FMCSamplingRate *)samplingRate {
+-(void) setSamplingRate:(FMCSamplingRate*) samplingRate {
     if (samplingRate != nil) {
         [parameters setObject:samplingRate forKey:NAMES_samplingRate];
     } else {
@@ -93,7 +93,7 @@
     return [parameters objectForKey:NAMES_maxDuration];
 }
 
--(void) setBitsPerSample:(FMCBitsPerSample *) bitsPerSample {
+-(void) setBitsPerSample:(FMCBitsPerSample*) bitsPerSample {
     if (bitsPerSample != nil) {
         [parameters setObject:bitsPerSample forKey:NAMES_bitsPerSample];
     } else {
@@ -105,12 +105,12 @@
     NSObject* obj = [parameters objectForKey:NAMES_bitsPerSample];
     if ([obj isKindOfClass:FMCBitsPerSample.class]) {
         return (FMCBitsPerSample*)obj;
-    } else { 
+    } else {
         return [FMCBitsPerSample valueOf:(NSString*)obj];
     }
 }
 
--(void) setAudioType:(FMCAudioType *)audioType {
+-(void) setAudioType:(FMCAudioType*) audioType {
     if (audioType != nil) {
         [parameters setObject:audioType forKey:NAMES_audioType];
     } else {
@@ -138,7 +138,5 @@
 -(NSNumber*) muteAudio {
     return [parameters objectForKey:NAMES_muteAudio];
 }
-
-
 
 @end
