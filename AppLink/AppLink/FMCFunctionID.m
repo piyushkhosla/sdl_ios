@@ -9,7 +9,7 @@
 @implementation FMCFunctionID
 
 -(id) init {
-    if (self = [super init]) {}
+    if (self = [super init]) {
     
     functionIDs = [NSDictionary dictionaryWithObjectsAndKeys:
                       NAMES_reserved, @"0",
@@ -64,8 +64,8 @@
                       NAMES_OnEncodedSyncPData, @"98304",
                       NAMES_OnSyncPData, @"98405",
                       nil];
-    
-    
+        
+    }
     return self;
 }
 

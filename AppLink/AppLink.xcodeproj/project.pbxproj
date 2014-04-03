@@ -710,7 +710,7 @@
 		597C048017DEFF4F003E6E1A /* FMCSubscribeVehicleDataResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCSubscribeVehicleDataResponse.h; sourceTree = "<group>"; };
 		597C048117DEFF4F003E6E1A /* FMCSubscribeVehicleDataResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCSubscribeVehicleDataResponse.m; sourceTree = "<group>"; };
 		597C048217DEFF4F003E6E1A /* FMCSyncIAPTransport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCSyncIAPTransport.h; sourceTree = "<group>"; };
-		597C048317DEFF4F003E6E1A /* FMCSyncIAPTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCSyncIAPTransport.m; sourceTree = "<group>"; };
+		597C048317DEFF4F003E6E1A /* FMCSyncIAPTransport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCSyncIAPTransport.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C048417DEFF4F003E6E1A /* FMCSyncMsgVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCSyncMsgVersion.h; sourceTree = "<group>"; };
 		597C048517DEFF4F003E6E1A /* FMCSyncMsgVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCSyncMsgVersion.m; sourceTree = "<group>"; };
 		597C048617DEFF4F003E6E1A /* FMCSyncPData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCSyncPData.h; sourceTree = "<group>"; };
@@ -798,6 +798,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5912048018D967720091D81E /* RPCs */ = {
+			isa = PBXGroup;
+			children = (
+				59F8E67018888E5200B7C56B /* Requests */,
+				59F8E67218888E9800B7C56B /* Responses */,
+				59F8E673188895B400B7C56B /* Notifications */,
+				59F8E6751888986100B7C56B /* Enums */,
+				598655B91888F2AA009F7156 /* Structs */,
+			);
+			name = RPCs;
+			sourceTree = "<group>";
+		};
 		5913384E17DEFC5E00CF214C = {
 			isa = PBXGroup;
 			children = (
@@ -829,12 +841,8 @@
 				59F8E66F18888CB000B7C56B /* Proxy */,
 				59F8E66D18888B3F00B7C56B /* Protocol */,
 				59F8E66E18888B4F00B7C56B /* Transport */,
+				5912048018D967720091D81E /* RPCs */,
 				59F8E674188896A400B7C56B /* Debug */,
-				59F8E67018888E5200B7C56B /* RPC Request */,
-				59F8E67218888E9800B7C56B /* RPC Response */,
-				59F8E673188895B400B7C56B /* RPC Notification */,
-				59F8E6751888986100B7C56B /* Enum */,
-				598655B91888F2AA009F7156 /* Struct */,
 				5913386117DEFC5E00CF214C /* Supporting Files */,
 			);
 			path = AppLink;
@@ -849,7 +857,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		598655B91888F2AA009F7156 /* Struct */ = {
+		598655B91888F2AA009F7156 /* Structs */ = {
 			isa = PBXGroup;
 			children = (
 				597C036117DEFF4F003E6E1A /* FMCAudioPassThruCapabilities.h */,
@@ -909,7 +917,7 @@
 				597C04CC17DEFF50003E6E1A /* FMCVrHelpItem.h */,
 				597C04CD17DEFF50003E6E1A /* FMCVrHelpItem.m */,
 			);
-			name = Struct;
+			name = Structs;
 			sourceTree = "<group>";
 		};
 		59F8E66D18888B3F00B7C56B /* Protocol */ = {
@@ -989,7 +997,7 @@
 			name = Proxy;
 			sourceTree = "<group>";
 		};
-		59F8E67018888E5200B7C56B /* RPC Request */ = {
+		59F8E67018888E5200B7C56B /* Requests */ = {
 			isa = PBXGroup;
 			children = (
 				597C034D17DEFF4F003E6E1A /* FMCAddCommand.h */,
@@ -1061,10 +1069,10 @@
 				597C04B017DEFF50003E6E1A /* FMCUnsubscribeVehicleData.h */,
 				597C04B117DEFF50003E6E1A /* FMCUnsubscribeVehicleData.m */,
 			);
-			name = "RPC Request";
+			name = Requests;
 			sourceTree = "<group>";
 		};
-		59F8E67218888E9800B7C56B /* RPC Response */ = {
+		59F8E67218888E9800B7C56B /* Responses */ = {
 			isa = PBXGroup;
 			children = (
 				597C034F17DEFF4F003E6E1A /* FMCAddCommandResponse.h */,
@@ -1138,10 +1146,10 @@
 				597C04B217DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.h */,
 				597C04B317DEFF50003E6E1A /* FMCUnsubscribeVehicleDataResponse.m */,
 			);
-			name = "RPC Response";
+			name = Responses;
 			sourceTree = "<group>";
 		};
-		59F8E673188895B400B7C56B /* RPC Notification */ = {
+		59F8E673188895B400B7C56B /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
 				597C03F117DEFF4F003E6E1A /* FMCOnAppInterfaceUnregistered.h */,
@@ -1169,7 +1177,7 @@
 				597C040917DEFF4F003E6E1A /* FMCOnVehicleData.h */,
 				597C040A17DEFF4F003E6E1A /* FMCOnVehicleData.m */,
 			);
-			name = "RPC Notification";
+			name = Notifications;
 			sourceTree = "<group>";
 		};
 		59F8E674188896A400B7C56B /* Debug */ = {
@@ -1185,7 +1193,7 @@
 			name = Debug;
 			sourceTree = "<group>";
 		};
-		59F8E6751888986100B7C56B /* Enum */ = {
+		59F8E6751888986100B7C56B /* Enums */ = {
 			isa = PBXGroup;
 			children = (
 				597C035D17DEFF4F003E6E1A /* FMCAppHMIType.h */,
@@ -1287,7 +1295,7 @@
 				597C04D017DEFF50003E6E1A /* FMCWiperStatus.h */,
 				597C04D117DEFF50003E6E1A /* FMCWiperStatus.m */,
 			);
-			name = Enum;
+			name = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1564,7 +1572,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Sets the target folders and the final framework product.\nFMK_NAME=${PROJECT_NAME}\nFMK_VERSION=1   # replace with your version for the framework folder\n\n# Install dir will be the final output to the framework.\n# The following line create it in the root folder of the current project.\nINSTALL_DIR=${SRCROOT}/Products/${FMK_NAME}.framework\n\n# Working dir will be deleted after the framework creation.\nWRK_DIR=build\nDEVICE_DIR=${WRK_DIR}/Release-iphoneos/${FMK_NAME}.framework\nSIMULATOR_DIR=${WRK_DIR}/Release-iphonesimulator/${FMK_NAME}.framework\n\n#Set Version String In FMCSyncProxy.h & FMCSyncProxy.m\nVERSION_STRING=AppLink-$(date +%Y%m%d-%H%M%S)-LOCAL-iOS\nsed -ie \"s/##Version##/${VERSION_STRING}/g\" ${SRCROOT}/AppLink/FMCSyncProxy.h\nsed -ie \"s/##Version##/${VERSION_STRING}/g\" ${SRCROOT}/AppLink/FMCSyncProxy.m\n\n# Building both architectures.\nxcodebuild -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphoneos\nxcodebuild -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphonesimulator\n\n#Reset Version String In SyncProxy.h & FMCSyncProxy.m to ##Version##\nsed -ie \"s/${VERSION_STRING}/##Version##/g\" ${SRCROOT}/AppLink/FMCSyncProxy.h\nsed -ie \"s/${VERSION_STRING}/##Version##/g\" ${SRCROOT}/AppLink/FMCSyncProxy.m\n\n# Cleaning the oldest.\nif [ -d \"${INSTALL_DIR}\" ]\nthen\nrm -rf \"${INSTALL_DIR}\"\nfi\n\n# Creates and renews the final product folder.\nmkdir -p \"${INSTALL_DIR}\"\nmkdir -p \"${INSTALL_DIR}/Versions\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Headers\"\n\n# Creates the internal links.\n# It MUST uses relative path, otherwise will not work when the folder is copied/moved.\nln -s \"${FMK_VERSION}\" \"${INSTALL_DIR}/Versions/Current\"\nln -s \"Versions/Current/Headers\" \"${INSTALL_DIR}/Headers\"\nln -s \"Versions/Current/Resources\" \"${INSTALL_DIR}/Resources\"\nln -s \"Versions/Current/${FMK_NAME}\" \"${INSTALL_DIR}/${FMK_NAME}\"\n\n# Copies the headers and resources files to the final product folder.\ncp -R \"${DEVICE_DIR}/Headers/\" \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Headers/\"\ncp -R \"${DEVICE_DIR}/\" \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources/\"\n\n# Removes the binary and header from the resources folder.\nrm -r \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources/Headers\" \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources/${FMK_NAME}\"\n\n# Uses the Lipo Tool to merge both binary files (i386 + armv6/armv7) into one Universal final product.\nlipo -create \"${DEVICE_DIR}/${FMK_NAME}\" \"${SIMULATOR_DIR}/${FMK_NAME}\" -output \"${INSTALL_DIR}/Versions/${FMK_VERSION}/${FMK_NAME}\"\nrm -r \"${WRK_DIR}\"";
+			shellScript = "# Sets the target folders and the final framework product.\nFMK_NAME=${PROJECT_NAME}\nFMK_VERSION=A   # replace with your version for the framework folder\n\n# Install dir will be the final output to the framework.\n# The following line create it in the root folder of the current project.\nINSTALL_DIR=${SRCROOT}/Products/${FMK_NAME}.framework\n\n# Working dir will be deleted after the framework creation.\nWRK_DIR=build\nDEVICE_DIR=${WRK_DIR}/Release-iphoneos/${FMK_NAME}.framework\nSIMULATOR_DIR=${WRK_DIR}/Release-iphonesimulator/${FMK_NAME}.framework\n\n#Set Version String In FMCSyncProxy.h & FMCSyncProxy.m\nVERSION_STRING=AppLink-$(date +%Y%m%d-%H%M%S)-LOCAL-iOS\nsed -ie \"s/##Version##/${VERSION_STRING}/g\" ${SRCROOT}/AppLink/FMCSyncProxy.h\nsed -ie \"s/##Version##/${VERSION_STRING}/g\" ${SRCROOT}/AppLink/FMCSyncProxy.m\n\n# Building both architectures.\n#xcodebuild -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphoneos\nxcodebuild -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphoneos6.1\nxcodebuild -configuration \"Release\" -target \"${FMK_NAME}\" -sdk iphonesimulator\n\n#Reset Version String In SyncProxy.h & FMCSyncProxy.m to ##Version##\nsed -ie \"s/${VERSION_STRING}/##Version##/g\" ${SRCROOT}/AppLink/FMCSyncProxy.h\nsed -ie \"s/${VERSION_STRING}/##Version##/g\" ${SRCROOT}/AppLink/FMCSyncProxy.m\n\n# Cleaning the oldest.\nif [ -d \"${INSTALL_DIR}\" ]\nthen\nrm -rf \"${INSTALL_DIR}\"\nfi\n\n# Creates and renews the final product folder.\nmkdir -p \"${INSTALL_DIR}\"\nmkdir -p \"${INSTALL_DIR}/Versions\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources\"\nmkdir -p \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Headers\"\n\n# Creates the internal links.\n# It MUST uses relative path, otherwise will not work when the folder is copied/moved.\nln -s \"${FMK_VERSION}\" \"${INSTALL_DIR}/Versions/Current\"\nln -s \"Versions/Current/Headers\" \"${INSTALL_DIR}/Headers\"\nln -s \"Versions/Current/Resources\" \"${INSTALL_DIR}/Resources\"\nln -s \"Versions/Current/${FMK_NAME}\" \"${INSTALL_DIR}/${FMK_NAME}\"\n\n# Copies the headers and resources files to the final product folder.\ncp -R \"${DEVICE_DIR}/Headers/\" \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Headers/\"\ncp -R \"${DEVICE_DIR}/\" \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources/\"\n\n# Removes the binary and header from the resources folder.\nrm -r \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources/Headers\" \"${INSTALL_DIR}/Versions/${FMK_VERSION}/Resources/${FMK_NAME}\"\n\n# Uses the Lipo Tool to merge both binary files (i386 + armv6/armv7) into one Universal final product.\nlipo -create \"${DEVICE_DIR}/${FMK_NAME}\" \"${SIMULATOR_DIR}/${FMK_NAME}\" -output \"${INSTALL_DIR}/Versions/${FMK_VERSION}/${FMK_NAME}\"\nrm -r \"${WRK_DIR}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
