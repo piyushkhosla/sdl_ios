@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setEcuName:(NSNumber *) ecuName {
+-(void) setEcuName:(NSNumber*) ecuName {
     if (ecuName != nil) {
         [parameters setObject:ecuName forKey:NAMES_ecuName];
     } else {
@@ -50,6 +50,5 @@
         return newList;
     }
 }
-
 
 @end

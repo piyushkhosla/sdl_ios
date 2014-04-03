@@ -62,7 +62,7 @@
     }
 }
 
--(void) setVrHelpTitle:(NSString *) vrHelpTitle {
+-(void) setVrHelpTitle:(NSString*) vrHelpTitle {
     if (vrHelpTitle != nil) {
         [parameters setObject:vrHelpTitle forKey:NAMES_vrHelpTitle];
     } else {
@@ -74,7 +74,7 @@
     return [parameters objectForKey:NAMES_vrHelpTitle];
 }
 
--(void) setVrHelp:(NSMutableArray *) vrHelp {
+-(void) setVrHelp:(NSMutableArray*) vrHelp {
     if (vrHelp != nil) {
         [parameters setObject:vrHelp forKey:NAMES_vrHelp];
     } else {

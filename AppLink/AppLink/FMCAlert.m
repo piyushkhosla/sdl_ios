@@ -101,7 +101,7 @@
     return [parameters objectForKey:NAMES_playTone];
 }
 
--(void) setSoftButtons:(NSMutableArray *) softButtons {
+-(void) setSoftButtons:(NSMutableArray*) softButtons {
     if (softButtons != nil) {
         [parameters setObject:softButtons forKey:NAMES_softButtons];
     } else {

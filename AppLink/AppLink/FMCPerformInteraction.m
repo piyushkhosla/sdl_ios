@@ -136,7 +136,7 @@
     return [parameters objectForKey:NAMES_timeout];
 }
 
--(void) setVrHelp:(NSMutableArray *) vrHelp {
+-(void) setVrHelp:(NSMutableArray*) vrHelp {
     if (vrHelp != nil) {
         [parameters setObject:vrHelp forKey:NAMES_vrHelp];
     } else {

@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setGps:(NSNumber *) gps {
+-(void) setGps:(NSNumber*) gps {
     if (gps != nil) {
         [parameters setObject:gps forKey:NAMES_gps];
     } else {
@@ -30,7 +30,7 @@
     return [parameters objectForKey:NAMES_gps];
 }
 
--(void) setSpeed:(NSNumber *) speed {
+-(void) setSpeed:(NSNumber*) speed {
     if (speed != nil) {
         [parameters setObject:speed forKey:NAMES_speed];
     } else {
@@ -42,7 +42,7 @@
     return [parameters objectForKey:NAMES_speed];
 }
 
--(void) setRpm:(NSNumber *) rpm {
+-(void) setRpm:(NSNumber*) rpm {
     if (rpm != nil) {
         [parameters setObject:rpm forKey:NAMES_rpm];
     } else {
@@ -54,7 +54,7 @@
     return [parameters objectForKey:NAMES_rpm];
 }
 
--(void) setFuelLevel:(NSNumber *) fuelLevel {
+-(void) setFuelLevel:(NSNumber*) fuelLevel {
     if (fuelLevel != nil) {
         [parameters setObject:fuelLevel forKey:NAMES_fuelLevel];
     } else {
@@ -78,7 +78,7 @@
     return [parameters objectForKey:NAMES_fuelLevelState];
 }
 
--(void) setInstantFuelConsumption:(NSNumber *) instantFuelConsumption {
+-(void) setInstantFuelConsumption:(NSNumber*) instantFuelConsumption {
     if (instantFuelConsumption != nil) {
         [parameters setObject:instantFuelConsumption forKey:NAMES_instantFuelConsumption];
     } else {
@@ -90,7 +90,7 @@
     return [parameters objectForKey:NAMES_instantFuelConsumption];
 }
 
--(void) setExternalTemperature:(NSNumber *) externalTemperature {
+-(void) setExternalTemperature:(NSNumber*) externalTemperature {
     if (externalTemperature != nil) {
         [parameters setObject:externalTemperature forKey:NAMES_externalTemperature];
     } else {
@@ -102,7 +102,7 @@
     return [parameters objectForKey:NAMES_externalTemperature];
 }
 
--(void) setPrndl:(NSNumber *) prndl {
+-(void) setPrndl:(NSNumber*) prndl {
     if (prndl != nil) {
         [parameters setObject:prndl forKey:NAMES_prndl];
     } else {
@@ -114,7 +114,7 @@
     return [parameters objectForKey:NAMES_prndl];
 }
 
--(void) setTirePressure:(NSNumber *) tirePressure {
+-(void) setTirePressure:(NSNumber*) tirePressure {
     if (tirePressure != nil) {
         [parameters setObject:tirePressure forKey:NAMES_tirePressure];
     } else {
@@ -126,7 +126,7 @@
     return [parameters objectForKey:NAMES_tirePressure];
 }
 
--(void) setOdometer:(NSNumber *) odometer {
+-(void) setOdometer:(NSNumber*) odometer {
     if (odometer != nil) {
         [parameters setObject:odometer forKey:NAMES_odometer];
     } else {
@@ -138,7 +138,7 @@
     return [parameters objectForKey:NAMES_odometer];
 }
 
--(void) setBeltStatus:(NSNumber *) beltStatus {
+-(void) setBeltStatus:(NSNumber*) beltStatus {
     if (beltStatus != nil) {
         [parameters setObject:beltStatus forKey:NAMES_beltStatus];
     } else {
@@ -150,7 +150,7 @@
     return [parameters objectForKey:NAMES_beltStatus];
 }
 
--(void) setBodyInformation:(NSNumber *) bodyInformation {
+-(void) setBodyInformation:(NSNumber*) bodyInformation {
     if (bodyInformation != nil) {
         [parameters setObject:bodyInformation forKey:NAMES_bodyInformation];
     } else {
@@ -162,7 +162,7 @@
     return [parameters objectForKey:NAMES_bodyInformation];
 }
 
--(void) setDeviceStatus:(NSNumber *) deviceStatus {
+-(void) setDeviceStatus:(NSNumber*) deviceStatus {
     if (deviceStatus != nil) {
         [parameters setObject:deviceStatus forKey:NAMES_deviceStatus];
     } else {
@@ -174,7 +174,7 @@
     return [parameters objectForKey:NAMES_deviceStatus];
 }
 
--(void) setDriverBraking:(NSNumber *) driverBraking {
+-(void) setDriverBraking:(NSNumber*) driverBraking {
     if (driverBraking != nil) {
         [parameters setObject:driverBraking forKey:NAMES_driverBraking];
     } else {
@@ -186,7 +186,7 @@
     return [parameters objectForKey:NAMES_driverBraking];
 }
 
--(void) setWiperStatus:(NSNumber *) wiperStatus {
+-(void) setWiperStatus:(NSNumber*) wiperStatus {
     if (wiperStatus != nil) {
         [parameters setObject:wiperStatus forKey:NAMES_wiperStatus];
     } else {
@@ -198,7 +198,7 @@
     return [parameters objectForKey:NAMES_wiperStatus];
 }
 
--(void) setHeadLampStatus:(NSNumber *) headLampStatus {
+-(void) setHeadLampStatus:(NSNumber*) headLampStatus {
     if (headLampStatus != nil) {
         [parameters setObject:headLampStatus forKey:NAMES_headLampStatus];
     } else {
@@ -210,7 +210,7 @@
     return [parameters objectForKey:NAMES_headLampStatus];
 }
 
--(void) setEngineTorque:(NSNumber *) engineTorque {
+-(void) setEngineTorque:(NSNumber*) engineTorque {
     if (engineTorque != nil) {
         [parameters setObject:engineTorque forKey:NAMES_engineTorque];
     } else {
@@ -222,7 +222,7 @@
     return [parameters objectForKey:NAMES_engineTorque];
 }
 
--(void) setAccPedalPosition:(NSNumber *) accPedalPosition {
+-(void) setAccPedalPosition:(NSNumber*) accPedalPosition {
     if (accPedalPosition != nil) {
         [parameters setObject:accPedalPosition forKey:NAMES_accPedalPosition];
     } else {
@@ -234,7 +234,7 @@
     return [parameters objectForKey:NAMES_accPedalPosition];
 }
 
--(void) setSteeringWheelAngle:(NSNumber *) steeringWheelAngle {
+-(void) setSteeringWheelAngle:(NSNumber*) steeringWheelAngle {
     if (steeringWheelAngle != nil) {
         [parameters setObject:steeringWheelAngle forKey:NAMES_steeringWheelAngle];
     } else {

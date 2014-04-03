@@ -49,7 +49,7 @@
     return [parameters objectForKey:NAMES_appName];
 }
 
--(void) setTtsName:(NSMutableArray *) ttsName {
+-(void) setTtsName:(NSMutableArray*) ttsName {
     if (ttsName != nil) {
         [parameters setObject:ttsName forKey:NAMES_ttsName];
     } else {
@@ -140,7 +140,7 @@
     }
 }
 
--(void) setAppHMIType:(NSMutableArray *) appHMIType {
+-(void) setAppHMIType:(NSMutableArray*) appHMIType {
     if (appHMIType != nil) {
         [parameters setObject:appHMIType forKey:NAMES_appHMIType];
     } else {
