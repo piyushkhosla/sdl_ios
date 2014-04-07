@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setLowBeamsOn:(NSNumber *) lowBeamsOn {
+-(void) setLowBeamsOn:(NSNumber*) lowBeamsOn {
     if (lowBeamsOn != nil) {
         [store setObject:lowBeamsOn forKey:NAMES_lowBeamsOn];
     } else {
@@ -30,7 +30,7 @@
     return [store objectForKey:NAMES_lowBeamsOn];
 }
 
--(void) setHighBeamsOn:(NSNumber *) highBeamsOn {
+-(void) setHighBeamsOn:(NSNumber*) highBeamsOn {
     if (highBeamsOn != nil) {
         [store setObject:highBeamsOn forKey:NAMES_highBeamsOn];
     } else {

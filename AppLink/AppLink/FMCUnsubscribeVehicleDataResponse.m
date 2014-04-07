@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setGps:(FMCVehicleDataResult *)gps {
+-(void) setGps:(FMCVehicleDataResult*) gps {
     if (gps != nil) {
         [parameters setObject:gps forKey:NAMES_gps];
     } else {

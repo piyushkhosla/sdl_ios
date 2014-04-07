@@ -10,6 +10,7 @@ FMCSamplingRate* FMCSamplingRate_22KHZ = nil;
 FMCSamplingRate* FMCSamplingRate_44KHZ = nil;
 
 NSMutableArray* FMCSamplingRate_values = nil;
+
 @implementation FMCSamplingRate
 
 +(FMCSamplingRate*) valueOf:(NSString*) value {

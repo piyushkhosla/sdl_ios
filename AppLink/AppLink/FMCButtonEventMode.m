@@ -8,6 +8,7 @@ FMCButtonEventMode* FMCButtonEventMode_BUTTONUP = nil;
 FMCButtonEventMode* FMCButtonEventMode_BUTTONDOWN = nil;
 
 NSMutableArray* FMCButtonEventMode_values = nil;
+
 @implementation FMCButtonEventMode
 
 +(FMCButtonEventMode*) valueOf:(NSString*) value {
@@ -30,17 +31,17 @@ NSMutableArray* FMCButtonEventMode_values = nil;
 }
 
 +(FMCButtonEventMode*) BUTTONUP {
-    	if (FMCButtonEventMode_BUTTONUP == nil) {
-        		FMCButtonEventMode_BUTTONUP = [[FMCButtonEventMode alloc] initWithValue:@"BUTTONUP"];
-    	}
-    	return FMCButtonEventMode_BUTTONUP;
+    if (FMCButtonEventMode_BUTTONUP == nil) {
+        FMCButtonEventMode_BUTTONUP = [[FMCButtonEventMode alloc] initWithValue:@"BUTTONUP"];
+    }
+    return FMCButtonEventMode_BUTTONUP;
 }
 
 +(FMCButtonEventMode*) BUTTONDOWN {
-    	if (FMCButtonEventMode_BUTTONDOWN == nil) {
-        		FMCButtonEventMode_BUTTONDOWN = [[FMCButtonEventMode alloc] initWithValue:@"BUTTONDOWN"];
-    	}
-    	return FMCButtonEventMode_BUTTONDOWN;
+    if (FMCButtonEventMode_BUTTONDOWN == nil) {
+        FMCButtonEventMode_BUTTONDOWN = [[FMCButtonEventMode alloc] initWithValue:@"BUTTONDOWN"];
+    }
+    return FMCButtonEventMode_BUTTONDOWN;
 }
 
 @end

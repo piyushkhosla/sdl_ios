@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setPressureTelltale:(FMCWarningLightStatus *) pressureTelltale {
+-(void) setPressureTelltale:(FMCWarningLightStatus*) pressureTelltale {
     if (pressureTelltale != nil) {
         [store setObject:pressureTelltale forKey:NAMES_pressureTelltale];
     } else {
@@ -78,7 +78,7 @@
     return [store objectForKey:NAMES_rightRear];
 }
 
--(void) setInnerLeftRear:(FMCSingleTireStatus *) innerLeftRear {
+-(void) setInnerLeftRear:(FMCSingleTireStatus*) innerLeftRear {
     if (innerLeftRear != nil) {
         [store setObject:innerLeftRear forKey:NAMES_innerLeftRear];
     } else {

@@ -2,13 +2,13 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <Foundation/Foundation.h> 
-#import <AppLink/FMCEnum.h>   
+#import <Foundation/Foundation.h>
+#import <AppLink/FMCEnum.h>
 
 @interface FMCVehicleDataType : FMCEnum {}
 
 +(FMCVehicleDataType*) valueOf:(NSString*) value;
-+(NSMutableArray*) values;                                 
++(NSMutableArray*) values;
 
 +(FMCVehicleDataType*) VEHICLEDATA_GPS;
 +(FMCVehicleDataType*) VEHICLEDATA_SPEED;
@@ -33,5 +33,3 @@
 +(FMCVehicleDataType*) VEHICLEDATA_STEERINGWHEEL;
 
 @end
-
-

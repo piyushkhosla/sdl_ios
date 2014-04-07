@@ -11,6 +11,7 @@ FMCUpdateMode* FMCUpdateMode_RESUME = nil;
 FMCUpdateMode* FMCUpdateMode_CLEAR = nil;
 
 NSMutableArray* FMCUpdateMode_values = nil;
+
 @implementation FMCUpdateMode
 
 +(FMCUpdateMode*) valueOf:(NSString*) value {
@@ -36,31 +37,31 @@ NSMutableArray* FMCUpdateMode_values = nil;
 }
 
 +(FMCUpdateMode*) COUNTUP {
-    	if (FMCUpdateMode_COUNTUP == nil) {
-        		FMCUpdateMode_COUNTUP = [[FMCUpdateMode alloc] initWithValue:@"COUNTUP"];
-    	}
-    	return FMCUpdateMode_COUNTUP;
+    if (FMCUpdateMode_COUNTUP == nil) {
+        FMCUpdateMode_COUNTUP = [[FMCUpdateMode alloc] initWithValue:@"COUNTUP"];
+    }
+    return FMCUpdateMode_COUNTUP;
 }
 
 +(FMCUpdateMode*) COUNTDOWN {
-    	if (FMCUpdateMode_COUNTDOWN == nil) {
-        		FMCUpdateMode_COUNTDOWN = [[FMCUpdateMode alloc] initWithValue:@"COUNTDOWN"];
-    	}
-    	return FMCUpdateMode_COUNTDOWN;
+    if (FMCUpdateMode_COUNTDOWN == nil) {
+        FMCUpdateMode_COUNTDOWN = [[FMCUpdateMode alloc] initWithValue:@"COUNTDOWN"];
+    }
+    return FMCUpdateMode_COUNTDOWN;
 }
 
 +(FMCUpdateMode*) PAUSE {
-    	if (FMCUpdateMode_PAUSE == nil) {
-        		FMCUpdateMode_PAUSE = [[FMCUpdateMode alloc] initWithValue:@"PAUSE"];
-    	}
-    	return FMCUpdateMode_PAUSE;
+    if (FMCUpdateMode_PAUSE == nil) {
+        FMCUpdateMode_PAUSE = [[FMCUpdateMode alloc] initWithValue:@"PAUSE"];
+    }
+    return FMCUpdateMode_PAUSE;
 }
 
 +(FMCUpdateMode*) RESUME {
-    	if (FMCUpdateMode_RESUME == nil) {
-        		FMCUpdateMode_RESUME = [[FMCUpdateMode alloc] initWithValue:@"RESUME"];
-    	}
-    	return FMCUpdateMode_RESUME;
+    if (FMCUpdateMode_RESUME == nil) {
+        FMCUpdateMode_RESUME = [[FMCUpdateMode alloc] initWithValue:@"RESUME"];
+    }
+    return FMCUpdateMode_RESUME;
 }
 
 +(FMCUpdateMode*) CLEAR {

@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setVoiceRecOn:(NSNumber *) voiceRecOn {
+-(void) setVoiceRecOn:(NSNumber*) voiceRecOn {
     if (voiceRecOn != nil) {
         [store setObject:voiceRecOn forKey:NAMES_voiceRecOn];
     } else {
@@ -30,7 +30,7 @@
     return [store objectForKey:NAMES_voiceRecOn];
 }
 
--(void) setBtIconOn:(NSNumber *) btIconOn {
+-(void) setBtIconOn:(NSNumber*) btIconOn {
     if (btIconOn != nil) {
         [store setObject:btIconOn forKey:NAMES_btIconOn];
     } else {
@@ -42,7 +42,7 @@
     return [store objectForKey:NAMES_btIconOn];
 }
 
--(void) setCallActive:(NSNumber *) callActive {
+-(void) setCallActive:(NSNumber*) callActive {
     if (callActive != nil) {
         [store setObject:callActive forKey:NAMES_callActive];
     } else {
@@ -54,7 +54,7 @@
     return [store objectForKey:NAMES_callActive];
 }
 
--(void) setPhoneRoaming:(NSNumber *) phoneRoaming {
+-(void) setPhoneRoaming:(NSNumber*) phoneRoaming {
     if (phoneRoaming != nil) {
         [store setObject:phoneRoaming forKey:NAMES_phoneRoaming];
     } else {
@@ -66,7 +66,7 @@
     return [store objectForKey:NAMES_phoneRoaming];
 }
 
--(void) setTextMsgAvailable:(NSNumber *) textMsgAvailable {
+-(void) setTextMsgAvailable:(NSNumber*) textMsgAvailable {
     if (textMsgAvailable != nil) {
         [store setObject:textMsgAvailable forKey:NAMES_textMsgAvailable];
     } else {
@@ -90,7 +90,7 @@
     return [store objectForKey:NAMES_battLevelStatus];
 }
 
--(void) setStereoAudioOutputMuted:(NSNumber *) stereoAudioOutputMuted {
+-(void) setStereoAudioOutputMuted:(NSNumber*) stereoAudioOutputMuted {
     if (stereoAudioOutputMuted != nil) {
         [store setObject:stereoAudioOutputMuted forKey:NAMES_stereoAudioOutputMuted];
     } else {
@@ -102,7 +102,7 @@
     return [store objectForKey:NAMES_stereoAudioOutputMuted];
 }
 
--(void) setMonoAudioOutputMuted:(NSNumber *) monoAudioOutputMuted {
+-(void) setMonoAudioOutputMuted:(NSNumber*) monoAudioOutputMuted {
     if (monoAudioOutputMuted != nil) {
         [store setObject:monoAudioOutputMuted forKey:NAMES_monoAudioOutputMuted];
     } else {
@@ -138,7 +138,7 @@
     return [store objectForKey:NAMES_primaryAudioSource];
 }
 
--(void) setECallEventActive:(NSNumber *) eCallEventActive {
+-(void) setECallEventActive:(NSNumber*) eCallEventActive {
     if (eCallEventActive != nil) {
         [store setObject:eCallEventActive forKey:NAMES_eCallEventActive];
     } else {

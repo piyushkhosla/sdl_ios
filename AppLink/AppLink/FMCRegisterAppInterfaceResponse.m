@@ -53,7 +53,7 @@
     NSObject* obj = [parameters objectForKey:NAMES_language];
     if ([obj isKindOfClass:FMCLanguage.class]) {
         return (FMCLanguage*)obj;
-    } else { 
+    } else {
         return [FMCLanguage valueOf:(NSString*)obj];
     }
 }
@@ -163,7 +163,7 @@
     NSMutableArray* array = [parameters objectForKey:NAMES_hmiZoneCapabilities];
     if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCHMIZoneCapabilities.class]) {
         return array;
-    } else { 
+    } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSString* enumString in array) {
             [newList addObject:[FMCHMIZoneCapabilities valueOf:enumString]];
@@ -184,7 +184,7 @@
     NSMutableArray* array = [parameters objectForKey:NAMES_speechCapabilities];
     if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCSpeechCapabilities.class]) {
         return array;
-    } else { 
+    } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSString* enumString in array) {
             [newList addObject:[FMCSpeechCapabilities valueOf:enumString]];
@@ -205,7 +205,7 @@
     NSMutableArray* array = [parameters objectForKey:NAMES_vrCapabilities];
     if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCVrCapabilities.class]) {
         return array;
-    } else { 
+    } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSString* enumString in array) {
             [newList addObject:[FMCVrCapabilities valueOf:enumString]];
@@ -214,7 +214,7 @@
     }
 }
 
--(void) setAudioPassThruCapabilities:(NSMutableArray *) audioPassThruCapabilities {
+-(void) setAudioPassThruCapabilities:(NSMutableArray*) audioPassThruCapabilities {
     if (audioPassThruCapabilities != nil) {
         [parameters setObject:audioPassThruCapabilities forKey:NAMES_audioPassThruCapabilities];
     } else {
@@ -235,7 +235,7 @@
     }
 }
 
--(void) setVehicleType:(FMCVehicleType *) vehicleType {
+-(void) setVehicleType:(FMCVehicleType*) vehicleType {
     if (vehicleType != nil) {
         [parameters setObject:vehicleType forKey:NAMES_vehicleType];
     } else {

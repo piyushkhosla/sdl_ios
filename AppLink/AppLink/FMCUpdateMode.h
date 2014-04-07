@@ -16,5 +16,4 @@
 +(FMCUpdateMode*) RESUME;
 +(FMCUpdateMode*) CLEAR;
 
-
 @end

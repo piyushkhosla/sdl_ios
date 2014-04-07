@@ -42,7 +42,7 @@
     NSObject* obj = [store objectForKey:NAMES_type];
     if ([obj isKindOfClass:FMCSpeechCapabilities.class]) {
         return (FMCSpeechCapabilities*)obj;
-    } else { 
+    } else {
         return [FMCSpeechCapabilities valueOf:(NSString*)obj];
     }
 }

@@ -42,7 +42,7 @@
     NSObject* obj = [parameters objectForKey:NAMES_triggerSource];
     if ([obj isKindOfClass:FMCTriggerSource.class]) {
         return (FMCTriggerSource*)obj;
-    } else { 
+    } else {
         return [FMCTriggerSource valueOf:(NSString*)obj];
     }
 }

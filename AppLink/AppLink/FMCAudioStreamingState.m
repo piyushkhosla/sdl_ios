@@ -9,6 +9,7 @@ FMCAudioStreamingState* FMCAudioStreamingState_ATTENUATED = nil;
 FMCAudioStreamingState* FMCAudioStreamingState_NOT_AUDIBLE = nil;
 
 NSMutableArray* FMCAudioStreamingState_values = nil;
+
 @implementation FMCAudioStreamingState
 
 +(FMCAudioStreamingState*) valueOf:(NSString*) value {
@@ -31,10 +32,10 @@ NSMutableArray* FMCAudioStreamingState_values = nil;
 }
 
 +(FMCAudioStreamingState*) AUDIBLE {
-    	if (FMCAudioStreamingState_AUDIBLE == nil) {
-        		FMCAudioStreamingState_AUDIBLE = [[FMCAudioStreamingState alloc] initWithValue:@"AUDIBLE"];
-    	}
-    	return FMCAudioStreamingState_AUDIBLE;
+    if (FMCAudioStreamingState_AUDIBLE == nil) {
+        FMCAudioStreamingState_AUDIBLE = [[FMCAudioStreamingState alloc] initWithValue:@"AUDIBLE"];
+    }
+    return FMCAudioStreamingState_AUDIBLE;
 }
 
 +(FMCAudioStreamingState*) ATTENUATED {
@@ -45,10 +46,10 @@ NSMutableArray* FMCAudioStreamingState_values = nil;
 }
 
 +(FMCAudioStreamingState*) NOT_AUDIBLE {
-    	if (FMCAudioStreamingState_NOT_AUDIBLE == nil) {
-        		FMCAudioStreamingState_NOT_AUDIBLE = [[FMCAudioStreamingState alloc] initWithValue:@"NOT_AUDIBLE"];
-    	}
-    	return FMCAudioStreamingState_NOT_AUDIBLE;
+    if (FMCAudioStreamingState_NOT_AUDIBLE == nil) {
+        FMCAudioStreamingState_NOT_AUDIBLE = [[FMCAudioStreamingState alloc] initWithValue:@"NOT_AUDIBLE"];
+    }
+    return FMCAudioStreamingState_NOT_AUDIBLE;
 }
 
 @end

@@ -13,6 +13,7 @@ FMCMediaClockFormat* FMCMediaClockFormat_CLOCKTEXT3 = nil;
 FMCMediaClockFormat* FMCMediaClockFormat_CLOCKTEXT4 = nil;
 
 NSMutableArray* FMCMediaClockFormat_values = nil;
+
 @implementation FMCMediaClockFormat
 
 +(FMCMediaClockFormat*) valueOf:(NSString*) value {
@@ -27,14 +28,14 @@ NSMutableArray* FMCMediaClockFormat_values = nil;
 +(NSMutableArray*) values {
     if (FMCMediaClockFormat_values == nil) {
         FMCMediaClockFormat_values = [[NSMutableArray alloc] initWithObjects:
-                                     FMCMediaClockFormat.CLOCK1,
-                                     FMCMediaClockFormat.CLOCK2,
-                                     FMCMediaClockFormat.CLOCK3,
-                                     FMCMediaClockFormat.CLOCKTEXT1,
-                                     FMCMediaClockFormat.CLOCKTEXT2,
-                                     FMCMediaClockFormat.CLOCKTEXT3,
-                                     FMCMediaClockFormat.CLOCKTEXT4,
-                                     nil];
+                FMCMediaClockFormat.CLOCK1,
+                FMCMediaClockFormat.CLOCK2,
+                FMCMediaClockFormat.CLOCK3,
+                FMCMediaClockFormat.CLOCKTEXT1,
+                FMCMediaClockFormat.CLOCKTEXT2,
+                FMCMediaClockFormat.CLOCKTEXT3,
+                FMCMediaClockFormat.CLOCKTEXT4,
+                nil];
     }
     return FMCMediaClockFormat_values;
 }

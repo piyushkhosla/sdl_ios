@@ -7,6 +7,7 @@
 FMCAudioType* FMCAudioType_PCM = nil;
 
 NSMutableArray* FMCAudioType_values = nil;
+
 @implementation FMCAudioType
 
 +(FMCAudioType*) valueOf:(NSString*) value {
@@ -28,10 +29,10 @@ NSMutableArray* FMCAudioType_values = nil;
 }
 
 +(FMCAudioType*) PCM {
-    	if (FMCAudioType_PCM == nil) {
-        		FMCAudioType_PCM = [[FMCAudioType alloc] initWithValue:@"PCM"];
-    	}
-    	return FMCAudioType_PCM;
+    if (FMCAudioType_PCM == nil) {
+        FMCAudioType_PCM = [[FMCAudioType alloc] initWithValue:@"PCM"];
+    }
+    return FMCAudioType_PCM;
 }
 
 @end

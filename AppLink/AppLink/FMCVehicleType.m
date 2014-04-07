@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setMake:(NSString *) make {
+-(void) setMake:(NSString*) make {
     if (make != nil) {
         [store setObject:make forKey:NAMES_make];
     } else {
@@ -30,7 +30,7 @@
     return [store objectForKey:NAMES_make];
 }
 
--(void) setModel:(NSString *) model {
+-(void) setModel:(NSString*) model {
     if (model != nil) {
         [store setObject:model forKey:NAMES_model];
     } else {
@@ -42,7 +42,7 @@
     return [store objectForKey:NAMES_model];
 }
 
--(void) setModelYear:(NSString *) modelYear {
+-(void) setModelYear:(NSString*) modelYear {
     if (modelYear != nil) {
         [store setObject:modelYear forKey:NAMES_modelYear];
     } else {
@@ -54,7 +54,7 @@
     return [store objectForKey:NAMES_modelYear];
 }
 
--(void) setTrim:(NSString *) trim {
+-(void) setTrim:(NSString*) trim {
     if (trim != nil) {
         [store setObject:trim forKey:NAMES_trim];
     } else {

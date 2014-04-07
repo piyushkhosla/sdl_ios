@@ -30,6 +30,7 @@ FMCLanguage* FMCLanguage_DA_DK = nil;
 FMCLanguage* FMCLanguage_NO_NO = nil;
 
 NSMutableArray* FMCLanguage_values = nil;
+
 @implementation FMCLanguage
 
 +(FMCLanguage*) valueOf:(NSString*) value {

@@ -8,21 +8,17 @@
 
 @implementation FMCPermissionItem
 
--(id)init {
-    if (self = [super init]) {
-        
-    }
+-(id) init {
+    if (self = [super init]) {}
     return self;
 }
 
--(id)initWithDictionary:(NSMutableDictionary *)dict {
-    if (self = [super initWithDictionary:dict]) {
-        
-    }
+-(id) initWithDictionary:(NSMutableDictionary*) dict {
+    if (self = [super initWithDictionary:dict]) {}
     return self;
 }
 
--(void) setRpcName:(NSString *) rpcName {
+-(void) setRpcName:(NSString*) rpcName {
     if (rpcName != nil) {
         [store setObject:rpcName forKey:NAMES_rpcName];
     } else {

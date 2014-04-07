@@ -8,6 +8,7 @@ FMCBitsPerSample* FMCBitsPerSample_8_BIT = nil;
 FMCBitsPerSample* FMCBitsPerSample_16_BIT = nil;
 
 NSMutableArray* FMCBitsPerSample_values = nil;
+
 @implementation FMCBitsPerSample
 
 +(FMCBitsPerSample*) valueOf:(NSString*) value {

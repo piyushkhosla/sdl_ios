@@ -5,8 +5,8 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCNotification.h>
 
-#import <AppLink/FMCAudioStreamingState.h>
 #import <AppLink/FMCHMILevel.h>
+#import <AppLink/FMCAudioStreamingState.h>
 #import <AppLink/FMCSystemContext.h>
 
 @interface FMCOnHMIStatus : FMCRPCNotification {}

@@ -8,6 +8,7 @@ FMCImageType* FMCImageType_STATIC = nil;
 FMCImageType* FMCImageType_DYNAMIC = nil;
 
 NSMutableArray* FMCImageType_values = nil;
+
 @implementation FMCImageType
 
 +(FMCImageType*) valueOf:(NSString*) imageType {
@@ -30,17 +31,17 @@ NSMutableArray* FMCImageType_values = nil;
 }
 
 +(FMCImageType*) STATIC {
-    	if (FMCImageType_STATIC == nil) {
-        		FMCImageType_STATIC = [[FMCImageType alloc] initWithValue:@"STATIC"];
-    	}
-    	return FMCImageType_STATIC;
+    if (FMCImageType_STATIC == nil) {
+        FMCImageType_STATIC = [[FMCImageType alloc] initWithValue:@"STATIC"];
+    }
+    return FMCImageType_STATIC;
 }
 
 +(FMCImageType*) DYNAMIC {
-    	if (FMCImageType_DYNAMIC == nil) {
-        		FMCImageType_DYNAMIC = [[FMCImageType alloc] initWithValue:@"DYNAMIC"];
-    	}
-    	return FMCImageType_DYNAMIC;
+    if (FMCImageType_DYNAMIC == nil) {
+        FMCImageType_DYNAMIC = [[FMCImageType alloc] initWithValue:@"DYNAMIC"];
+    }
+    return FMCImageType_DYNAMIC;
 }
 
 @end

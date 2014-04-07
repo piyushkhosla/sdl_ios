@@ -2,13 +2,13 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <Foundation/Foundation.h> 
-#import <AppLink/FMCEnum.h>   
+#import <Foundation/Foundation.h>
+#import <AppLink/FMCEnum.h>
 
 @interface FMCVehicleDataResultCode : FMCEnum {}
 
 +(FMCVehicleDataResultCode*) valueOf:(NSString*) value;
-+(NSMutableArray*) values;                                 
++(NSMutableArray*) values;
 
 +(FMCVehicleDataResultCode*) SUCCESS;
 +(FMCVehicleDataResultCode*) DISALLOWED;
@@ -20,5 +20,3 @@
 +(FMCVehicleDataResultCode*) IGNORED;
 
 @end
-
-

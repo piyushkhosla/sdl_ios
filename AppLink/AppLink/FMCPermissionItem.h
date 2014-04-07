@@ -10,8 +10,8 @@
 
 @interface FMCPermissionItem : FMCRPCStruct {}
 
--(id)init;
--(id)initWithDictionary:(NSMutableDictionary *)dict;
+-(id) init;
+-(id) initWithDictionary:(NSMutableDictionary*) dict;
 
 @property(assign) NSString* rpcName;
 @property(assign) NSMutableArray* hmiPermissions;

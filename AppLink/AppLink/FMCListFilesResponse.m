@@ -30,7 +30,7 @@
     return [parameters objectForKey:NAMES_filenames];
 }
 
--(void) setSpaceAvailable:(NSNumber *) spaceAvailable {
+-(void) setSpaceAvailable:(NSNumber*) spaceAvailable {
     if (spaceAvailable != nil) {
         [parameters setObject:spaceAvailable forKey:NAMES_spaceAvailable];
     } else {

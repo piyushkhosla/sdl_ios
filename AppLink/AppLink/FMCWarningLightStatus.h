@@ -2,13 +2,13 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <Foundation/Foundation.h> 
-#import <AppLink/FMCEnum.h>   
+#import <Foundation/Foundation.h>
+#import <AppLink/FMCEnum.h>
 
 @interface FMCWarningLightStatus : FMCEnum {}
 
 +(FMCWarningLightStatus*) valueOf:(NSString*) value;
-+(NSMutableArray*) values;                                 
++(NSMutableArray*) values;
 
 +(FMCWarningLightStatus*) OFF;
 +(FMCWarningLightStatus*) ON;
@@ -16,5 +16,3 @@
 +(FMCWarningLightStatus*) NOT_USED;
 
 @end
-
-

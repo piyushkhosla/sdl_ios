@@ -15,8 +15,8 @@ FMCDisplayType* FMCDisplayType_MFD3 = nil;
 FMCDisplayType* FMCDisplayType_MFD4 = nil;
 FMCDisplayType* FMCDisplayType_MFD5 = nil;
 
-
 NSMutableArray* FMCDisplayType_values = nil;
+
 @implementation FMCDisplayType
 
 +(FMCDisplayType*) valueOf:(NSString*) value {
@@ -47,31 +47,31 @@ NSMutableArray* FMCDisplayType_values = nil;
 }
 
 +(FMCDisplayType*) CID {
-    	if (FMCDisplayType_CID == nil) {
-        		FMCDisplayType_CID = [[FMCDisplayType alloc] initWithValue:@"CID"];
-    	}
-    	return FMCDisplayType_CID;
+    if (FMCDisplayType_CID == nil) {
+        FMCDisplayType_CID = [[FMCDisplayType alloc] initWithValue:@"CID"];
+    }
+    return FMCDisplayType_CID;
 }
 
 +(FMCDisplayType*) TYPE2 {
-    	if (FMCDisplayType_TYPE2 == nil) {
-        		FMCDisplayType_TYPE2 = [[FMCDisplayType alloc] initWithValue:@"TYPE2"];
-    	}
-    	return FMCDisplayType_TYPE2;
+    if (FMCDisplayType_TYPE2 == nil) {
+        FMCDisplayType_TYPE2 = [[FMCDisplayType alloc] initWithValue:@"TYPE2"];
+    }
+    return FMCDisplayType_TYPE2;
 }
 
 +(FMCDisplayType*) TYPE5 {
-    	if (FMCDisplayType_TYPE5 == nil) {
-        		FMCDisplayType_TYPE5 = [[FMCDisplayType alloc] initWithValue:@"TYPE5"];
-    	}
-    	return FMCDisplayType_TYPE5;
+    if (FMCDisplayType_TYPE5 == nil) {
+        FMCDisplayType_TYPE5 = [[FMCDisplayType alloc] initWithValue:@"TYPE5"];
+    }
+    return FMCDisplayType_TYPE5;
 }
 
 +(FMCDisplayType*) NGN {
-    	if (FMCDisplayType_NGN == nil) {
-        		FMCDisplayType_NGN = [[FMCDisplayType alloc] initWithValue:@"NGN"];
-    	}
-    	return FMCDisplayType_NGN;
+    if (FMCDisplayType_NGN == nil) {
+        FMCDisplayType_NGN = [[FMCDisplayType alloc] initWithValue:@"NGN"];
+    }
+    return FMCDisplayType_NGN;
 }
 
 +(FMCDisplayType*) GEN2_4_DMA {
@@ -82,10 +82,10 @@ NSMutableArray* FMCDisplayType_values = nil;
 }
 
 +(FMCDisplayType*) GEN2_8_DMA {
-    	if (FMCDisplayType_GEN2_8_DMA == nil) {
-        		FMCDisplayType_GEN2_8_DMA = [[FMCDisplayType alloc] initWithValue:@"GEN2_8_DMA"];
-    	}
-    	return FMCDisplayType_GEN2_8_DMA;
+    if (FMCDisplayType_GEN2_8_DMA == nil) {
+        FMCDisplayType_GEN2_8_DMA = [[FMCDisplayType alloc] initWithValue:@"GEN2_8_DMA"];
+    }
+    return FMCDisplayType_GEN2_8_DMA;
 }
 
 +(FMCDisplayType*) GEN2_4_HUD {

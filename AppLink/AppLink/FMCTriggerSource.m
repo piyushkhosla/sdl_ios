@@ -8,6 +8,7 @@ FMCTriggerSource* FMCTriggerSource_TS_MENU = nil;
 FMCTriggerSource* FMCTriggerSource_TS_VR = nil;
 
 NSMutableArray* FMCTriggerSource_values = nil;
+
 @implementation FMCTriggerSource
 
 +(FMCTriggerSource*) valueOf:(NSString*) value {

@@ -7,6 +7,7 @@
 FMCVrCapabilities* FMCVrCapabilities_TEXT = nil;
 
 NSMutableArray* FMCVrCapabilities_values = nil;
+
 @implementation FMCVrCapabilities
 
 +(FMCVrCapabilities*) valueOf:(NSString*) value {
@@ -32,10 +33,10 @@ NSMutableArray* FMCVrCapabilities_values = nil;
 }
 
 +(FMCVrCapabilities*) TEXT {
-    	if (FMCVrCapabilities_TEXT == nil) {
-        		FMCVrCapabilities_TEXT = [[FMCVrCapabilities alloc] initWithValue:@"TEXT"];
-    	}
-    	return FMCVrCapabilities_TEXT;
+    if (FMCVrCapabilities_TEXT == nil) {
+        FMCVrCapabilities_TEXT = [[FMCVrCapabilities alloc] initWithValue:@"TEXT"];
+    }
+    return FMCVrCapabilities_TEXT;
 }
 
 @end

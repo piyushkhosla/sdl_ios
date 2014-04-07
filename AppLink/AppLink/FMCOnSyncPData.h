@@ -5,7 +5,7 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCNotification.h>
 
-@interface FMCOnSyncPData: FMCRPCNotification {}
+@interface FMCOnSyncPData : FMCRPCNotification {}
 
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
