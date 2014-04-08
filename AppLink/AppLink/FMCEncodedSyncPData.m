@@ -27,8 +27,7 @@
 }
 
 -(NSMutableArray*) data {
-    NSMutableArray* obj = [parameters objectForKey:NAMES_data];
-	return (NSMutableArray*)obj;
+    return [parameters objectForKey:NAMES_data];
 }
 
 @end

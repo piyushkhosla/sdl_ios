@@ -5,16 +5,21 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCResponse.h>
 
-#import <AppLink/FMCBeltStatus.h>
-#import <AppLink/FMCBodyInformation.h>
-#import <AppLink/FMCComponentVolumeStatus.h>
-#import <AppLink/FMCDeviceStatus.h>
 #import <AppLink/FMCGPSData.h>
-#import <AppLink/FMCHeadLampStatus.h>
+#import <AppLink/FMCComponentVolumeStatus.h>
 #import <AppLink/FMCPRNDL.h>
 #import <AppLink/FMCTireStatus.h>
+#import <AppLink/FMCBeltStatus.h>
+#import <AppLink/FMCBodyInformation.h>
+#import <AppLink/FMCDeviceStatus.h>
 #import <AppLink/FMCVehicleDataEventStatus.h>
 #import <AppLink/FMCWiperStatus.h>
+#import <AppLink/FMCHeadLampStatus.h>
+#import <AppLink/FMCECallInfo.h>
+#import <AppLink/FMCAirbagStatus.h>
+#import <AppLink/FMCEmergencyEvent.h>
+#import <AppLink/FMCClusterModeStatus.h>
+#import <AppLink/FMCMyKey.h>
 
 @interface FMCGetVehicleDataResponse : FMCRPCResponse {}
 
@@ -25,7 +30,7 @@
 @property(assign) NSNumber* speed;
 @property(assign) NSNumber* rpm;
 @property(assign) NSNumber* fuelLevel;
-@property(assign) FMCComponentVolumeStatus* fuelLevelState;
+@property(assign) FMCComponentVolumeStatus* fuelLevel_State;
 @property(assign) NSNumber* instantFuelConsumption;
 @property(assign) NSNumber* externalTemperature;
 @property(assign) NSString* vin;
@@ -41,5 +46,10 @@
 @property(assign) NSNumber* engineTorque;
 @property(assign) NSNumber* accPedalPosition;
 @property(assign) NSNumber* steeringWheelAngle;
+@property(assign) FMCECallInfo* eCallInfo;
+@property(assign) FMCAirbagStatus* airbagStatus;
+@property(assign) FMCEmergencyEvent* emergencyEvent;
+@property(assign) FMCClusterModeStatus* clusterModeStatus;
+@property(assign) FMCMyKey* myKey;
 
 @end

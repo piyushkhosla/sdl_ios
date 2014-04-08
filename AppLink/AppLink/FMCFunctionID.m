@@ -53,6 +53,7 @@
                       NAMES_OnButtonPress, @"32771",
                       NAMES_OnVehicleData, @"32772",
                       NAMES_OnCommand, @"32773",
+                      NAMES_OnTBTClientState, @"32774",
                       NAMES_OnDriverDistraction, @"32775",
                       NAMES_OnPermissionsChange, @"32776",
                       NAMES_OnAudioPassThru, @"32777",

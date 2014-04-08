@@ -2,7 +2,7 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <AppLink/FMCPermissionItem.h>
+#import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCNotification.h>
 
 @interface FMCOnPermissionsChange : FMCRPCNotification {}

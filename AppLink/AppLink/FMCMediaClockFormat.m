@@ -58,7 +58,7 @@ NSMutableArray* FMCMediaClockFormat_values = nil;
     if (FMCMediaClockFormat_CLOCK3 == nil) {
         FMCMediaClockFormat_CLOCK3 = [[FMCMediaClockFormat alloc] initWithValue:@"CLOCK3"];
     }
-    return FMCMediaClockFormat_CLOCK2;
+    return FMCMediaClockFormat_CLOCK3;
 }
 
 +(FMCMediaClockFormat*) CLOCKTEXT1 {

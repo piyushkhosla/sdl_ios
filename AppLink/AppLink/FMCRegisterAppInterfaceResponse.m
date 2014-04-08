@@ -4,13 +4,13 @@
 
 #import <AppLink/FMCRegisterAppInterfaceResponse.h>
 
-#import <AppLink/FMCAudioPassThruCapabilities.h>
-#import <AppLink/FMCButtonCapabilities.h>
-#import <AppLink/FMCHMIZoneCapabilities.h>
 #import <AppLink/FMCNames.h>
-#import <AppLink/FMCSpeechCapabilities.h>
+#import <AppLink/FMCButtonCapabilities.h>
 #import <AppLink/FMCSoftButtonCapabilities.h>
+#import <AppLink/FMCHmiZoneCapabilities.h>
+#import <AppLink/FMCSpeechCapabilities.h>
 #import <AppLink/FMCVrCapabilities.h>
+#import <AppLink/FMCAudioPassThruCapabilities.h>
 
 @implementation FMCRegisterAppInterfaceResponse
 
@@ -161,12 +161,12 @@
 
 -(NSMutableArray*) hmiZoneCapabilities {
     NSMutableArray* array = [parameters objectForKey:NAMES_hmiZoneCapabilities];
-    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCHMIZoneCapabilities.class]) {
+    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCHmiZoneCapabilities.class]) {
         return array;
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSString* enumString in array) {
-            [newList addObject:[FMCHMIZoneCapabilities valueOf:enumString]];
+            [newList addObject:[FMCHmiZoneCapabilities valueOf:enumString]];
         }
         return newList;
     }

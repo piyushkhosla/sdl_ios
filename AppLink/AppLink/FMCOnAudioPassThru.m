@@ -18,16 +18,4 @@
     return self;
 }
 
--(void) setBulkData:(NSData *)bulkData {
-    if (bulkData != nil) {
-        [store setObject:bulkData forKey:NAMES_bulkData];
-    } else {
-        [store removeObjectForKey:NAMES_bulkData];
-    }
-}
-
--(NSData*) bulkData {
-    return [store objectForKey:NAMES_bulkData];
-}
-
 @end

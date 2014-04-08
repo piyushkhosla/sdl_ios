@@ -11,6 +11,7 @@
 +(NSMutableArray*) values;
 
 +(FMCVehicleDataResultCode*) SUCCESS;
++(FMCVehicleDataResultCode*) TRUNCATED_DATA;
 +(FMCVehicleDataResultCode*) DISALLOWED;
 +(FMCVehicleDataResultCode*) USER_DISALLOWED;
 +(FMCVehicleDataResultCode*) INVALID_ID;

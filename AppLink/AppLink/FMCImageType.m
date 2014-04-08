@@ -11,9 +11,9 @@ NSMutableArray* FMCImageType_values = nil;
 
 @implementation FMCImageType
 
-+(FMCImageType*) valueOf:(NSString*) imageType {
++(FMCImageType*) valueOf:(NSString*) value {
     for (FMCImageType* item in FMCImageType.values) {
-        if ([item.value isEqualToString:imageType]) {
+        if ([item.value isEqualToString:value]) {
             return item;
         }
     }

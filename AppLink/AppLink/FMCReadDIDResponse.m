@@ -5,6 +5,7 @@
 #import <AppLink/FMCReadDIDResponse.h>
 
 #import <AppLink/FMCNames.h>
+#import <AppLink/FMCDIDResult.h>
 
 @implementation FMCReadDIDResponse
 
@@ -32,10 +33,8 @@
         return array;
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
-        for (NSString* enumString in array) {
-            //TODO: Cleanup
-            //[newList addObject:[FMDIDResult valueOf:enumString]];
-            [newList addObject:enumString];
+        for (NSDictionary* dict in array) {
+            [newList addObject:[[[FMCDIDResult alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
         }
         return newList;
     }

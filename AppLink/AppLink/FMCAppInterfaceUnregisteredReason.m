@@ -11,6 +11,7 @@ FMCAppInterfaceUnregisteredReason* FMCAppInterfaceUnregisteredReason_USB_DISCONN
 FMCAppInterfaceUnregisteredReason* FMCAppInterfaceUnregisteredReason_REQUEST_WHILE_IN_NONE_HMI_LEVEL = nil;
 FMCAppInterfaceUnregisteredReason* FMCAppInterfaceUnregisteredReason_TOO_MANY_REQUESTS = nil;
 FMCAppInterfaceUnregisteredReason* FMCAppInterfaceUnregisteredReason_DRIVER_DISTRACTION_VIOLATION = nil;
+FMCAppInterfaceUnregisteredReason* FMCAppInterfaceUnregisteredReason_LANGUAGE_CHANGE = nil;
 FMCAppInterfaceUnregisteredReason* FMCAppInterfaceUnregisteredReason_MASTER_RESET = nil;
 FMCAppInterfaceUnregisteredReason* FMCAppInterfaceUnregisteredReason_FACTORY_DEFAULTS = nil;
 FMCAppInterfaceUnregisteredReason* FMCAppInterfaceUnregisteredReason_APP_UNAUTHORIZED = nil;
@@ -38,6 +39,7 @@ NSMutableArray* FMCAppInterfaceUnregisteredReason_values = nil;
                 FMCAppInterfaceUnregisteredReason.REQUEST_WHILE_IN_NONE_HMI_LEVEL,
                 FMCAppInterfaceUnregisteredReason.TOO_MANY_REQUESTS,
                 FMCAppInterfaceUnregisteredReason.DRIVER_DISTRACTION_VIOLATION,
+                FMCAppInterfaceUnregisteredReason.LANGUAGE_CHANGE,
                 FMCAppInterfaceUnregisteredReason.MASTER_RESET,
                 FMCAppInterfaceUnregisteredReason.FACTORY_DEFAULTS,
                 FMCAppInterfaceUnregisteredReason.APP_UNAUTHORIZED,
@@ -93,6 +95,13 @@ NSMutableArray* FMCAppInterfaceUnregisteredReason_values = nil;
         FMCAppInterfaceUnregisteredReason_DRIVER_DISTRACTION_VIOLATION = [[FMCAppInterfaceUnregisteredReason alloc] initWithValue:@"DRIVER_DISTRACTION_VIOLATION"];
     }
     return FMCAppInterfaceUnregisteredReason_DRIVER_DISTRACTION_VIOLATION;
+}
+
++(FMCAppInterfaceUnregisteredReason*) LANGUAGE_CHANGE {
+    if (FMCAppInterfaceUnregisteredReason_LANGUAGE_CHANGE == nil) {
+        FMCAppInterfaceUnregisteredReason_LANGUAGE_CHANGE = [[FMCAppInterfaceUnregisteredReason alloc] initWithValue:@"LANGUAGE_CHANGE"];
+    }
+    return FMCAppInterfaceUnregisteredReason_LANGUAGE_CHANGE;
 }
 
 +(FMCAppInterfaceUnregisteredReason*) MASTER_RESET {

@@ -39,7 +39,7 @@
     if (hmiDisplayLanguage != nil) {
         [parameters setObject:hmiDisplayLanguage forKey:NAMES_hmiDisplayLanguage];
     } else {
-        [parameters removeObjectForKey:NAMES_language];
+        [parameters removeObjectForKey:NAMES_hmiDisplayLanguage];
     }
 }
 

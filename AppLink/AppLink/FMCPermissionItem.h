@@ -2,11 +2,11 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <AppLink/FMCHMIPermissions.h>
+#import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCMessage.h>
 
+#import <AppLink/FMCHMIPermissions.h>
 #import <AppLink/FMCParameterPermissions.h>
-#import <AppLink/FMCPermissionStatus.h>
 
 @interface FMCPermissionItem : FMCRPCStruct {}
 
@@ -14,7 +14,7 @@
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
 @property(assign) NSString* rpcName;
-@property(assign) NSMutableArray* hmiPermissions;
-@property(assign) NSMutableArray* parameterPermissions;
+@property(assign) FMCHMIPermissions* hmiPermissions;
+@property(assign) FMCParameterPermissions* parameterPermissions;
 
 @end

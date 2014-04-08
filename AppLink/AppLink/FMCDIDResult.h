@@ -13,6 +13,7 @@
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
 @property(assign) FMCVehicleDataResultCode* resultCode;
-@property(assign) NSMutableArray* data;
+@property(assign) NSNumber* didLocation;
+@property(assign) NSString* data;
 
 @end

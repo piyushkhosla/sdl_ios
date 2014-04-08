@@ -31,16 +31,16 @@ NSMutableArray* FMCAppHMIType_values = nil;
 +(NSMutableArray*) values {
     if (FMCAppHMIType_values == nil) {
         FMCAppHMIType_values = [[NSMutableArray alloc] initWithObjects:
-                FMCAppHMIType_DEFAULT,
-                FMCAppHMIType_COMMUNICATION,
-                FMCAppHMIType_MEDIA,
-                FMCAppHMIType_MESSAGING,
-                FMCAppHMIType_NAVIGATION,
-                FMCAppHMIType_INFORMATION,
-                FMCAppHMIType_SOCIAL,
-                FMCAppHMIType_BACKGROUND_PROCESS,
-                FMCAppHMIType_TESTING,
-                FMCAppHMIType_SYSTEM,
+                FMCAppHMIType.DEFAULT,
+                FMCAppHMIType.COMMUNICATION,
+                FMCAppHMIType.MEDIA,
+                FMCAppHMIType.MESSAGING,
+                FMCAppHMIType.NAVIGATION,
+                FMCAppHMIType.INFORMATION,
+                FMCAppHMIType.SOCIAL,
+                FMCAppHMIType.BACKGROUND_PROCESS,
+                FMCAppHMIType.TESTING,
+                FMCAppHMIType.SYSTEM,
                 nil];
     }
     return FMCAppHMIType_values;

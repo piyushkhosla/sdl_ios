@@ -66,16 +66,16 @@
     return [parameters objectForKey:NAMES_fuelLevel];
 }
 
--(void) setFuelLevelState:(NSNumber *) fuelLevelState {
-    if (fuelLevelState != nil) {
-        [parameters setObject:fuelLevelState forKey:NAMES_fuelLevelState];
+-(void) setFuelLevel_State:(NSNumber*) fuelLevel_State {
+    if (fuelLevel_State != nil) {
+        [parameters setObject:fuelLevel_State forKey:NAMES_fuelLevel_State];
     } else {
-        [parameters removeObjectForKey:NAMES_fuelLevelState];
+        [parameters removeObjectForKey:NAMES_fuelLevel_State];
     }
 }
 
--(NSNumber*) fuelLevelState {
-    return [parameters objectForKey:NAMES_fuelLevelState];
+-(NSNumber*) fuelLevel_State {
+    return [parameters objectForKey:NAMES_fuelLevel_State];
 }
 
 -(void) setInstantFuelConsumption:(NSNumber*) instantFuelConsumption {
@@ -256,6 +256,66 @@
 
 -(NSNumber*) steeringWheelAngle {
     return [parameters objectForKey:NAMES_steeringWheelAngle];
+}
+
+-(void) setECallInfo:(NSNumber*) eCallInfo {
+    if (eCallInfo != nil) {
+        [parameters setObject:eCallInfo forKey:NAMES_eCallInfo];
+    } else {
+        [parameters removeObjectForKey:NAMES_eCallInfo];
+    }
+}
+
+-(NSNumber*) eCallInfo {
+    return [parameters objectForKey:NAMES_eCallInfo];
+}
+
+-(void) setAirbagStatus:(NSNumber*) airbagStatus {
+    if (airbagStatus != nil) {
+        [parameters setObject:airbagStatus forKey:NAMES_airbagStatus];
+    } else {
+        [parameters removeObjectForKey:NAMES_airbagStatus];
+    }
+}
+
+-(NSNumber*) airbagStatus {
+    return [parameters objectForKey:NAMES_airbagStatus];
+}
+
+-(void) setEmergencyEvent:(NSNumber*) emergencyEvent {
+    if (emergencyEvent != nil) {
+        [parameters setObject:emergencyEvent forKey:NAMES_emergencyEvent];
+    } else {
+        [parameters removeObjectForKey:NAMES_emergencyEvent];
+    }
+}
+
+-(NSNumber*) emergencyEvent {
+    return [parameters objectForKey:NAMES_emergencyEvent];
+}
+
+-(void) setClusterModeStatus:(NSNumber*) clusterModeStatus {
+    if (clusterModeStatus != nil) {
+        [parameters setObject:clusterModeStatus forKey:NAMES_clusterModeStatus];
+    } else {
+        [parameters removeObjectForKey:NAMES_clusterModeStatus];
+    }
+}
+
+-(NSNumber*) clusterModeStatus {
+    return [parameters objectForKey:NAMES_clusterModeStatus];
+}
+
+-(void) setMyKey:(NSNumber*) myKey {
+    if (myKey != nil) {
+        [parameters setObject:myKey forKey:NAMES_myKey];
+    } else {
+        [parameters removeObjectForKey:NAMES_myKey];
+    }
+}
+
+-(NSNumber*) myKey {
+    return [parameters objectForKey:NAMES_myKey];
 }
 
 @end

@@ -5,6 +5,7 @@
 #import <AppLink/FMCOnPermissionsChange.h>
 
 #import <AppLink/FMCNames.h>
+#import <AppLink/FMCPermissionItem.h>
 
 @implementation FMCOnPermissionsChange
 
@@ -20,14 +21,14 @@
 
 -(void) setPermissionItem:(NSMutableArray*) permissionItem {
     if (permissionItem != nil) {
-        [parameters setObject:permissionItem forKey:NAMES_PermissionItem];
+        [parameters setObject:permissionItem forKey:NAMES_permissionItem];
     } else {
-        [parameters removeObjectForKey:NAMES_PermissionItem];
+        [parameters removeObjectForKey:NAMES_permissionItem];
     }
 }
 
 -(NSMutableArray*) permissionItem {
-    NSMutableArray* array = [parameters objectForKey:NAMES_PermissionItem];
+    NSMutableArray* array = [parameters objectForKey:NAMES_permissionItem];
     if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCPermissionItem.class]) {
         return array;
     } else {

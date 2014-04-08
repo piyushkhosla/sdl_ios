@@ -49,7 +49,7 @@
 }
 
 -(NSString*) audioPassThruDisplayText1 {
-    return [parameters objectForKey:NAMES_audioPassThruDisplayText2];
+    return [parameters objectForKey:NAMES_audioPassThruDisplayText1];
 }
 
 -(void) setAudioPassThruDisplayText2:(NSString*) audioPassThruDisplayText2 {
@@ -74,7 +74,7 @@
 
 -(FMCSamplingRate*) samplingRate {
     NSObject* obj = [parameters objectForKey:NAMES_samplingRate];
-    if ([obj isKindOfClass:FMCBitsPerSample.class]) {
+    if ([obj isKindOfClass:FMCSamplingRate.class]) {
         return (FMCSamplingRate*)obj;
     } else {
         return [FMCSamplingRate valueOf:(NSString*)obj];

@@ -86,8 +86,13 @@
     }
 }
 
--(NSNumber*) battLevelStatus {
-    return [store objectForKey:NAMES_battLevelStatus];
+-(FMCDeviceLevelStatus*) battLevelStatus {
+    NSObject* obj = [store objectForKey:NAMES_battLevelStatus];
+    if ([obj isKindOfClass:FMCDeviceLevelStatus.class]) {
+        return (FMCDeviceLevelStatus*)obj;
+    } else {
+        return [FMCDeviceLevelStatus valueOf:(NSString*)obj];
+    }
 }
 
 -(void) setStereoAudioOutputMuted:(NSNumber*) stereoAudioOutputMuted {
@@ -122,8 +127,13 @@
     }
 }
 
--(NSNumber*) signalLevelStatus {
-    return [store objectForKey:NAMES_signalLevelStatus];
+-(FMCDeviceLevelStatus*) signalLevelStatus {
+    NSObject* obj = [store objectForKey:NAMES_signalLevelStatus];
+    if ([obj isKindOfClass:FMCDeviceLevelStatus.class]) {
+        return (FMCDeviceLevelStatus*)obj;
+    } else {
+        return [FMCDeviceLevelStatus valueOf:(NSString*)obj];
+    }
 }
 
 -(void) setPrimaryAudioSource:(FMCPrimaryAudioSource*) primaryAudioSource {
@@ -134,8 +144,13 @@
     }
 }
 
--(NSNumber*) primaryAudioSource {
-    return [store objectForKey:NAMES_primaryAudioSource];
+-(FMCPrimaryAudioSource*) primaryAudioSource {
+    NSObject* obj = [store objectForKey:NAMES_primaryAudioSource];
+    if ([obj isKindOfClass:FMCPrimaryAudioSource.class]) {
+        return (FMCPrimaryAudioSource*)obj;
+    } else {
+        return [FMCPrimaryAudioSource valueOf:(NSString*)obj];
+    }
 }
 
 -(void) setECallEventActive:(NSNumber*) eCallEventActive {

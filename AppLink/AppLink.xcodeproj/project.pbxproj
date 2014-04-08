@@ -399,6 +399,34 @@
 		597C066B17DEFF51003E6E1A /* FMCAppLinkProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04D217DEFF50003E6E1A /* FMCAppLinkProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		597C066C17DEFF51003E6E1A /* FMCAppLinkProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 597C04D317DEFF50003E6E1A /* FMCAppLinkProtocol.m */; };
 		597C067A17DEFF51003E6E1A /* AppLink.h in Headers */ = {isa = PBXBuildFile; fileRef = 597C04E117DEFF50003E6E1A /* AppLink.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		59EAEC3C18F3BD2D0095E38E /* FMCAirbagStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 59EAEC2018F3BD2C0095E38E /* FMCAirbagStatus.h */; };
+		59EAEC3D18F3BD2D0095E38E /* FMCAirbagStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 59EAEC2118F3BD2C0095E38E /* FMCAirbagStatus.m */; };
+		59EAEC3E18F3BD2D0095E38E /* FMCCarModeStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 59EAEC2218F3BD2C0095E38E /* FMCCarModeStatus.h */; };
+		59EAEC3F18F3BD2D0095E38E /* FMCCarModeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 59EAEC2318F3BD2C0095E38E /* FMCCarModeStatus.m */; };
+		59EAEC4018F3BD2D0095E38E /* FMCClusterModeStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 59EAEC2418F3BD2C0095E38E /* FMCClusterModeStatus.h */; };
+		59EAEC4118F3BD2D0095E38E /* FMCClusterModeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 59EAEC2518F3BD2C0095E38E /* FMCClusterModeStatus.m */; };
+		59EAEC4218F3BD2D0095E38E /* FMCECallConfirmationStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 59EAEC2618F3BD2C0095E38E /* FMCECallConfirmationStatus.h */; };
+		59EAEC4318F3BD2D0095E38E /* FMCECallConfirmationStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 59EAEC2718F3BD2C0095E38E /* FMCECallConfirmationStatus.m */; };
+		59EAEC4418F3BD2D0095E38E /* FMCECallInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 59EAEC2818F3BD2C0095E38E /* FMCECallInfo.h */; };
+		59EAEC4518F3BD2D0095E38E /* FMCECallInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 59EAEC2918F3BD2C0095E38E /* FMCECallInfo.m */; };
+		59EAEC4618F3BD2D0095E38E /* FMCEmergencyEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 59EAEC2A18F3BD2C0095E38E /* FMCEmergencyEvent.h */; };
+		59EAEC4718F3BD2D0095E38E /* FMCEmergencyEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 59EAEC2B18F3BD2C0095E38E /* FMCEmergencyEvent.m */; };
+		59EAEC4818F3BD2D0095E38E /* FMCEmergencyEventType.h in Headers */ = {isa = PBXBuildFile; fileRef = 59EAEC2C18F3BD2C0095E38E /* FMCEmergencyEventType.h */; };
+		59EAEC4918F3BD2D0095E38E /* FMCEmergencyEventType.m in Sources */ = {isa = PBXBuildFile; fileRef = 59EAEC2D18F3BD2C0095E38E /* FMCEmergencyEventType.m */; };
+		59EAEC4A18F3BD2D0095E38E /* FMCFuelCutoffStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 59EAEC2E18F3BD2C0095E38E /* FMCFuelCutoffStatus.h */; };
+		59EAEC4B18F3BD2D0095E38E /* FMCFuelCutoffStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 59EAEC2F18F3BD2C0095E38E /* FMCFuelCutoffStatus.m */; };
+		59EAEC4C18F3BD2D0095E38E /* FMCMyKey.h in Headers */ = {isa = PBXBuildFile; fileRef = 59EAEC3018F3BD2C0095E38E /* FMCMyKey.h */; };
+		59EAEC4D18F3BD2D0095E38E /* FMCMyKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 59EAEC3118F3BD2C0095E38E /* FMCMyKey.m */; };
+		59EAEC4E18F3BD2D0095E38E /* FMCOnTBTClientState.h in Headers */ = {isa = PBXBuildFile; fileRef = 59EAEC3218F3BD2C0095E38E /* FMCOnTBTClientState.h */; };
+		59EAEC4F18F3BD2D0095E38E /* FMCOnTBTClientState.m in Sources */ = {isa = PBXBuildFile; fileRef = 59EAEC3318F3BD2C0095E38E /* FMCOnTBTClientState.m */; };
+		59EAEC5018F3BD2D0095E38E /* FMCPowerModeQualificationStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 59EAEC3418F3BD2C0095E38E /* FMCPowerModeQualificationStatus.h */; };
+		59EAEC5118F3BD2D0095E38E /* FMCPowerModeQualificationStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 59EAEC3518F3BD2D0095E38E /* FMCPowerModeQualificationStatus.m */; };
+		59EAEC5218F3BD2D0095E38E /* FMCPowerModeStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 59EAEC3618F3BD2D0095E38E /* FMCPowerModeStatus.h */; };
+		59EAEC5318F3BD2D0095E38E /* FMCPowerModeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 59EAEC3718F3BD2D0095E38E /* FMCPowerModeStatus.m */; };
+		59EAEC5418F3BD2D0095E38E /* FMCTBTState.h in Headers */ = {isa = PBXBuildFile; fileRef = 59EAEC3818F3BD2D0095E38E /* FMCTBTState.h */; };
+		59EAEC5518F3BD2D0095E38E /* FMCTBTState.m in Sources */ = {isa = PBXBuildFile; fileRef = 59EAEC3918F3BD2D0095E38E /* FMCTBTState.m */; };
+		59EAEC5618F3BD2D0095E38E /* FMCTimerMode.h in Headers */ = {isa = PBXBuildFile; fileRef = 59EAEC3A18F3BD2D0095E38E /* FMCTimerMode.h */; };
+		59EAEC5718F3BD2D0095E38E /* FMCTimerMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 59EAEC3B18F3BD2D0095E38E /* FMCTimerMode.m */; };
 		FBAC28E1181FEAF4003210A2 /* FMCExternalLibrary.h in Headers */ = {isa = PBXBuildFile; fileRef = FBAC28E0181FEAF4003210A2 /* FMCExternalLibrary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -784,6 +812,34 @@
 		597C04D217DEFF50003E6E1A /* FMCAppLinkProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FMCAppLinkProtocol.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		597C04D317DEFF50003E6E1A /* FMCAppLinkProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FMCAppLinkProtocol.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		597C04E117DEFF50003E6E1A /* AppLink.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppLink.h; sourceTree = "<group>"; };
+		59EAEC2018F3BD2C0095E38E /* FMCAirbagStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCAirbagStatus.h; sourceTree = "<group>"; };
+		59EAEC2118F3BD2C0095E38E /* FMCAirbagStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCAirbagStatus.m; sourceTree = "<group>"; };
+		59EAEC2218F3BD2C0095E38E /* FMCCarModeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCCarModeStatus.h; sourceTree = "<group>"; };
+		59EAEC2318F3BD2C0095E38E /* FMCCarModeStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCCarModeStatus.m; sourceTree = "<group>"; };
+		59EAEC2418F3BD2C0095E38E /* FMCClusterModeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCClusterModeStatus.h; sourceTree = "<group>"; };
+		59EAEC2518F3BD2C0095E38E /* FMCClusterModeStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCClusterModeStatus.m; sourceTree = "<group>"; };
+		59EAEC2618F3BD2C0095E38E /* FMCECallConfirmationStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCECallConfirmationStatus.h; sourceTree = "<group>"; };
+		59EAEC2718F3BD2C0095E38E /* FMCECallConfirmationStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCECallConfirmationStatus.m; sourceTree = "<group>"; };
+		59EAEC2818F3BD2C0095E38E /* FMCECallInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCECallInfo.h; sourceTree = "<group>"; };
+		59EAEC2918F3BD2C0095E38E /* FMCECallInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCECallInfo.m; sourceTree = "<group>"; };
+		59EAEC2A18F3BD2C0095E38E /* FMCEmergencyEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCEmergencyEvent.h; sourceTree = "<group>"; };
+		59EAEC2B18F3BD2C0095E38E /* FMCEmergencyEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCEmergencyEvent.m; sourceTree = "<group>"; };
+		59EAEC2C18F3BD2C0095E38E /* FMCEmergencyEventType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCEmergencyEventType.h; sourceTree = "<group>"; };
+		59EAEC2D18F3BD2C0095E38E /* FMCEmergencyEventType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCEmergencyEventType.m; sourceTree = "<group>"; };
+		59EAEC2E18F3BD2C0095E38E /* FMCFuelCutoffStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCFuelCutoffStatus.h; sourceTree = "<group>"; };
+		59EAEC2F18F3BD2C0095E38E /* FMCFuelCutoffStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCFuelCutoffStatus.m; sourceTree = "<group>"; };
+		59EAEC3018F3BD2C0095E38E /* FMCMyKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCMyKey.h; sourceTree = "<group>"; };
+		59EAEC3118F3BD2C0095E38E /* FMCMyKey.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCMyKey.m; sourceTree = "<group>"; };
+		59EAEC3218F3BD2C0095E38E /* FMCOnTBTClientState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCOnTBTClientState.h; sourceTree = "<group>"; };
+		59EAEC3318F3BD2C0095E38E /* FMCOnTBTClientState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCOnTBTClientState.m; sourceTree = "<group>"; };
+		59EAEC3418F3BD2C0095E38E /* FMCPowerModeQualificationStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCPowerModeQualificationStatus.h; sourceTree = "<group>"; };
+		59EAEC3518F3BD2D0095E38E /* FMCPowerModeQualificationStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCPowerModeQualificationStatus.m; sourceTree = "<group>"; };
+		59EAEC3618F3BD2D0095E38E /* FMCPowerModeStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCPowerModeStatus.h; sourceTree = "<group>"; };
+		59EAEC3718F3BD2D0095E38E /* FMCPowerModeStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCPowerModeStatus.m; sourceTree = "<group>"; };
+		59EAEC3818F3BD2D0095E38E /* FMCTBTState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCTBTState.h; sourceTree = "<group>"; };
+		59EAEC3918F3BD2D0095E38E /* FMCTBTState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCTBTState.m; sourceTree = "<group>"; };
+		59EAEC3A18F3BD2D0095E38E /* FMCTimerMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCTimerMode.h; sourceTree = "<group>"; };
+		59EAEC3B18F3BD2D0095E38E /* FMCTimerMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCTimerMode.m; sourceTree = "<group>"; };
 		FBAC28E0181FEAF4003210A2 /* FMCExternalLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCExternalLibrary.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -804,8 +860,8 @@
 				59F8E67018888E5200B7C56B /* Requests */,
 				59F8E67218888E9800B7C56B /* Responses */,
 				59F8E673188895B400B7C56B /* Notifications */,
-				59F8E6751888986100B7C56B /* Enums */,
 				598655B91888F2AA009F7156 /* Structs */,
+				59F8E6751888986100B7C56B /* Enums */,
 			);
 			name = RPCs;
 			sourceTree = "<group>";
@@ -860,6 +916,8 @@
 		598655B91888F2AA009F7156 /* Structs */ = {
 			isa = PBXGroup;
 			children = (
+				59EAEC2018F3BD2C0095E38E /* FMCAirbagStatus.h */,
+				59EAEC2118F3BD2C0095E38E /* FMCAirbagStatus.m */,
 				597C036117DEFF4F003E6E1A /* FMCAudioPassThruCapabilities.h */,
 				597C036217DEFF4F003E6E1A /* FMCAudioPassThruCapabilities.m */,
 				597C036717DEFF4F003E6E1A /* FMCBeltStatus.h */,
@@ -870,12 +928,18 @@
 				597C037217DEFF4F003E6E1A /* FMCButtonCapabilities.m */,
 				597C037F17DEFF4F003E6E1A /* FMCChoice.h */,
 				597C038017DEFF4F003E6E1A /* FMCChoice.m */,
+				59EAEC2418F3BD2C0095E38E /* FMCClusterModeStatus.h */,
+				59EAEC2518F3BD2C0095E38E /* FMCClusterModeStatus.m */,
 				597C03A017DEFF4F003E6E1A /* FMCDeviceStatus.h */,
 				597C03A117DEFF4F003E6E1A /* FMCDeviceStatus.m */,
 				597C03A217DEFF4F003E6E1A /* FMCDIDResult.h */,
 				597C03A317DEFF4F003E6E1A /* FMCDIDResult.m */,
 				597C03A617DEFF4F003E6E1A /* FMCDisplayCapabilities.h */,
 				597C03A717DEFF4F003E6E1A /* FMCDisplayCapabilities.m */,
+				59EAEC2818F3BD2C0095E38E /* FMCECallInfo.h */,
+				59EAEC2918F3BD2C0095E38E /* FMCECallInfo.m */,
+				59EAEC2A18F3BD2C0095E38E /* FMCEmergencyEvent.h */,
+				59EAEC2B18F3BD2C0095E38E /* FMCEmergencyEvent.m */,
 				597C03B517DEFF4F003E6E1A /* FMCEngineInfo.h */,
 				597C03B617DEFF4F003E6E1A /* FMCEngineInfo.m */,
 				597C03C917DEFF4F003E6E1A /* FMCGPSData.h */,
@@ -888,6 +952,8 @@
 				597C03D817DEFF4F003E6E1A /* FMCImage.m */,
 				597C03EE17DEFF4F003E6E1A /* FMCMenuParams.h */,
 				597C03EF17DEFF4F003E6E1A /* FMCMenuParams.m */,
+				59EAEC3018F3BD2C0095E38E /* FMCMyKey.h */,
+				59EAEC3118F3BD2C0095E38E /* FMCMyKey.m */,
 				597C040B17DEFF4F003E6E1A /* FMCParameterPermissions.h */,
 				597C040C17DEFF4F003E6E1A /* FMCParameterPermissions.m */,
 				597C041517DEFF4F003E6E1A /* FMCPermissionItem.h */,
@@ -1174,6 +1240,8 @@
 				597C040417DEFF4F003E6E1A /* FMCOnPermissionsChange.m */,
 				597C040517DEFF4F003E6E1A /* FMCOnSyncPData.h */,
 				597C040617DEFF4F003E6E1A /* FMCOnSyncPData.m */,
+				59EAEC3218F3BD2C0095E38E /* FMCOnTBTClientState.h */,
+				59EAEC3318F3BD2C0095E38E /* FMCOnTBTClientState.m */,
 				597C040917DEFF4F003E6E1A /* FMCOnVehicleData.h */,
 				597C040A17DEFF4F003E6E1A /* FMCOnVehicleData.m */,
 			);
@@ -1212,6 +1280,10 @@
 				597C037617DEFF4F003E6E1A /* FMCButtonName.m */,
 				597C037717DEFF4F003E6E1A /* FMCButtonPressMode.h */,
 				597C037817DEFF4F003E6E1A /* FMCButtonPressMode.m */,
+				59EAEC2218F3BD2C0095E38E /* FMCCarModeStatus.h */,
+				59EAEC2318F3BD2C0095E38E /* FMCCarModeStatus.m */,
+				59EAEC2618F3BD2C0095E38E /* FMCECallConfirmationStatus.h */,
+				59EAEC2718F3BD2C0095E38E /* FMCECallConfirmationStatus.m */,
 				597C037D17DEFF4F003E6E1A /* FMCCharacterSet.h */,
 				597C037E17DEFF4F003E6E1A /* FMCCharacterSet.m */,
 				597C038117DEFF4F003E6E1A /* FMCCompassDirection.h */,
@@ -1226,8 +1298,12 @@
 				597C03AB17DEFF4F003E6E1A /* FMCDriverDistractionState.m */,
 				597C039E17DEFF4F003E6E1A /* FMCDeviceLevelStatus.h */,
 				597C039F17DEFF4F003E6E1A /* FMCDeviceLevelStatus.m */,
+				59EAEC2C18F3BD2C0095E38E /* FMCEmergencyEventType.h */,
+				59EAEC2D18F3BD2C0095E38E /* FMCEmergencyEventType.m */,
 				597C03B917DEFF4F003E6E1A /* FMCFileType.h */,
 				597C03BA17DEFF4F003E6E1A /* FMCFileType.m */,
+				59EAEC2E18F3BD2C0095E38E /* FMCFuelCutoffStatus.h */,
+				59EAEC2F18F3BD2C0095E38E /* FMCFuelCutoffStatus.m */,
 				597C03C717DEFF4F003E6E1A /* FMCGlobalProperty.h */,
 				597C03C817DEFF4F003E6E1A /* FMCGlobalProperty.m */,
 				597C03CD17DEFF4F003E6E1A /* FMCHMILevel.h */,
@@ -1250,6 +1326,10 @@
 				597C03ED17DEFF4F003E6E1A /* FMCMediaClockFormat.m */,
 				597C041717DEFF4F003E6E1A /* FMCPermissionStatus.h */,
 				597C041817DEFF4F003E6E1A /* FMCPermissionStatus.m */,
+				59EAEC3418F3BD2C0095E38E /* FMCPowerModeQualificationStatus.h */,
+				59EAEC3518F3BD2D0095E38E /* FMCPowerModeQualificationStatus.m */,
+				59EAEC3618F3BD2D0095E38E /* FMCPowerModeStatus.h */,
+				59EAEC3718F3BD2D0095E38E /* FMCPowerModeStatus.m */,
 				597C041B17DEFF4F003E6E1A /* FMCPrimaryAudioSource.h */,
 				597C041C17DEFF4F003E6E1A /* FMCPrimaryAudioSource.m */,
 				597C041D17DEFF4F003E6E1A /* FMCPRNDL.h */,
@@ -1268,10 +1348,14 @@
 				597C049217DEFF4F003E6E1A /* FMCSystemAction.m */,
 				597C049317DEFF4F003E6E1A /* FMCSystemContext.h */,
 				597C049417DEFF4F003E6E1A /* FMCSystemContext.m */,
+				59EAEC3818F3BD2D0095E38E /* FMCTBTState.h */,
+				59EAEC3918F3BD2D0095E38E /* FMCTBTState.m */,
 				597C049717DEFF4F003E6E1A /* FMCTextAlignment.h */,
 				597C049817DEFF4F003E6E1A /* FMCTextAlignment.m */,
 				597C049B17DEFF50003E6E1A /* FMCTextFieldName.h */,
 				597C049C17DEFF50003E6E1A /* FMCTextFieldName.m */,
+				59EAEC3A18F3BD2D0095E38E /* FMCTimerMode.h */,
+				59EAEC3B18F3BD2D0095E38E /* FMCTimerMode.m */,
 				597C04A017DEFF50003E6E1A /* FMCTriggerSource.h */,
 				597C04A117DEFF50003E6E1A /* FMCTriggerSource.m */,
 				597C04B417DEFF50003E6E1A /* FMCUpdateMode.h */,
@@ -1328,6 +1412,7 @@
 				597C051017DEFF50003E6E1A /* FMCButtonPressMode.h in Headers */,
 				597C051217DEFF50003E6E1A /* FMCChangeRegistration.h in Headers */,
 				597C051417DEFF50003E6E1A /* FMCChangeRegistrationResponse.h in Headers */,
+				59EAEC4018F3BD2D0095E38E /* FMCClusterModeStatus.h in Headers */,
 				597C051617DEFF50003E6E1A /* FMCCharacterSet.h in Headers */,
 				597C051817DEFF50003E6E1A /* FMCChoice.h in Headers */,
 				597C051A17DEFF50003E6E1A /* FMCCompassDirection.h in Headers */,
@@ -1357,6 +1442,7 @@
 				597C054C17DEFF50003E6E1A /* FMCEndAudioPassThruResponse.h in Headers */,
 				597C054E17DEFF50003E6E1A /* FMCEngineInfo.h in Headers */,
 				597C055017DEFF50003E6E1A /* FMCEnum.h in Headers */,
+				59EAEC4A18F3BD2D0095E38E /* FMCFuelCutoffStatus.h in Headers */,
 				597C055217DEFF50003E6E1A /* FMCFileType.h in Headers */,
 				597C055417DEFF50003E6E1A /* FMCFunctionID.h in Headers */,
 				597C055617DEFF50003E6E1A /* FMCGenericResponse.h in Headers */,
@@ -1365,9 +1451,11 @@
 				597C055C17DEFF50003E6E1A /* FMCGetVehicleData.h in Headers */,
 				597C055E17DEFF50003E6E1A /* FMCGetVehicleDataResponse.h in Headers */,
 				597C056017DEFF50003E6E1A /* FMCGlobalProperty.h in Headers */,
+				59EAEC5018F3BD2D0095E38E /* FMCPowerModeQualificationStatus.h in Headers */,
 				597C056217DEFF50003E6E1A /* FMCGPSData.h in Headers */,
 				597C056417DEFF50003E6E1A /* FMCHeadLampStatus.h in Headers */,
 				597C056617DEFF50003E6E1A /* FMCHMILevel.h in Headers */,
+				59EAEC3E18F3BD2D0095E38E /* FMCCarModeStatus.h in Headers */,
 				597C056817DEFF50003E6E1A /* FMCHMIPermissions.h in Headers */,
 				597C056A17DEFF50003E6E1A /* FMCHMIZoneCapabilities.h in Headers */,
 				597C056C17DEFF50003E6E1A /* FMCIgnitionStableStatus.h in Headers */,
@@ -1395,6 +1483,7 @@
 				597C059A17DEFF50003E6E1A /* FMCOnLanguageChange.h in Headers */,
 				597C059C17DEFF50003E6E1A /* FMCOnPermissionsChange.h in Headers */,
 				597C05A217DEFF50003E6E1A /* FMCOnVehicleData.h in Headers */,
+				59EAEC4818F3BD2D0095E38E /* FMCEmergencyEventType.h in Headers */,
 				597C05A417DEFF50003E6E1A /* FMCParameterPermissions.h in Headers */,
 				597C05A617DEFF50003E6E1A /* FMCPerformAudioPassThru.h in Headers */,
 				597C05A817DEFF50003E6E1A /* FMCPerformAudioPassThruResponse.h in Headers */,
@@ -1416,6 +1505,7 @@
 				597C05C517DEFF50003E6E1A /* FMCReadDID.h in Headers */,
 				597C05C717DEFF50003E6E1A /* FMCReadDIDResponse.h in Headers */,
 				597C05C917DEFF50003E6E1A /* FMCRegisterAppInterface.h in Headers */,
+				59EAEC4E18F3BD2D0095E38E /* FMCOnTBTClientState.h in Headers */,
 				597C05CB17DEFF50003E6E1A /* FMCRegisterAppInterfaceResponse.h in Headers */,
 				597C05CD17DEFF50003E6E1A /* FMCResetGlobalProperties.h in Headers */,
 				597C05CF17DEFF50003E6E1A /* FMCResetGlobalPropertiesResponse.h in Headers */,
@@ -1433,7 +1523,9 @@
 				597C05E717DEFF50003E6E1A /* FMCSetAppIconResponse.h in Headers */,
 				597C05E917DEFF50003E6E1A /* FMCSetDisplayLayout.h in Headers */,
 				597C05EB17DEFF50003E6E1A /* FMCSetDisplayLayoutResponse.h in Headers */,
+				59EAEC4218F3BD2D0095E38E /* FMCECallConfirmationStatus.h in Headers */,
 				597C05ED17DEFF50003E6E1A /* FMCSetGlobalProperties.h in Headers */,
+				59EAEC5218F3BD2D0095E38E /* FMCPowerModeStatus.h in Headers */,
 				597C05EF17DEFF50003E6E1A /* FMCSetGlobalPropertiesResponse.h in Headers */,
 				597C05F117DEFF50003E6E1A /* FMCSetMediaClockTimer.h in Headers */,
 				597C05F317DEFF50003E6E1A /* FMCSetMediaClockTimerResponse.h in Headers */,
@@ -1445,6 +1537,7 @@
 				597C060317DEFF50003E6E1A /* FMCSliderResponse.h in Headers */,
 				597C060517DEFF50003E6E1A /* FMCSoftButton.h in Headers */,
 				597C060717DEFF50003E6E1A /* FMCSoftButtonCapabilities.h in Headers */,
+				59EAEC5418F3BD2D0095E38E /* FMCTBTState.h in Headers */,
 				597C060917DEFF50003E6E1A /* FMCSoftButtonType.h in Headers */,
 				597C060B17DEFF50003E6E1A /* FMCSpeak.h in Headers */,
 				597C060D17DEFF50003E6E1A /* FMCSpeakResponse.h in Headers */,
@@ -1454,6 +1547,7 @@
 				597C061517DEFF50003E6E1A /* FMCSubscribeButtonResponse.h in Headers */,
 				597C061717DEFF50003E6E1A /* FMCSubscribeVehicleData.h in Headers */,
 				597C061917DEFF50003E6E1A /* FMCSubscribeVehicleDataResponse.h in Headers */,
+				59EAEC5618F3BD2D0095E38E /* FMCTimerMode.h in Headers */,
 				597C061B17DEFF50003E6E1A /* FMCSyncIAPTransport.h in Headers */,
 				597C061D17DEFF50003E6E1A /* FMCSyncMsgVersion.h in Headers */,
 				597C062317DEFF50003E6E1A /* FMCSyncProxy.h in Headers */,
@@ -1464,6 +1558,7 @@
 				597C062C17DEFF50003E6E1A /* FMCSystemContext.h in Headers */,
 				597C063017DEFF50003E6E1A /* FMCTextAlignment.h in Headers */,
 				597C063217DEFF50003E6E1A /* FMCTextField.h in Headers */,
+				59EAEC3C18F3BD2D0095E38E /* FMCAirbagStatus.h in Headers */,
 				597C063417DEFF50003E6E1A /* FMCTextFieldName.h in Headers */,
 				597C063617DEFF50003E6E1A /* FMCTireStatus.h in Headers */,
 				597C063817DEFF50003E6E1A /* FMCTransportListener.h in Headers */,
@@ -1492,14 +1587,17 @@
 				597C066B17DEFF51003E6E1A /* FMCAppLinkProtocol.h in Headers */,
 				597C067A17DEFF51003E6E1A /* AppLink.h in Headers */,
 				5931469617E03CFD005C49C5 /* FMCBitConverter.h in Headers */,
+				59EAEC4C18F3BD2D0095E38E /* FMCMyKey.h in Headers */,
 				597C058917DEFF50003E6E1A /* FMCNames.h in Headers */,
 				FBAC28E1181FEAF4003210A2 /* FMCExternalLibrary.h in Headers */,
 				597C054517DEFF50003E6E1A /* FMCEncodedSyncPData.h in Headers */,
 				597C054717DEFF50003E6E1A /* FMCEncodedSyncPDataResponse.h in Headers */,
+				59EAEC4618F3BD2D0095E38E /* FMCEmergencyEvent.h in Headers */,
 				597C059617DEFF50003E6E1A /* FMCOnEncodedSyncPData.h in Headers */,
 				597C059E17DEFF50003E6E1A /* FMCOnSyncPData.h in Headers */,
 				597C061F17DEFF50003E6E1A /* FMCSyncPData.h in Headers */,
 				597C062117DEFF50003E6E1A /* FMCSyncPDataResponse.h in Headers */,
+				59EAEC4418F3BD2D0095E38E /* FMCECallInfo.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1581,6 +1679,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59EAEC3F18F3BD2D0095E38E /* FMCCarModeStatus.m in Sources */,
 				597C04E317DEFF50003E6E1A /* FMCAbstractProtocol.m in Sources */,
 				597C04E517DEFF50003E6E1A /* FMCAbstractSyncTransport.m in Sources */,
 				597C04E717DEFF50003E6E1A /* FMCAddCommand.m in Sources */,
@@ -1599,6 +1698,7 @@
 				597C050517DEFF50003E6E1A /* FMCBitConverter.m in Sources */,
 				597C050717DEFF50003E6E1A /* FMCBitsPerSample.m in Sources */,
 				597C050917DEFF50003E6E1A /* FMCBodyInformation.m in Sources */,
+				59EAEC4918F3BD2D0095E38E /* FMCEmergencyEventType.m in Sources */,
 				597C050B17DEFF50003E6E1A /* FMCButtonCapabilities.m in Sources */,
 				597C050D17DEFF50003E6E1A /* FMCButtonEventMode.m in Sources */,
 				597C050F17DEFF50003E6E1A /* FMCButtonName.m in Sources */,
@@ -1625,6 +1725,7 @@
 				597C053A17DEFF50003E6E1A /* FMCDeviceStatus.m in Sources */,
 				597C053C17DEFF50003E6E1A /* FMCDIDResult.m in Sources */,
 				597C053E17DEFF50003E6E1A /* FMCDimension.m in Sources */,
+				59EAEC4D18F3BD2D0095E38E /* FMCMyKey.m in Sources */,
 				597C054017DEFF50003E6E1A /* FMCDisplayCapabilities.m in Sources */,
 				597C054217DEFF50003E6E1A /* FMCDisplayType.m in Sources */,
 				597C054417DEFF50003E6E1A /* FMCDriverDistractionState.m in Sources */,
@@ -1651,6 +1752,7 @@
 				597C056F17DEFF50003E6E1A /* FMCIgnitionStatus.m in Sources */,
 				597C057117DEFF50003E6E1A /* FMCImage.m in Sources */,
 				597C057317DEFF50003E6E1A /* FMCImageType.m in Sources */,
+				59EAEC4F18F3BD2D0095E38E /* FMCOnTBTClientState.m in Sources */,
 				597C057517DEFF50003E6E1A /* FMCInteractionMode.m in Sources */,
 				597C057817DEFF50003E6E1A /* FMCJingle.m in Sources */,
 				597C057A17DEFF50003E6E1A /* FMCJsonDecoder.m in Sources */,
@@ -1666,6 +1768,7 @@
 				597C058F17DEFF50003E6E1A /* FMCOnButtonEvent.m in Sources */,
 				597C059117DEFF50003E6E1A /* FMCOnButtonPress.m in Sources */,
 				597C059317DEFF50003E6E1A /* FMCOnCommand.m in Sources */,
+				59EAEC5718F3BD2D0095E38E /* FMCTimerMode.m in Sources */,
 				597C059517DEFF50003E6E1A /* FMCOnDriverDistraction.m in Sources */,
 				597C059717DEFF50003E6E1A /* FMCOnEncodedSyncPData.m in Sources */,
 				597C059917DEFF50003E6E1A /* FMCOnHMIStatus.m in Sources */,
@@ -1679,6 +1782,7 @@
 				597C05AB17DEFF50003E6E1A /* FMCPerformInteraction.m in Sources */,
 				597C05AD17DEFF50003E6E1A /* FMCPerformInteractionResponse.m in Sources */,
 				597C05AF17DEFF50003E6E1A /* FMCPermissionItem.m in Sources */,
+				59EAEC4318F3BD2D0095E38E /* FMCECallConfirmationStatus.m in Sources */,
 				597C05B117DEFF50003E6E1A /* FMCPermissionStatus.m in Sources */,
 				597C05B317DEFF50003E6E1A /* FMCPresetBankCapabilities.m in Sources */,
 				597C05B517DEFF50003E6E1A /* FMCPrimaryAudioSource.m in Sources */,
@@ -1691,7 +1795,9 @@
 				597C05C617DEFF50003E6E1A /* FMCReadDID.m in Sources */,
 				597C05C817DEFF50003E6E1A /* FMCReadDIDResponse.m in Sources */,
 				597C05CA17DEFF50003E6E1A /* FMCRegisterAppInterface.m in Sources */,
+				59EAEC5318F3BD2D0095E38E /* FMCPowerModeStatus.m in Sources */,
 				597C05CC17DEFF50003E6E1A /* FMCRegisterAppInterfaceResponse.m in Sources */,
+				59EAEC3D18F3BD2D0095E38E /* FMCAirbagStatus.m in Sources */,
 				597C05CE17DEFF50003E6E1A /* FMCResetGlobalProperties.m in Sources */,
 				597C05D017DEFF50003E6E1A /* FMCResetGlobalPropertiesResponse.m in Sources */,
 				597C05D217DEFF50003E6E1A /* FMCResult.m in Sources */,
@@ -1726,21 +1832,26 @@
 				597C061017DEFF50003E6E1A /* FMCSpeechCapabilities.m in Sources */,
 				597C061217DEFF50003E6E1A /* FMCStartTime.m in Sources */,
 				597C061417DEFF50003E6E1A /* FMCSubscribeButton.m in Sources */,
+				59EAEC4518F3BD2D0095E38E /* FMCECallInfo.m in Sources */,
 				597C061617DEFF50003E6E1A /* FMCSubscribeButtonResponse.m in Sources */,
 				597C061817DEFF50003E6E1A /* FMCSubscribeVehicleData.m in Sources */,
 				597C061A17DEFF50003E6E1A /* FMCSubscribeVehicleDataResponse.m in Sources */,
 				597C061C17DEFF50003E6E1A /* FMCSyncIAPTransport.m in Sources */,
 				597C061E17DEFF50003E6E1A /* FMCSyncMsgVersion.m in Sources */,
+				59EAEC5518F3BD2D0095E38E /* FMCTBTState.m in Sources */,
 				597C062017DEFF50003E6E1A /* FMCSyncPData.m in Sources */,
+				59EAEC4718F3BD2D0095E38E /* FMCEmergencyEvent.m in Sources */,
 				597C062217DEFF50003E6E1A /* FMCSyncPDataResponse.m in Sources */,
 				597C062417DEFF50003E6E1A /* FMCSyncProxy.m in Sources */,
 				597C062617DEFF50003E6E1A /* FMCSyncProxyFactory.m in Sources */,
 				597C062817DEFF50003E6E1A /* FMCSyncTcpTransport.m in Sources */,
 				597C062B17DEFF50003E6E1A /* FMCSystemAction.m in Sources */,
+				59EAEC4118F3BD2D0095E38E /* FMCClusterModeStatus.m in Sources */,
 				597C062D17DEFF50003E6E1A /* FMCSystemContext.m in Sources */,
 				597C063117DEFF50003E6E1A /* FMCTextAlignment.m in Sources */,
 				597C063317DEFF50003E6E1A /* FMCTextField.m in Sources */,
 				597C063517DEFF50003E6E1A /* FMCTextFieldName.m in Sources */,
+				59EAEC5118F3BD2D0095E38E /* FMCPowerModeQualificationStatus.m in Sources */,
 				597C063717DEFF50003E6E1A /* FMCTireStatus.m in Sources */,
 				597C063A17DEFF50003E6E1A /* FMCTriggerSource.m in Sources */,
 				597C063C17DEFF50003E6E1A /* FMCTTSChunk.m in Sources */,
@@ -1763,6 +1874,7 @@
 				597C066417DEFF50003E6E1A /* FMCVrCapabilities.m in Sources */,
 				597C066617DEFF50003E6E1A /* FMCVrHelpItem.m in Sources */,
 				597C066817DEFF50003E6E1A /* FMCWarningLightStatus.m in Sources */,
+				59EAEC4B18F3BD2D0095E38E /* FMCFuelCutoffStatus.m in Sources */,
 				597C066A17DEFF50003E6E1A /* FMCWiperStatus.m in Sources */,
 				597C066C17DEFF51003E6E1A /* FMCAppLinkProtocol.m in Sources */,
 			);

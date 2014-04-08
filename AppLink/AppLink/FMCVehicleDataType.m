@@ -18,6 +18,11 @@ FMCVehicleDataType* FMCVehicleDataType_VEHICLEDATA_ODOMETER = nil;
 FMCVehicleDataType* FMCVehicleDataType_VEHICLEDATA_BELTSTATUS = nil;
 FMCVehicleDataType* FMCVehicleDataType_VEHICLEDATA_BODYINFO = nil;
 FMCVehicleDataType* FMCVehicleDataType_VEHICLEDATA_DEVICESTATUS = nil;
+FMCVehicleDataType* FMCVehicleDataType_VEHICLEDATA_ECALLINFO = nil;
+FMCVehicleDataType* FMCVehicleDataType_VEHICLEDATA_AIRBAGSTATUS = nil;
+FMCVehicleDataType* FMCVehicleDataType_VEHICLEDATA_EMERGENCYEVENT = nil;
+FMCVehicleDataType* FMCVehicleDataType_VEHICLEDATA_CLUSTERMODESTATUS = nil;
+FMCVehicleDataType* FMCVehicleDataType_VEHICLEDATA_MYKEY = nil;
 FMCVehicleDataType* FMCVehicleDataType_VEHICLEDATA_BRAKING = nil;
 FMCVehicleDataType* FMCVehicleDataType_VEHICLEDATA_WIPERSTATUS = nil;
 FMCVehicleDataType* FMCVehicleDataType_VEHICLEDATA_HEADLAMPSTATUS = nil;
@@ -39,33 +44,38 @@ NSMutableArray* FMCVehicleDataType_values = nil;
     return nil;
 }
 
-+(NSMutableArray *) values {           
-	if (FMCVehicleDataType_values == nil) {                               
-		FMCVehicleDataType_values = [[NSMutableArray alloc] initWithObjects: 
-                                    FMCVehicleDataType.VEHICLEDATA_GPS,
-                                    FMCVehicleDataType.VEHICLEDATA_SPEED,
-                                    FMCVehicleDataType.VEHICLEDATA_RPM,
-                                    FMCVehicleDataType.VEHICLEDATA_FUELLEVEL,
-                                    FMCVehicleDataType.VEHICLEDATA_FUELLEVEL_STATE,
-                                    FMCVehicleDataType.VEHICLEDATA_FUELCONSUMPTION,
-                                    FMCVehicleDataType.VEHICLEDATA_EXTERNTEMP,
-                                    FMCVehicleDataType.VEHICLEDATA_VIN,
-                                    FMCVehicleDataType.VEHICLEDATA_PRNDL,
-                                    FMCVehicleDataType.VEHICLEDATA_TIREPRESSURE,
-                                    FMCVehicleDataType.VEHICLEDATA_ODOMETER,
-                                    FMCVehicleDataType.VEHICLEDATA_BELTSTATUS,
-                                    FMCVehicleDataType.VEHICLEDATA_BODYINFO,
-                                    FMCVehicleDataType.VEHICLEDATA_DEVICESTATUS,
-                                    FMCVehicleDataType.VEHICLEDATA_BRAKING,
-                                    FMCVehicleDataType.VEHICLEDATA_WIPERSTATUS,
-                                    FMCVehicleDataType.VEHICLEDATA_HEADLAMPSTATUS,
-                                    FMCVehicleDataType.VEHICLEDATA_BATTVOLTAGE,
-                                    FMCVehicleDataType.VEHICLEDATA_ENGINETORQUE,
-                                    FMCVehicleDataType.VEHICLEDATA_ACCPEDAL,
-                                    FMCVehicleDataType.VEHICLEDATA_STEERINGWHEEL,
-									nil];
-	} 
-	return FMCVehicleDataType_values;
++(NSMutableArray*) values {
+    if (FMCVehicleDataType_values == nil) {
+        FMCVehicleDataType_values = [[NSMutableArray alloc] initWithObjects:
+                FMCVehicleDataType.VEHICLEDATA_GPS,
+                FMCVehicleDataType.VEHICLEDATA_SPEED,
+                FMCVehicleDataType.VEHICLEDATA_RPM,
+                FMCVehicleDataType.VEHICLEDATA_FUELLEVEL,
+                FMCVehicleDataType.VEHICLEDATA_FUELLEVEL_STATE,
+                FMCVehicleDataType.VEHICLEDATA_FUELCONSUMPTION,
+                FMCVehicleDataType.VEHICLEDATA_EXTERNTEMP,
+                FMCVehicleDataType.VEHICLEDATA_VIN,
+                FMCVehicleDataType.VEHICLEDATA_PRNDL,
+                FMCVehicleDataType.VEHICLEDATA_TIREPRESSURE,
+                FMCVehicleDataType.VEHICLEDATA_ODOMETER,
+                FMCVehicleDataType.VEHICLEDATA_BELTSTATUS,
+                FMCVehicleDataType.VEHICLEDATA_BODYINFO,
+                FMCVehicleDataType.VEHICLEDATA_DEVICESTATUS,
+                FMCVehicleDataType.VEHICLEDATA_ECALLINFO,
+                FMCVehicleDataType.VEHICLEDATA_AIRBAGSTATUS,
+                FMCVehicleDataType.VEHICLEDATA_EMERGENCYEVENT,
+                FMCVehicleDataType.VEHICLEDATA_CLUSTERMODESTATUS,
+                FMCVehicleDataType.VEHICLEDATA_MYKEY,
+                FMCVehicleDataType.VEHICLEDATA_BRAKING,
+                FMCVehicleDataType.VEHICLEDATA_WIPERSTATUS,
+                FMCVehicleDataType.VEHICLEDATA_HEADLAMPSTATUS,
+                FMCVehicleDataType.VEHICLEDATA_BATTVOLTAGE,
+                FMCVehicleDataType.VEHICLEDATA_ENGINETORQUE,
+                FMCVehicleDataType.VEHICLEDATA_ACCPEDAL,
+                FMCVehicleDataType.VEHICLEDATA_STEERINGWHEEL,
+                nil];
+    }
+    return FMCVehicleDataType_values;
 }
 
 +(FMCVehicleDataType*) VEHICLEDATA_GPS {
@@ -164,6 +174,41 @@ NSMutableArray* FMCVehicleDataType_values = nil;
         FMCVehicleDataType_VEHICLEDATA_DEVICESTATUS = [[FMCVehicleDataType alloc] initWithValue:@"VEHICLEDATA_DEVICESTATUS"];
     }
     return FMCVehicleDataType_VEHICLEDATA_DEVICESTATUS;
+}
+
++(FMCVehicleDataType*) VEHICLEDATA_ECALLINFO {
+    if (FMCVehicleDataType_VEHICLEDATA_ECALLINFO == nil) {
+        FMCVehicleDataType_VEHICLEDATA_ECALLINFO = [[FMCVehicleDataType alloc] initWithValue:@"VEHICLEDATA_ECALLINFO"];
+    }
+    return FMCVehicleDataType_VEHICLEDATA_ECALLINFO;
+}
+
++(FMCVehicleDataType*) VEHICLEDATA_AIRBAGSTATUS {
+    if (FMCVehicleDataType_VEHICLEDATA_AIRBAGSTATUS == nil) {
+        FMCVehicleDataType_VEHICLEDATA_AIRBAGSTATUS = [[FMCVehicleDataType alloc] initWithValue:@"VEHICLEDATA_AIRBAGSTATUS"];
+    }
+    return FMCVehicleDataType_VEHICLEDATA_AIRBAGSTATUS;
+}
+
++(FMCVehicleDataType*) VEHICLEDATA_EMERGENCYEVENT {
+    if (FMCVehicleDataType_VEHICLEDATA_EMERGENCYEVENT == nil) {
+        FMCVehicleDataType_VEHICLEDATA_EMERGENCYEVENT = [[FMCVehicleDataType alloc] initWithValue:@"VEHICLEDATA_EMERGENCYEVENT"];
+    }
+    return FMCVehicleDataType_VEHICLEDATA_EMERGENCYEVENT;
+}
+
++(FMCVehicleDataType*) VEHICLEDATA_CLUSTERMODESTATUS {
+    if (FMCVehicleDataType_VEHICLEDATA_CLUSTERMODESTATUS == nil) {
+        FMCVehicleDataType_VEHICLEDATA_CLUSTERMODESTATUS = [[FMCVehicleDataType alloc] initWithValue:@"VEHICLEDATA_CLUSTERMODESTATUS"];
+    }
+    return FMCVehicleDataType_VEHICLEDATA_CLUSTERMODESTATUS;
+}
+
++(FMCVehicleDataType*) VEHICLEDATA_MYKEY {
+    if (FMCVehicleDataType_VEHICLEDATA_MYKEY == nil) {
+        FMCVehicleDataType_VEHICLEDATA_MYKEY = [[FMCVehicleDataType alloc] initWithValue:@"VEHICLEDATA_MYKEY"];
+    }
+    return FMCVehicleDataType_VEHICLEDATA_MYKEY;
 }
 
 +(FMCVehicleDataType*) VEHICLEDATA_BRAKING {

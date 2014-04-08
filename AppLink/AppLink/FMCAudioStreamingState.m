@@ -25,6 +25,7 @@ NSMutableArray* FMCAudioStreamingState_values = nil;
     if (FMCAudioStreamingState_values == nil) {
         FMCAudioStreamingState_values = [[NSMutableArray alloc] initWithObjects:
                 FMCAudioStreamingState.AUDIBLE,
+                FMCAudioStreamingState.ATTENUATED,
                 FMCAudioStreamingState.NOT_AUDIBLE,
                 nil];
     }

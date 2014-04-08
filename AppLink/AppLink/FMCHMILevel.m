@@ -10,6 +10,7 @@ FMCHMILevel* FMCHMILevel_HMI_BACKGROUND = nil;
 FMCHMILevel* FMCHMILevel_HMI_NONE = nil;
 
 NSMutableArray* FMCHMILevel_values = nil;
+
 @implementation FMCHMILevel
 
 +(FMCHMILevel*) valueOf:(NSString*) value {
@@ -34,31 +35,31 @@ NSMutableArray* FMCHMILevel_values = nil;
 }
 
 +(FMCHMILevel*) HMI_FULL {
-    	if (FMCHMILevel_HMI_FULL == nil) {
-        		FMCHMILevel_HMI_FULL = [[FMCHMILevel alloc] initWithValue:@"FULL"];
-    	}
-    	return FMCHMILevel_HMI_FULL;
+    if (FMCHMILevel_HMI_FULL == nil) {
+        FMCHMILevel_HMI_FULL = [[FMCHMILevel alloc] initWithValue:@"FULL"];
+    }
+    return FMCHMILevel_HMI_FULL;
 }
 
 +(FMCHMILevel*) HMI_LIMITED {
-    	if (FMCHMILevel_HMI_LIMITED == nil) {
-        		FMCHMILevel_HMI_LIMITED = [[FMCHMILevel alloc] initWithValue:@"LIMITED"];
-    	}
-    	return FMCHMILevel_HMI_LIMITED;
+    if (FMCHMILevel_HMI_LIMITED == nil) {
+        FMCHMILevel_HMI_LIMITED = [[FMCHMILevel alloc] initWithValue:@"LIMITED"];
+    }
+    return FMCHMILevel_HMI_LIMITED;
 }
 
 +(FMCHMILevel*) HMI_BACKGROUND {
-    	if (FMCHMILevel_HMI_BACKGROUND == nil) {
-        		FMCHMILevel_HMI_BACKGROUND = [[FMCHMILevel alloc] initWithValue:@"BACKGROUND"];
-    	}
-    	return FMCHMILevel_HMI_BACKGROUND;
+    if (FMCHMILevel_HMI_BACKGROUND == nil) {
+        FMCHMILevel_HMI_BACKGROUND = [[FMCHMILevel alloc] initWithValue:@"BACKGROUND"];
+    }
+    return FMCHMILevel_HMI_BACKGROUND;
 }
 
 +(FMCHMILevel*) HMI_NONE {
-    	if (FMCHMILevel_HMI_NONE == nil) {
-        		FMCHMILevel_HMI_NONE = [[FMCHMILevel alloc] initWithValue:@"NONE"];
-    	}
-    	return FMCHMILevel_HMI_NONE;
+    if (FMCHMILevel_HMI_NONE == nil) {
+        FMCHMILevel_HMI_NONE = [[FMCHMILevel alloc] initWithValue:@"NONE"];
+    }
+    return FMCHMILevel_HMI_NONE;
 }
 
 @end

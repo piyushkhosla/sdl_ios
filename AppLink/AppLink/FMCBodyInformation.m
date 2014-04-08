@@ -38,8 +38,13 @@
     }
 }
 
--(NSNumber*) ignitionStableStatus {
-    return [store objectForKey:NAMES_ignitionStableStatus];
+-(FMCIgnitionStableStatus*) ignitionStableStatus {
+    NSObject* obj = [store objectForKey:NAMES_ignitionStableStatus];
+    if ([obj isKindOfClass:FMCIgnitionStableStatus.class]) {
+        return (FMCIgnitionStableStatus*)obj;
+    } else {
+        return [FMCIgnitionStableStatus valueOf:(NSString*)obj];
+    }
 }
 
 -(void) setIgnitionStatus:(FMCIgnitionStatus*) ignitionStatus {
@@ -50,8 +55,13 @@
     }
 }
 
--(NSNumber*) ignitionStatus {
-    return [store objectForKey:NAMES_ignitionStatus];
+-(FMCIgnitionStatus*) ignitionStatus {
+    NSObject* obj = [store objectForKey:NAMES_ignitionStatus];
+    if ([obj isKindOfClass:FMCIgnitionStatus.class]) {
+        return (FMCIgnitionStatus*)obj;
+    } else {
+        return [FMCIgnitionStatus valueOf:(NSString*)obj];
+    }
 }
 
 -(void) setDriverDoorAjar:(NSNumber*) driverDoorAjar {

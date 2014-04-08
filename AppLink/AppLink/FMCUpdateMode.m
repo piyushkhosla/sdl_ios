@@ -30,7 +30,7 @@ NSMutableArray* FMCUpdateMode_values = nil;
                 FMCUpdateMode.COUNTDOWN,
                 FMCUpdateMode.PAUSE,
                 FMCUpdateMode.RESUME,
-                FMCUpdateMode_CLEAR,
+                FMCUpdateMode.CLEAR,
                 nil];
     }
     return FMCUpdateMode_values;

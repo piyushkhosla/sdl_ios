@@ -39,16 +39,7 @@
 }
 
 -(NSMutableArray*) didLocation {
-    NSMutableArray* array = [parameters objectForKey:NAMES_didLocation];
-    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:NSNumber.class]) {
-        return array;
-    } else {
-        NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
-        for (NSNumber* enumNumber in array) {
-            [newList addObject:enumNumber];
-        }
-        return newList;
-    }
+    return [parameters objectForKey:NAMES_didLocation];
 }
 
 @end

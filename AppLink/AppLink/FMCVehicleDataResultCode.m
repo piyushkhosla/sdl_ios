@@ -5,6 +5,7 @@
 #import <AppLink/FMCVehicleDataResultCode.h>
 
 FMCVehicleDataResultCode* FMCVehicleDataResultCode_SUCCESS = nil;
+FMCVehicleDataResultCode* FMCVehicleDataResultCode_TRUNCATED_DATA = nil;
 FMCVehicleDataResultCode* FMCVehicleDataResultCode_DISALLOWED = nil;
 FMCVehicleDataResultCode* FMCVehicleDataResultCode_USER_DISALLOWED = nil;
 FMCVehicleDataResultCode* FMCVehicleDataResultCode_INVALID_ID = nil;
@@ -26,20 +27,21 @@ NSMutableArray* FMCVehicleDataResultCode_values = nil;
     return nil;
 }
 
-+(NSMutableArray *) values {           
-	if (FMCVehicleDataResultCode_values == nil) {                               
-		FMCVehicleDataResultCode_values = [[NSMutableArray alloc] initWithObjects: 
-                                    FMCVehicleDataResultCode.SUCCESS,
-                                    FMCVehicleDataResultCode.DISALLOWED,
-                                    FMCVehicleDataResultCode.USER_DISALLOWED,
-                                    FMCVehicleDataResultCode.INVALID_ID,
-                                    FMCVehicleDataResultCode.VEHICLE_DATA_NOT_AVAILABLE,
-                                    FMCVehicleDataResultCode.DATA_ALREADY_SUBSCRIBED,
-                                    FMCVehicleDataResultCode.DATA_NOT_SUBSCRIBED,
-                                    FMCVehicleDataResultCode.IGNORED,
-									nil];
-	} 
-	return FMCVehicleDataResultCode_values; 
++(NSMutableArray*) values {
+    if (FMCVehicleDataResultCode_values == nil) {
+        FMCVehicleDataResultCode_values = [[NSMutableArray alloc] initWithObjects:
+                FMCVehicleDataResultCode.SUCCESS,
+                FMCVehicleDataResultCode.TRUNCATED_DATA,
+                FMCVehicleDataResultCode.DISALLOWED,
+                FMCVehicleDataResultCode.USER_DISALLOWED,
+                FMCVehicleDataResultCode.INVALID_ID,
+                FMCVehicleDataResultCode.VEHICLE_DATA_NOT_AVAILABLE,
+                FMCVehicleDataResultCode.DATA_ALREADY_SUBSCRIBED,
+                FMCVehicleDataResultCode.DATA_NOT_SUBSCRIBED,
+                FMCVehicleDataResultCode.IGNORED,
+                nil];
+    }
+    return FMCVehicleDataResultCode_values;
 }
 
 +(FMCVehicleDataResultCode*) SUCCESS {
@@ -47,6 +49,13 @@ NSMutableArray* FMCVehicleDataResultCode_values = nil;
         FMCVehicleDataResultCode_SUCCESS = [[FMCVehicleDataResultCode alloc] initWithValue:@"SUCCESS"];
     }
     return FMCVehicleDataResultCode_SUCCESS;
+}
+
++(FMCVehicleDataResultCode*) TRUNCATED_DATA {
+    if (FMCVehicleDataResultCode_TRUNCATED_DATA == nil) {
+        FMCVehicleDataResultCode_TRUNCATED_DATA = [[FMCVehicleDataResultCode alloc] initWithValue:@"TRUNCATED_DATA"];
+    }
+    return FMCVehicleDataResultCode_TRUNCATED_DATA;
 }
 
 +(FMCVehicleDataResultCode*) DISALLOWED {

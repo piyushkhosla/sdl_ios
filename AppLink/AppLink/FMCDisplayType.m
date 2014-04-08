@@ -8,9 +8,8 @@ FMCDisplayType* FMCDisplayType_CID = nil;
 FMCDisplayType* FMCDisplayType_TYPE2 = nil;
 FMCDisplayType* FMCDisplayType_TYPE5 = nil;
 FMCDisplayType* FMCDisplayType_NGN = nil;
-FMCDisplayType* FMCDisplayType_GEN2_4_DMA = nil;
 FMCDisplayType* FMCDisplayType_GEN2_8_DMA = nil;
-FMCDisplayType* FMCDisplayType_GEN2_4_HUD = nil;
+FMCDisplayType* FMCDisplayType_GEN2_6_DMA = nil;
 FMCDisplayType* FMCDisplayType_MFD3 = nil;
 FMCDisplayType* FMCDisplayType_MFD4 = nil;
 FMCDisplayType* FMCDisplayType_MFD5 = nil;
@@ -35,9 +34,8 @@ NSMutableArray* FMCDisplayType_values = nil;
                 FMCDisplayType.TYPE2,
                 FMCDisplayType.TYPE5,
                 FMCDisplayType.NGN,
-                FMCDisplayType.GEN2_4_DMA,
                 FMCDisplayType.GEN2_8_DMA,
-                FMCDisplayType.GEN2_4_HUD,
+                FMCDisplayType.GEN2_6_DMA,
                 FMCDisplayType.MFD3,
                 FMCDisplayType.MFD4,
                 FMCDisplayType.MFD5,
@@ -74,13 +72,6 @@ NSMutableArray* FMCDisplayType_values = nil;
     return FMCDisplayType_NGN;
 }
 
-+(FMCDisplayType*) GEN2_4_DMA {
-    	if (FMCDisplayType_GEN2_4_DMA == nil) {
-        		FMCDisplayType_GEN2_4_DMA = [[FMCDisplayType alloc] initWithValue:@"GEN2_4_DMA"];
-    	}
-    	return FMCDisplayType_GEN2_4_DMA;
-}
-
 +(FMCDisplayType*) GEN2_8_DMA {
     if (FMCDisplayType_GEN2_8_DMA == nil) {
         FMCDisplayType_GEN2_8_DMA = [[FMCDisplayType alloc] initWithValue:@"GEN2_8_DMA"];
@@ -88,11 +79,11 @@ NSMutableArray* FMCDisplayType_values = nil;
     return FMCDisplayType_GEN2_8_DMA;
 }
 
-+(FMCDisplayType*) GEN2_4_HUD {
-    	if (FMCDisplayType_GEN2_4_HUD == nil) {
-        		FMCDisplayType_GEN2_4_HUD = [[FMCDisplayType alloc] initWithValue:@"GEN2_4_HUD"];
-    	}
-    	return FMCDisplayType_GEN2_4_HUD;
++(FMCDisplayType*) GEN2_6_DMA {
+    if (FMCDisplayType_GEN2_6_DMA == nil) {
+        FMCDisplayType_GEN2_6_DMA = [[FMCDisplayType alloc] initWithValue:@"GEN2_6_DMA"];
+    }
+    return FMCDisplayType_GEN2_6_DMA;
 }
 
 +(FMCDisplayType*) MFD3 {

@@ -123,7 +123,12 @@
 }
 
 -(FMCCompassDirection*) compassDirection {
-    return [store objectForKey:NAMES_compassDirection];
+    NSObject* obj = [store objectForKey:NAMES_compassDirection];
+    if ([obj isKindOfClass:FMCCompassDirection.class]) {
+        return (FMCCompassDirection*)obj;
+    } else {
+        return [FMCCompassDirection valueOf:(NSString*)obj];
+    }
 }
 
 -(void) setPdop:(NSNumber*) pdop {
@@ -194,8 +199,13 @@
     }
 }
 
--(FMCCompassDirection*) dimension {
-    return [store objectForKey:NAMES_dimension];
+-(FMCDimension*) dimension {
+    NSObject* obj = [store objectForKey:NAMES_dimension];
+    if ([obj isKindOfClass:FMCDimension.class]) {
+        return (FMCDimension*)obj;
+    } else {
+        return [FMCDimension valueOf:(NSString*)obj];
+    }
 }
 
 -(void) setAltitude:(NSNumber*) altitude {

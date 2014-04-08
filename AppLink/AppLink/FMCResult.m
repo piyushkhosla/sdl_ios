@@ -32,6 +32,7 @@ FMCResult* FMCResult_CANCEL_ROUTE = nil;
 FMCResult* FMCResult_TRUNCATED_DATA = nil;
 FMCResult* FMCResult_RETRY = nil;
 FMCResult* FMCResult_WARNINGS = nil;
+FMCResult* FMCResult_SAVED = nil;
 
 NSMutableArray* FMCResult_values = nil;
 
@@ -77,6 +78,7 @@ NSMutableArray* FMCResult_values = nil;
                 FMCResult.TRUNCATED_DATA,
                 FMCResult.RETRY,
                 FMCResult.WARNINGS,
+                FMCResult.SAVED,
                 nil];
     }
     return FMCResult_values;
@@ -276,6 +278,13 @@ NSMutableArray* FMCResult_values = nil;
         FMCResult_WARNINGS = [[FMCResult alloc] initWithValue:@"WARNINGS"];
     }
     return FMCResult_WARNINGS;
+}
+
++(FMCResult*) SAVED {
+    if (FMCResult_SAVED == nil) {
+        FMCResult_SAVED = [[FMCResult alloc] initWithValue:@"SAVED"];
+    }
+    return FMCResult_SAVED;
 }
 
 @end
