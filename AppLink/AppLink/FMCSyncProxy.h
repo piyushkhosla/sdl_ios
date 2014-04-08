@@ -9,7 +9,6 @@
 #import <AppLink/FMCProxyListener.h>
 #import <AppLink/FMCRPCRequestFactory.h>
 #import <AppLink/FMCSyncTransport.h>
-#import <AppLink/FMCExternalLibrary.h>
 
 @interface FMCSyncProxy : NSObject<FMCProtocolListener, NSURLConnectionDelegate> {
     Byte _version;
@@ -17,7 +16,6 @@
 	NSObject<FMCSyncTransport>* transport;
 	NSObject<FMCProtocol>* protocol;
 	NSMutableArray* proxyListeners;
-    NSMutableArray* externalLibraries;
 	Byte rpcSessionID;
 	Byte bulkSessionID;
 	
@@ -33,9 +31,6 @@
 
 -(void) dispose;
 -(void) addDelegate:(NSObject<FMCProxyListener>*) delegate;
-
--(void) registerLibrary:(id<FMCExternalLibrary>) externalLibrary;
-- (NSArray*)registeredLibraries;
 
 -(void) sendRPCRequest:(FMCRPCMessage*) msg;
 -(void) handleRpcMessage:(NSDictionary*) msg;
