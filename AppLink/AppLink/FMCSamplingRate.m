@@ -35,10 +35,10 @@ NSMutableArray* FMCSamplingRate_values = nil;
 }
 
 +(FMCSamplingRate*) _8KHZ {
-    	if (FMCSamplingRate_8KHZ == nil) {
-        		FMCSamplingRate_8KHZ = [[FMCSamplingRate alloc] initWithValue:@"8KHZ"];
-    	}
-    	return FMCSamplingRate_8KHZ;
+    if (FMCSamplingRate_8KHZ == nil) {
+        FMCSamplingRate_8KHZ = [[FMCSamplingRate alloc] initWithValue:@"8KHZ"];
+    }
+    return FMCSamplingRate_8KHZ;
 }
 
 +(FMCSamplingRate*) _16KHZ {

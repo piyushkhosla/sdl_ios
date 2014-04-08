@@ -1,16 +1,16 @@
-//  FMCHMIZoneCapabilities.h
+//  FMCHmiZoneCapabilities.h
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCEnum.h>
 
-@interface FMCHMIZoneCapabilities : FMCEnum {}
+@interface FMCHmiZoneCapabilities : FMCEnum {}
 
-+(FMCHMIZoneCapabilities*) valueOf:(NSString*) value;
++(FMCHmiZoneCapabilities*) valueOf:(NSString*) value;
 +(NSMutableArray*) values;
 
-+(FMCHMIZoneCapabilities*) FRONT;
-+(FMCHMIZoneCapabilities*) BACK;
++(FMCHmiZoneCapabilities*) FRONT;
++(FMCHmiZoneCapabilities*) BACK;
 
 @end

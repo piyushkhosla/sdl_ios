@@ -21,15 +21,15 @@ NSMutableArray* FMCDimension_values = nil;
     return nil;
 }
 
-+(NSMutableArray *) values {           
-	if (FMCDimension_values == nil) {                               
-		FMCDimension_values = [[NSMutableArray alloc] initWithObjects: 
-                                    FMCDimension.NO_FIX,
-                                    FMCDimension._2D,
-                                    FMCDimension._3D,
-									nil];                        
-	} 
-	return FMCDimension_values; 
++(NSMutableArray*) values {
+    if (FMCDimension_values == nil) {
+        FMCDimension_values = [[NSMutableArray alloc] initWithObjects:
+                FMCDimension.NO_FIX,
+                FMCDimension._2D,
+                FMCDimension._3D,
+                nil];
+    }
+    return FMCDimension_values;
 }
 
 +(FMCDimension*) NO_FIX {
@@ -40,17 +40,17 @@ NSMutableArray* FMCDimension_values = nil;
 }
 
 +(FMCDimension*) _2D {
-	if (FMCDimension_2D == nil) {
-		FMCDimension_2D = [[FMCDimension alloc] initWithValue:@"2D"];
-	}
-	return FMCDimension_2D;
+    if (FMCDimension_2D == nil) {
+        FMCDimension_2D = [[FMCDimension alloc] initWithValue:@"2D"];
+    }
+    return FMCDimension_2D;
 }
 
 +(FMCDimension*) _3D {
-	if (FMCDimension_3D == nil) {
-		FMCDimension_3D = [[FMCDimension alloc] initWithValue:@"3D"];
-	}
-	return FMCDimension_3D;
+    if (FMCDimension_3D == nil) {
+        FMCDimension_3D = [[FMCDimension alloc] initWithValue:@"3D"];
+    }
+    return FMCDimension_3D;
 }
 
 @end

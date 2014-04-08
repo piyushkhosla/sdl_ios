@@ -30,7 +30,7 @@
     NSMutableArray* array = [parameters objectForKey:NAMES_didResult];
     if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCDIDResult.class]) {
         return array;
-    } else { 
+    } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSString* enumString in array) {
             //TODO: Cleanup
@@ -40,6 +40,5 @@
         return newList;
     }
 }
-
 
 @end

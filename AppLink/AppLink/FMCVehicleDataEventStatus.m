@@ -23,17 +23,17 @@ NSMutableArray* FMCVehicleDataEventStatus_values = nil;
     return nil;
 }
 
-+(NSMutableArray *) values {           
-	if (FMCVehicleDataEventStatus_values == nil) {                               
-		FMCVehicleDataEventStatus_values = [[NSMutableArray alloc] initWithObjects: 
-                                    FMCVehicleDataEventStatus.NO_EVENT,
-                                    FMCVehicleDataEventStatus._NO,
-                                    FMCVehicleDataEventStatus._YES,
-                                    FMCVehicleDataEventStatus.NOT_SUPPORTED,
-                                    FMCVehicleDataEventStatus.FAULT,
-									nil];
-	} 
-	return FMCVehicleDataEventStatus_values; 
++(NSMutableArray*) values {
+    if (FMCVehicleDataEventStatus_values == nil) {
+        FMCVehicleDataEventStatus_values = [[NSMutableArray alloc] initWithObjects:
+                FMCVehicleDataEventStatus.NO_EVENT,
+                FMCVehicleDataEventStatus._NO,
+                FMCVehicleDataEventStatus._YES,
+                FMCVehicleDataEventStatus.NOT_SUPPORTED,
+                FMCVehicleDataEventStatus.FAULT,
+                nil];
+    }
+    return FMCVehicleDataEventStatus_values;
 }
 
 +(FMCVehicleDataEventStatus*) NO_EVENT {
@@ -44,17 +44,17 @@ NSMutableArray* FMCVehicleDataEventStatus_values = nil;
 }
 
 +(FMCVehicleDataEventStatus*) _NO {
-	if (FMCVehicleDataEventStatus_NO == nil) {
-		FMCVehicleDataEventStatus_NO = [[FMCVehicleDataEventStatus alloc] initWithValue:@"NO"];
-	}
-	return FMCVehicleDataEventStatus_NO;
+    if (FMCVehicleDataEventStatus_NO == nil) {
+        FMCVehicleDataEventStatus_NO = [[FMCVehicleDataEventStatus alloc] initWithValue:@"NO"];
+    }
+    return FMCVehicleDataEventStatus_NO;
 }
 
 +(FMCVehicleDataEventStatus*) _YES {
-	if (FMCVehicleDataEventStatus_YES == nil) {
-		FMCVehicleDataEventStatus_YES = [[FMCVehicleDataEventStatus alloc] initWithValue:@"YES"];
-	}
-	return FMCVehicleDataEventStatus_YES;
+    if (FMCVehicleDataEventStatus_YES == nil) {
+        FMCVehicleDataEventStatus_YES = [[FMCVehicleDataEventStatus alloc] initWithValue:@"YES"];
+    }
+    return FMCVehicleDataEventStatus_YES;
 }
 
 +(FMCVehicleDataEventStatus*) NOT_SUPPORTED {
@@ -72,4 +72,3 @@ NSMutableArray* FMCVehicleDataEventStatus_values = nil;
 }
 
 @end
-

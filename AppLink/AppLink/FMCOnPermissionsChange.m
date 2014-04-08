@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setPermissionItem:(NSMutableArray *)permissionItem {
+-(void) setPermissionItem:(NSMutableArray*) permissionItem {
     if (permissionItem != nil) {
         [parameters setObject:permissionItem forKey:NAMES_PermissionItem];
     } else {
