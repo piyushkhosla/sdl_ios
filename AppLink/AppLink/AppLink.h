@@ -110,6 +110,7 @@
 #import <AppLink/FMCOnLanguageChange.h>
 #import <AppLink/FMCOnPermissionsChange.h>
 #import <AppLink/FMCOnSyncPData.h>
+#import <AppLink/FMCOnSystemRequest.h>
 #import <AppLink/FMCOnVehicleData.h>
 #import <AppLink/FMCOnTBTClientState.h>
 #import <AppLink/FMCOnTouchEvent.h>
