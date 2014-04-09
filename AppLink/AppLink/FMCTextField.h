@@ -5,8 +5,8 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCMessage.h>
 
-#import <AppLink/FMCCharacterSet.h>
 #import <AppLink/FMCTextFieldName.h>
+#import <AppLink/FMCCharacterSet.h>
 
 @interface FMCTextField : FMCRPCStruct {}
 

@@ -30,7 +30,7 @@
     NSObject* obj = [parameters objectForKey:NAMES_state];
     if ([obj isKindOfClass:FMCDriverDistractionState.class]) {
         return (FMCDriverDistractionState*)obj;
-    } else { 
+    } else {
         return [FMCDriverDistractionState valueOf:(NSString*)obj];
     }
 }

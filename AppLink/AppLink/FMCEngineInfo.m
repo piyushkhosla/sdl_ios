@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setElectricFuelConsumption:(NSNumber *) electricFuelConsumption {
+-(void) setElectricFuelConsumption:(NSNumber*) electricFuelConsumption {
     if (electricFuelConsumption != nil) {
         [store setObject:electricFuelConsumption forKey:NAMES_electricFuelConsumption];
     } else {
@@ -30,7 +30,7 @@
     return [store objectForKey:NAMES_electricFuelConsumption];
 }
 
--(void) setStateOfCharge:(NSNumber *) stateOfCharge {
+-(void) setStateOfCharge:(NSNumber*) stateOfCharge {
     if (stateOfCharge != nil) {
         [store setObject:stateOfCharge forKey:NAMES_stateOfCharge];
     } else {
@@ -51,10 +51,15 @@
 }
 
 -(FMCMaintenanceModeStatus*) fuelMaintenanceMode {
-    return [store objectForKey:NAMES_fuelMaintenanceMode];
+    NSObject* obj = [store objectForKey:NAMES_fuelMaintenanceMode];
+    if ([obj isKindOfClass:FMCMaintenanceModeStatus.class]) {
+        return (FMCMaintenanceModeStatus*)obj;
+    } else {
+        return [FMCMaintenanceModeStatus valueOf:(NSString*)obj];
+    }
 }
 
--(void) setDistanceToEmpty:(NSNumber *) distanceToEmpty {
+-(void) setDistanceToEmpty:(NSNumber*) distanceToEmpty {
     if (distanceToEmpty != nil) {
         [store setObject:distanceToEmpty forKey:NAMES_distanceToEmpty];
     } else {

@@ -10,8 +10,8 @@
 +(FMCTriggerSource*) valueOf:(NSString*) value;
 +(NSMutableArray*) values;
 
-+(FMCTriggerSource*) TS_MENU;
-+(FMCTriggerSource*) TS_VR;
-+(FMCTriggerSource*) TS_KEYBOARD;
++(FMCTriggerSource*) MENU;
++(FMCTriggerSource*) VR;
++(FMCTriggerSource*) KEYBOARD;
 
 @end

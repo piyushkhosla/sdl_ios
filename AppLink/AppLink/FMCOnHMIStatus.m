@@ -30,7 +30,7 @@
     NSObject* obj = [parameters objectForKey:NAMES_hmiLevel];
     if ([obj isKindOfClass:FMCHMILevel.class]) {
         return (FMCHMILevel*)obj;
-    } else { 
+    } else {
         return [FMCHMILevel valueOf:(NSString*)obj];
     }
 }
@@ -47,7 +47,7 @@
     NSObject* obj = [parameters objectForKey:NAMES_audioStreamingState];
     if ([obj isKindOfClass:FMCAudioStreamingState.class]) {
         return (FMCAudioStreamingState*)obj;
-    } else { 
+    } else {
         return [FMCAudioStreamingState valueOf:(NSString*)obj];
     }
 }
@@ -64,7 +64,7 @@
     NSObject* obj = [parameters objectForKey:NAMES_systemContext];
     if ([obj isKindOfClass:FMCSystemContext.class]) {
         return (FMCSystemContext*)obj;
-    } else { 
+    } else {
         return [FMCSystemContext valueOf:(NSString*)obj];
     }
 }

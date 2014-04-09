@@ -11,6 +11,7 @@ FMCSystemContext* FMCSystemContext_HMI_OBSCURED = nil;
 FMCSystemContext* FMCSystemContext_ALERT = nil;
 
 NSMutableArray* FMCSystemContext_values = nil;
+
 @implementation FMCSystemContext
 
 +(FMCSystemContext*) valueOf:(NSString*) value {
@@ -36,24 +37,24 @@ NSMutableArray* FMCSystemContext_values = nil;
 }
 
 +(FMCSystemContext*) MAIN {
-    	if (FMCSystemContext_MAIN == nil) {
-        		FMCSystemContext_MAIN = [[FMCSystemContext alloc] initWithValue:@"MAIN"];
-    	}
-    	return FMCSystemContext_MAIN;
+    if (FMCSystemContext_MAIN == nil) {
+        FMCSystemContext_MAIN = [[FMCSystemContext alloc] initWithValue:@"MAIN"];
+    }
+    return FMCSystemContext_MAIN;
 }
 
 +(FMCSystemContext*) VRSESSION {
-    	if (FMCSystemContext_VRSESSION == nil) {
-        		FMCSystemContext_VRSESSION = [[FMCSystemContext alloc] initWithValue:@"VRSESSION"];
-    	}
-    	return FMCSystemContext_VRSESSION;
+    if (FMCSystemContext_VRSESSION == nil) {
+        FMCSystemContext_VRSESSION = [[FMCSystemContext alloc] initWithValue:@"VRSESSION"];
+    }
+    return FMCSystemContext_VRSESSION;
 }
 
 +(FMCSystemContext*) MENU {
-    	if (FMCSystemContext_MENU == nil) {
-        		FMCSystemContext_MENU = [[FMCSystemContext alloc] initWithValue:@"MENU"];
-    	}
-    	return FMCSystemContext_MENU;
+    if (FMCSystemContext_MENU == nil) {
+        FMCSystemContext_MENU = [[FMCSystemContext alloc] initWithValue:@"MENU"];
+    }
+    return FMCSystemContext_MENU;
 }
 
 +(FMCSystemContext*) HMI_OBSCURED {

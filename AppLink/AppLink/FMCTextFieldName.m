@@ -29,6 +29,7 @@ FMCTextFieldName* FMCTextFieldName_secondaryText = nil;
 FMCTextFieldName* FMCTextFieldName_tertiaryText = nil;
 
 NSMutableArray* FMCTextFieldName_values = nil;
+
 @implementation FMCTextFieldName
 
 +(FMCTextFieldName*) valueOf:(NSString*) value {
@@ -71,17 +72,17 @@ NSMutableArray* FMCTextFieldName_values = nil;
 }
 
 +(FMCTextFieldName*) mainField1 {
-    	if (FMCTextFieldName_mainField1 == nil) {
-        		FMCTextFieldName_mainField1 = [[FMCTextFieldName alloc] initWithValue:@"mainField1"];
-    	}
-    	return FMCTextFieldName_mainField1;
+    if (FMCTextFieldName_mainField1 == nil) {
+        FMCTextFieldName_mainField1 = [[FMCTextFieldName alloc] initWithValue:@"mainField1"];
+    }
+    return FMCTextFieldName_mainField1;
 }
 
 +(FMCTextFieldName*) mainField2 {
-    	if (FMCTextFieldName_mainField2 == nil) {
-        		FMCTextFieldName_mainField2 = [[FMCTextFieldName alloc] initWithValue:@"mainField2"];
-    	}
-    	return FMCTextFieldName_mainField2;
+    if (FMCTextFieldName_mainField2 == nil) {
+        FMCTextFieldName_mainField2 = [[FMCTextFieldName alloc] initWithValue:@"mainField2"];
+    }
+    return FMCTextFieldName_mainField2;
 }
 
 +(FMCTextFieldName*) mainField3 {
@@ -99,38 +100,38 @@ NSMutableArray* FMCTextFieldName_values = nil;
 }
 
 +(FMCTextFieldName*) statusBar {
-    	if (FMCTextFieldName_statusBar == nil) {
-        		FMCTextFieldName_statusBar = [[FMCTextFieldName alloc] initWithValue:@"statusBar"];
-    	}
-    	return FMCTextFieldName_statusBar;
+    if (FMCTextFieldName_statusBar == nil) {
+        FMCTextFieldName_statusBar = [[FMCTextFieldName alloc] initWithValue:@"statusBar"];
+    }
+    return FMCTextFieldName_statusBar;
 }
 
 +(FMCTextFieldName*) mediaClock {
-    	if (FMCTextFieldName_mediaClock == nil) {
-        		FMCTextFieldName_mediaClock = [[FMCTextFieldName alloc] initWithValue:@"mediaClock"];
-    	}
-    	return FMCTextFieldName_mediaClock;
+    if (FMCTextFieldName_mediaClock == nil) {
+        FMCTextFieldName_mediaClock = [[FMCTextFieldName alloc] initWithValue:@"mediaClock"];
+    }
+    return FMCTextFieldName_mediaClock;
 }
 
 +(FMCTextFieldName*) mediaTrack {
-    	if (FMCTextFieldName_mediaTrack == nil) {
-        		FMCTextFieldName_mediaTrack = [[FMCTextFieldName alloc] initWithValue:@"mediaTrack"];
-    	}
-    	return FMCTextFieldName_mediaTrack;
+    if (FMCTextFieldName_mediaTrack == nil) {
+        FMCTextFieldName_mediaTrack = [[FMCTextFieldName alloc] initWithValue:@"mediaTrack"];
+    }
+    return FMCTextFieldName_mediaTrack;
 }
 
 +(FMCTextFieldName*) alertText1 {
-    	if (FMCTextFieldName_alertText1 == nil) {
-        		FMCTextFieldName_alertText1 = [[FMCTextFieldName alloc] initWithValue:@"alertText1"];
-    	}
-    	return FMCTextFieldName_alertText1;
+    if (FMCTextFieldName_alertText1 == nil) {
+        FMCTextFieldName_alertText1 = [[FMCTextFieldName alloc] initWithValue:@"alertText1"];
+    }
+    return FMCTextFieldName_alertText1;
 }
 
 +(FMCTextFieldName*) alertText2 {
-    	if (FMCTextFieldName_alertText2 == nil) {
-        		FMCTextFieldName_alertText2 = [[FMCTextFieldName alloc] initWithValue:@"alertText2"];
-    	}
-    	return FMCTextFieldName_alertText2;
+    if (FMCTextFieldName_alertText2 == nil) {
+        FMCTextFieldName_alertText2 = [[FMCTextFieldName alloc] initWithValue:@"alertText2"];
+    }
+    return FMCTextFieldName_alertText2;
 }
 
 +(FMCTextFieldName*) alertText3 {

@@ -4,14 +4,15 @@
 
 #import <AppLink/FMCRegisterAppInterfaceResponse.h>
 
-#import <AppLink/FMCAudioPassThruCapabilities.h>
-#import <AppLink/FMCButtonCapabilities.h>
-#import <AppLink/FMCHMIZoneCapabilities.h>
 #import <AppLink/FMCNames.h>
-#import <AppLink/FMCPrerecordedSpeech.h>
-#import <AppLink/FMCSpeechCapabilities.h>
+#import <AppLink/FMCButtonCapabilities.h>
 #import <AppLink/FMCSoftButtonCapabilities.h>
+#import <AppLink/FMCHmiZoneCapabilities.h>
+#import <AppLink/FMCSpeechCapabilities.h>
 #import <AppLink/FMCVrCapabilities.h>
+#import <AppLink/FMCAudioPassThruCapabilities.h>
+#import <AppLink/FMCPrerecordedSpeech.h>
+//#import <AppLink/FMCSpeechCapabilities.h>
 
 @implementation FMCRegisterAppInterfaceResponse
 
@@ -54,7 +55,7 @@
     NSObject* obj = [parameters objectForKey:NAMES_language];
     if ([obj isKindOfClass:FMCLanguage.class]) {
         return (FMCLanguage*)obj;
-    } else { 
+    } else {
         return [FMCLanguage valueOf:(NSString*)obj];
     }
 }
@@ -162,12 +163,12 @@
 
 -(NSMutableArray*) hmiZoneCapabilities {
     NSMutableArray* array = [parameters objectForKey:NAMES_hmiZoneCapabilities];
-    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCHMIZoneCapabilities.class]) {
+    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCHmiZoneCapabilities.class]) {
         return array;
-    } else { 
+    } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSString* enumString in array) {
-            [newList addObject:[FMCHMIZoneCapabilities valueOf:enumString]];
+            [newList addObject:[FMCHmiZoneCapabilities valueOf:enumString]];
         }
         return newList;
     }
@@ -235,7 +236,7 @@
     NSMutableArray* array = [parameters objectForKey:NAMES_vrCapabilities];
     if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCVrCapabilities.class]) {
         return array;
-    } else { 
+    } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSString* enumString in array) {
             [newList addObject:[FMCVrCapabilities valueOf:enumString]];
@@ -244,7 +245,7 @@
     }
 }
 
--(void) setAudioPassThruCapabilities:(NSMutableArray *) audioPassThruCapabilities {
+-(void) setAudioPassThruCapabilities:(NSMutableArray*) audioPassThruCapabilities {
     if (audioPassThruCapabilities != nil) {
         [parameters setObject:audioPassThruCapabilities forKey:NAMES_audioPassThruCapabilities];
     } else {
@@ -265,7 +266,7 @@
     }
 }
 
--(void) setVehicleType:(FMCVehicleType *) vehicleType {
+-(void) setVehicleType:(FMCVehicleType*) vehicleType {
     if (vehicleType != nil) {
         [parameters setObject:vehicleType forKey:NAMES_vehicleType];
     } else {

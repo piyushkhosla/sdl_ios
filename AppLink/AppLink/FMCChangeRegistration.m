@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setLanguage:(FMCLanguage *) language {
+-(void) setLanguage:(FMCLanguage*) language {
     if (language != nil) {
         [parameters setObject:language forKey:NAMES_language];
     } else {
@@ -35,11 +35,11 @@
     }
 }
 
--(void) setHmiDisplayLanguage:(FMCLanguage *) hmiDisplayLanguage {
+-(void) setHmiDisplayLanguage:(FMCLanguage*) hmiDisplayLanguage {
     if (hmiDisplayLanguage != nil) {
         [parameters setObject:hmiDisplayLanguage forKey:NAMES_hmiDisplayLanguage];
     } else {
-        [parameters removeObjectForKey:NAMES_language];
+        [parameters removeObjectForKey:NAMES_hmiDisplayLanguage];
     }
 }
 
@@ -51,4 +51,5 @@
         return [FMCLanguage valueOf:(NSString*)obj];
     }
 }
+
 @end

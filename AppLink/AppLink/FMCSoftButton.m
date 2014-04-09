@@ -30,12 +30,12 @@
     NSObject* obj = [store objectForKey:NAMES_type];
     if ([obj isKindOfClass:FMCSoftButtonType.class]) {
         return (FMCSoftButtonType*)obj;
-    } else { 
+    } else {
         return [FMCSoftButtonType valueOf:(NSString*)obj];
     }
 }
 
--(void) setText:(NSString *) text {
+-(void) setText:(NSString*) text {
     if (text != nil) {
         [store setObject:text forKey:NAMES_text];
     } else {
@@ -64,7 +64,7 @@
     }
 }
 
--(void) setIsHighlighted:(NSNumber *) isHighlighted {
+-(void) setIsHighlighted:(NSNumber*) isHighlighted {
     if (isHighlighted != nil) {
         [store setObject:isHighlighted forKey:NAMES_isHighlighted];
     } else {
@@ -76,7 +76,7 @@
     return [store objectForKey:NAMES_isHighlighted];
 }
 
--(void) setSoftButtonID:(NSNumber *) softButtonID {
+-(void) setSoftButtonID:(NSNumber*) softButtonID {
     if (softButtonID != nil) {
         [store setObject:softButtonID forKey:NAMES_softButtonID];
     } else {

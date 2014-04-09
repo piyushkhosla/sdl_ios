@@ -9,6 +9,7 @@ FMCSoftButtonType* FMCSoftButtonType_IMAGE = nil;
 FMCSoftButtonType* FMCSoftButtonType_BOTH = nil;
 
 NSMutableArray* FMCSoftButtonType_values = nil;
+
 @implementation FMCSoftButtonType
 
 +(FMCSoftButtonType*) valueOf:(NSString*) value {
@@ -32,17 +33,17 @@ NSMutableArray* FMCSoftButtonType_values = nil;
 }
 
 +(FMCSoftButtonType*) TEXT {
-    	if (FMCSoftButtonType_TEXT == nil) {
-        		FMCSoftButtonType_TEXT = [[FMCSoftButtonType alloc] initWithValue:@"TEXT"];
-    	}
-    	return FMCSoftButtonType_TEXT;
+    if (FMCSoftButtonType_TEXT == nil) {
+        FMCSoftButtonType_TEXT = [[FMCSoftButtonType alloc] initWithValue:@"TEXT"];
+    }
+    return FMCSoftButtonType_TEXT;
 }
 
 +(FMCSoftButtonType*) IMAGE {
-    	if (FMCSoftButtonType_IMAGE == nil) {
-        		FMCSoftButtonType_IMAGE = [[FMCSoftButtonType alloc] initWithValue:@"IMAGE"];
-    	}
-    	return FMCSoftButtonType_IMAGE;
+    if (FMCSoftButtonType_IMAGE == nil) {
+        FMCSoftButtonType_IMAGE = [[FMCSoftButtonType alloc] initWithValue:@"IMAGE"];
+    }
+    return FMCSoftButtonType_IMAGE;
 }
 
 +(FMCSoftButtonType*) BOTH {

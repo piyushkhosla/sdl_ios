@@ -210,7 +210,7 @@ correlationID{
 	msg.speed = speed;
 	msg.rpm = rpm;
 	msg.fuelLevel = fuelLevel;
-	msg.fuelLevelState = fuelLevelState;
+	msg.fuelLevel_State = fuelLevelState;
 	msg.instantFuelConsumption = instantFuelConsumption;
 	msg.externalTemperature = externalTemperature;
 	msg.vin = vin;
@@ -559,7 +559,7 @@ correlationID{
 	msg.speed = speed;
 	msg.rpm = rpm;
 	msg.fuelLevel = fuelLevel;
-	msg.fuelLevelState = fuelLevelState;
+	msg.fuelLevel_State = fuelLevelState;
 	msg.instantFuelConsumption = instantFuelConsumption;
 	msg.externalTemperature = externalTemperature;
 	msg.prndl = prndl;
@@ -603,7 +603,7 @@ correlationID{
 	msg.speed = speed;
 	msg.rpm = rpm;
 	msg.fuelLevel = fuelLevel;
-	msg.fuelLevelState = fuelLevelState;
+	msg.fuelLevel_State = fuelLevelState;
 	msg.instantFuelConsumption = instantFuelConsumption;
 	msg.externalTemperature = externalTemperature;
 	msg.prndl = prndl;

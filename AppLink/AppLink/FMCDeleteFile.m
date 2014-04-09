@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setSyncFileName:(NSString *) syncFileName {
+-(void) setSyncFileName:(NSString*) syncFileName {
     if (syncFileName != nil) {
         [parameters setObject:syncFileName forKey:NAMES_syncFileName];
     } else {

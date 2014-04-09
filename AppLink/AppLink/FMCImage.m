@@ -42,7 +42,7 @@
     NSObject* obj = [store objectForKey:NAMES_imageType];
     if ([obj isKindOfClass:FMCImageType.class]) {
         return (FMCImageType*)obj;
-    } else { 
+    } else {
         return [FMCImageType valueOf:(NSString*)obj];
     }
 }

@@ -16,6 +16,7 @@ FMCAppHMIType* FMCAppHMIType_TESTING = nil;
 FMCAppHMIType* FMCAppHMIType_SYSTEM = nil;
 
 NSMutableArray* FMCAppHMIType_values = nil;
+
 @implementation FMCAppHMIType
 
 +(FMCAppHMIType*) valueOf:(NSString*) value {
@@ -30,16 +31,16 @@ NSMutableArray* FMCAppHMIType_values = nil;
 +(NSMutableArray*) values {
     if (FMCAppHMIType_values == nil) {
         FMCAppHMIType_values = [[NSMutableArray alloc] initWithObjects:
-                FMCAppHMIType_DEFAULT,
-                FMCAppHMIType_COMMUNICATION,
-                FMCAppHMIType_MEDIA,
-                FMCAppHMIType_MESSAGING,
-                FMCAppHMIType_NAVIGATION,
-                FMCAppHMIType_INFORMATION,
-                FMCAppHMIType_SOCIAL,
-                FMCAppHMIType_BACKGROUND_PROCESS,
-                FMCAppHMIType_TESTING,
-                FMCAppHMIType_SYSTEM,
+                FMCAppHMIType.DEFAULT,
+                FMCAppHMIType.COMMUNICATION,
+                FMCAppHMIType.MEDIA,
+                FMCAppHMIType.MESSAGING,
+                FMCAppHMIType.NAVIGATION,
+                FMCAppHMIType.INFORMATION,
+                FMCAppHMIType.SOCIAL,
+                FMCAppHMIType.BACKGROUND_PROCESS,
+                FMCAppHMIType.TESTING,
+                FMCAppHMIType.SYSTEM,
                 nil];
     }
     return FMCAppHMIType_values;
@@ -80,7 +81,6 @@ NSMutableArray* FMCAppHMIType_values = nil;
     return FMCAppHMIType_NAVIGATION;
 }
 
-
 +(FMCAppHMIType*) INFORMATION {
     if (FMCAppHMIType_INFORMATION == nil) {
         FMCAppHMIType_INFORMATION = [[FMCAppHMIType alloc] initWithValue:@"INFORMATION"];
@@ -108,7 +108,6 @@ NSMutableArray* FMCAppHMIType_values = nil;
     }
     return FMCAppHMIType_TESTING;
 }
-
 
 +(FMCAppHMIType*) SYSTEM {
     if (FMCAppHMIType_SYSTEM == nil) {

@@ -4,10 +4,10 @@
 
 #import <AppLink/FMCDisplayCapabilities.h>
 
-#import <AppLink/FMCMediaClockFormat.h>
 #import <AppLink/FMCNames.h>
 #import <AppLink/FMCTextField.h>
 #import <AppLink/FMCImageField.h>
+#import <AppLink/FMCMediaClockFormat.h>
 
 @implementation FMCDisplayCapabilities
 
@@ -33,7 +33,7 @@
     NSObject* obj = [store objectForKey:NAMES_displayType];
     if ([obj isKindOfClass:FMCDisplayType.class]) {
         return (FMCDisplayType*)obj;
-    } else { 
+    } else {
         return [FMCDisplayType valueOf:(NSString*)obj];
     }
 }
@@ -92,7 +92,7 @@
     NSMutableArray* array = [store objectForKey:NAMES_mediaClockFormats];
     if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCMediaClockFormat.class]) {
         return array;
-    } else { 
+    } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSString* enumString in array) {
             [newList addObject:[FMCMediaClockFormat valueOf:enumString]];

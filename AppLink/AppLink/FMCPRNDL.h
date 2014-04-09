@@ -2,13 +2,13 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <Foundation/Foundation.h> 
-#import <AppLink/FMCEnum.h>   
+#import <Foundation/Foundation.h>
+#import <AppLink/FMCEnum.h>
 
 @interface FMCPRNDL : FMCEnum {}
 
 +(FMCPRNDL*) valueOf:(NSString*) value;
-+(NSMutableArray*) values;                                 
++(NSMutableArray*) values;
 
 +(FMCPRNDL*) PARK;
 +(FMCPRNDL*) REVERSE;
@@ -23,10 +23,8 @@
 +(FMCPRNDL*) FIFTH;
 +(FMCPRNDL*) SIXTH;
 +(FMCPRNDL*) SEVENTH;
-+(FMCPRNDL*) EIGTH;
++(FMCPRNDL*) EIGHTH;
 +(FMCPRNDL*) UNKNOWN;
 +(FMCPRNDL*) FAULT;
 
 @end
-
-

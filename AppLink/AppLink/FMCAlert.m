@@ -5,8 +5,8 @@
 #import <AppLink/FMCAlert.h>
 
 #import <AppLink/FMCNames.h>
-#import <AppLink/FMCSoftButton.h>
 #import <AppLink/FMCTTSChunk.h>
+#import <AppLink/FMCSoftButton.h>
 
 @implementation FMCAlert
 
@@ -118,7 +118,7 @@
     return [parameters objectForKey:NAMES_progressIndicator];
 }
 
--(void) setSoftButtons:(NSMutableArray *) softButtons {
+-(void) setSoftButtons:(NSMutableArray*) softButtons {
     if (softButtons != nil) {
         [parameters setObject:softButtons forKey:NAMES_softButtons];
     } else {

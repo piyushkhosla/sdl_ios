@@ -2,13 +2,13 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <Foundation/Foundation.h> 
-#import <AppLink/FMCEnum.h>   
+#import <Foundation/Foundation.h>
+#import <AppLink/FMCEnum.h>
 
 @interface FMCVehicleDataType : FMCEnum {}
 
 +(FMCVehicleDataType*) valueOf:(NSString*) value;
-+(NSMutableArray*) values;                                 
++(NSMutableArray*) values;
 
 +(FMCVehicleDataType*) VEHICLEDATA_GPS;
 +(FMCVehicleDataType*) VEHICLEDATA_SPEED;
@@ -24,6 +24,11 @@
 +(FMCVehicleDataType*) VEHICLEDATA_BELTSTATUS;
 +(FMCVehicleDataType*) VEHICLEDATA_BODYINFO;
 +(FMCVehicleDataType*) VEHICLEDATA_DEVICESTATUS;
++(FMCVehicleDataType*) VEHICLEDATA_ECALLINFO;
++(FMCVehicleDataType*) VEHICLEDATA_AIRBAGSTATUS;
++(FMCVehicleDataType*) VEHICLEDATA_EMERGENCYEVENT;
++(FMCVehicleDataType*) VEHICLEDATA_CLUSTERMODESTATUS;
++(FMCVehicleDataType*) VEHICLEDATA_MYKEY;
 +(FMCVehicleDataType*) VEHICLEDATA_BRAKING;
 +(FMCVehicleDataType*) VEHICLEDATA_WIPERSTATUS;
 +(FMCVehicleDataType*) VEHICLEDATA_HEADLAMPSTATUS;
@@ -33,5 +38,3 @@
 +(FMCVehicleDataType*) VEHICLEDATA_STEERINGWHEEL;
 
 @end
-
-

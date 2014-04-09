@@ -5,8 +5,8 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCNotification.h>
 
-#import <AppLink/FMCButtonEventMode.h>
 #import <AppLink/FMCButtonName.h>
+#import <AppLink/FMCButtonEventMode.h>
 
 @interface FMCOnButtonEvent : FMCRPCNotification {}
 

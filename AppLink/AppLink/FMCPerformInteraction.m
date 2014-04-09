@@ -65,7 +65,7 @@
     NSObject* obj = [parameters objectForKey:NAMES_interactionMode];
     if ([obj isKindOfClass:FMCInteractionMode.class]) {
         return (FMCInteractionMode*)obj;
-    } else { 
+    } else {
         return [FMCInteractionMode valueOf:(NSString*)obj];
     }
 }
@@ -78,7 +78,7 @@
     }
 }
 
--(NSMutableArray*) interactionChoiceSetIDList { 
+-(NSMutableArray*) interactionChoiceSetIDList {
     return [parameters objectForKey:NAMES_interactionChoiceSetIDList];
 }
 
@@ -136,7 +136,7 @@
     return [parameters objectForKey:NAMES_timeout];
 }
 
--(void) setVrHelp:(NSMutableArray *) vrHelp {
+-(void) setVrHelp:(NSMutableArray*) vrHelp {
     if (vrHelp != nil) {
         [parameters setObject:vrHelp forKey:NAMES_vrHelp];
     } else {

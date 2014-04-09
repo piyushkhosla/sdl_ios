@@ -5,9 +5,8 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCRequest.h>
 
-#import <AppLink/FMCImage.h>
-#import <AppLink/FMCSoftButton.h>
 #import <AppLink/FMCTextAlignment.h>
+#import <AppLink/FMCImage.h>
 
 @interface FMCShow : FMCRPCRequest {}
 

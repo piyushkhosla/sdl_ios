@@ -10,6 +10,4 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSData* bulkData;
-
 @end

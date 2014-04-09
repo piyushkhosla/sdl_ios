@@ -5,8 +5,8 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCRequest.h>
 
-#import <AppLink/FMCLanguage.h>
 #import <AppLink/FMCSyncMsgVersion.h>
+#import <AppLink/FMCLanguage.h>
 
 @interface FMCRegisterAppInterface : FMCRPCRequest {}
 

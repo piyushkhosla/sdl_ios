@@ -17,6 +17,7 @@
 +(FMCAppInterfaceUnregisteredReason*) REQUEST_WHILE_IN_NONE_HMI_LEVEL;
 +(FMCAppInterfaceUnregisteredReason*) TOO_MANY_REQUESTS;
 +(FMCAppInterfaceUnregisteredReason*) DRIVER_DISTRACTION_VIOLATION;
++(FMCAppInterfaceUnregisteredReason*) LANGUAGE_CHANGE;
 +(FMCAppInterfaceUnregisteredReason*) MASTER_RESET;
 +(FMCAppInterfaceUnregisteredReason*) FACTORY_DEFAULTS;
 +(FMCAppInterfaceUnregisteredReason*) APP_UNAUTHORIZED;

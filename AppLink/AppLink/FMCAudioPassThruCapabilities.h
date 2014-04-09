@@ -5,9 +5,9 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCMessage.h>
 
-#import <AppLink/FMCAudioType.h>
-#import <AppLink/FMCBitsPerSample.h>
 #import <AppLink/FMCSamplingRate.h>
+#import <AppLink/FMCBitsPerSample.h>
+#import <AppLink/FMCAudioType.h>
 
 @interface FMCAudioPassThruCapabilities : FMCRPCStruct {}
 

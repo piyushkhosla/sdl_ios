@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setEcuName:(NSNumber *) ecuName {
+-(void) setEcuName:(NSNumber*) ecuName {
     if (ecuName != nil) {
         [parameters setObject:ecuName forKey:NAMES_ecuName];
     } else {
@@ -30,7 +30,7 @@
     return [parameters objectForKey:NAMES_ecuName];
 }
 
--(void) setDtcMask:(NSNumber *) dtcMask {
+-(void) setDtcMask:(NSNumber*) dtcMask {
     if (dtcMask != nil) {
         [parameters setObject:dtcMask forKey:NAMES_dtcMask];
     } else {

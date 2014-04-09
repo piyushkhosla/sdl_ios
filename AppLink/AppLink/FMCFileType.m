@@ -14,6 +14,7 @@ FMCFileType* FMCFileType_BINARY = nil;
 FMCFileType* FMCFileType_JSON = nil;
 
 NSMutableArray* FMCFileType_values = nil;
+
 @implementation FMCFileType
 
 +(FMCFileType*) valueOf:(NSString*) value {

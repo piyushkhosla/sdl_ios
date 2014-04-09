@@ -5,8 +5,6 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCRequest.h>
 
-#import <AppLink/FMCGlobalProperty.h>
-
 @interface FMCResetGlobalProperties : FMCRPCRequest {}
 
 -(id) init;
