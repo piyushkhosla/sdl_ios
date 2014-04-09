@@ -39,5 +39,8 @@
 +(FMCResult*) RETRY;
 +(FMCResult*) WARNINGS;
 +(FMCResult*) SAVED;
++(FMCResult*) INVALID_CERT;
++(FMCResult*) EXPIRED_CERT;
++(FMCResult*) RESUME_FAILED;
 
 @end

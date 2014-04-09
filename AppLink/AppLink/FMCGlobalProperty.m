@@ -8,6 +8,9 @@ FMCGlobalProperty* FMCGlobalProperty_HELPPROMPT = nil;
 FMCGlobalProperty* FMCGlobalProperty_TIMEOUTPROMPT = nil;
 FMCGlobalProperty* FMCGlobalProperty_VRHELPTITLE = nil;
 FMCGlobalProperty* FMCGlobalProperty_VRHELPITEMS = nil;
+FMCGlobalProperty* FMCGlobalProperty_MENUNAME = nil;
+FMCGlobalProperty* FMCGlobalProperty_MENUICON = nil;
+FMCGlobalProperty* FMCGlobalProperty_KEYBOARDPROPERTIES = nil;
 
 NSMutableArray* FMCGlobalProperty_values = nil;
 
@@ -29,6 +32,9 @@ NSMutableArray* FMCGlobalProperty_values = nil;
                 FMCGlobalProperty.TIMEOUTPROMPT,
                 FMCGlobalProperty.VRHELPTITLE,
                 FMCGlobalProperty.VRHELPITEMS,
+                FMCGlobalProperty.MENUNAME,
+                FMCGlobalProperty.MENUICON,
+                FMCGlobalProperty.KEYBOARDPROPERTIES,
                 nil];
     }
     return FMCGlobalProperty_values;
@@ -60,6 +66,27 @@ NSMutableArray* FMCGlobalProperty_values = nil;
         FMCGlobalProperty_VRHELPITEMS = [[FMCGlobalProperty alloc] initWithValue:@"VRHELPITEMS"];
     }
     return FMCGlobalProperty_VRHELPITEMS;
+}
+
++(FMCGlobalProperty*) MENUNAME {
+    if (FMCGlobalProperty_MENUNAME == nil) {
+        FMCGlobalProperty_MENUNAME = [[FMCGlobalProperty alloc] initWithValue:@"MENUNAME"];
+    }
+    return FMCGlobalProperty_MENUNAME;
+}
+
++(FMCGlobalProperty*) MENUICON {
+    if (FMCGlobalProperty_MENUICON == nil) {
+        FMCGlobalProperty_MENUICON = [[FMCGlobalProperty alloc] initWithValue:@"MENUICON"];
+    }
+    return FMCGlobalProperty_MENUICON;
+}
+
++(FMCGlobalProperty*) KEYBOARDPROPERTIES {
+    if (FMCGlobalProperty_KEYBOARDPROPERTIES == nil) {
+        FMCGlobalProperty_KEYBOARDPROPERTIES = [[FMCGlobalProperty alloc] initWithValue:@"KEYBOARDPROPERTIES"];
+    }
+    return FMCGlobalProperty_KEYBOARDPROPERTIES;
 }
 
 @end

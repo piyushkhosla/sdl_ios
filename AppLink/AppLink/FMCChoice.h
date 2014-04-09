@@ -16,5 +16,8 @@
 @property(assign) NSString* menuName;
 @property(assign) NSMutableArray* vrCommands;
 @property(assign) FMCImage* image;
+@property(assign) NSString* secondaryText;
+@property(assign) NSString* tertiaryText;
+@property(assign) FMCImage* secondaryImage;
 
 @end

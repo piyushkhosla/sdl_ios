@@ -4,6 +4,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCMessage.h>
+
 #import <AppLink/FMCAmbientLightStatus.h>
 
 @interface FMCHeadLampStatus : FMCRPCStruct {}

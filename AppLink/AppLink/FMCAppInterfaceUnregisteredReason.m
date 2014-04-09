@@ -4,7 +4,6 @@
 
 #import <AppLink/FMCAppInterfaceUnregisteredReason.h>
 
-FMCAppInterfaceUnregisteredReason* FMCAppInterfaceUnregisteredReason_USER_EXIT = nil;
 FMCAppInterfaceUnregisteredReason* FMCAppInterfaceUnregisteredReason_IGNITION_OFF = nil;
 FMCAppInterfaceUnregisteredReason* FMCAppInterfaceUnregisteredReason_BLUETOOTH_OFF = nil;
 FMCAppInterfaceUnregisteredReason* FMCAppInterfaceUnregisteredReason_USB_DISCONNECTED = nil;
@@ -32,7 +31,6 @@ NSMutableArray* FMCAppInterfaceUnregisteredReason_values = nil;
 +(NSMutableArray*) values {
     if (FMCAppInterfaceUnregisteredReason_values == nil) {
         FMCAppInterfaceUnregisteredReason_values = [[NSMutableArray alloc] initWithObjects:
-                FMCAppInterfaceUnregisteredReason.USER_EXIT,
                 FMCAppInterfaceUnregisteredReason.IGNITION_OFF,
                 FMCAppInterfaceUnregisteredReason.BLUETOOTH_OFF,
                 FMCAppInterfaceUnregisteredReason.USB_DISCONNECTED,
@@ -46,13 +44,6 @@ NSMutableArray* FMCAppInterfaceUnregisteredReason_values = nil;
                 nil];
     }
     return FMCAppInterfaceUnregisteredReason_values;
-}
-
-+(FMCAppInterfaceUnregisteredReason*) USER_EXIT {
-    if (FMCAppInterfaceUnregisteredReason_USER_EXIT == nil) {
-        FMCAppInterfaceUnregisteredReason_USER_EXIT = [[FMCAppInterfaceUnregisteredReason alloc] initWithValue:@"USER_EXIT"];
-    }
-    return FMCAppInterfaceUnregisteredReason_USER_EXIT;
 }
 
 +(FMCAppInterfaceUnregisteredReason*) IGNITION_OFF {

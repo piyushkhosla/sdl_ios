@@ -3,42 +3,43 @@
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <AppLink/FMCTouchCoord.h>
+
 #import <AppLink/FMCNames.h>
 
 @implementation FMCTouchCoord
 
-- (void)setX:(NSNumber*)value
-{
-    if (value != nil)
-    {
-        [store setObject:value forKey:NAMES_touchCoordX];
-    }
-    else
-    {
-        [store removeObjectForKey:NAMES_touchCoordX];
+-(id) init {
+    if (self = [super init]) {}
+    return self;
+}
+
+-(id) initWithDictionary:(NSMutableDictionary*) dict {
+    if (self = [super initWithDictionary:dict]) {}
+    return self;
+}
+
+-(void) setX:(NSNumber*) x {
+    if (x != nil) {
+        [store setObject:x forKey:NAMES_x];
+    } else {
+        [store removeObjectForKey:NAMES_x];
     }
 }
 
-- (NSNumber*)x
-{
-    return [store objectForKey:NAMES_touchCoordX];
+-(NSNumber*) x {
+    return [store objectForKey:NAMES_x];
 }
 
-- (void)setY:(NSNumber*)value
-{
-    if (value != nil)
-    {
-        [store setObject:value forKey:NAMES_touchCoordY];
-    }
-    else
-    {
-        [store removeObjectForKey:NAMES_touchCoordY];
+-(void) setY:(NSNumber*) y {
+    if (y != nil) {
+        [store setObject:y forKey:NAMES_y];
+    } else {
+        [store removeObjectForKey:NAMES_y];
     }
 }
 
-- (NSNumber*)y
-{
-    return [store objectForKey:NAMES_touchCoordY];
+-(NSNumber*) y {
+    return [store objectForKey:NAMES_y];
 }
 
 @end

@@ -20,6 +20,7 @@ FMCButtonName* FMCButtonName_PRESET_7 = nil;
 FMCButtonName* FMCButtonName_PRESET_8 = nil;
 FMCButtonName* FMCButtonName_PRESET_9 = nil;
 FMCButtonName* FMCButtonName_CUSTOM_BUTTON = nil;
+FMCButtonName* FMCButtonName_SEARCH = nil;
 
 NSMutableArray* FMCButtonName_values = nil;
 
@@ -53,6 +54,7 @@ NSMutableArray* FMCButtonName_values = nil;
                 FMCButtonName.PRESET_8,
                 FMCButtonName.PRESET_9,
                 FMCButtonName.CUSTOM_BUTTON,
+                FMCButtonName.SEARCH,
                 nil];
     }
     return FMCButtonName_values;
@@ -168,6 +170,13 @@ NSMutableArray* FMCButtonName_values = nil;
         FMCButtonName_CUSTOM_BUTTON = [[FMCButtonName alloc] initWithValue:@"CUSTOM_BUTTON"];
     }
     return FMCButtonName_CUSTOM_BUTTON;
+}
+
++(FMCButtonName*) SEARCH {
+    if (FMCButtonName_SEARCH == nil) {
+        FMCButtonName_SEARCH = [[FMCButtonName alloc] initWithValue:@"SEARCH"];
+    }
+    return FMCButtonName_SEARCH;
 }
 
 @end

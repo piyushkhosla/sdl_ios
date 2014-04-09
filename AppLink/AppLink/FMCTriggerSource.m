@@ -24,10 +24,10 @@ NSMutableArray* FMCTriggerSource_values = nil;
 +(NSMutableArray*) values {
     if (FMCTriggerSource_values == nil) {
         FMCTriggerSource_values = [[NSMutableArray alloc] initWithObjects:
-                                   FMCTriggerSource.MENU,
-                                   FMCTriggerSource.VR,
-                                   FMCTriggerSource.KEYBOARD,
-                                   nil];
+                FMCTriggerSource.MENU,
+                FMCTriggerSource.VR,
+                FMCTriggerSource.KEYBOARD,
+                nil];
     }
     return FMCTriggerSource_values;
 }
@@ -54,4 +54,3 @@ NSMutableArray* FMCTriggerSource_values = nil;
 }
 
 @end
-

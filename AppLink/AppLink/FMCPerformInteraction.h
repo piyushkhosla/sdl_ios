@@ -6,6 +6,7 @@
 #import <AppLink/FMCRPCRequest.h>
 
 #import <AppLink/FMCInteractionMode.h>
+#import <AppLink/FMCLayoutMode.h>
 
 @interface FMCPerformInteraction : FMCRPCRequest {}
 
@@ -20,5 +21,6 @@
 @property(assign) NSMutableArray* timeoutPrompt;
 @property(assign) NSNumber* timeout;
 @property(assign) NSMutableArray* vrHelp;
+@property(assign) FMCLayoutMode* interactionLayout;
 
 @end

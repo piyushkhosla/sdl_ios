@@ -26,5 +26,6 @@
 +(FMCButtonName*) PRESET_8;
 +(FMCButtonName*) PRESET_9;
 +(FMCButtonName*) CUSTOM_BUTTON;
++(FMCButtonName*) SEARCH;
 
 @end

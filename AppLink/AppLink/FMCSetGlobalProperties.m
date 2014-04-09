@@ -95,4 +95,50 @@
     }
 }
 
+-(void) setMenuTitle:(NSString*) menuTitle {
+    if (menuTitle != nil) {
+        [parameters setObject:menuTitle forKey:NAMES_menuTitle];
+    } else {
+        [parameters removeObjectForKey:NAMES_menuTitle];
+    }
+}
+
+-(NSString*) menuTitle {
+    return [parameters objectForKey:NAMES_menuTitle];
+}
+
+-(void) setMenuIcon:(FMCImage*) menuIcon {
+    if (menuIcon != nil) {
+        [parameters setObject:menuIcon forKey:NAMES_menuIcon];
+    } else {
+        [parameters removeObjectForKey:NAMES_menuIcon];
+    }
+}
+
+-(FMCImage*) menuIcon {
+    NSObject* obj = [parameters objectForKey:NAMES_menuIcon];
+    if ([obj isKindOfClass:FMCImage.class]) {
+        return (FMCImage*)obj;
+    } else {
+        return [[[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+    }
+}
+
+-(void) setKeyboardProperties:(FMCKeyboardProperties*) keyboardProperties {
+    if (keyboardProperties != nil) {
+        [parameters setObject:keyboardProperties forKey:NAMES_keyboardProperties];
+    } else {
+        [parameters removeObjectForKey:NAMES_keyboardProperties];
+    }
+}
+
+-(FMCKeyboardProperties*) keyboardProperties {
+    NSObject* obj = [parameters objectForKey:NAMES_keyboardProperties];
+    if ([obj isKindOfClass:FMCKeyboardProperties.class]) {
+        return (FMCKeyboardProperties*)obj;
+    } else {
+        return [[[FMCKeyboardProperties alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+    }
+}
+
 @end

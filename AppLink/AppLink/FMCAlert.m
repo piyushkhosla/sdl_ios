@@ -101,20 +101,15 @@
     return [parameters objectForKey:NAMES_playTone];
 }
 
-- (void)setProgressIndicator:(NSNumber*)value
-{
-    if (value)
-    {
-        [parameters setObject:value forKey:NAMES_progressIndicator];
-    }
-    else
-    {
+-(void) setProgressIndicator:(NSNumber*) progressIndicator {
+    if (progressIndicator != nil) {
+        [parameters setObject:progressIndicator forKey:NAMES_progressIndicator];
+    } else {
         [parameters removeObjectForKey:NAMES_progressIndicator];
     }
 }
 
-- (NSNumber*)progressIndicator
-{
+-(NSNumber*) progressIndicator {
     return [parameters objectForKey:NAMES_progressIndicator];
 }
 

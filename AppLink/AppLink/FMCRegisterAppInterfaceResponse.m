@@ -9,10 +9,9 @@
 #import <AppLink/FMCSoftButtonCapabilities.h>
 #import <AppLink/FMCHmiZoneCapabilities.h>
 #import <AppLink/FMCSpeechCapabilities.h>
+#import <AppLink/FMCPrerecordedSpeech.h>
 #import <AppLink/FMCVrCapabilities.h>
 #import <AppLink/FMCAudioPassThruCapabilities.h>
-#import <AppLink/FMCPrerecordedSpeech.h>
-//#import <AppLink/FMCSpeechCapabilities.h>
 
 @implementation FMCRegisterAppInterfaceResponse
 
@@ -195,29 +194,21 @@
     }
 }
 
--(void) setPrerecordedSpeech:(NSMutableArray*)values {
-    if (values)
-    {
-        [parameters setObject:values forKey:NAMES_prerecordedSpeech];
-    }
-    else
-    {
+-(void) setPrerecordedSpeech:(NSMutableArray*) prerecordedSpeech {
+    if (prerecordedSpeech != nil) {
+        [parameters setObject:prerecordedSpeech forKey:NAMES_prerecordedSpeech];
+    } else {
         [parameters removeObjectForKey:NAMES_prerecordedSpeech];
     }
 }
 
 -(NSMutableArray*) prerecordedSpeech {
     NSMutableArray* array = [parameters objectForKey:NAMES_prerecordedSpeech];
-    if ([array count] == 0 ||
-        [[array objectAtIndex:0] isKindOfClass:FMCPrerecordedSpeech.class])
-    {
+    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCPrerecordedSpeech.class]) {
         return array;
-    }
-    else
-    {
+    } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
-        for (NSString* enumString in array)
-        {
+        for (NSString* enumString in array) {
             [newList addObject:[FMCPrerecordedSpeech valueOf:enumString]];
         }
         return newList;
@@ -281,6 +272,18 @@
     } else {
         return [[[FMCVehicleType alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
     }
+}
+
+-(void) setSupportedDiagModes:(NSMutableArray*) supportedDiagModes {
+    if (supportedDiagModes != nil) {
+        [parameters setObject:supportedDiagModes forKey:NAMES_supportedDiagModes];
+    } else {
+        [parameters removeObjectForKey:NAMES_supportedDiagModes];
+    }
+}
+
+-(NSMutableArray*) supportedDiagModes {
+    return [parameters objectForKey:NAMES_supportedDiagModes];
 }
 
 @end

@@ -1,8 +1,9 @@
-//  FMCOnVehicleData.m
+//  FMCOnSystemRequest.m
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <AppLink/FMCOnSystemRequest.h>
+
 #import <AppLink/FMCNames.h>
 
 @implementation FMCOnSystemRequest
@@ -17,101 +18,85 @@
     return self;
 }
 
-- (void)setRequestType:(FMCRequestType*)requestType
-{
-    if (requestType)
-    {
+-(void) setRequestType:(FMCRequestType*) requestType {
+    if (requestType != nil) {
         [parameters setObject:requestType forKey:NAMES_requestType];
-    }
-    else
-    {
+    } else {
         [parameters removeObjectForKey:NAMES_requestType];
     }
 }
 
-- (FMCRequestType*)requestType
-{
+-(FMCRequestType*) requestType {
     NSObject* obj = [parameters objectForKey:NAMES_requestType];
-    if ([obj isKindOfClass:FMCRequestType.class])
-    {
+    if ([obj isKindOfClass:FMCRequestType.class]) {
         return (FMCRequestType*)obj;
-    }
-    else
-    {
+    } else {
         return [FMCRequestType valueOf:(NSString*)obj];
     }
 }
 
-- (void)setUrl:(NSString *)url
-{
-    if (url) {
-        [parameters setObject:url forKey:@"url"];
+-(void) setUrl:(NSMutableArray*) url {
+    if (url != nil) {
+        [parameters setObject:url forKey:NAMES_url];
     } else {
-        [parameters removeObjectForKey:@"url"];
+        [parameters removeObjectForKey:NAMES_url];
     }
 }
 
-- (NSString*)url
-{
-    return [parameters objectForKey:@"url"];
+-(NSMutableArray*) url {
+    return [parameters objectForKey:NAMES_url];
 }
 
-- (void)setFileType:(FMCFileType*)fileType
-{
-    if (fileType)
-    {
+-(void) setTimeout:(NSNumber*) timeout {
+    if (timeout != nil) {
+        [parameters setObject:timeout forKey:NAMES_timeout];
+    } else {
+        [parameters removeObjectForKey:NAMES_timeout];
+    }
+}
+
+-(NSNumber*) timeout {
+    return [parameters objectForKey:NAMES_timeout];
+}
+
+-(void) setFileType:(FMCFileType*) fileType {
+    if (fileType != nil) {
         [parameters setObject:fileType forKey:NAMES_fileType];
-    }
-    else
-    {
+    } else {
         [parameters removeObjectForKey:NAMES_fileType];
     }
 }
 
-- (FMCFileType*)fileType
-{
+-(FMCFileType*) fileType {
     NSObject* obj = [parameters objectForKey:NAMES_fileType];
-    if ([obj isKindOfClass:FMCFileType.class])
-    {
+    if ([obj isKindOfClass:FMCFileType.class]) {
         return (FMCFileType*)obj;
-    }
-    else
-    {
+    } else {
         return [FMCFileType valueOf:(NSString*)obj];
     }
 }
 
-- (void)setOffset:(NSNumber*)value
-{
-    if (value)
-    {
-        [parameters setObject:value forKey:NAMES_offset];
-    }
-    else
-    {
+-(void) setOffset:(NSNumber*) offset {
+    if (offset != nil) {
+        [parameters setObject:offset forKey:NAMES_offset];
+    } else {
         [parameters removeObjectForKey:NAMES_offset];
     }
 }
 
-- (NSNumber*)offset
-{
+-(NSNumber*) offset {
     return [parameters objectForKey:NAMES_offset];
 }
 
-- (void)setLength:(NSNumber*)value
-{
-    if (value)
-    {
-        [parameters setObject:value forKey:NAMES_length];
-    }
-    else
-    {
+-(void) setLength:(NSNumber*) length {
+    if (length != nil) {
+        [parameters setObject:length forKey:NAMES_length];
+    } else {
         [parameters removeObjectForKey:NAMES_length];
     }
 }
 
-- (NSNumber*)length
-{
+-(NSNumber*) length {
     return [parameters objectForKey:NAMES_length];
 }
 

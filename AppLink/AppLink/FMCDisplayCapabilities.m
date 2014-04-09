@@ -113,6 +113,35 @@
     return [store objectForKey:NAMES_graphicSupported];
 }
 
+-(void) setTemplatesAvailable:(NSMutableArray*) templatesAvailable {
+    if (templatesAvailable != nil) {
+        [store setObject:templatesAvailable forKey:NAMES_templatesAvailable];
+    } else {
+        [store removeObjectForKey:NAMES_templatesAvailable];
+    }
+}
+
+-(NSMutableArray*) templatesAvailable {
+    return [store objectForKey:NAMES_templatesAvailable];
+}
+
+-(void) setScreenParams:(FMCScreenParams*) screenParams {
+    if (screenParams != nil) {
+        [store setObject:screenParams forKey:NAMES_screenParams];
+    } else {
+        [store removeObjectForKey:NAMES_screenParams];
+    }
+}
+
+-(FMCScreenParams*) screenParams {
+    NSObject* obj = [store objectForKey:NAMES_screenParams];
+    if ([obj isKindOfClass:FMCScreenParams.class]) {
+        return (FMCScreenParams*)obj;
+    } else {
+        return [[[FMCScreenParams alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+    }
+}
+
 -(void) setNumCustomPresetsAvailable:(NSNumber*) numCustomPresetsAvailable {
     if (numCustomPresetsAvailable != nil) {
         [store setObject:numCustomPresetsAvailable forKey:NAMES_numCustomPresetsAvailable];
@@ -124,6 +153,5 @@
 -(NSNumber*) numCustomPresetsAvailable {
     return [store objectForKey:NAMES_numCustomPresetsAvailable];
 }
-
 
 @end

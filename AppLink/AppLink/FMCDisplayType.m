@@ -13,6 +13,7 @@ FMCDisplayType* FMCDisplayType_GEN2_6_DMA = nil;
 FMCDisplayType* FMCDisplayType_MFD3 = nil;
 FMCDisplayType* FMCDisplayType_MFD4 = nil;
 FMCDisplayType* FMCDisplayType_MFD5 = nil;
+FMCDisplayType* FMCDisplayType_GEN3_8_INCH = nil;
 
 NSMutableArray* FMCDisplayType_values = nil;
 
@@ -39,6 +40,7 @@ NSMutableArray* FMCDisplayType_values = nil;
                 FMCDisplayType.MFD3,
                 FMCDisplayType.MFD4,
                 FMCDisplayType.MFD5,
+                FMCDisplayType.GEN3_8_INCH,
                 nil];
     }
     return FMCDisplayType_values;
@@ -105,6 +107,13 @@ NSMutableArray* FMCDisplayType_values = nil;
         FMCDisplayType_MFD5 = [[FMCDisplayType alloc] initWithValue:@"MFD5"];
     }
     return FMCDisplayType_MFD5;
+}
+
++(FMCDisplayType*) GEN3_8_INCH {
+    if (FMCDisplayType_GEN3_8_INCH == nil) {
+        FMCDisplayType_GEN3_8_INCH = [[FMCDisplayType alloc] initWithValue:@"GEN3_8-INCH"];
+    }
+    return FMCDisplayType_GEN3_8_INCH;
 }
 
 @end

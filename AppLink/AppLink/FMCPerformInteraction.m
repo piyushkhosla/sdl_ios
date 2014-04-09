@@ -157,4 +157,21 @@
     }
 }
 
+-(void) setInteractionLayout:(FMCLayoutMode*) interactionLayout {
+    if (interactionLayout != nil) {
+        [parameters setObject:interactionLayout forKey:NAMES_interactionLayout];
+    } else {
+        [parameters removeObjectForKey:NAMES_interactionLayout];
+    }
+}
+
+-(FMCLayoutMode*) interactionLayout {
+    NSObject* obj = [parameters objectForKey:NAMES_interactionLayout];
+    if ([obj isKindOfClass:FMCLayoutMode.class]) {
+        return (FMCLayoutMode*)obj;
+    } else {
+        return [FMCLayoutMode valueOf:(NSString*)obj];
+    }
+}
+
 @end

@@ -5,7 +5,7 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCResponse.h>
 
-@interface FMCSystemRequestResponse : FMCRPCResponse
+@interface FMCSystemRequestResponse : FMCRPCResponse {}
 
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;

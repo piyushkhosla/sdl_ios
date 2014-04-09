@@ -6,6 +6,7 @@
 #import <AppLink/FMCRPCMessage.h>
 
 #import <AppLink/FMCDisplayType.h>
+#import <AppLink/FMCScreenParams.h>
 
 @interface FMCDisplayCapabilities : FMCRPCStruct {}
 
@@ -17,6 +18,8 @@
 @property(assign) NSMutableArray* imageFields;
 @property(assign) NSMutableArray* mediaClockFormats;
 @property(assign) NSNumber* graphicSupported;
+@property(assign) NSMutableArray* templatesAvailable;
+@property(assign) FMCScreenParams* screenParams;
 @property(assign) NSNumber* numCustomPresetsAvailable;
 
 @end

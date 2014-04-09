@@ -19,5 +19,6 @@
 +(FMCDisplayType*) MFD3;
 +(FMCDisplayType*) MFD4;
 +(FMCDisplayType*) MFD5;
++(FMCDisplayType*) GEN3_8_INCH;
 
 @end

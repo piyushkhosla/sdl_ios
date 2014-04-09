@@ -71,4 +71,45 @@
     }
 }
 
+-(void) setSecondaryText:(NSString*) secondaryText {
+    if (secondaryText != nil) {
+        [store setObject:secondaryText forKey:NAMES_secondaryText];
+    } else {
+        [store removeObjectForKey:NAMES_secondaryText];
+    }
+}
+
+-(NSString*) secondaryText {
+    return [store objectForKey:NAMES_secondaryText];
+}
+
+-(void) setTertiaryText:(NSString*) tertiaryText {
+    if (tertiaryText != nil) {
+        [store setObject:tertiaryText forKey:NAMES_tertiaryText];
+    } else {
+        [store removeObjectForKey:NAMES_tertiaryText];
+    }
+}
+
+-(NSString*) tertiaryText {
+    return [store objectForKey:NAMES_tertiaryText];
+}
+
+-(void) setSecondaryImage:(FMCImage*) secondaryImage {
+    if (secondaryImage != nil) {
+        [store setObject:secondaryImage forKey:NAMES_secondaryImage];
+    } else {
+        [store removeObjectForKey:NAMES_secondaryImage];
+    }
+}
+
+-(FMCImage*) secondaryImage {
+    NSObject* obj = [store objectForKey:NAMES_secondaryImage];
+    if ([obj isKindOfClass:FMCImage.class]) {
+        return (FMCImage*)obj;
+    } else {
+        return [[[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+    }
+}
+
 @end

@@ -5,9 +5,12 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCMessage.h>
 
-@interface FMCTouchCoord : FMCRPCStruct
+@interface FMCTouchCoord : FMCRPCStruct {}
 
-@property (assign) NSNumber* x;
-@property (assign) NSNumber* y;
+-(id) init;
+-(id) initWithDictionary:(NSMutableDictionary*) dict;
+
+@property(assign) NSNumber* x;
+@property(assign) NSNumber* y;
 
 @end

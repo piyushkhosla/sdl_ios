@@ -30,7 +30,7 @@
     return [parameters objectForKey:NAMES_choiceID];
 }
 
--(void) setManualTextEntry:(NSNumber*) manualTextEntry {
+-(void) setManualTextEntry:(NSString*) manualTextEntry {
     if (manualTextEntry != nil) {
         [parameters setObject:manualTextEntry forKey:NAMES_manualTextEntry];
     } else {
@@ -38,7 +38,7 @@
     }
 }
 
--(NSNumber*) manualTextEntry {
+-(NSString*) manualTextEntry {
     return [parameters objectForKey:NAMES_manualTextEntry];
 }
 

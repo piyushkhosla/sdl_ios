@@ -10,7 +10,6 @@
 +(FMCAppInterfaceUnregisteredReason*) valueOf:(NSString*) value;
 +(NSMutableArray*) values;
 
-+(FMCAppInterfaceUnregisteredReason*) USER_EXIT;
 +(FMCAppInterfaceUnregisteredReason*) IGNITION_OFF;
 +(FMCAppInterfaceUnregisteredReason*) BLUETOOTH_OFF;
 +(FMCAppInterfaceUnregisteredReason*) USB_DISCONNECTED;

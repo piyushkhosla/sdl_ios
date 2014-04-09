@@ -7,6 +7,7 @@
 
 #import <AppLink/FMCSyncMsgVersion.h>
 #import <AppLink/FMCLanguage.h>
+#import <AppLink/FMCDeviceInfo.h>
 
 @interface FMCRegisterAppInterface : FMCRPCRequest {}
 
@@ -22,6 +23,8 @@
 @property(assign) FMCLanguage* languageDesired;
 @property(assign) FMCLanguage* hmiDisplayLanguageDesired;
 @property(assign) NSMutableArray* appHMIType;
+@property(assign) NSString* hashID;
+@property(assign) FMCDeviceInfo* deviceInfo;
 @property(assign) NSString* appID;
 
 @end

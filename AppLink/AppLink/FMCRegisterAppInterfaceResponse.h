@@ -29,5 +29,6 @@
 @property(assign) NSMutableArray* vrCapabilities;
 @property(assign) NSMutableArray* audioPassThruCapabilities;
 @property(assign) FMCVehicleType* vehicleType;
+@property(assign) NSMutableArray* supportedDiagModes;
 
 @end
