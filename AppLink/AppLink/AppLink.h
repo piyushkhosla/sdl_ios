@@ -130,7 +130,6 @@
 #import <AppLink/FMCDisplayCapabilities.h>
 #import <AppLink/FMCECallInfo.h>
 #import <AppLink/FMCEmergencyEvent.h>
-#import <AppLink/FMCEngineInfo.h>
 #import <AppLink/FMCGPSData.h>
 #import <AppLink/FMCHeadLampStatus.h>
 #import <AppLink/FMCHMIPermissions.h>
