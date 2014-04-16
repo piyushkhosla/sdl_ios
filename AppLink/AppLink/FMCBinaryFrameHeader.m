@@ -57,18 +57,14 @@
         memcpy((void*)jsonData.bytes, binHeader.bytes + 12, msg._jsonSize);
         msg._jsonData = jsonData;
     }
-    
-    if (binHeader.length - msg._jsonSize - 12 > 0) {
-        NSData* bulkData;
-        Byte* mallocPtr = malloc(binHeader.length - msg._jsonSize - 12);
-        if (mallocPtr == nil) {
-            @throw [NSException exceptionWithName:@"OutOfMemoryException" reason:@"malloc failed" userInfo:nil];
-        }
-        bulkData = [[NSData alloc] initWithBytesNoCopy:mallocPtr length:(binHeader.length - msg._jsonSize - 12)];
-        memcpy((void*)bulkData.bytes, binHeader.bytes + 12 + msg._jsonSize, (binHeader.length - msg._jsonSize - 12));
-        msg._bulkData = bulkData;
+
+    const int headerSize = 12;
+    NSUInteger bulkDataOffset = headerSize + jsonSize;
+    NSUInteger sizeOfBulkData = binHeader.length - bulkDataOffset;
+    if (sizeOfBulkData > 0) {
+        msg._bulkData = [binHeader subdataWithRange:NSMakeRange(bulkDataOffset, sizeOfBulkData)];
     }
-	
+
 	return msg;
 }
 

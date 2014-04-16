@@ -111,6 +111,7 @@
 		
 		function = [[store objectForKey:messageType] retain];
 		parameters = [[function objectForKey:NAMES_parameters] retain];
+        self.bulkData = [dict objectForKey:@"bulkData"];
 	}
 	return self;
 }
@@ -136,19 +137,6 @@
         [parameters setObject:value forKey:functionName];
     } else {
         [parameters removeObjectForKey:functionName];
-    }
-}
-
--(NSData*) getBulkData {
-    return _bulkData;
-}
-
--(void) setBulkData:(NSData*) bulkData
-{
-    if(bulkData != _bulkData)
-    {
-        [_bulkData release];
-        _bulkData = [[NSData dataWithData:bulkData] retain];
     }
 }
 
