@@ -176,11 +176,8 @@ const int POLICIES_CORRELATION_ID = 65535;
         FMCFunctionID* functionID = [[FMCFunctionID alloc] init];
         pm._functionID = [[functionID getFunctionID:[msg getFunctionName]] intValue];
         pm._correlationID = [msg.correlationID intValue];
-        
-        if ([msg getBulkData] != nil) {
-            pm._bulkData = [msg getBulkData];
-        }
-        
+        pm._bulkData = msg.bulkData;
+
 		[protocol sendData:pm];
 	} @catch (NSException * e) {
 		[FMCDebugTool logException:e withMessage:@"Proxy: Failed to send RPC request: %@", msg.name];
