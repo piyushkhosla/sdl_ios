@@ -96,16 +96,16 @@
     
     //Check for a version difference
     if (_version == 1) {
-        //Nothing has been read into the buffer and version is 2
-        if (headerBuf.length == 0 && (receivedBytes[0] >> 4) == 2) {
-            [self setVersion:(Byte) receivedBytes[0] >> 4];
-			//Buffer has something in it and version is 2
-        } else if ((((Byte *)headerBuf.bytes)[0] >> 4) == 2) {
+        //Future proofing, nothing has been read into the buffer and version is >= 2
+        if (headerBuf.length == 0 && (receivedBytes[0] >> 4) >= 2) {
+            [self setVersion:(Byte) 0x02];
+        //Future proofing, buffer has something in it and version >= 2
+        } else if ((((Byte *)headerBuf.bytes)[0] >> 4) >= 2) {
             //safe current state of the buffer and also set the new version
             NSMutableData* tempHeader = nil;
             tempHeader = [[NSMutableData alloc] initWithCapacity:headerBuf.length];
             tempHeader = headerBuf;
-            [self setVersion:(Byte) ((Byte *)headerBuf.bytes)[0] >> 4];
+            [self setVersion:(Byte) 0x02];
             headerBuf = tempHeader;
         }
     }
@@ -486,8 +486,9 @@
 }
 
 -(void) handleFrame:(FMCProtocolFrameHeader*) header data:(NSData*) data {
-    if (header._version == 2) {
-        _version = header._version;
+    //Future proofing, header._version >= 2
+    if (header._version >= 2) {
+        _version = (Byte) 0x02;
     }
     
     if (header._frameType == FMCFrameType_Control) {
