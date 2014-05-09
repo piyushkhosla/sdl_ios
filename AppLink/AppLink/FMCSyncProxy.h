@@ -1,7 +1,7 @@
 //  FMCSyncProxy.h
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
-//  Version: AppLinkFramework-2.2.0-iOS
+//  Version: ##Version##
 
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCISyncProxy.h>

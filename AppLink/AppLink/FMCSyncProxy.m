@@ -16,7 +16,7 @@
 #import <AppLink/FMCSiphonServer.h>
 #import <AppLink/FMCSyncProxy.h>
 
-#define VERSION_STRING @"AppLinkFramework-2.2.0-iOS"
+#define VERSION_STRING @"##Version##"
 
 @interface FMCCallback : NSObject {
 	NSObject* target;
