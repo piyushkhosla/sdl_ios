@@ -47,7 +47,7 @@
     NSObject* obj = [parameters objectForKey:NAMES_updateMode];
     if ([obj isKindOfClass:FMCUpdateMode.class]) {
         return (FMCUpdateMode*)obj;
-    } else { 
+    } else {
         return [FMCUpdateMode valueOf:(NSString*)obj];
     }
 }

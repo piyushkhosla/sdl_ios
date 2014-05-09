@@ -38,5 +38,6 @@
 +(FMCResult*) TRUNCATED_DATA;
 +(FMCResult*) RETRY;
 +(FMCResult*) WARNINGS;
++(FMCResult*) SAVED;
 
 @end

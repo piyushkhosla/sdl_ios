@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setSyncFileName:(NSString *) syncFileName {
+-(void) setSyncFileName:(NSString*) syncFileName {
     if (syncFileName != nil) {
         [parameters setObject:syncFileName forKey:NAMES_syncFileName];
     } else {
@@ -30,7 +30,7 @@
     return [parameters objectForKey:NAMES_syncFileName];
 }
 
--(void) setFileType:(FMCFileType *) fileType {
+-(void) setFileType:(FMCFileType*) fileType {
     if (fileType != nil) {
         [parameters setObject:fileType forKey:NAMES_fileType];
     } else {
@@ -47,7 +47,7 @@
     }
 }
 
--(void) setPersistentFile:(NSNumber *) persistentFile {
+-(void) setPersistentFile:(NSNumber*) persistentFile {
     if (persistentFile != nil) {
         [parameters setObject:persistentFile forKey:NAMES_persistentFile];
     } else {
@@ -58,6 +58,5 @@
 -(NSNumber*) persistentFile {
     return [parameters objectForKey:NAMES_persistentFile];
 }
-
 
 @end

@@ -30,7 +30,7 @@
     NSObject* obj = [parameters objectForKey:NAMES_reason];
     if ([obj isKindOfClass:FMCAppInterfaceUnregisteredReason.class]) {
         return (FMCAppInterfaceUnregisteredReason*)obj;
-    } else { 
+    } else {
         return [FMCAppInterfaceUnregisteredReason valueOf:(NSString*)obj];
     }
 }

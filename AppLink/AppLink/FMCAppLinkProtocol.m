@@ -28,6 +28,7 @@
         
         _version = 1;
         _messageID = 0;
+        _consecFrameNumber = 0;
 	}
 	return self;
 }
@@ -95,16 +96,16 @@
     
     //Check for a version difference
     if (_version == 1) {
-        //Nothing has been read into the buffer and version is 2
-        if (headerBuf.length == 0 && (receivedBytes[0] >> 4) == 2) {
-            [self setVersion:(Byte) receivedBytes[0] >> 4];
-			//Buffer has something in it and version is 2
-        } else if ((((Byte *)headerBuf.bytes)[0] >> 4) == 2) {
+        //Future proofing, nothing has been read into the buffer and version is >= 2
+        if (headerBuf.length == 0 && (receivedBytes[0] >> 4) >= 2) {
+            [self setVersion:(Byte) 0x02];
+        //Future proofing, buffer has something in it and version >= 2
+        } else if ((((Byte *)headerBuf.bytes)[0] >> 4) >= 2) {
             //safe current state of the buffer and also set the new version
             NSMutableData* tempHeader = nil;
             tempHeader = [[NSMutableData alloc] initWithCapacity:headerBuf.length];
             tempHeader = headerBuf;
-            [self setVersion:(Byte) ((Byte *)headerBuf.bytes)[0] >> 4];
+            [self setVersion:(Byte) 0x02];
             headerBuf = tempHeader;
         }
     }
@@ -321,13 +322,27 @@
             
             for (int i = 0; i < frameCount; i++) {
                 int bytesToWrite = protocolMsg._data.length - currentOffset;
-                if (bytesToWrite > maxDataSize) { bytesToWrite = maxDataSize
-                    ; }
-                FMCProtocolFrameHeader *consecHeader = [FMCProtocolFrameHeaderFactory consecutiveFrameWithSessionType:sessionType sessionID:sessionID dataSize:bytesToWrite messageID:_messageID version:_version];
+                if (bytesToWrite > maxDataSize) {
+                    bytesToWrite = maxDataSize;
+                }
+                
+                _consecFrameNumber++;
+
+                if (_consecFrameNumber == 0) {
+                    _consecFrameNumber++;
+                }
+
+                if ( (i+1) >= frameCount) {
+                    _consecFrameNumber = FMCFrameData_ConsecutiveLastFrame;
+                }
+
+                FMCProtocolFrameHeader *consecHeader = [FMCProtocolFrameHeaderFactory consecutiveFrameWithSessionType:sessionType sessionID:sessionID frameData:_consecFrameNumber dataSize:bytesToWrite messageID:_messageID version:_version];
                 [self sendFrameToTransport:consecHeader withData:protocolMsg._data offset:currentOffset length:bytesToWrite];
                 currentOffset += bytesToWrite;
-                
             }
+            
+            _consecFrameNumber = 0;
+
         }
 		
 	}
@@ -471,8 +486,9 @@
 }
 
 -(void) handleFrame:(FMCProtocolFrameHeader*) header data:(NSData*) data {
-    if (header._version == 2) {
-        _version = header._version;
+    //Future proofing, header._version >= 2
+    if (header._version >= 2) {
+        _version = (Byte) 0x02;
     }
     
     if (header._frameType == FMCFrameType_Control) {

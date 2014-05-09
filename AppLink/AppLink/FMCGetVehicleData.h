@@ -5,8 +5,6 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCRequest.h>
 
-#import <AppLink/FMCVehicleDataType.h>
-
 @interface FMCGetVehicleData : FMCRPCRequest {}
 
 -(id) init;
@@ -16,7 +14,7 @@
 @property(assign) NSNumber* speed;
 @property(assign) NSNumber* rpm;
 @property(assign) NSNumber* fuelLevel;
-@property(assign) NSNumber* fuelLevelState;
+@property(assign) NSNumber* fuelLevel_State;
 @property(assign) NSNumber* instantFuelConsumption;
 @property(assign) NSNumber* externalTemperature;
 @property(assign) NSNumber* vin;
@@ -32,5 +30,10 @@
 @property(assign) NSNumber* engineTorque;
 @property(assign) NSNumber* accPedalPosition;
 @property(assign) NSNumber* steeringWheelAngle;
+@property(assign) NSNumber* eCallInfo;
+@property(assign) NSNumber* airbagStatus;
+@property(assign) NSNumber* emergencyEvent;
+@property(assign) NSNumber* clusterModeStatus;
+@property(assign) NSNumber* myKey;
 
 @end

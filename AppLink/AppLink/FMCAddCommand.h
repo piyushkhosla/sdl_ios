@@ -5,8 +5,8 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCRequest.h>
 
-#import <AppLink/FMCImage.h>
 #import <AppLink/FMCMenuParams.h>
+#import <AppLink/FMCImage.h>
 
 @interface FMCAddCommand : FMCRPCRequest {}
 

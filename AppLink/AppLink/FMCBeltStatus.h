@@ -21,7 +21,7 @@
 @property(assign) FMCVehicleDataEventStatus* rightRow2BuckleBelted;
 @property(assign) FMCVehicleDataEventStatus* middleRow2BuckleBelted;
 @property(assign) FMCVehicleDataEventStatus* middleRow3BuckleBelted;
-@property(assign) FMCVehicleDataEventStatus* leftRow3BuckledBelted;
+@property(assign) FMCVehicleDataEventStatus* leftRow3BuckleBelted;
 @property(assign) FMCVehicleDataEventStatus* rightRow3BuckleBelted;
 @property(assign) FMCVehicleDataEventStatus* leftRearInflatableBelted;
 @property(assign) FMCVehicleDataEventStatus* rightRearInflatableBelted;

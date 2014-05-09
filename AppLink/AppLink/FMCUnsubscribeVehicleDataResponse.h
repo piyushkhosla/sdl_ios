@@ -16,7 +16,7 @@
 @property(assign) FMCVehicleDataResult* speed;
 @property(assign) FMCVehicleDataResult* rpm;
 @property(assign) FMCVehicleDataResult* fuelLevel;
-@property(assign) FMCVehicleDataResult* fuelLevelState;
+@property(assign) FMCVehicleDataResult* fuelLevel_State;
 @property(assign) FMCVehicleDataResult* instantFuelConsumption;
 @property(assign) FMCVehicleDataResult* externalTemperature;
 @property(assign) FMCVehicleDataResult* prndl;
@@ -31,5 +31,10 @@
 @property(assign) FMCVehicleDataResult* engineTorque;
 @property(assign) FMCVehicleDataResult* accPedalPosition;
 @property(assign) FMCVehicleDataResult* steeringWheelAngle;
+@property(assign) FMCVehicleDataResult* eCallInfo;
+@property(assign) FMCVehicleDataResult* airbagStatus;
+@property(assign) FMCVehicleDataResult* emergencyEvent;
+@property(assign) FMCVehicleDataResult* clusterModes;
+@property(assign) FMCVehicleDataResult* myKey;
 
 @end

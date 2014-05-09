@@ -111,6 +111,7 @@
 		
 		function = [[store objectForKey:messageType] retain];
 		parameters = [[function objectForKey:NAMES_parameters] retain];
+        self.bulkData = [dict objectForKey:@"bulkData"];
 	}
 	return self;
 }
@@ -136,21 +137,6 @@
         [parameters setObject:value forKey:functionName];
     } else {
         [parameters removeObjectForKey:functionName];
-    }
-}
-
--(NSData*) getBulkData {
-    return _bulkData;
-}
-
--(void) setBulkData:(NSData*) bulkData {
-    if (bulkData != nil) {
-        Byte* mallocPtr = malloc(bulkData.length);
-        if (mallocPtr == nil) {
-            @throw [NSException exceptionWithName:@"OutOfMemoryException" reason:@"malloc failed" userInfo:nil];
-        }
-        _bulkData = [[NSData alloc] initWithBytesNoCopy:mallocPtr length:bulkData.length];
-        memcpy((void*)_bulkData.bytes, bulkData, bulkData.length);
     }
 }
 

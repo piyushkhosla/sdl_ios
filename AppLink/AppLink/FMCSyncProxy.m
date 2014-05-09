@@ -16,7 +16,7 @@
 #import <AppLink/FMCSiphonServer.h>
 #import <AppLink/FMCSyncProxy.h>
 
-#define VERSION_STRING @"AppLink-2.1.1-iOS"
+#define VERSION_STRING @"AppLink-2.2.0-iOS"
 
 @interface FMCCallback : NSObject {
 	NSObject* target;
@@ -78,8 +78,6 @@ const int POLICIES_CORRELATION_ID = 65535;
         rpcSessionID = 0;
         
         alreadyDestructed = NO;
-
-        externalLibraries = nil;
         
         [transport addTransportListener:protocol];
         [protocol addProtocolListener:self];
@@ -113,11 +111,6 @@ const int POLICIES_CORRELATION_ID = 65535;
         [proxyListeners release];
         proxyListeners = nil;
         
-        if (externalLibraries) {
-            [externalLibraries release];
-            externalLibraries = nil;
-        }
-        
         alreadyDestructed = YES;
     }
 }
@@ -143,20 +136,6 @@ const int POLICIES_CORRELATION_ID = 65535;
 	@synchronized(proxyListeners) {
 		[proxyListeners addObject:delegate];
 	}
-}
-
--(void) registerLibrary:(id <FMCExternalLibrary>) externalLibrary {
-    if (externalLibrary) {
-        if (!externalLibraries) {
-            externalLibraries = [[NSMutableArray alloc] init];
-        }
-        [externalLibraries addObject:externalLibrary];
-    }
-}
-
-- (NSArray*)registeredLibraries
-{
-    return [externalLibraries copy];
 }
 
 -(NSString*) getProxyVersion {
@@ -197,11 +176,8 @@ const int POLICIES_CORRELATION_ID = 65535;
         FMCFunctionID* functionID = [[FMCFunctionID alloc] init];
         pm._functionID = [[functionID getFunctionID:[msg getFunctionName]] intValue];
         pm._correlationID = [msg.correlationID intValue];
-        
-        if ([msg getBulkData] != nil) {
-            pm._bulkData = [msg getBulkData];
-        }
-        
+        pm._bulkData = msg.bulkData;
+
 		[protocol sendData:pm];
 	} @catch (NSException * e) {
 		[FMCDebugTool logException:e withMessage:@"Proxy: Failed to send RPC request: %@", msg.name];
@@ -378,12 +354,6 @@ const int POLICIES_CORRELATION_ID = 65535;
         //Print Proxy Version To Console
         [FMCDebugTool logInfo:@"Framework Version: %@", [self getProxyVersion]];
         
-        //Print external library versions to Console
-        if (externalLibraries) {
-            for (id <FMCExternalLibrary> library in externalLibraries) {
-                [FMCDebugTool logInfo:@"%@ Version: %@", [library getLibraryName], [library getVersion]];
-            }
-        }
     }
    
     if ([functionName isEqualToString:@"EncodedSyncPDataResponse"]) {
@@ -433,7 +403,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 			[self performSelectorOnMainThread:@selector(performCallback:) withObject:callback waitUntilDone:NO];
 			// [callback release]; Moved to performCallback to avoid thread race condition
 		} else {
-			[FMCDebugTool logInfo:@"Proxy: Proxy listener does not respond to selector: %@", handlerName];
+			[FMCDebugTool logInfo:@"Proxy: App does not listen for callback: %@", handlerName];
 		}
 	}
 	[localListeners release];

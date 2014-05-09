@@ -10,6 +10,7 @@ FMCGlobalProperty* FMCGlobalProperty_VRHELPTITLE = nil;
 FMCGlobalProperty* FMCGlobalProperty_VRHELPITEMS = nil;
 
 NSMutableArray* FMCGlobalProperty_values = nil;
+
 @implementation FMCGlobalProperty
 
 +(FMCGlobalProperty*) valueOf:(NSString*) value {
@@ -34,17 +35,17 @@ NSMutableArray* FMCGlobalProperty_values = nil;
 }
 
 +(FMCGlobalProperty*) HELPPROMPT {
-    	if (FMCGlobalProperty_HELPPROMPT == nil) {
-        		FMCGlobalProperty_HELPPROMPT = [[FMCGlobalProperty alloc] initWithValue:@"HELPPROMPT"];
-    	}
-    	return FMCGlobalProperty_HELPPROMPT;
+    if (FMCGlobalProperty_HELPPROMPT == nil) {
+        FMCGlobalProperty_HELPPROMPT = [[FMCGlobalProperty alloc] initWithValue:@"HELPPROMPT"];
+    }
+    return FMCGlobalProperty_HELPPROMPT;
 }
 
 +(FMCGlobalProperty*) TIMEOUTPROMPT {
-    	if (FMCGlobalProperty_TIMEOUTPROMPT == nil) {
-        		FMCGlobalProperty_TIMEOUTPROMPT = [[FMCGlobalProperty alloc] initWithValue:@"TIMEOUTPROMPT"];
-    	}
-    	return FMCGlobalProperty_TIMEOUTPROMPT;
+    if (FMCGlobalProperty_TIMEOUTPROMPT == nil) {
+        FMCGlobalProperty_TIMEOUTPROMPT = [[FMCGlobalProperty alloc] initWithValue:@"TIMEOUTPROMPT"];
+    }
+    return FMCGlobalProperty_TIMEOUTPROMPT;
 }
 
 +(FMCGlobalProperty*) VRHELPTITLE {

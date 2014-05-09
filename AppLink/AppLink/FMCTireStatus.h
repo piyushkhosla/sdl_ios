@@ -5,8 +5,8 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCMessage.h>
 
-#import <AppLink/FMCSingleTireStatus.h>
 #import <AppLink/FMCWarningLightStatus.h>
+#import <AppLink/FMCSingleTireStatus.h>
 
 @interface FMCTireStatus : FMCRPCStruct {}
 

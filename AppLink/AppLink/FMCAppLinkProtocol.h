@@ -16,6 +16,7 @@
 	NSInteger dataBufFinalLength;
 	NSObject *msgLock;
     UInt32 _messageID;
+    Byte _consecFrameNumber;
 }
 
 -(void) setVersion:(Byte) version;

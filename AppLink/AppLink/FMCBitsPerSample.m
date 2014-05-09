@@ -8,6 +8,7 @@ FMCBitsPerSample* FMCBitsPerSample_8_BIT = nil;
 FMCBitsPerSample* FMCBitsPerSample_16_BIT = nil;
 
 NSMutableArray* FMCBitsPerSample_values = nil;
+
 @implementation FMCBitsPerSample
 
 +(FMCBitsPerSample*) valueOf:(NSString*) value {
@@ -30,17 +31,17 @@ NSMutableArray* FMCBitsPerSample_values = nil;
 }
 
 +(FMCBitsPerSample*) _8_BIT {
-    	if (FMCBitsPerSample_8_BIT == nil) {
-        		FMCBitsPerSample_8_BIT = [[FMCBitsPerSample alloc] initWithValue:@"8_BIT"];
-    	}
-    	return FMCBitsPerSample_8_BIT;
+    if (FMCBitsPerSample_8_BIT == nil) {
+        FMCBitsPerSample_8_BIT = [[FMCBitsPerSample alloc] initWithValue:@"8_BIT"];
+    }
+    return FMCBitsPerSample_8_BIT;
 }
 
 +(FMCBitsPerSample*) _16_BIT {
-    	if (FMCBitsPerSample_16_BIT == nil) {
-        		FMCBitsPerSample_16_BIT = [[FMCBitsPerSample alloc] initWithValue:@"16_BIT"];
-    	}
-    	return FMCBitsPerSample_16_BIT;
+    if (FMCBitsPerSample_16_BIT == nil) {
+        FMCBitsPerSample_16_BIT = [[FMCBitsPerSample alloc] initWithValue:@"16_BIT"];
+    }
+    return FMCBitsPerSample_16_BIT;
 }
 
 @end

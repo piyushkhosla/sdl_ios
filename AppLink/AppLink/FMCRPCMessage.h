@@ -20,7 +20,6 @@
 	NSMutableDictionary* function;
 	NSMutableDictionary* parameters;
 	NSString* messageType;
-	NSData* _bulkData;
 }
 
 -(id) initWithName:(NSString*) name;
@@ -29,9 +28,8 @@
 -(void) setFunctionName:(NSString*) functionName;
 -(NSObject*) getParameters:(NSString*) functionName;
 -(void) setParameters:(NSString*) functionName value:(NSObject*) value;
--(NSData*) getBulkData;
--(void) setBulkData:(NSData*) bulkData;
 
+@property (nonatomic, retain) NSData* bulkData;
 @property(readonly) NSString* name;
 @property(readonly) NSString* messageType;
 

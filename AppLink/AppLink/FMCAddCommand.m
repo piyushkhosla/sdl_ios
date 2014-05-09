@@ -55,11 +55,11 @@
     }
 }
 
--(NSMutableArray*) vrCommands { 
+-(NSMutableArray*) vrCommands {
     return [parameters objectForKey:NAMES_vrCommands];
 }
 
--(void) setCmdIcon:(FMCImage *) cmdIcon {
+-(void) setCmdIcon:(FMCImage*) cmdIcon {
     if (cmdIcon != nil) {
         [parameters setObject:cmdIcon forKey:NAMES_cmdIcon];
     } else {

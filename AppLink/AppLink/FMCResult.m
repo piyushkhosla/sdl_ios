@@ -32,8 +32,10 @@ FMCResult* FMCResult_CANCEL_ROUTE = nil;
 FMCResult* FMCResult_TRUNCATED_DATA = nil;
 FMCResult* FMCResult_RETRY = nil;
 FMCResult* FMCResult_WARNINGS = nil;
+FMCResult* FMCResult_SAVED = nil;
 
 NSMutableArray* FMCResult_values = nil;
+
 @implementation FMCResult
 
 +(FMCResult*) valueOf:(NSString*) value {
@@ -76,156 +78,157 @@ NSMutableArray* FMCResult_values = nil;
                 FMCResult.TRUNCATED_DATA,
                 FMCResult.RETRY,
                 FMCResult.WARNINGS,
+                FMCResult.SAVED,
                 nil];
     }
     return FMCResult_values;
 }
 
 +(FMCResult*) SUCCESS {
-    	if (FMCResult_SUCCESS == nil) {
-        		FMCResult_SUCCESS = [[FMCResult alloc] initWithValue:@"SUCCESS"];
-    	}
-    	return FMCResult_SUCCESS;
+    if (FMCResult_SUCCESS == nil) {
+        FMCResult_SUCCESS = [[FMCResult alloc] initWithValue:@"SUCCESS"];
+    }
+    return FMCResult_SUCCESS;
 }
 
 +(FMCResult*) INVALID_DATA {
-    	if (FMCResult_INVALID_DATA == nil) {
-        		FMCResult_INVALID_DATA = [[FMCResult alloc] initWithValue:@"INVALID_DATA"];
-    	}
-    	return FMCResult_INVALID_DATA;
+    if (FMCResult_INVALID_DATA == nil) {
+        FMCResult_INVALID_DATA = [[FMCResult alloc] initWithValue:@"INVALID_DATA"];
+    }
+    return FMCResult_INVALID_DATA;
 }
 
 +(FMCResult*) UNSUPPORTED_REQUEST {
-    	if (FMCResult_UNSUPPORTED_REQUEST == nil) {
-        		FMCResult_UNSUPPORTED_REQUEST = [[FMCResult alloc] initWithValue:@"UNSUPPORTED_REQUEST"];
-    	}
-    	return FMCResult_UNSUPPORTED_REQUEST;
+    if (FMCResult_UNSUPPORTED_REQUEST == nil) {
+        FMCResult_UNSUPPORTED_REQUEST = [[FMCResult alloc] initWithValue:@"UNSUPPORTED_REQUEST"];
+    }
+    return FMCResult_UNSUPPORTED_REQUEST;
 }
 
 +(FMCResult*) OUT_OF_MEMORY {
-    	if (FMCResult_OUT_OF_MEMORY == nil) {
-        		FMCResult_OUT_OF_MEMORY = [[FMCResult alloc] initWithValue:@"OUT_OF_MEMORY"];
-    	}
-    	return FMCResult_OUT_OF_MEMORY;
+    if (FMCResult_OUT_OF_MEMORY == nil) {
+        FMCResult_OUT_OF_MEMORY = [[FMCResult alloc] initWithValue:@"OUT_OF_MEMORY"];
+    }
+    return FMCResult_OUT_OF_MEMORY;
 }
 
 +(FMCResult*) TOO_MANY_PENDING_REQUESTS {
-    	if (FMCResult_TOO_MANY_PENDING_REQUESTS == nil) {
-        		FMCResult_TOO_MANY_PENDING_REQUESTS = [[FMCResult alloc] initWithValue:@"TOO_MANY_PENDING_REQUESTS"];
-    	}
-    	return FMCResult_TOO_MANY_PENDING_REQUESTS;
+    if (FMCResult_TOO_MANY_PENDING_REQUESTS == nil) {
+        FMCResult_TOO_MANY_PENDING_REQUESTS = [[FMCResult alloc] initWithValue:@"TOO_MANY_PENDING_REQUESTS"];
+    }
+    return FMCResult_TOO_MANY_PENDING_REQUESTS;
 }
 
 +(FMCResult*) INVALID_ID {
-    	if (FMCResult_INVALID_ID == nil) {
-        		FMCResult_INVALID_ID = [[FMCResult alloc] initWithValue:@"INVALID_ID"];
-    	}
-    	return FMCResult_INVALID_ID;
+    if (FMCResult_INVALID_ID == nil) {
+        FMCResult_INVALID_ID = [[FMCResult alloc] initWithValue:@"INVALID_ID"];
+    }
+    return FMCResult_INVALID_ID;
 }
 
 +(FMCResult*) DUPLICATE_NAME {
-    	if (FMCResult_DUPLICATE_NAME == nil) {
-        		FMCResult_DUPLICATE_NAME = [[FMCResult alloc] initWithValue:@"DUPLICATE_NAME"];
-    	}
-    	return FMCResult_DUPLICATE_NAME;
+    if (FMCResult_DUPLICATE_NAME == nil) {
+        FMCResult_DUPLICATE_NAME = [[FMCResult alloc] initWithValue:@"DUPLICATE_NAME"];
+    }
+    return FMCResult_DUPLICATE_NAME;
 }
 
 +(FMCResult*) TOO_MANY_APPLICATIONS {
-    	if (FMCResult_TOO_MANY_APPLICATIONS == nil) {
-        		FMCResult_TOO_MANY_APPLICATIONS = [[FMCResult alloc] initWithValue:@"TOO_MANY_APPLICATIONS"];
-    	}
-    	return FMCResult_TOO_MANY_APPLICATIONS;
+    if (FMCResult_TOO_MANY_APPLICATIONS == nil) {
+        FMCResult_TOO_MANY_APPLICATIONS = [[FMCResult alloc] initWithValue:@"TOO_MANY_APPLICATIONS"];
+    }
+    return FMCResult_TOO_MANY_APPLICATIONS;
 }
 
 +(FMCResult*) APPLICATION_REGISTERED_ALREADY {
-    	if (FMCResult_APPLICATION_REGISTERED_ALREADY == nil) {
-        		FMCResult_APPLICATION_REGISTERED_ALREADY = [[FMCResult alloc] initWithValue:@"APPLICATION_REGISTERED_ALREADY"];
-    	}
-    	return FMCResult_APPLICATION_REGISTERED_ALREADY;
+    if (FMCResult_APPLICATION_REGISTERED_ALREADY == nil) {
+        FMCResult_APPLICATION_REGISTERED_ALREADY = [[FMCResult alloc] initWithValue:@"APPLICATION_REGISTERED_ALREADY"];
+    }
+    return FMCResult_APPLICATION_REGISTERED_ALREADY;
 }
 
 +(FMCResult*) UNSUPPORTED_VERSION {
-    	if (FMCResult_UNSUPPORTED_VERSION == nil) {
-        		FMCResult_UNSUPPORTED_VERSION = [[FMCResult alloc] initWithValue:@"UNSUPPORTED_VERSION"];
-    	}
-    	return FMCResult_UNSUPPORTED_VERSION;
+    if (FMCResult_UNSUPPORTED_VERSION == nil) {
+        FMCResult_UNSUPPORTED_VERSION = [[FMCResult alloc] initWithValue:@"UNSUPPORTED_VERSION"];
+    }
+    return FMCResult_UNSUPPORTED_VERSION;
 }
 
 +(FMCResult*) WRONG_LANGUAGE {
-    	if (FMCResult_WRONG_LANGUAGE == nil) {
-        		FMCResult_WRONG_LANGUAGE = [[FMCResult alloc] initWithValue:@"WRONG_LANGUAGE"];
-    	}
-    	return FMCResult_WRONG_LANGUAGE;
+    if (FMCResult_WRONG_LANGUAGE == nil) {
+        FMCResult_WRONG_LANGUAGE = [[FMCResult alloc] initWithValue:@"WRONG_LANGUAGE"];
+    }
+    return FMCResult_WRONG_LANGUAGE;
 }
 
 +(FMCResult*) APPLICATION_NOT_REGISTERED {
-    	if (FMCResult_APPLICATION_NOT_REGISTERED == nil) {
-        		FMCResult_APPLICATION_NOT_REGISTERED = [[FMCResult alloc] initWithValue:@"APPLICATION_NOT_REGISTERED"];
-    	}
-    	return FMCResult_APPLICATION_NOT_REGISTERED;
+    if (FMCResult_APPLICATION_NOT_REGISTERED == nil) {
+        FMCResult_APPLICATION_NOT_REGISTERED = [[FMCResult alloc] initWithValue:@"APPLICATION_NOT_REGISTERED"];
+    }
+    return FMCResult_APPLICATION_NOT_REGISTERED;
 }
 
 +(FMCResult*) IN_USE {
-    	if (FMCResult_IN_USE == nil) {
-        		FMCResult_IN_USE = [[FMCResult alloc] initWithValue:@"IN_USE"];
-    	}
-    	return FMCResult_IN_USE;
+    if (FMCResult_IN_USE == nil) {
+        FMCResult_IN_USE = [[FMCResult alloc] initWithValue:@"IN_USE"];
+    }
+    return FMCResult_IN_USE;
 }
 
 +(FMCResult*) VEHICLE_DATA_NOT_ALLOWED {
-    	if (FMCResult_VEHICLE_DATA_NOT_ALLOWED == nil) {
-        		FMCResult_VEHICLE_DATA_NOT_ALLOWED = [[FMCResult alloc] initWithValue:@"VEHICLE_DATA_NOT_ALLOWED"];
-    	}
-    	return FMCResult_VEHICLE_DATA_NOT_ALLOWED;
+    if (FMCResult_VEHICLE_DATA_NOT_ALLOWED == nil) {
+        FMCResult_VEHICLE_DATA_NOT_ALLOWED = [[FMCResult alloc] initWithValue:@"VEHICLE_DATA_NOT_ALLOWED"];
+    }
+    return FMCResult_VEHICLE_DATA_NOT_ALLOWED;
 }
 
 +(FMCResult*) VEHICLE_DATA_NOT_AVAILABLE {
-    	if (FMCResult_VEHICLE_DATA_NOT_AVAILABLE == nil) {
-        		FMCResult_VEHICLE_DATA_NOT_AVAILABLE = [[FMCResult alloc] initWithValue:@"VEHICLE_DATA_NOT_AVAILABLE"];
-    	}
-    	return FMCResult_VEHICLE_DATA_NOT_AVAILABLE;
+    if (FMCResult_VEHICLE_DATA_NOT_AVAILABLE == nil) {
+        FMCResult_VEHICLE_DATA_NOT_AVAILABLE = [[FMCResult alloc] initWithValue:@"VEHICLE_DATA_NOT_AVAILABLE"];
+    }
+    return FMCResult_VEHICLE_DATA_NOT_AVAILABLE;
 }
 
 +(FMCResult*) REJECTED {
-    	if (FMCResult_REJECTED == nil) {
-        		FMCResult_REJECTED = [[FMCResult alloc] initWithValue:@"REJECTED"];
-    	}
-    	return FMCResult_REJECTED;
+    if (FMCResult_REJECTED == nil) {
+        FMCResult_REJECTED = [[FMCResult alloc] initWithValue:@"REJECTED"];
+    }
+    return FMCResult_REJECTED;
 }
 
 +(FMCResult*) ABORTED {
-    	if (FMCResult_ABORTED == nil) {
-        		FMCResult_ABORTED = [[FMCResult alloc] initWithValue:@"ABORTED"];
-    	}
-    	return FMCResult_ABORTED;
+    if (FMCResult_ABORTED == nil) {
+        FMCResult_ABORTED = [[FMCResult alloc] initWithValue:@"ABORTED"];
+    }
+    return FMCResult_ABORTED;
 }
 
 +(FMCResult*) IGNORED {
-    	if (FMCResult_IGNORED == nil) {
-        		FMCResult_IGNORED = [[FMCResult alloc] initWithValue:@"IGNORED"];
-    	}
-    	return FMCResult_IGNORED;
+    if (FMCResult_IGNORED == nil) {
+        FMCResult_IGNORED = [[FMCResult alloc] initWithValue:@"IGNORED"];
+    }
+    return FMCResult_IGNORED;
 }
 
 +(FMCResult*) UNSUPPORTED_RESOURCE {
-    	if (FMCResult_UNSUPPORTED_RESOURCE == nil) {
-        		FMCResult_UNSUPPORTED_RESOURCE = [[FMCResult alloc] initWithValue:@"UNSUPPORTED_RESOURCE"];
-    	}
-    	return FMCResult_UNSUPPORTED_RESOURCE;
+    if (FMCResult_UNSUPPORTED_RESOURCE == nil) {
+        FMCResult_UNSUPPORTED_RESOURCE = [[FMCResult alloc] initWithValue:@"UNSUPPORTED_RESOURCE"];
+    }
+    return FMCResult_UNSUPPORTED_RESOURCE;
 }
 
 +(FMCResult*) FILE_NOT_FOUND {
-    	if (FMCResult_FILE_NOT_FOUND == nil) {
-        		FMCResult_FILE_NOT_FOUND = [[FMCResult alloc] initWithValue:@"FILE_NOT_FOUND"];
-    	}
-    	return FMCResult_FILE_NOT_FOUND;
+    if (FMCResult_FILE_NOT_FOUND == nil) {
+        FMCResult_FILE_NOT_FOUND = [[FMCResult alloc] initWithValue:@"FILE_NOT_FOUND"];
+    }
+    return FMCResult_FILE_NOT_FOUND;
 }
 
 +(FMCResult*) GENERIC_ERROR {
-    	if (FMCResult_GENERIC_ERROR == nil) {
-        		FMCResult_GENERIC_ERROR = [[FMCResult alloc] initWithValue:@"GENERIC_ERROR"];
-    	}
-    	return FMCResult_GENERIC_ERROR;
+    if (FMCResult_GENERIC_ERROR == nil) {
+        FMCResult_GENERIC_ERROR = [[FMCResult alloc] initWithValue:@"GENERIC_ERROR"];
+    }
+    return FMCResult_GENERIC_ERROR;
 }
 
 +(FMCResult*) DISALLOWED {
@@ -275,6 +278,13 @@ NSMutableArray* FMCResult_values = nil;
         FMCResult_WARNINGS = [[FMCResult alloc] initWithValue:@"WARNINGS"];
     }
     return FMCResult_WARNINGS;
+}
+
++(FMCResult*) SAVED {
+    if (FMCResult_SAVED == nil) {
+        FMCResult_SAVED = [[FMCResult alloc] initWithValue:@"SAVED"];
+    }
+    return FMCResult_SAVED;
 }
 
 @end

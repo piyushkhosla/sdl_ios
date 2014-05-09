@@ -5,6 +5,7 @@
 #import <AppLink/FMCShow.h>
 
 #import <AppLink/FMCNames.h>
+#import <AppLink/FMCSoftButton.h>
 
 @implementation FMCShow
 
@@ -78,7 +79,7 @@
     NSObject* obj = [parameters objectForKey:NAMES_alignment];
     if ([obj isKindOfClass:FMCTextAlignment.class]) {
         return (FMCTextAlignment*)obj;
-    } else { 
+    } else {
         return [FMCTextAlignment valueOf:(NSString*)obj];
     }
 }
@@ -136,7 +137,7 @@
     }
 }
 
--(void) setSoftButtons:(NSMutableArray *) softButtons {
+-(void) setSoftButtons:(NSMutableArray*) softButtons {
     if (softButtons != nil) {
         [parameters setObject:softButtons forKey:NAMES_softButtons];
     } else {

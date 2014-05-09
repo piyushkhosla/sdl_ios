@@ -30,7 +30,7 @@
     NSObject* obj = [store objectForKey:NAMES_name];
     if ([obj isKindOfClass:FMCTextFieldName.class]) {
         return (FMCTextFieldName*)obj;
-    } else { 
+    } else {
         return [FMCTextFieldName valueOf:(NSString*)obj];
     }
 }
@@ -47,7 +47,7 @@
     NSObject* obj = [store objectForKey:NAMES_characterSet];
     if ([obj isKindOfClass:FMCCharacterSet.class]) {
         return (FMCCharacterSet*)obj;
-    } else { 
+    } else {
         return [FMCCharacterSet valueOf:(NSString*)obj];
     }
 }

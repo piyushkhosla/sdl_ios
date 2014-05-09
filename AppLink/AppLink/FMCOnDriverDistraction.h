@@ -7,7 +7,7 @@
 
 #import <AppLink/FMCDriverDistractionState.h>
 
-@interface FMCOnDriverDistraction: FMCRPCNotification {}
+@interface FMCOnDriverDistraction : FMCRPCNotification {}
 
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
@@ -15,4 +15,3 @@
 @property(assign) FMCDriverDistractionState* state;
 
 @end
-

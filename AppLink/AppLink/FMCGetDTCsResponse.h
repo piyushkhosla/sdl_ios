@@ -5,8 +5,6 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCResponse.h>
 
-#import <AppLink/FMCVehicleDataResultCode.h>
-
 @interface FMCGetDTCsResponse : FMCRPCResponse {}
 
 -(id) init;

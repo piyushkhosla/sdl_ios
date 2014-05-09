@@ -13,6 +13,6 @@
 +(FMCProtocolFrameHeader*) endSessionWithSessionType:(FMCSessionType)sessionType sessionID:(Byte)sessionID messageID:(UInt32)messageID version:(Byte)version;
 +(FMCProtocolFrameHeader*) singleFrameWithSessionType:(FMCSessionType)sessionType sessionID:(Byte)sessionID dataSize:(NSInteger)dataSize messageID:(UInt32)messageID version:(Byte)version;
 +(FMCProtocolFrameHeader*) firstFrameWithSessionType:(FMCSessionType)sessionType sessionID:(Byte)sessionID messageID:(UInt32)messageID version:(Byte)version;
-+(FMCProtocolFrameHeader*) consecutiveFrameWithSessionType:(FMCSessionType) sessionType sessionID:(Byte)sessionID dataSize:(NSInteger)dataSize messageID:(UInt32)messageID version:(Byte)version;
++(FMCProtocolFrameHeader*) consecutiveFrameWithSessionType:(FMCSessionType) sessionType sessionID:(Byte)sessionID frameData:(Byte)frameData dataSize:(NSInteger)dataSize messageID:(UInt32)messageID version:(Byte)version;
 
 @end

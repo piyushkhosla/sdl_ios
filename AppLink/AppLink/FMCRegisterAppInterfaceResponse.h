@@ -5,10 +5,10 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCResponse.h>
 
-#import <AppLink/FMCDisplayCapabilities.h>
-#import <AppLink/FMCLanguage.h>
-#import <AppLink/FMCPresetBankCapabilities.h>
 #import <AppLink/FMCSyncMsgVersion.h>
+#import <AppLink/FMCLanguage.h>
+#import <AppLink/FMCDisplayCapabilities.h>
+#import <AppLink/FMCPresetBankCapabilities.h>
 #import <AppLink/FMCVehicleType.h>
 
 @interface FMCRegisterAppInterfaceResponse : FMCRPCResponse {}
@@ -28,6 +28,5 @@
 @property(assign) NSMutableArray* vrCapabilities;
 @property(assign) NSMutableArray* audioPassThruCapabilities;
 @property(assign) FMCVehicleType* vehicleType;
-
 
 @end

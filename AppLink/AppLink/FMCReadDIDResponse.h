@@ -5,13 +5,11 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCResponse.h>
 
-#import <AppLink/FMCDIDResult.h>
-
 @interface FMCReadDIDResponse : FMCRPCResponse {}
 
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCDIDResult* didResult;
+@property(assign) NSMutableArray* didResult;
 
 @end
