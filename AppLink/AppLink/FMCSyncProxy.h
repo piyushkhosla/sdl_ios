@@ -25,6 +25,7 @@
     BOOL alreadyDestructed;
     
     NSMutableData* httpResponseData;
+    NSString* requestKind;
 }
 
 -(id)  initWithTransport:(NSObject<FMCSyncTransport>*) transport protocol:(NSObject<FMCProtocol>*) protocol delegate:(NSObject<FMCProxyListener>*) delegate;
