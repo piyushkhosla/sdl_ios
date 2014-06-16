@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface FMCRPCPayloadMessage : NSObject
+@interface FMCRPCPayload : NSObject
 
 @property (assign) Byte rpcType;
 @property (assign) UInt32 functionID;

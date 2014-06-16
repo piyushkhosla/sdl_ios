@@ -3,9 +3,9 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import "FMCRPCPayloadMessage.h"
+#import "FMCRPCPayload.h"
 
-@implementation FMCRPCPayloadMessage
+@implementation FMCRPCPayload
 
 -(id) init {
 	if (self = [super init]) {

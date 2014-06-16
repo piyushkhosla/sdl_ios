@@ -17,7 +17,7 @@
 		59204D2C194EB01500403450 /* FMCApplinkProtocolRecievedMessageRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 59204D21194EB01500403450 /* FMCApplinkProtocolRecievedMessageRouter.m */; };
 		59204D2D194EB01500403450 /* FMCAppLinkV1ProtocolHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 59204D23194EB01500403450 /* FMCAppLinkV1ProtocolHeader.m */; };
 		59204D2E194EB01500403450 /* FMCAppLinkV2ProtocolHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 59204D25194EB01500403450 /* FMCAppLinkV2ProtocolHeader.m */; };
-		59204D2F194EB01500403450 /* FMCRPCPayloadMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 59204D27194EB01500403450 /* FMCRPCPayloadMessage.m */; };
+		59204D2F194EB01500403450 /* FMCRPCPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = 59204D27194EB01500403450 /* FMCRPCPayload.m */; };
 		59BFDFB2194EB2FA00B6E8B5 /* FMCDebugTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 59BFDFAF194EB2FA00B6E8B5 /* FMCDebugTool.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		59BFDFB3194EB2FA00B6E8B5 /* FMCSiphonServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 59BFDFB1194EB2FA00B6E8B5 /* FMCSiphonServer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		59E5A3D5194E318200B908AA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E5A3D4194E318200B908AA /* Foundation.framework */; };
@@ -294,8 +294,8 @@
 		59204D23194EB01500403450 /* FMCAppLinkV1ProtocolHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCAppLinkV1ProtocolHeader.m; sourceTree = "<group>"; };
 		59204D24194EB01500403450 /* FMCAppLinkV2ProtocolHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCAppLinkV2ProtocolHeader.h; sourceTree = "<group>"; };
 		59204D25194EB01500403450 /* FMCAppLinkV2ProtocolHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCAppLinkV2ProtocolHeader.m; sourceTree = "<group>"; };
-		59204D26194EB01500403450 /* FMCRPCPayloadMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCRPCPayloadMessage.h; sourceTree = "<group>"; };
-		59204D27194EB01500403450 /* FMCRPCPayloadMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCRPCPayloadMessage.m; sourceTree = "<group>"; };
+		59204D26194EB01500403450 /* FMCRPCPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCRPCPayload.h; sourceTree = "<group>"; };
+		59204D27194EB01500403450 /* FMCRPCPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCRPCPayload.m; sourceTree = "<group>"; };
 		59BFDFAE194EB2FA00B6E8B5 /* FMCDebugTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCDebugTool.h; sourceTree = "<group>"; };
 		59BFDFAF194EB2FA00B6E8B5 /* FMCDebugTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCDebugTool.m; sourceTree = "<group>"; };
 		59BFDFB0194EB2FA00B6E8B5 /* FMCSiphonServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCSiphonServer.h; sourceTree = "<group>"; };
@@ -933,8 +933,8 @@
 				59204D23194EB01500403450 /* FMCAppLinkV1ProtocolHeader.m */,
 				59204D24194EB01500403450 /* FMCAppLinkV2ProtocolHeader.h */,
 				59204D25194EB01500403450 /* FMCAppLinkV2ProtocolHeader.m */,
-				59204D26194EB01500403450 /* FMCRPCPayloadMessage.h */,
-				59204D27194EB01500403450 /* FMCRPCPayloadMessage.m */,
+				59204D26194EB01500403450 /* FMCRPCPayload.h */,
+				59204D27194EB01500403450 /* FMCRPCPayload.m */,
 				59E5A41B194E347900B908AA /* FMCAbstractProtocol.h */,
 				59E5A41C194E347900B908AA /* FMCAbstractProtocol.m */,
 				59E5A41D194E347900B908AA /* FMCAppLinkProtocol.h */,
@@ -1621,7 +1621,7 @@
 				59E5A5F9194E347900B908AA /* FMCFileType.m in Sources */,
 				59E5A6B0194E347900B908AA /* FMCVehicleType.m in Sources */,
 				59204D17194EAFCB00403450 /* FMCTCPTransport.m in Sources */,
-				59204D2F194EB01500403450 /* FMCRPCPayloadMessage.m in Sources */,
+				59204D2F194EB01500403450 /* FMCRPCPayload.m in Sources */,
 				59E5A6AF194E347900B908AA /* FMCVehicleDataResult.m in Sources */,
 				59E5A5D7194E347900B908AA /* FMCRPCMessage.m in Sources */,
 				59E5A609194E347900B908AA /* FMCMediaClockFormat.m in Sources */,
