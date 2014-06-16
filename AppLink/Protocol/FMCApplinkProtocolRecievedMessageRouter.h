@@ -14,11 +14,7 @@
 @interface FMCApplinkProtocolRecievedMessageRouter : NSObject
 
 @property (weak) id<FMCProtocolListener> delegate;
-@property (strong) NSMutableDictionary *messageAssemblers;
 
-- (void)handleRecievedMessage:(FMCAppLinkProtocolMessage *)message;
-- (void)handleProtocolMessage:(FMCAppLinkProtocolMessage *)message;
-- (void)handleControlMessage:(FMCAppLinkProtocolMessage *)message;
-- (void)handleMultiPartMessage:(FMCAppLinkProtocolMessage *)message;
+- (void)handleRecievedMessageAsynch:(FMCAppLinkProtocolMessage *)message;
 
 @end

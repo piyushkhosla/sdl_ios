@@ -186,7 +186,7 @@ void print(NSString *format, ...)
         self.messageRouter = [[FMCApplinkProtocolRecievedMessageRouter alloc] init];
         self.messageRouter.delegate = self.delegate;
     }
-    [self.messageRouter handleRecievedMessage:message];
+    [self.messageRouter handleRecievedMessageAsynch:message];
 
 
 

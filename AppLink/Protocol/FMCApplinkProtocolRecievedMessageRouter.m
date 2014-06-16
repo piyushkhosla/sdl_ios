@@ -11,6 +11,21 @@
 #import "FMCAppLinkProtocolMessageAssembler.h"
 
 
+
+@interface FMCApplinkProtocolRecievedMessageRouter () {
+    dispatch_queue_t _recieveQueue;
+}
+
+@property (strong) NSMutableDictionary *messageAssemblers;
+
+- (void)handleRecievedMessageSynch:(FMCAppLinkProtocolMessage *)message;
+- (void)dispatchProtocolMessage:(FMCAppLinkProtocolMessage *)message;
+- (void)dispatchControlMessage:(FMCAppLinkProtocolMessage *)message;
+- (void)dispatchMultiPartMessage:(FMCAppLinkProtocolMessage *)message;
+
+@end
+
+
 @implementation FMCApplinkProtocolRecievedMessageRouter
 
 - (id)init {
@@ -20,22 +35,35 @@
 	return self;
 }
 
-- (void)handleRecievedMessage:(FMCAppLinkProtocolMessage *)message {
+- (void)handleRecievedMessageAsynch:(FMCAppLinkProtocolMessage *)message {
+    if(_recieveQueue == nil) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            _recieveQueue = dispatch_queue_create("com.ford.protocol.recieve", DISPATCH_QUEUE_SERIAL);
+        });
+    }
+
+    dispatch_async(_recieveQueue, ^(void){
+        [self handleRecievedMessageSynch:message];
+    });
+}
+
+- (void)handleRecievedMessageSynch:(FMCAppLinkProtocolMessage *)message {
 
     FMCFrameType frameType = message.header.frameType;
 
     switch (frameType) {
         case FMCFrameType_Single:
-            [self handleProtocolMessage:message];
+            [self dispatchProtocolMessage:message];
             break;
 
         case FMCFrameType_Control:
-            [self handleControlMessage:message];
+            [self dispatchControlMessage:message];
             break;
 
         case FMCFrameType_First:
         case FMCFrameType_Consecutive:
-            [self handleMultiPartMessage:message];
+            [self dispatchMultiPartMessage:message];
             break;
 
         default:
@@ -44,11 +72,11 @@
 
 }
 
-- (void)handleProtocolMessage:(FMCAppLinkProtocolMessage *)message {
+- (void)dispatchProtocolMessage:(FMCAppLinkProtocolMessage *)message {
     [self.delegate onProtocolMessageReceived:message];
 }
 
-- (void)handleControlMessage:(FMCAppLinkProtocolMessage *)message {
+- (void)dispatchControlMessage:(FMCAppLinkProtocolMessage *)message {
 
     if (message.header.frameData == FMCFrameData_StartSessionACK) {
         [self.delegate handleProtocolSessionStarted:message.header.serviceType
@@ -57,8 +85,7 @@
     }
 }
 
-
-- (void)handleMultiPartMessage:(FMCAppLinkProtocolMessage *)message {
+- (void)dispatchMultiPartMessage:(FMCAppLinkProtocolMessage *)message {
 
     // Pass multipart messages to an assembler and call delegate when done.
     NSNumber *sessionID = [NSNumber numberWithUnsignedChar:message.header.sessionID];
@@ -71,7 +98,7 @@
 
     AppLinkMessageAssemblyCompletionHandler completionHandler = ^void(BOOL done, FMCAppLinkProtocolMessage *assembledMessage) {
         if (done) {
-            [self handleProtocolMessage:message];
+            [self dispatchProtocolMessage:message];
         }
     };
     [assembler handleMessage:message withCompletionHandler:completionHandler];
