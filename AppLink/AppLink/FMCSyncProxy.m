@@ -184,14 +184,9 @@ const int POLICIES_CORRELATION_ID = 65535;
             rpcPayload.rpcType = 0; // Should be an enum...
             rpcPayload.functionID = [[[[FMCFunctionID alloc] init] getFunctionID:[msg getFunctionName]] intValue];
             rpcPayload.correlationID = [msg.correlationID intValue];
-            rpcPayload.jsonSize = jsonData.length;
-            rpcPayload.payload = jsonData;
-
-            // Append the Binary data
-            NSMutableData *mutablePayloadData = [NSMutableData dataWithData:rpcPayload.data];
-            NSData *binaryData = msg.bulkData;
-            [mutablePayloadData appendData:binaryData];
-            messagePayload = mutablePayloadData;
+            rpcPayload.jsonData = jsonData;
+            rpcPayload.binaryData = msg.bulkData;
+            messagePayload = rpcPayload.data;
         }
 
         //
@@ -277,108 +272,47 @@ const int POLICIES_CORRELATION_ID = 65535;
 	}
 }
 
-- (void)handleProtocolMessage:(FMCAppLinkProtocolMessage *)message {
-    //TODO: DEBUGOUTS
-    //NSLog(@"handleProtocolMessage: %@", msgData);
-    //TODO:ENDDEBUGOUTS
-    
+- (void)handleProtocolMessage:(FMCAppLinkProtocolMessage *)incomingMessage {
 
-// NOT QUITE DONE MAKING THIS WORK YET, CLOSE
-//    if (message.header.serviceType == FMCServiceType_RPC) {
-//        // See if we need to increase our version property
-//        // which we use to determine what to send.
-//        UInt8 incomingVersion = message.header.version;
-//        if (_version == 1 && incomingVersion == 2) {
-//            _version = incomingVersion;
-//        }
-//
-//        NSMutableDictionary* rpcDictionary = nil;
-//        NSDictionary* jsonDictionary = [[FMCJsonDecoder instance] decode:message.payload];
-//
-//        // Convert incoming message to dictionary
-//        // ACTUALLY.... this might be good to move to the FMCAppLinkProtocolMessage class.
-//        // then it wold just be a single call here,
-//        //        rpcDictionary = [message toDictionary];
-//        // and it would remove the 'if (version)' code, YAY!
-//        //
-//        if (incomingVersion == 1) {
-//            rpcDictionary = [jsonDictionary mutableCopy];
-//        } else if (incomingVersion == 2) {
-//            // Version 2 has some additional parameters.
-//            FMCRPCPayload *rpcPayload = message.rpcPayload;// TODO: have not written this method yet.
-//
-//            // Create the inner dictionary with the RPC properties
-//            NSMutableDictionary *innerDictionary = [[NSMutableDictionary alloc] init];
-//            [innerDictionary setObject:[NSNumber numberWithInt:rpcPayload.correlationID] forKey:NAMES_correlationID];
-//            [innerDictionary setObject:[NSNumber numberWithInt:rpcPayload.functionID] forKey:NAMES_operation_name];
-//            [innerDictionary setObject:jsonDictionary forKey:NAMES_parameters];
-//
-//            // Store it in the containing dictionary
-//            UInt8 rpcType = rpcPayload.rpcType;
-//            NSArray *rpcTypeNames = @[NAMES_request, NAMES_response, NAMES_notification];
-//            [rpcDictionary setObject:innerDictionary forKey:rpcTypeNames[rpcType]];
-//
-//            // The bulk data also goes in the outer dictionary
-//            [rpcDictionary setObject:[NSNumber numberWithInt:rpcPayload.bulkData] forKey:NAMES_bulkData];
-//
-//        }
-//
-//    }
-//
-//    [self handleRpcMessage:rpcDictionary];
+    NSMutableDictionary* rpcMessageAsDictionary = nil;
+
+    if (incomingMessage.header.serviceType == FMCServiceType_RPC) {
+        // See if we need to increase our version property
+        // which we use to determine what to send.
+        UInt8 incomingVersion = incomingMessage.header.version;
+        if (_version == 1 && incomingVersion == 2) {
+            _version = incomingVersion;
+        }
 
 
-// THE OLD ONE
-//    if (msgData._sessionType == FMCSessionType_RPC) {
-//        if (_version == 1) {
-//            if (msgData._version == 2) _version = msgData._version;
-//        }
-//
-//        // For version 2:
-//        NSMutableDictionary* msg;
-//        if (_version == 2) {
-//            // Create 2 dictionaries
-//            msg = [[NSMutableDictionary alloc] init];
-//            NSMutableDictionary* msgTemp = [[NSMutableDictionary alloc] init];
-//
-//            // Store correlationID in dictionary
-//            if (msgData._correlationID != 0) {
-//                [msgTemp setObject:[NSNumber numberWithInt:msgData._correlationID] forKey:NAMES_correlationID];
-//            }
-//
-//            // decode the json data and store it under "parameters" in the dictionary
-//            if (msgData._jsonSize > 0) {
-//                NSDictionary* mMsg = [[FMCJsonDecoder instance] decode:msgData._data];
-//                [msgTemp setObject:mMsg forKey:NAMES_parameters];
-//            }
-//
-//            // set function name
-//            FMCFunctionID* functionID = [[FMCFunctionID alloc] init];
-//            [msgTemp setObject:[functionID getFunctionName:msgData._functionID] forKey:NAMES_operation_name];
-//
-//
-//            // Store inner dictionary in outer dictionary under a key based on the type of message (req, resp, notif)
-//            if (msgData._rpcType == 0x00) {
-//                [msg setObject:msgTemp forKey:NAMES_request];
-//            } else if (msgData._rpcType == 0x01) {
-//                [msg setObject:msgTemp forKey:NAMES_response];
-//            } else if (msgData._rpcType == 0x02) {
-//                [msg setObject:msgTemp forKey:NAMES_notification];
-//            }
-//
-//            // store the bulk data under "bulkData" in the outer dictionary
-//            if (msgData._bulkData != nil) {
-//                [msg setObject:msgData._bulkData forKey:NAMES_bulkData];
-//            }
-//            
-//        } else {
-//            msg = (NSMutableDictionary*) [[FMCJsonDecoder instance] decode:msgData._data];
-//        }
-//		[self handleRpcMessage:msg];
-//        
-//    } else if (msgData._sessionType == FMCSessionType_BulkData) {
-//        bulkSessionID = msgData._sessionID;
-//    }
+        // Convert incoming message to dictionary
+        NSDictionary* jsonDictionary = [[FMCJsonDecoder instance] decode:incomingMessage.payload];
+        if (incomingVersion == 1) {
+            rpcMessageAsDictionary = [jsonDictionary mutableCopy];
+        } else if (incomingVersion == 2) {
+            // Version 2 has some additional parameters.
+            FMCRPCPayload *rpcPayload = [FMCRPCPayload rpcPayloadWithData:incomingMessage.payload];
+
+            // Create the inner dictionary with the RPC properties
+            NSMutableDictionary *innerDictionary = [[NSMutableDictionary alloc] init];
+            [innerDictionary setObject:[NSNumber numberWithInt:rpcPayload.correlationID] forKey:NAMES_correlationID];
+            [innerDictionary setObject:[NSNumber numberWithInt:rpcPayload.functionID] forKey:NAMES_operation_name];
+            [innerDictionary setObject:jsonDictionary forKey:NAMES_parameters];
+
+            // Store it in the containing dictionary
+            UInt8 rpcType = rpcPayload.rpcType;
+            NSArray *rpcTypeNames = @[NAMES_request, NAMES_response, NAMES_notification];
+            [rpcMessageAsDictionary setObject:innerDictionary forKey:rpcTypeNames[rpcType]];
+
+            // The bulk data also goes in the outer dictionary
+            [rpcMessageAsDictionary setObject:rpcPayload.binaryData forKey:NAMES_bulkData];
+
+        }
+
+    }
+
+    [self handleRpcMessage:rpcMessageAsDictionary];
+
 }
 
 -(void) neverCalled {
