@@ -2,9 +2,6 @@
 //  FMCAppLinkProtocolMessageAssembler.m
 //  ProtocolReWrite
 //
-//  Created by Yates, Hugh (H.R.) on 6/12/14.
-//  Copyright (c) 2014 AppLink. All rights reserved.
-//
 
 #import "FMCAppLinkProtocolMessageAssembler.h"
 #import "FMCAppLinkProtocolHeader.h"
