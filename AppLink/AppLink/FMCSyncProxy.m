@@ -17,6 +17,7 @@
 #import <AppLink/FMCSyncProxy.h>
 #import <AppLink/RPC/Requests/FMCSystemRequest.h>
 #import "FMCRPCPayload.h"
+#import "FMCAppLinkProtocolMessageDisassembler.h"
 
 #define VERSION_STRING @"##Version##"
 
@@ -48,9 +49,10 @@
 
 @interface FMCSyncProxy ()
 
--(void) notifyProxyClosed;
--(void) handleProtocolMessage:(FMCAppLinkProtocolMessage*) msgData;
--(void) performCallback:(FMCCallback*) callback;
+- (void)notifyProxyClosed;
+- (void)handleProtocolMessage:(FMCAppLinkProtocolMessage *)msgData;
+- (void)performCallback:(FMCCallback *)callback;
+- (void)sendMessageToProtocol:(FMCAppLinkProtocolMessage *)message;
 
 @end
 
@@ -204,12 +206,28 @@ const int POLICIES_CORRELATION_ID = 65535;
         FMCAppLinkProtocolMessage *message = [[FMCAppLinkProtocolMessage alloc] initWithHeader:header andPayload:messagePayload];
 
 
-        // Send it
-        [protocol sendData:message];
+        //
+        // Check if message is too large to send in one piece.
+        // If it is, break it up and send parts.
+        //
+        const int MAX_SEND_SIZE = 512;
+        if (message.size < MAX_SEND_SIZE) {
+            [self sendMessageToProtocol:message];
+        } else {
+            NSArray* messageArray = [FMCAppLinkProtocolMessageDisassembler disassemble:message withLimit:MAX_SEND_SIZE];
+            for (FMCAppLinkProtocolMessage *messagePart in messageArray) {
+                [self sendMessageToProtocol:messagePart];
+            }
+        }
+
         
 	} @catch (NSException * e) {
 		[FMCDebugTool logException:e withMessage:@"Proxy: Failed to send RPC request: %@", msg.name];
 	} @finally {}
+}
+
+- (void)sendMessageToProtocol:(FMCAppLinkProtocolMessage *)message {
+    [protocol sendData:message];
 }
 
 -(void) handleProtocolSessionStarted:(FMCServiceType) sessionType sessionID:(Byte) sessionID version:(Byte) version {
