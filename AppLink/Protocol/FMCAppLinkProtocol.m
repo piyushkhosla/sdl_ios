@@ -14,12 +14,15 @@ const NSUInteger MAX_TRANSMISSION_SIZE = 512;
 
 @interface FMCAppLinkProtocol () {
     UInt32 _messageID;
+    dispatch_queue_t _sendQueueDefaultPriority;
+    dispatch_queue_t _sendQueueHighPriority;
 }
 
 @property (strong) NSMutableData *recieveBuffer;
 @property (strong) FMCApplinkProtocolRecievedMessageRouter *messageRouter;
 
 - (void)sendDataToTransport:(NSData *)data;
+- (void)sendDataToTransportWithHighPriority:(NSData *)data;
 
 @end
 
@@ -29,6 +32,9 @@ const NSUInteger MAX_TRANSMISSION_SIZE = 512;
 - (id)init {
 	if (self = [super init]) {
         _messageID = 0;
+        _sendQueueDefaultPriority = dispatch_queue_create("com.ford.applink.send.defaultpriority", DISPATCH_QUEUE_SERIAL);
+        _sendQueueHighPriority = dispatch_queue_create("com.ford.applink.send.highpriority", DISPATCH_QUEUE_SERIAL);
+        dispatch_set_target_queue(_sendQueueDefaultPriority, _sendQueueHighPriority);
 	}
 	return self;
 }
@@ -91,38 +97,21 @@ const NSUInteger MAX_TRANSMISSION_SIZE = 512;
 
 }
 
-// temp just for the debug printing below
-void print(NSString *format, ...)
-{
-    va_list args;
-    va_start (args, format);
-    NSString *string;
-    string = [[NSString alloc] initWithFormat: format  arguments: args];
-    va_end (args);
-
-    fprintf (stdout, "%s", [string UTF8String]);
-
-}
-
+// Use for normal messages
 - (void)sendDataToTransport:(NSData *)data {
-    // Prints the bytes we send.
-    if (true) {
-        const int bytesPerLine = 16;
-        print(@"Sending %i bytes:\n", data.length);
-
-        UInt8 *p = (UInt8 *)data.bytes;
-        for (int n = 0; n < data.length ; n++) {
-            if (n%bytesPerLine == 0) {
-                print(@"\n");
-            }
-            print(@"0x%02X, ", *p++);
-        }
-        print(@"\n");
-    }
-
-    [self.transport sendData:data];
+    dispatch_async(_sendQueueDefaultPriority, ^{
+        [self.transport sendData:data];
+    });
 }
 
+// Use for critical messages, will jump ahead of any already queued normal priority messages.
+- (void)sendDataToTransportWithHighPriority:(NSData *)data {
+    dispatch_suspend(_sendQueueDefaultPriority);
+    dispatch_async(_sendQueueHighPriority, ^{
+        [self.transport sendData:data];
+        dispatch_resume(_sendQueueDefaultPriority);
+    });
+}
 
 //
 // Turn recieved bytes into message objects.
