@@ -11,6 +11,10 @@
 
 @property (weak) id<FMCTransportDelegate> delegate;
 //@property (readonly) bool isConnected;
+@property (readonly) NSString* endpointName;
+@property (readonly) NSString* endpointParam;
+
+- (id) initWithEndpoint:(NSString*) endpoint endpointParam:(NSString*) endointParam;
 
 - (void)notifyTransportConnected;
 - (void)notifyTransportDisconnected;

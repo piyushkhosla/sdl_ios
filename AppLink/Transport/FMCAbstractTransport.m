@@ -7,6 +7,14 @@
 
 @implementation FMCAbstractTransport
 
+- (id) initWithEndpoint:(NSString*) endpoint endpointParam:(NSString*) param {
+    if (self = [super init]) {
+        _endpointName = endpoint;
+        _endpointParam = param;
+    }
+    return self;
+}
+
 
 - (void)notifyTransportConnected {
 //	_isConnected = YES;

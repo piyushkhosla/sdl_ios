@@ -23,20 +23,19 @@
 	return [ret autorelease];
 }
 
-//TODO: Add back in TCP constructor (add ability to pass args)
-//+(FMCSyncProxy*) buildSyncProxyWithListener:(NSObject<FMCProxyListener>*) delegate
-//                              tcpIPAddress: (NSString*) ipaddress
-//                                   tcpPort: (NSString*) port {
-//    
-//    FMCTCPTransport* transport = [[FMCTCPTransport alloc] initWithEndpoint:ipaddress endpointParam:port];
-//    FMCAppLinkProtocol* protocol = [[FMCAppLinkProtocol alloc] init];
-//    
-//    FMCSyncProxy *ret = [[FMCSyncProxy alloc] initWithTransport:transport protocol:protocol delegate:delegate];
-//    
-//    [transport release];
-//    [protocol release];
-//    
-//	return [ret autorelease];
-//}
++(FMCSyncProxy*) buildSyncProxyWithListener:(NSObject<FMCProxyListener>*) delegate
+                              tcpIPAddress: (NSString*) ipaddress
+                                   tcpPort: (NSString*) port {
+    
+    FMCTCPTransport* transport = [[FMCTCPTransport alloc] initWithEndpoint:ipaddress endpointParam:port];
+    FMCAppLinkProtocol* protocol = [[FMCAppLinkProtocol alloc] init];
+    
+    FMCSyncProxy *ret = [[FMCSyncProxy alloc] initWithTransport:transport protocol:protocol delegate:delegate];
+    
+    [transport release];
+    [protocol release];
+    
+	return [ret autorelease];
+}
 
 @end

@@ -9,8 +9,7 @@
 
 +(FMCSyncProxy*) buildSyncProxyWithListener:(NSObject<FMCProxyListener>*) listener;
 
-//TODO: Add back in TCP constructor (add ability to pass args)
-//+(FMCSyncProxy*) buildSyncProxyWithListener:(NSObject<FMCProxyListener>*) listener
-//                              tcpIPAddress: (NSString*) ipaddress
-//                                   tcpPort: (NSString*) port;
++(FMCSyncProxy*) buildSyncProxyWithListener:(NSObject<FMCProxyListener>*) listener
+                              tcpIPAddress: (NSString*) ipaddress
+                                   tcpPort: (NSString*) port;
 @end

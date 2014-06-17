@@ -64,9 +64,8 @@ static void TCPCallback(CFSocketRef socket, CFSocketCallBackType type, CFDataRef
 		}
 		[transport notifyTransportConnected];
 	} else if (kCFSocketDataCallBack == type) {
-//		FMCTCPTransport *transport = (FMCTCPTransport *)info;
-//TODO: Update To Send NSData
-//        [transport handleBytesReceivedFromTransport:(UInt8 *)CFDataGetBytePtr((CFDataRef)data) length:(int)CFDataGetLength((CFDataRef)data)];
+		FMCTCPTransport *transport = (FMCTCPTransport *)info;
+        [transport handleDataReceivedFromTransport:[NSData dataWithBytes:(UInt8 *)CFDataGetBytePtr((CFDataRef)data) length:(int)CFDataGetLength((CFDataRef)data)]];
     } else {
 		[FMCDebugTool logInfo:@"unhandled TCPCallback: %d", type];
 	}
@@ -77,24 +76,24 @@ static void TCPCallback(CFSocketRef socket, CFSocketCallBackType type, CFDataRef
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"TCP Connection Init"]];
     [FMCDebugTool logInfo:@"TCP Connection Init"];
     //TODO:ENDDEBUGOUTS
-//TODO: Update To Use Endpoints
-//    int sock_fd = call_socket([endpointName UTF8String], [endpointParam UTF8String]);
-//	if (sock_fd < 0) {
-//        //TODO:DEBUGOUTS
-//        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Server Not Ready, Connection Failed"]];
-//		[FMCDebugTool logInfo:@"Server Not Ready, Connection Failed"];
-//        //TODO:ENDDEBUGOUTS
-//		return NO;
-//	}
+
+    int sock_fd = call_socket([self.endpointName UTF8String], [self.endpointParam UTF8String]);
+	if (sock_fd < 0) {
+        //TODO:DEBUGOUTS
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Server Not Ready, Connection Failed"]];
+		[FMCDebugTool logInfo:@"Server Not Ready, Connection Failed"];
+        //TODO:ENDDEBUGOUTS
+		return NO;
+	}
 	
-//	CFSocketContext socketCtxt = {0, self, NULL, NULL, NULL};
-//	socket = CFSocketCreateWithNative(kCFAllocatorDefault, sock_fd, kCFSocketDataCallBack|kCFSocketConnectCallBack , (CFSocketCallBack) &TCPCallback, &socketCtxt);
-//	CFRunLoopSourceRef source = CFSocketCreateRunLoopSource(kCFAllocatorDefault, socket, 0);
-//	CFRunLoopRef loop = CFRunLoopGetCurrent();
-//	CFRunLoopAddSource(loop, source, kCFRunLoopDefaultMode);
-//	CFRelease(source);
-//	
-//	return sock_fd >= 0;
+	CFSocketContext socketCtxt = {0, self, NULL, NULL, NULL};
+	socket = CFSocketCreateWithNative(kCFAllocatorDefault, sock_fd, kCFSocketDataCallBack|kCFSocketConnectCallBack , (CFSocketCallBack) &TCPCallback, &socketCtxt);
+	CFRunLoopSourceRef source = CFSocketCreateRunLoopSource(kCFAllocatorDefault, socket, 0);
+	CFRunLoopRef loop = CFRunLoopGetCurrent();
+	CFRunLoopAddSource(loop, source, kCFRunLoopDefaultMode);
+	CFRelease(source);
+	
+	return sock_fd >= 0;
     return nil;
 }
 
