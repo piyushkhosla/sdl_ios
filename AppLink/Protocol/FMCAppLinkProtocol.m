@@ -12,7 +12,9 @@
 
 const NSUInteger MAX_TRANSMISSION_SIZE = 512;
 
-@interface FMCAppLinkProtocol ()
+@interface FMCAppLinkProtocol () {
+    UInt32 _messageID;
+}
 
 @property (strong) NSMutableData *recieveBuffer;
 @property (strong) FMCApplinkProtocolRecievedMessageRouter *messageRouter;
@@ -26,7 +28,7 @@ const NSUInteger MAX_TRANSMISSION_SIZE = 512;
 
 - (id)init {
 	if (self = [super init]) {
-
+        _messageID = 0;
 	}
 	return self;
 }
@@ -59,32 +61,27 @@ const NSUInteger MAX_TRANSMISSION_SIZE = 512;
 }
 
 - (void)sendData:(FMCAppLinkProtocolMessage *)protocolMessage {
-    // TODO: Consider...
-    // V2 messages have a messageID...
-    // This is the only version specific code required for sending that isn't wrapped in the header classes.
-    // Could/should the setting of the messageID be moved to the 'init' method for the V2 headers? Probably.
-    // That would however, cause slightly different functionality for the sequences of messages that get produced when breaking
-    // up a large message into smaller ones. Right now they all seem to use the same messageID,
-    // not sure if that is a REQUIREMENT or not.
-    // OR, make it a requirement that the messageID be set before being sent to this function???
-    // but that places an onerous bookkeeping burden on someone else :-(
 
-    // not sure where or how yet how to set the messageID
-//    static NSUInteger messageID = 0;
-//    if (protocolMessage.header.version == 2) {
-//        [((FMCAppLinkV2ProtocolHeader*)[protocolMessage header]) setMessageID:messageID++];
-//    }
+    _messageID++;
 
-    // Is it small enough to send in a single message?
+
+    // V2 messages need to have message ID property set.
+    if (protocolMessage.header.version == 2) {
+        [((FMCAppLinkV2ProtocolHeader*)[protocolMessage header]) setMessageID:_messageID];
+    }
+
+
+    //
+    // See if it is small enough to send in one transmission.
+    // If not, break it up into smaller messages and send.
+    //
     if (protocolMessage.size < MAX_TRANSMISSION_SIZE)
     {
-        // Send message
         [self sendDataToTransport:protocolMessage.data];
 
     }
     else
     {
-        // Need to send as multiple messages
         NSArray *messages = [FMCAppLinkProtocolMessageDisassembler disassemble:protocolMessage withLimit:MAX_TRANSMISSION_SIZE];
         for (FMCAppLinkProtocolMessage *message in messages) {
             [self sendDataToTransport:message.data];
