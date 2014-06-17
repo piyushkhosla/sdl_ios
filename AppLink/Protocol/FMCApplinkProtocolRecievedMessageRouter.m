@@ -12,13 +12,10 @@
 
 
 
-@interface FMCApplinkProtocolRecievedMessageRouter () {
-    dispatch_queue_t _recieveQueue;
-}
+@interface FMCApplinkProtocolRecievedMessageRouter ()
 
 @property (strong) NSMutableDictionary *messageAssemblers;
 
-- (void)handleRecievedMessageSynch:(FMCAppLinkProtocolMessage *)message;
 - (void)dispatchProtocolMessage:(FMCAppLinkProtocolMessage *)message;
 - (void)dispatchControlMessage:(FMCAppLinkProtocolMessage *)message;
 - (void)dispatchMultiPartMessage:(FMCAppLinkProtocolMessage *)message;
@@ -35,20 +32,7 @@
 	return self;
 }
 
-- (void)handleRecievedMessageAsynch:(FMCAppLinkProtocolMessage *)message {
-    if(_recieveQueue == nil) {
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            _recieveQueue = dispatch_queue_create("com.ford.protocol.recieve", DISPATCH_QUEUE_SERIAL);
-        });
-    }
-
-    dispatch_async(_recieveQueue, ^(void){
-        [self handleRecievedMessageSynch:message];
-    });
-}
-
-- (void)handleRecievedMessageSynch:(FMCAppLinkProtocolMessage *)message {
+- (void)handleRecievedMessage:(FMCAppLinkProtocolMessage *)message {
 
     FMCFrameType frameType = message.header.frameType;
 

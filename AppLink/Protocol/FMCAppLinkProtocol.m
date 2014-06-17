@@ -14,6 +14,7 @@ const NSUInteger MAX_TRANSMISSION_SIZE = 512;
 
 @interface FMCAppLinkProtocol () {
     UInt32 _messageID;
+    dispatch_queue_t _recieveQueue;
     dispatch_queue_t _sendQueueDefaultPriority;
     dispatch_queue_t _sendQueueHighPriority;
 }
@@ -32,9 +33,12 @@ const NSUInteger MAX_TRANSMISSION_SIZE = 512;
 - (id)init {
 	if (self = [super init]) {
         _messageID = 0;
+        _recieveQueue = dispatch_queue_create("com.ford.applink.recieve", DISPATCH_QUEUE_SERIAL);
         _sendQueueDefaultPriority = dispatch_queue_create("com.ford.applink.send.defaultpriority", DISPATCH_QUEUE_SERIAL);
         _sendQueueHighPriority = dispatch_queue_create("com.ford.applink.send.highpriority", DISPATCH_QUEUE_SERIAL);
         dispatch_set_target_queue(_sendQueueDefaultPriority, _sendQueueHighPriority);
+
+        self.messageRouter = [[FMCApplinkProtocolRecievedMessageRouter alloc] init];
 	}
 	return self;
 }
@@ -167,14 +171,10 @@ const NSUInteger MAX_TRANSMISSION_SIZE = 512;
 
 
     // Pass on ultimate disposition of the message to the message router.
-    if (self.messageRouter == nil)
-    {
-        self.messageRouter = [[FMCApplinkProtocolRecievedMessageRouter alloc] init];
-        self.messageRouter.delegate = self.delegate;
-    }
-    [self.messageRouter handleRecievedMessageAsynch:message];
-
-
+    self.messageRouter.delegate = self.delegate;
+    dispatch_async(_recieveQueue, ^{
+        [self.messageRouter handleRecievedMessage:message];
+    });
 
 }
 
