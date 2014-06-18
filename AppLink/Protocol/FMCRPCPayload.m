@@ -28,7 +28,7 @@ const NSUInteger RPC_HEADER_SIZE = 12;
             self.rpcType = rpcType;
 
             UInt32 functionID = ui32Pointer[0] & 0x0FFFFFFF;
-            functionID = CFSwapInt32BigToHost(functionID);
+            functionID = CFSwapInt32BigToHost(functionID) & 0x0FFFFFFF;
             self.functionID = functionID;
 
             UInt32 correlationID = ui32Pointer[1];
@@ -45,7 +45,8 @@ const NSUInteger RPC_HEADER_SIZE = 12;
 
             NSData *binaryData = nil;
             NSUInteger offsetOfBinaryData = RPC_HEADER_SIZE + jsonDataSize;
-            binaryData = [data subdataWithRange:NSMakeRange(offsetOfBinaryData, jsonDataSize)];
+            NSUInteger binaryDataSize = data.length - jsonDataSize - RPC_HEADER_SIZE;
+            binaryData = [data subdataWithRange:NSMakeRange(offsetOfBinaryData, binaryDataSize)];
             self.binaryData = binaryData;
 
         }

@@ -174,7 +174,7 @@ const NSUInteger MAX_TRANSMISSION_SIZE = 512;
 
 
     // Pass on ultimate disposition of the message to the message router.
-    self.messageRouter.delegate = self.delegate;
+    self.messageRouter.delegate = self.protocolDelegate;
     dispatch_async(_recieveQueue, ^{
         [self.messageRouter handleRecievedMessage:message];
     });

@@ -82,7 +82,7 @@
 
     AppLinkMessageAssemblyCompletionHandler completionHandler = ^void(BOOL done, FMCAppLinkProtocolMessage *assembledMessage) {
         if (done) {
-            [self dispatchProtocolMessage:message];
+            [self dispatchProtocolMessage:assembledMessage];
         }
     };
     [assembler handleMessage:message withCompletionHandler:completionHandler];

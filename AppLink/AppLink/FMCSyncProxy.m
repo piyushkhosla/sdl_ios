@@ -275,17 +275,22 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 
         // Convert incoming message to dictionary
-        NSDictionary* jsonDictionary = [[FMCJsonDecoder instance] decode:incomingMessage.payload];
+        NSDictionary* jsonDictionary = nil;
         if (incomingVersion == 1) {
-            rpcMessageAsDictionary = [jsonDictionary mutableCopy];
+            jsonDictionary = [[FMCJsonDecoder instance] decode:incomingMessage.payload];
+           rpcMessageAsDictionary = [jsonDictionary mutableCopy];
         } else if (incomingVersion == 2) {
             // Version 2 has some additional parameters.
+            rpcMessageAsDictionary = [[NSMutableDictionary alloc] init];
+
             FMCRPCPayload *rpcPayload = [FMCRPCPayload rpcPayloadWithData:incomingMessage.payload];
+            jsonDictionary = [[FMCJsonDecoder instance] decode:rpcPayload.jsonData];
 
             // Create the inner dictionary with the RPC properties
             NSMutableDictionary *innerDictionary = [[NSMutableDictionary alloc] init];
+            NSString *functionName = [[[FMCFunctionID alloc] init] getFunctionName:rpcPayload.functionID];
+            [innerDictionary setObject:functionName forKey:NAMES_operation_name];
             [innerDictionary setObject:[NSNumber numberWithInt:rpcPayload.correlationID] forKey:NAMES_correlationID];
-            [innerDictionary setObject:[NSNumber numberWithInt:rpcPayload.functionID] forKey:NAMES_operation_name];
             [innerDictionary setObject:jsonDictionary forKey:NAMES_parameters];
 
             // Store it in the containing dictionary

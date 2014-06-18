@@ -32,12 +32,12 @@ const int V2APPLINK_HEADERSIZE = 12;
     headerBytes[3] = self.sessionID;
 
 //FIXME: Causing SIGABRT
-//    // Need to write these ints as big-endian.
-//    UInt32 *p = (UInt32 *)&headerBytes[4];
-//    *p = CFSwapInt32HostToBig(self.bytesInPayload);
-//
-//    p = (UInt32 *)&headerBytes[8];
-//    *p = CFSwapInt32HostToBig(self.messageID);
+    // Need to write these ints as big-endian.
+    UInt32 *p = (UInt32 *)&headerBytes[4];
+    *p = CFSwapInt32HostToBig(self.bytesInPayload);
+
+    p = (UInt32 *)&headerBytes[8];
+    *p = CFSwapInt32HostToBig(self.messageID);
 
     // Now put it all in an NSData object.
     NSData *dataOut = [NSData dataWithBytes:headerBytes length:V2APPLINK_HEADERSIZE];
