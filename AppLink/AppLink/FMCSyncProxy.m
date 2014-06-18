@@ -299,7 +299,10 @@ const int POLICIES_CORRELATION_ID = 65535;
             [rpcMessageAsDictionary setObject:innerDictionary forKey:rpcTypeNames[rpcType]];
 
             // The bulk data also goes in the outer dictionary
-            [rpcMessageAsDictionary setObject:rpcPayload.binaryData forKey:NAMES_bulkData];
+            if (rpcPayload.binaryData) {
+                [rpcMessageAsDictionary setObject:rpcPayload.binaryData forKey:NAMES_bulkData];
+            }
+
 
         }
 
