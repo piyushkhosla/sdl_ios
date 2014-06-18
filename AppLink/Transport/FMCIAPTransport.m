@@ -24,9 +24,9 @@
 @synthesize outStream;
 
 -(id) init {
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Init"]];
-    [FMCDebugTool logInfo:@"iAP: Init"];
-
+    
+    [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:@"Init"];
+    
     if (self = [super init]) {
 		transportLock = [[NSObject alloc] init];
 		writeQueue = [[NSMutableArray alloc] initWithCapacity:10];
@@ -67,15 +67,11 @@
 			while (YES) {
 				int bytesRead = (int)[inStream read:buf maxLength:1024];
                 
-                
                 [FMCSiphonServer _siphonRawTransportDataFromSync:buf msgBytesLength:bytesRead];
                 
 				if (bytesRead > 0) {
-
-                    //TODO: Update To Send NSData
-//					[self handleBytesReceivedFromTransport:buf	length:bytesRead];
+                    [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:[NSString stringWithFormat:@"Read %d bytes: %@", bytesRead, [self getHexString:buf length:bytesRead]]];
                     [self handleDataReceivedFromTransport:[NSData dataWithBytes:buf length:bytesRead]];
-                    
 				} else {
 					break;
 				}
@@ -94,7 +90,8 @@
                     
 					int bytesWritten = (int)[outStream write:msgBytes.bytes maxLength:msgBytes.length];
                     
-                    [FMCSiphonServer _siphonRawTransportDataFromApp:msgBytes.bytes msgBytesLength:bytesWritten]; 
+                    [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:[NSString stringWithFormat:@"Sent %d bytes: %@", bytesWritten, [self getHexString:msgBytes]]];
+                    [FMCSiphonServer _siphonRawTransportDataFromApp:msgBytes.bytes msgBytesLength:bytesWritten];
                     
 					if (bytesWritten < msgBytes.length) {
 						NSData* leftover = [NSData dataWithBytes:msgBytes.bytes + bytesWritten length:msgBytes.length - bytesWritten];
@@ -141,9 +138,8 @@
 {
     @synchronized (transportLock) {
 		// Select the first accessory:
-//        self.session = [[[EASession alloc] initWithAccessory:accessoryItem forProtocol:protocolName] autorelease];
-        self.session = [[EASession alloc] initWithAccessory:accessoryItem forProtocol:protocolName];
-
+        self.session = [[[EASession alloc] initWithAccessory:accessoryItem forProtocol:protocolName] autorelease];        
+        
 		if(accessoryItem != nil && self.session != nil) {
 			self.inStream = self.session.inputStream;
 			self.outStream = self.session.outputStream;
@@ -192,9 +188,8 @@
 		}
 	}
     
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Connected To Sync"]];
-    [FMCDebugTool logInfo:@"iAP: Connected To Sync"];
-	
+    [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:@"Connected To Sync"];
+    
     return YES;
 }
 
@@ -214,10 +209,7 @@
 
 -(void) checkConnectedSyncAccessory {
     
-    //TODO:DEBUGOUTS
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Looking For Sync"]];
-    [FMCDebugTool logInfo:@"iAP: Looking For Sync"];
-    //TODO:ENDDEBUGOUTS
+    [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:@"Looking For Sync"];
     
     for (EAAccessory* anAccessory in [[EAAccessoryManager sharedAccessoryManager] connectedAccessories]) {
         
@@ -234,15 +226,15 @@
 			
             if ([aProtocolString isEqualToString:SYNC_PROTOCOL_STRING]) {
                 
-                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Found Sync"]];
-                [FMCDebugTool logInfo:@"iAP: Found Sync"];
+                [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:@"Found Sync"];
+                
 
                 if (connectedSyncAccessory != nil) {
-//                    [connectedSyncAccessory release];
+                    [connectedSyncAccessory release];
                     connectedSyncAccessory = nil;
                 }
                 
-//                connectedSyncAccessory = [anAccessory retain];
+                connectedSyncAccessory = [anAccessory retain];
                 return;
                 break;
 			}
@@ -283,8 +275,7 @@
 
 -(void) accessoryConnected:(NSNotification*) connectNotification {
     
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Accessory Connected"]];
-    [FMCDebugTool logInfo:@"iAP: Accessory Connected"];
+    [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:@"Accessory Connected"];
     
     EAAccessory *connectedAccessory = [self getSyncAccessoryFromNotification:connectNotification];
     
@@ -295,19 +286,18 @@
     
     // We're assuming connectedSyncAccessory will be nil
 	if (connectedSyncAccessory != nil) {
-//        [connectedSyncAccessory release];
+        [connectedSyncAccessory release];
         connectedSyncAccessory = nil;
 	}
     
-//	connectedSyncAccessory = [connectedAccessory retain];
+	connectedSyncAccessory = [connectedAccessory retain];
 	[self connect];
     
 }
 
 -(void) accessoryDisconnected:(NSNotification*) connectNotification {
     
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Accessory Disconnected"]];
-    [FMCDebugTool logInfo:@"iAP: Accessory Disconnected"];
+    [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:@"Accessory Disconnected"];
     
     EAAccessory *disconnectedAccessory = [self getSyncAccessoryFromNotification:connectNotification];
     
@@ -321,7 +311,7 @@
             [self disconnect];
         }
         
-//        [connectedSyncAccessory release];
+        [connectedSyncAccessory release];
         connectedSyncAccessory = nil;
     }
 }
@@ -338,14 +328,14 @@
 	return [self getHexString:(Byte*)data.bytes length:(int)data.length];
 }
 
-
 -(void) queueData:(NSData*) msgBytes {
 	@synchronized (transportLock) {
 		if (spaceAvailable) {
 			spaceAvailable = NO;
 			
 			int bytesWritten = (int)[outStream write:msgBytes.bytes maxLength:msgBytes.length];
-            
+
+            [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:[NSString stringWithFormat:@"Sent %d bytes: %@", bytesWritten, [self getHexString:msgBytes]]];
             [FMCSiphonServer _siphonRawTransportDataFromApp:msgBytes.bytes msgBytesLength:bytesWritten];
             
 			if (bytesWritten < msgBytes.length) {
@@ -359,16 +349,17 @@
 }
 
 - (bool) sendData:(NSData*) msgBytes {
+    
+//    [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:[NSString stringWithFormat:@"Queueing %d bytes: %@", msgBytes.length, [self getHexString:msgBytes]]];
 	[self queueData:msgBytes];
 	return YES;
 }
 
 - (void) disconnect {
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Disconnect"]];
-    [FMCDebugTool logInfo:@"iAP: Disconnect"];
+    
+    [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:@"Disconnect"];
     
     @synchronized (transportLock) {
-        
         [self notifyTransportDisconnected];
         transportUsable = NO;
         
@@ -377,20 +368,21 @@
             [outStream close];
 			[outStream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 			[outStream setDelegate:nil];
-//            [outStream release];
+            [outStream release];
             outStream = nil;
             
             [inStream close];
             [inStream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
 			[inStream setDelegate:nil];
-//			[inStream release];
+			[inStream release];
 			inStream = nil;
 			
-//			[session release];
+			[session release];
 			session = nil;
 			
-//			[writeQueue release];
+			[writeQueue release];
 			writeQueue = nil;
+            
 		}
 	}
 }
@@ -412,13 +404,12 @@
         registeredForNotifications = NO;
     }
     
-//    [connectedSyncAccessory release];
+    [connectedSyncAccessory release];
     connectedSyncAccessory = nil;
     
-	
-//	[transportLock release];
+	[transportLock release];
     
-//	[super dealloc];
+	[super dealloc];
 }
 
 @end

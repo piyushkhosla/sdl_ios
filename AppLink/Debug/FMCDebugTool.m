@@ -6,7 +6,6 @@
 
 #import <AppLink/Debug/FMCSiphonServer.h>
 
-#define LOG_INFO_ENABLED
 #define LOG_ERROR_ENABLED
 
 //From .h
@@ -33,36 +32,54 @@ static NSMutableArray* debugToolConsoleList = nil;
 	[[FMCDebugTool getConsoleList] removeObject:aConsole];
 }
 
+
 +(void) logInfo:(NSString*) fmt, ... {
-	NSString* toOutRaw = nil;
-    //NSLog(@"FMCDebugTool, fmt = %@", fmt);
+    
+    NSString* toOutRaw = nil;
 	
-    va_list args;
-    va_start(args, fmt);
-        
+	va_list args;
+	va_start(args, fmt);
+    
     toOutRaw = [[NSString alloc] initWithFormat:fmt arguments:args];
     
+    va_end(args);
+    
+    [self logType:FMCDebugType_Debug withInfo:toOutRaw];
+    [toOutRaw release];
+}
+
++(void) logType:(FMCDebugType)debugType withInfo:(NSString*) info{
+    
+    [self logType:debugType usingOutput:FMCDebugOutput_All withInfo:info];
+    
+}
+
++(void) logType:(FMCDebugType)debugType usingOutput:(FMCDebugOutputType)outputType withInfo:(NSString*) info {
+	NSString* toOutRaw = nil;
+    //NSLog(@"FMCDebugTool, fmt = %@", fmt);
+    
+    toOutRaw = [[NSString alloc] initWithString:info];
+    
     //NSMutableString *toOut = [[NSMutableString alloc] initWithFormat:@"%@: ", VERSION_STRING];
-    NSMutableString *toOut = [[NSMutableString alloc] initWithString:@"FMCDebugTool: "];
+//    NSMutableString *toOut = [[NSMutableString alloc] initWithString:@"FMCDebugTool: "];
+    NSMutableString *toOut = [[NSMutableString alloc] initWithFormat:@"AppLink (%@): ", [FMCDebugTool stringForDebugType:debugType]];
+    
     [toOut appendString:toOutRaw];
     
     [toOutRaw release];
-    
-	va_end(args);
 	
     [FMCSiphonServer init];
-    bool dataLogged = [FMCSiphonServer _siphonNSLogData:toOut];
+    [FMCSiphonServer _siphonNSLogData:toOut];
     
-    
-#ifdef LOG_INFO_ENABLED
-    if(!dataLogged){
+    if (outputType == FMCDebugOutput_All || outputType == FMCDebugOutput_DeviceConsole) {
         NSLog(@"%@", toOut);
     }
-#endif
     
-	for (NSObject<FMCDebugToolConsole>* console in debugToolConsoleList) {
-		[console logInfo:toOut];
-	}
+    if (outputType == FMCDebugOutput_All || outputType == FMCDebugOutput_DebugConsole) {
+        for (NSObject<FMCDebugToolConsole>* console in debugToolConsoleList) {
+            [console logInfo:toOut];
+        }
+    }
     
     [toOut release];
 }
@@ -101,6 +118,35 @@ static NSMutableArray* debugToolConsoleList = nil;
 	}
     
     [toOut release];
+}
+
+
+
+
++(NSString *) stringForDebugType:(FMCDebugType) debugType{
+    
+    switch (debugType) {
+        case FMCDebugType_Debug:
+            return @"Debug";
+            break;
+        case FMCDebugType_Transport_iAP:
+            return @"iAP";
+            break;
+        case FMCDebugType_Transport_TCP:
+            return @"TCP";
+            break;
+        case FMCDebugType_Protocol:
+            return @"Protocol";
+            break;
+        case FMCDebugType_RPC:
+            return @"RPC";
+            break;
+            
+        default:
+            return @"Invalid DebugType";
+            break;
+    }
+    
 }
 
 @end

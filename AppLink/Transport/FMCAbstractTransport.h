@@ -10,7 +10,7 @@
 @interface FMCAbstractTransport : NSObject<FMCTransport>
 
 @property (weak) id<FMCTransportDelegate> delegate;
-//@property (readonly) bool isConnected;
+//@property (readonly) BOOL isConnected;
 @property (readonly) NSString* endpointName;
 @property (readonly) NSString* endpointParam;
 

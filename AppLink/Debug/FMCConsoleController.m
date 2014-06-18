@@ -37,6 +37,8 @@
 	if (atBottom) {
 		[self.tableView scrollToRowAtIndexPath:newIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 	}
+    
+    [self.tableView reloadData];
 }
 
 -(BOOL) isLastRowVisible {
@@ -68,7 +70,11 @@
 
 
 - (void)viewDidLoad {
+    
+    [FMCDebugTool addConsole:self];
+    
     [super viewDidLoad];
+    
     atBottom = YES;
 	
 	messageList = [[NSMutableArray alloc] initWithCapacity:100];
@@ -169,11 +175,21 @@
 		FMCRPCMessage *rpc = obj;
         
         //TODO:Get Internal Version Of Message For Line Below
-		NSData *jsonData = [[FMCJsonEncoder instance] encodeDictionary:[rpc serializeAsDictionary:2]];
-		alertText = [[[NSString alloc] initWithBytes:jsonData.bytes length:jsonData.length encoding:NSUTF8StringEncoding] autorelease];
+        NSDictionary* dictionary = [rpc serializeAsDictionary:2];
+        
+        NSError *error = nil;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
+                                                           options:NSJSONWritingPrettyPrinted
+                                                             error:&error];
+        
+        if (!jsonData) {
+            alertText = @"Error parsing the JSON.";
+        } else {
+            alertText = [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] autorelease];
+        }
 				
 	} else {
-		alertText = [NSString stringWithFormat:@"%@",obj];
+		alertText = [NSString stringWithFormat:@"%@",[obj description]];
 	}
 	
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"RPCMessage" message:alertText delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

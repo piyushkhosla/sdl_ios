@@ -3,7 +3,7 @@
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <UIKit/UIKit.h>
-#import <AppLink/Debug/FMCDebugToolConsole.h>
+#import <AppLink/Debug/FMCDebugTool.h>
 
 @interface FMCConsoleController : UITableViewController <FMCDebugToolConsole> {
 	NSMutableArray* messageList;
