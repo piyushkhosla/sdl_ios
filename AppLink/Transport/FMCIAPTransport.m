@@ -70,7 +70,8 @@
                 [FMCSiphonServer _siphonRawTransportDataFromSync:buf msgBytesLength:bytesRead];
                 
 				if (bytesRead > 0) {
-                    [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:[NSString stringWithFormat:@"Read %d bytes: %@", bytesRead, [self getHexString:buf length:bytesRead]]];
+                    [FMCDebugTool logType:FMCDebugType_Transport_iAP usingOutput:FMCDebugOutput_DeviceConsole withInfo:[NSString stringWithFormat:@"Read %d bytes: %@", bytesRead, [self getHexString:buf length:bytesRead]]];
+                    
                     [self handleDataReceivedFromTransport:[NSData dataWithBytes:buf length:bytesRead]];
 				} else {
 					break;
@@ -90,7 +91,8 @@
                     
 					int bytesWritten = (int)[outStream write:msgBytes.bytes maxLength:msgBytes.length];
                     
-                    [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:[NSString stringWithFormat:@"Sent %d bytes: %@", bytesWritten, [self getHexString:msgBytes]]];
+                    [FMCDebugTool logType:FMCDebugType_Transport_iAP usingOutput:FMCDebugOutput_DeviceConsole withInfo:[NSString stringWithFormat:@"Sent %d bytes: %@", bytesWritten, [self getHexString:msgBytes]]];
+                    
                     [FMCSiphonServer _siphonRawTransportDataFromApp:msgBytes.bytes msgBytesLength:bytesWritten];
                     
 					if (bytesWritten < msgBytes.length) {
@@ -335,7 +337,8 @@
 			
 			int bytesWritten = (int)[outStream write:msgBytes.bytes maxLength:msgBytes.length];
 
-            [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:[NSString stringWithFormat:@"Sent %d bytes: %@", bytesWritten, [self getHexString:msgBytes]]];
+            [FMCDebugTool logType:FMCDebugType_Transport_iAP usingOutput:FMCDebugOutput_DeviceConsole withInfo:[NSString stringWithFormat:@"Sent %d bytes: %@", bytesWritten, [self getHexString:msgBytes]]];
+            
             [FMCSiphonServer _siphonRawTransportDataFromApp:msgBytes.bytes msgBytesLength:bytesWritten];
             
 			if (bytesWritten < msgBytes.length) {

@@ -44,7 +44,7 @@ static NSMutableArray* debugToolConsoleList = nil;
     
     va_end(args);
     
-    [self logType:FMCDebugType_Debug withInfo:toOutRaw];
+    [self logType:FMCDebugType_Debug usingOutput:FMCDebugOutput_DeviceConsole withInfo:toOutRaw];
     [toOutRaw release];
 }
 

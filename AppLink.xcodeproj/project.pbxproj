@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		59204D15194EAFCB00403450 /* FMCAbstractTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 59204D0E194EAFCB00403450 /* FMCAbstractTransport.m */; };
-		59204D16194EAFCB00403450 /* FMCIAPTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 59204D10194EAFCB00403450 /* FMCIAPTransport.m */; };
+		59204D16194EAFCB00403450 /* FMCIAPTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 59204D10194EAFCB00403450 /* FMCIAPTransport.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		59204D17194EAFCB00403450 /* FMCTCPTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 59204D12194EAFCB00403450 /* FMCTCPTransport.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		59204D28194EB01500403450 /* FMCAppLinkProtocolHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 59204D19194EB01500403450 /* FMCAppLinkProtocolHeader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		59204D29194EB01500403450 /* FMCAppLinkProtocolMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 59204D1B194EB01500403450 /* FMCAppLinkProtocolMessage.m */; };

@@ -65,6 +65,14 @@ static void TCPCallback(CFSocketRef socket, CFSocketCallBackType type, CFDataRef
 		[transport notifyTransportConnected];
 	} else if (kCFSocketDataCallBack == type) {
 		FMCTCPTransport *transport = (FMCTCPTransport *)info;
+        
+        NSMutableString* byteStr = [NSMutableString stringWithCapacity:((int)CFDataGetLength((CFDataRef)data) * 2)];
+        for (int i = 0; i < (int)CFDataGetLength((CFDataRef)data); i++) {
+            [byteStr appendFormat:@"%02X", ((Byte*)(UInt8 *)CFDataGetBytePtr((CFDataRef)data))[i]];
+        }
+        
+        [FMCDebugTool logType:FMCDebugType_Transport_TCP usingOutput:FMCDebugOutput_DeviceConsole withInfo:[NSString stringWithFormat:@"Read %d bytes: %@", (int)CFDataGetLength((CFDataRef)data), byteStr]];
+        
         [transport handleDataReceivedFromTransport:[NSData dataWithBytes:(UInt8 *)CFDataGetBytePtr((CFDataRef)data) length:(int)CFDataGetLength((CFDataRef)data)]];
     } else {
 		[FMCDebugTool logInfo:@"unhandled TCPCallback: %d", type];
@@ -72,17 +80,14 @@ static void TCPCallback(CFSocketRef socket, CFSocketCallBackType type, CFDataRef
 }
 
 - (bool) connect {
-    //TODO:DEBUGOUTS
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"TCP Connection Init"]];
-    [FMCDebugTool logInfo:@"TCP Connection Init"];
-    //TODO:ENDDEBUGOUTS
+    
+    [FMCDebugTool logType:FMCDebugType_Transport_TCP withInfo:@"Init"];
 
     int sock_fd = call_socket([self.endpointName UTF8String], [self.endpointParam UTF8String]);
 	if (sock_fd < 0) {
-        //TODO:DEBUGOUTS
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Server Not Ready, Connection Failed"]];
-		[FMCDebugTool logInfo:@"Server Not Ready, Connection Failed"];
-        //TODO:ENDDEBUGOUTS
+        
+        [FMCDebugTool logType:FMCDebugType_Transport_TCP withInfo:@"Server Not Ready, Connection Failed"];
+        
 		return NO;
 	}
 	
@@ -97,17 +102,22 @@ static void TCPCallback(CFSocketRef socket, CFSocketCallBackType type, CFDataRef
     return nil;
 }
 
--(NSString*) getHexString:(NSData*) data {
-	NSMutableString* ret = [NSMutableString stringWithCapacity:(data.length * 2)];
-	for (int i = 0; i < data.length; i++) {
-		[ret appendFormat:@"%02X", ((Byte*)data.bytes)[i]];
+-(NSString*) getHexString:(UInt8*)bytes length:(int) length {
+	NSMutableString* ret = [NSMutableString stringWithCapacity:(length * 2)];
+	for (int i = 0; i < length; i++) {
+		[ret appendFormat:@"%02X", ((Byte*)bytes)[i]];
 	}
 	return ret;
 }
 
+-(NSString*) getHexString:(NSData*) data {
+	return [self getHexString:(Byte*)data.bytes length:(int)data.length];
+}
+
 - (bool) sendData:(NSData*) msgBytes {
 	NSString* byteStr = [self getHexString:msgBytes];
-	[FMCDebugTool logInfo:@"Sending %i bytes: %@", msgBytes.length, byteStr];
+    
+    [FMCDebugTool logType:FMCDebugType_Transport_TCP usingOutput:FMCDebugOutput_DeviceConsole withInfo:[NSString stringWithFormat:@"Sent %d bytes: %@", msgBytes.length, byteStr]];
 	
 	CFSocketError e = CFSocketSendData(socket, NULL, (CFDataRef)msgBytes, 10000);
 	return e==0;

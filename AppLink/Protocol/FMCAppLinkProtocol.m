@@ -53,8 +53,6 @@ const NSUInteger MAX_TRANSMISSION_SIZE = 512;
     header.frameData = FMCFrameData_StartSession;
 
     FMCAppLinkProtocolMessage *message = [[FMCAppLinkProtocolMessage alloc] initWithHeader:header andPayload:nil];
-    
-    [FMCDebugTool logType:FMCDebugType_Protocol withInfo:@"StartSession (request)"];
 
     [self sendDataToTransport:message.data];
 }

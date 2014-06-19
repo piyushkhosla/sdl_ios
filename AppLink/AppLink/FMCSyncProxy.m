@@ -215,9 +215,8 @@ const int POLICIES_CORRELATION_ID = 65535;
 }
 
 -(void) handleProtocolSessionStarted:(FMCServiceType) sessionType sessionID:(Byte) sessionID version:(Byte) version {
-
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: StartSession (response)"]];
-    [FMCDebugTool logInfo:@"Proxy: StartSession (response)"];
+    
+    [FMCDebugTool logType:FMCDebugType_RPC withInfo:@"StartSession (response)"];
 
     if (_version <= 1) {
         if (version == 2) {
@@ -479,9 +478,10 @@ const int POLICIES_CORRELATION_ID = 65535;
 			callback.parameter = rpcCallbackObject;
 			[self performSelectorOnMainThread:@selector(performCallback:) withObject:callback waitUntilDone:NO];
 			// [callback release]; Moved to performCallback to avoid thread race condition
-		} else {
-			[FMCDebugTool logInfo:@"Proxy: App does not listen for callback: %@", handlerName];
 		}
+//        else {
+//			[FMCDebugTool logInfo:@"Proxy: App does not listen for callback: %@", handlerName];
+//		}
 	}
 	[localListeners release];
 }
@@ -531,6 +531,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 - (void) onProtocolOpened {    
     isConnected = YES;
+    [FMCDebugTool logType:FMCDebugType_RPC withInfo:@"StartSession (request)"];
     [protocol sendStartSessionWithType:FMCServiceType_RPC];
     
     [self destroyHandshakeTimer];
