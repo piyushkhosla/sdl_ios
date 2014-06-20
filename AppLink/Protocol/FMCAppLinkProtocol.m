@@ -104,18 +104,18 @@ const NSUInteger MAX_TRANSMISSION_SIZE = 512;
 
 // Use for normal messages
 - (void)sendDataToTransport:(NSData *)data {
-    dispatch_async(_sendQueueDefaultPriority, ^{
+//    dispatch_async(_sendQueueDefaultPriority, ^{
         [self.transport sendData:data];
-    });
+//    });
 }
 
 // Use for critical messages, will jump ahead of any already queued normal priority messages.
 - (void)sendDataToTransportWithHighPriority:(NSData *)data {
-    dispatch_suspend(_sendQueueDefaultPriority);
-    dispatch_async(_sendQueueHighPriority, ^{
+//    dispatch_suspend(_sendQueueDefaultPriority);
+//    dispatch_async(_sendQueueHighPriority, ^{
         [self.transport sendData:data];
-        dispatch_resume(_sendQueueDefaultPriority);
-    });
+//        dispatch_resume(_sendQueueDefaultPriority);
+//    });
 }
 
 //
