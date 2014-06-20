@@ -47,6 +47,7 @@ typedef NS_ENUM(UInt8, FMCFrameData) {
 - (id)copyWithZone:(NSZone *)zone;
 - (NSData *)data;
 - (void)parse:(NSData *)data;
+- (NSString *)description;
 + (FMCAppLinkProtocolHeader *)headerForVersion:(UInt8)version;
 
 @end

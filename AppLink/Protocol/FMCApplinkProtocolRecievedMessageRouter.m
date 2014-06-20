@@ -9,6 +9,7 @@
 #import "FMCApplinkProtocolRecievedMessageRouter.h"
 #import "FMCAppLinkProtocolMessage.h"
 #import "FMCAppLinkProtocolMessageAssembler.h"
+#import <AppLink/Debug/FMCDebugTool.h>
 
 
 

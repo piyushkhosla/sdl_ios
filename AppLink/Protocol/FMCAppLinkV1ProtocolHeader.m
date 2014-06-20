@@ -5,21 +5,21 @@
 
 #import "FMCAppLinkV1ProtocolHeader.h"
 
+const int V1APPLINK_HEADERSIZE = 8;
 
 @implementation FMCAppLinkV1ProtocolHeader
 
 - (id)init {
 	if (self = [super init]) {
         _version = 1;
-        _size = 8;
+        _size = V1APPLINK_HEADERSIZE;
 	}
 	return self;
 }
 
 - (NSData *)data {
     // Assembles the properties in the binary header format
-    const UInt8 V1_HEADER_SIZE = 8;
-    Byte headerBytes[V1_HEADER_SIZE] = {0};
+    Byte headerBytes[V1APPLINK_HEADERSIZE] = {0};
 
     Byte version = (self.version & 0xF) << 4; // first 4 bits
     Byte compressed = self.compressed?1:0 << 3; // next 1 bit
@@ -35,7 +35,7 @@
     *p = CFSwapInt32HostToBig(self.bytesInPayload); // swap the byte order
 
     // Now put it all in an NSData object.
-    NSData *dataOut = [NSData dataWithBytes:headerBytes length:V1_HEADER_SIZE];
+    NSData *dataOut = [NSData dataWithBytes:headerBytes length:V1APPLINK_HEADERSIZE];
     
     return dataOut;
 }
@@ -67,5 +67,13 @@
     UInt32 *uintPointer = (UInt32 *)data.bytes;
     self.bytesInPayload = CFSwapInt32BigToHost(uintPointer[1]); // Data is coming in in big-endian, so swap it.
 }
+
+- (NSString *)description {
+    NSMutableString* description = [[NSMutableString alloc] init];
+    [description appendFormat:@"Version:%i, compressed:%i, frameType:%i, serviceType:%i, frameData:%i, sessionID:%i, dataSize:%i",
+                              self.version, self.compressed, self.frameType, self.serviceType, self.frameData, self.sessionID, (unsigned int)self.bytesInPayload];
+    return description;
+}
+
 
 @end

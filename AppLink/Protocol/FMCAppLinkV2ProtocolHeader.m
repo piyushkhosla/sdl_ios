@@ -12,15 +12,14 @@ const int V2APPLINK_HEADERSIZE = 12;
 - (id)init {
 	if (self = [super init]) {
         _version = 2;
-        _size = 12;
+        _size = V2APPLINK_HEADERSIZE;
 	}
 	return self;
 }
 
 - (NSData *)data {
     // Assembles the properties in the binary header format
-    const UInt8 V2_HEADER_SIZE = 8;
-    Byte headerBytes[V2_HEADER_SIZE] = {0};
+    Byte headerBytes[V2APPLINK_HEADERSIZE] = {0};
 
     Byte version = (self.version & 0xF) << 4; // first 4 bits
     Byte compressed = self.compressed?1:0 << 3; // next 1 bit
@@ -31,7 +30,6 @@ const int V2APPLINK_HEADERSIZE = 12;
     headerBytes[2] = self.frameData;
     headerBytes[3] = self.sessionID;
 
-//FIXME: Causing SIGABRT
     // Need to write these ints as big-endian.
     UInt32 *p = (UInt32 *)&headerBytes[4];
     *p = CFSwapInt32HostToBig(self.bytesInPayload);
@@ -73,6 +71,13 @@ const int V2APPLINK_HEADERSIZE = 12;
     UInt32 *uintPointer = (UInt32 *)data.bytes;
     self.bytesInPayload = CFSwapInt32BigToHost(uintPointer[1]); // Data is coming in in big-endian, so swap it.
     self.messageID = CFSwapInt32BigToHost(uintPointer[2]);             // Data is coming in in big-endian, so swap it.
+}
+
+- (NSString *)description {
+    NSMutableString* description = [[NSMutableString alloc] init];
+    [description appendFormat:@"Version:%i, compressed:%i, frameType:%i, serviceType:%i, frameData:%i, sessionID:%i, dataSize:%i, messageID:%i ",
+                              self.version, self.compressed, self.frameType, self.serviceType, self.frameData, self.sessionID, (unsigned int)self.bytesInPayload, (unsigned int)self.messageID];
+    return description;
 }
 
 @end

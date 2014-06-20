@@ -34,6 +34,12 @@
         [self doesNotRecognizeSelector:_cmd];
 }
 
+- (NSString *)description {
+    NSString* description = [NSString stringWithFormat:@"<%@: %p>", NSStringFromClass([self class]), self];
+    return description;
+}
+
+
 + (FMCAppLinkProtocolHeader *)headerForVersion:(UInt8)version {
     if (version == 1) {
         return [[FMCAppLinkV1ProtocolHeader alloc] init];

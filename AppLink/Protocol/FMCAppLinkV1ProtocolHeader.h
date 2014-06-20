@@ -11,5 +11,6 @@
 - (NSData *)data;
 - (id)copyWithZone:(NSZone *)zone;
 - (void)parse:(NSData *)data;
+- (NSString *)description;
 
 @end

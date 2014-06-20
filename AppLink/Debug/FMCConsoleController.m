@@ -23,7 +23,7 @@
 
 
 -(void) append:(id) toAppend {
-//    dispatch_async(dispatch_get_main_queue(), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         //Insert the new data
         NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
 
@@ -34,13 +34,13 @@
         NSIndexPath *newIndex = [NSIndexPath indexPathForRow:(messageList.count - 1) inSection:0];
         [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndex] withRowAnimation:UITableViewRowAnimationBottom];
 
-//        //If we were at the bottom, scroll to the new bottom.
-//        if (atBottom) {
-//            [self.tableView scrollToRowAtIndexPath:newIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-//        }
+        //If we were at the bottom, scroll to the new bottom.
+        if (atBottom) {
+            [self.tableView scrollToRowAtIndexPath:newIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
 
         [self.tableView reloadData];
-//    });
+    });
 }
 
 -(BOOL) isLastRowVisible {

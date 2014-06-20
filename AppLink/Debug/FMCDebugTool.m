@@ -50,7 +50,7 @@ static NSMutableArray* debugToolConsoleList = nil;
 
 +(void) logType:(FMCDebugType)debugType withInfo:(NSString*) info{
     
-    [self logType:debugType usingOutput:FMCDebugOutput_DeviceConsole withInfo:info];
+    [self logType:debugType usingOutput:FMCDebugOutput_All withInfo:info];
     
 }
 

@@ -104,29 +104,24 @@ const NSUInteger MAX_TRANSMISSION_SIZE = 512;
 
 // Use for normal messages
 - (void)sendDataToTransport:(NSData *)data {
-//    dispatch_async(_sendQueueDefaultPriority, ^{
+    dispatch_async(_sendQueueDefaultPriority, ^{
         [self.transport sendData:data];
-//    });
+    });
 }
 
 // Use for critical messages, will jump ahead of any already queued normal priority messages.
 - (void)sendDataToTransportWithHighPriority:(NSData *)data {
-//    dispatch_suspend(_sendQueueDefaultPriority);
-//    dispatch_async(_sendQueueHighPriority, ^{
+    dispatch_suspend(_sendQueueDefaultPriority);
+    dispatch_async(_sendQueueHighPriority, ^{
         [self.transport sendData:data];
-//        dispatch_resume(_sendQueueDefaultPriority);
-//    });
+        dispatch_resume(_sendQueueDefaultPriority);
+    });
 }
 
 //
 // Turn recieved bytes into message objects.
 //
 - (void)handleBytesFromTransport:(NSData *)recievedData {
-    // TODO: Find out if there is a maximim message size that the module is allowed to send.
-    // is it the same as our limit? If we exceed that size without having a mesage completed
-    // we can use that as error detection.
-    // TODO: how to recover from errors?
-
 
     // Initialize the recieve buffer which will contain bytes while messages are constructed.
     if (self.recieveBuffer == nil) {
@@ -173,9 +168,9 @@ const NSUInteger MAX_TRANSMISSION_SIZE = 512;
 
     // Pass on ultimate disposition of the message to the message router.
     self.messageRouter.delegate = self.protocolDelegate;
-//    dispatch_async(_recieveQueue, ^{
+    dispatch_async(_recieveQueue, ^{
         [self.messageRouter handleRecievedMessage:message];
-//    });
+    });
 
 }
 

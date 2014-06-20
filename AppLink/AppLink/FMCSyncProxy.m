@@ -165,11 +165,6 @@ const int POLICIES_CORRELATION_ID = 65535;
 // Send an RPC Request without checking for reserved correlation IDs	
 -(void) sendRPCRequestPrivate:(FMCRPCRequest*) msg {
 	@try {
-        //TODO:DEBUGOUTS
-        //[FMCDebugTool logInfo:@"FMSyncProxy: sendRPCRequest: encoding message: %@", msg];
-		//NSData* msgData = [[FMJsonEncoder instance] encodeDictionary:[msg serializeAsDictionary:_version]];
-        //TODO:ENDDEBUGOUTS
-
         //
         // Build the message payload (RPC data &| binary data).
         //
@@ -211,6 +206,8 @@ const int POLICIES_CORRELATION_ID = 65535;
 }
 
 - (void)sendMessageToProtocol:(FMCAppLinkProtocolMessage *)message {
+    [FMCDebugTool logType:FMCDebugType_Protocol withInfo:[NSString stringWithFormat:@"Send: %@", message.description]];
+
     [protocol sendData:message];
 }
 
@@ -246,10 +243,9 @@ const int POLICIES_CORRELATION_ID = 65535;
 }
 	 
 - (void) onProtocolMessageReceived:(FMCAppLinkProtocolMessage*) msgData {
-    //TODO: DEBUGOUTS
-    //    NSLog(@"onProtocolMessageReceived: %@", msgData);
-    //TODO:ENDDEBUGOUTS
-	@try {
+    [FMCDebugTool logType:FMCDebugType_Protocol withInfo:[NSString stringWithFormat:@"Recieved message: %@", msgData.description]];
+
+    @try {
 		[self handleProtocolMessage:msgData];
 	}
 	@catch (NSException * e) {

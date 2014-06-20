@@ -15,6 +15,7 @@
 - (id)init;
 - (id)initWithHeader:(FMCAppLinkProtocolHeader*)header andPayload:(NSData *)payload;
 - (NSUInteger)size;
+- (NSString *)description;
 
 + (UInt8)determineVersion:(NSData *)data;
 

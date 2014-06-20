@@ -98,6 +98,13 @@ const NSUInteger RPC_HEADER_SIZE = 12;
     return (headerSize + jsonDataSize + binaryDataSize);
 }
 
+- (NSString *)description {
+    NSMutableString *description = [[NSMutableString alloc] init];
+    [description appendFormat:@" rpcType:%i, functionID:%i, correlationID:%i, json:%i bytes, binary:%i bytes", self.rpcType, (unsigned int)self.functionID, (unsigned int)self.correlationID, self.jsonData.length, self.binaryData.length];
+
+    return description;
+}
+
 + (id)rpcPayloadWithData:(NSData *)data {
     return [[FMCRPCPayload alloc] initWithData:data];
 }

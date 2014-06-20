@@ -4,6 +4,7 @@
 //
 
 #import "FMCAppLinkProtocolMessage.h"
+#import "FMCRPCPayload.h"
 
 @interface FMCAppLinkProtocolMessage ()
 
@@ -45,7 +46,15 @@
     NSMutableData *dataOut = [NSMutableData dataWithCapacity:[self size]];
     [dataOut appendData:self.header.data];
     [dataOut appendData:self.payload];
+
     return dataOut;
+}
+
+- (NSString *)description {
+    NSMutableString* description = [[NSMutableString alloc] init];
+    [description appendString:self.header.description];
+    [description appendFormat:@" Payload: %i bytes.", self.payload.length];
+    return description;
 }
 
 @end
