@@ -23,23 +23,24 @@
 
 
 -(void) append:(id) toAppend {
-	//Insert the new data
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-    
-    [dictionary setObject:toAppend forKey:@"object"];
-    [dictionary setObject:[NSDate date] forKey:@"date"];
-    
-	[messageList addObject:dictionary];
-	NSIndexPath *newIndex = [NSIndexPath indexPathForRow:(messageList.count - 1) inSection:0];
-	[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndex] withRowAnimation:UITableViewRowAnimationBottom];
-    
-	//If we were at the bottom, scroll to the new bottom.
-// FIXME: Crashingq
-//	if (atBottom) {
-//        [self.tableView scrollToRowAtIndexPath:newIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-//	}
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //Insert the new data
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
 
-    [self.tableView reloadData];
+        [dictionary setObject:toAppend forKey:@"object"];
+        [dictionary setObject:[NSDate date] forKey:@"date"];
+
+        [messageList addObject:dictionary];
+        NSIndexPath *newIndex = [NSIndexPath indexPathForRow:(messageList.count - 1) inSection:0];
+        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndex] withRowAnimation:UITableViewRowAnimationBottom];
+
+        //If we were at the bottom, scroll to the new bottom.
+        if (atBottom) {
+            [self.tableView scrollToRowAtIndexPath:newIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+
+        [self.tableView reloadData];
+    });
 }
 
 -(BOOL) isLastRowVisible {
