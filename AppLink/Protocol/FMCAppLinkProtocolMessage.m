@@ -54,6 +54,7 @@
     NSMutableString* description = [[NSMutableString alloc] init];
     [description appendString:self.header.description];
     [description appendFormat:@" Payload: %i bytes.", self.payload.length];
+
     return description;
 }
 

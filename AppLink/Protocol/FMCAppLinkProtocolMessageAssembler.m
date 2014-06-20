@@ -53,7 +53,7 @@
         // Create the header
         FMCAppLinkProtocolHeader *header = message.header.copy;
         header.frameType = FMCFrameType_Single;
-        header.frameType = FMCFrameData_SingleFrame;
+        header.frameData = FMCFrameData_SingleFrame;
 
 
         // Create the payload
@@ -67,6 +67,7 @@
         [payload appendData:dataToAppend];
 
         // Validation
+        header.bytesInPayload = payload.length;
         if (payload.length != self.expectedBytes) {
             NSLog(@"Warning: collected bytes size of %i not equal to expected size of %i.", payload.length, (unsigned int)self.expectedBytes);
         }
