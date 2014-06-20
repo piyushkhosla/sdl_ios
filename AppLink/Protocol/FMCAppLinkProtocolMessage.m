@@ -18,7 +18,7 @@
 // Looks at and parses first byte to determine version.
 + (UInt8)determineVersion:(NSData *)data {
     UInt8 firstByte = ((UInt8*)data.bytes)[0];
-    UInt8 version = firstByte >> 1;
+    UInt8 version = firstByte >> 4;
     return version;
 }
 
