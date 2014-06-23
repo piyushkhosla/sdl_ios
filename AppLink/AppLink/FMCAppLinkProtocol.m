@@ -100,7 +100,7 @@
         if (headerBuf.length == 0 && (receivedBytes[0] >> 4) >= 2) {
             [self setVersion:(Byte) 0x02];
         //Future proofing, buffer has something in it and version >= 2
-        } else if ((((Byte *)headerBuf.bytes)[0] >> 4) >= 2) {
+        } else if (headerBuf.length > 0 && (((Byte *)headerBuf.bytes)[0] >> 4) >= 2) {
             //safe current state of the buffer and also set the new version
             NSMutableData* tempHeader = nil;
             tempHeader = [[NSMutableData alloc] initWithCapacity:headerBuf.length];
