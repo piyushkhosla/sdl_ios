@@ -14,7 +14,7 @@
 	[self doesNotRecognizeSelector:_cmd];
 }
 
-- (void)sendData:(FMCAppLinkProtocolMessage *)protocolMsg {
+- (void)sendRPCRequest:(FMCRPCRequest *)rpcRequest {
     [self doesNotRecognizeSelector:_cmd];
 }
 

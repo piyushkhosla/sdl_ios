@@ -8,13 +8,12 @@
 @class FMCApplinkProtocolRecievedMessageRouter;
 
 
-@interface FMCAppLinkProtocol : FMCAbstractProtocol
-
-@property (assign) UInt8 highestRecievedVersion;
+@interface FMCAppLinkProtocol : FMCAbstractProtocol <FMCProtocolListener>
 
 - (void)sendStartSessionWithType:(FMCServiceType)serviceType;
 - (void)sendEndSessionWithType:(FMCServiceType)serviceType sessionID:(Byte)sessionID;
-- (void)sendData:(FMCAppLinkProtocolMessage *)protocolMsg;
+- (void)sendRPCRequest:(FMCRPCRequest *)rpcRequest;
 - (void)handleBytesFromTransport:(NSData *)receivedData;
+- (void)sendHeartbeat;
 
 @end

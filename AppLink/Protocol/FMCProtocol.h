@@ -5,6 +5,7 @@
 #import <Foundation/Foundation.h>
 #import "FMCProtocolListener.h"
 #import "FMCAppLinkProtocolMessage.h"
+#import "FMCRPCRequest.h"
 #import "FMCTransport.h"
 #import "FMCTransportDelegate.h"
 
@@ -16,6 +17,6 @@
 - (void)handleBytesFromTransport:(NSData *)receivedData;
 - (void)sendStartSessionWithType:(FMCServiceType)sessionType;
 - (void)sendEndSessionWithType:(FMCServiceType)sessionType sessionID:(Byte)sessionID;
-- (void)sendData:(FMCAppLinkProtocolMessage *)protocolMsg;
+- (void)sendRPCRequest:(FMCRPCRequest *)rpcRequest;
 
 @end

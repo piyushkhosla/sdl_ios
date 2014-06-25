@@ -45,7 +45,7 @@
     NSMutableData *firstFramePayload = [NSMutableData dataWithBytes:payloadData length:sizeof(payloadData)];
     firstFrameHeader.bytesInPayload = firstFramePayload.length;
 
-    FMCAppLinkProtocolMessage *firstMessage = [[FMCAppLinkProtocolMessage alloc] initWithHeader:firstFrameHeader andPayload:firstFramePayload];
+    FMCAppLinkProtocolMessage *firstMessage = [FMCAppLinkProtocolMessage messageWithHeader:firstFrameHeader andPayload:firstFramePayload];
     outgoingMessages[0] = firstMessage;
 
 
@@ -60,7 +60,7 @@
         NSData *nextFramePayload = [incomingMessage.data subdataWithRange:NSMakeRange(offsetOfDataForThisFrame, numberOfDataBytesPerMessage)];
         nextFrameHeader.bytesInPayload = nextFramePayload.length;
 
-        FMCAppLinkProtocolMessage *nextMessage = [[FMCAppLinkProtocolMessage alloc] initWithHeader:nextFrameHeader andPayload:nextFramePayload];
+        FMCAppLinkProtocolMessage *nextMessage = [FMCAppLinkProtocolMessage messageWithHeader:nextFrameHeader andPayload:nextFramePayload];
         outgoingMessages[n+1] = nextMessage;
     }
 
@@ -78,7 +78,7 @@
     NSData *lastFramePayload = [incomingMessage.data subdataWithRange:NSMakeRange(offsetOfDataForLastFrame, numberOfDataBytesInLastMessage)];
     lastFrameHeader.bytesInPayload = lastFramePayload.length;
 
-    FMCAppLinkProtocolMessage *lastMessage = [[FMCAppLinkProtocolMessage alloc] initWithHeader:lastFrameHeader andPayload:lastFramePayload];
+    FMCAppLinkProtocolMessage *lastMessage = [FMCAppLinkProtocolMessage messageWithHeader:lastFrameHeader andPayload:lastFramePayload];
     outgoingMessages[numberOfMessagesRequired] = lastMessage;
 
     return outgoingMessages;

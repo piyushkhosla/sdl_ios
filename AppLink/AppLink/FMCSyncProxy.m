@@ -17,7 +17,6 @@
 #import <AppLink/FMCSyncProxy.h>
 #import <AppLink/RPC/Requests/FMCSystemRequest.h>
 #import "FMCRPCPayload.h"
-#import "FMCAppLinkProtocolMessageDisassembler.h"
 
 #define VERSION_STRING @"##Version##"
 
@@ -52,7 +51,6 @@
 - (void)notifyProxyClosed;
 - (void)handleProtocolMessage:(FMCAppLinkProtocolMessage *)msgData;
 - (void)performCallback:(FMCCallback *)callback;
-- (void)sendMessageToProtocol:(FMCAppLinkProtocolMessage *)message;
 
 @end
 
@@ -148,67 +146,20 @@ const int POLICIES_CORRELATION_ID = 65535;
 }
 
 -(void) sendRPCRequest:(FMCRPCMessage*) msg {
-    //TODO:Remove: Make sure the RPCMessage's correlationID is not reserved
     if ([msg isKindOfClass:FMCRPCRequest.class]) {
         FMCRPCRequest *request = (FMCRPCRequest*)msg;
-        
-        //        if ([self isCorrelationIDReserved:[[request correlationID] intValue]]) {
-        //            [self onError:
-        //             [NSString stringWithFormat:@"Error - RPC Request not sent: %@ attempted to use reserved correlationID: %d", msg, [[request correlationID] intValue]] exception:nil];
-        //        } else {
         [self sendRPCRequestPrivate:request];
-        //        }
     }
 }
 
 
 // Send an RPC Request without checking for reserved correlation IDs	
--(void) sendRPCRequestPrivate:(FMCRPCRequest*) msg {
+- (void)sendRPCRequestPrivate:(FMCRPCRequest *)rpcRequest {
 	@try {
-        //
-        // Build the message payload (RPC data &| binary data).
-        //
-        NSData *jsonData = [[FMCJsonEncoder instance] encodeDictionary:[msg serializeAsDictionary:_version]];
-        NSData* messagePayload = nil;
-
-        if(_version == 1) {
-            messagePayload = jsonData;
-        } else if (_version == 2) {
-            // Serialize the RPC data into an NSData
-            FMCRPCPayload *rpcPayload = [[FMCRPCPayload alloc] init];
-            rpcPayload.rpcType = 0; // Should be an enum...
-            rpcPayload.functionID = [[[[FMCFunctionID alloc] init] getFunctionID:[msg getFunctionName]] intValue];
-            rpcPayload.correlationID = [msg.correlationID intValue];
-            rpcPayload.jsonData = jsonData;
-            rpcPayload.binaryData = msg.bulkData;
-            messagePayload = rpcPayload.data;
-        }
-
-        //
-        // Build the protocol level header & message
-        //
-        FMCAppLinkProtocolHeader *header = [FMCAppLinkProtocolHeader headerForVersion:_version];
-        header.frameType = FMCFrameType_Single;
-        header.serviceType = FMCServiceType_RPC;
-        header.frameData = FMCFrameData_SingleFrame;
-        header.sessionID = rpcSessionID;
-        header.bytesInPayload = messagePayload.length;
-        FMCAppLinkProtocolMessage *message = [[FMCAppLinkProtocolMessage alloc] initWithHeader:header andPayload:messagePayload];
-
-
-        // Send it
-        [self sendMessageToProtocol:message];
-
-        
+        [protocol sendRPCRequest:rpcRequest];
 	} @catch (NSException * e) {
-		[FMCDebugTool logException:e withMessage:@"Proxy: Failed to send RPC request: %@", msg.name];
-	} @finally {}
-}
-
-- (void)sendMessageToProtocol:(FMCAppLinkProtocolMessage *)message {
-    [FMCDebugTool logType:FMCDebugType_Protocol withInfo:[NSString stringWithFormat:@"Send: %@", message.description]];
-
-    [protocol sendData:message];
+		[FMCDebugTool logException:e withMessage:@"Proxy: Failed to send RPC request: %@", rpcRequest.name];
+	}
 }
 
 -(void) handleProtocolSessionStarted:(FMCServiceType) sessionType sessionID:(Byte) sessionID version:(Byte) version {
@@ -258,51 +209,8 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 - (void)handleProtocolMessage:(FMCAppLinkProtocolMessage *)incomingMessage {
 
-    NSMutableDictionary* rpcMessageAsDictionary = nil;
-
-    if (incomingMessage.header.serviceType == FMCServiceType_RPC) {
-        // See if we need to increase our version property
-        // which we use to determine what to send.
-        UInt8 incomingVersion = incomingMessage.header.version;
-        if (_version == 1 && incomingVersion == 2) {
-            _version = incomingVersion;
-        }
-
-
-        // Convert incoming message to dictionary
-        NSDictionary* jsonDictionary = nil;
-        if (incomingVersion == 1) {
-            jsonDictionary = [[FMCJsonDecoder instance] decode:incomingMessage.payload];
-           rpcMessageAsDictionary = [jsonDictionary mutableCopy];
-        } else if (incomingVersion == 2) {
-            // Version 2 has some additional parameters.
-            rpcMessageAsDictionary = [[NSMutableDictionary alloc] init];
-
-            FMCRPCPayload *rpcPayload = [FMCRPCPayload rpcPayloadWithData:incomingMessage.payload];
-            jsonDictionary = [[FMCJsonDecoder instance] decode:rpcPayload.jsonData];
-
-            // Create the inner dictionary with the RPC properties
-            NSMutableDictionary *innerDictionary = [[NSMutableDictionary alloc] init];
-            NSString *functionName = [[[FMCFunctionID alloc] init] getFunctionName:rpcPayload.functionID];
-            [innerDictionary setObject:functionName forKey:NAMES_operation_name];
-            [innerDictionary setObject:[NSNumber numberWithInt:rpcPayload.correlationID] forKey:NAMES_correlationID];
-            [innerDictionary setObject:jsonDictionary forKey:NAMES_parameters];
-
-            // Store it in the containing dictionary
-            UInt8 rpcType = rpcPayload.rpcType;
-            NSArray *rpcTypeNames = @[NAMES_request, NAMES_response, NAMES_notification];
-            [rpcMessageAsDictionary setObject:innerDictionary forKey:rpcTypeNames[rpcType]];
-
-            // The bulk data also goes in the outer dictionary
-            if (rpcPayload.binaryData) {
-                [rpcMessageAsDictionary setObject:rpcPayload.binaryData forKey:NAMES_bulkData];
-            }
-
-
-        }
-
-    }
-
+    // Convert protocol message to dictionary
+    NSDictionary* rpcMessageAsDictionary = [incomingMessage rpcDictionary];
     [self handleRpcMessage:rpcMessageAsDictionary];
 
 }

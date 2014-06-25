@@ -73,7 +73,7 @@
         }
         
         // Create the message.
-        assembledMessage = [[FMCAppLinkProtocolMessage alloc] initWithHeader:header andPayload:payload];
+        assembledMessage = [FMCAppLinkProtocolMessage messageWithHeader:header andPayload:payload];
 
 
         // Execute completion handler.

@@ -4,6 +4,9 @@
 //
 
 #import "FMCAppLinkProtocolMessage.h"
+#import "FMCAppLinkV1ProtocolMessage.h"
+#import "FMCAppLinkV2ProtocolMessage.h"
+
 #import "FMCRPCPayload.h"
 
 @interface FMCAppLinkProtocolMessage ()
@@ -30,12 +33,9 @@
 	return self;
 }
 
-- (id)initWithHeader:(FMCAppLinkProtocolHeader*)header andPayload:(NSData *)payload {
-	if (self = [self init]) {
-        self.header = header;
-        self.payload = payload;
-	}
-	return self;
+- (NSDictionary *)rpcDictionary {
+    [self doesNotRecognizeSelector:_cmd];
+    return nil;
 }
 
 - (NSUInteger)size {
@@ -56,6 +56,20 @@
     [description appendFormat:@" Payload: %i bytes.", self.payload.length];
 
     return description;
+}
+
+// Returns a V1 or V2 object
++ (id)messageWithHeader:(FMCAppLinkProtocolHeader*)header andPayload:(NSData *)payload {
+    FMCAppLinkProtocolMessage *newMessage = nil;
+
+    UInt8 version = header.version;
+    if (version == 1) {
+        newMessage = [[FMCAppLinkV1ProtocolMessage alloc] initWithHeader:(FMCAppLinkProtocolHeader*)header andPayload:(NSData *)payload];
+    } else if (version >= 2) {
+        newMessage = [[FMCAppLinkV2ProtocolMessage alloc] initWithHeader:(FMCAppLinkProtocolHeader*)header andPayload:(NSData *)payload];
+    }
+
+    return newMessage;
 }
 
 @end
