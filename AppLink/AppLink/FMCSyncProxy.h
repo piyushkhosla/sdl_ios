@@ -10,7 +10,7 @@
 #import <AppLink/FMCRPCRequestFactory.h>
 #import <AppLink/Transport/FMCTransport.h>
 
-@interface FMCSyncProxy : NSObject<FMCProtocolListener, NSURLConnectionDelegate, NSStreamDelegate> {
+@interface FMCSyncProxy : NSObject<FMCProtocolListener, NSURLConnectionDataDelegate, NSStreamDelegate> {
     Byte _version;
     
 	NSObject<FMCTransport>* transport;
@@ -23,9 +23,6 @@
     
 	BOOL isConnected;
     BOOL alreadyDestructed;
-    
-    NSMutableData* httpResponseData;
-    NSString* requestKind;
 }
 
 -(id) initWithTransport:(NSObject<FMCTransport>*) transport protocol:(NSObject<FMCProtocol>*) protocol delegate:(NSObject<FMCProxyListener>*) delegate;

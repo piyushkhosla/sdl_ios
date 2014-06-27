@@ -246,6 +246,7 @@
 		59E5A6AF194E347900B908AA /* FMCVehicleDataResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 59E5A5C4194E347900B908AA /* FMCVehicleDataResult.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		59E5A6B0194E347900B908AA /* FMCVehicleType.m in Sources */ = {isa = PBXBuildFile; fileRef = 59E5A5C6194E347900B908AA /* FMCVehicleType.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		59E5A6B1194E347900B908AA /* FMCVrHelpItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 59E5A5C8194E347900B908AA /* FMCVrHelpItem.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E91EB3A7195DED0A001349EC /* FMCURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = E91EB3A6195DED0A001349EC /* FMCURLConnection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -754,6 +755,8 @@
 		59E5A5C6194E347900B908AA /* FMCVehicleType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCVehicleType.m; sourceTree = "<group>"; };
 		59E5A5C7194E347900B908AA /* FMCVrHelpItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCVrHelpItem.h; sourceTree = "<group>"; };
 		59E5A5C8194E347900B908AA /* FMCVrHelpItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCVrHelpItem.m; sourceTree = "<group>"; };
+		E91EB3A5195DED0A001349EC /* FMCURLConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCURLConnection.h; sourceTree = "<group>"; };
+		E91EB3A6195DED0A001349EC /* FMCURLConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCURLConnection.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -911,6 +914,8 @@
 				59E5A417194E347900B908AA /* FMCSyncProxyFactory.m */,
 				59E5A418194E347900B908AA /* FMCTTSChunkFactory.h */,
 				59E5A419194E347900B908AA /* FMCTTSChunkFactory.m */,
+				E91EB3A5195DED0A001349EC /* FMCURLConnection.h */,
+				E91EB3A6195DED0A001349EC /* FMCURLConnection.m */,
 			);
 			name = AppLink;
 			path = AppLink/AppLink;
@@ -1618,6 +1623,7 @@
 				59204D2D194EB01500403450 /* FMCAppLinkV1ProtocolHeader.m in Sources */,
 				59E5A66B194E347900B908AA /* FMCDeleteSubMenuResponse.m in Sources */,
 				59E5A69A194E347900B908AA /* FMCImage.m in Sources */,
+				E91EB3A7195DED0A001349EC /* FMCURLConnection.m in Sources */,
 				59E5A5F9194E347900B908AA /* FMCFileType.m in Sources */,
 				59E5A6B0194E347900B908AA /* FMCVehicleType.m in Sources */,
 				59204D17194EAFCB00403450 /* FMCTCPTransport.m in Sources */,

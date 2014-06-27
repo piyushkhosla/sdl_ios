@@ -17,6 +17,7 @@
 #import <AppLink/FMCSyncProxy.h>
 #import <AppLink/RPC/Requests/FMCSystemRequest.h>
 #import "FMCRPCPayload.h"
+#import "FMCURLConnection.h"
 
 #define VERSION_STRING @"##Version##"
 
@@ -345,8 +346,7 @@ const int POLICIES_CORRELATION_ID = 65535;
                 
                 request.HTTPBody = (NSData*)[httpRequestDictionary objectForKey:@"body"];
                 
-                requestKind = @"OnSystemRequestProprietary";
-                NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+                FMCURLConnection *conn = [[FMCURLConnection alloc] initWithRequest:request delegate:self andTag:@"OnSystemRequestProprietary"];
                 
                 if (conn == nil) {
                     [FMCDebugTool logInfo:@"%s: Error creating NSURLConnection", __PRETTY_FUNCTION__];
@@ -481,8 +481,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 //    NSLog(@"%@", jsonString);
 //TODO:ENDDEBUGOUTS
     
-    requestKind = @"OnEncodedSyncPData";
-    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    FMCURLConnection *conn = [[FMCURLConnection alloc] initWithRequest:request delegate:self andTag:@"OnEncodedSyncPData"];
     
     if (conn == nil) {
         [FMCDebugTool logInfo:@"%s: Error creating NSURLConnection", __PRETTY_FUNCTION__];
@@ -491,12 +490,16 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 #pragma mark - NSURL Methods
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    // Can be called multiple times, such as a server redirect, so reset the data each time
-    httpResponseData = [[NSMutableData alloc] init];
+    FMCURLConnection *fmcConnection = (FMCURLConnection*)connection;
+    fmcConnection.response = (NSHTTPURLResponse *)response;
+
+    // TODO: Optimise, get content-length from header, init data with that capacity
+    fmcConnection.responseData = [[NSMutableData alloc] init];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [httpResponseData appendData:data];
+    FMCURLConnection* fmcConnection = (FMCURLConnection *)connection;
+    [fmcConnection.responseData appendData:data];
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection
@@ -506,8 +509,16 @@ const int POLICIES_CORRELATION_ID = 65535;
 }
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection {
-   
+    // TODO: Now that this uses FMCURLConnection class we can clean this up.
+    // Could, for example, give it a block property of code to complete upon
+    // completion instead of switching on "requestKind".
+
+
     [connection release]; // Release the connection we allocated in sendEncodedSyncPData/sendSystemRequest
+
+    FMCURLConnection *fmcConnection = (FMCURLConnection *)connection;
+    NSString *requestKind = fmcConnection.tag;
+    NSData *httpResponseData = fmcConnection.responseData;
     
     if ([requestKind isEqualToString:@"OnEncodedSyncPData"]) {
         
@@ -578,7 +589,9 @@ const int POLICIES_CORRELATION_ID = 65535;
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     
     [connection release]; // Release the connection we allocated in sendEncodedSyncPData/sendSystemRequest
-    
+    FMCURLConnection *fmcConnection = (FMCURLConnection *)connection;
+    NSString *requestKind = fmcConnection.tag;
+
     if ([requestKind isEqualToString:@"OnEncodedSyncPData"]) {
         [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OnEncodedSyncPData (error)"]];
         [FMCDebugTool logInfo:@"Proxy: OnEncodedSyncPData (error)"];
