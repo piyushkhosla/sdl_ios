@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		59204D15194EAFCB00403450 /* FMCAbstractTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 59204D0E194EAFCB00403450 /* FMCAbstractTransport.m */; };
-		59204D16194EAFCB00403450 /* FMCIAPTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 59204D10194EAFCB00403450 /* FMCIAPTransport.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		59204D16194EAFCB00403450 /* FMCIAPTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 59204D10194EAFCB00403450 /* FMCIAPTransport.m */; };
 		59204D17194EAFCB00403450 /* FMCTCPTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 59204D12194EAFCB00403450 /* FMCTCPTransport.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		59204D28194EB01500403450 /* FMCAppLinkProtocolHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 59204D19194EB01500403450 /* FMCAppLinkProtocolHeader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		59204D29194EB01500403450 /* FMCAppLinkProtocolMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 59204D1B194EB01500403450 /* FMCAppLinkProtocolMessage.m */; };
@@ -20,6 +20,7 @@
 		59204D2F194EB01500403450 /* FMCRPCPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = 59204D27194EB01500403450 /* FMCRPCPayload.m */; };
 		59BFDFB2194EB2FA00B6E8B5 /* FMCDebugTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 59BFDFAF194EB2FA00B6E8B5 /* FMCDebugTool.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		59BFDFB3194EB2FA00B6E8B5 /* FMCSiphonServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 59BFDFB1194EB2FA00B6E8B5 /* FMCSiphonServer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		59DC1DA619593EAE0032BBCE /* FMCConsoleController.m in Sources */ = {isa = PBXBuildFile; fileRef = 59DC1DA419593EAE0032BBCE /* FMCConsoleController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		59E5A3D5194E318200B908AA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E5A3D4194E318200B908AA /* Foundation.framework */; };
 		59E5A3E3194E318200B908AA /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E5A3E2194E318200B908AA /* XCTest.framework */; };
 		59E5A3E4194E318200B908AA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59E5A3D4194E318200B908AA /* Foundation.framework */; };
@@ -301,6 +302,9 @@
 		59BFDFAF194EB2FA00B6E8B5 /* FMCDebugTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCDebugTool.m; sourceTree = "<group>"; };
 		59BFDFB0194EB2FA00B6E8B5 /* FMCSiphonServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCSiphonServer.h; sourceTree = "<group>"; };
 		59BFDFB1194EB2FA00B6E8B5 /* FMCSiphonServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCSiphonServer.m; sourceTree = "<group>"; };
+		59DC1DA319593EAE0032BBCE /* FMCConsoleController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCConsoleController.h; sourceTree = "<group>"; };
+		59DC1DA419593EAE0032BBCE /* FMCConsoleController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCConsoleController.m; sourceTree = "<group>"; };
+		59DC1DA519593EAE0032BBCE /* FMCDebugToolConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCDebugToolConsole.h; sourceTree = "<group>"; };
 		59E5A3D1194E318200B908AA /* libAppLink.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAppLink.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		59E5A3D4194E318200B908AA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		59E5A3D8194E318200B908AA /* AppLink-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AppLink-Prefix.pch"; sourceTree = "<group>"; };
@@ -785,6 +789,9 @@
 		59204D0B194EAF4600403450 /* Debug */ = {
 			isa = PBXGroup;
 			children = (
+				59DC1DA319593EAE0032BBCE /* FMCConsoleController.h */,
+				59DC1DA419593EAE0032BBCE /* FMCConsoleController.m */,
+				59DC1DA519593EAE0032BBCE /* FMCDebugToolConsole.h */,
 				59BFDFAE194EB2FA00B6E8B5 /* FMCDebugTool.h */,
 				59BFDFAF194EB2FA00B6E8B5 /* FMCDebugTool.m */,
 				59BFDFB0194EB2FA00B6E8B5 /* FMCSiphonServer.h */,
@@ -797,14 +804,14 @@
 		59204D0C194EAFCB00403450 /* Transport */ = {
 			isa = PBXGroup;
 			children = (
+				59204D14194EAFCB00403450 /* FMCTransportDelegate.h */,
+				59204D13194EAFCB00403450 /* FMCTransport.h */,
 				59204D0D194EAFCB00403450 /* FMCAbstractTransport.h */,
 				59204D0E194EAFCB00403450 /* FMCAbstractTransport.m */,
 				59204D0F194EAFCB00403450 /* FMCIAPTransport.h */,
 				59204D10194EAFCB00403450 /* FMCIAPTransport.m */,
 				59204D11194EAFCB00403450 /* FMCTCPTransport.h */,
 				59204D12194EAFCB00403450 /* FMCTCPTransport.m */,
-				59204D13194EAFCB00403450 /* FMCTransport.h */,
-				59204D14194EAFCB00403450 /* FMCTransportDelegate.h */,
 			);
 			name = Transport;
 			path = AppLink/Transport;
@@ -1693,6 +1700,7 @@
 				59E5A680194E347900B908AA /* FMCSliderResponse.m in Sources */,
 				59E5A660194E347900B908AA /* FMCUnsubscribeVehicleData.m in Sources */,
 				59E5A666194E347900B908AA /* FMCChangeRegistrationResponse.m in Sources */,
+				59DC1DA619593EAE0032BBCE /* FMCConsoleController.m in Sources */,
 				59E5A68B194E347900B908AA /* FMCAudioPassThruCapabilities.m in Sources */,
 				59E5A62E194E347900B908AA /* FMCOnCommand.m in Sources */,
 				59E5A634194E347900B908AA /* FMCOnLanguageChange.m in Sources */,

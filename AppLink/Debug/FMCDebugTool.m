@@ -44,17 +44,17 @@ static NSMutableArray* debugToolConsoleList = nil;
     
     va_end(args);
     
-    [self logType:FMCDebugType_Debug usingOutput:FMCDebugOutput_DeviceConsole withInfo:toOutRaw];
+    [self logInfo:toOutRaw withType:FMCDebugType_Debug toOutput:FMCDebugOutput_DeviceConsole];
     [toOutRaw release];
 }
 
-+(void) logType:(FMCDebugType)debugType withInfo:(NSString*) info{
++(void) logInfo:(NSString *)info withType:(FMCDebugType)debugType{
     
-    [self logType:debugType usingOutput:FMCDebugOutput_All withInfo:info];
+    [self logInfo:info withType:debugType toOutput:FMCDebugOutput_All];
     
 }
 
-+(void) logType:(FMCDebugType)debugType usingOutput:(FMCDebugOutputType)outputType withInfo:(NSString*) info {
++(void) logInfo:(NSString *)info withType:(FMCDebugType)debugType toOutput:(FMCDebugOutputType)outputType {
 	NSString* toOutRaw = nil;
     //NSLog(@"FMCDebugTool, fmt = %@", fmt);
     

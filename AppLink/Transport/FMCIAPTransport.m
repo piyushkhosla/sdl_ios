@@ -1,4 +1,4 @@
-//  FMCIAPTransport.m
+//  FMCIAPTransport.h
 //  FMCSyncIAPTransport.m
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
@@ -8,112 +8,306 @@
 #import "FMCDebugTool.h"
 #import "FMCSiphonServer.h"
 
-#define SYNC_PROTOCOL_STRING @"com.ford.sync.prot0"
+#define LEGACY_PROTOCOL_STRING @"com.ford.sync.prot0"
+#define CONTROL_PROTOCOL_STRING @"com.smartdevicelink.prot0"
 
-@interface FMCIAPTransport ()
+#define IAP_INPUT_BUFFER_SIZE 1024
 
--(void) accessoryConnected:(NSNotification*) connectNotification;
--(void) accessoryDisconnected:(NSNotification*) connectNotification;
--(NSString*) stringForEventCode:(NSStreamEvent) eventCode;
-
-@end
 
 @implementation FMCIAPTransport
-@synthesize session;
-@synthesize inStream;
-@synthesize outStream;
 
--(id) init {
-    
-    [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:@"Init"];
-    
-    if (self = [super init]) {
-		transportLock = [[NSObject alloc] init];
-		writeQueue = [[NSMutableArray alloc] initWithCapacity:10];
-		spaceAvailable = NO;
+- (id)init {
+    if (self = [super initWithEndpoint:nil endpointParam:nil]) {
         
-        if (!registeredForNotifications) {
-            registeredForNotifications = YES;
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessoryConnected:) name:EAAccessoryDidConnectNotification object:nil];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessoryDisconnected:) name:EAAccessoryDidDisconnectNotification object:nil];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
-            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
-        }
+        [FMCDebugTool logInfo:@"Init" withType:FMCDebugType_Transport_iAP];
         
-        if ([[UIApplication sharedApplication] applicationState] == UIApplicationStateBackground) {
-            appInBackground = YES;
-        } else {
-            appInBackground = NO;
-        }
-        
-        transportUsable = YES;
-        [FMCSiphonServer init];
-	}
-	return self;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessoryConnected:) name:EAAccessoryDidConnectNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessoryDisconnected:) name:EAAccessoryDidDisconnectNotification object:nil];
+    }
+    return self;
 }
 
-- (void)stream:(NSStream *)aStream handleEvent:(NSStreamEvent)eventCode {
+
+#pragma mark - FMCTransport Implementation
+
+- (void)connect {
+    [FMCDebugTool logInfo:@"Looking To Connect" withType:FMCDebugType_Transport_iAP];
     
-//    //TODO:DEBUGOUTS
+    [self checkForValidConnectedAccessory];
+    
+    if (self.accessory && self.protocolString) {
+        [self openSession];
+        
+//        if (!self.onControlProtocol) {
+//            [self notifyTransportConnected];
+//        }
+    }
+
+}
+
+- (void)disconnect {
+    [FMCDebugTool logInfo:@"Disconnect" withType:FMCDebugType_Transport_iAP];
+    
+    if (self.session) {
+        [self closeSession];
+        
+        if (!self.onControlProtocol) {
+            [self notifyTransportDisconnected];
+        }
+    }
+}
+
+- (void)sendData:(NSData*) data {
+    if (!self.writeData) {
+        self.writeData = [[NSMutableData alloc] init];
+    }
+    
+    [self.writeData appendData:data];
+    [self writeDataOut];
+}
+
+
+
+#pragma mark - EAAccessory Notifications
+
+- (void)accessoryConnected:(NSNotification*) notification {
+    [FMCDebugTool logInfo:@"Accessory Connected" withType:FMCDebugType_Transport_iAP];
+    [self connect];
+}
+
+- (void)accessoryDisconnected:(NSNotification*) notification {
+    [FMCDebugTool logInfo:@"Accessory Disconnected" withType:FMCDebugType_Transport_iAP];
+    [self disconnect];
+}
+
+
+
+#pragma mark - NSStreamDelegateEventExtensions
+
+- (void)stream:(NSStream *)stream handleEvent:(NSStreamEvent)event
+{
 //    if (eventCode != NSStreamEventHasBytesAvailable && eventCode != NSStreamEventHasSpaceAvailable) {
-//        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:[NSString stringWithFormat:@"iAP: %@ Stream Event: %@", ((aStream == inStream) ? @"In" : @"Out"), [self stringForEventCode:eventCode]]]];
-//        [FMCDebugTool logInfo:[NSString stringWithFormat:@"iAP: %@ Stream Event: %@", ((aStream == inStream) ? @"In" : @"Out"), [self stringForEventCode:eventCode]]];
+//    [FMCDebugTool logInfo:[NSString stringWithFormat:@"%@ Stream Event: %@", ((stream == [self.session inputStream]) ? @"In" : @"Out"), [self stringForEventCode:event]] withType:FMCDebugType_Transport_iAP];
 //    }
-//    ///TODO:ENDDEBUGOUTS
     
-	if (aStream == inStream) {
-		if (eventCode == NSStreamEventHasBytesAvailable || eventCode == NSStreamEventOpenCompleted) {
-			UInt8 buf[1024];
-			while (YES) {
-				int bytesRead = (int)[inStream read:buf maxLength:1024];
+    switch (event) {
+        case NSStreamEventNone:
+            break;
+        case NSStreamEventOpenCompleted:
+            if ((stream == [_session outputStream]) && !self.onControlProtocol) {
+                    [self notifyTransportConnected];
+            }
+            break;
+        case NSStreamEventHasBytesAvailable:
+            [self readDataIn];
+            break;
+        case NSStreamEventHasSpaceAvailable:
+            [self writeDataOut];
+            break;
+        case NSStreamEventErrorOccurred:
+            break;
+        case NSStreamEventEndEncountered:
+            if (stream == [self.session inputStream]) {
+                [self disconnect];
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+
+
+#pragma mark - Class Methods
+
+- (void)setupControllerForAccessory:(EAAccessory *)accessory withProtocolString:(NSString *)protocolString
+{
+    self.accessory = accessory;
+    self.protocolString = protocolString;
+}
+
+- (void)checkForValidConnectedAccessory {
+    for (EAAccessory* accessory in [[EAAccessoryManager sharedAccessoryManager] connectedAccessories]) {
+        
+        [FMCDebugTool logInfo:[NSString stringWithFormat:@"Check Accessory: %@", accessory] withType:FMCDebugType_Transport_iAP];
+
+        self.useLegacyProtocol = NO;
+        
+		for (NSString *protocolString in [accessory protocolStrings]) {
+            if ([protocolString isEqualToString:LEGACY_PROTOCOL_STRING]) {
+                self.useLegacyProtocol = YES;
+            }
+            
+            if ([protocolString isEqualToString:CONTROL_PROTOCOL_STRING]) {
+                [FMCDebugTool logInfo:[NSString stringWithFormat:@"MultiApp Sync @ %@", CONTROL_PROTOCOL_STRING] withType:FMCDebugType_Transport_iAP];
                 
-                [FMCSiphonServer _siphonRawTransportDataFromSync:buf msgBytesLength:bytesRead];
+                self.useLegacyProtocol = NO;
                 
-				if (bytesRead > 0) {
-                    [FMCDebugTool logType:FMCDebugType_Transport_iAP usingOutput:FMCDebugOutput_DeviceConsole withInfo:[NSString stringWithFormat:@"Read %d bytes: %@", bytesRead, [self getHexString:buf length:bytesRead]]];
-                    
-                    [self handleDataReceivedFromTransport:[NSData dataWithBytes:buf length:bytesRead]];
-				} else {
-					break;
-				}
-                
-			}
-		} else if (eventCode == NSStreamEventEndEncountered) {
-			[self disconnect];
-		}
-	} else if (aStream == outStream) {
-		if (eventCode == NSStreamEventHasSpaceAvailable) {
-			if (writeQueue.count > 0) {
-				@synchronized(transportLock) {
-					NSData* msgBytes = [writeQueue objectAtIndex:0];
-                    
-					spaceAvailable = NO;
-                    
-					int bytesWritten = (int)[outStream write:msgBytes.bytes maxLength:msgBytes.length];
-                    
-                    [FMCDebugTool logType:FMCDebugType_Transport_iAP usingOutput:FMCDebugOutput_DeviceConsole withInfo:[NSString stringWithFormat:@"Sent %d bytes: %@", bytesWritten, [self getHexString:msgBytes]]];
-                    
-                    [FMCSiphonServer _siphonRawTransportDataFromApp:msgBytes.bytes msgBytesLength:bytesWritten];
-                    
-					if (bytesWritten < msgBytes.length) {
-						NSData* leftover = [NSData dataWithBytes:msgBytes.bytes + bytesWritten length:msgBytes.length - bytesWritten];
-						//Insert the leftover bytes at the front of the queue
-						[writeQueue insertObject:leftover atIndex:0];
-					}
-					[writeQueue removeObjectAtIndex:0];
-				}
-			} else {
-				spaceAvailable = YES;
-			}
-		} else if (eventCode == NSStreamEventOpenCompleted) {
-            [self notifyTransportConnected];
-		} else if (eventCode == NSStreamEventEndEncountered) {
-			//[self handleTransportDisconnected];
-		}
+                [self setupControllerForAccessory:accessory withProtocolString:CONTROL_PROTOCOL_STRING];
+                return;
+            }
+        }
+        if (self.useLegacyProtocol) {
+            [FMCDebugTool logInfo:[NSString stringWithFormat:@"Legacy Sync @ %@", LEGACY_PROTOCOL_STRING] withType:FMCDebugType_Transport_iAP];
+            
+            [self setupControllerForAccessory:accessory withProtocolString:LEGACY_PROTOCOL_STRING];
+            return;
+        }
 	}
 }
 
--(NSString*) stringForEventCode:(NSStreamEvent) eventCode {
+- (void)dealloc {
+    [FMCDebugTool logInfo:@"Dealloc" withType:FMCDebugType_Transport_iAP];
+    
+    [self closeSession];
+    [self setupControllerForAccessory:nil withProtocolString:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EAAccessoryDidConnectNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:EAAccessoryDidDisconnectNotification object:nil];
+}
+
+
+
+#pragma mark Session Control
+
+- (void)openSession {
+    [FMCDebugTool logInfo:@"Open Session" withType:FMCDebugType_Transport_iAP];
+    
+    if (self.accessory && self.protocolString) {
+        
+        self.session = [[EASession alloc] initWithAccessory:self.accessory forProtocol:self.protocolString];
+        
+        if (self.session) {
+            [FMCDebugTool logInfo:@"Opening Session" withType:FMCDebugType_Transport_iAP];
+            
+            [[self.session inputStream] setDelegate:self];
+            [[self.session inputStream] scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+            [[self.session inputStream] open];
+            
+            [[self.session outputStream] setDelegate:self];
+            [[self.session outputStream] scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+            [[self.session outputStream] open];
+            
+            if ([self.protocolString isEqualToString:CONTROL_PROTOCOL_STRING]) {
+                self.onControlProtocol = YES;
+            }
+        } else {
+            [FMCDebugTool logInfo:@"Session is nil" withType:FMCDebugType_Transport_iAP];
+            if ([self.protocolString isEqualToString:CONTROL_PROTOCOL_STRING]) {
+                [FMCDebugTool logInfo:@"App may not have declared multi com.smartdevicelink.prot strings in Info.plist" withType:FMCDebugType_Transport_iAP];
+            }
+        }
+    } else {
+        [FMCDebugTool logInfo:@"Accessory or ProtocolString is nil" withType:FMCDebugType_Transport_iAP];
+    }
+}
+
+- (void)closeSession {
+    [FMCDebugTool logInfo:@"Close Session" withType:FMCDebugType_Transport_iAP];
+    
+    if (self.session) {
+        [FMCDebugTool logInfo:@"Closing Session" withType:FMCDebugType_Transport_iAP];
+        
+        [[self.session inputStream] close];
+        [[self.session inputStream] removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [[self.session inputStream] setDelegate:nil];
+        
+        [[self.session outputStream] close];
+        [[self.session outputStream] removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+        [[self.session outputStream] setDelegate:nil];
+        
+        self.session = nil;
+        self.writeData = nil;
+    }
+}
+
+
+
+#pragma mark Low Level Read/Write
+
+// Write data to the accessory while there is space available and data to write
+- (void)writeDataOut {
+    while (([[self.session outputStream] hasSpaceAvailable]) && ([self.writeData length] > 0))
+    {
+        NSInteger bytesWritten = [[self.session outputStream] write:[self.writeData bytes] maxLength:[self.writeData length]];
+        if (bytesWritten == -1) {
+            [FMCDebugTool logInfo:@"WriteDataOut Error" withType:FMCDebugType_Transport_iAP];
+            break;
+        }
+        else if (bytesWritten > 0) {
+            [self.writeData replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
+        }
+    }
+}
+
+// Read data while there is data and space available in the input buffer
+- (void)readDataIn {
+    uint8_t buf[IAP_INPUT_BUFFER_SIZE];
+    while ([[self.session inputStream] hasBytesAvailable])
+    {
+        NSInteger bytesRead = [[self.session inputStream] read:buf maxLength:IAP_INPUT_BUFFER_SIZE];
+        
+        if (bytesRead > 0) {
+            [self handleBytesReceivedFromTransport:buf length:bytesRead];
+        } else {
+            break;
+        }
+    }
+}
+
+
+
+#pragma mark - Overridden Methods
+
+- (void)handleBytesReceivedFromTransport:(Byte*) receivedBytes length:(int) receivedBytesLength{
+    
+    if (self.onControlProtocol){
+
+        NSNumber *dataProtocol = [NSNumber numberWithUnsignedInt:receivedBytes[0]];
+        
+        [FMCDebugTool logInfo:[NSString stringWithFormat:@"Data Protocol: %@", dataProtocol] withType:FMCDebugType_Transport_iAP];
+        
+        if ([dataProtocol isEqualToNumber:[NSNumber numberWithInt:255]]) {
+            [FMCDebugTool logInfo:@"All Available Protocols Are In Use" withType:FMCDebugType_Transport_iAP];
+            
+            //FIXME: Restart but dont call back up to app or connect will keep getting called when busy...
+            return;
+        }
+        else {
+            NSString *currentProtocolString = [NSString stringWithFormat:@"com.smartdevicelink.prot%@", dataProtocol];
+            
+            [FMCDebugTool logInfo:[NSString stringWithFormat:@"Switch To Data Protocol: %@", currentProtocolString] withType:FMCDebugType_Transport_iAP];
+            
+            [self closeSession];
+            self.onControlProtocol = NO;
+
+            [self setupControllerForAccessory:self.accessory withProtocolString:currentProtocolString];
+            
+            [self openSession];
+        }
+    }
+    else {
+        [super handleDataReceivedFromTransport:[NSData dataWithBytes:receivedBytes length:receivedBytesLength]];
+    }
+}
+
+
+
+#pragma mark - Debug
+
+-(NSString*) getHexString:(UInt8*)bytes length:(int) length {
+	NSMutableString* ret = [NSMutableString stringWithCapacity:(length * 2)];
+	for (int i = 0; i < length; i++) {
+		[ret appendFormat:@"%02X", ((Byte*)bytes)[i]];
+	}
+	return ret;
+}
+
+-(NSString*) getHexString:(NSData*) data {
+	return [self getHexString:(Byte*)data.bytes length:(int)data.length];
+}
+
+- (NSString*)stringForEventCode:(NSStreamEvent) eventCode {
 	switch (eventCode) {
 		case NSStreamEventOpenCompleted:
 			return @"OpenCompleted";
@@ -134,285 +328,6 @@
 			break;
 	}
 	return nil;
-}
-
-- (BOOL)connect:(EAAccessory*)accessoryItem usedProtocol:(NSString*)protocolName
-{
-    @synchronized (transportLock) {
-		// Select the first accessory:
-        self.session = [[[EASession alloc] initWithAccessory:accessoryItem forProtocol:protocolName] autorelease];        
-        
-		if(accessoryItem != nil && self.session != nil) {
-			self.inStream = self.session.inputStream;
-			self.outStream = self.session.outputStream;
-			
-			@try {		
-				// Initialize and schedule the input stream:
-				if(self.inStream != nil) {
-					self.inStream.delegate = self;
-					[self.inStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-					[self.inStream open];
-				} else {	
-//                    //TODO:DEBUGOUTS
-//                    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: connect:usedProtocol:  outStream not set"]];
-//                    [FMCDebugTool logInfo:@"iAP: connect:usedProtocol: outStream not set"];
-//                    //TODO:ENDDEBUGOUTS
-                    
-                    return NO;
-				}
-				
-				// Initialize and schedule the output stream:
-				if(self.outStream != nil) {
-					self.outStream.delegate = self;
-					[self.outStream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-					[self.outStream open];
-				} else {	
-//                    //TODO:DEBUGOUTS
-//                    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: connect:usedProtocol:  outStream not set"]];
-//                    [FMCDebugTool logInfo:@"iAP: connect:usedProtocol: outStream not set"];
-//                    //TODO:ENDDEBUGOUTS
-                    
-                    return NO;
-				}
-			}
-			@catch (id streamEx) {
-				return NO;
-			}
-		
-        } else {
-            
-//            //TODO:DEBUGOUTS
-//            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: connect:usedProtocol: Session and Accessory not set"]];
-//            [FMCDebugTool logInfo:@"iAP: connect:usedProtocol: Session and Accessory not set"];
-//            //TODO:ENDDEBUGOUTS
-            
-			return NO;
-		}
-	}
-    
-    [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:@"Connected To Sync"];
-    
-    return YES;
-}
-
-- (bool) connect {
-    if (connectedSyncAccessory != nil) {
-        [self connect:connectedSyncAccessory usedProtocol:SYNC_PROTOCOL_STRING];
-    } else {
-        [self checkConnectedSyncAccessory];
-        if (connectedSyncAccessory != nil) {
-            [self connect:connectedSyncAccessory usedProtocol:SYNC_PROTOCOL_STRING];
-        } else {
-            return NO;
-        }
-    }
-	return YES;
-}
-
--(void) checkConnectedSyncAccessory {
-    
-    [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:@"Looking For Sync"];
-    
-    for (EAAccessory* anAccessory in [[EAAccessoryManager sharedAccessoryManager] connectedAccessories]) {
-        
-//        //TODO:DEBUGOUTS
-//        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Accessory Found"]];
-//        [FMCDebugTool logInfo:@"iAP: Accessory Found"];
-//        //TODO:ENDDEBUGOUTS
-        
-		for (NSString *aProtocolString in [anAccessory protocolStrings]) {
-//            //TODO:DEBUGOUTS
-//            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Found Protocol String"]];
-//            [FMCDebugTool logInfo:@"iAP: Found protocol string: %@", aProtocolString];
-//            ///TODO:ENDDEBUGOUTS
-			
-            if ([aProtocolString isEqualToString:SYNC_PROTOCOL_STRING]) {
-                
-                [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:@"Found Sync"];
-                
-
-                if (connectedSyncAccessory != nil) {
-                    [connectedSyncAccessory release];
-                    connectedSyncAccessory = nil;
-                }
-                
-                connectedSyncAccessory = [anAccessory retain];
-                return;
-                break;
-			}
-		}
-	}
-}
-
--(void)applicationWillEnterForeground:(NSNotification *)notification {
-//    //TODO:DEBUGOUTS
-//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Will Enter Foreground"]];
-//    [FMCDebugTool logInfo:@"iAP: Will Enter Foreground"];
-//    //TODO:ENDDEBUGOUTS
-    
-    appInBackground = NO;
-    [self connect];
-}
-
--(void)applicationDidEnterBackground:(NSNotification *)notification {
-//    //TODO:DEBUGOUTS
-//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Did Enter Background"]];
-//    [FMCDebugTool logInfo:@"iAP: Did Enter Background"];
-//    //TODO:ENDDEBUGOUTS
-    
-    appInBackground = YES;
-}
-
--(EAAccessory*) getSyncAccessoryFromNotification:(NSNotification*) notification {
-    EAAccessory *accessory = [[notification userInfo] objectForKey:EAAccessoryKey];
-    
-    for (NSString *protocolString in [accessory protocolStrings]) {
-        if ([protocolString isEqualToString:SYNC_PROTOCOL_STRING]) {
-            return accessory;
-        }
-    }
-    
-    return nil;
-}
-
--(void) accessoryConnected:(NSNotification*) connectNotification {
-    
-    [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:@"Accessory Connected"];
-    
-    EAAccessory *connectedAccessory = [self getSyncAccessoryFromNotification:connectNotification];
-    
-    if(connectedAccessory == nil) {
-    	// connectedAccessory is not a SYNC accessory
-        return;
-    }
-    
-    // We're assuming connectedSyncAccessory will be nil
-	if (connectedSyncAccessory != nil) {
-        [connectedSyncAccessory release];
-        connectedSyncAccessory = nil;
-	}
-    
-	connectedSyncAccessory = [connectedAccessory retain];
-	[self connect];
-    
-}
-
--(void) accessoryDisconnected:(NSNotification*) connectNotification {
-    
-    [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:@"Accessory Disconnected"];
-    
-    EAAccessory *disconnectedAccessory = [self getSyncAccessoryFromNotification:connectNotification];
-    
-    if(disconnectedAccessory == nil) {
-    	// disconnectedAccessory is not a SYNC accessory
-        return;
-    }
-    
-    if ([disconnectedAccessory connectionID] == [connectedSyncAccessory connectionID]) {
-        if (session != nil) {
-            [self disconnect];
-        }
-        
-        [connectedSyncAccessory release];
-        connectedSyncAccessory = nil;
-    }
-}
-
--(NSString*) getHexString:(UInt8*)bytes length:(int) length {	
-	NSMutableString* ret = [NSMutableString stringWithCapacity:(length * 2)];
-	for (int i = 0; i < length; i++) {
-		[ret appendFormat:@"%02X", ((Byte*)bytes)[i]];
-	}
-	return ret;
-}
-
--(NSString*) getHexString:(NSData*) data {
-	return [self getHexString:(Byte*)data.bytes length:(int)data.length];
-}
-
--(void) queueData:(NSData*) msgBytes {
-	@synchronized (transportLock) {
-		if (spaceAvailable) {
-			spaceAvailable = NO;
-			
-			int bytesWritten = (int)[outStream write:msgBytes.bytes maxLength:msgBytes.length];
-
-            [FMCDebugTool logType:FMCDebugType_Transport_iAP usingOutput:FMCDebugOutput_DeviceConsole withInfo:[NSString stringWithFormat:@"Sent %d bytes: %@", bytesWritten, [self getHexString:msgBytes]]];
-            
-            [FMCSiphonServer _siphonRawTransportDataFromApp:msgBytes.bytes msgBytesLength:bytesWritten];
-            
-			if (bytesWritten < msgBytes.length) {
-				[writeQueue insertObject:[NSData dataWithBytes:msgBytes.bytes + bytesWritten length:msgBytes.length - bytesWritten] atIndex:0];
-			}
-			
-		} else {
-			[writeQueue addObject:msgBytes];
-		}
-	}
-}
-
-- (bool) sendData:(NSData*) msgBytes {
-    
-//    [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:[NSString stringWithFormat:@"Queueing %d bytes: %@", msgBytes.length, [self getHexString:msgBytes]]];
-	[self queueData:msgBytes];
-	return YES;
-}
-
-- (void) disconnect {
-    
-    [FMCDebugTool logType:FMCDebugType_Transport_iAP withInfo:@"Disconnect"];
-    
-    @synchronized (transportLock) {
-        [self notifyTransportDisconnected];
-        transportUsable = NO;
-        
-		if (session != nil) {
-			
-            [outStream close];
-			[outStream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-			[outStream setDelegate:nil];
-            [outStream release];
-            outStream = nil;
-            
-            [inStream close];
-            [inStream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-			[inStream setDelegate:nil];
-			[inStream release];
-			inStream = nil;
-			
-			[session release];
-			session = nil;
-			
-			[writeQueue release];
-			writeQueue = nil;
-            
-		}
-	}
-}
-
-- (void) dealloc {
-    
-    [self disconnect];
-    
-//    //TODO:DEBUGOUTS
-//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"iAP: Dealloc"]];
-//    [FMCDebugTool logInfo:@"iAP: Dealloc"];
-//    //TODO:ENDDEBUGOUTS
-    
-    if (registeredForNotifications) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:EAAccessoryDidConnectNotification object:nil];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:EAAccessoryDidDisconnectNotification object:nil];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
-        registeredForNotifications = NO;
-    }
-    
-    [connectedSyncAccessory release];
-    connectedSyncAccessory = nil;
-    
-	[transportLock release];
-    
-	[super dealloc];
 }
 
 @end

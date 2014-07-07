@@ -24,9 +24,9 @@ typedef NS_ENUM(UInt8, FMCDebugOutputType) {
 +(void) addConsole:(NSObject<FMCDebugToolConsole>*) aConsole;
 +(void) removeConsole:(NSObject<FMCDebugToolConsole>*) aConsole;
 
-+(void) logInfo:(NSString*) fmt, ... ;
-+(void) logType:(FMCDebugType)debugType withInfo:(NSString*) fmt;
-+(void) logType:(FMCDebugType)debugType usingOutput:(FMCDebugOutputType)outputType withInfo:(NSString*) fmt;
++(void) logInfo:(NSString *)fmt, ... ;
++(void) logInfo:(NSString *)info withType:(FMCDebugType)debugType;
++(void) logInfo:(NSString *)info withType:(FMCDebugType)debugType toOutput:(FMCDebugOutputType)outputType;
 
 +(void) logException:(NSException*) ex withMessage:(NSString*) fmt, ... ;
 

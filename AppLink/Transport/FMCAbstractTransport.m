@@ -15,39 +15,30 @@
     return self;
 }
 
-
 - (void)notifyTransportConnected {
-//	_isConnected = YES;
-	[self.delegate onTransportConnected];
+    [self.delegate onTransportConnected];
 }
 
 - (void)notifyTransportDisconnected {
-//	if (self.isConnected) {
-        [self.delegate onTransportDisconnected];
-//	}
-//    _isConnected = NO;
+    [self.delegate onTransportDisconnected];
 }
 
 - (void)handleDataReceivedFromTransport:(NSData *)receivedData {
-    
     [self.delegate onDataReceived:receivedData];
 }
 
 
 #pragma mark FMCTransport Implementation
-
-- (bool)connect {
+- (void)connect {
 	[self doesNotRecognizeSelector:_cmd];
-	return NO;
 }
 
 - (void)disconnect {
 	[self doesNotRecognizeSelector:_cmd];
 }
 
-- (bool)sendData:(NSData *)dataToSend {
+- (void)sendData:(NSData *)dataToSend {
 	[self doesNotRecognizeSelector:_cmd];
-	return NO;
 }
 
 @end

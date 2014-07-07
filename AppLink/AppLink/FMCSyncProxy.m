@@ -165,7 +165,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 -(void) handleProtocolSessionStarted:(FMCServiceType) sessionType sessionID:(Byte) sessionID version:(Byte) version {
     
-    [FMCDebugTool logType:FMCDebugType_RPC withInfo:@"StartSession (response)"];
+    [FMCDebugTool logInfo:@"StartSession (response)" withType:FMCDebugType_Protocol];
 
     if (_version <= 1) {
         if (version == 2) {
@@ -195,8 +195,10 @@ const int POLICIES_CORRELATION_ID = 65535;
 }
 	 
 - (void) onProtocolMessageReceived:(FMCAppLinkProtocolMessage*) msgData {
-    [FMCDebugTool logType:FMCDebugType_Protocol withInfo:[NSString stringWithFormat:@"Recieved message: %@", msgData.description]];
-
+    //TODO: DEBUGOUTS
+    //[FMCDebugTool logInfo:[NSString stringWithFormat:@"Recieved message: %@", msgData.description] withType:FMCDebugType_Protocol];
+    //TODO:ENDDEBUGOUTS
+    
     @try {
 		[self handleProtocolMessage:msgData];
 	}
@@ -435,7 +437,8 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 - (void) onProtocolOpened {    
     isConnected = YES;
-    [FMCDebugTool logType:FMCDebugType_RPC withInfo:@"StartSession (request)"];
+    [FMCDebugTool logInfo:@"StartSession (request)" withType:FMCDebugType_RPC];
+    
     [protocol sendStartSessionWithType:FMCServiceType_RPC];
     
     [self destroyHandshakeTimer];

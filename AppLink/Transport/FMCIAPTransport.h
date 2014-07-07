@@ -4,30 +4,21 @@
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <Foundation/Foundation.h>
-#import "FMCAbstractTransport.h"
 #import <ExternalAccessory/ExternalAccessory.h>
+#import "FMCAbstractTransport.h"
 
-@interface FMCIAPTransport : FMCAbstractTransport<NSStreamDelegate> {
-	EASession* session;
-	NSInputStream* inStream;
-	NSOutputStream* outStream;
-	NSObject* transportLock;
-	
-	NSMutableArray* writeQueue;
-	
-	BOOL spaceAvailable;
-	
-    BOOL registeredForNotifications;
-    BOOL appInBackground;
-    BOOL transportUsable;
-    
-    EAAccessory *connectedSyncAccessory;
-}
+@interface FMCIAPTransport : FMCAbstractTransport <NSStreamDelegate> {}
 
-@property(nonatomic, retain) EASession* session;
-@property(nonatomic, retain) NSStream* inStream;
-@property(nonatomic, retain) NSStream* outStream;
 
--(void) checkConnectedSyncAccessory;
+@property (strong) EASession *session;
+@property (strong) EAAccessory *accessory;
+
+@property (strong) NSMutableData *writeData;
+
+@property (assign) BOOL onControlProtocol;
+@property (assign) BOOL useLegacyProtocol;
+
+@property (strong) NSString *protocolString;
+
 
 @end

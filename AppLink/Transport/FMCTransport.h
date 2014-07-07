@@ -10,8 +10,8 @@
 
 @property (weak) id<FMCTransportDelegate> delegate;
 
-- (bool)connect;
+- (void)connect;
 - (void)disconnect;
-- (bool)sendData:(NSData *)dataToSend;
+- (void)sendData:(NSData *)dataToSend;
 
 @end
