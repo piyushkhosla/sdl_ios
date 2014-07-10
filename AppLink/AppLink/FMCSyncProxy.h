@@ -10,7 +10,7 @@
 #import <AppLink/FMCRPCRequestFactory.h>
 #import <AppLink/Transport/FMCTransport.h>
 
-@interface FMCSyncProxy : NSObject<FMCProtocolListener, NSURLConnectionDataDelegate, NSStreamDelegate> {
+@interface FMCSyncProxy : NSObject<FMCProtocolListener, NSStreamDelegate> {
     Byte _version;
     
 	NSObject<FMCTransport>* transport;

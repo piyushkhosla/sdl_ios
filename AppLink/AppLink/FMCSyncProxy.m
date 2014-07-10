@@ -17,9 +17,12 @@
 #import <AppLink/FMCSyncProxy.h>
 #import <AppLink/RPC/Requests/FMCSystemRequest.h>
 #import "FMCRPCPayload.h"
-#import "FMCURLConnection.h"
 
 #define VERSION_STRING @"##Version##"
+
+
+typedef void(^FMCCustomTaskCompletionHandler)(NSData *data, NSURLResponse *response, NSError *error);
+
 
 @interface FMCCallback : NSObject {
 	NSObject* target;
@@ -52,6 +55,8 @@
 - (void)notifyProxyClosed;
 - (void)handleProtocolMessage:(FMCAppLinkProtocolMessage *)msgData;
 - (void)performCallback:(FMCCallback *)callback;
+- (void)OESPHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error;
+- (void)OSRHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error;
 
 @end
 
@@ -59,7 +64,6 @@
 
 const float handshakeTime = 30.0;
 const float notifyProxyClosedDelay = 0.1;
-
 const int POLICIES_CORRELATION_ID = 65535;
 
 - (void)handshakeTimerFired {
@@ -305,61 +309,61 @@ const int POLICIES_CORRELATION_ID = 65535;
 
     
     // Intercept OnEncodedSyncPData. If URL != nil, perform HTTP Post and don't pass the notification to FMProxyListeners
-    if ([functionName isEqualToString:@"OnEncodedSyncPData"]) {        
+    if ([functionName isEqualToString:@"OnEncodedSyncPData"]) {
 
             [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OnEncodedSyncPData (notification)"]];
             [FMCDebugTool logInfo:@"Proxy: OnEncodedSyncPData (notification)"];
-        
-            NSString *urlString = (NSString *)[rpcMsg getParameters:@"URL"];
-            if (urlString != nil) {
-                NSDictionary *encodedSyncPData = (NSDictionary *)[rpcMsg getParameters:@"data"];
-                NSNumber *encodedSyncPTimeout = (NSNumber *) [rpcMsg getParameters:@"Timeout"];
+
+            NSString     *urlString           = (NSString *)    [rpcMsg getParameters:@"URL"];
+            NSDictionary *encodedSyncPData    = (NSDictionary *)[rpcMsg getParameters:@"data"];
+            NSNumber     *encodedSyncPTimeout = (NSNumber *)    [rpcMsg getParameters:@"Timeout"];
+
+            if (urlString && encodedSyncPData && encodedSyncPTimeout) {
                 [self sendEncodedSyncPData:encodedSyncPData toURL:urlString withTimeout:encodedSyncPTimeout];
-                
                 return;
             }
     }
     
     // Intercept OnSystemRequest. If URL != nil, perform HTTP Post and don't pass the notification to FMProxyListeners
-    if ([functionName isEqualToString:@"OnSystemRequest"]) {
-        
-        FMCOnSystemRequest* sysRpcMsg = (FMCOnSystemRequest*) rpcMsg;
-        
-        if ([sysRpcMsg.requestType isEqual: [FMCRequestType PROPRIETARY]]){
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OnSystemRequest (notification)"]];
-            [FMCDebugTool logInfo:@"Proxy: OnSystemRequest (notification)"];
-            
-            NSString *urlString = sysRpcMsg.url[1];
-            if (urlString != nil) {
-                
-                NSError *error = nil;
-                NSDictionary *notificationDictionary = [NSJSONSerialization JSONObjectWithData:sysRpcMsg.bulkData options:kNilOptions error:&error];
-                NSDictionary *httpRequestDictionary = [notificationDictionary objectForKey:@"HTTPRequest"];
-                NSDictionary *headersDictionary = [httpRequestDictionary objectForKey:@"headers"];
-                
-                // Create the URL request
-                NSURL *url = [NSURL URLWithString:urlString];
-                NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-                
-                [request setValue:(NSString*)[headersDictionary objectForKey:@"ContentType"] forHTTPHeaderField:@"content-type"];
-                
-                request.timeoutInterval = [(NSNumber*) [headersDictionary objectForKey:@"ConnectTimeout"] doubleValue];
-                request.HTTPMethod = (NSString*)[headersDictionary objectForKey:@"RequestMethod"];
-                
-                request.HTTPBody = (NSData*)[httpRequestDictionary objectForKey:@"body"];
-                
-                FMCURLConnection *conn = [[FMCURLConnection alloc] initWithRequest:request delegate:self andTag:@"OnSystemRequestProprietary"];
-                
-                if (conn == nil) {
-                    [FMCDebugTool logInfo:@"%s: Error creating NSURLConnection", __PRETTY_FUNCTION__];
-                }
-                
-                return;
-            }
+//    if ([functionName isEqualToString:@"OnSystemRequest"]) {
+//        
+//        FMCOnSystemRequest* sysRpcMsg = (FMCOnSystemRequest*) rpcMsg;
+//        
+//        if ([sysRpcMsg.requestType isEqual: [FMCRequestType PROPRIETARY]]){
+//            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OnSystemRequest (notification)"]];
+//            [FMCDebugTool logInfo:@"Proxy: OnSystemRequest (notification)"];
+//            
+//            NSString *urlString = sysRpcMsg.url[1];
+//            if (urlString != nil) {
+//                
+//                NSError *error = nil;
+//                NSDictionary *notificationDictionary = [NSJSONSerialization JSONObjectWithData:sysRpcMsg.bulkData options:kNilOptions error:&error];
+//                NSDictionary *httpRequestDictionary = [notificationDictionary objectForKey:@"HTTPRequest"];
+//                NSDictionary *headersDictionary = [httpRequestDictionary objectForKey:@"headers"];
+//                
+//                // Create the URL request
+//                NSURL *url = [NSURL URLWithString:urlString];
+//                NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+//                
+//                [request setValue:(NSString*)[headersDictionary objectForKey:@"ContentType"] forHTTPHeaderField:@"content-type"];
+//                
+//                request.timeoutInterval = [(NSNumber*) [headersDictionary objectForKey:@"ConnectTimeout"] doubleValue];
+//                request.HTTPMethod = (NSString*)[headersDictionary objectForKey:@"RequestMethod"];
+//                
+//                request.HTTPBody = (NSData*)[httpRequestDictionary objectForKey:@"body"];
+//                
+//                FMCURLConnection *conn = [[FMCURLConnection alloc] initWithRequest:request delegate:self andTag:@"OnSystemRequestProprietary"];
+//                
+//                if (conn == nil) {
+//                    [FMCDebugTool logInfo:@"%s: Error creating NSURLConnection", __PRETTY_FUNCTION__];
+//                }
+//                
+//                return;
+//            }
+//
+//        }
+//    }
 
-        }
-    }
-    
 	NSString* functionClassName = [NSString stringWithFormat:@"FMC%@", functionName];
 	Class functionClass = objc_getClass([functionClassName cStringUsingEncoding:NSUTF8StringEncoding]);
     
@@ -455,161 +459,78 @@ const int POLICIES_CORRELATION_ID = 65535;
 }
 
 -(void)sendEncodedSyncPData:(NSDictionary*)encodedSyncPData toURL:(NSString*)urlString withTimeout:(NSNumber*) timeout{
-    
-    //Get data (second element of array), then format as JSON
-    NSString *encodedSyncPDataString = [[NSString stringWithFormat:@"%@", encodedSyncPData] componentsSeparatedByString:@"\""][1];
-    NSString* jsonString = [NSString stringWithFormat:@"{\"data\":[\"%@\"]}", encodedSyncPDataString];
-    
-    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    
-    // Create the URL request
+
+    // Configure HTTP URL & Request
     NSURL *url = [NSURL URLWithString:urlString];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    
     request.HTTPMethod = @"POST";
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    request.HTTPBody = jsonData;
-    request.timeoutInterval = [timeout doubleValue];
-    
-//TODO:DEBUGOUTS
-//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:[timeout doubleValue]]];
-//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:urlString]];
-//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:encodedSyncPData]];
-//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:jsonString]];
-//
-//    NSLog(@"%.21g", [timeout doubleValue]);
-//    [FMCDebugTool logInfo:urlString];
-//    NSLog(@"%@", encodedSyncPData);
-//    NSLog(@"%@", encodedSyncPDataString);
-//    NSLog(@"%@", jsonString);
-//TODO:ENDDEBUGOUTS
-    
-    FMCURLConnection *conn = [[FMCURLConnection alloc] initWithRequest:request delegate:self andTag:@"OnEncodedSyncPData"];
-    
-    if (conn == nil) {
-        [FMCDebugTool logInfo:@"%s: Error creating NSURLConnection", __PRETTY_FUNCTION__];
+
+    // Configure HTTP Session
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    config.HTTPAdditionalHeaders = @{@"Content-Type": @"application/json"};
+    config.timeoutIntervalForRequest = 60;
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+
+    // Prepare the data in the required format
+    NSString *encodedSyncPDataString = [[NSString stringWithFormat:@"%@", encodedSyncPData] componentsSeparatedByString:@"\""][1];
+    NSArray *array = [NSArray arrayWithObject:encodedSyncPDataString];
+    NSDictionary *dictionary = @{@"data": array};
+    NSError *JSONSerializationError = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dictionary options:kNilOptions error:&JSONSerializationError];
+    if (JSONSerializationError) {
+        [FMCDebugTool logInfo:@"Proxy: Error formatting data for HTTP Request. %@: %@", JSONSerializationError];
+        return;
     }
+
+    // Create the completion handler to be executed upon response
+    FMCCustomTaskCompletionHandler handler = ^void(NSData *data, NSURLResponse *response, NSError *error)
+    {
+        [self OESPHTTPRequestCompletionHandler:data response:response error:error];
+    };
+
+    // Send the HTTP Request
+    [FMCDebugTool logInfo:@"Proxy: OnEncodedSyncPData (HTTP Request)"];
+    NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:data completionHandler:handler];
+    [uploadTask resume];
+
+    // Debugging
+    //NSLog(@"Data In: %@", encodedSyncPData);
+    NSLog(@"Send to URL: %@", urlString);
+    NSLog(@"HTTP Body: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 }
 
-#pragma mark - NSURL Methods
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    FMCURLConnection *fmcConnection = (FMCURLConnection*)connection;
-    fmcConnection.response = (NSHTTPURLResponse *)response;
+- (void)OESPHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error {
+    // Sample of response: {"data":["SDLKGLSDKFJLKSjdslkfjslkJLKDSGLKSDJFLKSDJF"]}
+    [FMCDebugTool logInfo:@"Proxy: OnEncodedSyncPData (HTTP Response recieved)"];
 
-    // TODO: Optimise, get content-length from header, init data with that capacity
-    fmcConnection.responseData = [[NSMutableData alloc] init];
-}
+    // Validate response data.
+    if (data.length == 0) {
+        [FMCDebugTool logInfo:@"Proxy: (failure) OnEncodedSyncP response data is empty."];
+        return;
+    }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    FMCURLConnection* fmcConnection = (FMCURLConnection *)connection;
-    [fmcConnection.responseData appendData:data];
-}
-
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
-                  willCacheResponse:(NSCachedURLResponse*)cachedResponse {
-    // Return nil to indicate not necessary to store a cached response for this connection
-    return nil;
-}
-
--(void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    // TODO: Now that this uses FMCURLConnection class we can clean this up.
-    // Could, for example, give it a block property of code to complete upon
-    // completion instead of switching on "requestKind".
-
-
-    [connection release]; // Release the connection we allocated in sendEncodedSyncPData/sendSystemRequest
-
-    FMCURLConnection *fmcConnection = (FMCURLConnection *)connection;
-    NSString *requestKind = fmcConnection.tag;
-    NSData *httpResponseData = fmcConnection.responseData;
-    
-    if ([requestKind isEqualToString:@"OnEncodedSyncPData"]) {
-        
-        // Sample of response: {"data":["SDLKGLSDKFJLKSjdslkfjslkJLKDSGLKSDJFLKSDJF"]}
-        if ([httpResponseData length] == 0){
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OnEncodedSyncPData (invalid)"]];
-            [FMCDebugTool logInfo:@"Proxy: OnEncodedSyncPData (invalid)"];
-            
-            return;
-        }
-
-        // Capture what comes back from the post in json form
-        NSString *responseString = [[NSString alloc] initWithData:httpResponseData encoding:NSUTF8StringEncoding];
-        NSData *responseData = [responseString dataUsingEncoding:NSASCIIStringEncoding];
-        
-        NSError *error = nil;
-        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
-        NSMutableArray *encodedSyncPDataArray = [responseDictionary objectForKey:@"data"];
-        
-        //TODO:DEBUGOUTS
-        //[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:responseString]];
-        //[FMCDebugTool logInfo:responseString];
-        //TODO:ENDDEBUGOUTS
-        
-        // Build encodedSyncPData request
+    // Convert data to RPCRequest
+    NSError *JSONConversionError = nil;
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&JSONConversionError];
+    if (!JSONConversionError) {
         FMCEncodedSyncPData *request = [[[FMCEncodedSyncPData alloc] init] autorelease];
-        request.data = encodedSyncPDataArray;
         request.correlationID = [NSNumber numberWithInt:POLICIES_CORRELATION_ID];
-        
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: EncodedSyncPData (request)"]];
-        [FMCDebugTool logInfo:@"Proxy: EncodedSyncPData (request)"];
+        request.data = [responseDictionary objectForKey:@"data"];
 
         [self sendRPCRequestPrivate:request];
-        
-    } else if ([requestKind isEqualToString:@"OnSystemRequestProprietary"]) {
-        
-        if ([httpResponseData length] == 0){
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OnSystemRequest (invalid)"]];
-            [FMCDebugTool logInfo:@"Proxy: OnSystemRequest (invalid)"];
-            
-            return;
-        }
-        
-        // Capture what comes back from the post in json form
-        NSString *responseString = [[NSString alloc] initWithData:httpResponseData encoding:NSUTF8StringEncoding];
-        NSData *responseData = [responseString dataUsingEncoding:NSASCIIStringEncoding];
-        
-        //TODO:DEBUGOUTS
-        //[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:responseString]];
-        //[FMCDebugTool logInfo:responseString];
-        //TODO:ENDDEBUGOUTS
-        
-        // Build SystemRequest request
-        FMCSystemRequest *request = [[[FMCSystemRequest alloc] init] autorelease];
-        request.requestType = [FMCRequestType PROPRIETARY];
-        request.bulkData = responseData;
-        
-        request.correlationID = [NSNumber numberWithInt:POLICIES_CORRELATION_ID];
-        
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: SystemRequest (request)"]];
-        [FMCDebugTool logInfo:@"Proxy: SystemRequest (request)"];
-        
-        [self sendRPCRequestPrivate:request];
-        
     }
+
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    
-    [connection release]; // Release the connection we allocated in sendEncodedSyncPData/sendSystemRequest
-    FMCURLConnection *fmcConnection = (FMCURLConnection *)connection;
-    NSString *requestKind = fmcConnection.tag;
+- (void)OSRHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error {
 
-    if ([requestKind isEqualToString:@"OnEncodedSyncPData"]) {
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OnEncodedSyncPData (error)"]];
-        [FMCDebugTool logInfo:@"Proxy: OnEncodedSyncPData (error)"];
-        
-    } else {
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OnSystemRequest (error)"]];
-        [FMCDebugTool logInfo:@"Proxy: OnSystemRequest (error)"];
-        
-    }
-    
-    //TODO:DEBUGOUTS
-    //[FMCDebugTool logInfo:@"%s, Connection failed with error: %@", __PRETTY_FUNCTION__, [error localizedDescription]];
-    //TODO:ENDDEBUGOUTS
+    FMCSystemRequest *request = [[[FMCSystemRequest alloc] init] autorelease];
+    request.correlationID = [NSNumber numberWithInt:POLICIES_CORRELATION_ID];
+    request.requestType = [FMCRequestType PROPRIETARY];
+    request.bulkData = data;
+    [self sendRPCRequestPrivate:request];
+
 }
-
 
 #pragma mark - PutFile Streaming
 - (void)putFileStream:(NSInputStream*)inputStream :(FMCPutFile*)putFileRPCRequest
