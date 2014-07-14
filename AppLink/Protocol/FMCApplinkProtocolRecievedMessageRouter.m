@@ -1,10 +1,9 @@
-//
 //  FMCApplinkProtocolRecievedMessageRouter.m
-//  ProtocolReWrite
+//  SyncProxy
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 //
 //  This class gets handed the FMCAppLinkProtocol messages as they are recieved
 //  and decides what happens to them and where they are sent on to.
-//
 
 #import "FMCApplinkProtocolRecievedMessageRouter.h"
 #import "FMCAppLinkProtocolMessage.h"

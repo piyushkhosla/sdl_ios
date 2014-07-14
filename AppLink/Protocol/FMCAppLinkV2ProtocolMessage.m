@@ -1,7 +1,6 @@
-//
 //  FMCAppLinkV2ProtocolMessage.m
-//  SyncProxyTester
-//
+//  SyncProxy
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import "FMCAppLinkV2ProtocolMessage.h"
 #import "FMCRPCPayload.h"

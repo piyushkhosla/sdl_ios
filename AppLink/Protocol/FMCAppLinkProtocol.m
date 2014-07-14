@@ -1,7 +1,6 @@
-//
 //  FMCAppLinkProtocol.m
-//  ProtocolReWrite
-//
+//  SyncProxy
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <AppLink/FMCJsonEncoder.h>
 #import <AppLink/FMCFunctionID.h>

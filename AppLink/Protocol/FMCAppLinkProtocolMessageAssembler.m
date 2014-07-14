@@ -1,7 +1,6 @@
-//
 //  FMCAppLinkProtocolMessageAssembler.m
-//  ProtocolReWrite
-//
+//  SyncProxy
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import "FMCAppLinkProtocolMessageAssembler.h"
 #import "FMCAppLinkProtocolHeader.h"

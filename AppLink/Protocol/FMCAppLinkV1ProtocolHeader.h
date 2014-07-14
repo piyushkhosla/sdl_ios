@@ -1,7 +1,6 @@
-//
-//  NewFMCAppLinkV2ProtocolHeader.h
-//  ProtocolReWrite
-//
+//  FMCAppLinkV1ProtocolHeader.h
+//  SyncProxy
+//  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import "FMCAppLinkProtocolHeader.h"
 
