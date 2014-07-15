@@ -109,10 +109,27 @@ static void TCPCallback(CFSocketRef socket, CFSocketCallBackType type, CFDataRef
 }
 
 - (void) sendData:(NSData*) msgBytes {
+
 	NSString* byteStr = [self getHexString:msgBytes];
-    
     [FMCDebugTool logInfo:[NSString stringWithFormat:@"Sent %d bytes: %@", msgBytes.length, byteStr] withType:FMCDebugType_Transport_TCP toOutput:FMCDebugOutput_DeviceConsole];
-	
+
+    CFSocketError e = CFSocketSendData(socket, NULL, (CFDataRef)msgBytes, 10000);
+    if (e != kCFSocketSuccess) {
+        NSString *errorCause = nil;
+        switch (e) {
+            case kCFSocketTimeout:
+                errorCause = @"Socket Timeout Error.";
+                break;
+
+            case kCFSocketError:
+                default:
+                errorCause = @"Socket Error.";
+                break;
+        }
+        
+        [FMCDebugTool logInfo:[NSString stringWithFormat:@"Socket sendData error: %@", errorCause] withType:FMCDebugType_Transport_TCP toOutput:FMCDebugOutput_DeviceConsole];
+    }
+
 }
 
 - (void) dealloc {
