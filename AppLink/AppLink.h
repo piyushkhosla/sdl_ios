@@ -13,7 +13,6 @@
 //AppLink Debug
 #import <AppLink/Debug/FMCConsoleController.h>
 #import <AppLink/Debug/FMCDebugTool.h>
-#import <AppLink/Debug/FMCDebugToolConsole.h>
 #import <AppLink/Debug/FMCSiphonServer.h>
 
 //RPC Requests

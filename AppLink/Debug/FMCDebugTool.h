@@ -3,7 +3,14 @@
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <Foundation/Foundation.h>
-#import <AppLink/Debug/FMCDebugToolConsole.h>
+
+@protocol FMCDebugToolConsole
+
+-(void) logInfo:(NSString*) info;
+-(void) logException:(NSException*) ex withMessage:(NSString*) message;
+
+@end
+
 
 typedef NS_ENUM(UInt8, FMCDebugType) {
 	FMCDebugType_Debug = 0,
