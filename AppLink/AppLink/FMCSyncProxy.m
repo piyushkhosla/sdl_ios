@@ -311,58 +311,90 @@ const int POLICIES_CORRELATION_ID = 65535;
     // Intercept OnEncodedSyncPData. If URL != nil, perform HTTP Post and don't pass the notification to FMProxyListeners
     if ([functionName isEqualToString:@"OnEncodedSyncPData"]) {
 
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OnEncodedSyncPData (notification)"]];
-            [FMCDebugTool logInfo:@"Proxy: OnEncodedSyncPData (notification)"];
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OnEncodedSyncPData (notification)"]];
+        [FMCDebugTool logInfo:@"Proxy: OnEncodedSyncPData (notification)"];
 
-            NSString     *urlString           = (NSString *)    [rpcMsg getParameters:@"URL"];
-            NSDictionary *encodedSyncPData    = (NSDictionary *)[rpcMsg getParameters:@"data"];
-            NSNumber     *encodedSyncPTimeout = (NSNumber *)    [rpcMsg getParameters:@"Timeout"];
+        NSString     *urlString           = (NSString *)    [rpcMsg getParameters:@"URL"];
+        NSDictionary *encodedSyncPData    = (NSDictionary *)[rpcMsg getParameters:@"data"];
+        NSNumber     *encodedSyncPTimeout = (NSNumber *)    [rpcMsg getParameters:@"Timeout"];
 
-            if (urlString && encodedSyncPData && encodedSyncPTimeout) {
-                [self sendEncodedSyncPData:encodedSyncPData toURL:urlString withTimeout:encodedSyncPTimeout];
-                return;
-            }
+        if (urlString && encodedSyncPData && encodedSyncPTimeout) {
+            [self sendEncodedSyncPData:encodedSyncPData toURL:urlString withTimeout:encodedSyncPTimeout];
+        }
+
+        return;
     }
     
-    // Intercept OnSystemRequest. If URL != nil, perform HTTP Post and don't pass the notification to FMProxyListeners
-//    if ([functionName isEqualToString:@"OnSystemRequest"]) {
-//        
-//        FMCOnSystemRequest* sysRpcMsg = (FMCOnSystemRequest*) rpcMsg;
-//        
-//        if ([sysRpcMsg.requestType isEqual: [FMCRequestType PROPRIETARY]]){
-//            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OnSystemRequest (notification)"]];
-//            [FMCDebugTool logInfo:@"Proxy: OnSystemRequest (notification)"];
-//            
-//            NSString *urlString = sysRpcMsg.url[1];
-//            if (urlString != nil) {
-//                
-//                NSError *error = nil;
-//                NSDictionary *notificationDictionary = [NSJSONSerialization JSONObjectWithData:sysRpcMsg.bulkData options:kNilOptions error:&error];
-//                NSDictionary *httpRequestDictionary = [notificationDictionary objectForKey:@"HTTPRequest"];
-//                NSDictionary *headersDictionary = [httpRequestDictionary objectForKey:@"headers"];
-//                
-//                // Create the URL request
-//                NSURL *url = [NSURL URLWithString:urlString];
-//                NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-//                
-//                [request setValue:(NSString*)[headersDictionary objectForKey:@"ContentType"] forHTTPHeaderField:@"content-type"];
-//                
-//                request.timeoutInterval = [(NSNumber*) [headersDictionary objectForKey:@"ConnectTimeout"] doubleValue];
-//                request.HTTPMethod = (NSString*)[headersDictionary objectForKey:@"RequestMethod"];
-//                
-//                request.HTTPBody = (NSData*)[httpRequestDictionary objectForKey:@"body"];
-//                
-//                FMCURLConnection *conn = [[FMCURLConnection alloc] initWithRequest:request delegate:self andTag:@"OnSystemRequestProprietary"];
-//                
-//                if (conn == nil) {
-//                    [FMCDebugTool logInfo:@"%s: Error creating NSURLConnection", __PRETTY_FUNCTION__];
-//                }
-//                
-//                return;
-//            }
-//
-//        }
-//    }
+    // Intercept OnSystemRequest.
+    if ([functionName isEqualToString:@"OnSystemRequest"]) {
+
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OnSystemRequest (notification)"]];
+        [FMCDebugTool logInfo:@"Proxy: OnSystemRequest (notification)"];
+
+
+        FMCOnSystemRequest* sysRpcMsg = [[FMCOnSystemRequest alloc] initWithDictionary:(NSMutableDictionary*) msg];
+        FMCRequestType *requestType = sysRpcMsg.requestType;
+        NSString       *urlString   = sysRpcMsg.url[0];
+        FMCFileType    *fileType    = sysRpcMsg.fileType;
+        if (requestType == [FMCRequestType PROPRIETARY]
+            && urlString != nil
+            && fileType == [FMCFileType JSON])
+        {
+            // Data comes in a dictionary in the bulkData
+            NSError *errorJSONSerializeNotification = nil;
+            NSDictionary *notificationDictionary = [NSJSONSerialization JSONObjectWithData:sysRpcMsg.bulkData options:kNilOptions error:&errorJSONSerializeNotification];
+            if (errorJSONSerializeNotification) {
+                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: (failure) OnSystemRequest: Notification data is not valid JSON."]];
+                [FMCDebugTool logInfo:@"Proxy: (failure) OnSystemRequest: Notification data is not valid JSON."];
+                return;
+            }
+
+
+            // Extract data from the dictionary
+            NSError *errorJSONSerializeBody = nil;
+            NSDictionary   *requestData = notificationDictionary[@"HTTPRequest"];
+            NSDictionary   *headers     = requestData[@"headers"];
+            NSDictionary   *body        = requestData[@"body"];
+            NSString       *contentType = headers[@"ContentType"];
+            NSTimeInterval timeout      = [headers[@"ConnectTimeout"] doubleValue];
+            NSString       *method      = headers[@"RequestMethod"];
+            NSData         *data        = [NSJSONSerialization dataWithJSONObject:body options:kNilOptions error:&errorJSONSerializeBody];
+            if (errorJSONSerializeBody) {
+                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: (failure) OnSystemRequest: Body data is not valid JSON."]];
+                [FMCDebugTool logInfo:@"Proxy: (failure) OnSystemRequest: Body data is not valid JSON."];
+                return;
+            }
+
+
+            // HTTP Request configuration
+            NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+            NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+            NSURL *url = [NSURL URLWithString:urlString];
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+            [request setValue:contentType forHTTPHeaderField:@"content-type"];
+            request.timeoutInterval = timeout;
+            request.HTTPMethod = method;
+
+
+            // Logging
+            NSString *msg = [NSString stringWithFormat:@"Proxy: SR HTTP Send"];
+            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:msg]];
+            [FMCDebugTool logInfo:msg];
+
+
+            // Send the HTTP Request
+            FMCCustomTaskCompletionHandler handler = ^void(NSData *data, NSURLResponse *response, NSError *error)
+            {
+                [self OSRHTTPRequestCompletionHandler:data response:response error:error];
+            };
+            NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:data completionHandler:handler];
+            [uploadTask resume];
+
+            return;
+        }
+
+    } // End of OnSystemRequest
+
 
 	NSString* functionClassName = [NSString stringWithFormat:@"FMC%@", functionName];
 	Class functionClass = objc_getClass([functionClassName cStringUsingEncoding:NSUTF8StringEncoding]);
@@ -493,10 +525,6 @@ const int POLICIES_CORRELATION_ID = 65535;
     NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:data completionHandler:handler];
     [uploadTask resume];
 
-    // Debugging
-    //NSLog(@"Data In: %@", encodedSyncPData);
-    NSLog(@"Send to URL: %@", urlString);
-    NSLog(@"HTTP Body: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
 }
 
 - (void)OESPHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error {
