@@ -334,12 +334,25 @@ const int POLICIES_CORRELATION_ID = 65535;
 
         FMCOnSystemRequest* sysRpcMsg = [[FMCOnSystemRequest alloc] initWithDictionary:(NSMutableDictionary*) msg];
         FMCRequestType *requestType = sysRpcMsg.requestType;
-        NSString       *urlString   = sysRpcMsg.url[0];
+        NSString       *urlString   = sysRpcMsg.url;
         FMCFileType    *fileType    = sysRpcMsg.fileType;
-        if (requestType == [FMCRequestType PROPRIETARY]
-            && urlString != nil
-            && fileType == [FMCFileType JSON])
+        if (requestType == [FMCRequestType PROPRIETARY])
         {
+            // Validate input
+            if (urlString == nil)
+            {
+                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OnSystemRequest (notification) failure: url is nil."]];
+                [FMCDebugTool logInfo:@"Proxy: OnSystemRequest (notification) failure: url is nil."];
+                return;
+            }
+            if (fileType != [FMCFileType JSON])
+            {
+                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OnSystemRequest (notification) failure: file type is not JSON"]];
+                [FMCDebugTool logInfo:@"Proxy: OnSystemRequest (notification) failure: file type is not JSON"];
+                return;
+            }
+
+
             // Data comes in a dictionary in the bulkData
             NSError *errorJSONSerializeNotification = nil;
             NSDictionary *notificationDictionary = [NSJSONSerialization JSONObjectWithData:sysRpcMsg.bulkData options:kNilOptions error:&errorJSONSerializeNotification];

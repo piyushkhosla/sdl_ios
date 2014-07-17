@@ -14,7 +14,7 @@
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
 @property(assign) FMCRequestType* requestType;
-@property(assign) NSMutableArray* url;
+@property(assign) NSString* url;
 @property(assign) NSNumber* timeout;
 @property(assign) FMCFileType* fileType;
 @property(assign) NSNumber* offset;

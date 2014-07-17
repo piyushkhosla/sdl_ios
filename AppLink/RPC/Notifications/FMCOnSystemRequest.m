@@ -35,7 +35,7 @@
     }
 }
 
--(void) setUrl:(NSMutableArray*) url {
+-(void) setUrl:(NSString*) url {
     if (url != nil) {
         [parameters setObject:url forKey:NAMES_url];
     } else {
@@ -43,7 +43,7 @@
     }
 }
 
--(NSMutableArray*) url {
+-(NSString*) url {
     return [parameters objectForKey:NAMES_url];
 }
 
