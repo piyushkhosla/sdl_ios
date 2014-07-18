@@ -109,7 +109,7 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
     header.serviceType = FMCServiceType_RPC;
     header.frameData = FMCFrameData_SingleFrame;
     header.sessionID = self.sessionID;
-    header.bytesInPayload = messagePayload.length;
+    header.bytesInPayload = (UInt32)messagePayload.length;
 
     // V2+ messages need to have message ID property set.
     if (self.version >= 2) {

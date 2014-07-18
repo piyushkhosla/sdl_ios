@@ -134,7 +134,7 @@ void _closeSiphonSocket() {
 	
 	sendingFormattedTrace = true;
     
-    dataSent = _sendSiphonData(traceBytes.bytes, traceBytes.length, formattedTrace);
+    dataSent = _sendSiphonData(traceBytes.bytes, (int)traceBytes.length, formattedTrace);
     
     return dataSent;
 } // end-method
@@ -152,7 +152,7 @@ void _closeSiphonSocket() {
     
     bool dataSent = NO;
     
-    dataSent = _sendSiphonData(textBytes.bytes, textBytes.length, appLog);
+    dataSent = _sendSiphonData(textBytes.bytes, (int)textBytes.length, appLog);
     
     return dataSent;
 } // end-method

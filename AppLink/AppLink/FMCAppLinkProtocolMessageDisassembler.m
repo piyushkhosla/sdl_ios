@@ -39,10 +39,10 @@
     firstFrameHeader.frameType = FMCFrameType_First;
 
     UInt32 payloadData[2];
-    payloadData[0] = CFSwapInt32HostToBig(incomingMessage.payload.length);
-    payloadData[1] = CFSwapInt32HostToBig(numberOfMessagesRequired);
+    payloadData[0] = CFSwapInt32HostToBig((UInt32)incomingMessage.payload.length);
+    payloadData[1] = CFSwapInt32HostToBig((UInt32)numberOfMessagesRequired);
     NSMutableData *firstFramePayload = [NSMutableData dataWithBytes:payloadData length:sizeof(payloadData)];
-    firstFrameHeader.bytesInPayload = firstFramePayload.length;
+    firstFrameHeader.bytesInPayload = (UInt32)firstFramePayload.length;
 
     FMCAppLinkProtocolMessage *firstMessage = [FMCAppLinkProtocolMessage messageWithHeader:firstFrameHeader andPayload:firstFramePayload];
     outgoingMessages[0] = firstMessage;
@@ -57,7 +57,7 @@
 
         NSUInteger offsetOfDataForThisFrame = headerSize + (n * numberOfDataBytesPerMessage);
         NSData *nextFramePayload = [incomingMessage.data subdataWithRange:NSMakeRange(offsetOfDataForThisFrame, numberOfDataBytesPerMessage)];
-        nextFrameHeader.bytesInPayload = nextFramePayload.length;
+        nextFrameHeader.bytesInPayload = (UInt32)nextFramePayload.length;
 
         FMCAppLinkProtocolMessage *nextMessage = [FMCAppLinkProtocolMessage messageWithHeader:nextFrameHeader andPayload:nextFramePayload];
         outgoingMessages[n+1] = nextMessage;
@@ -75,7 +75,7 @@
     NSUInteger numberOfDataBytesInLastMessage = incomingPayloadSize - numberOfDataBytesSentSoFar;
     NSUInteger offsetOfDataForLastFrame = headerSize + numberOfDataBytesSentSoFar;
     NSData *lastFramePayload = [incomingMessage.data subdataWithRange:NSMakeRange(offsetOfDataForLastFrame, numberOfDataBytesInLastMessage)];
-    lastFrameHeader.bytesInPayload = lastFramePayload.length;
+    lastFrameHeader.bytesInPayload = (UInt32)lastFramePayload.length;
 
     FMCAppLinkProtocolMessage *lastMessage = [FMCAppLinkProtocolMessage messageWithHeader:lastFrameHeader andPayload:lastFramePayload];
     outgoingMessages[numberOfMessagesRequired] = lastMessage;

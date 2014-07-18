@@ -258,7 +258,7 @@
 
 #pragma mark - Overridden Methods
 
-- (void)handleBytesReceivedFromTransport:(Byte*) receivedBytes length:(int) receivedBytesLength{
+- (void)handleBytesReceivedFromTransport:(Byte *)receivedBytes length:(NSInteger)receivedBytesLength {
     
     if (self.onControlProtocol){
 

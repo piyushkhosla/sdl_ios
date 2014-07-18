@@ -66,9 +66,9 @@
         [payload appendData:dataToAppend];
 
         // Validation
-        header.bytesInPayload = payload.length;
+        header.bytesInPayload = (UInt32)payload.length;
         if (payload.length != self.expectedBytes) {
-            NSLog(@"Warning: collected bytes size of %i not equal to expected size of %i.", payload.length, (unsigned int)self.expectedBytes);
+            NSLog(@"Warning: collected bytes size of %lu not equal to expected size of %i.", (unsigned long)payload.length, (unsigned int)self.expectedBytes);
         }
         
         // Create the message.

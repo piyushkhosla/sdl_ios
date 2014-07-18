@@ -52,7 +52,7 @@
 - (NSString *)description {
     NSMutableString* description = [[NSMutableString alloc] init];
     [description appendString:self.header.description];
-    [description appendFormat:@" Payload: %i bytes.", self.payload.length];
+    [description appendFormat:@" Payload: %lu bytes.", (unsigned long)self.payload.length];
 
     return description;
 }

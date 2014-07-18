@@ -598,7 +598,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
             const int bufferSize = 1024;
             uint8_t buf[bufferSize];
-            int len = [(NSInputStream *)stream read:buf maxLength:bufferSize];
+            NSUInteger len = [(NSInputStream *)stream read:buf maxLength:bufferSize];
             if(len > 0)
             {
                 NSData* data = [NSData dataWithBytes:buf length:len];
@@ -607,15 +607,11 @@ const int POLICIES_CORRELATION_ID = 65535;
 
                 FMCPutFile* putFileRPCRequest = (FMCPutFile*)objc_getAssociatedObject(stream, @"FMCPutFile");
                 [putFileRPCRequest setOffset:[NSNumber numberWithUnsignedInteger:newOffset]];
-                [putFileRPCRequest setLength:[NSNumber numberWithUnsignedInt:len]];
+                [putFileRPCRequest setLength:[NSNumber numberWithUnsignedInteger:len]];
                 [putFileRPCRequest setBulkData:data];
 
                 [self sendRPCRequest:putFileRPCRequest];
 
-            }
-            else if (len < 0)
-            {
-                [FMCDebugTool logInfo:@"Stream read failure."];
             }
 
             break;

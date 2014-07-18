@@ -75,7 +75,7 @@ const NSUInteger RPC_HEADER_SIZE = 12;
     UInt8 headerBuffer[RPC_HEADER_SIZE];
     *(UInt32 *)&headerBuffer[0] = CFSwapInt32HostToBig(self.functionID);
     *(UInt32 *)&headerBuffer[4] = CFSwapInt32HostToBig(self.correlationID);
-    *(UInt32 *)&headerBuffer[8] = CFSwapInt32HostToBig(self.jsonData.length);
+    *(UInt32 *)&headerBuffer[8] = CFSwapInt32HostToBig((UInt32)self.jsonData.length);
     UInt8 rpcType = (self.rpcType & 0x0F) << 4;
     headerBuffer[0] &= 0x0F;
     headerBuffer[0] |= rpcType;
@@ -99,7 +99,7 @@ const NSUInteger RPC_HEADER_SIZE = 12;
 
 - (NSString *)description {
     NSMutableString *description = [[NSMutableString alloc] init];
-    [description appendFormat:@" rpcType:%i, functionID:%i, correlationID:%i, json:%i bytes, binary:%i bytes", self.rpcType, (unsigned int)self.functionID, (unsigned int)self.correlationID, self.jsonData.length, self.binaryData.length];
+    [description appendFormat:@" rpcType:%i, functionID:%i, correlationID:%i, json:%lu bytes, binary:%lu bytes", self.rpcType, (unsigned int)self.functionID, (unsigned int)self.correlationID, (unsigned long)self.jsonData.length, (unsigned long)self.binaryData.length];
 
     return description;
 }
