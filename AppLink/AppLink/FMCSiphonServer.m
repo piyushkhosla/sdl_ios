@@ -247,7 +247,7 @@ _sendSiphonData(const void* dataBytes, int dataBytesLength, SiphonDataType sipho
 bool _sendDataToSiphonSocket(int soc, const void* pData,  int dataLength) {
     
 	int bytesRemainingToSend = dataLength;
-	int bytesSent = 0;
+	ssize_t bytesSent = 0;
 	const UInt8   *pd = pData;
     
     if (pData == NULL || dataLength == 0) {
