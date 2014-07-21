@@ -8,16 +8,4 @@
 
 @interface FMCIAPTransport : FMCAbstractTransport <NSStreamDelegate> {}
 
-
-@property (strong) EASession *session;
-@property (strong) EAAccessory *accessory;
-
-@property (strong) NSMutableData *writeData;
-
-@property (assign) BOOL onControlProtocol;
-@property (assign) BOOL useLegacyProtocol;
-
-@property (strong) NSString *protocolString;
-
-
 @end

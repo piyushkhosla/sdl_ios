@@ -13,6 +13,24 @@
 #define IAP_INPUT_BUFFER_SIZE 1024
 
 
+@interface FMCIAPTransport ()
+
+
+@property (strong) EASession *session;
+@property (strong) EAAccessory *accessory;
+
+@property (strong) NSMutableData *writeData;
+
+@property (assign) BOOL onControlProtocol;
+@property (assign) BOOL useLegacyProtocol;
+
+@property (strong) NSString *protocolString;
+
+
+@end
+
+
+
 @implementation FMCIAPTransport
 
 - (id)init {
@@ -27,7 +45,8 @@
 }
 
 
-#pragma mark - FMCTransport Implementation
+#pragma mark -
+#pragma mark FMCTransport Implementation
 
 - (void)connect {
     [FMCDebugTool logInfo:@"Looking To Connect" withType:FMCDebugType_Transport_iAP];
@@ -36,10 +55,6 @@
     
     if (self.accessory && self.protocolString) {
         [self openSession];
-        
-//        if (!self.onControlProtocol) {
-//            [self notifyTransportConnected];
-//        }
     }
 
 }
@@ -67,7 +82,8 @@
 
 
 
-#pragma mark - EAAccessory Notifications
+#pragma mark -
+#pragma mark EAAccessory Notifications
 
 - (void)accessoryConnected:(NSNotification*) notification {
     [FMCDebugTool logInfo:@"Accessory Connected" withType:FMCDebugType_Transport_iAP];
@@ -81,7 +97,8 @@
 
 
 
-#pragma mark - NSStreamDelegateEventExtensions
+#pragma mark -
+#pragma mark NSStreamDelegateEventExtensions
 
 - (void)stream:(NSStream *)stream handleEvent:(NSStreamEvent)event
 {
@@ -117,7 +134,8 @@
 
 
 
-#pragma mark - Class Methods
+#pragma mark -
+#pragma mark Class Methods
 
 - (void)setupControllerForAccessory:(EAAccessory *)accessory withProtocolString:(NSString *)protocolString
 {
@@ -256,7 +274,8 @@
 
 
 
-#pragma mark - Overridden Methods
+#pragma mark -
+#pragma mark Overridden Methods
 
 - (void)handleBytesReceivedFromTransport:(Byte *)receivedBytes length:(NSInteger)receivedBytesLength {
     
@@ -292,7 +311,8 @@
 
 
 
-#pragma mark - Debug
+#pragma mark -
+#pragma mark Debug Helpers
 
 -(NSString*) getHexString:(UInt8*)bytes length:(int) length {
 	NSMutableString* ret = [NSMutableString stringWithCapacity:(length * 2)];
