@@ -251,15 +251,18 @@
 
 // Write data to the accessory while there is space available and data to write
 - (void)writeDataOut {
-    while (([[self.session outputStream] hasSpaceAvailable]) && ([self.writeData length] > 0))
+    @synchronized(self)
     {
-        NSInteger bytesWritten = [[self.session outputStream] write:[self.writeData bytes] maxLength:[self.writeData length]];
-        if (bytesWritten == -1) {
-            [FMCDebugTool logInfo:@"WriteDataOut Error" withType:FMCDebugType_Transport_iAP];
-            break;
-        }
-        else if (bytesWritten > 0) {
-            [self.writeData replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
+        while (([[self.session outputStream] hasSpaceAvailable]) && ([self.writeData length] > 0))
+        {
+            NSInteger bytesWritten = [[self.session outputStream] write:[self.writeData bytes] maxLength:[self.writeData length]];
+            if (bytesWritten == -1) {
+                [FMCDebugTool logInfo:@"WriteDataOut Error" withType:FMCDebugType_Transport_iAP];
+                break;
+            }
+            else if (bytesWritten > 0) {
+                [self.writeData replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
+            }
         }
     }
 }
