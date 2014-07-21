@@ -12,6 +12,8 @@
 
 #define IAP_INPUT_BUFFER_SIZE 1024
 
+//#define DEBUG_USE_LEGACY
+
 
 @interface FMCIAPTransport ()
 
@@ -150,6 +152,9 @@
 
         self.useLegacyProtocol = NO;
         
+#ifdef DEBUG_USE_LEGACY
+        self.useLegacyProtocol = YES;
+#else
 		for (NSString *protocolString in [accessory protocolStrings]) {
             if ([protocolString isEqualToString:LEGACY_PROTOCOL_STRING]) {
                 self.useLegacyProtocol = YES;
@@ -164,6 +169,8 @@
                 return;
             }
         }
+#endif
+        
         if (self.useLegacyProtocol) {
             [FMCDebugTool logInfo:[NSString stringWithFormat:@"Legacy Sync @ %@", LEGACY_PROTOCOL_STRING] withType:FMCDebugType_Transport_iAP];
             
