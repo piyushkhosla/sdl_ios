@@ -12,11 +12,11 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSString* syncFileName;
-@property(assign) FMCFileType* fileType;
-@property(assign) NSNumber* persistentFile;
-@property(assign) NSNumber* systemFile;
-@property(assign) NSNumber* offset;
-@property(assign) NSNumber* length;
+@property(strong) NSString* syncFileName;
+@property(strong) FMCFileType* fileType;
+@property(strong) NSNumber* persistentFile;
+@property(strong) NSNumber* systemFile;
+@property(strong) NSNumber* offset;
+@property(strong) NSNumber* length;
 
 @end

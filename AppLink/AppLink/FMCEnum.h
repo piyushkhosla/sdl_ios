@@ -10,6 +10,6 @@
 
 -(id) initWithValue:(NSString*) value;
 
-@property(readonly) NSString* value;
+@property(strong, readonly) NSString* value;
 
 @end

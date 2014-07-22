@@ -10,8 +10,8 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* touchEventId;
-@property(assign) NSMutableArray* timeStamp;
-@property(assign) NSMutableArray* coord;
+@property(strong) NSNumber* touchEventId;
+@property(strong) NSMutableArray* timeStamp;
+@property(strong) NSMutableArray* coord;
 
 @end

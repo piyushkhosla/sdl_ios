@@ -13,11 +13,11 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCRequestType* requestType;
-@property(assign) NSString* url;
-@property(assign) NSNumber* timeout;
-@property(assign) FMCFileType* fileType;
-@property(assign) NSNumber* offset;
-@property(assign) NSNumber* length;
+@property(strong) FMCRequestType* requestType;
+@property(strong) NSString* url;
+@property(strong) NSNumber* timeout;
+@property(strong) FMCFileType* fileType;
+@property(strong) NSNumber* offset;
+@property(strong) NSNumber* length;
 
 @end

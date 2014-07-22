@@ -10,7 +10,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* ecuHeader;
-@property(assign) NSMutableArray* dtc;
+@property(strong) NSNumber* ecuHeader;
+@property(strong) NSMutableArray* dtc;
 
 @end

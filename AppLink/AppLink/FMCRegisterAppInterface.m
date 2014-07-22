@@ -33,7 +33,7 @@
     if ([obj isKindOfClass:FMCSyncMsgVersion.class]) {
         return (FMCSyncMsgVersion*)obj;
     } else {
-        return [[[FMCSyncMsgVersion alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCSyncMsgVersion alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -64,7 +64,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCTTSChunk alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCTTSChunk alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -186,7 +186,7 @@
     if ([obj isKindOfClass:FMCDeviceInfo.class]) {
         return (FMCDeviceInfo*)obj;
     } else {
-        return [[[FMCDeviceInfo alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCDeviceInfo alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 

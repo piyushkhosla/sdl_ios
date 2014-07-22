@@ -38,7 +38,7 @@
     if ([obj isKindOfClass:FMCSyncMsgVersion.class]) {
         return (FMCSyncMsgVersion*)obj;
     } else {
-        return [[[FMCSyncMsgVersion alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCSyncMsgVersion alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -89,7 +89,7 @@
     if ([obj isKindOfClass:FMCDisplayCapabilities.class]) {
         return (FMCDisplayCapabilities*)obj;
     } else {
-        return [[[FMCDisplayCapabilities alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCDisplayCapabilities alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -108,7 +108,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCButtonCapabilities alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCButtonCapabilities alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -129,7 +129,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCSoftButtonCapabilities alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCSoftButtonCapabilities alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -148,7 +148,7 @@
     if ([obj isKindOfClass:FMCPresetBankCapabilities.class]) {
         return (FMCPresetBankCapabilities*)obj;
     } else {
-        return [[[FMCPresetBankCapabilities alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCPresetBankCapabilities alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -251,7 +251,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCAudioPassThruCapabilities alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCAudioPassThruCapabilities alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -270,7 +270,7 @@
     if ([obj isKindOfClass:FMCVehicleType.class]) {
         return (FMCVehicleType*)obj;
     } else {
-        return [[[FMCVehicleType alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleType alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 

@@ -10,6 +10,6 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSString* hashID;
+@property(strong) NSString* hashID;
 
 @end

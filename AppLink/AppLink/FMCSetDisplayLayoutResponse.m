@@ -33,7 +33,7 @@
     if ([obj isKindOfClass:FMCDisplayCapabilities.class]) {
         return (FMCDisplayCapabilities*)obj;
     } else {
-        return [[[FMCDisplayCapabilities alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCDisplayCapabilities alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -52,7 +52,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCButtonCapabilities alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCButtonCapabilities alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -73,7 +73,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCSoftButtonCapabilities alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCSoftButtonCapabilities alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -92,7 +92,7 @@
     if ([obj isKindOfClass:FMCPresetBankCapabilities.class]) {
         return (FMCPresetBankCapabilities*)obj;
     } else {
-        return [[[FMCPresetBankCapabilities alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCPresetBankCapabilities alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 

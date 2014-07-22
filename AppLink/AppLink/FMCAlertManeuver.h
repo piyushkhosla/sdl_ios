@@ -10,7 +10,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSMutableArray* ttsChunks;
-@property(assign) NSMutableArray* softButtons;
+@property(strong) NSMutableArray* ttsChunks;
+@property(strong) NSMutableArray* softButtons;
 
 @end

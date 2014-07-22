@@ -12,13 +12,13 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCVehicleDataEventStatus* driverAirbagDeployed;
-@property(assign) FMCVehicleDataEventStatus* driverSideAirbagDeployed;
-@property(assign) FMCVehicleDataEventStatus* driverCurtainAirbagDeployed;
-@property(assign) FMCVehicleDataEventStatus* passengerAirbagDeployed;
-@property(assign) FMCVehicleDataEventStatus* passengerCurtainAirbagDeployed;
-@property(assign) FMCVehicleDataEventStatus* driverKneeAirbagDeployed;
-@property(assign) FMCVehicleDataEventStatus* passengerSideAirbagDeployed;
-@property(assign) FMCVehicleDataEventStatus* passengerKneeAirbagDeployed;
+@property(strong) FMCVehicleDataEventStatus* driverAirbagDeployed;
+@property(strong) FMCVehicleDataEventStatus* driverSideAirbagDeployed;
+@property(strong) FMCVehicleDataEventStatus* driverCurtainAirbagDeployed;
+@property(strong) FMCVehicleDataEventStatus* passengerAirbagDeployed;
+@property(strong) FMCVehicleDataEventStatus* passengerCurtainAirbagDeployed;
+@property(strong) FMCVehicleDataEventStatus* driverKneeAirbagDeployed;
+@property(strong) FMCVehicleDataEventStatus* passengerSideAirbagDeployed;
+@property(strong) FMCVehicleDataEventStatus* passengerKneeAirbagDeployed;
 
 @end

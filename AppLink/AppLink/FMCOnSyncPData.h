@@ -10,7 +10,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSString* URL;
-@property(assign) NSNumber* Timeout;
+@property(strong) NSString* URL;
+@property(strong) NSNumber* Timeout;
 
 @end

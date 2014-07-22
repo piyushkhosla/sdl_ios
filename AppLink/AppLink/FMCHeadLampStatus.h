@@ -12,8 +12,8 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* lowBeamsOn;
-@property(assign) NSNumber* highBeamsOn;
-@property(assign) FMCAmbientLightStatus* ambientLightSensorStatus;
+@property(strong) NSNumber* lowBeamsOn;
+@property(strong) NSNumber* highBeamsOn;
+@property(strong) FMCAmbientLightStatus* ambientLightSensorStatus;
 
 @end

@@ -13,8 +13,8 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCVehicleDataNotificationStatus* eCallNotificationStatus;
-@property(assign) FMCVehicleDataNotificationStatus* auxECallNotificationStatus;
-@property(assign) FMCECallConfirmationStatus* eCallConfirmationStatus;
+@property(strong) FMCVehicleDataNotificationStatus* eCallNotificationStatus;
+@property(strong) FMCVehicleDataNotificationStatus* auxECallNotificationStatus;
+@property(strong) FMCECallConfirmationStatus* eCallConfirmationStatus;
 
 @end

@@ -12,7 +12,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCLanguage* language;
-@property(assign) FMCLanguage* hmiDisplayLanguage;
+@property(strong) FMCLanguage* language;
+@property(strong) FMCLanguage* hmiDisplayLanguage;
 
 @end

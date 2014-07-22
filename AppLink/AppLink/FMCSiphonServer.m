@@ -70,7 +70,7 @@ void _stopServer(NSString *reason);
         
         initStarted = true;
         
-        startTimeStamp = [[NSDate date] retain];
+        startTimeStamp = [NSDate date];
         
         _closeSiphonSocket();
         
@@ -107,8 +107,7 @@ void _closeSiphonSocket() {
 #ifdef ZERO_CONFIG
 	_stopServer(@"Shutting Down");   
 #endif
-    
-	[super dealloc];
+
 }
 
 + (bool)_siphonIsActive {

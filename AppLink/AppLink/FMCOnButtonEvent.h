@@ -13,8 +13,8 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCButtonName* buttonName;
-@property(assign) FMCButtonEventMode* buttonEventMode;
-@property(assign) NSNumber* customButtonID;
+@property(strong) FMCButtonName* buttonName;
+@property(strong) FMCButtonEventMode* buttonEventMode;
+@property(strong) NSNumber* customButtonID;
 
 @end

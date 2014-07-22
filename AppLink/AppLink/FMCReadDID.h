@@ -10,7 +10,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* ecuName;
-@property(assign) NSMutableArray* didLocation;
+@property(strong) NSNumber* ecuName;
+@property(strong) NSMutableArray* didLocation;
 
 @end

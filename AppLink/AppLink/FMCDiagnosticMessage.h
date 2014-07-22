@@ -10,8 +10,8 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* targetID;
-@property(assign) NSNumber* messageLength;
-@property(assign) NSMutableArray* messageData;
+@property(strong) NSNumber* targetID;
+@property(strong) NSNumber* messageLength;
+@property(strong) NSMutableArray* messageData;
 
 @end

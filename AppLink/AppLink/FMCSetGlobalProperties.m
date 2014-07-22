@@ -35,7 +35,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCTTSChunk alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCTTSChunk alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -56,7 +56,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCTTSChunk alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCTTSChunk alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -89,7 +89,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCVrHelpItem alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCVrHelpItem alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -120,7 +120,7 @@
     if ([obj isKindOfClass:FMCImage.class]) {
         return (FMCImage*)obj;
     } else {
-        return [[[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -137,7 +137,7 @@
     if ([obj isKindOfClass:FMCKeyboardProperties.class]) {
         return (FMCKeyboardProperties*)obj;
     } else {
-        return [[[FMCKeyboardProperties alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCKeyboardProperties alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 

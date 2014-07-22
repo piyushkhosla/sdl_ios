@@ -10,7 +10,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* resolutionWidth;
-@property(assign) NSNumber* resolutionHeight;
+@property(strong) NSNumber* resolutionWidth;
+@property(strong) NSNumber* resolutionHeight;
 
 @end

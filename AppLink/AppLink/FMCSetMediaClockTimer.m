@@ -31,7 +31,7 @@
     if ([obj isKindOfClass:FMCStartTime.class]) {
         return (FMCStartTime*)obj;
     } else {
-        return [[[FMCStartTime alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCStartTime alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -48,7 +48,7 @@
     if ([obj isKindOfClass:FMCStartTime.class]) {
         return (FMCStartTime*)obj;
     } else {
-        return [[[FMCStartTime alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCStartTime alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 

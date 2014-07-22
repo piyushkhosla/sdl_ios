@@ -12,9 +12,9 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCButtonName* name;
-@property(assign) NSNumber* shortPressAvailable;
-@property(assign) NSNumber* longPressAvailable;
-@property(assign) NSNumber* upDownAvailable;
+@property(strong) FMCButtonName* name;
+@property(strong) NSNumber* shortPressAvailable;
+@property(strong) NSNumber* longPressAvailable;
+@property(strong) NSNumber* upDownAvailable;
 
 @end

@@ -46,7 +46,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCChoice alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCChoice alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }

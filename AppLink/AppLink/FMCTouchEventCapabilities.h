@@ -10,8 +10,8 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* pressAvailable;
-@property(assign) NSNumber* multiTouchAvailable;
-@property(assign) NSNumber* doublePressAvailable;
+@property(strong) NSNumber* pressAvailable;
+@property(strong) NSNumber* multiTouchAvailable;
+@property(strong) NSNumber* doublePressAvailable;
 
 @end

@@ -10,8 +10,8 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* hours;
-@property(assign) NSNumber* minutes;
-@property(assign) NSNumber* seconds;
+@property(strong) NSNumber* hours;
+@property(strong) NSNumber* minutes;
+@property(strong) NSNumber* seconds;
 
 @end

@@ -13,8 +13,8 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCImageFieldName* name;
-@property(assign) NSMutableArray* imageTypeSupported;
-@property(assign) FMCImageResolution* imageResolution;
+@property(strong) FMCImageFieldName* name;
+@property(strong) NSMutableArray* imageTypeSupported;
+@property(strong) FMCImageResolution* imageResolution;
 
 @end

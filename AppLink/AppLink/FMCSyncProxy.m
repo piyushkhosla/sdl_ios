@@ -44,17 +44,17 @@ const int POLICIES_CORRELATION_ID = 65535;
 #pragma mark - Object lifecycle
 - (id)initWithTransport:(NSObject<FMCTransport> *)theTransport protocol:(NSObject<FMCProtocol> *)theProtocol delegate:(NSObject<FMCProxyListener> *)theDelegate {
 	if (self = [super init]) {        
-        proxyListeners = [[NSMutableArray alloc] initWithObjects:theDelegate, nil];
-        protocol = [theProtocol retain];
-        transport = [theTransport retain];
         rpcSessionID = 0;
         alreadyDestructed = NO;
                 
-        transport.delegate = protocol;
-        protocol.protocolDelegate = self;
-        protocol.transport = transport;
-        
-        [transport connect];
+        self.proxyListeners = [[NSMutableArray alloc] initWithObjects:theDelegate, nil];
+        self.protocol = theProtocol;
+        self.transport = theTransport;
+        self.transport.delegate = self.protocol;
+        self.protocol.protocolDelegate = self;
+        self.protocol.transport = self.transport;
+        [self.transport connect];
+
         [[EAAccessoryManager sharedAccessoryManager] registerForLocalNotifications];
 
     }
@@ -64,18 +64,13 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 -(void) destructObjects {
     if(!alreadyDestructed) {
-        [self destroyHandshakeTimer];
-        
-        [transport release];
-        transport = nil;
-        
-        [protocol release];
-        protocol = nil;
-        
-        [proxyListeners release];
-        proxyListeners = nil;
-        
         alreadyDestructed = YES;
+
+        self.transport = nil;
+        self.protocol = nil;
+        self.proxyListeners = nil;
+
+        [self destroyHandshakeTimer];
     }
 }
 
@@ -85,7 +80,6 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 -(void) dealloc {
     [self destructObjects];
-	[super dealloc];
 }
 
 -(void) notifyProxyClosed {
@@ -98,14 +92,18 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 #pragma mark - Pseudo properties
 - (NSObject<FMCTransport> *)getTransport {
-    return transport;
+    return self.transport;// not needed except for backwards compatability?
 }
 
 - (NSObject<FMCProtocol> *)getProtocol {
-    return protocol;
+    return self.protocol;// not needed except for backwards compatability?
 }
 
 - (NSString *)getProxyVersion {
+    return VERSION_STRING;
+}
+
+- (NSString *)proxyVersion { // How it should have been named.
     return VERSION_STRING;
 }
 
@@ -120,10 +118,9 @@ const int POLICIES_CORRELATION_ID = 65535;
 }
 
 -(void)destroyHandshakeTimer {
-    if (handshakeTimer != nil) {
-        [handshakeTimer invalidate];
-        [handshakeTimer release];
-        handshakeTimer = nil;
+    if (self.handshakeTimer != nil) {
+        [self.handshakeTimer invalidate];
+        self.handshakeTimer = nil;
     }
 }
 
@@ -133,11 +130,10 @@ const int POLICIES_CORRELATION_ID = 65535;
     isConnected = YES;
     [FMCDebugTool logInfo:@"StartSession (request)" withType:FMCDebugType_RPC];
 
-    [protocol sendStartSessionWithType:FMCServiceType_RPC];
+    [self.protocol sendStartSessionWithType:FMCServiceType_RPC];
 
     [self destroyHandshakeTimer];
-    handshakeTimer = [NSTimer scheduledTimerWithTimeInterval:handshakeTime target:self selector:@selector(handshakeTimerFired) userInfo:nil repeats:NO];
-    [handshakeTimer retain];
+    self.handshakeTimer = [NSTimer scheduledTimerWithTimeInterval:handshakeTime target:self selector:@selector(handshakeTimerFired) userInfo:nil repeats:NO];
 }
 
 -(void) onProtocolClosed {
@@ -182,7 +178,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 - (void)sendRPCRequestPrivate:(FMCRPCRequest *)rpcRequest {
 	@try {
-        [protocol sendRPCRequest:rpcRequest];
+        [self.protocol sendRPCRequest:rpcRequest];
 	} @catch (NSException * e) {
 		[FMCDebugTool logException:e withMessage:@"Proxy: Failed to send RPC request: %@", rpcRequest.name];
 	}
@@ -337,9 +333,8 @@ const int POLICIES_CORRELATION_ID = 65535;
 
     // From the function name, create the corresponding RPCObject and initialize it
 	NSString* functionClassName = [NSString stringWithFormat:@"FMC%@", functionName];
-	Class functionClass = objc_getClass([functionClassName cStringUsingEncoding:NSUTF8StringEncoding]);
-	NSObject* functionObject = (id)class_createInstance(functionClass, 0);
-    NSObject* rpcCallbackObject = [functionObject performSelector:@selector(initWithDictionary:) withObject:msg];
+	FMCRPCMessage *functionObject = [[NSClassFromString(functionClassName) alloc] init];
+    NSObject* rpcCallbackObject = [functionObject initWithDictionary:[msg mutableCopy]];
 
     // Formulate the name of the method to call on the listeners and call it, passing the RPC Object
 	NSString* handlerName = [NSString stringWithFormat:@"on%@:", functionName];
@@ -350,13 +345,13 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 #pragma mark - Delegate management
 -(void) addDelegate:(NSObject<FMCProxyListener>*) delegate {
-	@synchronized(proxyListeners) {
-		[proxyListeners addObject:delegate];
+	@synchronized(self.proxyListeners) {
+		[self.proxyListeners addObject:delegate];
 	}
 }
 
 - (void)invokeMethodOnDelegates:(SEL)aSelector withObject:(id)object {
-    [proxyListeners enumerateObjectsUsingBlock:^(id listener, NSUInteger idx, BOOL *stop) {
+    [self.proxyListeners enumerateObjectsUsingBlock:^(id listener, NSUInteger idx, BOOL *stop) {
         if ([(NSObject *)listener respondsToSelector:aSelector]) {
             [(NSObject *)listener performSelectorOnMainThread:aSelector withObject:object waitUntilDone:NO];
         }
@@ -416,7 +411,7 @@ const int POLICIES_CORRELATION_ID = 65535;
     NSError *JSONConversionError = nil;
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&JSONConversionError];
     if (!JSONConversionError) {
-        FMCEncodedSyncPData *request = [[[FMCEncodedSyncPData alloc] init] autorelease];
+        FMCEncodedSyncPData *request = [[FMCEncodedSyncPData alloc] init];
         request.correlationID = [NSNumber numberWithInt:POLICIES_CORRELATION_ID];
         request.data = [responseDictionary objectForKey:@"data"];
 
@@ -427,7 +422,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 - (void)OSRHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error {
 
-    FMCSystemRequest *request = [[[FMCSystemRequest alloc] init] autorelease];
+    FMCSystemRequest *request = [[FMCSystemRequest alloc] init];
     request.correlationID = [NSNumber numberWithInt:POLICIES_CORRELATION_ID];
     request.requestType = [FMCRequestType PROPRIETARY];
     request.bulkData = data;
@@ -439,9 +434,6 @@ const int POLICIES_CORRELATION_ID = 65535;
 #pragma mark - PutFile Streaming
 - (void)putFileStream:(NSInputStream*)inputStream :(FMCPutFile*)putFileRPCRequest
 {
-    [inputStream retain];
-    [putFileRPCRequest retain];
-
     inputStream.delegate = self;
     objc_setAssociatedObject(inputStream, @"FMCPutFile", putFileRPCRequest, OBJC_ASSOCIATION_RETAIN);
     objc_setAssociatedObject(inputStream, @"BaseOffset", [putFileRPCRequest offset], OBJC_ASSOCIATION_RETAIN);
@@ -482,16 +474,9 @@ const int POLICIES_CORRELATION_ID = 65535;
         }
         case NSStreamEventEndEncountered:
         {
-            // Stream done. Release the custom property on it.
-            FMCPutFile* putFileRPCRequest = (FMCPutFile*)objc_getAssociatedObject(stream, @"FMCPutFile");
-            [putFileRPCRequest release];
-            NSNumber* baseOffset = (NSNumber*)objc_getAssociatedObject(stream, @"BaseOffset");
-            [baseOffset release];
-
             // Cleanup the stream
             [stream close];
             [stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-            [stream release];
 
             break;
         }
@@ -515,54 +500,6 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 +(void)disableSiphonDebug {
     [FMCSiphonServer disableSiphonDebug];
-}
-
-
-#pragma mark -
--(void) neverCalled {
-    [[FMCAddCommandResponse alloc] release];
-    [[FMCAddSubMenuResponse alloc] release];
-    [[FMCAlertResponse alloc] release];
-    [[FMCCreateInteractionChoiceSetResponse alloc] release];
-    [[FMCDeleteCommandResponse alloc] release];
-    [[FMCDeleteInteractionChoiceSetResponse alloc] release];
-    [[FMCDeleteSubMenuResponse alloc] release];
-    [[FMCOnHMIStatus alloc] release];
-    [[FMCOnButtonEvent alloc] release];
-    [[FMCOnButtonPress alloc] release];
-    [[FMCOnCommand alloc] release];
-    [[FMCOnAppInterfaceUnregistered alloc] release];
-    [[FMCPerformInteractionResponse alloc] release];
-    [[FMCRegisterAppInterfaceResponse alloc] release];
-    [[FMCSetGlobalPropertiesResponse alloc] release];
-    [[FMCResetGlobalPropertiesResponse alloc] release];
-    [[FMCSetMediaClockTimerResponse alloc] release];
-    [[FMCShowResponse alloc] release];
-    [[FMCSpeakResponse alloc] release];
-    [[FMCSubscribeButtonResponse alloc] release];
-    [[FMCUnregisterAppInterfaceResponse alloc] release];
-    [[FMCUnsubscribeButtonResponse alloc] release];
-    [[FMCGenericResponse alloc] release];
-    [[FMCOnDriverDistraction alloc] release];
-    [[FMCSubscribeVehicleDataResponse alloc] release];
-    [[FMCUnsubscribeVehicleDataResponse alloc] release];
-    [[FMCGetVehicleDataResponse alloc] release];
-    [[FMCGetDTCsResponse alloc] release];
-    [[FMCReadDIDResponse alloc] release];
-    [[FMCOnVehicleData alloc] release];
-    [[FMCOnPermissionsChange alloc] release];
-    [[FMCSliderResponse alloc] release];
-    [[FMCPutFileResponse alloc] release];
-    [[FMCDeleteFileResponse alloc] release];
-    [[FMCListFilesResponse alloc] release];
-    [[FMCSetAppIconResponse alloc] release];
-    [[FMCPerformAudioPassThruResponse alloc] release];
-    [[FMCEndAudioPassThruResponse alloc] release];
-    [[FMCOnAudioPassThru alloc] release];
-    [[FMCScrollableMessageResponse alloc] release];
-    [[FMCChangeRegistrationResponse alloc] release];
-    [[FMCOnLanguageChange alloc] release];
-    [[FMCSetDisplayLayout alloc] release];
 }
 
 @end

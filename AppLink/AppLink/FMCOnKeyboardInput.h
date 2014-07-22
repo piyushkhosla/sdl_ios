@@ -12,7 +12,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCKeyboardEvent* event;
-@property(assign) NSString* data;
+@property(strong) FMCKeyboardEvent* event;
+@property(strong) NSString* data;
 
 @end

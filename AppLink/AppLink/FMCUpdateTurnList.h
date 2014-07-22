@@ -10,7 +10,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSMutableArray* turnList;
-@property(assign) NSMutableArray* softButtons;
+@property(strong) NSMutableArray* turnList;
+@property(strong) NSMutableArray* softButtons;
 
 @end

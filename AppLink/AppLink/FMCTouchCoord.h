@@ -10,7 +10,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* x;
-@property(assign) NSNumber* y;
+@property(strong) NSNumber* x;
+@property(strong) NSNumber* y;
 
 @end

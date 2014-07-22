@@ -14,13 +14,9 @@
 +(FMCSyncProxy*) buildSyncProxyWithListener:(NSObject<FMCProxyListener>*) delegate {
     FMCIAPTransport* transport = [[FMCIAPTransport alloc] init];
     FMCAppLinkProtocol* protocol = [[FMCAppLinkProtocol alloc] init];
-    
     FMCSyncProxy *ret = [[FMCSyncProxy alloc] initWithTransport:transport protocol:protocol delegate:delegate];
-    
-    [transport release];
-    [protocol release];
-    
-	return [ret autorelease];
+
+	return ret;
 }
 
 +(FMCSyncProxy*) buildSyncProxyWithListener:(NSObject<FMCProxyListener>*) delegate
@@ -29,13 +25,9 @@
     
     FMCTCPTransport* transport = [[FMCTCPTransport alloc] initWithEndpoint:ipaddress endpointParam:port];
     FMCAppLinkProtocol* protocol = [[FMCAppLinkProtocol alloc] init];
-    
     FMCSyncProxy *ret = [[FMCSyncProxy alloc] initWithTransport:transport protocol:protocol delegate:delegate];
-    
-    [transport release];
-    [protocol release];
-    
-	return [ret autorelease];
+
+	return ret;
 }
 
 @end

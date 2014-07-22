@@ -13,23 +13,23 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* longitudeDegrees;
-@property(assign) NSNumber* latitudeDegrees;
-@property(assign) NSNumber* utcYear;
-@property(assign) NSNumber* utcMonth;
-@property(assign) NSNumber* utcDay;
-@property(assign) NSNumber* utcHours;
-@property(assign) NSNumber* utcMinutes;
-@property(assign) NSNumber* utcSeconds;
-@property(assign) FMCCompassDirection* compassDirection;
-@property(assign) NSNumber* pdop;
-@property(assign) NSNumber* hdop;
-@property(assign) NSNumber* vdop;
-@property(assign) NSNumber* actual;
-@property(assign) NSNumber* satellites;
-@property(assign) FMCDimension* dimension;
-@property(assign) NSNumber* altitude;
-@property(assign) NSNumber* heading;
-@property(assign) NSNumber* speed;
+@property(strong) NSNumber* longitudeDegrees;
+@property(strong) NSNumber* latitudeDegrees;
+@property(strong) NSNumber* utcYear;
+@property(strong) NSNumber* utcMonth;
+@property(strong) NSNumber* utcDay;
+@property(strong) NSNumber* utcHours;
+@property(strong) NSNumber* utcMinutes;
+@property(strong) NSNumber* utcSeconds;
+@property(strong) FMCCompassDirection* compassDirection;
+@property(strong) NSNumber* pdop;
+@property(strong) NSNumber* hdop;
+@property(strong) NSNumber* vdop;
+@property(strong) NSNumber* actual;
+@property(strong) NSNumber* satellites;
+@property(strong) FMCDimension* dimension;
+@property(strong) NSNumber* altitude;
+@property(strong) NSNumber* heading;
+@property(strong) NSNumber* speed;
 
 @end

@@ -31,7 +31,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -48,7 +48,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -65,7 +65,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -82,7 +82,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -99,7 +99,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -116,7 +116,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -133,7 +133,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -150,7 +150,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -167,7 +167,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -184,7 +184,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -201,7 +201,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -218,7 +218,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -235,7 +235,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -252,7 +252,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -269,7 +269,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -286,7 +286,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -303,7 +303,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -320,7 +320,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -337,7 +337,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -354,7 +354,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -371,7 +371,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -388,7 +388,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -405,7 +405,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -422,7 +422,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 

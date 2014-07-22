@@ -13,12 +13,12 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCWarningLightStatus* pressureTelltale;
-@property(assign) FMCSingleTireStatus* leftFront;
-@property(assign) FMCSingleTireStatus* rightFront;
-@property(assign) FMCSingleTireStatus* leftRear;
-@property(assign) FMCSingleTireStatus* rightRear;
-@property(assign) FMCSingleTireStatus* innerLeftRear;
-@property(assign) FMCSingleTireStatus* innerRightRear;
+@property(strong) FMCWarningLightStatus* pressureTelltale;
+@property(strong) FMCSingleTireStatus* leftFront;
+@property(strong) FMCSingleTireStatus* rightFront;
+@property(strong) FMCSingleTireStatus* leftRear;
+@property(strong) FMCSingleTireStatus* rightRear;
+@property(strong) FMCSingleTireStatus* innerLeftRear;
+@property(strong) FMCSingleTireStatus* innerRightRear;
 
 @end

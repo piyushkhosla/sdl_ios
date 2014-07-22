@@ -9,10 +9,9 @@
 
 @interface FMCRPCResponse : FMCRPCMessage {}
 
-@property(retain) NSNumber* correlationID;
-
-@property(retain) NSNumber* success;
-@property(assign) FMCResult* resultCode;
-@property(retain) NSString* info;
+@property(strong) NSNumber* correlationID;
+@property(strong) NSNumber* success;
+@property(strong) FMCResult* resultCode;
+@property(strong) NSString* info;
 
 @end

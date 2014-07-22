@@ -10,13 +10,13 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSString* alertText1;
-@property(assign) NSString* alertText2;
-@property(assign) NSString* alertText3;
-@property(assign) NSMutableArray* ttsChunks;
-@property(assign) NSNumber* duration;
-@property(assign) NSNumber* playTone;
-@property(assign) NSNumber* progressIndicator;
-@property(assign) NSMutableArray* softButtons;
+@property(strong) NSString* alertText1;
+@property(strong) NSString* alertText2;
+@property(strong) NSString* alertText3;
+@property(strong) NSMutableArray* ttsChunks;
+@property(strong) NSNumber* duration;
+@property(strong) NSNumber* playTone;
+@property(strong) NSNumber* progressIndicator;
+@property(strong) NSMutableArray* softButtons;
 
 @end

@@ -60,7 +60,7 @@
     if ([obj isKindOfClass:FMCImage.class]) {
         return (FMCImage*)obj;
     } else {
-        return [[[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 

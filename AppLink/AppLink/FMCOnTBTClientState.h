@@ -12,6 +12,6 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCTBTState* state;
+@property(strong) FMCTBTState* state;
 
 @end

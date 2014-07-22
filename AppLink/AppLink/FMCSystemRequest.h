@@ -12,7 +12,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCRequestType* requestType;
-@property(assign) NSString* fileName;
+@property(strong) FMCRequestType* requestType;
+@property(strong) NSString* fileName;
 
 @end

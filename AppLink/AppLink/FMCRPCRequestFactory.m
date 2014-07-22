@@ -12,22 +12,22 @@
 //***** AddCommand *****
 +(FMCAddCommand*) buildAddCommandWithID:(NSNumber*) cmdID menuName:(NSString*) menuName parentID:(NSNumber*) parentID position:(NSNumber*) position vrCommands:(NSArray*) vrCommands iconValue:(NSString*) iconValue iconType:(FMCImageType*) iconType correlationID:(NSNumber*) correlationID {
 	
-    FMCAddCommand* msg = [[[FMCAddCommand alloc] init] autorelease];
+    FMCAddCommand* msg = [[FMCAddCommand alloc] init];
 	msg.correlationID = correlationID;
     
 	msg.cmdID = cmdID;
     
 	if (menuName != nil || parentID != nil || position != nil) {
-		FMCMenuParams* menuParams = [[[FMCMenuParams alloc] init] autorelease];
+		FMCMenuParams* menuParams = [[FMCMenuParams alloc] init];
 		menuParams.menuName = menuName;
 		menuParams.parentID = parentID;
 		menuParams.position = position;
 		msg.menuParams = menuParams;
 	}
-	msg.vrCommands = [[vrCommands mutableCopy] autorelease];
+	msg.vrCommands = [vrCommands mutableCopy];
     
     if (iconValue != nil || iconType != nil) {
-        FMCImage* icon = [[[FMCImage alloc] init] autorelease];
+        FMCImage* icon = [[FMCImage alloc] init];
 		icon.value = iconValue;
 		icon.imageType = iconType;
 		msg.cmdIcon = icon;
@@ -51,7 +51,7 @@
 //***** AddSubMenu *****
 +(FMCAddSubMenu*) buildAddSubMenuWithID:(NSNumber*) menuID menuName:(NSString*) menuName position:(NSNumber*) position correlationID:(NSNumber*) correlationID {
 	
-    FMCAddSubMenu* msg = [[[FMCAddSubMenu alloc] init] autorelease];
+    FMCAddSubMenu* msg = [[FMCAddSubMenu alloc] init];
 	msg.correlationID = correlationID;
 	msg.menuID = menuID;
 	msg.menuName = menuName;
@@ -69,7 +69,7 @@
 //***** Alert *****
 +(FMCAlert*) buildAlertWithTTS:(NSString*) ttsText alertText1:(NSString*) alertText1 alertText2:(NSString*) alertText2 alertText3:(NSString*) alertText3 playTone:(NSNumber*) playTone duration:(NSNumber*) duration correlationID:(NSNumber*) correlationID {
 	
-    FMCTTSChunk* simpleChunk = [[[FMCTTSChunk alloc] init] autorelease];
+    FMCTTSChunk* simpleChunk = [[FMCTTSChunk alloc] init];
 	simpleChunk.text = ttsText;
 	simpleChunk.type = FMCSpeechCapabilities.TEXT;
 	NSArray* ttsChunks = [NSArray arrayWithObject:simpleChunk];
@@ -91,15 +91,15 @@ correlationID{
 //***
 +(FMCAlert*) buildAlertWithTTSChunks:(NSArray*) ttsChunks alertText1:(NSString*) alertText1 alertText2:(NSString*) alertText2 alertText3:(NSString*) alertText3 playTone:(NSNumber*) playTone duration:(NSNumber*) duration softButtons:(NSArray*) softButtons correlationID:(NSNumber*) correlationID {
 	
-    FMCAlert* msg = [[[FMCAlert alloc] init] autorelease];
+    FMCAlert* msg = [[FMCAlert alloc] init];
 	msg.correlationID = correlationID;
 	msg.alertText1 = alertText1;
 	msg.alertText2 = alertText2;
     msg.alertText3 = alertText3;
-	msg.ttsChunks = [[ttsChunks mutableCopy] autorelease];
+	msg.ttsChunks = [ttsChunks mutableCopy];
 	msg.playTone = playTone;
 	msg.duration = duration;
-    msg.softButtons = [[softButtons mutableCopy] autorelease];
+    msg.softButtons = [softButtons mutableCopy];
 	return msg;
 }
 
@@ -124,7 +124,7 @@ correlationID{
 
 +(FMCChangeRegistration*) buildChangeRegistrationWithLanguage:(FMCLanguage*) language hmiDisplayLanguage:(FMCLanguage*) hmiDisplayLanguage correlationID:(NSNumber*) correlationID {
 	
-    FMCChangeRegistration* msg = [[[FMCChangeRegistration alloc] init] autorelease];
+    FMCChangeRegistration* msg = [[FMCChangeRegistration alloc] init];
     msg.language = language;
     msg.hmiDisplayLanguage = hmiDisplayLanguage;
     msg.correlationID = correlationID;
@@ -134,9 +134,9 @@ correlationID{
 
 +(FMCCreateInteractionChoiceSet*) buildCreateInteractionChoiceSetWithID:(NSNumber*)interactionChoiceSetID choiceSet:(NSArray*) choices correlationID:(NSNumber*) correlationID  {
 	
-    FMCCreateInteractionChoiceSet *msg = [[[FMCCreateInteractionChoiceSet alloc] init] autorelease];
+    FMCCreateInteractionChoiceSet *msg = [[FMCCreateInteractionChoiceSet alloc] init];
 	msg.interactionChoiceSetID = interactionChoiceSetID;
-	msg.choiceSet = [[choices mutableCopy] autorelease];
+	msg.choiceSet = [choices mutableCopy];
 	msg.correlationID = correlationID;
 	
 	return msg;
@@ -144,7 +144,7 @@ correlationID{
 
 +(FMCDeleteCommand*) buildDeleteCommandWithID:(NSNumber*) cmdID correlationID:(NSNumber*) correlationID  {
 	
-    FMCDeleteCommand *msg = [[[FMCDeleteCommand alloc] init] autorelease];
+    FMCDeleteCommand *msg = [[FMCDeleteCommand alloc] init];
 	msg.cmdID = cmdID;
 	msg.correlationID = correlationID;
 	
@@ -153,7 +153,7 @@ correlationID{
 
 +(FMCDeleteFile*) buildDeleteFileWithName:(NSString*) syncFileName correlationID:(NSNumber*) correlationID {
     
-    FMCDeleteFile* msg = [[[FMCDeleteFile alloc] init] autorelease];
+    FMCDeleteFile* msg = [[FMCDeleteFile alloc] init];
     msg.syncFileName = syncFileName;
     msg.correlationID = correlationID;
     
@@ -162,7 +162,7 @@ correlationID{
 
 +(FMCListFiles*) buildListFilesWithCorrelationID:(NSNumber*) correlationID {
     
-    FMCListFiles* msg = [[[FMCListFiles alloc] init] autorelease];
+    FMCListFiles* msg = [[FMCListFiles alloc] init];
     msg.correlationID = correlationID;
     
     return msg;
@@ -170,7 +170,7 @@ correlationID{
 
 +(FMCDeleteInteractionChoiceSet*) buildDeleteInteractionChoiceSetWithID:(NSNumber*)interactionChoiceSetID correlationID:(NSNumber*) correlationID  {
 	
-    FMCDeleteInteractionChoiceSet *msg = [[[FMCDeleteInteractionChoiceSet alloc] init] autorelease];
+    FMCDeleteInteractionChoiceSet *msg = [[FMCDeleteInteractionChoiceSet alloc] init];
 	msg.interactionChoiceSetID = interactionChoiceSetID;
 	msg.correlationID = correlationID;
 	
@@ -179,7 +179,7 @@ correlationID{
 
 +(FMCDeleteSubMenu*) buildDeleteSubMenuWithID:(NSNumber*) menuID correlationID:(NSNumber*) correlationID {
 	
-    FMCDeleteSubMenu *msg = [[[FMCDeleteSubMenu alloc] init] autorelease];
+    FMCDeleteSubMenu *msg = [[FMCDeleteSubMenu alloc] init];
 	msg.menuID = menuID;
 	msg.correlationID = correlationID;
     
@@ -188,7 +188,7 @@ correlationID{
 
 +(FMCEndAudioPassThru*) buildEndAudioPassThruWithCorrelationID:(NSNumber*) correlationID {
     
-    FMCEndAudioPassThru* msg = [[[FMCEndAudioPassThru alloc] init] autorelease];
+    FMCEndAudioPassThru* msg = [[FMCEndAudioPassThru alloc] init];
     msg.correlationID = correlationID;
     
 	return msg;
@@ -196,7 +196,7 @@ correlationID{
 
 +(FMCGetDTCs*) buildGetDTCsWithECUName:(NSNumber*) ecuName correlationID:(NSNumber*) correlationID {
 	
-    FMCGetDTCs* msg = [[[FMCGetDTCs alloc] init] autorelease];
+    FMCGetDTCs* msg = [[FMCGetDTCs alloc] init];
     msg.ecuName = ecuName;
 	msg.correlationID = correlationID;
     
@@ -205,7 +205,7 @@ correlationID{
 
 +(FMCGetVehicleData*) buildGetVehicleDataWithGPS:(NSNumber*) gps speed:(NSNumber*) speed rpm:(NSNumber*) rpm fuelLevel:(NSNumber*) fuelLevel fuelLevelState:(NSNumber*) fuelLevelState instantFuelConsumption:(NSNumber*) instantFuelConsumption externalTemperature:(NSNumber*) externalTemperature vin:(NSNumber*) vin prndl:(NSNumber*) prndl tirePressure:(NSNumber*) tirePressure odometer:(NSNumber*) odometer beltStatus:(NSNumber*) beltStatus bodyInformation:(NSNumber*) bodyInformation deviceStatus:(NSNumber*) deviceStatus driverBraking:(NSNumber*) driverBraking wiperStatus:(NSNumber*) wiperStatus headLampStatus:(NSNumber*) headLampStatus engineTorque:(NSNumber*) engineTorque accPedalPosition:(NSNumber*) accPedalPosition steeringWheelAngle:(NSNumber*) steeringWheelAngle correlationID:(NSNumber*) correlationID {
 	
-    FMCGetVehicleData* msg = [[[FMCGetVehicleData alloc] init] autorelease];
+    FMCGetVehicleData* msg = [[FMCGetVehicleData alloc] init];
     msg.gps = gps;
 	msg.speed = speed;
 	msg.rpm = rpm;
@@ -235,8 +235,8 @@ correlationID{
     
     NSArray* initialChunks = [FMCTTSChunkFactory buildTTSChunksFromSimple:initialPrompt];
     
-    FMCPerformAudioPassThru* msg = [[[FMCPerformAudioPassThru alloc] init] autorelease];
-	msg.initialPrompt = [[initialChunks mutableCopy] autorelease];
+    FMCPerformAudioPassThru* msg = [[FMCPerformAudioPassThru alloc] init];
+	msg.initialPrompt = [initialChunks mutableCopy];
 	msg.audioPassThruDisplayText1 = audioPassThruDisplayText1;
 	msg.audioPassThruDisplayText2 = audioPassThruDisplayText2;
 	msg.samplingRate = samplingRate;
@@ -252,15 +252,15 @@ correlationID{
 //***** PerformInteraction *****
 +(FMCPerformInteraction*) buildPerformInteractionWithInitialChunks:(NSArray*)initialChunks initialText:(NSString*)initialText interactionChoiceSetIDList:(NSArray*) interactionChoiceSetIDList helpChunks:(NSArray*)helpChunks timeoutChunks:(NSArray*)timeoutChunks interactionMode:(FMCInteractionMode*) interactionMode timeout:(NSNumber*)timeout vrHelp:(NSArray*) vrHelp correlationID:(NSNumber*) correlationID  {
 	
-    FMCPerformInteraction *msg = [[[FMCPerformInteraction alloc] init] autorelease];
-	msg.initialPrompt = [[initialChunks mutableCopy] autorelease];
+    FMCPerformInteraction *msg = [[FMCPerformInteraction alloc] init];
+	msg.initialPrompt = [initialChunks mutableCopy];
 	msg.initialText = initialText;
-	msg.interactionChoiceSetIDList = [[interactionChoiceSetIDList mutableCopy] autorelease];
-	msg.helpPrompt = [[helpChunks mutableCopy] autorelease];
-	msg.timeoutPrompt = [[timeoutChunks mutableCopy] autorelease];
+	msg.interactionChoiceSetIDList = [interactionChoiceSetIDList mutableCopy];
+	msg.helpPrompt = [helpChunks mutableCopy];
+	msg.timeoutPrompt = [timeoutChunks mutableCopy];
 	msg.interactionMode = interactionMode;
 	msg.timeout = timeout;
-    msg.vrHelp = [[vrHelp mutableCopy] autorelease];
+    msg.vrHelp = [vrHelp mutableCopy];
 	msg.correlationID = correlationID;
 	
 	return msg;
@@ -302,15 +302,11 @@ correlationID{
     //    +(FMPutFile*) buildPutFile:(NSString*) syncFileName fileType:(FMCFileType*) fileType persisistentFile:(NSNumber*) persistentFile fileData:(NSData*) fileData correlationID:(NSNumber*) correlationID {
     
     
-    FMCPutFile* msg = [[[FMCPutFile alloc] init] autorelease];
+    FMCPutFile* msg = [[FMCPutFile alloc] init];
     msg.syncFileName = syncFileName;
     
-    msg.fileType = [[fileType mutableCopy] autorelease];
+    msg.fileType = [fileType mutableCopy];
     msg.persistentFile = persistentFile;
-    
-    //TODO
-    //	msg.fileData = [[fileData mutableCopy] autorelease];
-    
     msg.correlationID = correlationID;
     
     return msg;
@@ -318,9 +314,9 @@ correlationID{
 
 +(FMCReadDID*) buildReadDIDWithECUName:(NSNumber*) ecuName didLocation:(NSArray*) didLocation correlationID:(NSNumber*) correlationID {
 	
-    FMCReadDID* msg = [[[FMCReadDID alloc] init] autorelease];
+    FMCReadDID* msg = [[FMCReadDID alloc] init];
     msg.ecuName = ecuName;
-	msg.didLocation = [[didLocation mutableCopy] autorelease];
+	msg.didLocation = [didLocation mutableCopy];
 	msg.correlationID = correlationID;
 	
 	return msg;
@@ -329,8 +325,8 @@ correlationID{
 //***** RegisterAppInterface *****
 +(FMCRegisterAppInterface*) buildRegisterAppInterfaceWithAppName:(NSString*) appName ttsName:(NSMutableArray*) ttsName vrSynonyms:(NSMutableArray*) vrSynonyms isMediaApp:(NSNumber*) isMediaApp languageDesired:(FMCLanguage*) languageDesired hmiDisplayLanguageDesired:(FMCLanguage*) hmiDisplayLanguageDesired appID:(NSString*) appID {
     
-    FMCRegisterAppInterface* msg = [[[FMCRegisterAppInterface alloc] init] autorelease];
-    FMCSyncMsgVersion* version = [[[FMCSyncMsgVersion alloc] init] autorelease];
+    FMCRegisterAppInterface* msg = [[FMCRegisterAppInterface alloc] init];
+    FMCSyncMsgVersion* version = [[FMCSyncMsgVersion alloc] init];
 	version.majorVersion = [NSNumber numberWithInt:1];
 	version.minorVersion = [NSNumber numberWithInt:0];
     msg.syncMsgVersion = version;
@@ -364,8 +360,8 @@ correlationID{
 
 +(FMCResetGlobalProperties*) buildResetGlobalPropertiesWithProperties:(NSArray*) properties correlationID:(NSNumber*) correlationID {
 	
-    FMCResetGlobalProperties* msg = [[[FMCResetGlobalProperties alloc] init] autorelease];
-	msg.properties = [[properties mutableCopy] autorelease];
+    FMCResetGlobalProperties* msg = [[FMCResetGlobalProperties alloc] init];
+	msg.properties = [properties mutableCopy];
 	msg.correlationID = correlationID;
 	
 	return msg;
@@ -373,10 +369,10 @@ correlationID{
 
 +(FMCScrollableMessage*) buildScrollableMessage:(NSString*) scrollableMessageBody timeout:(NSNumber*) timeout softButtons:(NSArray*) softButtons correlationID:(NSNumber*) correlationID {
 	
-    FMCScrollableMessage* msg = [[[FMCScrollableMessage alloc] init] autorelease];
+    FMCScrollableMessage* msg = [[FMCScrollableMessage alloc] init];
     msg.scrollableMessageBody = scrollableMessageBody;
     msg.timeout = timeout;
-    msg.softButtons = [[softButtons mutableCopy] autorelease];
+    msg.softButtons = [softButtons mutableCopy];
 	msg.correlationID = correlationID;
 	
 	return msg;
@@ -384,7 +380,7 @@ correlationID{
 
 +(FMCSetAppIcon*) buildSetAppIconWithFileName:(NSString*) syncFileName correlationID:(NSNumber*) correlationID {
     
-    FMCSetAppIcon* msg = [[[FMCSetAppIcon alloc] init] autorelease];
+    FMCSetAppIcon* msg = [[FMCSetAppIcon alloc] init];
     msg.syncFileName = syncFileName;
     msg.correlationID = correlationID;
     
@@ -393,7 +389,7 @@ correlationID{
 
 +(FMCSetDisplayLayout*) buildSetDisplayLayout:(NSString*) displayLayout correlationID:(NSNumber*) correlationID {
     
-    FMCSetDisplayLayout* msg = [[[FMCSetDisplayLayout alloc] init] autorelease];
+    FMCSetDisplayLayout* msg = [[FMCSetDisplayLayout alloc] init];
     msg.displayLayout = displayLayout;
     msg.correlationID = correlationID;
     
@@ -404,11 +400,11 @@ correlationID{
 //***** SetGlobalProperties *****
 +(FMCSetGlobalProperties*) buildSetGlobalPropertiesWithHelpText:(NSString*) helpText timeoutText:(NSString*) timeoutText vrHelpTitle:(NSString*) vrHelpTitle vrHelp:(NSArray*) vrHelp correlationID:(NSNumber*) correlationID {
     
-	FMCSetGlobalProperties* msg = [[[FMCSetGlobalProperties alloc] init] autorelease];
+	FMCSetGlobalProperties* msg = [[FMCSetGlobalProperties alloc] init];
 	msg.helpPrompt = [FMCTTSChunkFactory buildTTSChunksFromSimple:helpText];
 	msg.timeoutPrompt = [FMCTTSChunkFactory buildTTSChunksFromSimple:timeoutText];
     msg.vrHelpTitle = vrHelpTitle;
-    msg.vrHelp = [[vrHelp mutableCopy] autorelease];
+    msg.vrHelp = [vrHelp mutableCopy];
     msg.correlationID = correlationID;
 	
 	return msg;
@@ -416,7 +412,7 @@ correlationID{
 
 +(FMCSetGlobalProperties*) buildSetGlobalPropertiesWithHelpText:(NSString*) helpText timeoutText:(NSString*) timeoutText correlationID:(NSNumber*) correlationID {
 	
-    FMCSetGlobalProperties* msg = [[[FMCSetGlobalProperties alloc] init] autorelease];
+    FMCSetGlobalProperties* msg = [[FMCSetGlobalProperties alloc] init];
 	msg.helpPrompt = [FMCTTSChunkFactory buildTTSChunksFromSimple:helpText];
 	msg.timeoutPrompt = [FMCTTSChunkFactory buildTTSChunksFromSimple:timeoutText];
 	msg.correlationID = correlationID;
@@ -429,8 +425,8 @@ correlationID{
 //***** SetMediaClockTimer *****
 +(FMCSetMediaClockTimer*) buildSetMediaClockTimerWithHours:(NSNumber*) hours minutes:(NSNumber*) minutes seconds:(NSNumber*) seconds updateMode:(FMCUpdateMode*) updateMode correlationID:(NSNumber*) correlationID  {
 	
-    FMCSetMediaClockTimer* msg = [[[FMCSetMediaClockTimer alloc] init] autorelease];
-	FMCStartTime* startTime = [[[FMCStartTime alloc] init] autorelease];
+    FMCSetMediaClockTimer* msg = [[FMCSetMediaClockTimer alloc] init];
+	FMCStartTime* startTime = [[FMCStartTime alloc] init];
 	startTime.hours = hours;
 	startTime.minutes = minutes;
 	startTime.seconds = seconds;
@@ -443,7 +439,7 @@ correlationID{
 
 +(FMCSetMediaClockTimer*) buildSetMediaClockTimerWithUpdateMode:(FMCUpdateMode*) updateMode correlationID:(NSNumber*) correlationID  {
 	
-    FMCSetMediaClockTimer* msg = [[[FMCSetMediaClockTimer alloc] init] autorelease];
+    FMCSetMediaClockTimer* msg = [[FMCSetMediaClockTimer alloc] init];
 	msg.updateMode = updateMode;
 	msg.correlationID = correlationID;
 	
@@ -455,7 +451,7 @@ correlationID{
 //***** Show *****
 +(FMCShow*) buildShowWithMainField1:(NSString*) mainField1 mainField2: (NSString*) mainField2 mainField3: (NSString*) mainField3 mainField4: (NSString*) mainField4 statusBar:(NSString*) statusBar mediaClock:(NSString*) mediaClock mediaTrack:(NSString*) mediaTrack alignment:(FMCTextAlignment*) textAlignment graphic:(FMCImage*) graphic softButtons:(NSArray*) softButtons customPresets:(NSArray*) customPresets correlationID:(NSNumber*) correlationID {
 	
-    FMCShow* msg = [[[FMCShow alloc] init] autorelease];
+    FMCShow* msg = [[FMCShow alloc] init];
 	msg.correlationID = correlationID;
 	msg.mainField1 = mainField1;
 	msg.mainField2 = mainField2;
@@ -466,15 +462,15 @@ correlationID{
 	msg.mediaTrack = mediaTrack;
 	msg.alignment = textAlignment;
     msg.graphic = graphic;
-    msg.softButtons = [[softButtons mutableCopy] autorelease];
-    msg.customPresets = [[customPresets mutableCopy] autorelease];
+    msg.softButtons = [softButtons mutableCopy];
+    msg.customPresets = [customPresets mutableCopy];
     
 	return msg;
 }
 
 +(FMCShow*) buildShowWithMainField1:(NSString*) mainField1 mainField2: (NSString*) mainField2 statusBar:(NSString*) statusBar mediaClock:(NSString*) mediaClock mediaTrack:(NSString*) mediaTrack alignment:(FMCTextAlignment*) textAlignment correlationID:(NSNumber*) correlationID  {
 	
-    FMCShow* msg = [[[FMCShow alloc] init] autorelease];
+    FMCShow* msg = [[FMCShow alloc] init];
 	msg.correlationID = correlationID;
 	msg.mainField1 = mainField1;
 	msg.mainField2 = mainField2;
@@ -494,12 +490,13 @@ correlationID{
 
 
 //***** Slider *****
-+(FMCSlider*) buildSliderDynamicFooterWithNumTicks:(NSNumber*) numTicks position:(NSNumber*) position sliderHeader:(NSString*) sliderHeader sliderFooter:(NSArray*) sliderFooter timeout:(NSNumber*) timeout correlationID:(NSNumber*) correlationID {	FMCSlider* msg = [[[FMCSlider alloc] init] autorelease];
++(FMCSlider*) buildSliderDynamicFooterWithNumTicks:(NSNumber*) numTicks position:(NSNumber*) position sliderHeader:(NSString*) sliderHeader sliderFooter:(NSArray*) sliderFooter timeout:(NSNumber*) timeout correlationID:(NSNumber*) correlationID {\
+    FMCSlider* msg = [[FMCSlider alloc] init];
 	msg.correlationID = correlationID;
     msg.numTicks = numTicks;
     msg.position = position;
     msg.sliderHeader = sliderHeader;
-    msg.sliderFooter = [[sliderFooter mutableCopy] autorelease];
+    msg.sliderFooter = [sliderFooter mutableCopy];
 	msg.timeout = timeout;
     
     return msg;
@@ -522,9 +519,9 @@ correlationID{
 //***** Speak *****
 +(FMCSpeak*) buildSpeakWithTTSChunks:(NSArray*) ttsChunks correlationID:(NSNumber*) correlationID  {
 	
-    FMCSpeak* msg = [[[FMCSpeak alloc] init] autorelease];
+    FMCSpeak* msg = [[FMCSpeak alloc] init];
 	msg.correlationID = correlationID;
-	msg.ttsChunks = [[ttsChunks mutableCopy] autorelease];
+	msg.ttsChunks = [ttsChunks mutableCopy];
 	
 	return msg;
 }
@@ -532,7 +529,7 @@ correlationID{
 //***
 +(FMCSpeak*) buildSpeakWithTTS:(NSString*) ttsText correlationID:(NSNumber*) correlationID  {
 	
-    FMCTTSChunk* simpleChunk = [[[FMCTTSChunk alloc] init] autorelease];
+    FMCTTSChunk* simpleChunk = [[FMCTTSChunk alloc] init];
 	simpleChunk.text = ttsText;
 	simpleChunk.type = FMCSpeechCapabilities.TEXT;
 	NSArray* ttsChunks = [NSMutableArray arrayWithObject:simpleChunk];
@@ -545,7 +542,7 @@ correlationID{
 
 +(FMCSubscribeButton*) buildSubscribeButtonWithName:(FMCButtonName*) buttonName correlationID:(NSNumber*) correlationID {
 	
-    FMCSubscribeButton* msg = [[[FMCSubscribeButton alloc] init] autorelease];
+    FMCSubscribeButton* msg = [[FMCSubscribeButton alloc] init];
 	msg.correlationID = correlationID;
 	msg.buttonName = buttonName;
 	
@@ -554,7 +551,7 @@ correlationID{
 
 +(FMCSubscribeVehicleData*) buildSubscribeVehicleDataWithGPS:(NSNumber*) gps speed:(NSNumber*) speed rpm:(NSNumber*) rpm fuelLevel:(NSNumber*) fuelLevel fuelLevelState:(NSNumber*) fuelLevelState instantFuelConsumption:(NSNumber*) instantFuelConsumption externalTemperature:(NSNumber*) externalTemperature prndl:(NSNumber*) prndl tirePressure:(NSNumber*) tirePressure odometer:(NSNumber*) odometer beltStatus:(NSNumber*) beltStatus bodyInformation:(NSNumber*) bodyInformation deviceStatus:(NSNumber*) deviceStatus driverBraking:(NSNumber*) driverBraking wiperStatus:(NSNumber*) wiperStatus headLampStatus:(NSNumber*) headLampStatus engineTorque:(NSNumber*) engineTorque accPedalPosition:(NSNumber*) accPedalPosition steeringWheelAngle:(NSNumber*) steeringWheelAngle correlationID:(NSNumber*) correlationID {
 	
-    FMCSubscribeVehicleData* msg = [[[FMCSubscribeVehicleData alloc] init] autorelease];
+    FMCSubscribeVehicleData* msg = [[FMCSubscribeVehicleData alloc] init];
     msg.gps = gps;
 	msg.speed = speed;
 	msg.rpm = rpm;
@@ -581,7 +578,7 @@ correlationID{
 
 +(FMCUnregisterAppInterface*) buildUnregisterAppInterfaceWithCorrelationID:(NSNumber*) correlationID  {
 	
-    FMCUnregisterAppInterface* msg = [[[FMCUnregisterAppInterface alloc] init] autorelease];
+    FMCUnregisterAppInterface* msg = [[FMCUnregisterAppInterface alloc] init];
 	msg.correlationID = correlationID;
 	
     return msg;
@@ -589,7 +586,7 @@ correlationID{
 
 +(FMCUnsubscribeButton*) buildUnsubscribeButtonWithName:(FMCButtonName*) buttonName correlationID:(NSNumber*) correlationID {
 	
-    FMCUnsubscribeButton *msg = [[[FMCUnsubscribeButton alloc] init] autorelease];
+    FMCUnsubscribeButton *msg = [[FMCUnsubscribeButton alloc] init];
 	msg.buttonName = buttonName;
 	msg.correlationID = correlationID;
 	
@@ -598,7 +595,7 @@ correlationID{
 
 +(FMCUnsubscribeVehicleData*) buildUnsubscribeVehicleDataWithGPS:(NSNumber*) gps speed:(NSNumber*) speed rpm:(NSNumber*) rpm fuelLevel:(NSNumber*) fuelLevel fuelLevelState:(NSNumber*) fuelLevelState instantFuelConsumption:(NSNumber*) instantFuelConsumption externalTemperature:(NSNumber*) externalTemperature prndl:(NSNumber*) prndl tirePressure:(NSNumber*) tirePressure odometer:(NSNumber*) odometer beltStatus:(NSNumber*) beltStatus bodyInformation:(NSNumber*) bodyInformation deviceStatus:(NSNumber*) deviceStatus driverBraking:(NSNumber*) driverBraking wiperStatus:(NSNumber*) wiperStatus headLampStatus:(NSNumber*) headLampStatus engineTorque:(NSNumber*) engineTorque accPedalPosition:(NSNumber*) accPedalPosition steeringWheelAngle:(NSNumber*) steeringWheelAngle correlationID:(NSNumber*) correlationID {
 	
-    FMCUnsubscribeVehicleData* msg = [[[FMCUnsubscribeVehicleData alloc] init] autorelease];
+    FMCUnsubscribeVehicleData* msg = [[FMCUnsubscribeVehicleData alloc] init];
     msg.gps = gps;
 	msg.speed = speed;
 	msg.rpm = rpm;

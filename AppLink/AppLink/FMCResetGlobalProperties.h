@@ -10,6 +10,6 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSMutableArray* properties;
+@property(strong) NSMutableArray* properties;
 
 @end

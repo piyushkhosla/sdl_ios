@@ -45,7 +45,6 @@ static NSMutableArray* debugToolConsoleList = nil;
     va_end(args);
     
     [self logInfo:toOutRaw withType:FMCDebugType_Debug toOutput:FMCDebugOutput_DeviceConsole];
-    [toOutRaw release];
 }
 
 +(void) logInfo:(NSString *)info withType:(FMCDebugType)debugType{
@@ -55,19 +54,12 @@ static NSMutableArray* debugToolConsoleList = nil;
 }
 
 +(void) logInfo:(NSString *)info withType:(FMCDebugType)debugType toOutput:(FMCDebugOutputType)outputType {
-	NSString* toOutRaw = nil;
-    //NSLog(@"FMCDebugTool, fmt = %@", fmt);
-    
-    toOutRaw = [[NSString alloc] initWithString:info];
-    
-    //NSMutableString *toOut = [[NSMutableString alloc] initWithFormat:@"%@: ", VERSION_STRING];
-//    NSMutableString *toOut = [[NSMutableString alloc] initWithString:@"FMCDebugTool: "];
+
+	NSString* toOutRaw = [[NSString alloc] initWithString:info];
     NSMutableString *toOut = [[NSMutableString alloc] initWithFormat:@"AppLink (%@): ", [FMCDebugTool stringForDebugType:debugType]];
     
     [toOut appendString:toOutRaw];
-    
-    [toOutRaw release];
-	
+
     [FMCSiphonServer init];
     [FMCSiphonServer _siphonNSLogData:toOut];
     
@@ -80,8 +72,7 @@ static NSMutableArray* debugToolConsoleList = nil;
             [console logInfo:toOut];
         }
     }
-    
-    [toOut release];
+
 }
 
 +(void) logException:(NSException*) ex withMessage:(NSString*) fmt, ...  {
@@ -92,11 +83,8 @@ static NSMutableArray* debugToolConsoleList = nil;
 
     toOutRaw = [[NSString alloc] initWithFormat:fmt arguments:args];
     
-//    NSMutableString *toOut = [[NSMutableString alloc] initWithFormat:@"%@: ", VERSION_STRING];
     NSMutableString *toOut = [[NSMutableString alloc] initWithString:@"FMCDebugTool: "];
     [toOut appendString:toOutRaw];
-    
-    [toOutRaw release];
     
     va_end(args);
     
@@ -117,7 +105,6 @@ static NSMutableArray* debugToolConsoleList = nil;
 		[console logException:ex withMessage:toOut];
 	}
     
-    [toOut release];
 }
 
 

@@ -11,7 +11,7 @@
     NSDateFormatter* dateFormatter;
 }
 
-@property (readonly) NSMutableArray *messageList;
+@property (strong, readonly) NSMutableArray *messageList;
 
 -(id) initWithTableView:(UITableView*) tableView;
 

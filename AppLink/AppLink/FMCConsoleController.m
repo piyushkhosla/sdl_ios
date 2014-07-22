@@ -123,7 +123,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     NSDictionary *currentDictionary = [messageList objectAtIndex:indexPath.row];
@@ -137,7 +137,6 @@
 		NSString* title = [NSString stringWithFormat:@"%@ (%@)", rpc.name, rpc.messageType];
 		
         //TODO: Cell Color Based On Message Type
-//        cell.textLabel.textColor = [UIColor colorWithRed:255.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f];
         cell.textLabel.text = title;
         
 		if ([rpc.messageType isEqualToString:@"response"]) {
@@ -187,7 +186,7 @@
         if (!jsonData) {
             alertText = @"Error parsing the JSON.";
         } else {
-            alertText = [[[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding] autorelease];
+            alertText = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
         }
 				
 	} else {
@@ -196,7 +195,7 @@
 	
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"RPCMessage" message:alertText delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 	[alertView show];
-	[alertView release];
+	alertView = nil;
     
 	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
@@ -217,27 +216,6 @@
 -(void) logException:(NSException*) ex withMessage:(NSString*) message {
 	[self appendString:message];
 	[self append:[ex description]];
-}
-	 
-#pragma mark -
-#pragma mark Memory management
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Relinquish ownership any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
-    [messageList release];
-    [dateFormatter release];
-}
-
-- (void)dealloc {
-    [super dealloc];
 }
 
 @end

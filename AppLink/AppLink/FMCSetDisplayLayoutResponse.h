@@ -13,9 +13,9 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCDisplayCapabilities* displayCapabilities;
-@property(assign) NSMutableArray* buttonCapabilities;
-@property(assign) NSMutableArray* softButtonCapabilities;
-@property(assign) FMCPresetBankCapabilities* presetBankCapabilities;
+@property(strong) FMCDisplayCapabilities* displayCapabilities;
+@property(strong) NSMutableArray* buttonCapabilities;
+@property(strong) NSMutableArray* softButtonCapabilities;
+@property(strong) FMCPresetBankCapabilities* presetBankCapabilities;
 
 @end

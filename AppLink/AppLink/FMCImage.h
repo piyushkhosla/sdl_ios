@@ -12,7 +12,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSString* value;
-@property(assign) FMCImageType* imageType;
+@property(strong) NSString* value;
+@property(strong) FMCImageType* imageType;
 
 @end

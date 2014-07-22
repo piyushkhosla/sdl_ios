@@ -10,9 +10,9 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* shortPressAvailable;
-@property(assign) NSNumber* longPressAvailable;
-@property(assign) NSNumber* upDownAvailable;
-@property(assign) NSNumber* imageSupported;
+@property(strong) NSNumber* shortPressAvailable;
+@property(strong) NSNumber* longPressAvailable;
+@property(strong) NSNumber* upDownAvailable;
+@property(strong) NSNumber* imageSupported;
 
 @end

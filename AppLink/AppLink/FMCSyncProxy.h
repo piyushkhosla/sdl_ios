@@ -12,18 +12,18 @@
 
 @interface FMCSyncProxy : NSObject<FMCProtocolListener, NSStreamDelegate> {
     Byte _version;
-    
-	NSObject<FMCTransport>* transport;
-	NSObject<FMCProtocol>* protocol;
-	NSMutableArray* proxyListeners;
 	Byte rpcSessionID;
 	Byte bulkSessionID;
-	
-    NSTimer* handshakeTimer;
-    
 	BOOL isConnected;
     BOOL alreadyDestructed;
+
 }
+
+@property (strong) NSObject<FMCProtocol>* protocol;
+@property (strong) NSObject<FMCTransport>* transport;
+@property (strong) NSMutableArray* proxyListeners;
+@property (strong) NSTimer* handshakeTimer;
+
 
 -(id) initWithTransport:(NSObject<FMCTransport>*) transport protocol:(NSObject<FMCProtocol>*) protocol delegate:(NSObject<FMCProxyListener>*) delegate;
 

@@ -13,9 +13,9 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCTextFieldName* name;
-@property(assign) FMCCharacterSet* characterSet;
-@property(assign) NSNumber* width;
-@property(assign) NSNumber* rows;
+@property(strong) FMCTextFieldName* name;
+@property(strong) FMCCharacterSet* characterSet;
+@property(strong) NSNumber* width;
+@property(strong) NSNumber* rows;
 
 @end

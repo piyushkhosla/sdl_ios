@@ -53,7 +53,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCTextField alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCTextField alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -74,7 +74,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCImageField alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCImageField alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -138,7 +138,7 @@
     if ([obj isKindOfClass:FMCScreenParams.class]) {
         return (FMCScreenParams*)obj;
     } else {
-        return [[[FMCScreenParams alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCScreenParams alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 

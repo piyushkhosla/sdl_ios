@@ -14,9 +14,9 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* powerModeActive;
-@property(assign) FMCPowerModeQualificationStatus* powerModeQualificationStatus;
-@property(assign) FMCCarModeStatus* carModeStatus;
-@property(assign) FMCPowerModeStatus* powerModeStatus;
+@property(strong) NSNumber* powerModeActive;
+@property(strong) FMCPowerModeQualificationStatus* powerModeQualificationStatus;
+@property(strong) FMCCarModeStatus* carModeStatus;
+@property(strong) FMCPowerModeStatus* powerModeStatus;
 
 @end

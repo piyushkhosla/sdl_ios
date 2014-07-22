@@ -12,16 +12,16 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSString* navigationText1;
-@property(assign) NSString* navigationText2;
-@property(assign) NSString* eta;
-@property(assign) NSString* timeToDestination;
-@property(assign) NSString* totalDistance;
-@property(assign) FMCImage* turnIcon;
-@property(assign) FMCImage* nextTurnIcon;
-@property(assign) NSNumber* distanceToManeuver;
-@property(assign) NSNumber* distanceToManeuverScale;
-@property(assign) NSNumber* maneuverComplete;
-@property(assign) NSMutableArray* softButtons;
+@property(strong) NSString* navigationText1;
+@property(strong) NSString* navigationText2;
+@property(strong) NSString* eta;
+@property(strong) NSString* timeToDestination;
+@property(strong) NSString* totalDistance;
+@property(strong) FMCImage* turnIcon;
+@property(strong) FMCImage* nextTurnIcon;
+@property(strong) NSNumber* distanceToManeuver;
+@property(strong) NSNumber* distanceToManeuverScale;
+@property(strong) NSNumber* maneuverComplete;
+@property(strong) NSMutableArray* softButtons;
 
 @end

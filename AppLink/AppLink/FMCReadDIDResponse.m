@@ -34,7 +34,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCDIDResult alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCDIDResult alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }

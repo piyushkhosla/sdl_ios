@@ -70,7 +70,7 @@
     if ([obj isKindOfClass:FMCImageResolution.class]) {
         return (FMCImageResolution*)obj;
     } else {
-        return [[[FMCImageResolution alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCImageResolution alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 

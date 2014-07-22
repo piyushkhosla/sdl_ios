@@ -14,10 +14,10 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCLanguage* language;
-@property(assign) FMCKeyboardLayout* keyboardLayout;
-@property(assign) FMCKeypressMode* keypressMode;
-@property(assign) NSMutableArray* limitedCharacterList;
-@property(assign) NSString* autoCompleteText;
+@property(strong) FMCLanguage* language;
+@property(strong) FMCKeyboardLayout* keyboardLayout;
+@property(strong) FMCKeypressMode* keypressMode;
+@property(strong) NSMutableArray* limitedCharacterList;
+@property(strong) NSString* autoCompleteText;
 
 @end

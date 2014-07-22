@@ -12,7 +12,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSString* navigationText;
-@property(assign) FMCImage* turnIcon;
+@property(strong) NSString* navigationText;
+@property(strong) FMCImage* turnIcon;
 
 @end

@@ -13,7 +13,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCImageResolution* resolution;
-@property(assign) FMCTouchEventCapabilities* touchEventAvailable;
+@property(strong) FMCImageResolution* resolution;
+@property(strong) FMCTouchEventCapabilities* touchEventAvailable;
 
 @end

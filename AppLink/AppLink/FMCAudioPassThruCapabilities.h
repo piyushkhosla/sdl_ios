@@ -14,8 +14,8 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCSamplingRate* samplingRate;
-@property(assign) FMCBitsPerSample* bitsPerSample;
-@property(assign) FMCAudioType* audioType;
+@property(strong) FMCSamplingRate* samplingRate;
+@property(strong) FMCBitsPerSample* bitsPerSample;
+@property(strong) FMCAudioType* audioType;
 
 @end

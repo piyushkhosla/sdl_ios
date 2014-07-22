@@ -12,7 +12,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCTouchType* type;
-@property(assign) NSMutableArray* event;
+@property(strong) FMCTouchType* type;
+@property(strong) NSMutableArray* event;
 
 @end

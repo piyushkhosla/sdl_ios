@@ -13,12 +13,12 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSMutableArray* helpPrompt;
-@property(assign) NSMutableArray* timeoutPrompt;
-@property(assign) NSString* vrHelpTitle;
-@property(assign) NSMutableArray* vrHelp;
-@property(assign) NSString* menuTitle;
-@property(assign) FMCImage* menuIcon;
-@property(assign) FMCKeyboardProperties* keyboardProperties;
+@property(strong) NSMutableArray* helpPrompt;
+@property(strong) NSMutableArray* timeoutPrompt;
+@property(strong) NSString* vrHelpTitle;
+@property(strong) NSMutableArray* vrHelp;
+@property(strong) NSString* menuTitle;
+@property(strong) FMCImage* menuIcon;
+@property(strong) FMCKeyboardProperties* keyboardProperties;
 
 @end

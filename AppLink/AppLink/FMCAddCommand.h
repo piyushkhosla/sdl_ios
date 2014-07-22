@@ -13,9 +13,9 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* cmdID;
-@property(assign) FMCMenuParams* menuParams;
-@property(assign) NSMutableArray* vrCommands;
-@property(assign) FMCImage* cmdIcon;
+@property(strong) NSNumber* cmdID;
+@property(strong) FMCMenuParams* menuParams;
+@property(strong) NSMutableArray* vrCommands;
+@property(strong) FMCImage* cmdIcon;
 
 @end

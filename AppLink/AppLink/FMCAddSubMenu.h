@@ -10,8 +10,8 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* menuID;
-@property(assign) NSNumber* position;
-@property(assign) NSString* menuName;
+@property(strong) NSNumber* menuID;
+@property(strong) NSNumber* position;
+@property(strong) NSString* menuName;
 
 @end

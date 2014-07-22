@@ -92,7 +92,7 @@
     if ([obj isKindOfClass:FMCImage.class]) {
         return (FMCImage*)obj;
     } else {
-        return [[[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -109,7 +109,7 @@
     if ([obj isKindOfClass:FMCImage.class]) {
         return (FMCImage*)obj;
     } else {
-        return [[[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -164,7 +164,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCSoftButton alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCSoftButton alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }

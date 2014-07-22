@@ -10,8 +10,8 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSString* scrollableMessageBody;
-@property(assign) NSNumber* timeout;
-@property(assign) NSMutableArray* softButtons;
+@property(strong) NSString* scrollableMessageBody;
+@property(strong) NSNumber* timeout;
+@property(strong) NSMutableArray* softButtons;
 
 @end

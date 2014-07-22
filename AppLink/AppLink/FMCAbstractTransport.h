@@ -9,8 +9,8 @@
 @interface FMCAbstractTransport : NSObject<FMCTransport>
 
 @property (weak) id<FMCTransportDelegate> delegate;
-@property (readonly) NSString* endpointName;
-@property (readonly) NSString* endpointParam;
+@property (strong, readonly) NSString* endpointName;
+@property (strong, readonly) NSString* endpointParam;
 
 - (id) initWithEndpoint:(NSString*) endpoint endpointParam:(NSString*) endointParam;
 

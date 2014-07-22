@@ -10,7 +10,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSMutableArray* allowed;
-@property(assign) NSMutableArray* userDisallowed;
+@property(strong) NSMutableArray* allowed;
+@property(strong) NSMutableArray* userDisallowed;
 
 @end

@@ -12,6 +12,6 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCComponentVolumeStatus* status;
+@property(strong) FMCComponentVolumeStatus* status;
 
 @end
