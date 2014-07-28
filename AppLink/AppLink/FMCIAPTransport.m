@@ -16,6 +16,9 @@
 
 
 @interface FMCIAPTransport ()
+{
+    dispatch_queue_t writeQueue;
+}
 
 @property (strong) EASession *session;
 @property (strong) EAAccessory *accessory;
@@ -32,6 +35,8 @@
 
 - (id)init {
     if (self = [super initWithEndpoint:nil endpointParam:nil]) {
+
+        writeQueue = dispatch_queue_create("com.Ford.AppLink.IAPWWriteQueue", DISPATCH_QUEUE_SERIAL);
         
         [FMCDebugTool logInfo:@"Init" withType:FMCDebugType_Transport_iAP];
         
@@ -69,12 +74,16 @@
 }
 
 - (void)sendData:(NSData*) data {
-    if (!self.writeData) {
-        self.writeData = [[NSMutableData alloc] init];
-    }
-    
-    [self.writeData appendData:data];
+
+    dispatch_async(writeQueue, ^{
+        if (!self.writeData) {
+            self.writeData = [[NSMutableData alloc] init];
+        }
+        [self.writeData appendData:data];
+    });
+
     [self writeDataOut];
+
 }
 
 
@@ -99,18 +108,24 @@
 
 - (void)stream:(NSStream *)stream handleEvent:(NSStreamEvent)event
 {
-//    if (eventCode != NSStreamEventHasBytesAvailable && eventCode != NSStreamEventHasSpaceAvailable) {
-//    [FMCDebugTool logInfo:[NSString stringWithFormat:@"%@ Stream Event: %@", ((stream == [self.session inputStream]) ? @"In" : @"Out"), [self stringForEventCode:event]] withType:FMCDebugType_Transport_iAP];
-//    }
-    
+
     switch (event) {
         case NSStreamEventNone:
             break;
         case NSStreamEventOpenCompleted:
-            if ((stream == [_session outputStream]) && !self.onControlProtocol) {
-                    [self notifyTransportConnected];
+        {
+            NSString *logMessage = [NSString stringWithFormat:@"Stream is Open:%@", stream.description];
+            [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Transport_iAP];
+
+            BOOL isOutputStream = (stream == [_session outputStream]);
+            BOOL isOnControlProtocol = self.onControlProtocol;
+
+            if (isOutputStream && !isOnControlProtocol) {
+                [FMCDebugTool logInfo:@"iAP Communication channel is open." withType:FMCDebugType_Transport_iAP];
+                [self notifyTransportConnected];
             }
             break;
+        }
         case NSStreamEventHasBytesAvailable:
             [self readDataIn];
             break;
@@ -118,7 +133,11 @@
             [self writeDataOut];
             break;
         case NSStreamEventErrorOccurred:
+        {
+            NSString *logMessage = [NSString stringWithFormat:@"Stream Error:%@", [[stream streamError] localizedDescription]];
+            [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Transport_iAP];
             break;
+        }
         case NSStreamEventEndEncountered:
             if (stream == [self.session inputStream]) {
                 [self disconnect];
@@ -246,8 +265,7 @@
 
 // Write data to the accessory while there is space available and data to write
 - (void)writeDataOut {
-    @synchronized(self)
-    {
+    dispatch_async(writeQueue, ^{
         while (([[self.session outputStream] hasSpaceAvailable]) && ([self.writeData length] > 0))
         {
             NSInteger bytesWritten = [[self.session outputStream] write:[self.writeData bytes] maxLength:[self.writeData length]];
@@ -259,7 +277,8 @@
                 [self.writeData replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
             }
         }
-    }
+    });
+
 }
 
 // Read data while there is data and space available in the input buffer
@@ -329,29 +348,6 @@
 
 -(NSString*) getHexString:(NSData*) data {
 	return [self getHexString:(Byte*)data.bytes length:(int)data.length];
-}
-
-- (NSString*)stringForEventCode:(NSStreamEvent) eventCode {
-	switch (eventCode) {
-		case NSStreamEventOpenCompleted:
-			return @"OpenCompleted";
-			break;
-		case NSStreamEventHasSpaceAvailable:
-			return @"HasSpaceAvailable";
-			break;
-		case NSStreamEventEndEncountered:
-			return @"EndEncountered";
-			break;
-		case NSStreamEventErrorOccurred:
-			return @"ErrorOccurred";
-			break;
-		case NSStreamEventHasBytesAvailable:
-			return @"HasBytesAvailable";
-			break;
-		default:
-			break;
-	}
-	return nil;
 }
 
 @end
