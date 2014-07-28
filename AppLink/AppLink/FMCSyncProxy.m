@@ -145,7 +145,8 @@ const int POLICIES_CORRELATION_ID = 65535;
 }
 
 - (void)handleProtocolSessionStarted:(FMCServiceType)sessionType sessionID:(Byte)sessionID version:(Byte)maxVersionForModule {
-    [FMCDebugTool logInfo:@"StartSession (response)" withType:FMCDebugType_Protocol];
+    NSString *logMessage = [NSString stringWithFormat:@"Session %d started.", sessionID];
+    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol];
 
     if (_version <= 1) {
         if (maxVersionForModule == 2) {
