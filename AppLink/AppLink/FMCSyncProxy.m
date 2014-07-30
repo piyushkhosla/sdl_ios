@@ -194,6 +194,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 // NOTE: This is getting rather large, excellent candidate for refactoring.
 -(void) handleRpcMessage:(NSDictionary*) msg {
+    NSString *logMessage = nil;
 
     FMCRPCMessage* rpcMsg = [[FMCRPCMessage alloc] initWithDictionary:(NSMutableDictionary*) msg];
     NSString* functionName = [rpcMsg getFunctionName];
@@ -224,18 +225,14 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 
     if ([functionName isEqualToString:@"EncodedSyncPDataResponse"]) {
-
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: ESPD (response)"]];
-        [FMCDebugTool logInfo:@"Proxy: ESPD (response)"];
-
+        [FMCDebugTool logInfo:@"Proxy: ESPD (response)" withType:FMCDebugType_RPC];
     }
 
 
     // Intercept OnEncodedSyncPData. If URL != nil, perform HTTP Post and don't pass the notification to FMProxyListeners
     if ([functionName isEqualToString:@"OnEncodedSyncPData"]) {
-
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OnEncodedSyncPData (notification)"]];
-        [FMCDebugTool logInfo:@"Proxy: OnEncodedSyncPData (notification)"];
+        logMessage = [NSString stringWithFormat:@"Proxy: OnEncodedSyncPData (notification)\n%@", msg];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
 
         NSString     *urlString           = (NSString *)    [rpcMsg getParameters:@"URL"];
         NSDictionary *encodedSyncPData    = (NSDictionary *)[rpcMsg getParameters:@"data"];
@@ -251,55 +248,54 @@ const int POLICIES_CORRELATION_ID = 65535;
     // Intercept OnSystemRequest.
     if ([functionName isEqualToString:@"OnSystemRequest"]) {
 
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OnSystemRequest (notification)"]];
-        [FMCDebugTool logInfo:@"Proxy: OnSystemRequest (notification)"];
-
+        logMessage = [NSString stringWithFormat:@"Proxy: OnSystemRequest (notification)\n%@", msg];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
 
         FMCOnSystemRequest* sysRpcMsg = [[FMCOnSystemRequest alloc] initWithDictionary:(NSMutableDictionary*) msg];
         FMCRequestType *requestType = sysRpcMsg.requestType;
         NSString       *urlString   = sysRpcMsg.url;
         FMCFileType    *fileType    = sysRpcMsg.fileType;
+
         if (requestType == [FMCRequestType PROPRIETARY])
         {
             // Validate input
             if (urlString == nil)
             {
-                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OnSystemRequest (notification) failure: url is nil."]];
-                [FMCDebugTool logInfo:@"Proxy: OnSystemRequest (notification) failure: url is nil."];
+                [FMCDebugTool logInfo:@"Proxy: OnSystemRequest (notification) failure: url is nil." withType:FMCDebugType_RPC];
                 return;
             }
             if (fileType != [FMCFileType JSON])
             {
-                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OnSystemRequest (notification) failure: file type is not JSON"]];
-                [FMCDebugTool logInfo:@"Proxy: OnSystemRequest (notification) failure: file type is not JSON"];
+                [FMCDebugTool logInfo:@"Proxy: OnSystemRequest (notification) failure: file type is not JSON" withType:FMCDebugType_RPC];
                 return;
             }
 
+            // Get data dictionary from the bulkData
+            NSDictionary *notificationDictionary = nil;
+            @try {
+                NSError *errorJSONSerializeNotification = nil;
+                notificationDictionary = [NSJSONSerialization JSONObjectWithData:sysRpcMsg.bulkData options:kNilOptions error:&errorJSONSerializeNotification];
+                if (errorJSONSerializeNotification) {
+                    [FMCDebugTool logInfo:@"Proxy: (failure) OnSystemRequest: Notification data is not valid JSON." withType:FMCDebugType_RPC];
+                    return;
+                }
+            }
+            @catch (NSException *exception) {
+                logMessage = [NSString stringWithFormat:@"Exception converting bulk data to NSDictionary. Data:\n%@", [[NSString alloc] initWithData:sysRpcMsg.bulkData encoding:NSUTF8StringEncoding]];
+                [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
 
-            // Data comes in a dictionary in the bulkData
-            NSError *errorJSONSerializeNotification = nil;
-            NSDictionary *notificationDictionary = [NSJSONSerialization JSONObjectWithData:sysRpcMsg.bulkData options:kNilOptions error:&errorJSONSerializeNotification];
-            if (errorJSONSerializeNotification) {
-                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: (failure) OnSystemRequest: Notification data is not valid JSON."]];
-                [FMCDebugTool logInfo:@"Proxy: (failure) OnSystemRequest: Notification data is not valid JSON."];
-                return;
+                [exception raise]; // rethrow
             }
 
 
             // Extract data from the dictionary
-            NSError *errorJSONSerializeBody = nil;
             NSDictionary   *requestData = notificationDictionary[@"HTTPRequest"];
             NSDictionary   *headers     = requestData[@"headers"];
-            NSDictionary   *body        = requestData[@"body"];
             NSString       *contentType = headers[@"ContentType"];
             NSTimeInterval timeout      = [headers[@"ConnectTimeout"] doubleValue];
             NSString       *method      = headers[@"RequestMethod"];
-            NSData         *data        = [NSJSONSerialization dataWithJSONObject:body options:kNilOptions error:&errorJSONSerializeBody];
-            if (errorJSONSerializeBody) {
-                [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: (failure) OnSystemRequest: Body data is not valid JSON."]];
-                [FMCDebugTool logInfo:@"Proxy: (failure) OnSystemRequest: Body data is not valid JSON."];
-                return;
-            }
+            NSString       *bodyString  = requestData[@"body"];
+            NSData         *bodyData    = [bodyString dataUsingEncoding:NSUTF8StringEncoding];
 
 
             // HTTP Request configuration
@@ -313,9 +309,8 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 
             // Logging
-            NSString *msg = [NSString stringWithFormat:@"Proxy: SR HTTP Send"];
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:msg]];
-            [FMCDebugTool logInfo:msg];
+            logMessage = [NSString stringWithFormat:@"Proxy: OnSystemRequest (HTTP Request) to URL %@\nBodyData=%@", urlString, bodyData];
+            [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
 
 
             // Send the HTTP Request
@@ -323,13 +318,20 @@ const int POLICIES_CORRELATION_ID = 65535;
             {
                 [self OSRHTTPRequestCompletionHandler:data response:response error:error];
             };
-            NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:data completionHandler:handler];
+            NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:bodyData completionHandler:handler];
             [uploadTask resume];
 
             return;
         }
 
     } // End of OnSystemRequest
+
+    if ([functionName isEqualToString:@"SystemRequestResponse"]) {
+        logMessage = [NSString stringWithFormat:@"FMCSystemRequest (response)\n%@", msg];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
+        return;
+    }
+
 
 
     // From the function name, create the corresponding RPCObject and initialize it
@@ -421,12 +423,33 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 }
 
+// Handle the OnSystemRequest HTTP Response
 - (void)OSRHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error {
+    NSString *logMessage = nil;
+    if (error) {
+        logMessage = [NSString stringWithFormat:@"SystemRequest HTTP Response = ERROR: %@", error];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
+        return;
+    }
 
+    if (data == nil) {
+        [FMCDebugTool logInfo:@"SystemRequest HTTP Response ERROR. Data returned is nil." withType:FMCDebugType_RPC];
+        return;
+    }
+
+    // Show the HTTP response
+    logMessage = [NSString stringWithFormat:@"Proxy: OnSystemRequest (HTTP Response recieved)\nData=%@", data];
+    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
+
+    // Create the message to send to module.
     FMCSystemRequest *request = [[FMCSystemRequest alloc] init];
     request.correlationID = [NSNumber numberWithInt:POLICIES_CORRELATION_ID];
     request.requestType = [FMCRequestType PROPRIETARY];
     request.bulkData = data;
+
+    // Log the FMCSystemRequest send to module
+    logMessage = [NSString stringWithFormat:@"FMCSystemRequest (request)\n%@\nData=%@", [request serializeAsDictionary:2], data ];
+    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
     [self sendRPCRequestPrivate:request];
 
 }
