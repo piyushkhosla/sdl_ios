@@ -425,7 +425,11 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 // Handle the OnSystemRequest HTTP Response
 - (void)OSRHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error {
-    NSString *logMessage = nil;
+
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
+    NSString *logMessage = [NSString stringWithFormat:@"SystemRequest HTTP Response Status: %ld\nheaders: %@", (long)httpResponse.statusCode, httpResponse.allHeaderFields];
+    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
+
     if (error) {
         logMessage = [NSString stringWithFormat:@"SystemRequest HTTP Response = ERROR: %@", error];
         [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
