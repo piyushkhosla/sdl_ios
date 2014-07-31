@@ -202,6 +202,8 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 	if ([functionName isEqualToString:NAMES_OnAppInterfaceUnregistered]
         || [functionName isEqualToString:NAMES_UnregisterAppInterface]) {
+        logMessage = [NSString stringWithFormat:@"Unregistration forced by module. %@", msg];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
 		[self notifyProxyClosed];
 		return;
 	}
