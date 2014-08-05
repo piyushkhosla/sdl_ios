@@ -26,7 +26,7 @@ const NSUInteger RPC_HEADER_SIZE = 12;
             UInt8 rpcType = (bytePointer[0] & 0xF0) >> 4;
             self.rpcType = rpcType;
 
-            UInt32 functionID = ui32Pointer[0] & 0x0FFFFFFF;
+            UInt32 functionID = ui32Pointer[0];
             functionID = CFSwapInt32BigToHost(functionID) & 0x0FFFFFFF;
             self.functionID = functionID;
 
