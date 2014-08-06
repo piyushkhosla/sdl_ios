@@ -121,7 +121,7 @@
             BOOL isOnControlProtocol = self.onControlProtocol;
 
             if (isOutputStream && !isOnControlProtocol) {
-                [FMCDebugTool logInfo:@"iAP Communication channel is open." withType:FMCDebugType_Transport_iAP];
+//                [FMCDebugTool logInfo:@"iAP Communication channel is open." withType:FMCDebugType_Transport_iAP];
                 [self notifyTransportConnected];
             }
             break;
@@ -209,7 +209,7 @@
 #pragma mark Session Control
 
 - (void)openSession {
-    [FMCDebugTool logInfo:@"Open Session" withType:FMCDebugType_Transport_iAP];
+//    [FMCDebugTool logInfo:@"Open Session" withType:FMCDebugType_Transport_iAP];
     
     if (self.accessory && self.protocolString) {
         
@@ -230,9 +230,11 @@
                 self.onControlProtocol = YES;
             }
         } else {
-            [FMCDebugTool logInfo:@"Session is nil" withType:FMCDebugType_Transport_iAP];
             if ([self.protocolString isEqualToString:CONTROL_PROTOCOL_STRING]) {
-                [FMCDebugTool logInfo:@"App may not have declared multi com.smartdevicelink.prot strings in Info.plist" withType:FMCDebugType_Transport_iAP];
+                [FMCDebugTool logInfo:@"Session is nil on control" withType:FMCDebugType_Transport_iAP];
+                //[FMCDebugTool logInfo:@"App may not have declared multiapp com.smartdevicelink.prot strings in Info.plist" withType:FMCDebugType_Transport_iAP];
+            } else {
+                [FMCDebugTool logInfo:@"Session is nil" withType:FMCDebugType_Transport_iAP];
             }
         }
     } else {
@@ -241,7 +243,7 @@
 }
 
 - (void)closeSession {
-    [FMCDebugTool logInfo:@"Close Session" withType:FMCDebugType_Transport_iAP];
+//    [FMCDebugTool logInfo:@"Close Session" withType:FMCDebugType_Transport_iAP];
     
     if (self.session) {
         [FMCDebugTool logInfo:@"Closing Session" withType:FMCDebugType_Transport_iAP];
@@ -307,7 +309,7 @@
 
         NSNumber *dataProtocol = [NSNumber numberWithUnsignedInt:receivedBytes[0]];
         
-        [FMCDebugTool logInfo:[NSString stringWithFormat:@"Data Protocol: %@", dataProtocol] withType:FMCDebugType_Transport_iAP];
+        [FMCDebugTool logInfo:[NSString stringWithFormat:@"Move To Prot: %@", dataProtocol] withType:FMCDebugType_Transport_iAP];
         
         if ([dataProtocol isEqualToNumber:[NSNumber numberWithInt:255]]) {
             [FMCDebugTool logInfo:@"All Available Protocols Are In Use" withType:FMCDebugType_Transport_iAP];
@@ -318,7 +320,7 @@
         else {
             NSString *currentProtocolString = [NSString stringWithFormat:@"com.smartdevicelink.prot%@", dataProtocol];
             
-            [FMCDebugTool logInfo:[NSString stringWithFormat:@"Switch To Data Protocol: %@", currentProtocolString] withType:FMCDebugType_Transport_iAP];
+//            [FMCDebugTool logInfo:[NSString stringWithFormat:@"Switch To Data Protocol: %@", currentProtocolString] withType:FMCDebugType_Transport_iAP];
             
             [self closeSession];
             self.onControlProtocol = NO;

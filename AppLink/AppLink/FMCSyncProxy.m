@@ -110,8 +110,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 #pragma mark - Handshake Timer
 - (void)handshakeTimerFired {
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: Init Handshake Timeout"]];
-    [FMCDebugTool logInfo:@"Proxy: Init Handshake Timeout"];
+    [FMCDebugTool logInfo:@"RPC Initial Handshake Timeout" withType:FMCDebugType_RPC];
 
     [self destroyHandshakeTimer];
     [self performSelector:@selector(notifyProxyClosed) withObject:nil afterDelay:notifyProxyClosedDelay];
@@ -145,8 +144,8 @@ const int POLICIES_CORRELATION_ID = 65535;
 }
 
 - (void)handleProtocolSessionStarted:(FMCServiceType)sessionType sessionID:(Byte)sessionID version:(Byte)maxVersionForModule {
-    NSString *logMessage = [NSString stringWithFormat:@"Session %d started.", sessionID];
-    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol];
+    NSString *logMessage = [NSString stringWithFormat:@"StartSession (response) with sessionID %d", sessionID];
+    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
 
     if (_version <= 1) {
         if (maxVersionForModule == 2) {
