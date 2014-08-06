@@ -42,6 +42,8 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessoryConnected:) name:EAAccessoryDidConnectNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessoryDisconnected:) name:EAAccessoryDidDisconnectNotification object:nil];
+        
+        [FMCSiphonServer init];
     }
     return self;
 }
@@ -271,6 +273,9 @@
         while (([[self.session outputStream] hasSpaceAvailable]) && ([self.writeData length] > 0))
         {
             NSInteger bytesWritten = [[self.session outputStream] write:[self.writeData bytes] maxLength:[self.writeData length]];
+            
+            [FMCSiphonServer _siphonRawTransportDataFromApp:[self.writeData bytes] msgBytesLength:(int)bytesWritten];
+            
             if (bytesWritten == -1) {
                 [FMCDebugTool logInfo:@"WriteDataOut Error" withType:FMCDebugType_Transport_iAP];
                 break;
@@ -289,6 +294,8 @@
     while ([[self.session inputStream] hasBytesAvailable])
     {
         NSInteger bytesRead = [[self.session inputStream] read:buf maxLength:IAP_INPUT_BUFFER_SIZE];
+        
+        [FMCSiphonServer _siphonRawTransportDataFromSync:buf msgBytesLength:(int)bytesRead];
         
         if (bytesRead > 0) {
             [self handleBytesReceivedFromTransport:buf length:bytesRead];
