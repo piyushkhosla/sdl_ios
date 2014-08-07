@@ -144,9 +144,9 @@ const int POLICIES_CORRELATION_ID = 65535;
 }
 
 - (void)handleProtocolSessionStarted:(FMCServiceType)sessionType sessionID:(Byte)sessionID version:(Byte)maxVersionForModule {
-    NSString *logMessage = [NSString stringWithFormat:@"StartSession (response) with sessionID %d", sessionID];
+    NSString *logMessage = [NSString stringWithFormat:@"StartSession (response)\nSessionId: %d", sessionID];
     [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
-
+    
     if (_version <= 1) {
         if (maxVersionForModule == 2) {
             _version = maxVersionForModule;
@@ -226,13 +226,13 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 
     if ([functionName isEqualToString:@"EncodedSyncPDataResponse"]) {
-        [FMCDebugTool logInfo:@"Proxy: ESPD (response)" withType:FMCDebugType_RPC];
+        [FMCDebugTool logInfo:@"EncodedSyncPData (response)" withType:FMCDebugType_RPC];
     }
 
 
     // Intercept OnEncodedSyncPData. If URL != nil, perform HTTP Post and don't pass the notification to FMProxyListeners
     if ([functionName isEqualToString:@"OnEncodedSyncPData"]) {
-        logMessage = [NSString stringWithFormat:@"Proxy: OnEncodedSyncPData (notification)\n%@", msg];
+        logMessage = [NSString stringWithFormat:@"OnEncodedSyncPData (notification)\n%@", msg];
         [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
 
         NSString     *urlString           = (NSString *)    [rpcMsg getParameters:@"URL"];
@@ -249,7 +249,7 @@ const int POLICIES_CORRELATION_ID = 65535;
     // Intercept OnSystemRequest.
     if ([functionName isEqualToString:@"OnSystemRequest"]) {
 
-        logMessage = [NSString stringWithFormat:@"Proxy: OnSystemRequest (notification)\n%@", msg];
+        logMessage = [NSString stringWithFormat:@"OnSystemRequest (notification)\n%@", msg];
         [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
 
         FMCOnSystemRequest* sysRpcMsg = [[FMCOnSystemRequest alloc] initWithDictionary:(NSMutableDictionary*) msg];
@@ -262,12 +262,12 @@ const int POLICIES_CORRELATION_ID = 65535;
             // Validate input
             if (urlString == nil)
             {
-                [FMCDebugTool logInfo:@"Proxy: OnSystemRequest (notification) failure: url is nil." withType:FMCDebugType_RPC];
+                [FMCDebugTool logInfo:@"OnSystemRequest (notification) failure: url is nil." withType:FMCDebugType_RPC];
                 return;
             }
             if (fileType != [FMCFileType JSON])
             {
-                [FMCDebugTool logInfo:@"Proxy: OnSystemRequest (notification) failure: file type is not JSON" withType:FMCDebugType_RPC];
+                [FMCDebugTool logInfo:@"OnSystemRequest (notification) failure: file type is not JSON" withType:FMCDebugType_RPC];
                 return;
             }
 
@@ -277,7 +277,7 @@ const int POLICIES_CORRELATION_ID = 65535;
                 NSError *errorJSONSerializeNotification = nil;
                 notificationDictionary = [NSJSONSerialization JSONObjectWithData:sysRpcMsg.bulkData options:kNilOptions error:&errorJSONSerializeNotification];
                 if (errorJSONSerializeNotification) {
-                    [FMCDebugTool logInfo:@"Proxy: (failure) OnSystemRequest: Notification data is not valid JSON." withType:FMCDebugType_RPC];
+                    [FMCDebugTool logInfo:@"OnSystemRequest failure: Notification data is not valid JSON." withType:FMCDebugType_RPC];
                     return;
                 }
             }
@@ -310,7 +310,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 
             // Logging
-            logMessage = [NSString stringWithFormat:@"Proxy: OnSystemRequest (HTTP Request) to URL %@\nBodyData=%@", urlString, bodyData];
+            logMessage = [NSString stringWithFormat:@"OnSystemRequest (HTTP request) to URL %@\nBodyData=%@", urlString, bodyData];
             [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
 
 
@@ -328,7 +328,7 @@ const int POLICIES_CORRELATION_ID = 65535;
     } // End of OnSystemRequest
 
     if ([functionName isEqualToString:@"SystemRequestResponse"]) {
-        logMessage = [NSString stringWithFormat:@"FMCSystemRequest (response)\n%@", msg];
+        logMessage = [NSString stringWithFormat:@"SystemRequest (response)\n%@", msg];
         [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
         return;
     }
@@ -395,7 +395,7 @@ const int POLICIES_CORRELATION_ID = 65535;
     };
 
     // Send the HTTP Request
-    [FMCDebugTool logInfo:@"Proxy: OnEncodedSyncPData (HTTP Request)"];
+    [FMCDebugTool logInfo:@"OnEncodedSyncPData (HTTP request)" withType:FMCDebugType_RPC];
     NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:data completionHandler:handler];
     [uploadTask resume];
 
@@ -403,11 +403,11 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 - (void)OESPHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error {
     // Sample of response: {"data":["SDLKGLSDKFJLKSjdslkfjslkJLKDSGLKSDJFLKSDJF"]}
-    [FMCDebugTool logInfo:@"Proxy: OnEncodedSyncPData (HTTP Response recieved)"];
+    [FMCDebugTool logInfo:@"OnEncodedSyncPData (HTTP response)" withType:FMCDebugType_RPC];
 
     // Validate response data.
     if (data.length == 0) {
-        [FMCDebugTool logInfo:@"Proxy: (failure) OnEncodedSyncP response data is empty."];
+        [FMCDebugTool logInfo:@"OnEncodedSyncP failure: response data is empty" withType:FMCDebugType_RPC];
         return;
     }
 
@@ -428,22 +428,22 @@ const int POLICIES_CORRELATION_ID = 65535;
 - (void)OSRHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error {
 
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
-    NSString *logMessage = [NSString stringWithFormat:@"SystemRequest HTTP Response Status: %ld\nheaders: %@", (long)httpResponse.statusCode, httpResponse.allHeaderFields];
+    NSString *logMessage = [NSString stringWithFormat:@"OnSystemRequest (HTTP response) Status: %ld\nheaders: %@", (long)httpResponse.statusCode, httpResponse.allHeaderFields];
     [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
 
     if (error) {
-        logMessage = [NSString stringWithFormat:@"SystemRequest HTTP Response = ERROR: %@", error];
+        logMessage = [NSString stringWithFormat:@"OnSystemRequest (HTTP response) = ERROR: %@", error];
         [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
         return;
     }
 
     if (data == nil) {
-        [FMCDebugTool logInfo:@"SystemRequest HTTP Response ERROR. Data returned is nil." withType:FMCDebugType_RPC];
+        [FMCDebugTool logInfo:@"OnSystemRequest (HTTP response) failure: Data returned is nil." withType:FMCDebugType_RPC];
         return;
     }
 
     // Show the HTTP response
-    logMessage = [NSString stringWithFormat:@"Proxy: OnSystemRequest (HTTP Response recieved)\nData=%@", data];
+    logMessage = [NSString stringWithFormat:@"OnSystemRequest (HTTP response) recieved\nData=%@", data];
     [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
 
     // Create the message to send to module.
@@ -453,7 +453,7 @@ const int POLICIES_CORRELATION_ID = 65535;
     request.bulkData = data;
 
     // Log the FMCSystemRequest send to module
-    logMessage = [NSString stringWithFormat:@"FMCSystemRequest (request)\n%@\nData=%@", [request serializeAsDictionary:2], data ];
+    logMessage = [NSString stringWithFormat:@"SystemRequest (request)\n%@\nData=%@", [request serializeAsDictionary:2], data ];
     [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
     [self sendRPCRequestPrivate:request];
 
