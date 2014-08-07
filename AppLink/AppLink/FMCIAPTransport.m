@@ -26,6 +26,11 @@
 @property (assign) BOOL onControlProtocol;
 @property (assign) BOOL useLegacyProtocol;
 @property (strong) NSString *protocolString;
+@property (assign) BOOL isOutputStreamReady;
+@property (assign) BOOL isInputStreamReady;
+
+@property (strong) NSTimer* backgroundedTimer;
+
 
 @end
 
@@ -42,6 +47,8 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessoryConnected:) name:EAAccessoryDidConnectNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessoryDisconnected:) name:EAAccessoryDidDisconnectNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
         
         [FMCSiphonServer init];
     }
@@ -103,6 +110,17 @@
     [self disconnect];
 }
 
+-(void)applicationWillEnterForeground:(NSNotification *)notification {
+    [FMCDebugTool logInfo:@"Will Enter Foreground" withType:FMCDebugType_Transport_iAP];
+    
+    [self.backgroundedTimer invalidate];
+//    [self connect];
+}
+
+-(void)applicationDidEnterBackground:(NSNotification *)notification {
+    [FMCDebugTool logInfo:@"Did Enter Background" withType:FMCDebugType_Transport_iAP];
+    self.backgroundedTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(backgroundButAwake:) userInfo: nil repeats: YES];
+}
 
 
 #pragma mark -
@@ -116,14 +134,21 @@
             break;
         case NSStreamEventOpenCompleted:
         {
-            NSString *logMessage = [NSString stringWithFormat:@"Stream is Open:%@", stream.description];
-            [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Transport_iAP];
+//            NSString *logMessage = [NSString stringWithFormat:@"Stream is Open:%@", stream.description];
+//            [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Transport_iAP];
 
-            BOOL isOutputStream = (stream == [_session outputStream]);
             BOOL isOnControlProtocol = self.onControlProtocol;
-
-            if (isOutputStream && !isOnControlProtocol) {
-//                [FMCDebugTool logInfo:@"iAP Communication channel is open." withType:FMCDebugType_Transport_iAP];
+            
+            if (stream == [_session outputStream]) {
+                self.isOutputStreamReady = YES;
+            } else if (stream == [_session inputStream]) {
+                self.isInputStreamReady = YES;
+            }
+            
+            if (isOnControlProtocol && self.isOutputStreamReady && self.isInputStreamReady) {
+                [FMCDebugTool logInfo:@"Waiting To Recieve Protocol Index" withType:FMCDebugType_Transport_iAP];
+            } else if (!isOnControlProtocol && self.isOutputStreamReady && self.isInputStreamReady) {
+                [FMCDebugTool logInfo:@"Transport Ready" withType:FMCDebugType_Transport_iAP];
                 [self notifyTransportConnected];
             }
             break;
@@ -141,10 +166,21 @@
             break;
         }
         case NSStreamEventEndEncountered:
-            if (stream == [self.session inputStream]) {
+        {
+//            NSString *logMessage = [NSString stringWithFormat:@"Stream is Closed:%@", stream.description];
+//            [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Transport_iAP];
+            
+            if (stream == [_session outputStream]) {
+                self.isOutputStreamReady = NO;
+            } else if (stream == [_session inputStream]) {
+                self.isInputStreamReady = NO;
+            }
+            
+            if (!self.isOutputStreamReady && !self.isInputStreamReady) {
                 [self disconnect];
             }
             break;
+        }
         default:
             break;
     }
@@ -204,6 +240,8 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EAAccessoryDidConnectNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EAAccessoryDidDisconnectNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
 }
 
 
@@ -235,6 +273,13 @@
             if ([self.protocolString isEqualToString:CONTROL_PROTOCOL_STRING]) {
                 [FMCDebugTool logInfo:@"Session is nil on control" withType:FMCDebugType_Transport_iAP];
                 //[FMCDebugTool logInfo:@"App may not have declared multiapp com.smartdevicelink.prot strings in Info.plist" withType:FMCDebugType_Transport_iAP];
+                
+                //Begin Connection Retry
+                float randomNumber = (float)arc4random() / UINT_MAX; // between 0 and 1
+                float randomMinMax = 0.0f + (0.5f-0.0f)*randomNumber; // between Min (0.0) and Max (0.5)
+                
+                [FMCDebugTool logInfo:[NSString stringWithFormat:@"Wait: %f", randomMinMax] withType:FMCDebugType_Transport_iAP];
+                [self performSelector:@selector(openSession) withObject:nil afterDelay:randomNumber];
             } else {
                 [FMCDebugTool logInfo:@"Session is nil" withType:FMCDebugType_Transport_iAP];
             }
@@ -260,6 +305,9 @@
         
         self.session = nil;
         self.writeData = nil;
+        
+        self.isOutputStreamReady = NO;
+        self.isInputStreamReady = NO;
     }
 }
 
@@ -316,7 +364,7 @@
 
         NSNumber *dataProtocol = [NSNumber numberWithUnsignedInt:receivedBytes[0]];
         
-        [FMCDebugTool logInfo:[NSString stringWithFormat:@"Move To Prot: %@", dataProtocol] withType:FMCDebugType_Transport_iAP];
+        [FMCDebugTool logInfo:[NSString stringWithFormat:@"Moving To Protocol Index: %@", dataProtocol] withType:FMCDebugType_Transport_iAP];
         
         if ([dataProtocol isEqualToNumber:[NSNumber numberWithInt:255]]) {
             [FMCDebugTool logInfo:@"All Available Protocols Are In Use" withType:FMCDebugType_Transport_iAP];
@@ -357,6 +405,11 @@
 
 -(NSString*) getHexString:(NSData*) data {
 	return [self getHexString:(Byte*)data.bytes length:(int)data.length];
+}
+
+-(void) backgroundButAwake:(NSTimer*) t
+{
+    [FMCDebugTool logInfo:@"Still Awake..." withType:FMCDebugType_Transport_iAP];
 }
 
 @end
