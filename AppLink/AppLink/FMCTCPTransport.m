@@ -86,6 +86,7 @@ static void TCPCallback(CFSocketRef socket, CFSocketCallBackType type, CFDataRef
 	if (sock_fd < 0) {
         
         [FMCDebugTool logInfo:@"Server Not Ready, Connection Failed" withType:FMCDebugType_Transport_TCP];
+        return;
 	}
 	
 	CFSocketContext socketCtxt = {0, (__bridge void *)(self), NULL, NULL, NULL};
