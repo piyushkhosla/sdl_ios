@@ -449,7 +449,7 @@ const int POLICIES_CORRELATION_ID = 65535;
     request.bulkData = data;
 
     // Log the FMCSystemRequest send to module
-    logMessage = [NSString stringWithFormat:@"OnSystemRequest (request)\n%@\nData length=%lu", [request serializeAsDictionary:2], (unsigned long)data.length ];
+    logMessage = [NSString stringWithFormat:@"SystemRequest (request)\n%@\nData length=%lu", [request serializeAsDictionary:2], (unsigned long)data.length ];
     [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
     [self sendRPCRequestPrivate:request];
 
