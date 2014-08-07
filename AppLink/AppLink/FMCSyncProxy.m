@@ -249,8 +249,7 @@ const int POLICIES_CORRELATION_ID = 65535;
     // Intercept OnSystemRequest.
     if ([functionName isEqualToString:@"OnSystemRequest"]) {
 
-        logMessage = [NSString stringWithFormat:@"OnSystemRequest (notification)\n%@", msg];
-        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
+        [FMCDebugTool logInfo:@"OnSystemRequest (notification)" withType:FMCDebugType_RPC];
 
         FMCOnSystemRequest* sysRpcMsg = [[FMCOnSystemRequest alloc] initWithDictionary:(NSMutableDictionary*) msg];
         FMCRequestType *requestType = sysRpcMsg.requestType;
@@ -310,7 +309,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 
             // Logging
-            logMessage = [NSString stringWithFormat:@"OnSystemRequest (HTTP request) to URL %@\nBodyData=%@", urlString, bodyData];
+            logMessage = [NSString stringWithFormat:@"OnSystemRequest (HTTP Request) to URL %@", urlString];
             [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
 
 
@@ -384,7 +383,7 @@ const int POLICIES_CORRELATION_ID = 65535;
     NSError *JSONSerializationError = nil;
     NSData *data = [NSJSONSerialization dataWithJSONObject:dictionary options:kNilOptions error:&JSONSerializationError];
     if (JSONSerializationError) {
-        [FMCDebugTool logInfo:@"Proxy: Error formatting data for HTTP Request. %@: %@", JSONSerializationError];
+        [FMCDebugTool logInfo:@"Error formatting data for HTTP Request. %@: %@", JSONSerializationError];
         return;
     }
 
@@ -427,9 +426,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 // Handle the OnSystemRequest HTTP Response
 - (void)OSRHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error {
 
-    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
-    NSString *logMessage = [NSString stringWithFormat:@"OnSystemRequest (HTTP response) Status: %ld\nheaders: %@", (long)httpResponse.statusCode, httpResponse.allHeaderFields];
-    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
+    NSString *logMessage = nil;
 
     if (error) {
         logMessage = [NSString stringWithFormat:@"OnSystemRequest (HTTP response) = ERROR: %@", error];
@@ -437,14 +434,13 @@ const int POLICIES_CORRELATION_ID = 65535;
         return;
     }
 
-    if (data == nil) {
-        [FMCDebugTool logInfo:@"OnSystemRequest (HTTP response) failure: Data returned is nil." withType:FMCDebugType_RPC];
+    if (data == nil || data.length == 0) {
+        [FMCDebugTool logInfo:@"OnSystemRequest (HTTP response) failure: No data returned." withType:FMCDebugType_RPC];
         return;
     }
 
     // Show the HTTP response
-    logMessage = [NSString stringWithFormat:@"OnSystemRequest (HTTP response) recieved\nData=%@", data];
-    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
+    [FMCDebugTool logInfo:@"OnSystemRequest (HTTP response)" withType:FMCDebugType_RPC];
 
     // Create the message to send to module.
     FMCSystemRequest *request = [[FMCSystemRequest alloc] init];
@@ -453,7 +449,7 @@ const int POLICIES_CORRELATION_ID = 65535;
     request.bulkData = data;
 
     // Log the FMCSystemRequest send to module
-    logMessage = [NSString stringWithFormat:@"SystemRequest (request)\n%@\nData=%@", [request serializeAsDictionary:2], data ];
+    logMessage = [NSString stringWithFormat:@"OnSystemRequest (request)\n%@\nData length=%lu", [request serializeAsDictionary:2], (unsigned long)data.length ];
     [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
     [self sendRPCRequestPrivate:request];
 
