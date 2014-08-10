@@ -322,7 +322,11 @@
         {
             [NSThread sleepForTimeInterval:0.020];
             NSInteger bytesWritten = [[self.session outputStream] write:[self.writeData bytes] maxLength:[self.writeData length]];
-            
+
+            CFAbsoluteTime t = CFAbsoluteTimeGetCurrent();
+            NSString* logMessage = [NSString stringWithFormat:@"%f Wrote %ld bytes to iAP.", (double)t, (long)bytesWritten];
+            NSLog(@"%@", logMessage);
+
             [FMCSiphonServer _siphonRawTransportDataFromApp:[self.writeData bytes] msgBytesLength:(int)bytesWritten];
             
             if (bytesWritten == -1) {
