@@ -320,7 +320,6 @@
     dispatch_async(writeQueue, ^{
         while (([[self.session outputStream] hasSpaceAvailable]) && ([self.writeData length] > 0))
         {
-            [NSThread sleepForTimeInterval:0.020];
             NSInteger bytesWritten = [[self.session outputStream] write:[self.writeData bytes] maxLength:[self.writeData length]];
 
             CFAbsoluteTime t = CFAbsoluteTimeGetCurrent();
