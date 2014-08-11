@@ -41,10 +41,11 @@
 - (id)init {
     if (self = [super initWithEndpoint:nil endpointParam:nil]) {
 
-        writeQueue = dispatch_queue_create("com.Ford.AppLink.IAPWWriteQueue", DISPATCH_QUEUE_SERIAL);
-        
         [FMCDebugTool logInfo:@"Init" withType:FMCDebugType_Transport_iAP];
-        
+
+        writeQueue = dispatch_queue_create("com.Ford.AppLink.IAPWWriteQueue", DISPATCH_QUEUE_SERIAL);
+        dispatch_set_target_queue(writeQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0));
+
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessoryConnected:) name:EAAccessoryDidConnectNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessoryDisconnected:) name:EAAccessoryDidDisconnectNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
@@ -83,16 +84,7 @@
 }
 
 - (void)sendData:(NSData*) data {
-
-    dispatch_async(writeQueue, ^{
-        if (!self.writeData) {
-            self.writeData = [[NSMutableData alloc] init];
-        }
-        [self.writeData appendData:data];
-    });
-
-    [self writeDataOut];
-
+    [self writeDataOut:data];
 }
 
 
@@ -157,7 +149,6 @@
             [self readDataIn];
             break;
         case NSStreamEventHasSpaceAvailable:
-            [self writeDataOut];
             break;
         case NSStreamEventErrorOccurred:
         {
@@ -316,26 +307,27 @@
 #pragma mark Low Level Read/Write
 
 // Write data to the accessory while there is space available and data to write
-- (void)writeDataOut {
+- (void)writeDataOut:(NSData *)dataOut {
     dispatch_async(writeQueue, ^{
-        while (([[self.session outputStream] hasSpaceAvailable]) && ([self.writeData length] > 0))
-        {
-            NSInteger bytesWritten = [[self.session outputStream] write:[self.writeData bytes] maxLength:[self.writeData length]];
 
-            CFAbsoluteTime t = CFAbsoluteTimeGetCurrent();
-            NSString* logMessage = [NSString stringWithFormat:@"%f Wrote %ld bytes to iAP.", (double)t, (long)bytesWritten];
-            NSLog(@"%@", logMessage);
+        NSMutableData *remainder = dataOut.mutableCopy;
 
-            [FMCSiphonServer _siphonRawTransportDataFromApp:[self.writeData bytes] msgBytesLength:(int)bytesWritten];
-            
-            if (bytesWritten == -1) {
-                [FMCDebugTool logInfo:@"WriteDataOut Error" withType:FMCDebugType_Transport_iAP];
-                break;
-            }
-            else if (bytesWritten > 0) {
-                [self.writeData replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
+        while (1) {
+            if (remainder.length == 0) break;
+
+            if ( [[self.session outputStream] hasSpaceAvailable] ) {
+                [NSThread sleepForTimeInterval:0.020];
+                NSInteger bytesWritten = [[self.session outputStream] write:remainder.bytes maxLength:remainder.length];
+                if (bytesWritten == -1) {
+                    NSLog(@"Error: %@", [[self.session outputStream] streamError]);
+                    break;
+                }
+
+                [FMCSiphonServer _siphonRawTransportDataFromApp:remainder.bytes msgBytesLength:(int)bytesWritten];
+                [remainder replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
             }
         }
+
     });
 
 }

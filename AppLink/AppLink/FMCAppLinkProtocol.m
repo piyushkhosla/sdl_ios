@@ -142,7 +142,6 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 // Use for normal messages
 - (void)sendDataToTransport:(NSData *)data {
     dispatch_async(_sendQueueDefaultPriority, ^{
-        NSLog(@"Protocol layer sending %ld bytes to transport.", (unsigned long)data.length);
         [self.transport sendData:data];
     });
 }
