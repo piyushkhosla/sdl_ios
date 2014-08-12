@@ -56,7 +56,12 @@ static NSMutableArray* debugToolConsoleList = nil;
 +(void) logInfo:(NSString *)info withType:(FMCDebugType)debugType toOutput:(FMCDebugOutputType)outputType {
 
 	NSString* toOutRaw = [[NSString alloc] initWithString:info];
-    NSMutableString *toOut = [[NSMutableString alloc] initWithFormat:@"AppLink (%@): ", [FMCDebugTool stringForDebugType:debugType]];
+    
+    NSMutableString *toOut = [[NSMutableString alloc] initWithCapacity:5];
+    
+    if (debugType != FMCDebugType_Debug) {
+        toOut = [NSMutableString  stringWithFormat:@"AppLink (%@): ", [FMCDebugTool stringForDebugType:debugType]];
+    }
     
     [toOut appendString:toOutRaw];
 

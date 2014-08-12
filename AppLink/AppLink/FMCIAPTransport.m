@@ -126,9 +126,6 @@
             break;
         case NSStreamEventOpenCompleted:
         {
-//            NSString *logMessage = [NSString stringWithFormat:@"Stream is Open:%@", stream.description];
-//            [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Transport_iAP];
-
             BOOL isOnControlProtocol = self.onControlProtocol;
             
             if (stream == [_session outputStream]) {
@@ -158,9 +155,6 @@
         }
         case NSStreamEventEndEncountered:
         {
-//            NSString *logMessage = [NSString stringWithFormat:@"Stream is Closed:%@", stream.description];
-//            [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Transport_iAP];
-            
             if (stream == [_session outputStream]) {
                 self.isOutputStreamReady = NO;
             } else if (stream == [_session inputStream]) {
@@ -240,14 +234,12 @@
 #pragma mark Session Control
 
 - (void)openSession {
-//    [FMCDebugTool logInfo:@"Open Session" withType:FMCDebugType_Transport_iAP];
-    
     if (self.accessory && self.protocolString) {
         
         self.session = [[EASession alloc] initWithAccessory:self.accessory forProtocol:self.protocolString];
         
         if (self.session) {
-            [FMCDebugTool logInfo:@"Opening Session" withType:FMCDebugType_Transport_iAP];
+            [FMCDebugTool logInfo:@"Opening Streams" withType:FMCDebugType_Transport_iAP];
             
             [[self.session inputStream] setDelegate:self];
             [[self.session inputStream] scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
@@ -262,7 +254,7 @@
             }
         } else {
             if ([self.protocolString isEqualToString:CONTROL_PROTOCOL_STRING]) {
-                [FMCDebugTool logInfo:@"Session is nil on control" withType:FMCDebugType_Transport_iAP];
+                [FMCDebugTool logInfo:@"Session Not Opened (Control Protocol)" withType:FMCDebugType_Transport_iAP];
                 //[FMCDebugTool logInfo:@"App may not have declared multiapp com.smartdevicelink.prot strings in Info.plist" withType:FMCDebugType_Transport_iAP];
                 
                 //Begin Connection Retry
@@ -272,19 +264,17 @@
                 [FMCDebugTool logInfo:[NSString stringWithFormat:@"Wait: %f", randomMinMax] withType:FMCDebugType_Transport_iAP];
                 [self performSelector:@selector(openSession) withObject:nil afterDelay:randomNumber];
             } else {
-                [FMCDebugTool logInfo:@"Session is nil" withType:FMCDebugType_Transport_iAP];
+                [FMCDebugTool logInfo:@"Session Not Opened" withType:FMCDebugType_Transport_iAP];
             }
         }
     } else {
-        [FMCDebugTool logInfo:@"Accessory or ProtocolString is nil" withType:FMCDebugType_Transport_iAP];
+        [FMCDebugTool logInfo:@"Accessory Or Protocol String Not Set" withType:FMCDebugType_Transport_iAP];
     }
 }
 
 - (void)closeSession {
-//    [FMCDebugTool logInfo:@"Close Session" withType:FMCDebugType_Transport_iAP];
-    
     if (self.session) {
-        [FMCDebugTool logInfo:@"Closing Session" withType:FMCDebugType_Transport_iAP];
+        [FMCDebugTool logInfo:@"Closing Streams" withType:FMCDebugType_Transport_iAP];
         
         [[self.session inputStream] close];
         [[self.session inputStream] removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
@@ -316,7 +306,10 @@
             if (remainder.length == 0) break;
 
             if ( [[self.session outputStream] hasSpaceAvailable] ) {
+                
+                //TODO: Added for debug, issue with module
                 [NSThread sleepForTimeInterval:0.020];
+                
                 NSInteger bytesWritten = [[self.session outputStream] write:remainder.bytes maxLength:remainder.length];
                 if (bytesWritten == -1) {
                     NSLog(@"Error: %@", [[self.session outputStream] streamError]);
@@ -363,7 +356,7 @@
         [FMCDebugTool logInfo:[NSString stringWithFormat:@"Moving To Protocol Index: %@", dataProtocol] withType:FMCDebugType_Transport_iAP];
         
         if ([dataProtocol isEqualToNumber:[NSNumber numberWithInt:255]]) {
-            [FMCDebugTool logInfo:@"All Available Protocols Are In Use" withType:FMCDebugType_Transport_iAP];
+            [FMCDebugTool logInfo:@"All Available Protocol Strings Are In Use" withType:FMCDebugType_Transport_iAP];
             
             //FIXME: Restart but dont call back up to app or connect will keep getting called when busy...
             return;
@@ -371,13 +364,10 @@
         else {
             NSString *currentProtocolString = [NSString stringWithFormat:@"com.smartdevicelink.prot%@", dataProtocol];
             
-//            [FMCDebugTool logInfo:[NSString stringWithFormat:@"Switch To Data Protocol: %@", currentProtocolString] withType:FMCDebugType_Transport_iAP];
-            
             [self closeSession];
             self.onControlProtocol = NO;
 
             [self setupControllerForAccessory:self.accessory withProtocolString:currentProtocolString];
-            
             [self openSession];
         }
     }
