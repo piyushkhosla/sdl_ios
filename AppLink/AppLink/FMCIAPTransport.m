@@ -63,12 +63,17 @@
 - (void)connect {
     [FMCDebugTool logInfo:@"Looking To Connect" withType:FMCDebugType_Transport_iAP];
     
-    [self checkForValidConnectedAccessory];
-    
-    if (self.accessory && self.protocolString) {
-        [self openSession];
+    if (!self.session){
+        [self checkForValidConnectedAccessory];
+        
+        if (self.accessory && self.protocolString) {
+            [self openSession];
+        } else {
+            [FMCDebugTool logInfo:@"No Connectable Devices Found" withType:FMCDebugType_Transport_iAP];
+        }
+    } else {
+        [FMCDebugTool logInfo:@"Session Already Open" withType:FMCDebugType_Transport_iAP];
     }
-
 }
 
 - (void)disconnect {
@@ -104,9 +109,10 @@
 
 -(void)applicationWillEnterForeground:(NSNotification *)notification {
     [FMCDebugTool logInfo:@"Will Enter Foreground" withType:FMCDebugType_Transport_iAP];
-    
     [self.backgroundedTimer invalidate];
-//    [self connect];
+    
+    [self setupControllerForAccessory:nil withProtocolString:nil];
+    [self connect];
 }
 
 -(void)applicationDidEnterBackground:(NSNotification *)notification {
