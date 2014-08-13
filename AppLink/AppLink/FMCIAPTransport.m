@@ -314,7 +314,7 @@
             if ( [[self.session outputStream] hasSpaceAvailable] ) {
                 
                 //TODO: Added for debug, issue with module
-                [NSThread sleepForTimeInterval:0.020];
+                //[NSThread sleepForTimeInterval:0.020];
                 
                 NSInteger bytesWritten = [[self.session outputStream] write:remainder.bytes maxLength:remainder.length];
                 if (bytesWritten == -1) {
