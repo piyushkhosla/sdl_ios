@@ -4,8 +4,8 @@
 
 #import <AppLink/FMCLayoutMode.h>
 
-FMCLayoutMode* FMCLayoutMode_ICONS_ONLY = nil;
-FMCLayoutMode* FMCLayoutMode_ICONS_WITH_SEARCH = nil;
+FMCLayoutMode* FMCLayoutMode_ICON_ONLY = nil;
+FMCLayoutMode* FMCLayoutMode_ICON_WITH_SEARCH = nil;
 FMCLayoutMode* FMCLayoutMode_LIST_ONLY = nil;
 FMCLayoutMode* FMCLayoutMode_LIST_WITH_SEARCH = nil;
 FMCLayoutMode* FMCLayoutMode_KEYBOARD = nil;
@@ -26,8 +26,8 @@ NSMutableArray* FMCLayoutMode_values = nil;
 +(NSMutableArray*) values {
     if (FMCLayoutMode_values == nil) {
         FMCLayoutMode_values = [[NSMutableArray alloc] initWithObjects:
-                FMCLayoutMode.ICONS_ONLY,
-                FMCLayoutMode.ICONS_WITH_SEARCH,
+                FMCLayoutMode.ICON_ONLY,
+                FMCLayoutMode.ICON_WITH_SEARCH,
                 FMCLayoutMode.LIST_ONLY,
                 FMCLayoutMode.LIST_WITH_SEARCH,
                 FMCLayoutMode.KEYBOARD,
@@ -36,18 +36,18 @@ NSMutableArray* FMCLayoutMode_values = nil;
     return FMCLayoutMode_values;
 }
 
-+(FMCLayoutMode*) ICONS_ONLY {
-    if (FMCLayoutMode_ICONS_ONLY == nil) {
-        FMCLayoutMode_ICONS_ONLY = [[FMCLayoutMode alloc] initWithValue:@"ICONS_ONLY"];
++(FMCLayoutMode*) ICON_ONLY {
+    if (FMCLayoutMode_ICON_ONLY == nil) {
+        FMCLayoutMode_ICON_ONLY = [[FMCLayoutMode alloc] initWithValue:@"ICON_ONLY"];
     }
-    return FMCLayoutMode_ICONS_ONLY;
+    return FMCLayoutMode_ICON_ONLY;
 }
 
-+(FMCLayoutMode*) ICONS_WITH_SEARCH {
-    if (FMCLayoutMode_ICONS_WITH_SEARCH == nil) {
-        FMCLayoutMode_ICONS_WITH_SEARCH = [[FMCLayoutMode alloc] initWithValue:@"ICONS_WITH_SEARCH"];
++(FMCLayoutMode*) ICON_WITH_SEARCH {
+    if (FMCLayoutMode_ICON_WITH_SEARCH == nil) {
+        FMCLayoutMode_ICON_WITH_SEARCH = [[FMCLayoutMode alloc] initWithValue:@"ICON_WITH_SEARCH"];
     }
-    return FMCLayoutMode_ICONS_WITH_SEARCH;
+    return FMCLayoutMode_ICON_WITH_SEARCH;
 }
 
 +(FMCLayoutMode*) LIST_ONLY {

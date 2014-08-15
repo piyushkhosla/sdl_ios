@@ -10,8 +10,8 @@
 +(FMCLayoutMode*) valueOf:(NSString*) value;
 +(NSMutableArray*) values;
 
-+(FMCLayoutMode*) ICONS_ONLY;
-+(FMCLayoutMode*) ICONS_WITH_SEARCH;
++(FMCLayoutMode*) ICON_ONLY;
++(FMCLayoutMode*) ICON_WITH_SEARCH;
 +(FMCLayoutMode*) LIST_ONLY;
 +(FMCLayoutMode*) LIST_WITH_SEARCH;
 +(FMCLayoutMode*) KEYBOARD;
