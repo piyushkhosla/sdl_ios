@@ -16,6 +16,7 @@
 #import <AppLink/FMCSyncProxy.h>
 #import <AppLink/FMCSystemRequest.h>
 #import "FMCRPCPayload.h"
+#import "FMCPolicyDataParser.h"
 
 
 #define VERSION_STRING @"##Version##"
@@ -443,13 +444,22 @@ const int POLICIES_CORRELATION_ID = 65535;
     // Show the HTTP response
     [FMCDebugTool logInfo:@"OnSystemRequest (HTTP response)" withType:FMCDebugType_RPC];
 
-    // Create the message to send to module.
+    // Create the SystemRequest RPC to send to module.
     FMCSystemRequest *request = [[FMCSystemRequest alloc] init];
     request.correlationID = [NSNumber numberWithInt:POLICIES_CORRELATION_ID];
     request.requestType = [FMCRequestType PROPRIETARY];
     request.bulkData = data;
 
-    // Log the FMCSystemRequest send to module
+    // Parse and display the policy data.
+    FMCPolicyDataParser *pdp = [[FMCPolicyDataParser alloc] init];
+    NSData *policyData = [pdp unwrap:data];
+    if (policyData) {
+        [pdp parsePolicyData:policyData];
+        logMessage = [NSString stringWithFormat:@"Policy Data:%@", pdp];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
+    }
+
+    // Send and log RPC Request
     logMessage = [NSString stringWithFormat:@"SystemRequest (request)\n%@\nData length=%lu", [request serializeAsDictionary:2], (unsigned long)data.length ];
     [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
     [self sendRPCRequestPrivate:request];
