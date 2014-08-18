@@ -214,8 +214,6 @@ const int POLICIES_CORRELATION_ID = 65535;
     
     
     if ([functionName isEqualToString:@"RegisterAppInterfaceResponse"]) {
-        // It's possible to run into a scenario in which SYNC fails to send a StartSessionACK. This issue will be caught by the timer that's waiting for a RegisterAppInterfaceResponse. If no RAIResponse is received, a call to onProxyClosed will occur.
-        
         // Turn off the timer, the handshake has succeeded
         [self destroyHandshakeTimer];
         
@@ -261,7 +259,7 @@ const int POLICIES_CORRELATION_ID = 65535;
             // Validate input
             if (urlString == nil)
             {
-                [FMCDebugTool logInfo:@"OnSystemRequest (notification) failure: url is nil." withType:FMCDebugType_RPC];
+                [FMCDebugTool logInfo:@"OnSystemRequest (notification) failure: url is nil" withType:FMCDebugType_RPC];
                 return;
             }
             if (fileType != [FMCFileType JSON])
@@ -276,7 +274,7 @@ const int POLICIES_CORRELATION_ID = 65535;
                 NSError *errorJSONSerializeNotification = nil;
                 notificationDictionary = [NSJSONSerialization JSONObjectWithData:sysRpcMsg.bulkData options:kNilOptions error:&errorJSONSerializeNotification];
                 if (errorJSONSerializeNotification) {
-                    [FMCDebugTool logInfo:@"OnSystemRequest failure: Notification data is not valid JSON." withType:FMCDebugType_RPC];
+                    [FMCDebugTool logInfo:@"OnSystemRequest failure: notification data is not valid JSON." withType:FMCDebugType_RPC];
                     return;
                 }
             }
@@ -400,13 +398,14 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 }
 
+// Handle the OnEncodedSyncPData HTTP Response
 - (void)OESPHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error {
     // Sample of response: {"data":["SDLKGLSDKFJLKSjdslkfjslkJLKDSGLKSDJFLKSDJF"]}
     [FMCDebugTool logInfo:@"OnEncodedSyncPData (HTTP response)" withType:FMCDebugType_RPC];
 
     // Validate response data.
-    if (data.length == 0) {
-        [FMCDebugTool logInfo:@"OnEncodedSyncP failure: response data is empty" withType:FMCDebugType_RPC];
+    if (data == nil || data.length == 0) {
+        [FMCDebugTool logInfo:@"OnEncodedSyncPData (HTTP response) failure: no data returned" withType:FMCDebugType_RPC];
         return;
     }
 
@@ -435,7 +434,7 @@ const int POLICIES_CORRELATION_ID = 65535;
     }
 
     if (data == nil || data.length == 0) {
-        [FMCDebugTool logInfo:@"OnSystemRequest (HTTP response) failure: No data returned." withType:FMCDebugType_RPC];
+        [FMCDebugTool logInfo:@"OnSystemRequest (HTTP response) failure: no data returned" withType:FMCDebugType_RPC];
         return;
     }
 
