@@ -15,7 +15,5 @@
 
 -(id) initWithTableView:(UITableView*) tableView;
 
--(void) appendString:(NSString*) toAppend;
--(void) appendMessage:(FMCRPCMessage*) toAppend;
 
 @end

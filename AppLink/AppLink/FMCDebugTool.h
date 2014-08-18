@@ -4,10 +4,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class FMCRPCMessage;
+
 @protocol FMCDebugToolConsole
 
 -(void) logInfo:(NSString*) info;
 -(void) logException:(NSException*) ex withMessage:(NSString*) message;
+-(void) logMessage:(FMCRPCMessage*) message;
 
 @end
 
@@ -20,23 +23,35 @@ typedef NS_ENUM(UInt8, FMCDebugType) {
 	FMCDebugType_RPC = 4
 };
 
-typedef NS_ENUM(UInt8, FMCDebugOutputType) {
-    FMCDebugOutput_DeviceConsole = 0,
-	FMCDebugOutput_DebugConsole = 1,
-    FMCDebugOutput_All = 2
+typedef NS_ENUM(UInt8, FMCDebugOutput) {
+    FMCDebugOutput_All = 0,
+    FMCDebugOutput_DeviceConsole = 1,
+	FMCDebugOutput_DebugToolConsole = 2
 };
+
+
+
 
 @interface FMCDebugTool : NSObject {}
 
-+(void) addConsole:(NSObject<FMCDebugToolConsole>*) aConsole;
-+(void) removeConsole:(NSObject<FMCDebugToolConsole>*) aConsole;
++(void) addConsole:(NSObject<FMCDebugToolConsole>*) console;
++(void) removeConsole:(NSObject<FMCDebugToolConsole>*) console;
 
-+(void) logInfo:(NSString *)fmt, ... ;
-+(void) logInfo:(NSString *)info withType:(FMCDebugType)debugType;
-+(void) logInfo:(NSString *)info withType:(FMCDebugType)debugType toOutput:(FMCDebugOutputType)outputType;
++(void) logInfo:(NSString *)fmt, ... ; 
++(void) logInfo:(NSString *)info withType:(FMCDebugType)type;
++(void) logInfo:(NSString *)info withType:(FMCDebugType)type toOutput:(FMCDebugOutput)output;
 
 +(void) logException:(NSException*) ex withMessage:(NSString*) fmt, ... ;
 
-+(NSString *) stringForDebugType:(FMCDebugType) debugType;
++(void) logMessage:(FMCRPCMessage*) rpcMessage;
+
++(NSString *) stringForDebugType:(FMCDebugType) type;
+
++(void) enableDebugToLogFile;
++(void) disableDebugToLogFile;
+
++ (void)rawTransportData:(const void*) msgBytes msgBytesLength:(int) msgBytesLength direction:(NSString *)direction;
+
++(void) writeToLogFile:(const void*) dataBytes msgBytesLength:(int) dataBytesLength prepend:(NSString *)prepend;
 
 @end

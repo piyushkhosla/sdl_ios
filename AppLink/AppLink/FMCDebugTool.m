@@ -3,16 +3,14 @@
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <AppLink/FMCDebugTool.h>
+#import <AppLink/FMCRPCMessage.h>
 
 #import <AppLink/FMCSiphonServer.h>
 
 #define LOG_ERROR_ENABLED
 
-//From .h
-//+(void) logInfo:(NSString*) fmt, ... ; // NS_FORMAT_FUNCTION(1,2);
-//+(void) logException:(NSException*) ex withMessage:(NSString*) fmt, ... ; // NS_FORMAT_FUNCTION(2,3);
-
 static NSMutableArray* debugToolConsoleList = nil;
+bool debugToLogFile = false;
 
 @implementation FMCDebugTool
 
@@ -24,14 +22,20 @@ static NSMutableArray* debugToolConsoleList = nil;
 }
 
 
-+(void) addConsole:(NSObject<FMCDebugToolConsole>*) aConsole {
-	[[FMCDebugTool getConsoleList] addObject:aConsole];
+#pragma mark -
+#pragma mark Debug Console Management
+
++(void) addConsole:(NSObject<FMCDebugToolConsole>*) console {
+	[[FMCDebugTool getConsoleList] addObject:console];
 }
 
-+(void) removeConsole:(NSObject<FMCDebugToolConsole>*) aConsole {
-	[[FMCDebugTool getConsoleList] removeObject:aConsole];
++(void) removeConsole:(NSObject<FMCDebugToolConsole>*) console {
+	[[FMCDebugTool getConsoleList] removeObject:console];
 }
 
+
+#pragma mark -
+#pragma mark logInfo
 
 +(void) logInfo:(NSString*) fmt, ... {
     
@@ -53,32 +57,42 @@ static NSMutableArray* debugToolConsoleList = nil;
     
 }
 
-+(void) logInfo:(NSString *)info withType:(FMCDebugType)debugType toOutput:(FMCDebugOutputType)outputType {
++(void) logInfo:(NSString *)info withType:(FMCDebugType)type toOutput:(FMCDebugOutput)output {
 
-	NSString* toOutRaw = [[NSString alloc] initWithString:info];
+    NSMutableString *outputString = [[NSMutableString alloc] initWithCapacity:5];
     
-    NSMutableString *toOut = [[NSMutableString alloc] initWithCapacity:5];
-    
-    if (debugType != FMCDebugType_Debug) {
-        toOut = [NSMutableString  stringWithFormat:@"AppLink (%@): ", [FMCDebugTool stringForDebugType:debugType]];
+    if (type != FMCDebugType_Debug) {
+        outputString = [NSMutableString  stringWithFormat:@"[%@] ", [FMCDebugTool stringForDebugType:type]];
     }
     
-    [toOut appendString:toOutRaw];
+    [outputString appendString:info];
 
-    [FMCSiphonServer init];
-    [FMCSiphonServer _siphonNSLogData:toOut];
-    
-    if (outputType == FMCDebugOutput_All || outputType == FMCDebugOutput_DeviceConsole) {
-        NSLog(@"%@", toOut);
+
+    //Output To DeviceConsole
+    if (output == FMCDebugOutput_All || output == FMCDebugOutput_DeviceConsole) {
+        NSLog(@"%@", outputString);
     }
     
-    if (outputType == FMCDebugOutput_All || outputType == FMCDebugOutput_DebugConsole) {
+    //Output To DebugToolConsoles
+    if (output == FMCDebugOutput_All || output == FMCDebugOutput_DebugToolConsole) {
         for (NSObject<FMCDebugToolConsole>* console in debugToolConsoleList) {
-            [console logInfo:toOut];
+            [console logInfo:outputString];
         }
     }
-
+    
+    //Output To LogFile
+//    if (output == FMCDebugOutput_All || output == FMCDebugOutput_DeviceConsole) {
+//        NSLog(@"%@", outputString);
+//    }
+    
+    //Output To Siphon
+    [FMCSiphonServer init];
+    [FMCSiphonServer _siphonNSLogData:outputString];
 }
+
+
+#pragma mark -
+#pragma mark logException
 
 +(void) logException:(NSException*) ex withMessage:(NSString*) fmt, ...  {
 	NSString* toOutRaw = nil;
@@ -97,7 +111,7 @@ static NSMutableArray* debugToolConsoleList = nil;
     bool dataLogged = [FMCSiphonServer _siphonNSLogData:toOut];
     if (dataLogged) {
         dataLogged = [FMCSiphonServer _siphonNSLogData:[ex reason]];
-    } // end-if
+    }
     
 	
 #ifdef LOG_ERROR_ENABLED
@@ -113,13 +127,101 @@ static NSMutableArray* debugToolConsoleList = nil;
 }
 
 
+#pragma mark -
+#pragma mark logMessage
 
++(void) logMessage:(FMCRPCMessage*) rpcMessage {
+    
+	if ([rpcMessage isKindOfClass:FMCRPCMessage.class]) {
+        
+        NSMutableString *toOut = [[NSMutableString alloc] initWithCapacity:5];
+        
+        toOut = [NSMutableString stringWithFormat:@"New: %@", [rpcMessage getFunctionName]];
+        
+        //TODO: Output is only Function Name, Parse rpcMessage object like in FMCConsoleController
+        //Output DeviceConsole
+        NSLog(@"%@", toOut);
+        
+        
+        //Output DebugToolConsole
+        for (NSObject<FMCDebugToolConsole>* console in debugToolConsoleList) {
+            [console logMessage:rpcMessage];
+        }
+        
+        //TODO: Output is only Function Name, Parse rpcMessage object like in FMCConsoleController
+        //Output Siphon
+        [FMCSiphonServer init];
+        [FMCSiphonServer _siphonNSLogData:toOut];
+
+	}
+}
+
++ (void)enableDebugToLogFile{
+    debugToLogFile = true;
+    
+    [FMCDebugTool logInfo:@"[Debug] Log File Enabled" withType:FMCDebugType_Debug];
+    
+    //Delete Log File If It Exists
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"applink.log"];
+
+    NSFileManager *manager = [NSFileManager defaultManager];
+    if ([manager fileExistsAtPath:filePath]) {
+        [FMCDebugTool logInfo:@"[Debug] Log File Exisits, Deleteing" withType:FMCDebugType_Debug];
+        [manager removeItemAtPath:filePath error:nil];
+    }
+    
+}
+
++ (void)disableDebugToLogFile {
+    debugToLogFile = false;
+}
+
+
++ (void)rawTransportData:(const void*) msgBytes msgBytesLength:(int) msgBytesLength direction:(NSString *)direction {
+    
+    if (!debugToLogFile || msgBytes == NULL || msgBytesLength == 0) {
+        return;
+    }
+    
+    [self writeToLogFile:msgBytes msgBytesLength:msgBytesLength prepend:direction];
+}
+
+
++(void) writeToLogFile:(const void*) dataBytes msgBytesLength:(int) dataBytesLength prepend:(NSString *)prepend{
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"applink.log"];
+    
+    NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:filePath];
+    if (fileHandle){
+//        [FMCDebugTool logInfo:@"[Debug] Append" withType:FMCDebugType_Debug];
+        [fileHandle seekToEndOfFile];
+        [fileHandle writeData:[prepend dataUsingEncoding:NSUTF8StringEncoding]];
+        [fileHandle writeData:[NSData dataWithBytes:dataBytes length:dataBytesLength]];
+        [fileHandle closeFile];
+    }
+    else {
+//        [FMCDebugTool logInfo:@"[Debug] Debug Log Created" withType:FMCDebugType_Debug];
+        NSString *savedString = @"Debug Log Created\n";
+        [[savedString dataUsingEncoding:NSUTF8StringEncoding] writeToFile:filePath atomically:NO];
+        [[prepend dataUsingEncoding:NSUTF8StringEncoding] writeToFile:filePath atomically:NO];
+        [[NSData dataWithBytes:dataBytes length:dataBytesLength] writeToFile:filePath atomically:NO];
+    }
+
+}
+
+
+#pragma mark -
+#pragma mark Helper Methods
 
 +(NSString *) stringForDebugType:(FMCDebugType) debugType{
     
     switch (debugType) {
         case FMCDebugType_Debug:
-            return @"Debug";
+            return @"App Debug";
             break;
         case FMCDebugType_Transport_iAP:
             return @"iAP";

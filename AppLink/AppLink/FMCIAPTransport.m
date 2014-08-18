@@ -61,7 +61,7 @@
 #pragma mark FMCTransport Implementation
 
 - (void)connect {
-    [FMCDebugTool logInfo:@"Looking To Connect" withType:FMCDebugType_Transport_iAP];
+    [FMCDebugTool logInfo:@"Connect" withType:FMCDebugType_Transport_iAP];
     
     if (!self.session){
         [self checkForValidConnectedAccessory];
@@ -69,7 +69,7 @@
         if (self.accessory && self.protocolString) {
             [self openSession];
         } else {
-            [FMCDebugTool logInfo:@"No Connectable Devices Found" withType:FMCDebugType_Transport_iAP];
+            [FMCDebugTool logInfo:@"No Devices Found" withType:FMCDebugType_Transport_iAP];
         }
     } else {
         [FMCDebugTool logInfo:@"Session Already Open" withType:FMCDebugType_Transport_iAP];
@@ -141,7 +141,7 @@
             }
             
             if (isOnControlProtocol && self.isOutputStreamReady && self.isInputStreamReady) {
-                [FMCDebugTool logInfo:@"Waiting To Recieve Protocol Index" withType:FMCDebugType_Transport_iAP];
+                [FMCDebugTool logInfo:@"Waiting For Protocol Index" withType:FMCDebugType_Transport_iAP];
             } else if (!isOnControlProtocol && self.isOutputStreamReady && self.isInputStreamReady) {
                 [FMCDebugTool logInfo:@"Transport Ready" withType:FMCDebugType_Transport_iAP];
                 [self notifyTransportConnected];
@@ -321,8 +321,10 @@
                     NSLog(@"Error: %@", [[self.session outputStream] streamError]);
                     break;
                 }
-
+                
+                [FMCDebugTool rawTransportData:remainder.bytes msgBytesLength:(int)bytesWritten direction:@"Outgoing:"];
                 [FMCSiphonServer _siphonRawTransportDataFromApp:remainder.bytes msgBytesLength:(int)bytesWritten];
+                
                 [remainder replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
             }
         }
@@ -338,6 +340,7 @@
     {
         NSInteger bytesRead = [[self.session inputStream] read:buf maxLength:IAP_INPUT_BUFFER_SIZE];
         
+        [FMCDebugTool rawTransportData:buf msgBytesLength:(int)bytesRead direction:@"Incoming:"];
         [FMCSiphonServer _siphonRawTransportDataFromSync:buf msgBytesLength:(int)bytesRead];
         
         if (bytesRead > 0) {

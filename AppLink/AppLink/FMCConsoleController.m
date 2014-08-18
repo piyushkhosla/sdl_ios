@@ -60,12 +60,24 @@
     
 }
 
--(void) appendString:(NSString*) toAppend {
-	[self append:toAppend];
+
+#pragma mark -
+#pragma mark FMCDebugTool Console Delegate
+
+-(void) logInfo:(NSString*) info {
+	[self append:info];
 }
--(void) appendMessage:(FMCRPCMessage*) toAppend{
-	[self append:toAppend];
+
+-(void) logException:(NSException*) ex withMessage:(NSString*) message {
+	[self append:message];
+	[self append:[ex description]];
 }
+
+-(void) logMessage:(FMCRPCMessage*) message{
+	[self append:message];
+}
+
+
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -102,6 +114,7 @@
 -(void) scrollViewDidEndDragging:(UIScrollView*) scrollView willDecelerate:(BOOL) willDecelerate {
     [self updateWhetherScrolledToBottom];
 }
+
 
 #pragma mark -
 #pragma mark Table view data source
@@ -159,6 +172,7 @@
     return cell;
 }
 
+
 #pragma mark -
 #pragma mark Table view delegate
 
@@ -199,23 +213,8 @@
     
 	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
-    // Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
 }
 
--(void) logInfo:(NSString*) info {
-	[self appendString:info];
-}
 
--(void) logException:(NSException*) ex withMessage:(NSString*) message {
-	[self appendString:message];
-	[self append:[ex description]];
-}
 
 @end

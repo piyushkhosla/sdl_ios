@@ -66,6 +66,8 @@ const int POLICIES_CORRELATION_ID = 65535;
     if(!alreadyDestructed) {
         alreadyDestructed = YES;
 
+        [[EAAccessoryManager sharedAccessoryManager] unregisterForLocalNotifications];
+        
         self.transport = nil;
         self.protocol = nil;
         self.proxyListeners = nil;
