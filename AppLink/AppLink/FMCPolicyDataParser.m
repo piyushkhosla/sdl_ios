@@ -100,6 +100,9 @@
 }
 
 - (NSString *)description {
+
+    NSString *esnString = [[NSString alloc] initWithData:self.ESN encoding:NSUTF8StringEncoding];
+
     NSMutableString *descriptionString = [NSMutableString stringWithFormat:@"Ver:%u; ", self.protocolVersion];
     [descriptionString appendFormat:@"RespReq:%u; ", self.isResponseRequired];
     [descriptionString appendFormat:@"HiBnd:%u; ", self.isHighBandwidth];
@@ -111,7 +114,7 @@
     [descriptionString appendFormat:@"CPU:%u; ", self.CPUDestination];
     [descriptionString appendFormat:@"EncKey:%u; ", self.encryptionKeyIndex];
     [descriptionString appendFormat:@"sz:%u; ", (unsigned int)self.payloadSize];
-    [descriptionString appendFormat:@"ESN:%@; ", self.ESN];
+    [descriptionString appendFormat:@"ESN:%@; ", esnString];
     [descriptionString appendFormat:@"mmid:%u; ", (unsigned int)self.moduleMessageId];
     [descriptionString appendFormat:@"smid:%u; ", (unsigned int)self.serverMessageId];
     [descriptionString appendFormat:@"status:%u; ", self.messageStatus];
