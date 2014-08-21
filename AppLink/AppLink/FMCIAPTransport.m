@@ -321,10 +321,12 @@
                     NSLog(@"Error: %@", [[self.session outputStream] streamError]);
                     break;
                 }
-                
-                [FMCDebugTool rawTransportData:remainder.bytes msgBytesLength:(int)bytesWritten direction:@"Outgoing:"];
-                [FMCSiphonServer _siphonRawTransportDataFromApp:remainder.bytes msgBytesLength:(int)bytesWritten];
-                
+
+                [FMCDebugTool logInfo:@"Outgoing:"
+                        andBinaryData:[remainder subdataWithRange:NSMakeRange(0, bytesWritten)]
+                             withType:FMCDebugType_Transport_iAP
+                             toOutput:FMCDebugOutput_File];
+
                 [remainder replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
             }
         }
@@ -339,11 +341,15 @@
     while ([[self.session inputStream] hasBytesAvailable])
     {
         NSInteger bytesRead = [[self.session inputStream] read:buf maxLength:IAP_INPUT_BUFFER_SIZE];
-        
-        [FMCDebugTool rawTransportData:buf msgBytesLength:(int)bytesRead direction:@"Incoming:"];
-        [FMCSiphonServer _siphonRawTransportDataFromSync:buf msgBytesLength:(int)bytesRead];
-        
+
+        NSData *dataIn = [NSData dataWithBytes:buf length:bytesRead];
+        [FMCDebugTool logInfo:@"Incoming:"
+                andBinaryData:dataIn
+                     withType:FMCDebugType_Transport_iAP
+                     toOutput:FMCDebugOutput_File];
+
         if (bytesRead > 0) {
+            // TODO: change this to ndsata parameter for consistency
             [self handleBytesReceivedFromTransport:buf length:bytesRead];
         } else {
             break;
@@ -389,18 +395,6 @@
 
 #pragma mark -
 #pragma mark Debug Helpers
-
--(NSString*) getHexString:(UInt8*)bytes length:(int) length {
-	NSMutableString* ret = [NSMutableString stringWithCapacity:(length * 2)];
-	for (int i = 0; i < length; i++) {
-		[ret appendFormat:@"%02X", ((Byte*)bytes)[i]];
-	}
-	return ret;
-}
-
--(NSString*) getHexString:(NSData*) data {
-	return [self getHexString:(Byte*)data.bytes length:(int)data.length];
-}
 
 -(void) backgroundButAwake:(NSTimer*) t
 {

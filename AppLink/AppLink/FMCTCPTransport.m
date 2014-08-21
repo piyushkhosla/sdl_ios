@@ -13,6 +13,7 @@
 #import <sys/wait.h>
 #import <netinet/in.h>
 #import <netdb.h>
+#import "FMCHexUtility.h"
 
 int call_socket(const char* hostname, const char* port) { 
     
@@ -97,21 +98,9 @@ static void TCPCallback(CFSocketRef socket, CFSocketCallBackType type, CFDataRef
 	CFRelease(source);
 }
 
--(NSString*) getHexString:(UInt8*)bytes length:(int) length {
-	NSMutableString* ret = [NSMutableString stringWithCapacity:(length * 2)];
-	for (int i = 0; i < length; i++) {
-		[ret appendFormat:@"%02X", ((Byte*)bytes)[i]];
-	}
-	return ret;
-}
-
--(NSString*) getHexString:(NSData*) data {
-	return [self getHexString:(Byte*)data.bytes length:(int)data.length];
-}
-
 - (void) sendData:(NSData*) msgBytes {
 
-	NSString* byteStr = [self getHexString:msgBytes];
+	NSString* byteStr = [FMCHexUtility getHexString:msgBytes];
     [FMCDebugTool logInfo:[NSString stringWithFormat:@"Sent %lu bytes: %@", (unsigned long)msgBytes.length, byteStr] withType:FMCDebugType_Transport_TCP toOutput:FMCDebugOutput_DeviceConsole];
 
     CFSocketError e = CFSocketSendData(socket, NULL, (__bridge CFDataRef)msgBytes, 10000);

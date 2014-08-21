@@ -505,6 +505,8 @@
 		59BF0A7019790C56008C6783 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 59A02FE41978FBA1003E8ECF /* InfoPlist.strings */; };
 		E932AD8B19A26CCF00D8155B /* FMCPolicyDataParser.h in Headers */ = {isa = PBXBuildFile; fileRef = E932AD8919A26CCF00D8155B /* FMCPolicyDataParser.h */; };
 		E932AD8C19A26CCF00D8155B /* FMCPolicyDataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E932AD8A19A26CCF00D8155B /* FMCPolicyDataParser.m */; };
+		E9AF74A719A2803700A97348 /* FMCHexUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = E9AF74A519A2803700A97348 /* FMCHexUtility.h */; };
+		E9AF74A819A2803700A97348 /* FMCHexUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AF74A619A2803700A97348 /* FMCHexUtility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1000,6 +1002,8 @@
 		59E5A3F0194E318200B908AA /* AppLinkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppLinkTests.m; sourceTree = "<group>"; };
 		E932AD8919A26CCF00D8155B /* FMCPolicyDataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCPolicyDataParser.h; sourceTree = "<group>"; };
 		E932AD8A19A26CCF00D8155B /* FMCPolicyDataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCPolicyDataParser.m; sourceTree = "<group>"; };
+		E9AF74A519A2803700A97348 /* FMCHexUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCHexUtility.h; sourceTree = "<group>"; };
+		E9AF74A619A2803700A97348 /* FMCHexUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCHexUtility.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1021,6 +1025,7 @@
 				59A02E431978FBA0003E8ECF /* RPC */,
 				59A02E081978FBA0003E8ECF /* Protocol */,
 				59A02FE61978FBA1003E8ECF /* Transport */,
+				E9AF74A919A2805C00A97348 /* Utility */,
 				59A02E011978FBA0003E8ECF /* Debug */,
 				59A02FE11978FBA1003E8ECF /* Supporting Files */,
 			);
@@ -1092,8 +1097,6 @@
 				59A02E2F1978FBA0003E8ECF /* FMCJsonEncoder.h */,
 				59A02E301978FBA0003E8ECF /* FMCJsonEncoder.m */,
 				59A02E311978FBA0003E8ECF /* FMCNames.h */,
-				E932AD8919A26CCF00D8155B /* FMCPolicyDataParser.h */,
-				E932AD8A19A26CCF00D8155B /* FMCPolicyDataParser.m */,
 				59A02E321978FBA0003E8ECF /* FMCProxyListener.h */,
 				59A02E331978FBA0003E8ECF /* FMCRPCMessage.h */,
 				59A02E341978FBA0003E8ECF /* FMCRPCMessage.m */,
@@ -1639,6 +1642,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E9AF74A919A2805C00A97348 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				E9AF74A519A2803700A97348 /* FMCHexUtility.h */,
+				E9AF74A619A2803700A97348 /* FMCHexUtility.m */,
+				E932AD8919A26CCF00D8155B /* FMCPolicyDataParser.h */,
+				E932AD8A19A26CCF00D8155B /* FMCPolicyDataParser.m */,
+			);
+			name = Utility;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1690,6 +1704,7 @@
 				59A0309B1978FBA2003E8ECF /* FMCTextFieldName.h in Headers */,
 				59A030E91978FBA4003E8ECF /* FMCDeleteInteractionChoiceSet.h in Headers */,
 				59A030171978FBA1003E8ECF /* FMCJingle.h in Headers */,
+				E9AF74A719A2803700A97348 /* FMCHexUtility.h in Headers */,
 				59A031731978FBAB003E8ECF /* FMCUnsubscribeVehicleDataResponse.h in Headers */,
 				59A030431978FBA1003E8ECF /* FMCCharacterSet.h in Headers */,
 				59A031891978FBAC003E8ECF /* FMCDIDResult.h in Headers */,
@@ -2211,6 +2226,7 @@
 				59A0310A1978FBA6003E8ECF /* FMCSetDisplayLayout.m in Sources */,
 				59A030A61978FBA3003E8ECF /* FMCVehicleDataActiveStatus.m in Sources */,
 				59A031AE1978FBAF003E8ECF /* FMCSoftButtonCapabilities.m in Sources */,
+				E9AF74A819A2803700A97348 /* FMCHexUtility.m in Sources */,
 				59A0319C1978FBAD003E8ECF /* FMCImageResolution.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

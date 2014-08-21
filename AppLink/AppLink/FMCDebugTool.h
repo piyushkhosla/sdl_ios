@@ -24,9 +24,10 @@ typedef NS_ENUM(UInt8, FMCDebugType) {
 };
 
 typedef NS_ENUM(UInt8, FMCDebugOutput) {
-    FMCDebugOutput_All = 0,
+    FMCDebugOutput_All = 0xFF,
     FMCDebugOutput_DeviceConsole = 1,
-	FMCDebugOutput_DebugToolConsole = 2
+	FMCDebugOutput_DebugToolConsole = 2,
+	FMCDebugOutput_File = 4
 };
 
 
@@ -34,24 +35,21 @@ typedef NS_ENUM(UInt8, FMCDebugOutput) {
 
 @interface FMCDebugTool : NSObject {}
 
-+(void) addConsole:(NSObject<FMCDebugToolConsole>*) console;
-+(void) removeConsole:(NSObject<FMCDebugToolConsole>*) console;
++ (void)addConsole:(NSObject<FMCDebugToolConsole>*) console;
++ (void)removeConsole:(NSObject<FMCDebugToolConsole>*) console;
 
-+(void) logInfo:(NSString *)fmt, ... ; 
-+(void) logInfo:(NSString *)info withType:(FMCDebugType)type;
-+(void) logInfo:(NSString *)info withType:(FMCDebugType)type toOutput:(FMCDebugOutput)output;
++ (void)logInfo:(NSString *)fmt, ... ;
++ (void)logInfo:(NSString *)info withType:(FMCDebugType)type;
++ (void)logInfo:(NSString *)info withType:(FMCDebugType)type toOutput:(FMCDebugOutput)output;
++ (void)logInfo:(NSString *)info andBinaryData:(NSData *)data withType:(FMCDebugType)type toOutput:(FMCDebugOutput)output;
++ (void)logException:(NSException*) ex withMessage:(NSString*) fmt, ... ;
++ (void)logMessage:(FMCRPCMessage*) rpcMessage;
 
-+(void) logException:(NSException*) ex withMessage:(NSString*) fmt, ... ;
++ (void)enableDebugToLogFile;
++ (void)disableDebugToLogFile;
++ (void)writeToLogFile:(NSString *)info;
 
-+(void) logMessage:(FMCRPCMessage*) rpcMessage;
++ (NSString *)stringForDebugType:(FMCDebugType) type;
 
-+(NSString *) stringForDebugType:(FMCDebugType) type;
-
-+(void) enableDebugToLogFile;
-+(void) disableDebugToLogFile;
-
-+ (void)rawTransportData:(const void*) msgBytes msgBytesLength:(int) msgBytesLength direction:(NSString *)direction;
-
-+(void) writeToLogFile:(const void*) dataBytes msgBytesLength:(int) dataBytesLength prepend:(NSString *)prepend;
 
 @end

@@ -4,8 +4,8 @@
 
 #import <AppLink/FMCDebugTool.h>
 #import <AppLink/FMCRPCMessage.h>
-
 #import <AppLink/FMCSiphonServer.h>
+#import "FMCHexUtility.h"
 
 #define LOG_ERROR_ENABLED
 
@@ -57,34 +57,53 @@ bool debugToLogFile = false;
     
 }
 
-+(void) logInfo:(NSString *)info withType:(FMCDebugType)type toOutput:(FMCDebugOutput)output {
++ (void)logInfo:(NSString *)info andBinaryData:(NSData *)data withType:(FMCDebugType)type toOutput:(FMCDebugOutput)output {
 
+    // convert binary data to string, append the two strings, then pass to usual log method.
+    NSMutableString *outputString = [[NSMutableString alloc] init];
+    if (info) {
+        [outputString appendString:info];
+    }
+
+    if (data) {
+        NSString *dataString = [FMCHexUtility getHexString:data];
+        if (dataString) {
+            [outputString appendString:dataString];
+        }
+    }
+
+    [FMCDebugTool logInfo:outputString withType:type toOutput:output];
+}
+
++ (void)logInfo:(NSString *)info withType:(FMCDebugType)type toOutput:(FMCDebugOutput)output {
+
+    // Start string with it's type:"iAP", "TCP" etc, leave empty if Debug
     NSMutableString *outputString = [[NSMutableString alloc] initWithCapacity:5];
-    
     if (type != FMCDebugType_Debug) {
         outputString = [NSMutableString  stringWithFormat:@"[%@] ", [FMCDebugTool stringForDebugType:type]];
     }
-    
-    [outputString appendString:info];
 
+    // Append the actual message.
+    [outputString appendString:info];
+   
 
     //Output To DeviceConsole
-    if (output == FMCDebugOutput_All || output == FMCDebugOutput_DeviceConsole) {
+    if (output & FMCDebugOutput_DeviceConsole) {
         NSLog(@"%@", outputString);
     }
     
     //Output To DebugToolConsoles
-    if (output == FMCDebugOutput_All || output == FMCDebugOutput_DebugToolConsole) {
+    if (output & FMCDebugOutput_DebugToolConsole) {
         for (NSObject<FMCDebugToolConsole>* console in debugToolConsoleList) {
             [console logInfo:outputString];
         }
     }
     
     //Output To LogFile
-//    if (output == FMCDebugOutput_All || output == FMCDebugOutput_DeviceConsole) {
-//        NSLog(@"%@", outputString);
-//    }
-    
+    if (output & FMCDebugOutput_File) {
+        [FMCDebugTool writeToLogFile:outputString];
+    }
+
     //Output To Siphon
     [FMCSiphonServer init];
     [FMCSiphonServer _siphonNSLogData:outputString];
@@ -178,37 +197,37 @@ bool debugToLogFile = false;
     debugToLogFile = false;
 }
 
++ (void)writeToLogFile:(NSString *)info {
 
-+ (void)rawTransportData:(const void*) msgBytes msgBytesLength:(int) msgBytesLength direction:(NSString *)direction {
-    
-    if (!debugToLogFile || msgBytes == NULL || msgBytesLength == 0) {
+    // Warning: do not call any logInfo method from here. recursion of death.
+
+    if (!debugToLogFile || info == NULL || info.length == 0) {
         return;
     }
-    
-    [self writeToLogFile:msgBytes msgBytesLength:msgBytesLength prepend:direction];
-}
 
-
-+(void) writeToLogFile:(const void*) dataBytes msgBytesLength:(int) dataBytesLength prepend:(NSString *)prepend{
+    // Create timestamp string, add it in front of the message to be logged
+    NSDate *currentDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM/dd/YY HH:mm:ss.SSS"];
+    NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    NSString *outputString = [dateString stringByAppendingFormat:@": %@\n", info ];
     
+    // file write takes an NSData, so convert string to data.
+    NSData *dataToLog = [outputString dataUsingEncoding:NSUTF8StringEncoding];
+
+    // If open/create file and write
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"applink.log"];
-    
+
     NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:filePath];
     if (fileHandle){
-//        [FMCDebugTool logInfo:@"[Debug] Append" withType:FMCDebugType_Debug];
         [fileHandle seekToEndOfFile];
-        [fileHandle writeData:[prepend dataUsingEncoding:NSUTF8StringEncoding]];
-        [fileHandle writeData:[NSData dataWithBytes:dataBytes length:dataBytesLength]];
+        [fileHandle writeData:dataToLog];
         [fileHandle closeFile];
     }
     else {
-//        [FMCDebugTool logInfo:@"[Debug] Debug Log Created" withType:FMCDebugType_Debug];
-        NSString *savedString = @"Debug Log Created\n";
-        [[savedString dataUsingEncoding:NSUTF8StringEncoding] writeToFile:filePath atomically:NO];
-        [[prepend dataUsingEncoding:NSUTF8StringEncoding] writeToFile:filePath atomically:NO];
-        [[NSData dataWithBytes:dataBytes length:dataBytesLength] writeToFile:filePath atomically:NO];
+        [dataToLog writeToFile:filePath atomically:NO];
     }
 
 }
