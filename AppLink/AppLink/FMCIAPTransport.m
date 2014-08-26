@@ -28,6 +28,8 @@
 @property (strong) NSString *protocolString;
 @property (assign) BOOL isOutputStreamReady;
 @property (assign) BOOL isInputStreamReady;
+@property (assign) BOOL transportReady;
+
 
 @property (strong) NSTimer* backgroundedTimer;
 
@@ -83,6 +85,8 @@
         [self closeSession];
         
         if (!self.onControlProtocol) {
+            [FMCDebugTool logInfo:@"Transport Not Ready" withType:FMCDebugType_Transport_iAP];
+            self.transportReady = NO;
             [self notifyTransportDisconnected];
         }
     }
@@ -122,6 +126,25 @@
 
 
 #pragma mark -
+#pragma mark Response Timers
+
+
+- (void)protocolIndexRestart{
+    
+    //TODO:DEBUG
+    [FMCDebugTool logInfo:@"PI Timer" withType:FMCDebugType_Transport_iAP];
+    
+    if (!self.transportReady) {
+        [FMCDebugTool logInfo:@"PI Restart" withType:FMCDebugType_Transport_iAP];
+        [self closeSession];
+        [self connect];
+    }
+        
+}
+
+
+
+#pragma mark -
 #pragma mark NSStreamDelegateEventExtensions
 
 - (void)stream:(NSStream *)stream handleEvent:(NSStreamEvent)event
@@ -132,19 +155,31 @@
             break;
         case NSStreamEventOpenCompleted:
         {
-            BOOL isOnControlProtocol = self.onControlProtocol;
-            
             if (stream == [_session outputStream]) {
                 self.isOutputStreamReady = YES;
             } else if (stream == [_session inputStream]) {
                 self.isInputStreamReady = YES;
             }
             
-            if (isOnControlProtocol && self.isOutputStreamReady && self.isInputStreamReady) {
-                [FMCDebugTool logInfo:@"Waiting For Protocol Index" withType:FMCDebugType_Transport_iAP];
-            } else if (!isOnControlProtocol && self.isOutputStreamReady && self.isInputStreamReady) {
-                [FMCDebugTool logInfo:@"Transport Ready" withType:FMCDebugType_Transport_iAP];
-                [self notifyTransportConnected];
+            if (self.isOutputStreamReady && self.isInputStreamReady) {
+                [FMCDebugTool logInfo:@"Streams Event Open" withType:FMCDebugType_Transport_iAP];
+                
+                if (self.onControlProtocol) {
+                    [FMCDebugTool logInfo:@"Waiting For Protocol Index" withType:FMCDebugType_Transport_iAP];
+                    
+                    //Begin Connection Retry
+//                    float randomNumber = (float)arc4random() / UINT_MAX; // between 0 and 1
+//                    float randomMinMax = 0.0f + (0.5f-0.0f)*randomNumber; // between Min (0.0) and Max (0.5)
+                    
+//                    [FMCDebugTool logInfo:[NSString stringWithFormat:@"Wait: %f", 1.5f] withType:FMCDebugType_Transport_iAP];
+                    [self performSelector:@selector(protocolIndexRestart) withObject:nil afterDelay:2.5f];
+
+                } else {
+                    [FMCDebugTool logInfo:@"Transport Ready" withType:FMCDebugType_Transport_iAP];
+                    self.transportReady = YES;
+                    [self notifyTransportConnected];
+                }
+                
             }
             break;
         }
@@ -168,7 +203,9 @@
             }
             
             if (!self.isOutputStreamReady && !self.isInputStreamReady) {
+                [FMCDebugTool logInfo:@"Streams Event End" withType:FMCDebugType_Transport_iAP];
                 [self disconnect];
+                [self connect];
             }
             break;
         }
@@ -261,7 +298,6 @@
         } else {
             if ([self.protocolString isEqualToString:CONTROL_PROTOCOL_STRING]) {
                 [FMCDebugTool logInfo:@"Session Not Opened (Control Protocol)" withType:FMCDebugType_Transport_iAP];
-                //[FMCDebugTool logInfo:@"App may not have declared multiapp com.smartdevicelink.prot strings in Info.plist" withType:FMCDebugType_Transport_iAP];
                 
                 //Begin Connection Retry
                 float randomNumber = (float)arc4random() / UINT_MAX; // between 0 and 1
@@ -322,7 +358,7 @@
                     break;
                 }
 
-                [FMCDebugTool logInfo:@"Outgoing:"
+                [FMCDebugTool logInfo:@">>>Outgoing Data:"
                         andBinaryData:[remainder subdataWithRange:NSMakeRange(0, bytesWritten)]
                              withType:FMCDebugType_Transport_iAP
                              toOutput:FMCDebugOutput_File];
@@ -343,7 +379,7 @@
         NSInteger bytesRead = [[self.session inputStream] read:buf maxLength:IAP_INPUT_BUFFER_SIZE];
 
         NSData *dataIn = [NSData dataWithBytes:buf length:bytesRead];
-        [FMCDebugTool logInfo:@"Incoming:"
+        [FMCDebugTool logInfo:@"<<<Incoming Data:"
                 andBinaryData:dataIn
                      withType:FMCDebugType_Transport_iAP
                      toOutput:FMCDebugOutput_File];
