@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		59279FF019AC394200025CD2 /* FMCHexUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = 59279FEE19AC394200025CD2 /* FMCHexUtility.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		59279FF119AC394200025CD2 /* FMCHexUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 59279FEF19AC394200025CD2 /* FMCHexUtility.m */; };
 		5948760D1979089600D94C36 /* FMCSyncProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 5948760B1979089600D94C36 /* FMCSyncProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5948760E1979089600D94C36 /* FMCSyncProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5948760C1979089600D94C36 /* FMCSyncProxy.m */; };
 		59A02FEF1978FBA1003E8ECF /* AppLink.h in Headers */ = {isa = PBXBuildFile; fileRef = 59A02E001978FBA0003E8ECF /* AppLink.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -503,13 +505,13 @@
 		59A031D01978FBB1003E8ECF /* FMCTransport.h in Headers */ = {isa = PBXBuildFile; fileRef = 59A02FED1978FBA1003E8ECF /* FMCTransport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		59A031D11978FBB1003E8ECF /* FMCTransportDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 59A02FEE1978FBA1003E8ECF /* FMCTransportDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		59BF0A7019790C56008C6783 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 59A02FE41978FBA1003E8ECF /* InfoPlist.strings */; };
-		E932AD8B19A26CCF00D8155B /* FMCPolicyDataParser.h in Headers */ = {isa = PBXBuildFile; fileRef = E932AD8919A26CCF00D8155B /* FMCPolicyDataParser.h */; };
+		E932AD8B19A26CCF00D8155B /* FMCPolicyDataParser.h in Headers */ = {isa = PBXBuildFile; fileRef = E932AD8919A26CCF00D8155B /* FMCPolicyDataParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E932AD8C19A26CCF00D8155B /* FMCPolicyDataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E932AD8A19A26CCF00D8155B /* FMCPolicyDataParser.m */; };
-		E9AF74A719A2803700A97348 /* FMCHexUtility.h in Headers */ = {isa = PBXBuildFile; fileRef = E9AF74A519A2803700A97348 /* FMCHexUtility.h */; };
-		E9AF74A819A2803700A97348 /* FMCHexUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AF74A619A2803700A97348 /* FMCHexUtility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		59279FEE19AC394200025CD2 /* FMCHexUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCHexUtility.h; sourceTree = "<group>"; };
+		59279FEF19AC394200025CD2 /* FMCHexUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCHexUtility.m; sourceTree = "<group>"; };
 		593E2D5A1978F0E80065A2AB /* AppLink.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppLink.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5948760B1979089600D94C36 /* FMCSyncProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCSyncProxy.h; sourceTree = "<group>"; };
 		5948760C1979089600D94C36 /* FMCSyncProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCSyncProxy.m; sourceTree = "<group>"; };
@@ -1002,8 +1004,6 @@
 		59E5A3F0194E318200B908AA /* AppLinkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppLinkTests.m; sourceTree = "<group>"; };
 		E932AD8919A26CCF00D8155B /* FMCPolicyDataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCPolicyDataParser.h; sourceTree = "<group>"; };
 		E932AD8A19A26CCF00D8155B /* FMCPolicyDataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCPolicyDataParser.m; sourceTree = "<group>"; };
-		E9AF74A519A2803700A97348 /* FMCHexUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCHexUtility.h; sourceTree = "<group>"; };
-		E9AF74A619A2803700A97348 /* FMCHexUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCHexUtility.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1645,8 +1645,8 @@
 		E9AF74A919A2805C00A97348 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				E9AF74A519A2803700A97348 /* FMCHexUtility.h */,
-				E9AF74A619A2803700A97348 /* FMCHexUtility.m */,
+				59279FEE19AC394200025CD2 /* FMCHexUtility.h */,
+				59279FEF19AC394200025CD2 /* FMCHexUtility.m */,
 				E932AD8919A26CCF00D8155B /* FMCPolicyDataParser.h */,
 				E932AD8A19A26CCF00D8155B /* FMCPolicyDataParser.m */,
 			);
@@ -1674,7 +1674,6 @@
 				59A031D01978FBB1003E8ECF /* FMCTransport.h in Headers */,
 				59A031491978FBA8003E8ECF /* FMCPerformAudioPassThruResponse.h in Headers */,
 				59A031251978FBA7003E8ECF /* FMCUpdateTurnList.h in Headers */,
-				E932AD8B19A26CCF00D8155B /* FMCPolicyDataParser.h in Headers */,
 				59A031291978FBA7003E8ECF /* FMCAddSubMenuResponse.h in Headers */,
 				59A031031978FBA5003E8ECF /* FMCResetGlobalProperties.h in Headers */,
 				59A030931978FBA2003E8ECF /* FMCSystemAction.h in Headers */,
@@ -1704,7 +1703,6 @@
 				59A0309B1978FBA2003E8ECF /* FMCTextFieldName.h in Headers */,
 				59A030E91978FBA4003E8ECF /* FMCDeleteInteractionChoiceSet.h in Headers */,
 				59A030171978FBA1003E8ECF /* FMCJingle.h in Headers */,
-				E9AF74A719A2803700A97348 /* FMCHexUtility.h in Headers */,
 				59A031731978FBAB003E8ECF /* FMCUnsubscribeVehicleDataResponse.h in Headers */,
 				59A030431978FBA1003E8ECF /* FMCCharacterSet.h in Headers */,
 				59A031891978FBAC003E8ECF /* FMCDIDResult.h in Headers */,
@@ -1905,7 +1903,9 @@
 				59A030891978FBA2003E8ECF /* FMCRPCMessageType.h in Headers */,
 				59A030DF1978FBA4003E8ECF /* FMCAlertManeuver.h in Headers */,
 				59A02FF81978FBA1003E8ECF /* FMCAppLinkProtocol.h in Headers */,
+				E932AD8B19A26CCF00D8155B /* FMCPolicyDataParser.h in Headers */,
 				5948760D1979089600D94C36 /* FMCSyncProxy.h in Headers */,
+				59279FF019AC394200025CD2 /* FMCHexUtility.h in Headers */,
 				59A030651978FBA1003E8ECF /* FMCImageType.h in Headers */,
 				59A0301D1978FBA1003E8ECF /* FMCNames.h in Headers */,
 			);
@@ -2106,6 +2106,7 @@
 				59A0311E1978FBA6003E8ECF /* FMCSystemRequest.m in Sources */,
 				59A030151978FBA1003E8ECF /* FMCFunctionID.m in Sources */,
 				59A0306C1978FBA2003E8ECF /* FMCKeyboardLayout.m in Sources */,
+				59279FF119AC394200025CD2 /* FMCHexUtility.m in Sources */,
 				59A0310E1978FBA6003E8ECF /* FMCSetMediaClockTimer.m in Sources */,
 				59A031CD1978FBB1003E8ECF /* FMCIAPTransport.m in Sources */,
 				59A0318A1978FBAC003E8ECF /* FMCDIDResult.m in Sources */,
@@ -2226,7 +2227,6 @@
 				59A0310A1978FBA6003E8ECF /* FMCSetDisplayLayout.m in Sources */,
 				59A030A61978FBA3003E8ECF /* FMCVehicleDataActiveStatus.m in Sources */,
 				59A031AE1978FBAF003E8ECF /* FMCSoftButtonCapabilities.m in Sources */,
-				E9AF74A819A2803700A97348 /* FMCHexUtility.m in Sources */,
 				59A0319C1978FBAD003E8ECF /* FMCImageResolution.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
