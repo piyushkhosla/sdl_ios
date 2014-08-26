@@ -16,6 +16,18 @@ const NSUInteger RPC_HEADER_SIZE = 12;
 }
 
 -(id) initWithData:(NSData *)data {
+    unsigned long dataLength = data.length;
+
+    if (data == nil || dataLength == 0) {
+        NSLog(@"Error: data is nil.");
+        return nil;
+    }
+
+    if (dataLength < RPC_HEADER_SIZE) {
+        NSLog(@"Error: insfficient data to form RPC header.");
+        return nil;
+    }
+
 	if (self = [self init]) {
         @try {
             // Setup our pointers for data access
@@ -24,6 +36,7 @@ const NSUInteger RPC_HEADER_SIZE = 12;
 
             // Extract the parts
             UInt8 rpcType = (bytePointer[0] & 0xF0) >> 4;
+
             self.rpcType = rpcType;
 
             UInt32 functionID = ui32Pointer[0];
@@ -39,7 +52,7 @@ const NSUInteger RPC_HEADER_SIZE = 12;
 
             NSData *jsonData = nil;
             NSUInteger offsetOfJSONData = RPC_HEADER_SIZE;
-            if (jsonDataSize > 0) {
+            if (jsonDataSize > 0 && jsonDataSize <= dataLength-RPC_HEADER_SIZE ) {
                 jsonData = [data subdataWithRange:NSMakeRange(offsetOfJSONData, jsonDataSize)];
             }
             self.jsonData = jsonData;
@@ -52,17 +65,17 @@ const NSUInteger RPC_HEADER_SIZE = 12;
             }
             self.binaryData = binaryData;
 
-        }
-        @catch (NSException *exception)
-        {
+        } @catch (NSException *e) {
             // Print exception information
             NSLog( @"NSException caught in FMCRPCPayload::initWithData" );
-            NSLog( @"Name: %@", exception.name);
-            NSLog( @"Reason: %@", exception.reason );
+            NSLog( @"Name: %@", e.name);
+            NSLog( @"Reason: %@", e.reason );
             NSLog( @"Data: %@", data.debugDescription );
             return nil;
+
         }
 	}
+
 	return self;
 }
 

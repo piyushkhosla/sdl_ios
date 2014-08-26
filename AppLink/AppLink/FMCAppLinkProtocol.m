@@ -33,6 +33,7 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 
 - (void)sendDataToTransport:(NSData *)data;
 - (void)sendDataToTransportWithHighPriority:(NSData *)data;
+- (void)logRPCSend:(FMCAppLinkProtocolMessage *)message;
 
 @end
 
@@ -126,17 +127,24 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
     //
     if (message.size < MAX_TRANSMISSION_SIZE)
     {
+        [self logRPCSend:message];
         [self sendDataToTransport:message.data];
     }
     else
     {
         NSArray *messages = [FMCAppLinkProtocolMessageDisassembler disassemble:message withLimit:MAX_TRANSMISSION_SIZE];
         for (FMCAppLinkProtocolMessage *smallerMessage in messages) {
+            [self logRPCSend:message];
             [self sendDataToTransport:smallerMessage.data];
         }
         
     }
 
+}
+
+- (void)logRPCSend:(FMCAppLinkProtocolMessage *)message {
+    NSString *logMessage = [NSString stringWithFormat:@"Sending : %@", message];
+    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole];
 }
 
 // Use for normal messages
@@ -160,6 +168,9 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 //
 - (void)handleBytesFromTransport:(NSData *)recievedData {
 
+    NSMutableString *logMessage = [[NSMutableString alloc]init];//
+    [logMessage appendFormat:@"Received: %ld", (long)recievedData.length];
+
     // Initialize the recieve buffer which will contain bytes while messages are constructed.
     if (self.recieveBuffer == nil) {
         self.recieveBuffer = [NSMutableData dataWithCapacity:(4 * MAX_TRANSMISSION_SIZE)];
@@ -167,10 +178,10 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 
     // Save the data
     [self.recieveBuffer appendData:recievedData];
+    [logMessage appendFormat:@"(%ld) ", (long)self.recieveBuffer.length];
 
     // Get the version
     UInt8 incomingVersion = [FMCAppLinkProtocolMessage determineVersion:self.recieveBuffer];
-
 
     // If we have enough bytes, create the header.
     FMCAppLinkProtocolHeader* header = [FMCAppLinkProtocolHeader headerForVersion:incomingVersion];
@@ -179,9 +190,10 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
         [header parse:self.recieveBuffer];
     } else {
         // Need to wait for more bytes.
+        [logMessage appendString:@"header incomplete, waiting for more bytes."];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole];
         return;
     }
-
 
     // If we have enough bytes, finish building the message.
     FMCAppLinkProtocolMessage *message = nil;
@@ -192,8 +204,12 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
         NSUInteger payloadLength = payloadSize;
         NSData *payload = [self.recieveBuffer subdataWithRange:NSMakeRange(payloadOffset, payloadLength)];
         message = [FMCAppLinkProtocolMessage messageWithHeader:header andPayload:payload];
+        [logMessage appendFormat:@"message complete. %@", message];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole];
     } else {
         // Need to wait for more bytes.
+        [logMessage appendFormat:@"header complete. message incomplete, waiting for %ld more bytes. Header:%@", (long)(messageSize - self.recieveBuffer.length), header];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole];
         return;
     }
 

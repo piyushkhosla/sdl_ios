@@ -322,7 +322,8 @@
                     break;
                 }
 
-                [FMCDebugTool logInfo:@"Outgoing:"
+                NSString *logMessage = [NSString stringWithFormat:@"Outgoing: (%ld)", (long)bytesWritten];
+                [FMCDebugTool logInfo:logMessage
                         andBinaryData:[remainder subdataWithRange:NSMakeRange(0, bytesWritten)]
                              withType:FMCDebugType_Transport_iAP
                              toOutput:FMCDebugOutput_File];
@@ -343,7 +344,9 @@
         NSInteger bytesRead = [[self.session inputStream] read:buf maxLength:IAP_INPUT_BUFFER_SIZE];
 
         NSData *dataIn = [NSData dataWithBytes:buf length:bytesRead];
-        [FMCDebugTool logInfo:@"Incoming:"
+
+        NSString *logMessage = [NSString stringWithFormat:@"Incoming: (%ld)", (long)bytesRead];
+        [FMCDebugTool logInfo:logMessage
                 andBinaryData:dataIn
                      withType:FMCDebugType_Transport_iAP
                      toOutput:FMCDebugOutput_File];

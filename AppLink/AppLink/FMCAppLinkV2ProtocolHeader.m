@@ -73,9 +73,31 @@ const int V2APPLINK_HEADERSIZE = 12;
 }
 
 - (NSString *)description {
+
+    NSString *frameTypeString = nil;
+    if (self.frameType >= 0 && self.frameType <= 3) {
+        NSArray *frameTypeNames = @[@"Control", @"Single", @"First", @"Consecutive"];
+        frameTypeString = frameTypeNames[self.frameType];
+    }
+
+
+    NSString *frameDataString = nil;
+    if (self.frameType == FMCFrameType_Control) {
+        if (self.frameData >= 0 && self.frameData <=5) {
+            NSArray *controlFrameDataNames = @[@"Heartbeat", @"StartSession", @"StartSessionACK", @"StartSessionNACK", @"EndSession", @"EndSessionNACK"];
+            frameDataString = controlFrameDataNames[self.frameData];
+        } else {
+            frameDataString = @"Reserved";
+        }
+    } else if (self.frameType == FMCFrameType_Single || self.frameType == FMCFrameType_First) {
+        frameDataString = @"Reserved";
+    } else if (self.frameType == FMCFrameType_Consecutive) {
+        frameDataString = @"Frame#";
+    }
+
     NSMutableString* description = [[NSMutableString alloc] init];
-    [description appendFormat:@"Version:%i, compressed:%i, frameType:%i, serviceType:%i, frameData:%i, sessionID:%i, dataSize:%i, messageID:%i ",
-                              self.version, self.compressed, self.frameType, self.serviceType, self.frameData, self.sessionID, (unsigned int)self.bytesInPayload, (unsigned int)self.messageID];
+    [description appendFormat:@"Version:%i, compressed:%i, frameType:%@(%i), serviceType:%i, frameData:%@(%i), sessionID:%i, dataSize:%i, messageID:%i ",
+                              self.version, self.compressed, frameTypeString, self.frameType, self.serviceType, frameDataString, self.frameData, self.sessionID, (unsigned int)self.bytesInPayload, (unsigned int)self.messageID];
     return description;
 }
 

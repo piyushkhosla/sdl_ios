@@ -5,8 +5,8 @@
 #import "FMCAppLinkProtocolMessage.h"
 #import "FMCAppLinkV1ProtocolMessage.h"
 #import "FMCAppLinkV2ProtocolMessage.h"
-
 #import "FMCRPCPayload.h"
+#import "FMCFunctionID.h"
 
 @interface FMCAppLinkProtocolMessage ()
 
@@ -50,9 +50,30 @@
 }
 
 - (NSString *)description {
+    // Print the header data.
     NSMutableString* description = [[NSMutableString alloc] init];
     [description appendString:self.header.description];
-    [description appendFormat:@" Payload: %lu bytes.", (unsigned long)self.payload.length];
+
+    // If it's an RPC, provide name and whether it's a notification, request or response.
+    if (self.header.serviceType == FMCServiceType_RPC &&
+        (self.header.frameType == FMCFrameType_Single)) {
+        FMCRPCPayload *rpcPayload = [FMCRPCPayload rpcPayloadWithData:self.payload];
+        if (rpcPayload) {
+            NSString *functionName = [[[FMCFunctionID alloc] init] getFunctionName:rpcPayload.functionID];
+
+            UInt8 rpcType = rpcPayload.rpcType;
+            NSArray *rpcTypeNames = @[@"Request", @"Response", @"Notification"];
+            NSString *rpcTypeString = nil;
+            if(rpcType >= 0 && rpcType < rpcTypeNames.count) {
+                rpcTypeString = rpcTypeNames[rpcType];
+            }
+
+            [description appendFormat:@" RPC Info: %@ %@", functionName, rpcTypeString];
+        }
+    } else {
+        // Not an RPC, provide generic info.
+        [description appendFormat:@" Payload: %lu bytes.", (unsigned long)self.payload.length];
+    }
 
     return description;
 }

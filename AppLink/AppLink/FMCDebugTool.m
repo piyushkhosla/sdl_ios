@@ -240,19 +240,19 @@ bool debugToLogFile = false;
     
     switch (debugType) {
         case FMCDebugType_Debug:
-            return @"App Debug";
+            return @"App ";
             break;
         case FMCDebugType_Transport_iAP:
-            return @"iAP";
+            return @"iAP ";
             break;
         case FMCDebugType_Transport_TCP:
-            return @"TCP";
+            return @"TCP ";
             break;
         case FMCDebugType_Protocol:
-            return @"Protocol";
+            return @"Prot";
             break;
         case FMCDebugType_RPC:
-            return @"RPC";
+            return @"RPC ";
             break;
             
         default:
