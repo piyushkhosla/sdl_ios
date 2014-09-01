@@ -54,21 +54,26 @@
     NSMutableString* description = [[NSMutableString alloc] init];
     [description appendString:self.header.description];
 
-    // If it's an RPC, provide name and whether it's a notification, request or response.
-    if (self.header.serviceType == FMCServiceType_RPC &&
-        (self.header.frameType == FMCFrameType_Single)) {
-        FMCRPCPayload *rpcPayload = [FMCRPCPayload rpcPayloadWithData:self.payload];
-        if (rpcPayload) {
-            NSString *functionName = [[[FMCFunctionID alloc] init] getFunctionName:rpcPayload.functionID];
+    // If it's an RPC, provide greater detail
+    if (self.header.serviceType == FMCServiceType_RPC && (self.header.frameType == FMCFrameType_Single)) {
+        // version of RPC Message determines how we access the info.
+        if (self.header.version == 2) {
+            FMCRPCPayload *rpcPayload = [FMCRPCPayload rpcPayloadWithData:self.payload];
+            if (rpcPayload) {
+                NSString *functionName = [[[FMCFunctionID alloc] init] getFunctionName:rpcPayload.functionID];
 
-            UInt8 rpcType = rpcPayload.rpcType;
-            NSArray *rpcTypeNames = @[@"Request", @"Response", @"Notification"];
-            NSString *rpcTypeString = nil;
-            if(rpcType >= 0 && rpcType < rpcTypeNames.count) {
-                rpcTypeString = rpcTypeNames[rpcType];
+                UInt8 rpcType = rpcPayload.rpcType;
+                NSArray *rpcTypeNames = @[@"Request", @"Response", @"Notification"];
+                NSString *rpcTypeString = nil;
+                if(rpcType >= 0 && rpcType < rpcTypeNames.count) {
+                    rpcTypeString = rpcTypeNames[rpcType];
+                }
+                [description appendFormat:@" RPC Info: %@ %@", functionName, rpcTypeString];
             }
+        } else {
+            // version == 1
+            // turn payload (which is JSON string) into dictionary and extract fields of interest.
 
-            [description appendFormat:@" RPC Info: %@ %@", functionName, rpcTypeString];
         }
     } else {
         // Not an RPC, provide generic info.

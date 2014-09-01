@@ -89,6 +89,10 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
     NSData *jsonData = [[FMCJsonEncoder instance] encodeDictionary:[rpcRequest serializeAsDictionary:self.version]];
     NSData* messagePayload = nil;
 
+    NSString *logMessage = [NSString stringWithFormat:@"%@", rpcRequest];
+    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+
+
     if(self.version == 1) {
         messagePayload = jsonData;
     } else if (self.version == 2) {
@@ -144,7 +148,7 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 
 - (void)logRPCSend:(FMCAppLinkProtocolMessage *)message {
     NSString *logMessage = [NSString stringWithFormat:@"Sending : %@", message];
-    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole];
+    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];
 }
 
 // Use for normal messages
@@ -191,7 +195,7 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
     } else {
         // Need to wait for more bytes.
         [logMessage appendString:@"header incomplete, waiting for more bytes."];
-        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];
         return;
     }
 
@@ -205,11 +209,11 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
         NSData *payload = [self.recieveBuffer subdataWithRange:NSMakeRange(payloadOffset, payloadLength)];
         message = [FMCAppLinkProtocolMessage messageWithHeader:header andPayload:payload];
         [logMessage appendFormat:@"message complete. %@", message];
-        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];
     } else {
         // Need to wait for more bytes.
         [logMessage appendFormat:@"header complete. message incomplete, waiting for %ld more bytes. Header:%@", (long)(messageSize - self.recieveBuffer.length), header];
-        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];
         return;
     }
 

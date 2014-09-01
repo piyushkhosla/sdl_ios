@@ -59,7 +59,7 @@ const NSUInteger RPC_HEADER_SIZE = 12;
 
             NSData *binaryData = nil;
             NSUInteger offsetOfBinaryData = RPC_HEADER_SIZE + jsonDataSize;
-            NSUInteger binaryDataSize = data.length - jsonDataSize - RPC_HEADER_SIZE;
+            NSInteger binaryDataSize = data.length - jsonDataSize - RPC_HEADER_SIZE;
             if (binaryDataSize > 0) {
                 binaryData = [data subdataWithRange:NSMakeRange(offsetOfBinaryData, binaryDataSize)];
             }

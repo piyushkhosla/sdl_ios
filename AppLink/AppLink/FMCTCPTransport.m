@@ -75,7 +75,8 @@ static void TCPCallback(CFSocketRef socket, CFSocketCallBackType type, CFDataRef
         
         [transport handleDataReceivedFromTransport:[NSData dataWithBytes:(UInt8 *)CFDataGetBytePtr((CFDataRef)data) length:(int)CFDataGetLength((CFDataRef)data)]];
     } else {
-		[FMCDebugTool logInfo:@"unhandled TCPCallback: %d", type];
+        NSString *logMessage = [NSString stringWithFormat:@"unhandled TCPCallback: %lu", type];
+		[FMCDebugTool logInfo:logMessage withType:FMCDebugType_Transport_TCP toOutput:FMCDebugOutput_DeviceConsole];
 	}
 }
 

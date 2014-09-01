@@ -11,6 +11,7 @@
     if (self = [super init]) {
         _endpointName = endpoint;
         _endpointParam = param;
+        _debugConsoleGroupName = @"default";
     }
     return self;
 }

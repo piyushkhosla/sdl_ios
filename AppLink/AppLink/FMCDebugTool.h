@@ -8,9 +8,7 @@
 
 @protocol FMCDebugToolConsole
 
--(void) logInfo:(NSString*) info;
--(void) logException:(NSException*) ex withMessage:(NSString*) message;
--(void) logMessage:(FMCRPCMessage*) message;
+- (void)logInfo:(NSString *)info;
 
 @end
 
@@ -20,7 +18,8 @@ typedef NS_ENUM(UInt8, FMCDebugType) {
 	FMCDebugType_Transport_iAP = 1,
     FMCDebugType_Transport_TCP = 2,
 	FMCDebugType_Protocol = 3,
-	FMCDebugType_RPC = 4
+	FMCDebugType_RPC = 4,
+	FMCDebugType_APP = 5
 };
 
 typedef NS_ENUM(UInt8, FMCDebugOutput) {
@@ -35,15 +34,15 @@ typedef NS_ENUM(UInt8, FMCDebugOutput) {
 
 @interface FMCDebugTool : NSObject {}
 
-+ (void)addConsole:(NSObject<FMCDebugToolConsole>*) console;
-+ (void)removeConsole:(NSObject<FMCDebugToolConsole>*) console;
-
-+ (void)logInfo:(NSString *)fmt, ... ;
++ (void)addConsole:(NSObject<FMCDebugToolConsole> *)console;
++ (void)addConsole:(NSObject<FMCDebugToolConsole> *)console toGroup:(NSString *)groupName;
++ (void)removeConsole:(NSObject<FMCDebugToolConsole> *)console;
++ (void)removeConsole:(NSObject<FMCDebugToolConsole> *)console fromGroup:(NSString *)groupName;
++ (void)logInfo:(NSString *)info;
 + (void)logInfo:(NSString *)info withType:(FMCDebugType)type;
 + (void)logInfo:(NSString *)info withType:(FMCDebugType)type toOutput:(FMCDebugOutput)output;
 + (void)logInfo:(NSString *)info andBinaryData:(NSData *)data withType:(FMCDebugType)type toOutput:(FMCDebugOutput)output;
-+ (void)logException:(NSException*) ex withMessage:(NSString*) fmt, ... ;
-+ (void)logMessage:(FMCRPCMessage*) rpcMessage;
++ (void)logInfo:(NSString *)info withType:(FMCDebugType)type toOutput:(FMCDebugOutput)output toGroup:(NSString *)consoleGroupName;
 
 + (void)enableDebugToLogFile;
 + (void)disableDebugToLogFile;

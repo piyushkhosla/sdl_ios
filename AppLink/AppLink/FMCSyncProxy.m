@@ -44,7 +44,9 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 #pragma mark - Object lifecycle
 - (id)initWithTransport:(NSObject<FMCTransport> *)theTransport protocol:(NSObject<FMCProtocol> *)theProtocol delegate:(NSObject<FMCProxyListener> *)theDelegate {
-	if (self = [super init]) {        
+	if (self = [super init]) {
+        _debugConsoleGroupName = @"default";
+        
         rpcSessionID = 0;
         alreadyDestructed = NO;
                 
@@ -113,7 +115,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 #pragma mark - Handshake Timer
 - (void)handshakeTimerFired {
-    [FMCDebugTool logInfo:@"RPC Initial Handshake Timeout" withType:FMCDebugType_RPC];
+    [FMCDebugTool logInfo:@"RPC Initial Handshake Timeout" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
     [self destroyHandshakeTimer];
     [self performSelector:@selector(notifyProxyClosed) withObject:nil afterDelay:notifyProxyClosedDelay];
@@ -130,7 +132,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 #pragma mark - FMCProtocolListener Implementation
 - (void) onProtocolOpened {
     isConnected = YES;
-    [FMCDebugTool logInfo:@"StartSession (request)" withType:FMCDebugType_RPC];
+    [FMCDebugTool logInfo:@"StartSession (request)" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
     [self.protocol sendStartSessionWithType:FMCServiceType_RPC];
 
@@ -148,7 +150,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 - (void)handleProtocolSessionStarted:(FMCServiceType)sessionType sessionID:(Byte)sessionID version:(Byte)maxVersionForModule {
     NSString *logMessage = [NSString stringWithFormat:@"StartSession (response)\nSessionId: %d", sessionID];
-    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
+    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     
     if (_version <= 1) {
         if (maxVersionForModule == 2) {
@@ -167,7 +169,8 @@ const int POLICIES_CORRELATION_ID = 65535;
 		[self handleProtocolMessage:msgData];
 	}
 	@catch (NSException * e) {
-		[FMCDebugTool logException:e withMessage:@"Proxy: Failed to handle protocol message"];
+		NSString *logMessage = [NSString stringWithFormat:@"Proxy: Failed to handle protocol message %@", e];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Debug toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 	}
 }
 
@@ -183,7 +186,8 @@ const int POLICIES_CORRELATION_ID = 65535;
 	@try {
         [self.protocol sendRPCRequest:rpcRequest];
 	} @catch (NSException * e) {
-		[FMCDebugTool logException:e withMessage:@"Proxy: Failed to send RPC request: %@", rpcRequest.name];
+		NSString *logMessage = [NSString stringWithFormat:@"Proxy: Failed to send RPC request: %@", rpcRequest.name];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Debug toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 	}
 }
 
@@ -205,7 +209,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 	if ([functionName isEqualToString:NAMES_OnAppInterfaceUnregistered]
         || [functionName isEqualToString:NAMES_UnregisterAppInterface]) {
         logMessage = [NSString stringWithFormat:@"Unregistration forced by module. %@", msg];
-        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC  toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 		[self notifyProxyClosed];
 		return;
 	}
@@ -221,20 +225,20 @@ const int POLICIES_CORRELATION_ID = 65535;
         [self destroyHandshakeTimer];
         
         //Print Proxy Version To Console
-        [FMCDebugTool logInfo:@"Framework Version: %@", [self getProxyVersion]];
-        
+        logMessage = [NSString stringWithFormat:@"Framework Version: %@", [self getProxyVersion]];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     }
 
 
     if ([functionName isEqualToString:@"EncodedSyncPDataResponse"]) {
-        [FMCDebugTool logInfo:@"EncodedSyncPData (response)" withType:FMCDebugType_RPC];
+        [FMCDebugTool logInfo:@"EncodedSyncPData (response)" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     }
 
 
     // Intercept OnEncodedSyncPData. If URL != nil, perform HTTP Post and don't pass the notification to FMProxyListeners
     if ([functionName isEqualToString:@"OnEncodedSyncPData"]) {
         logMessage = [NSString stringWithFormat:@"OnEncodedSyncPData (notification)\n%@", msg];
-        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
         NSString     *urlString           = (NSString *)    [rpcMsg getParameters:@"URL"];
         NSDictionary *encodedSyncPData    = (NSDictionary *)[rpcMsg getParameters:@"data"];
@@ -250,7 +254,7 @@ const int POLICIES_CORRELATION_ID = 65535;
     // Intercept OnSystemRequest.
     if ([functionName isEqualToString:@"OnSystemRequest"]) {
 
-        [FMCDebugTool logInfo:@"OnSystemRequest (notification)" withType:FMCDebugType_RPC];
+        [FMCDebugTool logInfo:@"OnSystemRequest (notification)" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
         FMCOnSystemRequest* sysRpcMsg = [[FMCOnSystemRequest alloc] initWithDictionary:(NSMutableDictionary*) msg];
         FMCRequestType *requestType = sysRpcMsg.requestType;
@@ -262,12 +266,12 @@ const int POLICIES_CORRELATION_ID = 65535;
             // Validate input
             if (urlString == nil)
             {
-                [FMCDebugTool logInfo:@"OnSystemRequest (notification) failure: url is nil" withType:FMCDebugType_RPC];
+                [FMCDebugTool logInfo:@"OnSystemRequest (notification) failure: url is nil" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
                 return;
             }
             if (fileType != [FMCFileType JSON])
             {
-                [FMCDebugTool logInfo:@"OnSystemRequest (notification) failure: file type is not JSON" withType:FMCDebugType_RPC];
+                [FMCDebugTool logInfo:@"OnSystemRequest (notification) failure: file type is not JSON" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
                 return;
             }
 
@@ -277,13 +281,13 @@ const int POLICIES_CORRELATION_ID = 65535;
                 NSError *errorJSONSerializeNotification = nil;
                 notificationDictionary = [NSJSONSerialization JSONObjectWithData:sysRpcMsg.bulkData options:kNilOptions error:&errorJSONSerializeNotification];
                 if (errorJSONSerializeNotification) {
-                    [FMCDebugTool logInfo:@"OnSystemRequest failure: notification data is not valid JSON." withType:FMCDebugType_RPC];
+                    [FMCDebugTool logInfo:@"OnSystemRequest failure: notification data is not valid JSON." withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
                     return;
                 }
             }
             @catch (NSException *exception) {
                 logMessage = [NSString stringWithFormat:@"Exception converting bulk data to NSDictionary. Data:\n%@", [[NSString alloc] initWithData:sysRpcMsg.bulkData encoding:NSUTF8StringEncoding]];
-                [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
+                [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
                 [exception raise]; // rethrow
             }
@@ -311,7 +315,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
             // Logging
             logMessage = [NSString stringWithFormat:@"OnSystemRequest (HTTP Request) to URL %@", urlString];
-            [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
+            [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
 
             // Send the HTTP Request
@@ -329,7 +333,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
     if ([functionName isEqualToString:@"SystemRequestResponse"]) {
         logMessage = [NSString stringWithFormat:@"SystemRequest (response)\n%@", msg];
-        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
         return;
     }
 
@@ -337,13 +341,17 @@ const int POLICIES_CORRELATION_ID = 65535;
 
     // From the function name, create the corresponding RPCObject and initialize it
 	NSString* functionClassName = [NSString stringWithFormat:@"FMC%@", functionName];
-	FMCRPCMessage *functionObject = [[NSClassFromString(functionClassName) alloc] init];
-    NSObject* rpcCallbackObject = [functionObject initWithDictionary:[msg mutableCopy]];
+    FMCRPCMessage *functionObject = [[NSClassFromString(functionClassName) alloc] initWithDictionary:msg];
+//	FMCRPCMessage *functionObject = [[NSClassFromString(functionClassName) alloc] init];
+//    NSObject* rpcCallbackObject = [functionObject initWithDictionary:[msg mutableCopy]];
+
+    logMessage = [NSString stringWithFormat:@"%@", functionObject];
+    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
     // Formulate the name of the method to call on the listeners and call it, passing the RPC Object
 	NSString* handlerName = [NSString stringWithFormat:@"on%@:", functionName];
 	SEL handlerSelector = NSSelectorFromString(handlerName);
-	[self invokeMethodOnDelegates:handlerSelector withObject:rpcCallbackObject];
+	[self invokeMethodOnDelegates:handlerSelector withObject:functionObject];
 }
 
 
@@ -384,7 +392,8 @@ const int POLICIES_CORRELATION_ID = 65535;
     NSError *JSONSerializationError = nil;
     NSData *data = [NSJSONSerialization dataWithJSONObject:dictionary options:kNilOptions error:&JSONSerializationError];
     if (JSONSerializationError) {
-        [FMCDebugTool logInfo:@"Error formatting data for HTTP Request. %@: %@", JSONSerializationError];
+        NSString *logMessage = [NSString stringWithFormat:@"Error formatting data for HTTP Request. %@", JSONSerializationError];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
         return;
     }
 
@@ -395,7 +404,7 @@ const int POLICIES_CORRELATION_ID = 65535;
     };
 
     // Send the HTTP Request
-    [FMCDebugTool logInfo:@"OnEncodedSyncPData (HTTP request)" withType:FMCDebugType_RPC];
+    [FMCDebugTool logInfo:@"OnEncodedSyncPData (HTTP request)" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:data completionHandler:handler];
     [uploadTask resume];
 
@@ -404,11 +413,11 @@ const int POLICIES_CORRELATION_ID = 65535;
 // Handle the OnEncodedSyncPData HTTP Response
 - (void)OESPHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error {
     // Sample of response: {"data":["SDLKGLSDKFJLKSjdslkfjslkJLKDSGLKSDJFLKSDJF"]}
-    [FMCDebugTool logInfo:@"OnEncodedSyncPData (HTTP response)" withType:FMCDebugType_RPC];
+    [FMCDebugTool logInfo:@"OnEncodedSyncPData (HTTP response)" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
     // Validate response data.
     if (data == nil || data.length == 0) {
-        [FMCDebugTool logInfo:@"OnEncodedSyncPData (HTTP response) failure: no data returned" withType:FMCDebugType_RPC];
+        [FMCDebugTool logInfo:@"OnEncodedSyncPData (HTTP response) failure: no data returned" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
         return;
     }
 
@@ -432,17 +441,17 @@ const int POLICIES_CORRELATION_ID = 65535;
 
     if (error) {
         logMessage = [NSString stringWithFormat:@"OnSystemRequest (HTTP response) = ERROR: %@", error];
-        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
         return;
     }
 
     if (data == nil || data.length == 0) {
-        [FMCDebugTool logInfo:@"OnSystemRequest (HTTP response) failure: no data returned" withType:FMCDebugType_RPC];
+        [FMCDebugTool logInfo:@"OnSystemRequest (HTTP response) failure: no data returned" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
         return;
     }
 
     // Show the HTTP response
-    [FMCDebugTool logInfo:@"OnSystemRequest (HTTP response)" withType:FMCDebugType_RPC];
+    [FMCDebugTool logInfo:@"OnSystemRequest (HTTP response)" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
     // Create the SystemRequest RPC to send to module.
     FMCSystemRequest *request = [[FMCSystemRequest alloc] init];
@@ -456,12 +465,12 @@ const int POLICIES_CORRELATION_ID = 65535;
     if (policyData) {
         [pdp parsePolicyData:policyData];
         logMessage = [NSString stringWithFormat:@"Policy Data:%@", pdp];
-        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     }
 
     // Send and log RPC Request
     logMessage = [NSString stringWithFormat:@"SystemRequest (request)\n%@\nData length=%lu", [request serializeAsDictionary:2], (unsigned long)data.length ];
-    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC];
+    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     [self sendRPCRequestPrivate:request];
 
 }
@@ -518,7 +527,7 @@ const int POLICIES_CORRELATION_ID = 65535;
         }
         case NSStreamEventErrorOccurred:
         {
-            [FMCDebugTool logInfo:@"Stream Event: Error"];
+            [FMCDebugTool logInfo:@"Stream Event: Error" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
             break;
         }
         default:

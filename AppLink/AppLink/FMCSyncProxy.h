@@ -23,7 +23,7 @@
 @property (strong) NSObject<FMCTransport>* transport;
 @property (strong) NSMutableArray* proxyListeners;
 @property (strong) NSTimer* handshakeTimer;
-
+@property (strong) NSString *debugConsoleGroupName;
 
 -(id) initWithTransport:(NSObject<FMCTransport>*) transport protocol:(NSObject<FMCProtocol>*) protocol delegate:(NSObject<FMCProxyListener>*) delegate;
 

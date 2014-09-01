@@ -318,7 +318,7 @@ void _acceptConnection(int fd) {
             siphonSocket = fd;
             
             setsockopt(siphonSocket, SOL_SOCKET, SO_NOSIGPIPE, (void *)&socketOps, sizeof(int));
-            [FMCDebugTool logInfo:@"Siphon connected."];
+            [FMCDebugTool logInfo:@"Siphon connected." withType:FMCDebugType_Debug];
             
         } // end-lock
     } // end-if

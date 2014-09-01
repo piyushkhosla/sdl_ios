@@ -10,6 +10,7 @@
 
 @interface FMCAbstractProtocol : NSObject<FMCProtocol>
 
+@property (strong) NSString *debugConsoleGroupName;
 @property (strong) id<FMCTransport> transport;
 @property (weak) id<FMCProtocolListener> protocolDelegate;
 

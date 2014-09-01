@@ -43,7 +43,7 @@
 - (id)init {
     if (self = [super initWithEndpoint:nil endpointParam:nil]) {
 
-        [FMCDebugTool logInfo:@"Init" withType:FMCDebugType_Transport_iAP];
+        [FMCDebugTool logInfo:@"Init" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
         writeQueue = dispatch_queue_create("com.Ford.AppLink.IAPWWriteQueue", DISPATCH_QUEUE_SERIAL);
         dispatch_set_target_queue(writeQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0));
@@ -63,7 +63,7 @@
 #pragma mark FMCTransport Implementation
 
 - (void)connect {
-    [FMCDebugTool logInfo:@"Connect" withType:FMCDebugType_Transport_iAP];
+    [FMCDebugTool logInfo:@"Connect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     
     if (!self.session){
         [self checkForValidConnectedAccessory];
@@ -71,21 +71,21 @@
         if (self.accessory && self.protocolString) {
             [self openSession];
         } else {
-            [FMCDebugTool logInfo:@"No Devices Found" withType:FMCDebugType_Transport_iAP];
+            [FMCDebugTool logInfo:@"No Devices Found" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
         }
     } else {
-        [FMCDebugTool logInfo:@"Session Already Open" withType:FMCDebugType_Transport_iAP];
+        [FMCDebugTool logInfo:@"Session Already Open" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     }
 }
 
 - (void)disconnect {
-    [FMCDebugTool logInfo:@"Disconnect" withType:FMCDebugType_Transport_iAP];
+    [FMCDebugTool logInfo:@"Disconnect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     
     if (self.session) {
         [self closeSession];
         
         if (!self.onControlProtocol) {
-            [FMCDebugTool logInfo:@"Transport Not Ready" withType:FMCDebugType_Transport_iAP];
+            [FMCDebugTool logInfo:@"Transport Not Ready" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
             self.transportReady = NO;
             [self notifyTransportDisconnected];
         }
@@ -102,17 +102,17 @@
 #pragma mark EAAccessory Notifications
 
 - (void)accessoryConnected:(NSNotification*) notification {
-    [FMCDebugTool logInfo:@"Accessory Connected" withType:FMCDebugType_Transport_iAP];
+    [FMCDebugTool logInfo:@"Accessory Connected" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     [self connect];
 }
 
 - (void)accessoryDisconnected:(NSNotification*) notification {
-    [FMCDebugTool logInfo:@"Accessory Disconnected" withType:FMCDebugType_Transport_iAP];
+    [FMCDebugTool logInfo:@"Accessory Disconnected" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     [self disconnect];
 }
 
 -(void)applicationWillEnterForeground:(NSNotification *)notification {
-    [FMCDebugTool logInfo:@"Will Enter Foreground" withType:FMCDebugType_Transport_iAP];
+    [FMCDebugTool logInfo:@"Will Enter Foreground" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     [self.backgroundedTimer invalidate];
     
     [self setupControllerForAccessory:nil withProtocolString:nil];
@@ -120,7 +120,7 @@
 }
 
 -(void)applicationDidEnterBackground:(NSNotification *)notification {
-    [FMCDebugTool logInfo:@"Did Enter Background" withType:FMCDebugType_Transport_iAP];
+    [FMCDebugTool logInfo:@"Did Enter Background" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     self.backgroundedTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(backgroundButAwake:) userInfo: nil repeats: YES];
 }
 
@@ -132,10 +132,10 @@
 - (void)protocolIndexRestart{
     
     //TODO:DEBUG
-    [FMCDebugTool logInfo:@"PI Timer" withType:FMCDebugType_Transport_iAP];
+    [FMCDebugTool logInfo:@"PI Timer" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     
     if (!self.transportReady) {
-        [FMCDebugTool logInfo:@"PI Restart" withType:FMCDebugType_Transport_iAP];
+        [FMCDebugTool logInfo:@"PI Restart" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
         [self closeSession];
         [self connect];
     }
@@ -162,10 +162,10 @@
             }
             
             if (self.isOutputStreamReady && self.isInputStreamReady) {
-                [FMCDebugTool logInfo:@"Streams Event Open" withType:FMCDebugType_Transport_iAP];
+                [FMCDebugTool logInfo:@"Streams Event Open" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
                 
                 if (self.onControlProtocol) {
-                    [FMCDebugTool logInfo:@"Waiting For Protocol Index" withType:FMCDebugType_Transport_iAP];
+                    [FMCDebugTool logInfo:@"Waiting For Protocol Index" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
                     
                     //Begin Connection Retry
 //                    float randomNumber = (float)arc4random() / UINT_MAX; // between 0 and 1
@@ -175,7 +175,7 @@
                     [self performSelector:@selector(protocolIndexRestart) withObject:nil afterDelay:2.5f];
 
                 } else {
-                    [FMCDebugTool logInfo:@"Transport Ready" withType:FMCDebugType_Transport_iAP];
+                    [FMCDebugTool logInfo:@"Transport Ready" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
                     self.transportReady = YES;
                     [self notifyTransportConnected];
                 }
@@ -191,7 +191,7 @@
         case NSStreamEventErrorOccurred:
         {
             NSString *logMessage = [NSString stringWithFormat:@"Stream Error:%@", [[stream streamError] localizedDescription]];
-            [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Transport_iAP];
+            [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
             break;
         }
         case NSStreamEventEndEncountered:
@@ -203,7 +203,7 @@
             }
             
             if (!self.isOutputStreamReady && !self.isInputStreamReady) {
-                [FMCDebugTool logInfo:@"Streams Event End" withType:FMCDebugType_Transport_iAP];
+                [FMCDebugTool logInfo:@"Streams Event End" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
                 [self disconnect];
                 [self connect];
             }
@@ -228,7 +228,7 @@
 - (void)checkForValidConnectedAccessory {
     for (EAAccessory* accessory in [[EAAccessoryManager sharedAccessoryManager] connectedAccessories]) {
         
-        [FMCDebugTool logInfo:[NSString stringWithFormat:@"Check Accessory: %@", accessory] withType:FMCDebugType_Transport_iAP];
+        [FMCDebugTool logInfo:[NSString stringWithFormat:@"Check Accessory: %@", accessory] withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
         self.useLegacyProtocol = NO;
         
@@ -241,7 +241,7 @@
             }
             
             if ([protocolString isEqualToString:CONTROL_PROTOCOL_STRING]) {
-                [FMCDebugTool logInfo:[NSString stringWithFormat:@"MultiApp Sync @ %@", CONTROL_PROTOCOL_STRING] withType:FMCDebugType_Transport_iAP];
+                [FMCDebugTool logInfo:[NSString stringWithFormat:@"MultiApp Sync @ %@", CONTROL_PROTOCOL_STRING] withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
                 
                 self.useLegacyProtocol = NO;
                 
@@ -252,7 +252,7 @@
 #endif
         
         if (self.useLegacyProtocol) {
-            [FMCDebugTool logInfo:[NSString stringWithFormat:@"Legacy Sync @ %@", LEGACY_PROTOCOL_STRING] withType:FMCDebugType_Transport_iAP];
+            [FMCDebugTool logInfo:[NSString stringWithFormat:@"Legacy Sync @ %@", LEGACY_PROTOCOL_STRING] withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
             
             [self setupControllerForAccessory:accessory withProtocolString:LEGACY_PROTOCOL_STRING];
             return;
@@ -261,7 +261,7 @@
 }
 
 - (void)dealloc {
-    [FMCDebugTool logInfo:@"Dealloc" withType:FMCDebugType_Transport_iAP];
+    [FMCDebugTool logInfo:@"Dealloc" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     
     [self closeSession];
     [self setupControllerForAccessory:nil withProtocolString:nil];
@@ -282,7 +282,7 @@
         self.session = [[EASession alloc] initWithAccessory:self.accessory forProtocol:self.protocolString];
         
         if (self.session) {
-            [FMCDebugTool logInfo:@"Opening Streams" withType:FMCDebugType_Transport_iAP];
+            [FMCDebugTool logInfo:@"Opening Streams" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
             
             [[self.session inputStream] setDelegate:self];
             [[self.session inputStream] scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
@@ -297,7 +297,7 @@
             }
         } else {
             if ([self.protocolString isEqualToString:CONTROL_PROTOCOL_STRING]) {
-                [FMCDebugTool logInfo:@"Session Not Opened (Control Protocol)" withType:FMCDebugType_Transport_iAP];
+                [FMCDebugTool logInfo:@"Session Not Opened (Control Protocol)" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
                 
                 //Begin Connection Retry
                 float randomNumber = (float)arc4random() / UINT_MAX; // between 0 and 1
@@ -306,17 +306,17 @@
                 [FMCDebugTool logInfo:[NSString stringWithFormat:@"Wait: %f", randomMinMax] withType:FMCDebugType_Transport_iAP];
                 [self performSelector:@selector(openSession) withObject:nil afterDelay:randomNumber];
             } else {
-                [FMCDebugTool logInfo:@"Session Not Opened" withType:FMCDebugType_Transport_iAP];
+                [FMCDebugTool logInfo:@"Session Not Opened" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
             }
         }
     } else {
-        [FMCDebugTool logInfo:@"Accessory Or Protocol String Not Set" withType:FMCDebugType_Transport_iAP];
+        [FMCDebugTool logInfo:@"Accessory Or Protocol String Not Set" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     }
 }
 
 - (void)closeSession {
     if (self.session) {
-        [FMCDebugTool logInfo:@"Closing Streams" withType:FMCDebugType_Transport_iAP];
+        [FMCDebugTool logInfo:@"Closing Streams" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
         
         [[self.session inputStream] close];
         [[self.session inputStream] removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
@@ -407,10 +407,10 @@
 
         NSNumber *dataProtocol = [NSNumber numberWithUnsignedInt:receivedBytes[0]];
         
-        [FMCDebugTool logInfo:[NSString stringWithFormat:@"Moving To Protocol Index: %@", dataProtocol] withType:FMCDebugType_Transport_iAP];
+        [FMCDebugTool logInfo:[NSString stringWithFormat:@"Moving To Protocol Index: %@", dataProtocol] withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
         
         if ([dataProtocol isEqualToNumber:[NSNumber numberWithInt:255]]) {
-            [FMCDebugTool logInfo:@"All Available Protocol Strings Are In Use" withType:FMCDebugType_Transport_iAP];
+            [FMCDebugTool logInfo:@"All Available Protocol Strings Are In Use" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
             
             //FIXME: Restart but dont call back up to app or connect will keep getting called when busy...
             return;
@@ -437,7 +437,7 @@
 
 -(void) backgroundButAwake:(NSTimer*) t
 {
-    [FMCDebugTool logInfo:@"Still Awake..." withType:FMCDebugType_Transport_iAP];
+    [FMCDebugTool logInfo:@"Still Awake..." withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 }
 
 @end

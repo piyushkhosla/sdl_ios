@@ -5,6 +5,12 @@
 #import "FMCAbstractProtocol.h"
 
 @implementation FMCAbstractProtocol
+- (id)init {
+	if (self = [super init]) {
+        _debugConsoleGroupName = @"default";
+	}
+	return self;
+}
 
 - (void)sendStartSessionWithType:(FMCServiceType)serviceType {
 	[self doesNotRecognizeSelector:_cmd];

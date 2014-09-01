@@ -9,52 +9,60 @@
 
 #define LOG_ERROR_ENABLED
 
-static NSMutableArray* debugToolConsoleList = nil;
+static NSMutableDictionary* namedConsoleSets = nil;
+
 bool debugToLogFile = false;
 
 @implementation FMCDebugTool
 
-+(NSMutableArray*) getConsoleList {
-	if (debugToolConsoleList == nil) {
-		debugToolConsoleList = [[NSMutableArray alloc] initWithCapacity:2];
-	}
-	return debugToolConsoleList;
+
+#pragma mark - Console Management
++ (void)addConsole:(NSObject<FMCDebugToolConsole> *)console {
+	[self addConsole:console toGroup:@"default"];
+}
+
++ (void)addConsole:(NSObject<FMCDebugToolConsole> *)console toGroup:(NSString *)groupName {
+    // Make sure master dictionary exists
+    if (namedConsoleSets == nil) {
+        namedConsoleSets = [NSMutableDictionary new];
+    }
+
+    // Make sure the set to contain this group's elements exists
+    if ([namedConsoleSets objectForKey:groupName] == nil) {
+        [namedConsoleSets setValue:[NSMutableSet new] forKey:groupName];
+    }
+
+    // Add the console to the set
+    [[namedConsoleSets valueForKey:groupName] addObject:console];
+
+}
+
++ (void)removeConsole:(NSObject<FMCDebugToolConsole> *)console {
+	[self removeConsole:console fromGroup:@"default"];
+}
+
++ (void)removeConsole:(NSObject<FMCDebugToolConsole> *)console fromGroup:(NSString *)groupName {
+    [[FMCDebugTool getConsoleListenersForGroup:groupName] removeObject:console];
+}
+
++ (NSMutableSet*)getConsoleListenersForGroup:(NSString *)groupName {
+	return [namedConsoleSets valueForKey:groupName];
 }
 
 
-#pragma mark -
-#pragma mark Debug Console Management
+#pragma mark - logging
+// TODO: Can we get rid of the "toGroup" stuff and merge it with the "toOutput" system?
 
-+(void) addConsole:(NSObject<FMCDebugToolConsole>*) console {
-	[[FMCDebugTool getConsoleList] addObject:console];
++ (void)logInfo:(NSString *)info {
+    [self logInfo:info withType:FMCDebugType_Debug toOutput:FMCDebugOutput_All toGroup:@"default"];
 }
 
-+(void) removeConsole:(NSObject<FMCDebugToolConsole>*) console {
-	[[FMCDebugTool getConsoleList] removeObject:console];
++ (void)logInfo:(NSString *)info withType:(FMCDebugType)type {
+    [self logInfo:info withType:type toOutput:FMCDebugOutput_All toGroup:@"default"];
 }
 
-
-#pragma mark -
-#pragma mark logInfo
-
-+(void) logInfo:(NSString*) fmt, ... {
-    
-    NSString* toOutRaw = nil;
-	
-	va_list args;
-	va_start(args, fmt);
-    
-    toOutRaw = [[NSString alloc] initWithFormat:fmt arguments:args];
-    
-    va_end(args);
-    
-    [self logInfo:toOutRaw withType:FMCDebugType_Debug toOutput:FMCDebugOutput_DeviceConsole];
-}
-
-+(void) logInfo:(NSString *)info withType:(FMCDebugType)debugType{
-    
-    [self logInfo:info withType:debugType toOutput:FMCDebugOutput_All];
-    
++ (void)logInfo:(NSString *)info withType:(FMCDebugType)type toOutput:(FMCDebugOutput)output {
+    [FMCDebugTool logInfo:info withType:type toOutput:output toGroup:@"default"];
 }
 
 + (void)logInfo:(NSString *)info andBinaryData:(NSData *)data withType:(FMCDebugType)type toOutput:(FMCDebugOutput)output {
@@ -72,33 +80,35 @@ bool debugToLogFile = false;
         }
     }
 
-    [FMCDebugTool logInfo:outputString withType:type toOutput:output];
+    [FMCDebugTool logInfo:outputString withType:type toOutput:output toGroup:@"default"];
 }
 
-+ (void)logInfo:(NSString *)info withType:(FMCDebugType)type toOutput:(FMCDebugOutput)output {
+// The designated logInfo method. All outputs should be performed here.
++ (void)logInfo:(NSString *)info withType:(FMCDebugType)type toOutput:(FMCDebugOutput)output toGroup:(NSString *)consoleGroupName {
 
-    // Start string with it's type:"iAP", "TCP" etc, leave empty if Debug
-    NSMutableString *outputString = [[NSMutableString alloc] initWithCapacity:5];
-    if (type != FMCDebugType_Debug) {
-        outputString = [NSMutableString  stringWithFormat:@"[%@] ", [FMCDebugTool stringForDebugType:type]];
-    }
+    // Format the message, start with type
+    NSMutableString *outputString = [NSMutableString  stringWithFormat:@"[%@] %@", [FMCDebugTool stringForDebugType:type], info];
 
-    // Append the actual message.
-    [outputString appendString:info];
-   
+
+    ////////////////////////////////////////////////
+    //
+    //  Output to the various destinations
+    //
+    ////////////////////////////////////////////////
 
     //Output To DeviceConsole
     if (output & FMCDebugOutput_DeviceConsole) {
         NSLog(@"%@", outputString);
     }
-    
+
     //Output To DebugToolConsoles
     if (output & FMCDebugOutput_DebugToolConsole) {
-        for (NSObject<FMCDebugToolConsole>* console in debugToolConsoleList) {
+        NSSet *consoleListeners = [self getConsoleListenersForGroup:consoleGroupName];
+        for (NSObject<FMCDebugToolConsole>* console in consoleListeners) {
             [console logInfo:outputString];
         }
     }
-    
+
     //Output To LogFile
     if (output & FMCDebugOutput_File) {
         [FMCDebugTool writeToLogFile:outputString];
@@ -107,78 +117,15 @@ bool debugToLogFile = false;
     //Output To Siphon
     [FMCSiphonServer init];
     [FMCSiphonServer _siphonNSLogData:outputString];
+
 }
 
 
-#pragma mark -
-#pragma mark logException
-
-+(void) logException:(NSException*) ex withMessage:(NSString*) fmt, ...  {
-	NSString* toOutRaw = nil;
-	
-	va_list args;
-	va_start(args, fmt);
-
-    toOutRaw = [[NSString alloc] initWithFormat:fmt arguments:args];
-    
-    NSMutableString *toOut = [[NSMutableString alloc] initWithString:@"FMCDebugTool: "];
-    [toOut appendString:toOutRaw];
-    
-    va_end(args);
-    
-    [FMCSiphonServer init];
-    bool dataLogged = [FMCSiphonServer _siphonNSLogData:toOut];
-    if (dataLogged) {
-        dataLogged = [FMCSiphonServer _siphonNSLogData:[ex reason]];
-    }
-    
-	
-#ifdef LOG_ERROR_ENABLED
-	if (!dataLogged) {
-        NSLog(@"%@: %@", toOut, ex);
-    }
-#endif
-	
-	for (NSObject<FMCDebugToolConsole>* console in debugToolConsoleList) {
-		[console logException:ex withMessage:toOut];
-	}
-    
-}
-
-
-#pragma mark -
-#pragma mark logMessage
-
-+(void) logMessage:(FMCRPCMessage*) rpcMessage {
-    
-	if ([rpcMessage isKindOfClass:FMCRPCMessage.class]) {
-        
-        NSMutableString *toOut = [[NSMutableString alloc] initWithCapacity:5];
-        
-        toOut = [NSMutableString stringWithFormat:@"New: %@", [rpcMessage getFunctionName]];
-        
-        //TODO: Output is only Function Name, Parse rpcMessage object like in FMCConsoleController
-        //Output DeviceConsole
-        NSLog(@"%@", toOut);
-        
-        
-        //Output DebugToolConsole
-        for (NSObject<FMCDebugToolConsole>* console in debugToolConsoleList) {
-            [console logMessage:rpcMessage];
-        }
-        
-        //TODO: Output is only Function Name, Parse rpcMessage object like in FMCConsoleController
-        //Output Siphon
-        [FMCSiphonServer init];
-        [FMCSiphonServer _siphonNSLogData:toOut];
-
-	}
-}
-
+#pragma mark - file handling
 + (void)enableDebugToLogFile{
     debugToLogFile = true;
     
-    [FMCDebugTool logInfo:@"[Debug] Log File Enabled" withType:FMCDebugType_Debug];
+    [FMCDebugTool logInfo:@"Log File Enabled" withType:FMCDebugType_Debug];
     
     //Delete Log File If It Exists
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -187,7 +134,7 @@ bool debugToLogFile = false;
 
     NSFileManager *manager = [NSFileManager defaultManager];
     if ([manager fileExistsAtPath:filePath]) {
-        [FMCDebugTool logInfo:@"[Debug] Log File Exisits, Deleteing" withType:FMCDebugType_Debug];
+        [FMCDebugTool logInfo:@"Log File Exisits, Deleteing" withType:FMCDebugType_Debug];
         [manager removeItemAtPath:filePath error:nil];
     }
     
@@ -233,28 +180,29 @@ bool debugToLogFile = false;
 }
 
 
-#pragma mark -
-#pragma mark Helper Methods
-
+#pragma mark - Helper Methods
 +(NSString *) stringForDebugType:(FMCDebugType) debugType{
     
     switch (debugType) {
         case FMCDebugType_Debug:
-            return @"App ";
+            return @"DBG";
             break;
         case FMCDebugType_Transport_iAP:
-            return @"iAP ";
+            return @"iAP";
             break;
         case FMCDebugType_Transport_TCP:
-            return @"TCP ";
+            return @"TCP";
             break;
         case FMCDebugType_Protocol:
-            return @"Prot";
+            return @"Pro";
             break;
         case FMCDebugType_RPC:
-            return @"RPC ";
+            return @"RPC";
             break;
-            
+        case FMCDebugType_APP:
+            return @"APP";
+            break;
+
         default:
             return @"Invalid DebugType";
             break;

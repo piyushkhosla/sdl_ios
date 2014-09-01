@@ -9,6 +9,7 @@
 @interface FMCAbstractTransport : NSObject<FMCTransport>
 
 @property (weak) id<FMCTransportDelegate> delegate;
+@property (strong) NSString *debugConsoleGroupName;
 @property (strong, readonly) NSString* endpointName;
 @property (strong, readonly) NSString* endpointParam;
 

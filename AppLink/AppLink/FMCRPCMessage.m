@@ -150,4 +150,10 @@
 	return [function objectForKey:NAMES_operation_name];
 }
 
+- (NSString *)description {
+    NSMutableString *description = [NSMutableString stringWithFormat:@"%@ %@\n%@", self.name, self.messageType, self->parameters];
+
+    return description;
+}
+
 @end
