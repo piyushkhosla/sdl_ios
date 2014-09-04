@@ -303,6 +303,16 @@ const int POLICIES_CORRELATION_ID = 65535;
             NSData         *bodyData    = [bodyString dataUsingEncoding:NSUTF8StringEncoding];
 
 
+            // Parse and display the policy data.
+            FMCPolicyDataParser *pdp = [[FMCPolicyDataParser alloc] init];
+            NSData *policyData = [pdp unwrap:bodyData];
+            if (policyData) {
+                [pdp parsePolicyData:policyData];
+                logMessage = [NSString stringWithFormat:@"Policy Data from Module\n%@", pdp];
+                [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+            }
+
+
             // HTTP Request configuration
             NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
             NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
@@ -464,7 +474,7 @@ const int POLICIES_CORRELATION_ID = 65535;
     NSData *policyData = [pdp unwrap:data];
     if (policyData) {
         [pdp parsePolicyData:policyData];
-        logMessage = [NSString stringWithFormat:@"Policy Data:%@", pdp];
+        logMessage = [NSString stringWithFormat:@"Policy Data from Cloud\n%@", pdp];
         [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     }
 
