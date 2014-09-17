@@ -507,6 +507,10 @@
 		59BF0A7019790C56008C6783 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 59A02FE41978FBA1003E8ECF /* InfoPlist.strings */; };
 		E932AD8B19A26CCF00D8155B /* FMCPolicyDataParser.h in Headers */ = {isa = PBXBuildFile; fileRef = E932AD8919A26CCF00D8155B /* FMCPolicyDataParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E932AD8C19A26CCF00D8155B /* FMCPolicyDataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E932AD8A19A26CCF00D8155B /* FMCPolicyDataParser.m */; };
+		E98A9C8719C74C7400C84B3F /* FMCObjectWithPriority.h in Headers */ = {isa = PBXBuildFile; fileRef = E98A9C8519C74C7400C84B3F /* FMCObjectWithPriority.h */; };
+		E98A9C8819C74C7400C84B3F /* FMCObjectWithPriority.m in Sources */ = {isa = PBXBuildFile; fileRef = E98A9C8619C74C7400C84B3F /* FMCObjectWithPriority.m */; };
+		E9BA327819C1EC3100D59762 /* FMCPrioritizedObjectCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = E9BA327619C1EC3100D59762 /* FMCPrioritizedObjectCollection.h */; };
+		E9BA327919C1EC3100D59762 /* FMCPrioritizedObjectCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BA327719C1EC3100D59762 /* FMCPrioritizedObjectCollection.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1004,6 +1008,10 @@
 		59E5A3F0194E318200B908AA /* AppLinkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppLinkTests.m; sourceTree = "<group>"; };
 		E932AD8919A26CCF00D8155B /* FMCPolicyDataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCPolicyDataParser.h; sourceTree = "<group>"; };
 		E932AD8A19A26CCF00D8155B /* FMCPolicyDataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCPolicyDataParser.m; sourceTree = "<group>"; };
+		E98A9C8519C74C7400C84B3F /* FMCObjectWithPriority.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCObjectWithPriority.h; sourceTree = "<group>"; };
+		E98A9C8619C74C7400C84B3F /* FMCObjectWithPriority.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCObjectWithPriority.m; sourceTree = "<group>"; };
+		E9BA327619C1EC3100D59762 /* FMCPrioritizedObjectCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCPrioritizedObjectCollection.h; sourceTree = "<group>"; };
+		E9BA327719C1EC3100D59762 /* FMCPrioritizedObjectCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCPrioritizedObjectCollection.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1062,6 +1070,8 @@
 				59A02E141978FBA0003E8ECF /* FMCAppLinkProtocolMessageDisassembler.m */,
 				59A02E151978FBA0003E8ECF /* FMCApplinkProtocolRecievedMessageRouter.h */,
 				59A02E161978FBA0003E8ECF /* FMCApplinkProtocolRecievedMessageRouter.m */,
+				E9BA327619C1EC3100D59762 /* FMCPrioritizedObjectCollection.h */,
+				E9BA327719C1EC3100D59762 /* FMCPrioritizedObjectCollection.m */,
 				59A02E171978FBA0003E8ECF /* FMCAppLinkV1ProtocolHeader.h */,
 				59A02E181978FBA0003E8ECF /* FMCAppLinkV1ProtocolHeader.m */,
 				59A02E191978FBA0003E8ECF /* FMCAppLinkV1ProtocolMessage.h */,
@@ -1074,6 +1084,8 @@
 				59A02E201978FBA0003E8ECF /* FMCProtocolListener.h */,
 				59A02E211978FBA0003E8ECF /* FMCRPCPayload.h */,
 				59A02E221978FBA0003E8ECF /* FMCRPCPayload.m */,
+				E98A9C8519C74C7400C84B3F /* FMCObjectWithPriority.h */,
+				E98A9C8619C74C7400C84B3F /* FMCObjectWithPriority.m */,
 			);
 			name = Protocol;
 			sourceTree = "<group>";
@@ -1716,6 +1728,8 @@
 				59A0305D1978FBA1003E8ECF /* FMCHMIZoneCapabilities.h in Headers */,
 				59A031791978FBAB003E8ECF /* FMCAudioPassThruCapabilities.h in Headers */,
 				59A0303D1978FBA1003E8ECF /* FMCButtonName.h in Headers */,
+				E98A9C8719C74C7400C84B3F /* FMCObjectWithPriority.h in Headers */,
+				E9BA327819C1EC3100D59762 /* FMCPrioritizedObjectCollection.h in Headers */,
 				59A030211978FBA1003E8ECF /* FMCRPCNotification.h in Headers */,
 				59A030F71978FBA5003E8ECF /* FMCListFiles.h in Headers */,
 				59A031CE1978FBB1003E8ECF /* FMCTCPTransport.h in Headers */,
@@ -2055,6 +2069,7 @@
 				59A031401978FBA8003E8ECF /* FMCEndAudioPassThruResponse.m in Sources */,
 				59A0307C1978FBA2003E8ECF /* FMCPowerModeStatus.m in Sources */,
 				59A030F81978FBA5003E8ECF /* FMCListFiles.m in Sources */,
+				E98A9C8819C74C7400C84B3F /* FMCObjectWithPriority.m in Sources */,
 				59A031221978FBA7003E8ECF /* FMCUnsubscribeButton.m in Sources */,
 				59A031881978FBAC003E8ECF /* FMCDeviceStatus.m in Sources */,
 				59A030481978FBA1003E8ECF /* FMCComponentVolumeStatus.m in Sources */,
@@ -2087,6 +2102,7 @@
 				59A031AC1978FBAE003E8ECF /* FMCSoftButton.m in Sources */,
 				59A030601978FBA1003E8ECF /* FMCIgnitionStableStatus.m in Sources */,
 				59A030841978FBA2003E8ECF /* FMCPRNDL.m in Sources */,
+				E9BA327919C1EC3100D59762 /* FMCPrioritizedObjectCollection.m in Sources */,
 				59A02FF31978FBA1003E8ECF /* FMCDebugTool.m in Sources */,
 				59A030F41978FBA5003E8ECF /* FMCGetDTCs.m in Sources */,
 				59A031101978FBA6003E8ECF /* FMCShow.m in Sources */,

@@ -16,9 +16,6 @@
 
 
 @interface FMCIAPTransport ()
-{
-    dispatch_queue_t writeQueue;
-}
 
 @property (strong) EASession *session;
 @property (strong) EAAccessory *accessory;
@@ -44,9 +41,6 @@
     if (self = [super initWithEndpoint:nil endpointParam:nil]) {
 
         [FMCDebugTool logInfo:@"Init" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-
-        writeQueue = dispatch_queue_create("com.Ford.AppLink.IAPWWriteQueue", DISPATCH_QUEUE_SERIAL);
-        dispatch_set_target_queue(writeQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0));
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessoryConnected:) name:EAAccessoryDidConnectNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessoryDisconnected:) name:EAAccessoryDidDisconnectNotification object:nil];
@@ -340,35 +334,32 @@
 
 // Write data to the accessory while there is space available and data to write
 - (void)writeDataOut:(NSData *)dataOut {
-    dispatch_async(writeQueue, ^{
 
-        NSMutableData *remainder = dataOut.mutableCopy;
+    NSMutableData *remainder = dataOut.mutableCopy;
 
-        while (1) {
-            if (remainder.length == 0) break;
+    while (1) {
+        if (remainder.length == 0) break;
 
-            if ( [[self.session outputStream] hasSpaceAvailable] ) {
-                
-                //TODO: Added for debug, issue with module
-                //[NSThread sleepForTimeInterval:0.020];
-                
-                NSInteger bytesWritten = [[self.session outputStream] write:remainder.bytes maxLength:remainder.length];
-                if (bytesWritten == -1) {
-                    NSLog(@"Error: %@", [[self.session outputStream] streamError]);
-                    break;
-                }
-
-                NSString *logMessage = [NSString stringWithFormat:@"Outgoing: (%ld)", (long)bytesWritten];
-                [FMCDebugTool logInfo:logMessage
-                        andBinaryData:[remainder subdataWithRange:NSMakeRange(0, bytesWritten)]
-                             withType:FMCDebugType_Transport_iAP
-                             toOutput:FMCDebugOutput_File];
-
-                [remainder replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
+        if ( [[self.session outputStream] hasSpaceAvailable] ) {
+            
+            //TODO: Added for debug, issue with module
+            //[NSThread sleepForTimeInterval:0.020];
+            
+            NSInteger bytesWritten = [[self.session outputStream] write:remainder.bytes maxLength:remainder.length];
+            if (bytesWritten == -1) {
+                NSLog(@"Error: %@", [[self.session outputStream] streamError]);
+                break;
             }
-        }
 
-    });
+            NSString *logMessage = [NSString stringWithFormat:@"Outgoing: (%ld)", (long)bytesWritten];
+            [FMCDebugTool logInfo:logMessage
+                    andBinaryData:[remainder subdataWithRange:NSMakeRange(0, bytesWritten)]
+                         withType:FMCDebugType_Transport_iAP
+                         toOutput:FMCDebugOutput_File];
+
+            [remainder replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
+        }
+    }
 
 }
 

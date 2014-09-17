@@ -13,6 +13,7 @@
 #import "FMCApplinkProtocolRecievedMessageRouter.h"
 #import "FMCRPCPayload.h"
 #import "FMCDebugTool.h"
+#import "FMCPrioritizedObjectCollection.h"
 
 
 const NSUInteger MAX_TRANSMISSION_SIZE = 512;
@@ -21,8 +22,8 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 @interface FMCAppLinkProtocol () {
     UInt32 _messageID;
     dispatch_queue_t _recieveQueue;
-    dispatch_queue_t _sendQueueDefaultPriority;
-    dispatch_queue_t _sendQueueHighPriority;
+    dispatch_queue_t _sendQueue;
+    FMCPrioritizedObjectCollection *prioritizedCollection;
 }
 
 @property (assign) UInt8 version;
@@ -31,8 +32,7 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 @property (strong) NSMutableData *recieveBuffer;
 @property (strong) FMCApplinkProtocolRecievedMessageRouter *messageRouter;
 
-- (void)sendDataToTransport:(NSData *)data;
-- (void)sendDataToTransportWithHighPriority:(NSData *)data;
+- (void)sendDataToTransport:(NSData *)data withPriority:(NSInteger)priority;
 - (void)logRPCSend:(FMCAppLinkProtocolMessage *)message;
 
 @end
@@ -46,9 +46,8 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
         _messageID = 0;
         _sessionID = 0;
         _recieveQueue = dispatch_queue_create("com.ford.applink.recieve", DISPATCH_QUEUE_SERIAL);
-        _sendQueueDefaultPriority = dispatch_queue_create("com.ford.applink.send.defaultpriority", DISPATCH_QUEUE_SERIAL);
-        _sendQueueHighPriority = dispatch_queue_create("com.ford.applink.send.highpriority", DISPATCH_QUEUE_SERIAL);
-        dispatch_set_target_queue(_sendQueueDefaultPriority, _sendQueueHighPriority);
+        _sendQueue = dispatch_queue_create("com.ford.applink.send.defaultpriority", DISPATCH_QUEUE_SERIAL);
+        prioritizedCollection = [FMCPrioritizedObjectCollection new];
 
         self.messageRouter = [[FMCApplinkProtocolRecievedMessageRouter alloc] init];
         self.messageRouter.delegate = self;
@@ -66,7 +65,7 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 
     FMCAppLinkProtocolMessage *message = [FMCAppLinkProtocolMessage messageWithHeader:header andPayload:nil];
 
-    [self sendDataToTransport:message.data];
+    [self sendDataToTransport:message.data withPriority:serviceType];
 }
 
 - (void)sendEndSessionWithType:(FMCServiceType)serviceType sessionID:(Byte)sessionID {
@@ -79,7 +78,7 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 
     FMCAppLinkProtocolMessage *message = [FMCAppLinkProtocolMessage messageWithHeader:header andPayload:nil];
 
-    [self sendDataToTransport:message.data];
+    [self sendDataToTransport:message.data withPriority:serviceType];
 
 }
 
@@ -132,14 +131,14 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
     if (message.size < MAX_TRANSMISSION_SIZE)
     {
         [self logRPCSend:message];
-        [self sendDataToTransport:message.data];
+        [self sendDataToTransport:message.data withPriority:FMCServiceType_RPC];
     }
     else
     {
         NSArray *messages = [FMCAppLinkProtocolMessageDisassembler disassemble:message withLimit:MAX_TRANSMISSION_SIZE];
         for (FMCAppLinkProtocolMessage *smallerMessage in messages) {
-            [self logRPCSend:message];
-            [self sendDataToTransport:smallerMessage.data];
+            [self logRPCSend:smallerMessage];
+            [self sendDataToTransport:smallerMessage.data withPriority:FMCServiceType_RPC];
         }
         
     }
@@ -152,19 +151,20 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 }
 
 // Use for normal messages
-- (void)sendDataToTransport:(NSData *)data {
-    dispatch_async(_sendQueueDefaultPriority, ^{
-        [self.transport sendData:data];
-    });
-}
+- (void)sendDataToTransport:(NSData *)data withPriority:(NSInteger)priority {
 
-// Use for critical messages, will jump ahead of any already queued normal priority messages.
-- (void)sendDataToTransportWithHighPriority:(NSData *)data {
-    dispatch_suspend(_sendQueueDefaultPriority);
-    dispatch_async(_sendQueueHighPriority, ^{
-        [self.transport sendData:data];
-        dispatch_resume(_sendQueueDefaultPriority);
+    [prioritizedCollection addObject:data withPriority:priority];
+
+    dispatch_async(_sendQueue, ^{
+
+        NSData *dataToTransmit = nil;
+        while(dataToTransmit = (NSData *)[prioritizedCollection nextObject])
+        {
+            [self.transport sendData:dataToTransmit];
+        };
+
     });
+
 }
 
 //
@@ -238,7 +238,7 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 
     FMCAppLinkProtocolMessage *message = [FMCAppLinkProtocolMessage messageWithHeader:header andPayload:nil];
 
-    [self sendDataToTransport:message.data];
+    [self sendDataToTransport:message.data withPriority:header.serviceType];
 
 }
 
