@@ -7,13 +7,18 @@
 
 /**
  * Creates a Choice Set which can be used in subsequent <i>
- * FMCPerformInteraction</i> Operations.
+ * {@linkplain FMCPerformInteraction} </i> Operations.
  * <p>
  * Function Group: Base
  * <p>
+ *
  * <b>HMILevel needs to be FULL, LIMITED or BACKGROUND</b>
  * </p>
- *
+ * <p>
+ * <b>Second Utterance issue with CreateInteractionChoiceSet RPC.</b> <br> Before a perform interaction
+ * is sent you MUST wait for the success from the CreateInteractionChoiceSet RPC.<br>
+ * If you do not wait the system may not recognize the first utterance from the user.
+ * </p>
  * Since <b>AppLink 1.0</b></br>
  * see FMCDeleteInteractionChoiceSet FMCPerformInteraction
  */
