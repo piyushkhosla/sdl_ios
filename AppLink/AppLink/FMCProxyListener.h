@@ -19,6 +19,7 @@
 #import <AppLink/FMCGetDTCsResponse.h>
 #import <AppLink/FMCGetVehicleDataResponse.h>
 #import <AppLink/FMCListFilesResponse.h>
+#import <AppLink/FMCLockScreenStatus.h>
 #import <AppLink/FMCOnAppInterfaceUnregistered.h>
 #import <AppLink/FMCOnAudioPassThru.h>
 #import <AppLink/FMCOnButtonEvent.h>
@@ -93,6 +94,7 @@
 -(void) onOnEncodedSyncPData:(FMCOnEncodedSyncPData*) notification;
 -(void) onOnHashChange:(FMCOnHashChange*) notification;
 -(void) onOnLanguageChange:(FMCOnLanguageChange*) notification;
+-(void) onOnLockScreenNotification:(FMCLockScreenStatus*) notification;
 -(void) onOnPermissionsChange:(FMCOnPermissionsChange*) notification;
 -(void) onOnSyncPData:(FMCOnSyncPData*) notification;
 -(void) onOnSystemRequest:(FMCOnSystemRequest*) notification;

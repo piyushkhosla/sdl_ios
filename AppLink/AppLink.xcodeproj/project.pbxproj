@@ -509,6 +509,12 @@
 		E932AD8C19A26CCF00D8155B /* FMCPolicyDataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E932AD8A19A26CCF00D8155B /* FMCPolicyDataParser.m */; };
 		E98A9C8719C74C7400C84B3F /* FMCObjectWithPriority.h in Headers */ = {isa = PBXBuildFile; fileRef = E98A9C8519C74C7400C84B3F /* FMCObjectWithPriority.h */; };
 		E98A9C8819C74C7400C84B3F /* FMCObjectWithPriority.m in Sources */ = {isa = PBXBuildFile; fileRef = E98A9C8619C74C7400C84B3F /* FMCObjectWithPriority.m */; };
+		E9A6E33A19CB27320054E1AD /* FMCLockScreenManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A6E33819CB27320054E1AD /* FMCLockScreenManager.h */; };
+		E9A6E33B19CB27320054E1AD /* FMCLockScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A6E33919CB27320054E1AD /* FMCLockScreenManager.m */; };
+		E9A6E33E19CB30FD0054E1AD /* FMCLockScreenStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A6E33C19CB30FD0054E1AD /* FMCLockScreenStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9A6E33F19CB30FD0054E1AD /* FMCLockScreenStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A6E33D19CB30FD0054E1AD /* FMCLockScreenStatus.m */; };
+		E9A6E34319CB3C880054E1AD /* FMCOnLockScreenStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A6E34119CB3C880054E1AD /* FMCOnLockScreenStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E9A6E34419CB3C880054E1AD /* FMCOnLockScreenStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A6E34219CB3C880054E1AD /* FMCOnLockScreenStatus.m */; };
 		E9BA327819C1EC3100D59762 /* FMCPrioritizedObjectCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = E9BA327619C1EC3100D59762 /* FMCPrioritizedObjectCollection.h */; };
 		E9BA327919C1EC3100D59762 /* FMCPrioritizedObjectCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BA327719C1EC3100D59762 /* FMCPrioritizedObjectCollection.m */; };
 /* End PBXBuildFile section */
@@ -1010,6 +1016,12 @@
 		E932AD8A19A26CCF00D8155B /* FMCPolicyDataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCPolicyDataParser.m; sourceTree = "<group>"; };
 		E98A9C8519C74C7400C84B3F /* FMCObjectWithPriority.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCObjectWithPriority.h; sourceTree = "<group>"; };
 		E98A9C8619C74C7400C84B3F /* FMCObjectWithPriority.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCObjectWithPriority.m; sourceTree = "<group>"; };
+		E9A6E33819CB27320054E1AD /* FMCLockScreenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMCLockScreenManager.h; path = AppLink/FMCLockScreenManager.h; sourceTree = "<group>"; };
+		E9A6E33919CB27320054E1AD /* FMCLockScreenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMCLockScreenManager.m; path = AppLink/FMCLockScreenManager.m; sourceTree = "<group>"; };
+		E9A6E33C19CB30FD0054E1AD /* FMCLockScreenStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCLockScreenStatus.h; sourceTree = "<group>"; };
+		E9A6E33D19CB30FD0054E1AD /* FMCLockScreenStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCLockScreenStatus.m; sourceTree = "<group>"; };
+		E9A6E34119CB3C880054E1AD /* FMCOnLockScreenStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCOnLockScreenStatus.h; sourceTree = "<group>"; };
+		E9A6E34219CB3C880054E1AD /* FMCOnLockScreenStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCOnLockScreenStatus.m; sourceTree = "<group>"; };
 		E9BA327619C1EC3100D59762 /* FMCPrioritizedObjectCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCPrioritizedObjectCollection.h; sourceTree = "<group>"; };
 		E9BA327719C1EC3100D59762 /* FMCPrioritizedObjectCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCPrioritizedObjectCollection.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1279,6 +1291,8 @@
 				59A02ECA1978FBA0003E8ECF /* FMCWarningLightStatus.m */,
 				59A02ECB1978FBA0003E8ECF /* FMCWiperStatus.h */,
 				59A02ECC1978FBA0003E8ECF /* FMCWiperStatus.m */,
+				E9A6E33C19CB30FD0054E1AD /* FMCLockScreenStatus.h */,
+				E9A6E33D19CB30FD0054E1AD /* FMCLockScreenStatus.m */,
 			);
 			name = Enums;
 			sourceTree = "<group>";
@@ -1320,6 +1334,8 @@
 				59A02EED1978FBA0003E8ECF /* FMCOnTouchEvent.m */,
 				59A02EEE1978FBA0003E8ECF /* FMCOnVehicleData.h */,
 				59A02EEF1978FBA0003E8ECF /* FMCOnVehicleData.m */,
+				E9A6E34119CB3C880054E1AD /* FMCOnLockScreenStatus.h */,
+				E9A6E34219CB3C880054E1AD /* FMCOnLockScreenStatus.m */,
 			);
 			name = Notifications;
 			sourceTree = "<group>";
@@ -1611,6 +1627,8 @@
 		59E5A3C8194E318200B908AA = {
 			isa = PBXGroup;
 			children = (
+				E9A6E33819CB27320054E1AD /* FMCLockScreenManager.h */,
+				E9A6E33919CB27320054E1AD /* FMCLockScreenManager.m */,
 				59A02DFF1978FBA0003E8ECF /* AppLink */,
 				59E5A3EA194E318200B908AA /* AppLinkTests */,
 				59E5A3D3194E318200B908AA /* Frameworks */,
@@ -1706,6 +1724,7 @@
 				59A030411978FBA1003E8ECF /* FMCCarModeStatus.h in Headers */,
 				59A030551978FBA1003E8ECF /* FMCFileType.h in Headers */,
 				59A030971978FBA2003E8ECF /* FMCTBTState.h in Headers */,
+				E9A6E33E19CB30FD0054E1AD /* FMCLockScreenStatus.h in Headers */,
 				59A030EB1978FBA4003E8ECF /* FMCDeleteSubMenu.h in Headers */,
 				59A0311F1978FBA6003E8ECF /* FMCUnregisterAppInterface.h in Headers */,
 				59A0307F1978FBA2003E8ECF /* FMCPrerecordedSpeech.h in Headers */,
@@ -1746,6 +1765,7 @@
 				59A0314F1978FBA9003E8ECF /* FMCReadDIDResponse.h in Headers */,
 				59A031611978FBAA003E8ECF /* FMCShowResponse.h in Headers */,
 				59A0318B1978FBAC003E8ECF /* FMCDisplayCapabilities.h in Headers */,
+				E9A6E33A19CB27320054E1AD /* FMCLockScreenManager.h in Headers */,
 				59A030371978FBA1003E8ECF /* FMCAudioType.h in Headers */,
 				59A0307D1978FBA2003E8ECF /* FMCPredefinedLayout.h in Headers */,
 				59A02FEF1978FBA1003E8ECF /* AppLink.h in Headers */,
@@ -1824,6 +1844,7 @@
 				59A030BB1978FBA3003E8ECF /* FMCOnButtonEvent.h in Headers */,
 				59A030511978FBA1003E8ECF /* FMCECallConfirmationStatus.h in Headers */,
 				59A030811978FBA2003E8ECF /* FMCPrimaryAudioSource.h in Headers */,
+				E9A6E34319CB3C880054E1AD /* FMCOnLockScreenStatus.h in Headers */,
 				59A030E11978FBA4003E8ECF /* FMCChangeRegistration.h in Headers */,
 				59A031A31978FBAE003E8ECF /* FMCParameterPermissions.h in Headers */,
 				59A031311978FBA7003E8ECF /* FMCCreateInteractionChoiceSetResponse.h in Headers */,
@@ -2171,6 +2192,7 @@
 				59A031BA1978FBAF003E8ECF /* FMCTouchEvent.m in Sources */,
 				59A031B61978FBAF003E8ECF /* FMCTireStatus.m in Sources */,
 				59A030E21978FBA4003E8ECF /* FMCChangeRegistration.m in Sources */,
+				E9A6E34419CB3C880054E1AD /* FMCOnLockScreenStatus.m in Sources */,
 				59A031481978FBA8003E8ECF /* FMCListFilesResponse.m in Sources */,
 				59A0304A1978FBA1003E8ECF /* FMCDeviceLevelStatus.m in Sources */,
 				59A030641978FBA1003E8ECF /* FMCImageFieldName.m in Sources */,
@@ -2208,6 +2230,7 @@
 				59A030741978FBA2003E8ECF /* FMCMaintenanceModeStatus.m in Sources */,
 				59A030301978FBA1003E8ECF /* FMCAmbientLightStatus.m in Sources */,
 				59A031421978FBA8003E8ECF /* FMCGenericResponse.m in Sources */,
+				E9A6E33B19CB27320054E1AD /* FMCLockScreenManager.m in Sources */,
 				59A0317A1978FBAB003E8ECF /* FMCAudioPassThruCapabilities.m in Sources */,
 				59A030321978FBA1003E8ECF /* FMCAppHMIType.m in Sources */,
 				59A031661978FBAA003E8ECF /* FMCSpeakResponse.m in Sources */,
@@ -2216,6 +2239,7 @@
 				59A030901978FBA2003E8ECF /* FMCSoftButtonType.m in Sources */,
 				59A030FA1978FBA5003E8ECF /* FMCPerformAudioPassThru.m in Sources */,
 				59A030CA1978FBA4003E8ECF /* FMCOnKeyboardInput.m in Sources */,
+				E9A6E33F19CB30FD0054E1AD /* FMCLockScreenStatus.m in Sources */,
 				59A0307A1978FBA2003E8ECF /* FMCPowerModeQualificationStatus.m in Sources */,
 				59A030EA1978FBA4003E8ECF /* FMCDeleteInteractionChoiceSet.m in Sources */,
 				59A030C41978FBA3003E8ECF /* FMCOnEncodedSyncPData.m in Sources */,

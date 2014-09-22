@@ -108,6 +108,7 @@
 #import <AppLink/FMCOnHMIStatus.h>
 #import <AppLink/FMCOnKeyboardInput.h>
 #import <AppLink/FMCOnLanguageChange.h>
+#import <AppLink/FMCOnLockScreenStatus.h>
 #import <AppLink/FMCOnPermissionsChange.h>
 #import <AppLink/FMCOnSyncPData.h>
 #import <AppLink/FMCOnSystemRequest.h>
@@ -185,6 +186,7 @@
 #import <AppLink/FMCKeyboardLayout.h>
 #import <AppLink/FMCKeypressMode.h>
 #import <AppLink/FMCLanguage.h>
+#import <AppLink/FMCLockScreenStatus.h>
 #import <AppLink/FMCMaintenanceModeStatus.h>
 #import <AppLink/FMCMediaClockFormat.h>
 #import <AppLink/FMCPermissionStatus.h>

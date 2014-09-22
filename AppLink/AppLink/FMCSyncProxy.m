@@ -17,6 +17,7 @@
 #import <AppLink/FMCSystemRequest.h>
 #import "FMCRPCPayload.h"
 #import "FMCPolicyDataParser.h"
+#import "FMCLockScreenManager.h"
 
 
 #define VERSION_STRING @"##Version##"
@@ -25,6 +26,9 @@ typedef void(^FMCCustomTaskCompletionHandler)(NSData *data, NSURLResponse *respo
 
 @interface FMCSyncProxy ()
 
+{
+    FMCLockScreenManager *lsm;
+}
 - (void)invokeMethodOnDelegates:(SEL)aSelector withObject:(id)object;
 - (void)notifyProxyClosed;
 - (void)handleProtocolMessage:(FMCAppLinkProtocolMessage *)msgData;
@@ -47,6 +51,9 @@ const int POLICIES_CORRELATION_ID = 65535;
 	if (self = [super init]) {
         _debugConsoleGroupName = @"default";
         
+
+        lsm = [FMCLockScreenManager new];
+
         rpcSessionID = 0;
         alreadyDestructed = NO;
                 
@@ -362,6 +369,28 @@ const int POLICIES_CORRELATION_ID = 65535;
 	NSString* handlerName = [NSString stringWithFormat:@"on%@:", functionName];
 	SEL handlerSelector = NSSelectorFromString(handlerName);
 	[self invokeMethodOnDelegates:handlerSelector withObject:functionObject];
+
+
+    // When an OnHMIStatus notification comes in, after passing it on (above), generate an "OnLockScreenNotification"
+    if ([functionName isEqualToString:@"OnHMIStatus"]) {
+        NSString *statusString = (NSString *)[rpcMsg getParameters:NAMES_hmiLevel];
+        FMCHMILevel *hmiLevel = [FMCHMILevel valueOf:statusString];
+        lsm.hmiLevel = hmiLevel;
+
+        SEL callbackSelector = NSSelectorFromString(@"onOnLockScreenNotification:");
+        [self invokeMethodOnDelegates:callbackSelector withObject:lsm.lockScreenStatusNotification];
+    }
+
+    // When an OnDriverDistraction notification comes in, after passing it on (above), generate an "OnLockScreenNotification"
+    if ([functionName isEqualToString:@"OnDriverDistraction"]) {
+        NSString *stateString = (NSString *)[rpcMsg getParameters:NAMES_state];
+        BOOL bState = [stateString isEqualToString:@"DD_ON"]?YES:NO;
+        lsm.bDriverDistractionStatus = bState;
+
+        SEL callbackSelector = NSSelectorFromString(@"onOnLockScreenNotification:");
+        [self invokeMethodOnDelegates:callbackSelector withObject:lsm.lockScreenStatusNotification];
+    }
+
 }
 
 
