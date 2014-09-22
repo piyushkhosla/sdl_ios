@@ -67,23 +67,26 @@
  * @abstract the application-scoped identifier that uniquely identifies this choice
  * @discussion <b>Note:</b>Min: 0  Max: 65535
  */
-@property(assign) NSNumber* choiceID;
+@property(strong) NSNumber* choiceID;
 /**
  * @abstract Text which appears in menu, representing this choice
  *				<br/>Min: 1
  *				<br/>Max: 100
  * @discussion
  */
-@property(assign) NSString* menuName;
+@property(strong) NSString* menuName;
 /**
  * @abstract an array of strings to be used as VR synonyms for this choice
  * @discussion if this array is provided, it must have at least one non-empty element
  */
-@property(assign) NSMutableArray* vrCommands;
+@property(strong) NSMutableArray* vrCommands;
 /**
  * @abstract the image of the choice
  * @discussion
  */
-@property(assign) FMCImage* image;
+@property(strong) FMCImage* image;
+@property(strong) NSString* secondaryText;
+@property(strong) NSString* tertiaryText;
+@property(strong) FMCImage* secondaryImage;
 
 @end

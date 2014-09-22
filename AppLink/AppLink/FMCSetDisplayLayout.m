@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setDisplayLayout:(NSString *) displayLayout {
+-(void) setDisplayLayout:(NSString*) displayLayout {
     if (displayLayout != nil) {
         [parameters setObject:displayLayout forKey:NAMES_displayLayout];
     } else {

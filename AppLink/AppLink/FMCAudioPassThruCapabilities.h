@@ -5,9 +5,9 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCMessage.h>
 
-#import <AppLink/FMCAudioType.h>
-#import <AppLink/FMCBitsPerSample.h>
 #import <AppLink/FMCSamplingRate.h>
+#import <AppLink/FMCBitsPerSample.h>
+#import <AppLink/FMCAudioType.h>
 
 /**
  * Describes different audio type configurations for FMCPerformAudioPassThru, e.g. {8kHz,8-bit,PCM}
@@ -59,16 +59,16 @@
  * @abstract The sampling rate for AudioPassThru<br>
  * 
  */
-@property(assign) FMCSamplingRate* samplingRate;
+@property(strong) FMCSamplingRate* samplingRate;
 /**
  * @abstract The sample depth in bit for AudioPassThru<br>
  * 
  */
-@property(assign) FMCBitsPerSample* bitsPerSample;
+@property(strong) FMCBitsPerSample* bitsPerSample;
 /**
  * @abstract The audiotype for AudioPassThru<br>
  * 
  */
-@property(assign) FMCAudioType* audioType;
+@property(strong) FMCAudioType* audioType;
 
 @end

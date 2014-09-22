@@ -40,11 +40,11 @@
  * @abstract the language app want to change to 
  * @discussion
  */
-@property(assign) FMCLanguage* language;
+@property(strong) FMCLanguage* language;
 /**
  * @abstract  HMI display language
  * @discussion
  */
-@property(assign) FMCLanguage* hmiDisplayLanguage;
+@property(strong) FMCLanguage* hmiDisplayLanguage;
 
 @end

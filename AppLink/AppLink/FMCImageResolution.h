@@ -5,9 +5,12 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCMessage.h>
 
-@interface FMCImageResolution : FMCRPCStruct
+@interface FMCImageResolution : FMCRPCStruct {}
 
-@property (assign) NSNumber* resolutionWidth;
-@property (assign) NSNumber* resolutionHeight;
+-(id) init;
+-(id) initWithDictionary:(NSMutableDictionary*) dict;
+
+@property(strong) NSNumber* resolutionWidth;
+@property(strong) NSNumber* resolutionHeight;
 
 @end

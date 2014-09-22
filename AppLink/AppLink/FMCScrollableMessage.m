@@ -19,7 +19,7 @@
     return self;
 }
 
--(void) setScrollableMessageBody:(NSString *) scrollableMessageBody {
+-(void) setScrollableMessageBody:(NSString*) scrollableMessageBody {
     if (scrollableMessageBody != nil) {
         [parameters setObject:scrollableMessageBody forKey:NAMES_scrollableMessageBody];
     } else {
@@ -31,7 +31,7 @@
     return [parameters objectForKey:NAMES_scrollableMessageBody];
 }
 
--(void) setTimeout:(NSNumber *) timeout {
+-(void) setTimeout:(NSNumber*) timeout {
     if (timeout != nil) {
         [parameters setObject:timeout forKey:NAMES_timeout];
     } else {
@@ -43,7 +43,7 @@
     return [parameters objectForKey:NAMES_timeout];
 }
 
--(void) setSoftButtons:(NSMutableArray *) softButtons {
+-(void) setSoftButtons:(NSMutableArray*) softButtons {
     if (softButtons != nil) {
         [parameters setObject:softButtons forKey:NAMES_softButtons];
     } else {
@@ -58,7 +58,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCSoftButton alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCSoftButton alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }

@@ -57,6 +57,6 @@
  * @abstract the reason application's interface was terminated
  * @discussion
  */
-@property(assign) FMCAppInterfaceUnregisteredReason* reason;
+@property(strong) FMCAppInterfaceUnregisteredReason* reason;
 
 @end

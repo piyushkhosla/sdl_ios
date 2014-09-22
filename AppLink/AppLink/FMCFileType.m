@@ -14,6 +14,7 @@ FMCFileType* FMCFileType_BINARY = nil;
 FMCFileType* FMCFileType_JSON = nil;
 
 NSMutableArray* FMCFileType_values = nil;
+
 @implementation FMCFileType
 
 +(FMCFileType*) valueOf:(NSString*) value {
@@ -28,15 +29,15 @@ NSMutableArray* FMCFileType_values = nil;
 +(NSMutableArray*) values {
     if (FMCFileType_values == nil) {
         FMCFileType_values = [[NSMutableArray alloc] initWithObjects:
-                              FMCFileType.GRAPHIC_BMP,
-                              FMCFileType.GRAPHIC_JPEG,
-                              FMCFileType.GRAPHIC_PNG,
-                              FMCFileType.AUDIO_WAVE,
-                              FMCFileType.AUDIO_MP3,
-                              FMCFileType.AUDIO_AAC,
-                              FMCFileType.BINARY,
-                              FMCFileType.JSON,
-                              nil];
+                FMCFileType.GRAPHIC_BMP,
+                FMCFileType.GRAPHIC_JPEG,
+                FMCFileType.GRAPHIC_PNG,
+                FMCFileType.AUDIO_WAVE,
+                FMCFileType.AUDIO_MP3,
+                FMCFileType.AUDIO_AAC,
+                FMCFileType.BINARY,
+                FMCFileType.JSON,
+                nil];
     }
     return FMCFileType_values;
 }
@@ -80,7 +81,7 @@ NSMutableArray* FMCFileType_values = nil;
     if (FMCFileType_AUDIO_AAC == nil) {
         FMCFileType_AUDIO_AAC = [[FMCFileType alloc] initWithValue:@"AUDIO_AAC"];
     }
-    return FMCFileType_AUDIO_MP3;
+    return FMCFileType_AUDIO_AAC;
 }
 
 +(FMCFileType*) BINARY {

@@ -43,7 +43,7 @@
     if ([obj isKindOfClass:FMCMenuParams.class]) {
         return (FMCMenuParams*)obj;
     } else {
-        return [[[FMCMenuParams alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCMenuParams alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -55,11 +55,11 @@
     }
 }
 
--(NSMutableArray*) vrCommands { 
+-(NSMutableArray*) vrCommands {
     return [parameters objectForKey:NAMES_vrCommands];
 }
 
--(void) setCmdIcon:(FMCImage *) cmdIcon {
+-(void) setCmdIcon:(FMCImage*) cmdIcon {
     if (cmdIcon != nil) {
         [parameters setObject:cmdIcon forKey:NAMES_cmdIcon];
     } else {
@@ -72,7 +72,7 @@
     if ([obj isKindOfClass:FMCImage.class]) {
         return (FMCImage*)obj;
     } else {
-        return [[[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 

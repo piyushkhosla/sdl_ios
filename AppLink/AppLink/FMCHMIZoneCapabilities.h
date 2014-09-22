@@ -1,4 +1,4 @@
-//  FMCHMIZoneCapabilities.h
+//  FMCHmiZoneCapabilities.h
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
@@ -10,13 +10,14 @@
  *
  */
 @interface FMCHMIZoneCapabilities : FMCEnum {}
+@interface FMCHmiZoneCapabilities : FMCEnum {}
 
 /*!
  @abstract return FMCHMIZoneCapabilities (FRONT / BACK)
  @param value NSString
  @result return FMCHMIZoneCapabilities
  */
-+(FMCHMIZoneCapabilities*) valueOf:(NSString*) value;
++(FMCHmiZoneCapabilities*) valueOf:(NSString*) value;
 /*!
  @abstract store all possible FMCHMIZoneCapabilities values
  @result return an array with all possible FMCHMIZoneCapabilities values inside
@@ -28,12 +29,12 @@
  * @result return a FMCHMIZoneCapabilities with value of <font color=gray><i> FRONT </i></font>
  * @since <font color=red><b> AppLink 1.0 </b></font>
  */
-+(FMCHMIZoneCapabilities*) FRONT;
++(FMCHmiZoneCapabilities*) FRONT;
 /**
  * @abstract Indicates HMI available for rear seat passengers.
  * @result return a FMCHMIZoneCapabilities with value of <font color=gray><i> BACK </i></font>
  * @since <font color=red><b> AppLink 1.0 </b></font>
  */
-+(FMCHMIZoneCapabilities*) BACK;
++(FMCHmiZoneCapabilities*) BACK;
 
 @end

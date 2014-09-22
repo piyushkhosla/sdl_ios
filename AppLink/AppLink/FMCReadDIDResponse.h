@@ -5,8 +5,6 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCResponse.h>
 
-#import <AppLink/FMCDIDResult.h>
-
 /**
  * Read DID Response is sent, when ReadDID has been called
  *
@@ -17,6 +15,6 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCDIDResult* didResult;
+@property(strong) NSMutableArray* didResult;
 
 @end

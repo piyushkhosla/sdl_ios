@@ -107,12 +107,12 @@
  * @abstract the button's name
  * @discussion
  */
-@property(assign) FMCButtonName* buttonName;
+@property(strong) FMCButtonName* buttonName;
 /**
  * @abstract button press mode whether this is a long or short button press event
  * @discussion
  */
-@property(assign) FMCButtonPressMode* buttonPressMode;
-@property(assign) NSNumber* customButtonID;
+@property(strong) FMCButtonPressMode* buttonPressMode;
+@property(strong) NSNumber* customButtonID;
 
 @end

@@ -4,6 +4,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCMessage.h>
+
 #import <AppLink/FMCAmbientLightStatus.h>
 
 /**
@@ -26,12 +27,11 @@
 /**
  * @abstract A boolean value. Status of the low beam lamps.
  */
-@property(assign) NSNumber* lowBeamsOn;
-
+@property(strong) NSNumber* lowBeamsOn;
 /**
  * @abstract A boolean value. Status of the high beam lamps.
  */
-@property(assign) NSNumber* highBeamsOn;
-@property(assign) FMCAmbientLightStatus* ambientLightSensorStatus;
+@property(strong) NSNumber* highBeamsOn;
+@property(strong) FMCAmbientLightStatus* ambientLightSensorStatus;
 
 @end

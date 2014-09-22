@@ -33,6 +33,6 @@
  * @abstract the MenuID that identifies the FMCSubMenu to be delete 
  * @discussion  <b>Notes: </b>Min Value: 0; Max Value: 2000000000
  */
-@property(assign) NSNumber* menuID;
+@property(strong) NSNumber* menuID;
 
 @end

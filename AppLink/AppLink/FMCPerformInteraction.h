@@ -6,6 +6,7 @@
 #import <AppLink/FMCRPCRequest.h>
 
 #import <AppLink/FMCInteractionMode.h>
+#import <AppLink/FMCLayoutMode.h>
 
 /**
  * Performs an application-initiated interaction in which the user can select a
@@ -40,43 +41,44 @@
  * displayed on first line of multiline display, and is centered. If text
  * does not fit on line, it will be truncated
  */
-@property(assign) NSString* initialText;
+@property(strong) NSString* initialText;
 /**
  * @abstract An array of one or more TTSChunks that, taken together, specify
  * what is to be spoken to the user at the start of an interaction
  */
-@property(assign) NSMutableArray* initialPrompt;
+@property(strong) NSMutableArray* initialPrompt;
 /**
  * @abstract The Indicates mode that indicate how user selects interaction
  * choice. User can choose either by voice (VR_ONLY), by visual selection
  * from the menu (MANUAL_ONLY), or by either mode (BOTH)
  */
-@property(assign) FMCInteractionMode* interactionMode;
+@property(strong) FMCInteractionMode* interactionMode;
 /**
  * @abstract A Vector<Integer> value representing an Array of one or more Choice
  * Set IDs
  */
-@property(assign) NSMutableArray* interactionChoiceSetIDList;
+@property(strong) NSMutableArray* interactionChoiceSetIDList;
 /**
  * @abstract A Vector<TTSChunk> which taken together, specify the help phrase to
  * be spoken when the user says "help" during the VR session
  */
-@property(assign) NSMutableArray* helpPrompt;
+@property(strong) NSMutableArray* helpPrompt;
 /**
  * @abstract An array of TTSChunks which, taken together, specify the phrase to
  * be spoken when the listen times out during the VR session
  */
-@property(assign) NSMutableArray* timeoutPrompt;
+@property(strong) NSMutableArray* timeoutPrompt;
 /**
  * @abstract An Integer value representing the amount of time, in milliseconds,
  * SYNC will wait for the user to make a choice (VR or Menu)
  */
-@property(assign) NSNumber* timeout;
+@property(strong) NSNumber* timeout;
 /**
  * @abstract A Voice recognition Help, which is a suggested VR Help Items to
  * display on-screen during Perform Interaction
  * @since AppLink 2.0
  */
-@property(assign) NSMutableArray* vrHelp;
+@property(strong) NSMutableArray* vrHelp;
+@property(strong) FMCLayoutMode* interactionLayout;
 
 @end

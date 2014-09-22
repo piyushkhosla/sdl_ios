@@ -5,8 +5,8 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCNotification.h>
 
-#import <AppLink/FMCAudioStreamingState.h>
 #import <AppLink/FMCHMILevel.h>
+#import <AppLink/FMCAudioStreamingState.h>
 #import <AppLink/FMCSystemContext.h>
 
 /**
@@ -79,16 +79,16 @@
  * @abstract FMCHMILevel in effect for the application
  * @discussion
  */
-@property(assign) FMCHMILevel* hmiLevel;
+@property(strong) FMCHMILevel* hmiLevel;
 /**
  * @abstract current state of audio streaming for the application
  * @discussion
  */
-@property(assign) FMCAudioStreamingState* audioStreamingState;
+@property(strong) FMCAudioStreamingState* audioStreamingState;
 /**
  * @abstract the System Context
  * @discussion whether a user-initiated interaction is in-progress (VRSESSION or MENU), or not (MAIN)
  */
-@property(assign) FMCSystemContext* systemContext;
+@property(strong) FMCSystemContext* systemContext;
 
 @end

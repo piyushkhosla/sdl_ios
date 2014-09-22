@@ -53,11 +53,11 @@
  * @abstract the static hex icon value or the binary image file name identifier (sent by FMCPutFile)
  * @discussion
  */
-@property(assign) NSString* value;
+@property(strong) NSString* value;
 /**
  * @abstract the image type
  * @discussion
  */
-@property(assign) FMCImageType* imageType;
+@property(strong) FMCImageType* imageType;
 
 @end

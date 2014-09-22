@@ -15,4 +15,6 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
+@property(strong) NSNumber* tryAgainTime;
+
 @end

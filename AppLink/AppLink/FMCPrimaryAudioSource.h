@@ -2,8 +2,8 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <Foundation/Foundation.h> 
-#import <AppLink/FMCEnum.h>   
+#import <Foundation/Foundation.h>
+#import <AppLink/FMCEnum.h>
 
 /**
  * Reflects the current primary audio source of SYNC (if selected).
@@ -61,5 +61,3 @@
 +(FMCPrimaryAudioSource*) MOBILE_APP;
 
 @end
-
-

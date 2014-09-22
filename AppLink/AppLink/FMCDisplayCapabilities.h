@@ -6,6 +6,7 @@
 #import <AppLink/FMCRPCMessage.h>
 
 #import <AppLink/FMCDisplayType.h>
+#import <AppLink/FMCScreenParams.h>
 
 /**
  * Contains information about the display for the SYNC system to which the application is currently connected.
@@ -63,32 +64,34 @@
  * @abstract the type of display
  * @discussion
  */
-@property(assign) FMCDisplayType* displayType;
+@property(strong) FMCDisplayType* displayType;
 /**
  * @abstract an array of FMCTextField structures, each of which describes a field in the HMI which the application can write to using operations such as <i>FMCShow</i>, <i>FMCSetMediaClockTimer</i>, etc.
  * @discussion  This array of FMCTextField structures identify all the text fields to which the application can write on the current display (identified by FMCDisplayType ).
  */
-@property(assign) NSMutableArray* textFields;
-/**
- * @abstract an array of FMCMediaClockFormat elements, defining the valid string formats used in specifying the contents of the media clock field
- * @discussion
- */
-@property(assign) NSMutableArray* mediaClockFormats;
+@property(strong) NSMutableArray* textFields;
 /**
  * @abstract an array of FMCImageField elements
  * @discussion A set of all fields that support images. See FMCImageField.
  */
-@property(assign) NSMutableArray* imageFields;
+@property(strong) NSMutableArray* imageFields;
+/**
+ * @abstract an array of FMCMediaClockFormat elements, defining the valid string formats used in specifying the contents of the media clock field
+ * @discussion
+ */
+@property(strong) NSMutableArray* mediaClockFormats;
 /**
  * @abstract the display's persistent screen supports.
  * @discussion
  * Since <b>AppLink 2.0</b>
  */
-@property(assign) NSNumber* graphicSupported;
+@property(strong) NSNumber* graphicSupported;
 /**
  * @abstract Number of presets the screen supports.
  * @discussion The number of on-screen custom presets available (if any)
  */
-@property(assign) NSNumber* numCustomPresetsAvailable;
+@property(strong) NSMutableArray* templatesAvailable;
+@property(strong) FMCScreenParams* screenParams;
+@property(strong) NSNumber* numCustomPresetsAvailable;
 
 @end

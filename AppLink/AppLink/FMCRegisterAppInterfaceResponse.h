@@ -5,10 +5,10 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCResponse.h>
 
-#import <AppLink/FMCDisplayCapabilities.h>
-#import <AppLink/FMCLanguage.h>
-#import <AppLink/FMCPresetBankCapabilities.h>
 #import <AppLink/FMCSyncMsgVersion.h>
+#import <AppLink/FMCLanguage.h>
+#import <AppLink/FMCDisplayCapabilities.h>
+#import <AppLink/FMCPresetBankCapabilities.h>
 #import <AppLink/FMCVehicleType.h>
 
 /**
@@ -46,58 +46,58 @@
  *            number sent from the app to SYNC&reg; (in RegisterAppInterface
  *            request) is ignored by SYNC&reg;
  */
-@property(assign) FMCSyncMsgVersion* syncMsgVersion;
+@property(strong) FMCSyncMsgVersion* syncMsgVersion;
 /**
  * @abstract Sets an enumeration indicating what language the application intends to
  * use for user interaction (Display, TTS and VR)
  */
-@property(assign) FMCLanguage* language;
+@property(strong) FMCLanguage* language;
 /**
  * @abstract An enumeration indicating what language the application intends to
  * use for user interaction ( Display)
  * @since AppLink 2.0
  */
-@property(assign) FMCLanguage* hmiDisplayLanguage;
+@property(strong) FMCLanguage* hmiDisplayLanguage;
 /**
  * @abstract Display Capabilities
  */
-@property(assign) FMCDisplayCapabilities* displayCapabilities;
+@property(strong) FMCDisplayCapabilities* displayCapabilities;
 /**
  * @abstract Button Capabilities
  */
-@property(assign) NSMutableArray* buttonCapabilities;
+@property(strong) NSMutableArray* buttonCapabilities;
 /**
  * @abstract SoftButton Capabilities
  */
-@property(assign) NSMutableArray* softButtonCapabilities;
+@property(strong) NSMutableArray* softButtonCapabilities;
 /**
  * @abstract Preset BankCapabilities
  */
-@property(assign) FMCPresetBankCapabilities* presetBankCapabilities;
+@property(strong) FMCPresetBankCapabilities* presetBankCapabilities;
 /**
  * @abstract Gets/Sets hmiZoneCapabilities when application interface is registered.
  */
-@property(assign) NSMutableArray* hmiZoneCapabilities;
+@property(strong) NSMutableArray* hmiZoneCapabilities;
 /**
  * @abstract Gets/Sets speechCapabilities when application interface is registered.
  */
-@property(assign) NSMutableArray* speechCapabilities;
+@property(strong) NSMutableArray* speechCapabilities;
 /**
  * @abstract Gets/Sets vrCapabilities when application interface is registered.
  */
-@property(assign) NSMutableArray* vrCapabilities;
+@property(strong) NSMutableArray* vrCapabilities;
 /**
  * @abstract Gets/Sets prerecordedSpeech when application interface is registered.
  */
-@property(assign) NSMutableArray* prerecordedSpeech;
+@property(strong) NSMutableArray* prerecordedSpeech;
 /**
  * @abstract Gets/Sets AudioPassThruCapabilities when application interface is registered.
  */
-@property(assign) NSMutableArray* audioPassThruCapabilities;
+@property(strong) NSMutableArray* audioPassThruCapabilities;
 /**
  * @abstract Gets/Sets VehicleType when application interface is registered.
  */
-@property(assign) FMCVehicleType* vehicleType;
-
+@property(strong) FMCVehicleType* vehicleType;
+@property(strong) NSMutableArray* supportedDiagModes;
 
 @end

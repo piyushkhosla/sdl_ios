@@ -68,11 +68,11 @@
  * @abstract the Command's ID
  * @discussion
  */
-@property(assign) NSNumber* cmdID;
+@property(strong) NSNumber* cmdID;
 /**
  * @abstract the object indicates the command was selected via VR or via a menu selection (using the OK button).
  * @discussion
  */
-@property(assign) FMCTriggerSource* triggerSource;
+@property(strong) FMCTriggerSource* triggerSource;
 
 @end

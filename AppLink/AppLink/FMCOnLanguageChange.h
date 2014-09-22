@@ -73,11 +73,11 @@
  * @abstract language that current SYNC voice engine(VR+TTS) use
  * @discussion
  */
-@property(assign) FMCLanguage* language;
+@property(strong) FMCLanguage* language;
 /**
  * @abstract language that current display use
  * @discussion
  */
-@property(assign) FMCLanguage* hmiDisplayLanguage;
+@property(strong) FMCLanguage* hmiDisplayLanguage;
 
 @end

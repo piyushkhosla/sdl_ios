@@ -143,5 +143,6 @@
 +(FMCTextFieldName*) menuName;
 +(FMCTextFieldName*) secondaryText;
 +(FMCTextFieldName*) tertiaryText;
++(FMCTextFieldName*) menuTitle;
 
 @end

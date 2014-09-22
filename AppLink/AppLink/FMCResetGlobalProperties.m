@@ -5,6 +5,7 @@
 #import <AppLink/FMCResetGlobalProperties.h>
 
 #import <AppLink/FMCNames.h>
+#import <AppLink/FMCGlobalProperty.h>
 
 @implementation FMCResetGlobalProperties
 
@@ -30,7 +31,7 @@
     NSMutableArray* array = [parameters objectForKey:NAMES_properties];
     if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCGlobalProperty.class]) {
         return array;
-    } else { 
+    } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSString* enumString in array) {
             [newList addObject:[FMCGlobalProperty valueOf:enumString]];

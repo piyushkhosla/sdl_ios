@@ -39,7 +39,7 @@
  * </table>
  * Since <b>AppLink 1.0</b>
  */
-@interface FMCOnDriverDistraction: FMCRPCNotification {}
+@interface FMCOnDriverDistraction : FMCRPCNotification {}
 
 /**
  *Constructs a newly allocated FMCOnDriverDistraction object
@@ -55,7 +55,6 @@
  * @abstract the driver distraction state(i.e. whether driver distraction rules are in effect, or not)
  * @discussion
  */
-@property(assign) FMCDriverDistractionState* state;
+@property(strong) FMCDriverDistractionState* state;
 
 @end
-

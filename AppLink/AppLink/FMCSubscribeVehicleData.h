@@ -5,8 +5,6 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCRequest.h>
 
-#import <AppLink/FMCVehicleDataType.h>
-
 /**
  * Subscribes for specific published vehicle data items. The data will be only
  * sent, if it has changed. The application will be notified by the
@@ -39,98 +37,103 @@
 /**
  * @abstract A boolean value. If true, subscribes Gps data
  */
-@property(assign) NSNumber* gps;
+@property(strong) NSNumber* gps;
 
 /**
  * @abstract A boolean value. If true, subscribes speed data
  */
-@property(assign) NSNumber* speed;
+@property(strong) NSNumber* speed;
 
 /**
  * @abstract A boolean value. If true, subscribes rpm data
  */
-@property(assign) NSNumber* rpm;
+@property(strong) NSNumber* rpm;
 
 /**
  * @abstract A boolean value. If true, subscribes FuelLevel data
  */
-@property(assign) NSNumber* fuelLevel;
+@property(strong) NSNumber* fuelLevel;
 
 /**
  * @abstract A boolean value. If true, subscribes fuelLevel_State data
  */
-@property(assign) NSNumber* fuelLevelState;
+@property(strong) NSNumber* fuelLevel_State;
 
 /**
  * @abstract A boolean value. If true, subscribes instantFuelConsumption data
  */
-@property(assign) NSNumber* instantFuelConsumption;
+@property(strong) NSNumber* instantFuelConsumption;
 
 /**
  * @abstract A boolean value. If true, subscribes externalTemperature data
  */
-@property(assign) NSNumber* externalTemperature;
+@property(strong) NSNumber* externalTemperature;
 
 /**
  * @abstract A boolean value. If true, subscribes Currently selected gear data
  */
-@property(assign) NSNumber* prndl;
+@property(strong) NSNumber* prndl;
 
 /**
  * @abstract A boolean value. If true, subscribes tire pressure status data
  */
-@property(assign) NSNumber* tirePressure;
+@property(strong) NSNumber* tirePressure;
 
 /**
  * @abstract A boolean value. If true, subscribes odometer data
  */
-@property(assign) NSNumber* odometer;
+@property(strong) NSNumber* odometer;
 
 /**
  * @abstract A boolean value. If true, subscribes belt Status data
  */
-@property(assign) NSNumber* beltStatus;
+@property(strong) NSNumber* beltStatus;
 
 /**
  * @abstract A boolean value. If true, subscribes body Information data
  */
-@property(assign) NSNumber* bodyInformation;
+@property(strong) NSNumber* bodyInformation;
 
 /**
  * @abstract A boolean value. If true, subscribes device Status data
  */
-@property(assign) NSNumber* deviceStatus;
+@property(strong) NSNumber* deviceStatus;
 
 /**
  * @abstract A boolean value. If true, subscribes driver Braking data
  */
-@property(assign) NSNumber* driverBraking;
+@property(strong) NSNumber* driverBraking;
 
 /**
  * @abstract A boolean value. If true, subscribes wiper Status data
  */
-@property(assign) NSNumber* wiperStatus;
+@property(strong) NSNumber* wiperStatus;
 
 /**
  * @abstract A boolean value. If true, subscribes Head Lamp Status data
  */
-@property(assign) NSNumber* headLampStatus;
+@property(strong) NSNumber* headLampStatus;
 
 /**
  * @abstract A boolean value. If true, subscribes Engine Torque data
  */
-@property(assign) NSNumber* engineTorque;
+@property(strong) NSNumber* engineTorque;
 
 /**
  * @abstract A boolean value. If true, means the accPedalPosition data has been
  * subscribed.
  */
-@property(assign) NSNumber* accPedalPosition;
+@property(strong) NSNumber* accPedalPosition;
 
 /**
  * @abstract A boolean value. If true, means the steeringWheelAngle data has been
  * subscribed.
  */
-@property(assign) NSNumber* steeringWheelAngle;
+@property(strong) NSNumber* steeringWheelAngle;
+@property(strong) NSNumber* eCallInfo;
+@property(strong) NSNumber* airbagStatus;
+@property(strong) NSNumber* emergencyEvent;
+@property(strong) NSNumber* clusterModeStatus;
+@property(strong) NSNumber* myKey;
 
 @end

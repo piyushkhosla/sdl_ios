@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setSamplingRate:(FMCSamplingRate *) samplingRate {
+-(void) setSamplingRate:(FMCSamplingRate*) samplingRate {
     if (samplingRate != nil) {
         [store setObject:samplingRate forKey:NAMES_samplingRate];
     } else {
@@ -30,12 +30,12 @@
     NSObject* obj = [store objectForKey:NAMES_samplingRate];
     if ([obj isKindOfClass:FMCSamplingRate.class]) {
         return (FMCSamplingRate*)obj;
-    } else { 
+    } else {
         return [FMCSamplingRate valueOf:(NSString*)obj];
     }
 }
 
--(void) setBitsPerSample:(FMCBitsPerSample *) bitsPerSample {
+-(void) setBitsPerSample:(FMCBitsPerSample*) bitsPerSample {
     if (bitsPerSample != nil) {
         [store setObject:bitsPerSample forKey:NAMES_bitsPerSample];
     } else {
@@ -52,7 +52,7 @@
     }
 }
 
--(void) setAudioType:(FMCAudioType *) audioType {
+-(void) setAudioType:(FMCAudioType*) audioType {
     if (audioType != nil) {
         [store setObject:audioType forKey:NAMES_audioType];
     } else {

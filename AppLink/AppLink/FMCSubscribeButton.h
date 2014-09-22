@@ -74,6 +74,6 @@
  * @abstract The name of the button to subscribe to
  * @discussion An enum value, see <i>FMCButtonName</i>
  */
-@property(assign) FMCButtonName* buttonName;
+@property(strong) FMCButtonName* buttonName;
 
 @end

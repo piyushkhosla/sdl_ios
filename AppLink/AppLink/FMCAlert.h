@@ -61,7 +61,7 @@
  *            <li>Text is always centered</li>
  *            </ul>
  */
-@property(assign) NSString* alertText1;
+@property(strong) NSString* alertText1;
 /**
  * @abstract the String to be displayed in the second field of the display during
  * the Alert
@@ -74,7 +74,7 @@
  *            <li>Text is always centered</li>
  *            </ul>
  */
-@property(assign) NSString* alertText2;
+@property(strong) NSString* alertText2;
 /**
  * @abstract the String to be displayed in the third field of the display during
  * the FMCAlert
@@ -87,13 +87,13 @@
  *            <li>Text is always centered</li>
  *            </ul>
  */
-@property(assign) NSString* alertText3;
+@property(strong) NSString* alertText3;
 /**
  * @abstract a NSMutableArray which, taken together, specify what is to be
  * spoken to the user
  * @discussion <b>Notes: </b>Array must have a least one element
  */
-@property(assign) NSMutableArray* ttsChunks;
+@property(strong) NSMutableArray* ttsChunks;
 /**
  * @abstract the duration of the displayed portion of the alert, in milliseconds.
  * After this amount of time has passed, the display fields alertText1 and
@@ -108,7 +108,7 @@
  *            <li>If omitted, the default is 5000 milliseconds</li>
  *            </ul>
  */
-@property(assign) NSNumber* duration;
+@property(strong) NSNumber* duration;
 /**
  * @abstract whether the alert tone should be played before the TTS (if any) is
  * spoken
@@ -117,7 +117,7 @@
  *            <p>
  *            <b>Notes: </b>If omitted, default is true
  */
-@property(assign) NSNumber* playTone;
+@property(strong) NSNumber* playTone;
 /**
  * @abstract the SoftButtons Array
  * @discussion <b>Notes: </b><br/>
@@ -129,7 +129,7 @@
  *            </ul>
  * @since AppLink 2.0
  */
-@property(assign) NSNumber* progressIndicator;
-@property(assign) NSMutableArray* softButtons;
+@property(strong) NSNumber* progressIndicator;
+@property(strong) NSMutableArray* softButtons;
 
 @end

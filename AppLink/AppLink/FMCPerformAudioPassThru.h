@@ -5,9 +5,9 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCRequest.h>
 
-#import <AppLink/FMCAudioType.h>
-#import <AppLink/FMCBitsPerSample.h>
 #import <AppLink/FMCSamplingRate.h>
+#import <AppLink/FMCBitsPerSample.h>
+#import <AppLink/FMCAudioType.h>
 
 /**
  * This will open an audio pass thru session. By doing so the app can receive
@@ -50,7 +50,7 @@
  *            <li>Array Maxsize: 100</li>
  *            </ul>
  */
-@property(assign) NSMutableArray* initialPrompt;
+@property(strong) NSMutableArray* initialPrompt;
 /**
  * @abstract a line of text displayed during audio capture
  * @discussion audioPassThruDisplayText1
@@ -59,7 +59,7 @@
  *            <p>
  *            <b>Notes: </b>Maxlength=500
  */
-@property(assign) NSString* audioPassThruDisplayText1;
+@property(strong) NSString* audioPassThruDisplayText1;
 /**
  * @abstract A line of text displayed during audio capture
  * @discussion audioPassThruDisplayText2
@@ -68,13 +68,13 @@
  *            <p>
  *            <b>Notes: </b>Maxlength=500
  */
-@property(assign) NSString* audioPassThruDisplayText2;
+@property(strong) NSString* audioPassThruDisplayText2;
 /**
  * @abstract A samplingRate
  *
  * @discussion a SamplingRate value representing a 8 or 16 or 22 or 24 khz
  */
-@property(assign) FMCSamplingRate* samplingRate;
+@property(strong) FMCSamplingRate* samplingRate;
 /**
  * @abstract the maximum duration of audio recording in milliseconds
  *
@@ -84,21 +84,21 @@
  *            <p>
  *            <b>Notes: </b>Minvalue:1; Maxvalue:1000000
  */
-@property(assign) NSNumber* maxDuration;
+@property(strong) NSNumber* maxDuration;
 /**
  * @abstract the quality the audio is recorded - 8 bit or 16 bit
  *
  * @discussion a BitsPerSample value representing 8 bit or 16 bit
  */
-@property(assign) FMCBitsPerSample* bitsPerSample;
+@property(strong) FMCBitsPerSample* bitsPerSample;
 /**
  * @abstract an audioType
  */
-@property(assign) FMCAudioType* audioType;
+@property(strong) FMCAudioType* audioType;
 /**
  * @abstract a Boolean value representing if the current audio source should be
  * muted during the APT session<br/>
  */
-@property(assign) NSNumber* muteAudio;
+@property(strong) NSNumber* muteAudio;
 
 @end

@@ -27,7 +27,12 @@
 }
 
 -(FMCVehicleDataType*) dataType {
-    return [store objectForKey:NAMES_dataType];
+    NSObject* obj = [store objectForKey:NAMES_dataType];
+    if ([obj isKindOfClass:FMCVehicleDataType.class]) {
+        return (FMCVehicleDataType*)obj;
+    } else {
+        return [FMCVehicleDataType valueOf:(NSString*)obj];
+    }
 }
 
 -(void) setResultCode:(FMCVehicleDataResultCode*) resultCode {
@@ -39,7 +44,12 @@
 }
 
 -(FMCVehicleDataResultCode*) resultCode {
-    return [store objectForKey:NAMES_resultCode];
+    NSObject* obj = [store objectForKey:NAMES_resultCode];
+    if ([obj isKindOfClass:FMCVehicleDataResultCode.class]) {
+        return (FMCVehicleDataResultCode*)obj;
+    } else {
+        return [FMCVehicleDataResultCode valueOf:(NSString*)obj];
+    }
 }
 
 @end

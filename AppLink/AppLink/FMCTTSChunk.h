@@ -54,10 +54,10 @@
 /**
  * @abstract Text to be spoken, or a phoneme specification, or the name of a pre-recorded sound. The contents of this field are indicated by the "type" field.
  */
-@property(assign) NSString* text;
+@property(strong) NSString* text;
 /**
  * @abstract The type of information in the "text" field (e.g. phrase to be spoken, phoneme specification, name of pre-recorded sound).
  */
-@property(assign) FMCSpeechCapabilities* type;
+@property(strong) FMCSpeechCapabilities* type;
 
 @end

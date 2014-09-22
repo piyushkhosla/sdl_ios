@@ -2,8 +2,8 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <Foundation/Foundation.h> 
-#import <AppLink/FMCEnum.h>   
+#import <Foundation/Foundation.h>
+#import <AppLink/FMCEnum.h>
 
 /**
  * Defines the vehicle data types that can be published and subscribed to
@@ -21,7 +21,7 @@
  @abstract Store the enumeration of all possible FMCVehicleDataType
  @result return an array that store all possible FMCVehicleDataType
  */
-+(NSMutableArray*) values;                                 
++(NSMutableArray*) values;
 
 /*!
  @abstract FMCVehicleDataType : <font color=gray><i> VEHICLEDATA_GPS </i></font>
@@ -83,6 +83,11 @@
  @abstract FMCVehicleDataType : <font color=gray><i> VEHICLEDATA_BRAKING </i></font>
  */
 +(FMCVehicleDataType*) VEHICLEDATA_BRAKING;
++(FMCVehicleDataType*) VEHICLEDATA_ECALLINFO;
++(FMCVehicleDataType*) VEHICLEDATA_AIRBAGSTATUS;
++(FMCVehicleDataType*) VEHICLEDATA_EMERGENCYEVENT;
++(FMCVehicleDataType*) VEHICLEDATA_CLUSTERMODESTATUS;
++(FMCVehicleDataType*) VEHICLEDATA_MYKEY;
 /*!
  @abstract FMCVehicleDataType : <font color=gray><i> VEHICLEDATA_WIPERSTATUS </i></font>
  */
@@ -109,5 +114,3 @@
 +(FMCVehicleDataType*) VEHICLEDATA_STEERINGWHEEL;
 
 @end
-
-

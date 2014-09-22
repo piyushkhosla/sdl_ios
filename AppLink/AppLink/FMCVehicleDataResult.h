@@ -13,7 +13,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCVehicleDataType* dataType;
-@property(assign) FMCVehicleDataResultCode* resultCode;
+@property(strong) FMCVehicleDataType* dataType;
+@property(strong) FMCVehicleDataResultCode* resultCode;
 
 @end

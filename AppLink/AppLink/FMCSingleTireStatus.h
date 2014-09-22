@@ -44,6 +44,6 @@
 /**
  * @abstract The volume status of a single tire
  */
-@property(assign) FMCComponentVolumeStatus* status;
+@property(strong) FMCComponentVolumeStatus* status;
 
 @end

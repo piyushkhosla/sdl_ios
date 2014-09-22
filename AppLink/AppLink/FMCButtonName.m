@@ -20,8 +20,10 @@ FMCButtonName* FMCButtonName_PRESET_7 = nil;
 FMCButtonName* FMCButtonName_PRESET_8 = nil;
 FMCButtonName* FMCButtonName_PRESET_9 = nil;
 FMCButtonName* FMCButtonName_CUSTOM_BUTTON = nil;
+FMCButtonName* FMCButtonName_SEARCH = nil;
 
 NSMutableArray* FMCButtonName_values = nil;
+
 @implementation FMCButtonName
 
 +(FMCButtonName*) valueOf:(NSString*) value {
@@ -52,114 +54,115 @@ NSMutableArray* FMCButtonName_values = nil;
                 FMCButtonName.PRESET_8,
                 FMCButtonName.PRESET_9,
                 FMCButtonName.CUSTOM_BUTTON,
+                FMCButtonName.SEARCH,
                 nil];
     }
     return FMCButtonName_values;
 }
 
 +(FMCButtonName*) OK {
-    	if (FMCButtonName_OK == nil) {
-        		FMCButtonName_OK = [[FMCButtonName alloc] initWithValue:@"OK"];
-    	}
-    	return FMCButtonName_OK;
+    if (FMCButtonName_OK == nil) {
+        FMCButtonName_OK = [[FMCButtonName alloc] initWithValue:@"OK"];
+    }
+    return FMCButtonName_OK;
 }
 
 +(FMCButtonName*) SEEKLEFT {
-    	if (FMCButtonName_SEEKLEFT == nil) {
-        		FMCButtonName_SEEKLEFT = [[FMCButtonName alloc] initWithValue:@"SEEKLEFT"];
-    	}
-    	return FMCButtonName_SEEKLEFT;
+    if (FMCButtonName_SEEKLEFT == nil) {
+        FMCButtonName_SEEKLEFT = [[FMCButtonName alloc] initWithValue:@"SEEKLEFT"];
+    }
+    return FMCButtonName_SEEKLEFT;
 }
 
 +(FMCButtonName*) SEEKRIGHT {
-    	if (FMCButtonName_SEEKRIGHT == nil) {
-        		FMCButtonName_SEEKRIGHT = [[FMCButtonName alloc] initWithValue:@"SEEKRIGHT"];
-    	}
-    	return FMCButtonName_SEEKRIGHT;
+    if (FMCButtonName_SEEKRIGHT == nil) {
+        FMCButtonName_SEEKRIGHT = [[FMCButtonName alloc] initWithValue:@"SEEKRIGHT"];
+    }
+    return FMCButtonName_SEEKRIGHT;
 }
 
 +(FMCButtonName*) TUNEUP {
-    	if (FMCButtonName_TUNEUP == nil) {
-        		FMCButtonName_TUNEUP = [[FMCButtonName alloc] initWithValue:@"TUNEUP"];
-    	}
-    	return FMCButtonName_TUNEUP;
+    if (FMCButtonName_TUNEUP == nil) {
+        FMCButtonName_TUNEUP = [[FMCButtonName alloc] initWithValue:@"TUNEUP"];
+    }
+    return FMCButtonName_TUNEUP;
 }
 
 +(FMCButtonName*) TUNEDOWN {
-    	if (FMCButtonName_TUNEDOWN == nil) {
-        		FMCButtonName_TUNEDOWN = [[FMCButtonName alloc] initWithValue:@"TUNEDOWN"];
-    	}
-    	return FMCButtonName_TUNEDOWN;
+    if (FMCButtonName_TUNEDOWN == nil) {
+        FMCButtonName_TUNEDOWN = [[FMCButtonName alloc] initWithValue:@"TUNEDOWN"];
+    }
+    return FMCButtonName_TUNEDOWN;
 }
 
 +(FMCButtonName*) PRESET_0 {
-    	if (FMCButtonName_PRESET_0 == nil) {
-        		FMCButtonName_PRESET_0 = [[FMCButtonName alloc] initWithValue:@"PRESET_0"];
-    	}
-    	return FMCButtonName_PRESET_0;
+    if (FMCButtonName_PRESET_0 == nil) {
+        FMCButtonName_PRESET_0 = [[FMCButtonName alloc] initWithValue:@"PRESET_0"];
+    }
+    return FMCButtonName_PRESET_0;
 }
 
 +(FMCButtonName*) PRESET_1 {
-    	if (FMCButtonName_PRESET_1 == nil) {
-        		FMCButtonName_PRESET_1 = [[FMCButtonName alloc] initWithValue:@"PRESET_1"];
-    	}
-    	return FMCButtonName_PRESET_1;
+    if (FMCButtonName_PRESET_1 == nil) {
+        FMCButtonName_PRESET_1 = [[FMCButtonName alloc] initWithValue:@"PRESET_1"];
+    }
+    return FMCButtonName_PRESET_1;
 }
 
 +(FMCButtonName*) PRESET_2 {
-    	if (FMCButtonName_PRESET_2 == nil) {
-        		FMCButtonName_PRESET_2 = [[FMCButtonName alloc] initWithValue:@"PRESET_2"];
-    	}
-    	return FMCButtonName_PRESET_2;
+    if (FMCButtonName_PRESET_2 == nil) {
+        FMCButtonName_PRESET_2 = [[FMCButtonName alloc] initWithValue:@"PRESET_2"];
+    }
+    return FMCButtonName_PRESET_2;
 }
 
 +(FMCButtonName*) PRESET_3 {
-    	if (FMCButtonName_PRESET_3 == nil) {
-        		FMCButtonName_PRESET_3 = [[FMCButtonName alloc] initWithValue:@"PRESET_3"];
-    	}
-    	return FMCButtonName_PRESET_3;
+    if (FMCButtonName_PRESET_3 == nil) {
+        FMCButtonName_PRESET_3 = [[FMCButtonName alloc] initWithValue:@"PRESET_3"];
+    }
+    return FMCButtonName_PRESET_3;
 }
 
 +(FMCButtonName*) PRESET_4 {
-    	if (FMCButtonName_PRESET_4 == nil) {
-        		FMCButtonName_PRESET_4 = [[FMCButtonName alloc] initWithValue:@"PRESET_4"];
-    	}
-    	return FMCButtonName_PRESET_4;
+    if (FMCButtonName_PRESET_4 == nil) {
+        FMCButtonName_PRESET_4 = [[FMCButtonName alloc] initWithValue:@"PRESET_4"];
+    }
+    return FMCButtonName_PRESET_4;
 }
 
 +(FMCButtonName*) PRESET_5 {
-    	if (FMCButtonName_PRESET_5 == nil) {
-        		FMCButtonName_PRESET_5 = [[FMCButtonName alloc] initWithValue:@"PRESET_5"];
-    	}
-    	return FMCButtonName_PRESET_5;
+    if (FMCButtonName_PRESET_5 == nil) {
+        FMCButtonName_PRESET_5 = [[FMCButtonName alloc] initWithValue:@"PRESET_5"];
+    }
+    return FMCButtonName_PRESET_5;
 }
 
 +(FMCButtonName*) PRESET_6 {
-    	if (FMCButtonName_PRESET_6 == nil) {
-        		FMCButtonName_PRESET_6 = [[FMCButtonName alloc] initWithValue:@"PRESET_6"];
-    	}
-    	return FMCButtonName_PRESET_6;
+    if (FMCButtonName_PRESET_6 == nil) {
+        FMCButtonName_PRESET_6 = [[FMCButtonName alloc] initWithValue:@"PRESET_6"];
+    }
+    return FMCButtonName_PRESET_6;
 }
 
 +(FMCButtonName*) PRESET_7 {
-    	if (FMCButtonName_PRESET_7 == nil) {
-        		FMCButtonName_PRESET_7 = [[FMCButtonName alloc] initWithValue:@"PRESET_7"];
-    	}
-    	return FMCButtonName_PRESET_7;
+    if (FMCButtonName_PRESET_7 == nil) {
+        FMCButtonName_PRESET_7 = [[FMCButtonName alloc] initWithValue:@"PRESET_7"];
+    }
+    return FMCButtonName_PRESET_7;
 }
 
 +(FMCButtonName*) PRESET_8 {
-    	if (FMCButtonName_PRESET_8 == nil) {
-        		FMCButtonName_PRESET_8 = [[FMCButtonName alloc] initWithValue:@"PRESET_8"];
-    	}
-    	return FMCButtonName_PRESET_8;
+    if (FMCButtonName_PRESET_8 == nil) {
+        FMCButtonName_PRESET_8 = [[FMCButtonName alloc] initWithValue:@"PRESET_8"];
+    }
+    return FMCButtonName_PRESET_8;
 }
 
 +(FMCButtonName*) PRESET_9 {
-    	if (FMCButtonName_PRESET_9 == nil) {
-        		FMCButtonName_PRESET_9 = [[FMCButtonName alloc] initWithValue:@"PRESET_9"];
-    	}
-    	return FMCButtonName_PRESET_9;
+    if (FMCButtonName_PRESET_9 == nil) {
+        FMCButtonName_PRESET_9 = [[FMCButtonName alloc] initWithValue:@"PRESET_9"];
+    }
+    return FMCButtonName_PRESET_9;
 }
 
 +(FMCButtonName*) CUSTOM_BUTTON {
@@ -167,6 +170,13 @@ NSMutableArray* FMCButtonName_values = nil;
         FMCButtonName_CUSTOM_BUTTON = [[FMCButtonName alloc] initWithValue:@"CUSTOM_BUTTON"];
     }
     return FMCButtonName_CUSTOM_BUTTON;
+}
+
++(FMCButtonName*) SEARCH {
+    if (FMCButtonName_SEARCH == nil) {
+        FMCButtonName_SEARCH = [[FMCButtonName alloc] initWithValue:@"SEARCH"];
+    }
+    return FMCButtonName_SEARCH;
 }
 
 @end

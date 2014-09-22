@@ -190,5 +190,9 @@
  @result return the result code of <font color=gray><i> WARNINGS </i></font>
  */
 +(FMCResult*) WARNINGS;
++(FMCResult*) SAVED;
++(FMCResult*) INVALID_CERT;
++(FMCResult*) EXPIRED_CERT;
++(FMCResult*) RESUME_FAILED;
 
 @end

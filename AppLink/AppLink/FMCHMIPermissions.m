@@ -4,8 +4,8 @@
 
 #import <AppLink/FMCHMIPermissions.h>
 
-#import <AppLink/FMCHMILevel.h>
 #import <AppLink/FMCNames.h>
+#import <AppLink/FMCHMILevel.h>
 
 @implementation FMCHMIPermissions
 

@@ -5,8 +5,8 @@
 #import <AppLink/FMCAlert.h>
 
 #import <AppLink/FMCNames.h>
-#import <AppLink/FMCSoftButton.h>
 #import <AppLink/FMCTTSChunk.h>
+#import <AppLink/FMCSoftButton.h>
 
 @implementation FMCAlert
 
@@ -71,7 +71,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCTTSChunk alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCTTSChunk alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -101,24 +101,19 @@
     return [parameters objectForKey:NAMES_playTone];
 }
 
-- (void)setProgressIndicator:(NSNumber*)value
-{
-    if (value)
-    {
-        [parameters setObject:value forKey:NAMES_progressIndicator];
-    }
-    else
-    {
+-(void) setProgressIndicator:(NSNumber*) progressIndicator {
+    if (progressIndicator != nil) {
+        [parameters setObject:progressIndicator forKey:NAMES_progressIndicator];
+    } else {
         [parameters removeObjectForKey:NAMES_progressIndicator];
     }
 }
 
-- (NSNumber*)progressIndicator
-{
+-(NSNumber*) progressIndicator {
     return [parameters objectForKey:NAMES_progressIndicator];
 }
 
--(void) setSoftButtons:(NSMutableArray *) softButtons {
+-(void) setSoftButtons:(NSMutableArray*) softButtons {
     if (softButtons != nil) {
         [parameters setObject:softButtons forKey:NAMES_softButtons];
     } else {
@@ -133,7 +128,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCSoftButton alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCSoftButton alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }

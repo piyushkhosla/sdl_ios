@@ -74,21 +74,21 @@
 /**
  * @abstract The make of the vehicle
  */
-@property(assign) NSString* make;
+@property(strong) NSString* make;
 
 /**
  * @abstract The model of the vehicle
  */
-@property(assign) NSString* model;
+@property(strong) NSString* model;
 
 /**
  * @abstract The model year of the vehicle
  */
-@property(assign) NSString* modelYear;
+@property(strong) NSString* modelYear;
 
 /**
  * @abstract The trim of the vehicle
  */
-@property(assign) NSString* trim;
+@property(strong) NSString* trim;
 
 @end

@@ -30,7 +30,7 @@
     return [parameters objectForKey:NAMES_ecuHeader];
 }
 
--(void) setDtc:(NSMutableArray *) dtc {
+-(void) setDtc:(NSMutableArray*) dtc {
     if (dtc != nil) {
         [parameters setObject:dtc forKey:NAMES_dtc];
     } else {

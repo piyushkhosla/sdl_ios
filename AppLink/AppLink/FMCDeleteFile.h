@@ -31,6 +31,6 @@
  * @abstract a file reference name
  * @discussion a String value representing a file reference name
  */
-@property(assign) NSString* syncFileName;
+@property(strong) NSString* syncFileName;
 
 @end

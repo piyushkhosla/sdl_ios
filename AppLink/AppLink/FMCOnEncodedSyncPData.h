@@ -5,13 +5,13 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCNotification.h>
 
-@interface FMCOnEncodedSyncPData: FMCRPCNotification {}
+@interface FMCOnEncodedSyncPData : FMCRPCNotification {}
 
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSMutableArray* data;
-@property(assign) NSString* url;
-@property(assign) NSNumber* timeout;
+@property(strong) NSMutableArray* data;
+@property(strong) NSString* URL;
+@property(strong) NSNumber* Timeout;
 
 @end

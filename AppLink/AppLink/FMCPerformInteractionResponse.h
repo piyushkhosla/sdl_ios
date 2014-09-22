@@ -28,14 +28,14 @@
  * @abstract The application-scoped identifier that uniquely identifies this choice.
  * <br/>choiceID Min: 0  Max: 65535
  */
-@property(assign) NSNumber* choiceID;
+@property(strong) NSNumber* choiceID;
 /**
  * @abstract A <I>TriggerSource</I> object which will be shown in the HMI</p>
  */
-@property(assign) FMCTriggerSource* triggerSource;
+@property(strong) FMCTriggerSource* triggerSource;
 /**
  * @abstract A string containing the entered text</p>
  */
-@property(assign) NSString* manualTextEntry;
+@property(strong) NSString* manualTextEntry;
 
 @end

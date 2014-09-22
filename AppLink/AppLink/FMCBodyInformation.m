@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setParkBrakeActive:(NSNumber *) parkBrakeActive {
+-(void) setParkBrakeActive:(NSNumber*) parkBrakeActive {
     if (parkBrakeActive != nil) {
         [store setObject:parkBrakeActive forKey:NAMES_parkBrakeActive];
     } else {
@@ -30,7 +30,6 @@
     return [store objectForKey:NAMES_parkBrakeActive];
 }
 
-
 -(void) setIgnitionStableStatus:(FMCIgnitionStableStatus*) ignitionStableStatus {
     if (ignitionStableStatus != nil) {
         [store setObject:ignitionStableStatus forKey:NAMES_ignitionStableStatus];
@@ -39,8 +38,13 @@
     }
 }
 
--(NSNumber*) ignitionStableStatus {
-    return [store objectForKey:NAMES_ignitionStableStatus];
+-(FMCIgnitionStableStatus*) ignitionStableStatus {
+    NSObject* obj = [store objectForKey:NAMES_ignitionStableStatus];
+    if ([obj isKindOfClass:FMCIgnitionStableStatus.class]) {
+        return (FMCIgnitionStableStatus*)obj;
+    } else {
+        return [FMCIgnitionStableStatus valueOf:(NSString*)obj];
+    }
 }
 
 -(void) setIgnitionStatus:(FMCIgnitionStatus*) ignitionStatus {
@@ -51,11 +55,16 @@
     }
 }
 
--(NSNumber*) ignitionStatus {
-    return [store objectForKey:NAMES_ignitionStatus];
+-(FMCIgnitionStatus*) ignitionStatus {
+    NSObject* obj = [store objectForKey:NAMES_ignitionStatus];
+    if ([obj isKindOfClass:FMCIgnitionStatus.class]) {
+        return (FMCIgnitionStatus*)obj;
+    } else {
+        return [FMCIgnitionStatus valueOf:(NSString*)obj];
+    }
 }
 
--(void) setDriverDoorAjar:(NSNumber *) driverDoorAjar {
+-(void) setDriverDoorAjar:(NSNumber*) driverDoorAjar {
     if (driverDoorAjar != nil) {
         [store setObject:driverDoorAjar forKey:NAMES_driverDoorAjar];
     } else {
@@ -67,7 +76,7 @@
     return [store objectForKey:NAMES_driverDoorAjar];
 }
 
--(void) setPassengerDoorAjar:(NSNumber *) passengerDoorAjar {
+-(void) setPassengerDoorAjar:(NSNumber*) passengerDoorAjar {
     if (passengerDoorAjar != nil) {
         [store setObject:passengerDoorAjar forKey:NAMES_passengerDoorAjar];
     } else {
@@ -79,7 +88,7 @@
     return [store objectForKey:NAMES_passengerDoorAjar];
 }
 
--(void) setRearLeftDoorAjar:(NSNumber *) rearLeftDoorAjar {
+-(void) setRearLeftDoorAjar:(NSNumber*) rearLeftDoorAjar {
     if (rearLeftDoorAjar != nil) {
         [store setObject:rearLeftDoorAjar forKey:NAMES_rearLeftDoorAjar];
     } else {
@@ -91,7 +100,7 @@
     return [store objectForKey:NAMES_rearLeftDoorAjar];
 }
 
--(void) setRearRightDoorAjar:(NSNumber *) rearRightDoorAjar {
+-(void) setRearRightDoorAjar:(NSNumber*) rearRightDoorAjar {
     if (rearRightDoorAjar != nil) {
         [store setObject:rearRightDoorAjar forKey:NAMES_rearRightDoorAjar];
     } else {
@@ -102,8 +111,5 @@
 -(NSNumber*) rearRightDoorAjar {
     return [store objectForKey:NAMES_rearRightDoorAjar];
 }
-
-
-
 
 @end

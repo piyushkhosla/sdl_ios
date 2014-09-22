@@ -1,21 +1,17 @@
-//
 //  FMCTouchType.h
-//  AppLink
-//
+//  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
-//
-//
 
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCEnum.h>
 
-@interface FMCTouchType : FMCEnum
+@interface FMCTouchType : FMCEnum {}
 
-+ (NSMutableArray*)values;
-+ (FMCTouchType*)valueOf:(NSString*) value;
-+ (FMCTouchType*)BEGIN;
-+ (FMCTouchType*)MOVE;
-+ (FMCTouchType*)END;
++(FMCTouchType*) valueOf:(NSString*) value;
++(NSMutableArray*) values;
+
++(FMCTouchType*) BEGIN;
++(FMCTouchType*) MOVE;
++(FMCTouchType*) END;
 
 @end
-

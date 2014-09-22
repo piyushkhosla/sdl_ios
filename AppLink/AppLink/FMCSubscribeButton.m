@@ -30,7 +30,7 @@
     NSObject* obj = [parameters objectForKey:NAMES_buttonName];
     if ([obj isKindOfClass:FMCButtonName.class]) {
         return (FMCButtonName*)obj;
-    } else { 
+    } else {
         return [FMCButtonName valueOf:(NSString*)obj];
     }
 }

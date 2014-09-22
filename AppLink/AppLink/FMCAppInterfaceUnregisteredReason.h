@@ -26,10 +26,6 @@
 +(NSMutableArray*) values;
 
 /**
- * @abstract  To Be Continued
- */
-+(FMCAppInterfaceUnregisteredReason*) USER_EXIT;
-/**
  * @abstract  Vehicle ignition turned off.
  * @result FMCAppInterfaceUnregisteredReason with value <font color=gray><i>IGNITION_OFF</i></font>
  * @since <font color=red><b>AppLink 1.0</b></font>
@@ -69,6 +65,7 @@
  * @since <font color=red><b>AppLink 1.0</b></font>
  */
 +(FMCAppInterfaceUnregisteredReason*) DRIVER_DISTRACTION_VIOLATION;
++(FMCAppInterfaceUnregisteredReason*) LANGUAGE_CHANGE;
 /**
  * @abstract  The user performed a MASTER RESET on the SYNC platform, causing removal
  * of a necessary Bluetooth pairing.

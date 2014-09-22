@@ -3,13 +3,15 @@
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <Foundation/Foundation.h>
-#import <AppLink/FMCProtocol.h>
+#import "FMCProtocol.h"
+#import "FMCTransport.h"
+#import "FMCProtocolListener.h"
 
-#import <AppLink/FMCSyncTransport.h>
 
-@interface FMCAbstractProtocol : NSObject<FMCProtocol> {
-	NSObject<FMCSyncTransport>* transport;
-	NSMutableArray* protocolListeners;
-}
+@interface FMCAbstractProtocol : NSObject<FMCProtocol>
+
+@property (strong) NSString *debugConsoleGroupName;
+@property (strong) id<FMCTransport> transport;
+@property (weak) id<FMCProtocolListener> protocolDelegate;
 
 @end

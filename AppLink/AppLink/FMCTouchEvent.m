@@ -3,59 +3,65 @@
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <AppLink/FMCTouchEvent.h>
+
 #import <AppLink/FMCNames.h>
+#import <AppLink/FMCTouchCoord.h>
 
 @implementation FMCTouchEvent
 
-- (void)setTouchEventId:(NSNumber*)value
-{
-    if (value != nil)
-    {
-        [store setObject:value forKey:NAMES_touchEventId];
-    }
-    else
-    {
-        [store removeObjectForKey:NAMES_touchEventId];
+-(id) init {
+    if (self = [super init]) {}
+    return self;
+}
+
+-(id) initWithDictionary:(NSMutableDictionary*) dict {
+    if (self = [super initWithDictionary:dict]) {}
+    return self;
+}
+
+-(void) setTouchEventId:(NSNumber*) touchEventId {
+    if (touchEventId != nil) {
+        [store setObject:touchEventId forKey:NAMES_id];
+    } else {
+        [store removeObjectForKey:NAMES_id];
     }
 }
 
-- (NSNumber*)touchEventId
-{
-    return [store objectForKey:NAMES_touchEventId];
+-(NSNumber*) touchEventId {
+    return [store objectForKey:NAMES_id];
 }
 
-- (void)setTimestamp:(NSNumber*)value
-{
-    if (value != nil)
-    {
-        [store setObject:value forKey:NAMES_touchEventTimestamp];
-    }
-    else
-    {
-        [store removeObjectForKey:NAMES_touchEventTimestamp];
+-(void) setTimeStamp:(NSMutableArray*) timeStamp {
+    if (timeStamp != nil) {
+        [store setObject:timeStamp forKey:NAMES_ts];
+    } else {
+        [store removeObjectForKey:NAMES_ts];
     }
 }
 
-- (NSNumber*)timestamp
-{
-    return [store objectForKey:NAMES_touchEventTimestamp];
+-(NSMutableArray*) timeStamp {
+    return [store objectForKey:NAMES_ts];
 }
 
-- (void)setCoord:(FMCTouchCoord*)value
-{
-    if (value != nil)
-    {
-        [store setObject:value forKey:NAMES_touchEventCoord];
-    }
-    else
-    {
-        [store removeObjectForKey:NAMES_touchEventCoord];
+-(void) setCoord:(NSMutableArray*) coord {
+    if (coord != nil) {
+        [store setObject:coord forKey:NAMES_c];
+    } else {
+        [store removeObjectForKey:NAMES_c];
     }
 }
 
-- (FMCTouchCoord*)coord
-{
-    return [store objectForKey:NAMES_touchEventCoord];
+-(NSMutableArray*) coord {
+    NSMutableArray* array = [store objectForKey:NAMES_c];
+    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCTouchCoord.class]) {
+        return array;
+    } else {
+        NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
+        for (NSDictionary* dict in array) {
+            [newList addObject:[[FMCTouchCoord alloc] initWithDictionary:(NSMutableDictionary*)dict]];
+        }
+        return newList;
+    }
 }
 
 @end

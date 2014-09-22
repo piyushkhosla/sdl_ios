@@ -30,6 +30,6 @@
  *            <p>
  *            <b>Notes: </b>Maxlength=500
  */
-@property(assign) NSString* syncFileName;
+@property(strong) NSString* syncFileName;
 
 @end

@@ -22,6 +22,6 @@
  */
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* spaceAvailable;
+@property(strong) NSNumber* spaceAvailable;
 
 @end

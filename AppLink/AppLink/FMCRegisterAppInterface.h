@@ -5,8 +5,9 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCRequest.h>
 
-#import <AppLink/FMCLanguage.h>
 #import <AppLink/FMCSyncMsgVersion.h>
+#import <AppLink/FMCLanguage.h>
+#import <AppLink/FMCDeviceInfo.h>
 
 /**
  * Registers the application's interface with SYNC&reg;, declaring properties of
@@ -94,7 +95,7 @@
 /**
  * @abstract the version of the SYNC&reg; AppLink interface
  */
-@property(assign) FMCSyncMsgVersion* syncMsgVersion;
+@property(strong) FMCSyncMsgVersion* syncMsgVersion;
 /**
  * @abstract Mobile Application's Name, This name is displayed in the SYNC&reg;
  * Mobile Applications menu. It also serves as the unique identifier of the
@@ -111,12 +112,12 @@
  *            application</li>
  *            </ul>
  */
-@property(assign) NSString* appName;
+@property(strong) NSString* appName;
 /**
  * @abstract TTS string for VR recognition of the mobile application name
  * @since AppLink 2.0
  */
-@property(assign) NSMutableArray* ttsName;
+@property(strong) NSMutableArray* ttsName;
 /**
  * @abstract a String representing an abbreviated version of the mobile
  * applincation's name (if necessary) that will be displayed on the NGN
@@ -133,7 +134,7 @@
  *            truncated to 5 characters</li>
  *            </ul>
  */
-@property(assign) NSString* ngnMediaScreenAppName;
+@property(strong) NSString* ngnMediaScreenAppName;
 /**
  * @abstract A vrSynonyms representing the an array of 1-100 elements, each
  * element containing a voice-recognition synonym
@@ -151,23 +152,23 @@
  *            application</li>
  *            </ul>
  */
-@property(assign) NSMutableArray* vrSynonyms;
+@property(strong) NSMutableArray* vrSynonyms;
 /**
  * @abstract A Boolean to indicate a mobile application that is a media
  * application or not
  */
-@property(assign) NSNumber* isMediaApplication;
+@property(strong) NSNumber* isMediaApplication;
 /**
  * @abstract A Language enumeration indicating what language the application
  * intends to use for user interaction (Display, TTS and VR)
  */
-@property(assign) FMCLanguage* languageDesired;
+@property(strong) FMCLanguage* languageDesired;
 /**
  * @abstract An enumeration indicating what language the application intends to
  * use for user interaction ( Display)
  * @since AppLink 2.0
  */
-@property(assign) FMCLanguage* hmiDisplayLanguageDesired;
+@property(strong) FMCLanguage* hmiDisplayLanguageDesired;
 /**
  * @abstract A list of all applicable app types stating which classifications
  * to be given to the app. e.g. for platforms , like GEN2, this will
@@ -183,7 +184,9 @@
  *            </ul>
  * @since AppLink 2.0
  */
-@property(assign) NSMutableArray* appHMIType;
+@property(strong) NSMutableArray* appHMIType;
+@property(strong) NSString* hashID;
+@property(strong) FMCDeviceInfo* deviceInfo;
 /**
  * @abstract A unique ID, which an app will be given when approved by Ford
  *
@@ -194,6 +197,6 @@
  *            <b>Notes: </b>Maxlength = 100
  * @since AppLink 2.0
  */
-@property(assign) NSString* appID;
+@property(strong) NSString* appID;
 
 @end

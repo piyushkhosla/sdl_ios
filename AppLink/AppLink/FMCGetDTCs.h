@@ -35,12 +35,10 @@
  *            <p>
  *            <b>Notes: </b>Minvalue:0; Maxvalue:65535
  */
-@property(assign) NSNumber* ecuName;
-
-
+@property(strong) NSNumber* ecuName;
 /**
  * @abstract  DTC Mask Byte to be sent in diagnostic request to module. NSNumber* dtcMask Minvalue:0; Maxvalue:255
  */
-@property(assign) NSNumber* dtcMask;
+@property(strong) NSNumber* dtcMask;
 
 @end

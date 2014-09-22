@@ -15,7 +15,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSMutableArray* filenames;
-@property(assign) NSNumber* spaceAvailable;
+@property(strong) NSMutableArray* filenames;
+@property(strong) NSNumber* spaceAvailable;
 
 @end

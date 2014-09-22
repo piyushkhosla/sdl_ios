@@ -57,10 +57,10 @@
 /**
  * @abstract A set of all parameters that are permitted for this given RPC.
  */
-@property(assign) NSMutableArray* allowed;
+@property(strong) NSMutableArray* allowed;
 /**
  * @abstract A set of all parameters that are prohibited for this given RPC.
  */
-@property(assign) NSMutableArray* userDisallowed;
+@property(strong) NSMutableArray* userDisallowed;
 
 @end

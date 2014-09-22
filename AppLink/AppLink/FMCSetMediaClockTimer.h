@@ -43,7 +43,13 @@
  *            <li>Will be ignored for PAUSE/RESUME and CLEAR</li>
  *            </ul>
  */
-@property(assign) FMCStartTime* startTime;
+@property(strong) FMCStartTime* startTime;
+/**
+ * @abstract An END time of type FMCStartTime, specifying hour, minute, second values
+ *
+ * @discussion An FMCStartTime object with specifying hour, minute, second values
+ */
+@property(strong) FMCStartTime* endTime;
 /**
  * @abstract The media clock/timer update mode (COUNTUP/COUNTDOWN/PAUSE/RESUME)
  *
@@ -57,12 +63,6 @@
  *            the timer's value when it was paused</li>
  *            </ul>
  */
-@property(assign) FMCUpdateMode* updateMode;
-/**
- * @abstract An END time of type FMCStartTime, specifying hour, minute, second values
- *
- * @discussion An FMCStartTime object with specifying hour, minute, second values
- */
-@property(assign) FMCStartTime* endTime;
+@property(strong) FMCUpdateMode* updateMode;
 
 @end

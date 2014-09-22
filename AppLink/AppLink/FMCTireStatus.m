@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setPressureTelltale:(FMCWarningLightStatus *) pressureTelltale {
+-(void) setPressureTelltale:(FMCWarningLightStatus*) pressureTelltale {
     if (pressureTelltale != nil) {
         [store setObject:pressureTelltale forKey:NAMES_pressureTelltale];
     } else {
@@ -27,7 +27,12 @@
 }
 
 -(FMCWarningLightStatus*) pressureTelltale {
-    return [store objectForKey:NAMES_pressureTelltale];
+    NSObject* obj = [store objectForKey:NAMES_pressureTelltale];
+    if ([obj isKindOfClass:FMCWarningLightStatus.class]) {
+        return (FMCWarningLightStatus*)obj;
+    } else {
+        return [FMCWarningLightStatus valueOf:(NSString*)obj];
+    }
 }
 
 -(void) setLeftFront:(FMCSingleTireStatus*) leftFront {
@@ -38,8 +43,13 @@
     }
 }
 
--(FMCWarningLightStatus*) leftFront {
-    return [store objectForKey:NAMES_leftFront];
+-(FMCSingleTireStatus*) leftFront {
+    NSObject* obj = [store objectForKey:NAMES_leftFront];
+    if ([obj isKindOfClass:FMCSingleTireStatus.class]) {
+        return (FMCSingleTireStatus*)obj;
+    } else {
+        return [[FMCSingleTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
+    }
 }
 
 -(void) setRightFront:(FMCSingleTireStatus*) rightFront {
@@ -50,8 +60,13 @@
     }
 }
 
--(FMCWarningLightStatus*) rightFront {
-    return [store objectForKey:NAMES_rightFront];
+-(FMCSingleTireStatus*) rightFront {
+    NSObject* obj = [store objectForKey:NAMES_rightFront];
+    if ([obj isKindOfClass:FMCSingleTireStatus.class]) {
+        return (FMCSingleTireStatus*)obj;
+    } else {
+        return [[FMCSingleTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
+    }
 }
 
 -(void) setLeftRear:(FMCSingleTireStatus*) leftRear {
@@ -62,8 +77,13 @@
     }
 }
 
--(FMCWarningLightStatus*) leftRear {
-    return [store objectForKey:NAMES_leftRear];
+-(FMCSingleTireStatus*) leftRear {
+    NSObject* obj = [store objectForKey:NAMES_leftRear];
+    if ([obj isKindOfClass:FMCSingleTireStatus.class]) {
+        return (FMCSingleTireStatus*)obj;
+    } else {
+        return [[FMCSingleTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
+    }
 }
 
 -(void) setRightRear:(FMCSingleTireStatus*) rightRear {
@@ -74,11 +94,16 @@
     }
 }
 
--(FMCWarningLightStatus*) rightRear {
-    return [store objectForKey:NAMES_rightRear];
+-(FMCSingleTireStatus*) rightRear {
+    NSObject* obj = [store objectForKey:NAMES_rightRear];
+    if ([obj isKindOfClass:FMCSingleTireStatus.class]) {
+        return (FMCSingleTireStatus*)obj;
+    } else {
+        return [[FMCSingleTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
+    }
 }
 
--(void) setInnerLeftRear:(FMCSingleTireStatus *) innerLeftRear {
+-(void) setInnerLeftRear:(FMCSingleTireStatus*) innerLeftRear {
     if (innerLeftRear != nil) {
         [store setObject:innerLeftRear forKey:NAMES_innerLeftRear];
     } else {
@@ -86,8 +111,13 @@
     }
 }
 
--(FMCWarningLightStatus*) innerLeftRear {
-    return [store objectForKey:NAMES_innerLeftRear];
+-(FMCSingleTireStatus*) innerLeftRear {
+    NSObject* obj = [store objectForKey:NAMES_innerLeftRear];
+    if ([obj isKindOfClass:FMCSingleTireStatus.class]) {
+        return (FMCSingleTireStatus*)obj;
+    } else {
+        return [[FMCSingleTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
+    }
 }
 
 -(void) setInnerRightRear:(FMCSingleTireStatus*) innerRightRear {
@@ -98,8 +128,13 @@
     }
 }
 
--(FMCWarningLightStatus*) innerRightRear {
-    return [store objectForKey:NAMES_innerRightRear];
+-(FMCSingleTireStatus*) innerRightRear {
+    NSObject* obj = [store objectForKey:NAMES_innerRightRear];
+    if ([obj isKindOfClass:FMCSingleTireStatus.class]) {
+        return (FMCSingleTireStatus*)obj;
+    } else {
+        return [[FMCSingleTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
+    }
 }
 
 @end

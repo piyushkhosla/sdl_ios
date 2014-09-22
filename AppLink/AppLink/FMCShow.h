@@ -5,9 +5,8 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCRequest.h>
 
-#import <AppLink/FMCImage.h>
-#import <AppLink/FMCSoftButton.h>
 #import <AppLink/FMCTextAlignment.h>
+#import <AppLink/FMCImage.h>
 
 /**
  * Updates the application's display text area, regardless of whether or not
@@ -58,7 +57,7 @@
  *            cleared</li>
  *            </ul>
  */
-@property(assign) NSString* mainField1;
+@property(strong) NSString* mainField1;
 /**
  * @abstract The text displayed on the second display line of a two-line display
  *
@@ -76,7 +75,7 @@
  *            <li>Maxlength = 500</li>
  *            </ul>
  */
-@property(assign) NSString* mainField2;
+@property(strong) NSString* mainField2;
 /**
  * @abstract The text displayed on the first display line of the second page
  *
@@ -95,7 +94,7 @@
  *            </ul>
  * @since AppLink 2.0
  */
-@property(assign) NSString* mainField3;
+@property(strong) NSString* mainField3;
 /**
  * @abstract The text displayed on the second display line of the second page
  *
@@ -114,7 +113,7 @@
  *            </ul>
  * Since AppLink 2.0
  */
-@property(assign) NSString* mainField4;
+@property(strong) NSString* mainField4;
 /**
  * @abstract The alignment that Specifies how mainField1 and mainField2 text
  * should be aligned on display
@@ -130,7 +129,7 @@
  *            <li>Has no effect with navigation display</li>
  *            </ul>
  */
-@property(assign) FMCTextAlignment* alignment;
+@property(strong) FMCTextAlignment* alignment;
 /**
  * @abstract Text in the Status Bar
  *
@@ -148,7 +147,7 @@
  *            parameter is ignored</li>
  *            </ul>
  */
-@property(assign) NSString* statusBar;
+@property(strong) NSString* statusBar;
 /**
  * @abstract This property is deprecated use SetMediaClockTimer instead.
  * <p> The value for the MediaClock field using a format described in the
@@ -165,7 +164,7 @@
  *            will not display anything)</li>
  *            </ul>
  */
-@property(assign) NSString* mediaClock;
+@property(strong) NSString* mediaClock;
 /**
  * @abstract The text in the track field
  *
@@ -178,7 +177,7 @@
  *            <li>This field is only valid for media applications on navigation displays</li>
  *            </ul>
  */
-@property(assign) NSString* mediaTrack;
+@property(strong) NSString* mediaTrack;
 /**
  * @abstract An image to be shown on supported displays
  *
@@ -188,7 +187,7 @@
  *            graphic shall not change<br/>
  * @since AppLink 2.0
  */
-@property(assign) FMCImage* graphic;
+@property(strong) FMCImage* graphic;
 /**
  * @abstract An image to be shown on supported displays
  *
@@ -198,7 +197,7 @@
  *            graphic shall not change<br/>
  * @since AppLink 2.0
  */
-@property(assign) FMCImage* secondaryGraphic;
+@property(strong) FMCImage* secondaryGraphic;
 /**
  * @abstract The the Soft buttons defined by the App
  *
@@ -215,7 +214,7 @@
  *
  * @since AppLink 2.0
  */
-@property(assign) NSMutableArray* softButtons;
+@property(strong) NSMutableArray* softButtons;
 /**
  * @abstract The Custom Presets defined by the App
  *
@@ -229,6 +228,6 @@
  *            </ul>
  * @since AppLink 2.0
  */
-@property(assign) NSMutableArray* customPresets;
+@property(strong) NSMutableArray* customPresets;
 
 @end

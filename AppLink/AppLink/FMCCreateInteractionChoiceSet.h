@@ -37,7 +37,7 @@
  * @discussion an NSNumber value representing the Choice Set ID<br>
  *            <b>Notes: </b>Min Value: 0; Max Value: 2000000000
  */
-@property(assign) NSNumber* interactionChoiceSetID;
+@property(strong) NSNumber* interactionChoiceSetID;
 /**
  * @abstract FMCChoice Array of one or more elements
  * @discussion a Array of FMCChoice representing the array of one or more
@@ -45,6 +45,6 @@
  *            <p>
  *            <b>Notes: </b>Min Value: 1; Max Value: 100
  */
-@property(assign) NSMutableArray* choiceSet;
+@property(strong) NSMutableArray* choiceSet;
 
 @end

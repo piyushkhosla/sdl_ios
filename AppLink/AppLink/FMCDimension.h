@@ -2,8 +2,8 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <Foundation/Foundation.h> 
-#import <AppLink/FMCEnum.h>   
+#import <Foundation/Foundation.h>
+#import <AppLink/FMCEnum.h>
 
 /**
  * The supported dimensions of the GPS.
@@ -22,7 +22,7 @@
  @abstract Store the enumeration of all possible FMCDimension
  @result return an array that store all possible FMCDimension
  */
-+(NSMutableArray*) values;                                 
++(NSMutableArray*) values;
 
 /*!
  @abstract No GPS at all
@@ -41,5 +41,3 @@
 +(FMCDimension*) _3D;
 
 @end
-
-
