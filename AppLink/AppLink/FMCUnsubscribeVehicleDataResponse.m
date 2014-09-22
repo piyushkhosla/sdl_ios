@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setGps:(FMCVehicleDataResult *)gps {
+-(void) setGps:(FMCVehicleDataResult*) gps {
     if (gps != nil) {
         [parameters setObject:gps forKey:NAMES_gps];
     } else {
@@ -31,7 +31,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -48,7 +48,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -65,7 +65,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -82,24 +82,24 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
--(void) setFuelLevelState:(FMCVehicleDataResult*) fuelLevelState {
-    if (fuelLevelState != nil) {
-        [parameters setObject:fuelLevelState forKey:NAMES_fuelLevelState];
+-(void) setFuelLevel_State:(FMCVehicleDataResult*) fuelLevel_State {
+    if (fuelLevel_State != nil) {
+        [parameters setObject:fuelLevel_State forKey:NAMES_fuelLevel_State];
     } else {
-        [parameters removeObjectForKey:NAMES_fuelLevelState];
+        [parameters removeObjectForKey:NAMES_fuelLevel_State];
     }
 }
 
--(FMCVehicleDataResult*) fuelLevelState {
-    NSObject* obj = [parameters objectForKey:NAMES_fuelLevelState];
+-(FMCVehicleDataResult*) fuelLevel_State {
+    NSObject* obj = [parameters objectForKey:NAMES_fuelLevel_State];
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -116,7 +116,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -133,7 +133,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -150,7 +150,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -167,7 +167,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -184,7 +184,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -201,7 +201,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -218,7 +218,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -235,7 +235,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -252,7 +252,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -269,7 +269,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -286,7 +286,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -303,7 +303,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -320,7 +320,7 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -337,7 +337,92 @@
     if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
         return (FMCVehicleDataResult*)obj;
     } else {
-        return [[[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
+    }
+}
+
+-(void) setECallInfo:(FMCVehicleDataResult*) eCallInfo {
+    if (eCallInfo != nil) {
+        [parameters setObject:eCallInfo forKey:NAMES_eCallInfo];
+    } else {
+        [parameters removeObjectForKey:NAMES_eCallInfo];
+    }
+}
+
+-(FMCVehicleDataResult*) eCallInfo {
+    NSObject* obj = [parameters objectForKey:NAMES_eCallInfo];
+    if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
+        return (FMCVehicleDataResult*)obj;
+    } else {
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
+    }
+}
+
+-(void) setAirbagStatus:(FMCVehicleDataResult*) airbagStatus {
+    if (airbagStatus != nil) {
+        [parameters setObject:airbagStatus forKey:NAMES_airbagStatus];
+    } else {
+        [parameters removeObjectForKey:NAMES_airbagStatus];
+    }
+}
+
+-(FMCVehicleDataResult*) airbagStatus {
+    NSObject* obj = [parameters objectForKey:NAMES_airbagStatus];
+    if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
+        return (FMCVehicleDataResult*)obj;
+    } else {
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
+    }
+}
+
+-(void) setEmergencyEvent:(FMCVehicleDataResult*) emergencyEvent {
+    if (emergencyEvent != nil) {
+        [parameters setObject:emergencyEvent forKey:NAMES_emergencyEvent];
+    } else {
+        [parameters removeObjectForKey:NAMES_emergencyEvent];
+    }
+}
+
+-(FMCVehicleDataResult*) emergencyEvent {
+    NSObject* obj = [parameters objectForKey:NAMES_emergencyEvent];
+    if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
+        return (FMCVehicleDataResult*)obj;
+    } else {
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
+    }
+}
+
+-(void) setClusterModes:(FMCVehicleDataResult*) clusterModes {
+    if (clusterModes != nil) {
+        [parameters setObject:clusterModes forKey:NAMES_clusterModes];
+    } else {
+        [parameters removeObjectForKey:NAMES_clusterModes];
+    }
+}
+
+-(FMCVehicleDataResult*) clusterModes {
+    NSObject* obj = [parameters objectForKey:NAMES_clusterModes];
+    if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
+        return (FMCVehicleDataResult*)obj;
+    } else {
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
+    }
+}
+
+-(void) setMyKey:(FMCVehicleDataResult*) myKey {
+    if (myKey != nil) {
+        [parameters setObject:myKey forKey:NAMES_myKey];
+    } else {
+        [parameters removeObjectForKey:NAMES_myKey];
+    }
+}
+
+-(FMCVehicleDataResult*) myKey {
+    NSObject* obj = [parameters objectForKey:NAMES_myKey];
+    if ([obj isKindOfClass:FMCVehicleDataResult.class]) {
+        return (FMCVehicleDataResult*)obj;
+    } else {
+        return [[FMCVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 

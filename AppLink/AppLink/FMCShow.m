@@ -5,6 +5,7 @@
 #import <AppLink/FMCShow.h>
 
 #import <AppLink/FMCNames.h>
+#import <AppLink/FMCSoftButton.h>
 
 @implementation FMCShow
 
@@ -78,7 +79,7 @@
     NSObject* obj = [parameters objectForKey:NAMES_alignment];
     if ([obj isKindOfClass:FMCTextAlignment.class]) {
         return (FMCTextAlignment*)obj;
-    } else { 
+    } else {
         return [FMCTextAlignment valueOf:(NSString*)obj];
     }
 }
@@ -132,36 +133,28 @@
     if ([obj isKindOfClass:FMCImage.class]) {
         return (FMCImage*)obj;
     } else {
-        return [[[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
-- (void)setSecondaryGraphic:(FMCImage*)secondaryGraphic
-{
-    if (secondaryGraphic)
-    {
+-(void) setSecondaryGraphic:(FMCImage*) secondaryGraphic {
+    if (secondaryGraphic != nil) {
         [parameters setObject:secondaryGraphic forKey:NAMES_secondaryGraphic];
-    }
-    else
-    {
+    } else {
         [parameters removeObjectForKey:NAMES_secondaryGraphic];
     }
 }
 
-- (FMCImage*)secondaryGraphic
-{
+-(FMCImage*) secondaryGraphic {
     NSObject* obj = [parameters objectForKey:NAMES_secondaryGraphic];
-    if ([obj isKindOfClass:FMCImage.class])
-    {
+    if ([obj isKindOfClass:FMCImage.class]) {
         return (FMCImage*)obj;
-    }
-    else
-    {
-        return [[[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+    } else {
+        return [[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
--(void) setSoftButtons:(NSMutableArray *) softButtons {
+-(void) setSoftButtons:(NSMutableArray*) softButtons {
     if (softButtons != nil) {
         [parameters setObject:softButtons forKey:NAMES_softButtons];
     } else {
@@ -176,7 +169,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCSoftButton alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCSoftButton alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }

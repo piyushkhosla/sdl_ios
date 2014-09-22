@@ -41,14 +41,14 @@
  *            <li>Only optional it timeoutPrompt has been specified</li>
  *            </ul>
  */
-@property(assign) NSMutableArray* helpPrompt;
+@property(strong) NSMutableArray* helpPrompt;
 /**
  * @abstract A Vector<TTSChunk> for Timeout Prompt representing Array of one or
  * more TTSChunk elements specifying the help prompt used in an interaction
  * started by PTT
  *
  */
-@property(assign) NSMutableArray* timeoutPrompt;
+@property(strong) NSMutableArray* timeoutPrompt;
 /**
  * @abstract Sets a voice recognition Help Title
  *
@@ -64,7 +64,7 @@
  *            </ul>
  * @since AppLink 2.0
  */
-@property(assign) NSString* vrHelpTitle;
+@property(strong) NSString* vrHelpTitle;
 /**
  * @abstract Sets the items listed in the VR help screen used in an interaction
  * started by PTT
@@ -85,6 +85,9 @@
  *            </ul>
  * @since AppLink 2.0
  */
-@property(assign) NSMutableArray* vrHelp;
+@property(strong) NSMutableArray* vrHelp;
+@property(strong) NSString* menuTitle;
+@property(strong) FMCImage* menuIcon;
+@property(strong) FMCKeyboardProperties* keyboardProperties;
 
 @end

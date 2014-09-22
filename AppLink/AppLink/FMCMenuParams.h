@@ -71,7 +71,7 @@
  * @abstract the unique ID of an existing submenu to which a command will be added
  * @discussion If this element is not provided, the command will be added to the top level of the Command Menu.  Min: 0; Max: 2000000000
  */
-@property(assign) NSNumber* parentID;
+@property(strong) NSNumber* parentID;
 /**
  * @abstract the position within the items of the parent Command Menu
  * @discussion 0 will insert at the front, 1 will insert after the first existing element, etc.
@@ -83,11 +83,11 @@
  * 						<li>If this element is omitted, the entry will be added at the end of the parent menu.</li>
  * 					</ul>
  */
-@property(assign) NSNumber* position;
+@property(strong) NSNumber* position;
 /**
  * @abstract the menu name which appears in menu, representing this command
  * @discussion 
  */
-@property(assign) NSString* menuName;
+@property(strong) NSString* menuName;
 
 @end

@@ -11,6 +11,7 @@ FMCSpeechCapabilities* FMCSpeechCapabilities_PRE_RECORDED = nil;
 FMCSpeechCapabilities* FMCSpeechCapabilities_SILENCE = nil;
 
 NSMutableArray* FMCSpeechCapabilities_values = nil;
+
 @implementation FMCSpeechCapabilities
 
 +(FMCSpeechCapabilities*) valueOf:(NSString*) value {
@@ -36,38 +37,38 @@ NSMutableArray* FMCSpeechCapabilities_values = nil;
 }
 
 +(FMCSpeechCapabilities*) TEXT {
-    	if (FMCSpeechCapabilities_TEXT == nil) {
-        		FMCSpeechCapabilities_TEXT = [[FMCSpeechCapabilities alloc] initWithValue:@"TEXT"];
-    	}
-    	return FMCSpeechCapabilities_TEXT;
+    if (FMCSpeechCapabilities_TEXT == nil) {
+        FMCSpeechCapabilities_TEXT = [[FMCSpeechCapabilities alloc] initWithValue:@"TEXT"];
+    }
+    return FMCSpeechCapabilities_TEXT;
 }
 
 +(FMCSpeechCapabilities*) SAPI_PHONEMES {
-    	if (FMCSpeechCapabilities_SAPI_PHONEMES == nil) {
-        		FMCSpeechCapabilities_SAPI_PHONEMES = [[FMCSpeechCapabilities alloc] initWithValue:@"SAPI_PHONEMES"];
-    	}
-    	return FMCSpeechCapabilities_SAPI_PHONEMES;
+    if (FMCSpeechCapabilities_SAPI_PHONEMES == nil) {
+        FMCSpeechCapabilities_SAPI_PHONEMES = [[FMCSpeechCapabilities alloc] initWithValue:@"SAPI_PHONEMES"];
+    }
+    return FMCSpeechCapabilities_SAPI_PHONEMES;
 }
 
 +(FMCSpeechCapabilities*) LHPLUS_PHONEMES {
-    	if (FMCSpeechCapabilities_LHPLUS_PHONEMES == nil) {
-        		FMCSpeechCapabilities_LHPLUS_PHONEMES = [[FMCSpeechCapabilities alloc] initWithValue:@"LHPLUS_PHONEMES"];
-    	}
-    	return FMCSpeechCapabilities_LHPLUS_PHONEMES;
+    if (FMCSpeechCapabilities_LHPLUS_PHONEMES == nil) {
+        FMCSpeechCapabilities_LHPLUS_PHONEMES = [[FMCSpeechCapabilities alloc] initWithValue:@"LHPLUS_PHONEMES"];
+    }
+    return FMCSpeechCapabilities_LHPLUS_PHONEMES;
 }
 
 +(FMCSpeechCapabilities*) PRE_RECORDED {
-    	if (FMCSpeechCapabilities_PRE_RECORDED == nil) {
-        		FMCSpeechCapabilities_PRE_RECORDED = [[FMCSpeechCapabilities alloc] initWithValue:@"PRE_RECORDED"];
-    	}
-    	return FMCSpeechCapabilities_PRE_RECORDED;
+    if (FMCSpeechCapabilities_PRE_RECORDED == nil) {
+        FMCSpeechCapabilities_PRE_RECORDED = [[FMCSpeechCapabilities alloc] initWithValue:@"PRE_RECORDED"];
+    }
+    return FMCSpeechCapabilities_PRE_RECORDED;
 }
 
 +(FMCSpeechCapabilities*) SILENCE {
-    	if (FMCSpeechCapabilities_SILENCE == nil) {
-        		FMCSpeechCapabilities_SILENCE = [[FMCSpeechCapabilities alloc] initWithValue:@"SILENCE"];
-    	}
-    	return FMCSpeechCapabilities_SILENCE;
+    if (FMCSpeechCapabilities_SILENCE == nil) {
+        FMCSpeechCapabilities_SILENCE = [[FMCSpeechCapabilities alloc] initWithValue:@"SILENCE"];
+    }
+    return FMCSpeechCapabilities_SILENCE;
 }
 
 @end

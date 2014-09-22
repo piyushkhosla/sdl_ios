@@ -36,5 +36,8 @@
 +(FMCGlobalProperty*) TIMEOUTPROMPT;
 +(FMCGlobalProperty*) VRHELPTITLE;
 +(FMCGlobalProperty*) VRHELPITEMS;
++(FMCGlobalProperty*) MENUNAME;
++(FMCGlobalProperty*) MENUICON;
++(FMCGlobalProperty*) KEYBOARDPROPERTIES;
 
 @end

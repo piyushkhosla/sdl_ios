@@ -1,17 +1,18 @@
-//  FMCHMIZoneCapabilities.m
+//  FMCHmiZoneCapabilities.m
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <AppLink/FMCHMIZoneCapabilities.h>
+#import <AppLink/FMCHmiZoneCapabilities.h>
 
-FMCHMIZoneCapabilities* FMCHMIZoneCapabilities_FRONT = nil;
-FMCHMIZoneCapabilities* FMCHMIZoneCapabilities_BACK = nil;
+FMCHmiZoneCapabilities* FMCHmiZoneCapabilities_FRONT = nil;
+FMCHmiZoneCapabilities* FMCHmiZoneCapabilities_BACK = nil;
 
-NSMutableArray* FMCHMIZoneCapabilities_values = nil;
-@implementation FMCHMIZoneCapabilities
+NSMutableArray* FMCHmiZoneCapabilities_values = nil;
 
-+(FMCHMIZoneCapabilities*) valueOf:(NSString*) value {
-    for (FMCHMIZoneCapabilities* item in FMCHMIZoneCapabilities.values) {
+@implementation FMCHmiZoneCapabilities
+
++(FMCHmiZoneCapabilities*) valueOf:(NSString*) value {
+    for (FMCHmiZoneCapabilities* item in FMCHmiZoneCapabilities.values) {
         if ([item.value isEqualToString:value]) {
             return item;
         }
@@ -20,27 +21,27 @@ NSMutableArray* FMCHMIZoneCapabilities_values = nil;
 }
 
 +(NSMutableArray*) values {
-    if (FMCHMIZoneCapabilities_values == nil) {
-        FMCHMIZoneCapabilities_values = [[NSMutableArray alloc] initWithObjects:
-                FMCHMIZoneCapabilities.FRONT,
-                FMCHMIZoneCapabilities.BACK,
+    if (FMCHmiZoneCapabilities_values == nil) {
+        FMCHmiZoneCapabilities_values = [[NSMutableArray alloc] initWithObjects:
+                FMCHmiZoneCapabilities.FRONT,
+                FMCHmiZoneCapabilities.BACK,
                 nil];
     }
-    return FMCHMIZoneCapabilities_values;
+    return FMCHmiZoneCapabilities_values;
 }
 
-+(FMCHMIZoneCapabilities*) FRONT {
-    	if (FMCHMIZoneCapabilities_FRONT == nil) {
-        		FMCHMIZoneCapabilities_FRONT = [[FMCHMIZoneCapabilities alloc] initWithValue:@"FRONT"];
-    	}
-    	return FMCHMIZoneCapabilities_FRONT;
++(FMCHmiZoneCapabilities*) FRONT {
+    if (FMCHmiZoneCapabilities_FRONT == nil) {
+        FMCHmiZoneCapabilities_FRONT = [[FMCHmiZoneCapabilities alloc] initWithValue:@"FRONT"];
+    }
+    return FMCHmiZoneCapabilities_FRONT;
 }
 
-+(FMCHMIZoneCapabilities*) BACK {
-    	if (FMCHMIZoneCapabilities_BACK == nil) {
-        		FMCHMIZoneCapabilities_BACK = [[FMCHMIZoneCapabilities alloc] initWithValue:@"BACK"];
-    	}
-    	return FMCHMIZoneCapabilities_BACK;
++(FMCHmiZoneCapabilities*) BACK {
+    if (FMCHmiZoneCapabilities_BACK == nil) {
+        FMCHmiZoneCapabilities_BACK = [[FMCHmiZoneCapabilities alloc] initWithValue:@"BACK"];
+    }
+    return FMCHmiZoneCapabilities_BACK;
 }
 
 @end

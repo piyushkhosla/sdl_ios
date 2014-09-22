@@ -31,12 +31,12 @@
  * and OK buttons)
  * @result return FMCTriggerSource with value of <font color=gray><i> MENU </i></font>
  */
-+(FMCTriggerSource*) TS_MENU;
++(FMCTriggerSource*) MENU;
 /**
  * @abstract Selection made via VR session
  * @result return FMCTriggerSource with value of <font color=gray><i> VR </i></font>
  */
-+(FMCTriggerSource*) TS_VR;
-+(FMCTriggerSource*) TS_KEYBOARD;
++(FMCTriggerSource*) VR;
++(FMCTriggerSource*) KEYBOARD;
 
 @end

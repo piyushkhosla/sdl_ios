@@ -4,12 +4,14 @@
 
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCMessage.h>
-#import <AppLink/FMCTouchCoord.h>
 
-@interface FMCTouchEvent : FMCRPCStruct
+@interface FMCTouchEvent : FMCRPCStruct {}
 
-@property (assign) NSNumber* touchEventId;
-@property (assign) NSNumber* timestamp;
-@property (assign) FMCTouchCoord* coord;
+-(id) init;
+-(id) initWithDictionary:(NSMutableDictionary*) dict;
+
+@property(strong) NSNumber* touchEventId;
+@property(strong) NSMutableArray* timeStamp;
+@property(strong) NSMutableArray* coord;
 
 @end

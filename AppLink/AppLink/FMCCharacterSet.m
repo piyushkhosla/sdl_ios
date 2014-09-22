@@ -10,6 +10,7 @@ FMCCharacterSet* FMCCharacterSet_CID1SET = nil;
 FMCCharacterSet* FMCCharacterSet_CID2SET = nil;
 
 NSMutableArray* FMCCharacterSet_values = nil;
+
 @implementation FMCCharacterSet
 
 +(FMCCharacterSet*) valueOf:(NSString*) value {
@@ -34,31 +35,31 @@ NSMutableArray* FMCCharacterSet_values = nil;
 }
 
 +(FMCCharacterSet*) TYPE2SET {
-    	if (FMCCharacterSet_TYPE2SET == nil) {
-        		FMCCharacterSet_TYPE2SET = [[FMCCharacterSet alloc] initWithValue:@"TYPE2SET"];
-    	}
-    	return FMCCharacterSet_TYPE2SET;
+    if (FMCCharacterSet_TYPE2SET == nil) {
+        FMCCharacterSet_TYPE2SET = [[FMCCharacterSet alloc] initWithValue:@"TYPE2SET"];
+    }
+    return FMCCharacterSet_TYPE2SET;
 }
 
 +(FMCCharacterSet*) TYPE5SET {
-    	if (FMCCharacterSet_TYPE5SET == nil) {
-        		FMCCharacterSet_TYPE5SET = [[FMCCharacterSet alloc] initWithValue:@"TYPE5SET"];
-    	}
-    	return FMCCharacterSet_TYPE5SET;
+    if (FMCCharacterSet_TYPE5SET == nil) {
+        FMCCharacterSet_TYPE5SET = [[FMCCharacterSet alloc] initWithValue:@"TYPE5SET"];
+    }
+    return FMCCharacterSet_TYPE5SET;
 }
 
 +(FMCCharacterSet*) CID1SET {
-    	if (FMCCharacterSet_CID1SET == nil) {
-        		FMCCharacterSet_CID1SET = [[FMCCharacterSet alloc] initWithValue:@"CID1SET"];
-    	}
-    	return FMCCharacterSet_CID1SET;
+    if (FMCCharacterSet_CID1SET == nil) {
+        FMCCharacterSet_CID1SET = [[FMCCharacterSet alloc] initWithValue:@"CID1SET"];
+    }
+    return FMCCharacterSet_CID1SET;
 }
 
 +(FMCCharacterSet*) CID2SET {
-    	if (FMCCharacterSet_CID2SET == nil) {
-        		FMCCharacterSet_CID2SET = [[FMCCharacterSet alloc] initWithValue:@"CID2SET"];
-    	}
-    	return FMCCharacterSet_CID2SET;
+    if (FMCCharacterSet_CID2SET == nil) {
+        FMCCharacterSet_CID2SET = [[FMCCharacterSet alloc] initWithValue:@"CID2SET"];
+    }
+    return FMCCharacterSet_CID2SET;
 }
 
 @end

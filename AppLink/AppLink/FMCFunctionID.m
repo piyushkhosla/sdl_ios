@@ -9,7 +9,7 @@
 @implementation FMCFunctionID
 
 -(id) init {
-    if (self = [super init]) {}
+    if (self = [super init]) {
     
     functionIDs = [NSDictionary dictionaryWithObjectsAndKeys:
                       NAMES_reserved, @"0",
@@ -39,6 +39,9 @@
                       NAMES_GetDTCs, @"24",
                       NAMES_ScrollableMessage, @"25",
                       NAMES_Slider, @"26",
+                      NAMES_ShowConstantTBT, @"27",
+                      NAMES_AlertManeuver, @"28",
+                      NAMES_UpdateTurnList, @"29",
                       NAMES_ChangeRegistration, @"30",
                       NAMES_GenericResponse, @"31",
                       NAMES_PutFile, @"32",
@@ -55,6 +58,7 @@
                       NAMES_OnButtonPress, @"32771",
                       NAMES_OnVehicleData, @"32772",
                       NAMES_OnCommand, @"32773",
+                      NAMES_OnTBTClientState, @"32774",
                       NAMES_OnDriverDistraction, @"32775",
                       NAMES_OnPermissionsChange, @"32776",
                       NAMES_OnAudioPassThru, @"32777",
@@ -62,6 +66,7 @@
                       NAMES_OnKeyboardInput, @"32779",
                       NAMES_OnTouchEvent, @"32780",
                       NAMES_OnSystemRequest, @"32781",
+                      NAMES_OnHashChange, @"32782",
 
                       NAMES_EncodedSyncPData, @"65536",
                       NAMES_SyncPData, @"65537",
@@ -69,8 +74,8 @@
                       NAMES_OnEncodedSyncPData, @"98304",
                       NAMES_OnSyncPData, @"98405",
                       nil];
-    
-    
+        
+    }
     return self;
 }
 

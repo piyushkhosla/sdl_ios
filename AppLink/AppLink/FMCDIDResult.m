@@ -27,10 +27,27 @@
 }
 
 -(FMCVehicleDataResultCode*) resultCode {
-    return [store objectForKey:NAMES_resultCode];
+    NSObject* obj = [store objectForKey:NAMES_resultCode];
+    if ([obj isKindOfClass:FMCVehicleDataResultCode.class]) {
+        return (FMCVehicleDataResultCode*)obj;
+    } else {
+        return [FMCVehicleDataResultCode valueOf:(NSString*)obj];
+    }
 }
 
--(void) setData:(NSMutableArray*) data {
+-(void) setDidLocation:(NSNumber*) didLocation {
+    if (didLocation != nil) {
+        [store setObject:didLocation forKey:NAMES_didLocation];
+    } else {
+        [store removeObjectForKey:NAMES_didLocation];
+    }
+}
+
+-(NSNumber*) didLocation {
+    return [store objectForKey:NAMES_didLocation];
+}
+
+-(void) setData:(NSString*) data {
     if (data != nil) {
         [store setObject:data forKey:NAMES_data];
     } else {
@@ -38,7 +55,7 @@
     }
 }
 
--(NSMutableArray*) data {
+-(NSString*) data {
     return [store objectForKey:NAMES_data];
 }
 

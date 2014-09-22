@@ -38,7 +38,7 @@
  * <i>FMCAddCommand</i> to which FMCSubMenu is the parent of the command being added
  * <p>
  */
-@property(assign) NSNumber* menuID;
+@property(strong) NSNumber* menuID;
 /**
  * @abstract a position of menu
  * @discussion An NSNumber pointer representing the position within the items
@@ -57,11 +57,11 @@
  *            the end of the list</li>
  *            </ul>
  */
-@property(assign) NSNumber* position;
+@property(strong) NSNumber* position;
 /**
  * @abstract a menuName which is displayed representing this submenu item
  * @discussion NSString which will be displayed representing this submenu item
  */
-@property(assign) NSString* menuName;
+@property(strong) NSString* menuName;
 
 @end

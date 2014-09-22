@@ -5,7 +5,6 @@
 #import <Foundation/Foundation.h>
 #import <ExternalAccessory/ExternalAccessory.h>
 #import <objc/runtime.h>
-
 #import <AppLink/FMCDebugTool.h>
 #import <AppLink/FMCEncodedSyncPData.h>
 #import <AppLink/FMCFunctionID.h>
@@ -15,110 +14,75 @@
 #import <AppLink/FMCNames.h>
 #import <AppLink/FMCSiphonServer.h>
 #import <AppLink/FMCSyncProxy.h>
+#import <AppLink/FMCSystemRequest.h>
+#import "FMCRPCPayload.h"
+#import "FMCPolicyDataParser.h"
+#import "FMCLockScreenManager.h"
+
 
 #define VERSION_STRING @"##Version##"
+typedef void(^FMCCustomTaskCompletionHandler)(NSData *data, NSURLResponse *response, NSError *error);
 
-@interface FMCCallback : NSObject {
-	NSObject* target;
-	SEL selector;
-	NSObject* parameter;
-}
-
-@property (nonatomic, retain) NSObject* target;
-@property (nonatomic, assign) SEL selector;
-@property (nonatomic, retain) NSObject* parameter;
-
-@end
-
-@implementation FMCCallback
-@synthesize target;
-@synthesize selector;
-@synthesize parameter;
-
--(void) dealloc {
-	[target release];
-	[parameter release];
-	
-	[super dealloc];
-}
-
-@end
 
 @interface FMCSyncProxy ()
 
--(void) notifyProxyClosed;
--(void) handleProtocolMessage:(FMCProtocolMessage*) msgData;
--(void) performCallback:(FMCCallback*) callback;
+{
+    FMCLockScreenManager *lsm;
+}
+- (void)invokeMethodOnDelegates:(SEL)aSelector withObject:(id)object;
+- (void)notifyProxyClosed;
+- (void)handleProtocolMessage:(FMCAppLinkProtocolMessage *)msgData;
+- (void)OESPHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error;
+- (void)OSRHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error;
 
 @end
+
+
 
 @implementation FMCSyncProxy
 
 const float handshakeTime = 30.0;
 const float notifyProxyClosedDelay = 0.1;
-
 const int POLICIES_CORRELATION_ID = 65535;
 
-- (void)handshakeTimerFired {
-    [self destroyHandshakeTimer];
-    
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: Init Handshake Timeout"]];
-    [FMCDebugTool logInfo:@"Proxy: Init Handshake Timeout"];
-    
-    [self performSelector:@selector(notifyProxyClosed) withObject:nil afterDelay:notifyProxyClosedDelay];
-}
 
--(id) initWithTransport:(NSObject<FMCSyncTransport>*) theTransport protocol:(NSObject<FMCProtocol>*) theProtocol delegate:(NSObject<FMCProxyListener>*) theDelegate {
-	if (self = [super init]) {        
-        [[EAAccessoryManager sharedAccessoryManager] registerForLocalNotifications];
+#pragma mark - Object lifecycle
+- (id)initWithTransport:(NSObject<FMCTransport> *)theTransport protocol:(NSObject<FMCProtocol> *)theProtocol delegate:(NSObject<FMCProxyListener> *)theDelegate {
+	if (self = [super init]) {
+        _debugConsoleGroupName = @"default";
         
-        proxyListeners = [[NSMutableArray alloc] initWithObjects:theDelegate, nil];
-        protocol = [theProtocol retain];
-        transport = [theTransport retain];
+
+        lsm = [FMCLockScreenManager new];
+
         rpcSessionID = 0;
-        
         alreadyDestructed = NO;
+                
+        self.proxyListeners = [[NSMutableArray alloc] initWithObjects:theDelegate, nil];
+        self.protocol = theProtocol;
+        self.transport = theTransport;
+        self.transport.delegate = self.protocol;
+        self.protocol.protocolDelegate = self;
+        self.protocol.transport = self.transport;
+        [self.transport connect];
 
-        externalLibraries = nil;
-        
-        [transport addTransportListener:protocol];
-        [protocol addProtocolListener:self];
-        protocol.transport = transport;
-        
-        [transport connect];
-        
-        return self;
+        [[EAAccessoryManager sharedAccessoryManager] registerForLocalNotifications];
+
     }
+
     return self;
-}
-
--(void)destroyHandshakeTimer {
-    if (handshakeTimer != nil) {
-        [handshakeTimer invalidate];
-        [handshakeTimer release];
-        handshakeTimer = nil;
-    }
 }
 
 -(void) destructObjects {
     if(!alreadyDestructed) {
-        [self destroyHandshakeTimer];
-        
-        [transport release];
-        transport = nil;
-        
-        [protocol release];
-        protocol = nil;
-        
-        [proxyListeners release];
-        proxyListeners = nil;
-        
-        if (externalLibraries) {
-            [externalLibraries release];
-            externalLibraries = nil;
-        }
-        
         alreadyDestructed = YES;
+
+        [[EAAccessoryManager sharedAccessoryManager] unregisterForLocalNotifications];
+        
+        self.transport = nil;
+        self.protocol = nil;
+        self.proxyListeners = nil;
+
+        [self destroyHandshakeTimer];
     }
 }
 
@@ -128,485 +92,432 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 -(void) dealloc {
     [self destructObjects];
-	[super dealloc];
 }
 
--(NSObject<FMCSyncTransport>*)getTransport {
-    return transport;
-}
-
--(NSObject<FMCProtocol>*)getProtocol {
-    return protocol;
-}
-
--(void) addDelegate:(NSObject<FMCProxyListener>*) delegate {
-	@synchronized(proxyListeners) {
-		[proxyListeners addObject:delegate];
+-(void) notifyProxyClosed {
+	if (isConnected) {
+		isConnected = NO;
+        [self invokeMethodOnDelegates:@selector(onProxyClosed) withObject:nil];
 	}
 }
 
--(void) registerLibrary:(id <FMCExternalLibrary>) externalLibrary {
-    if (externalLibrary) {
-        if (!externalLibraries) {
-            externalLibraries = [[NSMutableArray alloc] init];
-        }
-        [externalLibraries addObject:externalLibrary];
-    }
+
+#pragma mark - Pseudo properties
+- (NSObject<FMCTransport> *)getTransport {
+    return self.transport;// not needed except for backwards compatability?
 }
 
-- (NSArray*)registeredLibraries
-{
-    return [externalLibraries copy];
+- (NSObject<FMCProtocol> *)getProtocol {
+    return self.protocol;// not needed except for backwards compatability?
 }
 
--(NSString*) getProxyVersion {
+- (NSString *)getProxyVersion {
     return VERSION_STRING;
 }
 
--(void) sendRPCRequest:(FMCRPCMessage*) msg {
-    //TODO:Remove: Make sure the RPCMessage's correlationID is not reserved
-    if ([msg isKindOfClass:FMCRPCRequest.class]) {
-        FMCRPCRequest *request = (FMCRPCRequest*)msg;
-        
-        //        if ([self isCorrelationIDReserved:[[request correlationID] intValue]]) {
-        //            [self onError:
-        //             [NSString stringWithFormat:@"Error - RPC Request not sent: %@ attempted to use reserved correlationID: %d", msg, [[request correlationID] intValue]] exception:nil];
-        //        } else {
-        [self sendRPCRequestPrivate:request];
-        //        }
+- (NSString *)proxyVersion { // How it should have been named.
+    return VERSION_STRING;
+}
+
+
+#pragma mark - Handshake Timer
+- (void)handshakeTimerFired {
+    [FMCDebugTool logInfo:@"RPC Initial Handshake Timeout" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+
+    [self destroyHandshakeTimer];
+    [self performSelector:@selector(notifyProxyClosed) withObject:nil afterDelay:notifyProxyClosedDelay];
+}
+
+-(void)destroyHandshakeTimer {
+    if (self.handshakeTimer != nil) {
+        [self.handshakeTimer invalidate];
+        self.handshakeTimer = nil;
     }
 }
 
 
-// Send an RPC Request without checking for reserved correlation IDs	
--(void) sendRPCRequestPrivate:(FMCRPCRequest*) msg {
-	@try {
-        //TODO:DEBUGOUTS
-        //[FMCDebugTool logInfo:@"FMSyncProxy: sendRPCRequest: encoding message: %@", msg];
-		//NSData* msgData = [[FMJsonEncoder instance] encodeDictionary:[msg serializeAsDictionary:_version]];
-        //TODO:ENDDEBUGOUTS
-        
-        FMCProtocolMessage* pm = [[FMCProtocolMessage alloc] init];
-        pm._version = _version;
-        //pm._data = msgData;
-        pm._data = [[FMCJsonEncoder instance] encodeDictionary:[msg serializeAsDictionary:_version]];
-        pm._jsonSize = pm._data.length;
-        pm._sessionID = rpcSessionID;
-        pm._messageType = FMCMessageType_RPC;
-        pm._sessionType = FMCSessionType_RPC;
-        FMCFunctionID* functionID = [[FMCFunctionID alloc] init];
-        pm._functionID = [[functionID getFunctionID:[msg getFunctionName]] intValue];
-        pm._correlationID = [msg.correlationID intValue];
-        
-        if ([msg getBulkData] != nil) {
-            pm._bulkData = [msg getBulkData];
-        }
-        
-		[protocol sendData:pm];
-	} @catch (NSException * e) {
-		[FMCDebugTool logException:e withMessage:@"Proxy: Failed to send RPC request: %@", msg.name];
-	} @finally {}
-}
+#pragma mark - FMCProtocolListener Implementation
+- (void) onProtocolOpened {
+    isConnected = YES;
+    [FMCDebugTool logInfo:@"StartSession (request)" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
--(void) handleProtocolSessionStarted:(FMCSessionType) sessionType sessionID:(Byte) sessionID version:(Byte) version {
+    [self.protocol sendStartSessionWithType:FMCServiceType_RPC];
 
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: StartSession (response)"]];
-    [FMCDebugTool logInfo:@"Proxy: StartSession (response)"];
-
-    if (_version <= 1) {
-        if (version == 2) {
-            _version = version;
-        }
-    }
-    
-    if (sessionType == FMCSessionType_RPC || _version == 2) {
-        rpcSessionID = sessionID;
-        //TODO: DEBUGOUTS
-        //[FMCDebugTool logInfo:@"Got rpcSessionID = %i", rpcSessionID];
-        //TODO:ENDDEBUGOUTS
-        
-        NSArray *localListeners = nil;
-        @synchronized (proxyListeners) {
-            localListeners = [proxyListeners copy];
-        }
-        
-        for (NSObject<FMCProxyListener> *listener in localListeners) {
-            [listener onProxyOpened];
-        }
-        
-        [localListeners release];
-    } else {
-        // Handle other protocol session types here
-    }
-}
-	 
-- (void) onProtocolMessageReceived:(FMCProtocolMessage*) msgData {
-    //TODO: DEBUGOUTS
-    //    NSLog(@"onProtocolMessageReceived: %@", msgData);
-    //TODO:ENDDEBUGOUTS
-	@try {
-		[self handleProtocolMessage:msgData];
-	}
-	@catch (NSException * e) {
-		[FMCDebugTool logException:e withMessage:@"Proxy: Failed to handle protocol message"];
-	}
-	@finally {
-		
-	}
-}
-
--(void) handleProtocolMessage:(FMCProtocolMessage*) msgData {
-    //TODO: DEBUGOUTS
-    //NSLog(@"handleProtocolMessage: %@", msgData);
-    //TODO:ENDDEBUGOUTS
-    
-    if (msgData._sessionType == FMCSessionType_RPC) {
-        if (_version == 1) {
-            if (msgData._version == 2) _version = msgData._version;
-        }
-        
-        NSMutableDictionary* msg;
-        if (_version == 2) {
-            msg = [[NSMutableDictionary alloc] init];
-            NSMutableDictionary* msgTemp = [[NSMutableDictionary alloc] init];
-            if (msgData._correlationID != 0) {
-                [msgTemp setObject:[NSNumber numberWithInt:msgData._correlationID] forKey:NAMES_correlationID];
-            }
-            if (msgData._jsonSize > 0) {
-                NSDictionary* mMsg = [[FMCJsonDecoder instance] decode:msgData._data];
-                [msgTemp setObject:mMsg forKey:NAMES_parameters];
-            }
-            FMCFunctionID* functionID = [[FMCFunctionID alloc] init];
-            [msgTemp setObject:[functionID getFunctionName:msgData._functionID] forKey:NAMES_operation_name];
-            if (msgData._rpcType == 0x00) {
-                [msg setObject:msgTemp forKey:NAMES_request];
-            } else if (msgData._rpcType == 0x01) {
-                [msg setObject:msgTemp forKey:NAMES_response];
-            } else if (msgData._rpcType == 0x02) {
-                [msg setObject:msgTemp forKey:NAMES_notification];
-            }
-            if (msgData._bulkData != nil) {
-                [msg setObject:msgData._bulkData forKey:NAMES_bulkData];
-            }
-            
-        } else {
-            msg = (NSMutableDictionary*) [[FMCJsonDecoder instance] decode:msgData._data];
-        }
-		[self handleRpcMessage:msg];
-        
-    } else if (msgData._sessionType == FMCSessionType_BulkData) {
-        bulkSessionID = msgData._sessionID;
-        //TODO: DEBUGOUTS
-//        [FMCDebugTool logInfo:@"FMSyncProxy: handleProtocolMessage: Got bulkSessionID = %i", bulkSessionID];
-        //TODO:ENDDEBUGOUTS
-    }
-}
-
--(void) neverCalled {
-	[[FMCAddCommandResponse alloc] release];
-	[[FMCAddSubMenuResponse alloc] release];
-	[[FMCAlertResponse alloc] release];
-	[[FMCCreateInteractionChoiceSetResponse alloc] release];
-	[[FMCDeleteCommandResponse alloc] release];
-	[[FMCDeleteInteractionChoiceSetResponse alloc] release];
-	[[FMCDeleteSubMenuResponse alloc] release];
-	[[FMCOnHMIStatus alloc] release];
-	[[FMCOnButtonEvent alloc] release];
-	[[FMCOnButtonPress alloc] release];
-	[[FMCOnCommand alloc] release];
-	[[FMCOnAppInterfaceUnregistered alloc] release];
-	[[FMCPerformInteractionResponse alloc] release];
-	[[FMCRegisterAppInterfaceResponse alloc] release];
-	[[FMCSetGlobalPropertiesResponse alloc] release];
-	[[FMCResetGlobalPropertiesResponse alloc] release];
-	[[FMCSetMediaClockTimerResponse alloc] release];
-	[[FMCShowResponse alloc] release];
-	[[FMCSpeakResponse alloc] release];
-	[[FMCSubscribeButtonResponse alloc] release];
-	[[FMCUnregisterAppInterfaceResponse alloc] release];
-	[[FMCUnsubscribeButtonResponse alloc] release];
-    [[FMCGenericResponse alloc] release];
-    [[FMCOnDriverDistraction alloc] release];
-    [[FMCSubscribeVehicleDataResponse alloc] release];
-    [[FMCUnsubscribeVehicleDataResponse alloc] release];
-    [[FMCGetVehicleDataResponse alloc] release];
-    [[FMCGetDTCsResponse alloc] release];
-    [[FMCReadDIDResponse alloc] release];
-    [[FMCOnVehicleData alloc] release];
-    [[FMCOnPermissionsChange alloc] release];
-    [[FMCSliderResponse alloc] release];
-    [[FMCPutFileResponse alloc] release];
-    [[FMCDeleteFileResponse alloc] release];
-    [[FMCListFilesResponse alloc] release];
-    [[FMCSetAppIconResponse alloc] release];
-    [[FMCPerformAudioPassThruResponse alloc] release];
-    [[FMCEndAudioPassThruResponse alloc] release];
-    [[FMCOnAudioPassThru alloc] release];
-    [[FMCScrollableMessageResponse alloc] release];
-    [[FMCChangeRegistrationResponse alloc] release];
-    [[FMCOnLanguageChange alloc] release];
-    [[FMCSetDisplayLayout alloc] release];
-}
-
--(void) handleRpcMessage:(NSDictionary*) msg {
-	
-    FMCRPCMessage* rpcMsg = [[FMCRPCMessage alloc] initWithDictionary:(NSMutableDictionary*) msg];
-    NSString* functionName = [rpcMsg getFunctionName];
-    NSString* messageType = [rpcMsg messageType];
-
-	if ([functionName isEqualToString:NAMES_OnAppInterfaceUnregistered]
-        || [functionName isEqualToString:NAMES_UnregisterAppInterface]) {
-		[self notifyProxyClosed];
-		return;
-	}
-    
-	if ([messageType isEqualToString:NAMES_response]) {
-//TODO:DEBUGOUTS
-//        [FMCDebugTool logInfo:@"FMSyncProxy: handleRpcMessage: Receiving: %@", functionName];
-//TODO:ENDDEBUGOUTS
-		bool notGenericResponseMessage = ![functionName isEqualToString:@"GenericResponse"];
-		if(notGenericResponseMessage) functionName = [NSString stringWithFormat:@"%@Response", functionName];
-	}
-    
-    
-    if ([functionName isEqualToString:@"RegisterAppInterfaceResponse"]) {
-        // It's possible to run into a scenario in which SYNC fails to send a StartSessionACK. This issue will be caught by the timer that's waiting for a RegisterAppInterfaceResponse. If no RAIResponse is received, a call to onProxyClosed will occur.
-        
-        // Turn off the timer, the handshake has succeeded
-        [self destroyHandshakeTimer];
-        
-        //Print Proxy Version To Console
-        [FMCDebugTool logInfo:@"Framework Version: %@", [self getProxyVersion]];
-        
-        //Print external library versions to Console
-        if (externalLibraries) {
-            for (id <FMCExternalLibrary> library in externalLibraries) {
-                [FMCDebugTool logInfo:@"%@ Version: %@", [library getLibraryName], [library getVersion]];
-            }
-        }
-    }
-   
-    if ([functionName isEqualToString:@"EncodedSyncPDataResponse"]) {
-
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: ESPD (response)"]];
-        [FMCDebugTool logInfo:@"Proxy: ESPD (response)"];
-
-    }
-
-    
-    // Intercept OnEncodedSyncPData. If URL != nil, perform HTTP Post and don't pass the notification to FMProxyListeners
-    if ([functionName isEqualToString:@"OnEncodedSyncPData"]) {        
-
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OESPD (notification)"]];
-            [FMCDebugTool logInfo:@"Proxy: OESPD (notification)"];
-        
-            NSString *urlString = (NSString *)[rpcMsg getParameters:@"URL"];
-            if (urlString != nil) {
-                NSDictionary *encodedSyncPData = (NSDictionary *)[rpcMsg getParameters:@"data"];
-                NSNumber *encodedSyncPTimeout = (NSNumber *) [rpcMsg getParameters:@"Timeout"];
-                [self sendEncodedSyncPData:encodedSyncPData toURL:urlString withTimeout:encodedSyncPTimeout];
-            }
-    }
-    
-	NSString* functionClassName = [NSString stringWithFormat:@"FMC%@", functionName];
-	Class functionClass = objc_getClass([functionClassName cStringUsingEncoding:NSUTF8StringEncoding]);
-    
-    // functionObject doesn't leak because performSelector returns a pointer to the same instance that class_createInstance() creates
-	NSObject* functionObject = (id)class_createInstance(functionClass, 0);
-    NSObject* rpcCallbackObject = [functionObject performSelector:@selector(initWithDictionary:) withObject:msg];
-	
-	NSString* handlerName = [NSString stringWithFormat:@"on%@:", functionName];
-
-	SEL handlerSelector = NSSelectorFromString(handlerName);
-	
-	NSArray *localListeners = nil;
-	@synchronized (proxyListeners) {
-		localListeners = [proxyListeners copy];
-	}
-	
-	for (NSObject<FMCProxyListener> *listener in localListeners) {
-		if ([listener respondsToSelector:handlerSelector]) {
-			FMCCallback* callback = [[FMCCallback alloc] init];
-			callback.target = listener;
-			callback.selector = handlerSelector;
-			callback.parameter = rpcCallbackObject;
-			[self performSelectorOnMainThread:@selector(performCallback:) withObject:callback waitUntilDone:NO];
-			// [callback release]; Moved to performCallback to avoid thread race condition
-		} else {
-			[FMCDebugTool logInfo:@"Proxy: Proxy listener does not respond to selector: %@", handlerName];
-		}
-	}
-	[localListeners release];
-}
-
--(void) performCallback:(FMCCallback*) callback {
-	@try {
-		[callback.target performSelector:callback.selector withObject:callback.parameter];
-	} @catch (NSException * e) {
-		[FMCDebugTool logException:e withMessage:@"Exception thrown during call to %@ with object %@", callback.target, callback.parameter];
-	} @finally {
-		[callback release];
-	}
+    [self destroyHandshakeTimer];
+    self.handshakeTimer = [NSTimer scheduledTimerWithTimeInterval:handshakeTime target:self selector:@selector(handshakeTimerFired) userInfo:nil repeats:NO];
 }
 
 -(void) onProtocolClosed {
 	[self notifyProxyClosed];
 }
 
--(void) notifyProxyClosed {
-	if (isConnected) {
-		isConnected = NO;
-		NSArray *localListeners = nil;
-		@synchronized (proxyListeners) {
-			localListeners = [proxyListeners copy];
-		}
-		
-		for (NSObject<FMCProxyListener> *listener in localListeners) {
-			[listener performSelectorOnMainThread:@selector(onProxyClosed) withObject:nil waitUntilDone:NO];
-		}
-		[localListeners release];
-	}
-}
-
 -(void) onError:(NSString*) info exception:(NSException*) e {
-	
-	NSArray *localListeners = nil;
-	@synchronized (proxyListeners) {
-		localListeners = [proxyListeners copy];
-	}
-	
-	for (NSObject<FMCProxyListener> *listener in localListeners) {
-		[listener performSelectorOnMainThread:@selector(onError:) withObject:e waitUntilDone:NO];
-	}
-	[localListeners release];
+    [self invokeMethodOnDelegates:@selector(onError:) withObject:e];
 }
 
+- (void)handleProtocolSessionStarted:(FMCServiceType)sessionType sessionID:(Byte)sessionID version:(Byte)maxVersionForModule {
+    NSString *logMessage = [NSString stringWithFormat:@"StartSession (response)\nSessionId: %d", sessionID];
+    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    
+    if (_version <= 1) {
+        if (maxVersionForModule == 2) {
+            _version = maxVersionForModule;
+        }
+    }
 
-- (void) onProtocolOpened {    
-    isConnected = YES;
-    [protocol sendStartSessionWithType:FMCSessionType_RPC];
-    
-    [self destroyHandshakeTimer];
-    handshakeTimer = [NSTimer scheduledTimerWithTimeInterval:handshakeTime target:self selector:@selector(handshakeTimerFired) userInfo:nil repeats:NO];
-    [handshakeTimer retain];
-}
-
-+(void)enableSiphonDebug {
-    [FMCSiphonServer enableSiphonDebug];
-}
-
-+(void)disableSiphonDebug {
-    [FMCSiphonServer disableSiphonDebug];
-}
-
--(void)sendEncodedSyncPData:(NSDictionary*)encodedSyncPData toURL:(NSString*)urlString withTimeout:(NSNumber*) timeout{
-    
-    //Get data (second element of array), then format as JSON
-    NSString *encodedSyncPDataString = [[NSString stringWithFormat:@"%@", encodedSyncPData] componentsSeparatedByString:@"\""][1];
-    NSString* jsonString = [NSString stringWithFormat:@"{\"data\":[\"%@\"]}", encodedSyncPDataString];
-    
-    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    
-    // Create the URL request
-    NSURL *url = [NSURL URLWithString:urlString];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    
-    request.HTTPMethod = @"POST";
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    request.HTTPBody = jsonData;
-    request.timeoutInterval = [timeout doubleValue];
-    
-//TODO:DEBUGOUTS
-//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:[timeout doubleValue]]];
-//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:urlString]];
-//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:encodedSyncPData]];
-//    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:jsonString]];
-//
-//    NSLog(@"%.21g", [timeout doubleValue]);
-//    [FMCDebugTool logInfo:urlString];
-//    NSLog(@"%@", encodedSyncPData);
-//    NSLog(@"%@", encodedSyncPDataString);
-//    NSLog(@"%@", jsonString);
-//TODO:ENDDEBUGOUTS
-    
-    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    
-    if (conn == nil) {
-        [FMCDebugTool logInfo:@"%s: Error creating NSURLConnection", __PRETTY_FUNCTION__];
+    if (sessionType == FMCServiceType_RPC || _version == 2) {
+        rpcSessionID = sessionID;
+        [self invokeMethodOnDelegates:@selector(onProxyOpened) withObject:nil];
     }
 }
 
-#pragma mark - NSURL Methods
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    // Can be called multiple times, such as a server redirect, so reset the data each time
-    httpResponseData = [[NSMutableData alloc] init];
+- (void) onProtocolMessageReceived:(FMCAppLinkProtocolMessage*) msgData {
+    @try {
+		[self handleProtocolMessage:msgData];
+	}
+	@catch (NSException * e) {
+		NSString *logMessage = [NSString stringWithFormat:@"Proxy: Failed to handle protocol message %@", e];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Debug toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+	}
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [httpResponseData appendData:data];
+
+#pragma mark - Message sending and recieving
+-(void) sendRPCRequest:(FMCRPCMessage*) msg {
+    if ([msg isKindOfClass:FMCRPCRequest.class]) {
+        [self sendRPCRequestPrivate:(FMCRPCRequest *)msg];
+    }
 }
 
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
-                  willCacheResponse:(NSCachedURLResponse*)cachedResponse {
-    // Return nil to indicate not necessary to store a cached response for this connection
-    return nil;
+- (void)sendRPCRequestPrivate:(FMCRPCRequest *)rpcRequest {
+	@try {
+        [self.protocol sendRPCRequest:rpcRequest];
+	} @catch (NSException * e) {
+		NSString *logMessage = [NSString stringWithFormat:@"Proxy: Failed to send RPC request: %@", rpcRequest.name];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Debug toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+	}
 }
 
--(void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    // Sample of response: {"data":["SDLKGLSDKFJLKSjdslkfjslkJLKDSGLKSDJFLKSDJF"]}
+- (void)handleProtocolMessage:(FMCAppLinkProtocolMessage *)incomingMessage {
+    // Convert protocol message to dictionary
+    NSDictionary* rpcMessageAsDictionary = [incomingMessage rpcDictionary];
+    [self handleRpcMessage:rpcMessageAsDictionary];
+}
+
+
+// NOTE: This is getting rather large, excellent candidate for refactoring.
+-(void) handleRpcMessage:(NSDictionary*) msg {
+    NSString *logMessage = nil;
+
+    FMCRPCMessage* rpcMsg = [[FMCRPCMessage alloc] initWithDictionary:(NSMutableDictionary*) msg];
+    NSString* functionName = [rpcMsg getFunctionName];
+    NSString* messageType = [rpcMsg messageType];
+
+	if ([functionName isEqualToString:NAMES_OnAppInterfaceUnregistered]
+        || [functionName isEqualToString:NAMES_UnregisterAppInterface]) {
+        logMessage = [NSString stringWithFormat:@"Unregistration forced by module. %@", msg];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC  toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+		[self notifyProxyClosed];
+		return;
+	}
     
-    [connection release]; // Release the connection we allocated in sendEncodedSyncPData
+	if ([messageType isEqualToString:NAMES_response]) {
+		bool notGenericResponseMessage = ![functionName isEqualToString:@"GenericResponse"];
+		if(notGenericResponseMessage) functionName = [NSString stringWithFormat:@"%@Response", functionName];
+	}
     
-    if ([httpResponseData length] == 0){
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OESPD (invalid)"]];
-        [FMCDebugTool logInfo:@"Proxy: OESPD (invalid)"];
+    
+    if ([functionName isEqualToString:@"RegisterAppInterfaceResponse"]) {
+        // Turn off the timer, the handshake has succeeded
+        [self destroyHandshakeTimer];
         
+        //Print Proxy Version To Console
+        logMessage = [NSString stringWithFormat:@"Framework Version: %@", [self getProxyVersion]];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    }
+
+
+    if ([functionName isEqualToString:@"EncodedSyncPDataResponse"]) {
+        [FMCDebugTool logInfo:@"EncodedSyncPData (response)" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    }
+
+
+    // Intercept OnEncodedSyncPData. If URL != nil, perform HTTP Post and don't pass the notification to FMProxyListeners
+    if ([functionName isEqualToString:@"OnEncodedSyncPData"]) {
+        logMessage = [NSString stringWithFormat:@"OnEncodedSyncPData (notification)\n%@", msg];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+
+        NSString     *urlString           = (NSString *)    [rpcMsg getParameters:@"URL"];
+        NSDictionary *encodedSyncPData    = (NSDictionary *)[rpcMsg getParameters:@"data"];
+        NSNumber     *encodedSyncPTimeout = (NSNumber *)    [rpcMsg getParameters:@"Timeout"];
+
+        if (urlString && encodedSyncPData && encodedSyncPTimeout) {
+            [self sendEncodedSyncPData:encodedSyncPData toURL:urlString withTimeout:encodedSyncPTimeout];
+        }
+
         return;
     }
-        
-    // Capture what comes back from the post in json form
-    NSString *responseString = [[NSString alloc] initWithData:httpResponseData encoding:NSUTF8StringEncoding];
-    NSData *responseData = [responseString dataUsingEncoding:NSASCIIStringEncoding];
     
-    NSError *error = nil;
-    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
-    NSMutableArray *encodedSyncPDataArray = [responseDictionary objectForKey:@"data"];
-    
-    //TODO:DEBUGOUTS
-    //[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:responseString]];
-    //[FMCDebugTool logInfo:responseString];
-    //TODO:ENDDEBUGOUTS
-    
-    // Build encodedSyncPData request
-    FMCEncodedSyncPData *request = [[[FMCEncodedSyncPData alloc] init] autorelease];
-    request.data = encodedSyncPDataArray;
-    request.correlationID = [NSNumber numberWithInt:POLICIES_CORRELATION_ID];
-    
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: ESPD (request)"]];
-    [FMCDebugTool logInfo:@"Proxy: ESPD (request)"];
+    // Intercept OnSystemRequest.
+    if ([functionName isEqualToString:@"OnSystemRequest"]) {
 
-    [self sendRPCRequestPrivate:request];
+        [FMCDebugTool logInfo:@"OnSystemRequest (notification)" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+
+        FMCOnSystemRequest* sysRpcMsg = [[FMCOnSystemRequest alloc] initWithDictionary:(NSMutableDictionary*) msg];
+        FMCRequestType *requestType = sysRpcMsg.requestType;
+        NSString       *urlString   = sysRpcMsg.url;
+        FMCFileType    *fileType    = sysRpcMsg.fileType;
+
+        if (requestType == [FMCRequestType PROPRIETARY])
+        {
+            // Validate input
+            if (urlString == nil)
+            {
+                [FMCDebugTool logInfo:@"OnSystemRequest (notification) failure: url is nil" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+                return;
+            }
+            if (fileType != [FMCFileType JSON])
+            {
+                [FMCDebugTool logInfo:@"OnSystemRequest (notification) failure: file type is not JSON" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+                return;
+            }
+
+            // Get data dictionary from the bulkData
+            NSDictionary *notificationDictionary = nil;
+            @try {
+                NSError *errorJSONSerializeNotification = nil;
+                notificationDictionary = [NSJSONSerialization JSONObjectWithData:sysRpcMsg.bulkData options:kNilOptions error:&errorJSONSerializeNotification];
+                if (errorJSONSerializeNotification) {
+                    [FMCDebugTool logInfo:@"OnSystemRequest failure: notification data is not valid JSON." withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+                    return;
+                }
+            }
+            @catch (NSException *exception) {
+                logMessage = [NSString stringWithFormat:@"Exception converting bulk data to NSDictionary. Data:\n%@", [[NSString alloc] initWithData:sysRpcMsg.bulkData encoding:NSUTF8StringEncoding]];
+                [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+
+                [exception raise]; // rethrow
+            }
+
+
+            // Extract data from the dictionary
+            NSDictionary   *requestData = notificationDictionary[@"HTTPRequest"];
+            NSDictionary   *headers     = requestData[@"headers"];
+            NSString       *contentType = headers[@"ContentType"];
+            NSTimeInterval timeout      = [headers[@"ConnectTimeout"] doubleValue];
+            NSString       *method      = headers[@"RequestMethod"];
+            NSString       *bodyString  = requestData[@"body"];
+            NSData         *bodyData    = [bodyString dataUsingEncoding:NSUTF8StringEncoding];
+
+
+            // Parse and display the policy data.
+            FMCPolicyDataParser *pdp = [[FMCPolicyDataParser alloc] init];
+            NSData *policyData = [pdp unwrap:bodyData];
+            if (policyData) {
+                [pdp parsePolicyData:policyData];
+                logMessage = [NSString stringWithFormat:@"Policy Data from Module\n%@", pdp];
+                [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+            }
+
+
+            // HTTP Request configuration
+            NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+            NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+            NSURL *url = [NSURL URLWithString:urlString];
+            NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+            [request setValue:contentType forHTTPHeaderField:@"content-type"];
+            request.timeoutInterval = timeout;
+            request.HTTPMethod = method;
+
+
+            // Logging
+            logMessage = [NSString stringWithFormat:@"OnSystemRequest (HTTP Request) to URL %@", urlString];
+            [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+
+
+            // Send the HTTP Request
+            FMCCustomTaskCompletionHandler handler = ^void(NSData *data, NSURLResponse *response, NSError *error)
+            {
+                [self OSRHTTPRequestCompletionHandler:data response:response error:error];
+            };
+            NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:bodyData completionHandler:handler];
+            [uploadTask resume];
+
+            return;
+        }
+
+    } // End of OnSystemRequest
+
+    if ([functionName isEqualToString:@"SystemRequestResponse"]) {
+        logMessage = [NSString stringWithFormat:@"SystemRequest (response)\n%@", msg];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+        return;
+    }
+
+
+
+    // From the function name, create the corresponding RPCObject and initialize it
+	NSString* functionClassName = [NSString stringWithFormat:@"FMC%@", functionName];
+    FMCRPCMessage *functionObject = [[NSClassFromString(functionClassName) alloc] initWithDictionary:msg];
+//	FMCRPCMessage *functionObject = [[NSClassFromString(functionClassName) alloc] init];
+//    NSObject* rpcCallbackObject = [functionObject initWithDictionary:[msg mutableCopy]];
+
+    logMessage = [NSString stringWithFormat:@"%@", functionObject];
+    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+
+    // Formulate the name of the method to call on the listeners and call it, passing the RPC Object
+	NSString* handlerName = [NSString stringWithFormat:@"on%@:", functionName];
+	SEL handlerSelector = NSSelectorFromString(handlerName);
+	[self invokeMethodOnDelegates:handlerSelector withObject:functionObject];
+
+
+    // When an OnHMIStatus notification comes in, after passing it on (above), generate an "OnLockScreenNotification"
+    if ([functionName isEqualToString:@"OnHMIStatus"]) {
+        NSString *statusString = (NSString *)[rpcMsg getParameters:NAMES_hmiLevel];
+        FMCHMILevel *hmiLevel = [FMCHMILevel valueOf:statusString];
+        lsm.hmiLevel = hmiLevel;
+
+        SEL callbackSelector = NSSelectorFromString(@"onOnLockScreenNotification:");
+        [self invokeMethodOnDelegates:callbackSelector withObject:lsm.lockScreenStatusNotification];
+    }
+
+    // When an OnDriverDistraction notification comes in, after passing it on (above), generate an "OnLockScreenNotification"
+    if ([functionName isEqualToString:@"OnDriverDistraction"]) {
+        NSString *stateString = (NSString *)[rpcMsg getParameters:NAMES_state];
+        BOOL bState = [stateString isEqualToString:@"DD_ON"]?YES:NO;
+        lsm.bDriverDistractionStatus = bState;
+
+        SEL callbackSelector = NSSelectorFromString(@"onOnLockScreenNotification:");
+        [self invokeMethodOnDelegates:callbackSelector withObject:lsm.lockScreenStatusNotification];
+    }
+
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: OESPD (error)"]];
-    [FMCDebugTool logInfo:@"Proxy: OESPD (error)"];
-    
-    //TODO:DEBUGOUTS
-    //[FMCDebugTool logInfo:@"%s, Connection failed with error: %@", __PRETTY_FUNCTION__, [error localizedDescription]];
-    //TODO:ENDDEBUGOUTS
-    
-    [connection release];
+
+#pragma mark - Delegate management
+-(void) addDelegate:(NSObject<FMCProxyListener>*) delegate {
+	@synchronized(self.proxyListeners) {
+		[self.proxyListeners addObject:delegate];
+	}
+}
+
+- (void)invokeMethodOnDelegates:(SEL)aSelector withObject:(id)object {
+    [self.proxyListeners enumerateObjectsUsingBlock:^(id listener, NSUInteger idx, BOOL *stop) {
+        if ([(NSObject *)listener respondsToSelector:aSelector]) {
+            [(NSObject *)listener performSelectorOnMainThread:aSelector withObject:object waitUntilDone:NO];
+        }
+    }];
+}
+
+
+#pragma mark - System Request and SyncP handling
+-(void)sendEncodedSyncPData:(NSDictionary*)encodedSyncPData toURL:(NSString*)urlString withTimeout:(NSNumber*) timeout{
+
+    // Configure HTTP URL & Request
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"POST";
+
+    // Configure HTTP Session
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    config.HTTPAdditionalHeaders = @{@"Content-Type": @"application/json"};
+    config.timeoutIntervalForRequest = 60;
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+
+    // Prepare the data in the required format
+    NSString *encodedSyncPDataString = [[NSString stringWithFormat:@"%@", encodedSyncPData] componentsSeparatedByString:@"\""][1];
+    NSArray *array = [NSArray arrayWithObject:encodedSyncPDataString];
+    NSDictionary *dictionary = @{@"data": array};
+    NSError *JSONSerializationError = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:dictionary options:kNilOptions error:&JSONSerializationError];
+    if (JSONSerializationError) {
+        NSString *logMessage = [NSString stringWithFormat:@"Error formatting data for HTTP Request. %@", JSONSerializationError];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+        return;
+    }
+
+    // Create the completion handler to be executed upon response
+    FMCCustomTaskCompletionHandler handler = ^void(NSData *data, NSURLResponse *response, NSError *error)
+    {
+        [self OESPHTTPRequestCompletionHandler:data response:response error:error];
+    };
+
+    // Send the HTTP Request
+    [FMCDebugTool logInfo:@"OnEncodedSyncPData (HTTP request)" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:data completionHandler:handler];
+    [uploadTask resume];
+
+}
+
+// Handle the OnEncodedSyncPData HTTP Response
+- (void)OESPHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error {
+    // Sample of response: {"data":["SDLKGLSDKFJLKSjdslkfjslkJLKDSGLKSDJFLKSDJF"]}
+    [FMCDebugTool logInfo:@"OnEncodedSyncPData (HTTP response)" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+
+    // Validate response data.
+    if (data == nil || data.length == 0) {
+        [FMCDebugTool logInfo:@"OnEncodedSyncPData (HTTP response) failure: no data returned" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+        return;
+    }
+
+    // Convert data to RPCRequest
+    NSError *JSONConversionError = nil;
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&JSONConversionError];
+    if (!JSONConversionError) {
+        FMCEncodedSyncPData *request = [[FMCEncodedSyncPData alloc] init];
+        request.correlationID = [NSNumber numberWithInt:POLICIES_CORRELATION_ID];
+        request.data = [responseDictionary objectForKey:@"data"];
+
+        [self sendRPCRequestPrivate:request];
+    }
+
+}
+
+// Handle the OnSystemRequest HTTP Response
+- (void)OSRHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error {
+
+    NSString *logMessage = nil;
+
+    if (error) {
+        logMessage = [NSString stringWithFormat:@"OnSystemRequest (HTTP response) = ERROR: %@", error];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+        return;
+    }
+
+    if (data == nil || data.length == 0) {
+        [FMCDebugTool logInfo:@"OnSystemRequest (HTTP response) failure: no data returned" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+        return;
+    }
+
+    // Show the HTTP response
+    [FMCDebugTool logInfo:@"OnSystemRequest (HTTP response)" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+
+    // Create the SystemRequest RPC to send to module.
+    FMCSystemRequest *request = [[FMCSystemRequest alloc] init];
+    request.correlationID = [NSNumber numberWithInt:POLICIES_CORRELATION_ID];
+    request.requestType = [FMCRequestType PROPRIETARY];
+    request.bulkData = data;
+
+    // Parse and display the policy data.
+    FMCPolicyDataParser *pdp = [[FMCPolicyDataParser alloc] init];
+    NSData *policyData = [pdp unwrap:data];
+    if (policyData) {
+        [pdp parsePolicyData:policyData];
+        logMessage = [NSString stringWithFormat:@"Policy Data from Cloud\n%@", pdp];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    }
+
+    // Send and log RPC Request
+    logMessage = [NSString stringWithFormat:@"SystemRequest (request)\n%@\nData length=%lu", [request serializeAsDictionary:2], (unsigned long)data.length ];
+    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    [self sendRPCRequestPrivate:request];
+
 }
 
 
 #pragma mark - PutFile Streaming
 - (void)putFileStream:(NSInputStream*)inputStream :(FMCPutFile*)putFileRPCRequest
 {
-    [inputStream retain];
-    [putFileRPCRequest retain];
-
     inputStream.delegate = self;
     objc_setAssociatedObject(inputStream, @"FMCPutFile", putFileRPCRequest, OBJC_ASSOCIATION_RETAIN);
     objc_setAssociatedObject(inputStream, @"BaseOffset", [putFileRPCRequest offset], OBJC_ASSOCIATION_RETAIN);
@@ -622,11 +533,12 @@ const int POLICIES_CORRELATION_ID = 65535;
     {
         case NSStreamEventHasBytesAvailable:
         {
+            // Grab some bytes from the stream and send them in a FMCPutFile RPC Request
             NSUInteger currentStreamOffset = [[stream propertyForKey:NSStreamFileCurrentOffsetKey] unsignedIntegerValue];
 
             const int bufferSize = 1024;
             uint8_t buf[bufferSize];
-            int len = [(NSInputStream *)stream read:buf maxLength:bufferSize];
+            NSUInteger len = [(NSInputStream *)stream read:buf maxLength:bufferSize];
             if(len > 0)
             {
                 NSData* data = [NSData dataWithBytes:buf length:len];
@@ -635,37 +547,26 @@ const int POLICIES_CORRELATION_ID = 65535;
 
                 FMCPutFile* putFileRPCRequest = (FMCPutFile*)objc_getAssociatedObject(stream, @"FMCPutFile");
                 [putFileRPCRequest setOffset:[NSNumber numberWithUnsignedInteger:newOffset]];
-                [putFileRPCRequest setLength:[NSNumber numberWithUnsignedInt:len]];
+                [putFileRPCRequest setLength:[NSNumber numberWithUnsignedInteger:len]];
                 [putFileRPCRequest setBulkData:data];
 
                 [self sendRPCRequest:putFileRPCRequest];
 
-            }
-            else if (len < 0)
-            {
-                [FMCDebugTool logInfo:@"Stream read failure."];
             }
 
             break;
         }
         case NSStreamEventEndEncountered:
         {
-            // Stream done. Release the custom property on it.
-            FMCPutFile* putFileRPCRequest = (FMCPutFile*)objc_getAssociatedObject(stream, @"FMCPutFile");
-            [putFileRPCRequest release];
-            NSNumber* baseOffset = (NSNumber*)objc_getAssociatedObject(stream, @"BaseOffset");
-            [baseOffset release];
-
             // Cleanup the stream
             [stream close];
             [stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-            [stream release];
 
             break;
         }
         case NSStreamEventErrorOccurred:
         {
-            [FMCDebugTool logInfo:@"Stream Event: Error"];
+            [FMCDebugTool logInfo:@"Stream Event: Error" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
             break;
         }
         default:
@@ -673,6 +574,16 @@ const int POLICIES_CORRELATION_ID = 65535;
             break;
         }
     }
+}
+
+
+#pragma mark - Siphon management
++(void)enableSiphonDebug {
+    [FMCSiphonServer enableSiphonDebug];
+}
+
++(void)disableSiphonDebug {
+    [FMCSiphonServer disableSiphonDebug];
 }
 
 @end

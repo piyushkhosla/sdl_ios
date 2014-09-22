@@ -36,12 +36,11 @@
  * @result return FMCDisplayType with value of <font color=gray><i> NGN </i></font>
  */
 +(FMCDisplayType*) NGN;
-+(FMCDisplayType*) GEN2_4_DMA;
 +(FMCDisplayType*) GEN2_8_DMA;
-+(FMCDisplayType*) GEN2_4_HUD;
-+(FMCDisplayType*) GEN3_8_INCH;
++(FMCDisplayType*) GEN2_6_DMA;
 +(FMCDisplayType*) MFD3;
 +(FMCDisplayType*) MFD4;
 +(FMCDisplayType*) MFD5;
++(FMCDisplayType*) GEN3_8_INCH;
 
 @end

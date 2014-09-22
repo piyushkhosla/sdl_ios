@@ -5,8 +5,8 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCMessage.h>
 
-#import <AppLink/FMCCharacterSet.h>
 #import <AppLink/FMCTextFieldName.h>
+#import <AppLink/FMCCharacterSet.h>
 
 /**
  * Struct defining the characteristics of a displayed field on the HMI.
@@ -70,11 +70,11 @@
 /**
  * @abstract The enumeration identifying the field.
  */
-@property(assign) FMCTextFieldName* name;
+@property(strong) FMCTextFieldName* name;
 /**
  * @abstract The character set that is supported in this field.
  */
-@property(assign) FMCCharacterSet* characterSet;
+@property(strong) FMCCharacterSet* characterSet;
 /**
  * @abstract The number of characters in one row of this field.
  * 					<ul>
@@ -82,7 +82,7 @@
  *					<li>maxvalue="500"</li>
  *					</ul>
  */
-@property(assign) NSNumber* width;
+@property(strong) NSNumber* width;
 /**
  * @abstract The number of rows for this text field.
  * 					<ul>
@@ -90,6 +90,6 @@
  *					<li>maxvalue="3"</li>
  *					</ul>
  */
-@property(assign) NSNumber* rows;
+@property(strong) NSNumber* rows;
 
 @end

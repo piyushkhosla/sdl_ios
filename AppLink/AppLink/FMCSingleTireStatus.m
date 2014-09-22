@@ -26,8 +26,13 @@
     }
 }
 
--(NSNumber*) status {
-    return [store objectForKey:NAMES_status];
+-(FMCComponentVolumeStatus*) status {
+    NSObject* obj = [store objectForKey:NAMES_status];
+    if ([obj isKindOfClass:FMCComponentVolumeStatus.class]) {
+        return (FMCComponentVolumeStatus*)obj;
+    } else {
+        return [FMCComponentVolumeStatus valueOf:(NSString*)obj];
+    }
 }
 
 @end

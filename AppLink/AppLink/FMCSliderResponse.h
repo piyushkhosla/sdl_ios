@@ -26,6 +26,6 @@
 /**
  * @abstract The selected position of the slider.
  */
-@property(assign) NSNumber* sliderPosition;
+@property(strong) NSNumber* sliderPosition;
 
 @end

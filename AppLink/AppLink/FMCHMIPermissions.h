@@ -56,11 +56,11 @@
  * @abstract a set of all HMI levels that are permitted for this given RPC
  * @discussion
  */
-@property(assign) NSMutableArray* allowed;
+@property(strong) NSMutableArray* allowed;
 /**
  * @abstract a set of all HMI levels that are prohibited for this given RPC
  * @discussion
  */
-@property(assign) NSMutableArray* userDisallowed;
+@property(strong) NSMutableArray* userDisallowed;
 
 @end

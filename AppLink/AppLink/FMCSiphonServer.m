@@ -11,7 +11,7 @@
  ******************************/
 
 //#define ZERO_CONFIG //Uncomment when implementing zero-config.
-//#define DEBUG //Uncomment to have output to NSLog.
+//#define DEBUG_SIPHON //Uncomment to have output to NSLog.
 
 #import <AppLink/FMCSiphonServer.h>
 #include <UIKit/UIKit.h>
@@ -70,7 +70,7 @@ void _stopServer(NSString *reason);
         
         initStarted = true;
         
-        startTimeStamp = [[NSDate date] retain];
+        startTimeStamp = [NSDate date];
         
         _closeSiphonSocket();
         
@@ -87,7 +87,7 @@ void _stopServer(NSString *reason);
 }
 
 void _closeSiphonSocket() {
-#ifdef DEBUG
+#ifdef DEBUG_SIPHON
     NSLog(@"siphon: Resetting siphon socket ...");
 #endif
     if (siphonLock) {
@@ -98,7 +98,7 @@ void _closeSiphonSocket() {
             } // end-if
         } // end-lock
     } // end-if
-#ifdef DEBUG
+#ifdef DEBUG_SIPHON
     NSLog(@"siphon: siphon socket reset complete");
 #endif
 } // end-method
@@ -107,8 +107,7 @@ void _closeSiphonSocket() {
 #ifdef ZERO_CONFIG
 	_stopServer(@"Shutting Down");   
 #endif
-    
-	[super dealloc];
+
 }
 
 + (bool)_siphonIsActive {
@@ -134,7 +133,7 @@ void _closeSiphonSocket() {
 	
 	sendingFormattedTrace = true;
     
-    dataSent = _sendSiphonData(traceBytes.bytes, traceBytes.length, formattedTrace);
+    dataSent = _sendSiphonData(traceBytes.bytes, (int)traceBytes.length, formattedTrace);
     
     return dataSent;
 } // end-method
@@ -152,7 +151,7 @@ void _closeSiphonSocket() {
     
     bool dataSent = NO;
     
-    dataSent = _sendSiphonData(textBytes.bytes, textBytes.length, appLog);
+    dataSent = _sendSiphonData(textBytes.bytes, (int)textBytes.length, appLog);
     
     return dataSent;
 } // end-method
@@ -227,14 +226,14 @@ _sendSiphonData(const void* dataBytes, int dataBytesLength, SiphonDataType sipho
                 if(wasSent) {
                     return YES;
                 } else {
-#ifdef DEBUG
+#ifdef DEBUG_SIPHON
                     NSLog(@"siphon: failure sending to siphon socket");
 #endif
                     _closeSiphonSocket();
                     return NO;
                 } // end-if
             } else {
-#ifdef DEBUG
+#ifdef DEBUG_SIPHON
                 NSLog(@"siphon: siphon socket is NULL");
 #endif
             } // end-if
@@ -247,7 +246,7 @@ _sendSiphonData(const void* dataBytes, int dataBytesLength, SiphonDataType sipho
 bool _sendDataToSiphonSocket(int soc, const void* pData,  int dataLength) {
     
 	int bytesRemainingToSend = dataLength;
-	int bytesSent = 0;
+	ssize_t bytesSent = 0;
 	const UInt8   *pd = pData;
     
     if (pData == NULL || dataLength == 0) {
@@ -260,7 +259,7 @@ bool _sendDataToSiphonSocket(int soc, const void* pData,  int dataLength) {
             bytesSent = send(soc, pd, bytesRemainingToSend, 0);
             
             if(bytesSent == -1) {
-#ifdef DEBUG
+#ifdef DEBUG_SIPHON
                 NSLog(@"siphon: got bytesSent==-1 on send(siphonSocket)");
 #endif
                 return NO;
@@ -278,7 +277,7 @@ bool _sendDataToSiphonSocket(int soc, const void* pData,  int dataLength) {
 
 
 void _serverDidStartOnPort(int port) {
-#ifdef DEBUG
+#ifdef DEBUG_SIPHON
 	NSLog(@"siphon: server started on port: %d",port);
 #endif
 }
@@ -313,13 +312,13 @@ void _acceptConnection(int fd) {
             int socketOps = 1;
             
             _closeSiphonSocket();
-#ifdef DEBUG
+#ifdef DEBUG_SIPHON
             NSLog(@"siphon: storing newly accepted siphon socket handle %08x ...", fd);
 #endif
             siphonSocket = fd;
             
             setsockopt(siphonSocket, SOL_SOCKET, SO_NOSIGPIPE, (void *)&socketOps, sizeof(int));
-            [FMCDebugTool logInfo:@"Siphon connected."];
+            [FMCDebugTool logInfo:@"Siphon connected." withType:FMCDebugType_Debug];
             
         } // end-lock
     } // end-if
@@ -328,7 +327,7 @@ void _acceptConnection(int fd) {
 }
 
 static void AcceptCallback(CFSocketRef s, CFSocketCallBackType type, CFDataRef address, const void *data, void *info) {
-#ifdef DEBUG
+#ifdef DEBUG_SIPHON
 	NSLog(@"siphon: accepted siphon connection ...");
 #endif
     
@@ -402,7 +401,7 @@ void _startServerOnPort(int port) {
 			port = ntohs(addr.sin_port);
             
 		}
-#ifdef DEBUG
+#ifdef DEBUG_SIPHON
 		NSLog(@"siphon: my port is %d ",port);
 #endif
         

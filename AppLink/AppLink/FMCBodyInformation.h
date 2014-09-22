@@ -28,36 +28,36 @@
 /**
  * @abstract References signal "PrkBrkActv_B_Actl".
  */
-@property(assign) NSNumber* parkBrakeActive;
+@property(strong) NSNumber* parkBrakeActive;
 
 /**
  * @abstract References signal "Ignition_Switch_Stable". See IgnitionStableStatus.
  */
-@property(assign) FMCIgnitionStableStatus* ignitionStableStatus;
+@property(strong) FMCIgnitionStableStatus* ignitionStableStatus;
 
 /**
  * @abstract References signal "Ignition_status". See IgnitionStatus.
  */
-@property(assign) FMCIgnitionStatus* ignitionStatus;
+@property(strong) FMCIgnitionStatus* ignitionStatus;
 
 /**
  * @abstract References signal "DrStatDrv_B_Actl".
  */
-@property(assign) NSNumber* driverDoorAjar;
+@property(strong) NSNumber* driverDoorAjar;
 
 /**
  * @abstract References signal "DrStatPsngr_B_Actl".
  */
-@property(assign) NSNumber* passengerDoorAjar;
+@property(strong) NSNumber* passengerDoorAjar;
 
 /**
  * @abstract References signal "DrStatRl_B_Actl".
  */
-@property(assign) NSNumber* rearLeftDoorAjar;
+@property(strong) NSNumber* rearLeftDoorAjar;
 
 /**
  * @abstract References signal "DrStatRr_B_Actl".
  */
-@property(assign) NSNumber* rearRightDoorAjar;
+@property(strong) NSNumber* rearRightDoorAjar;
 
 @end

@@ -64,18 +64,18 @@
 /**
  * @abstract The button supports a short press.
  */
-@property(assign) NSNumber* shortPressAvailable;
+@property(strong) NSNumber* shortPressAvailable;
 /**
  * @abstract The button supports a LONG press.
  */
-@property(assign) NSNumber* longPressAvailable;
+@property(strong) NSNumber* longPressAvailable;
 /**
  * @abstract The button supports "button down" and "button up".
  */
-@property(assign) NSNumber* upDownAvailable;
+@property(strong) NSNumber* upDownAvailable;
 /**
  * @abstract The button supports referencing a static or dynamic image.
  */
-@property(assign) NSNumber* imageSupported;
+@property(strong) NSNumber* imageSupported;
 
 @end

@@ -4,14 +4,14 @@
 
 #import <AppLink/FMCRegisterAppInterfaceResponse.h>
 
-#import <AppLink/FMCAudioPassThruCapabilities.h>
-#import <AppLink/FMCButtonCapabilities.h>
-#import <AppLink/FMCHMIZoneCapabilities.h>
 #import <AppLink/FMCNames.h>
-#import <AppLink/FMCPrerecordedSpeech.h>
-#import <AppLink/FMCSpeechCapabilities.h>
+#import <AppLink/FMCButtonCapabilities.h>
 #import <AppLink/FMCSoftButtonCapabilities.h>
+#import <AppLink/FMCHmiZoneCapabilities.h>
+#import <AppLink/FMCSpeechCapabilities.h>
+#import <AppLink/FMCPrerecordedSpeech.h>
 #import <AppLink/FMCVrCapabilities.h>
+#import <AppLink/FMCAudioPassThruCapabilities.h>
 
 @implementation FMCRegisterAppInterfaceResponse
 
@@ -38,7 +38,7 @@
     if ([obj isKindOfClass:FMCSyncMsgVersion.class]) {
         return (FMCSyncMsgVersion*)obj;
     } else {
-        return [[[FMCSyncMsgVersion alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCSyncMsgVersion alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -54,7 +54,7 @@
     NSObject* obj = [parameters objectForKey:NAMES_language];
     if ([obj isKindOfClass:FMCLanguage.class]) {
         return (FMCLanguage*)obj;
-    } else { 
+    } else {
         return [FMCLanguage valueOf:(NSString*)obj];
     }
 }
@@ -89,7 +89,7 @@
     if ([obj isKindOfClass:FMCDisplayCapabilities.class]) {
         return (FMCDisplayCapabilities*)obj;
     } else {
-        return [[[FMCDisplayCapabilities alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCDisplayCapabilities alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -108,7 +108,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCButtonCapabilities alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCButtonCapabilities alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -129,7 +129,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCSoftButtonCapabilities alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCSoftButtonCapabilities alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -148,7 +148,7 @@
     if ([obj isKindOfClass:FMCPresetBankCapabilities.class]) {
         return (FMCPresetBankCapabilities*)obj;
     } else {
-        return [[[FMCPresetBankCapabilities alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCPresetBankCapabilities alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -162,12 +162,12 @@
 
 -(NSMutableArray*) hmiZoneCapabilities {
     NSMutableArray* array = [parameters objectForKey:NAMES_hmiZoneCapabilities];
-    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCHMIZoneCapabilities.class]) {
+    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCHmiZoneCapabilities.class]) {
         return array;
-    } else { 
+    } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSString* enumString in array) {
-            [newList addObject:[FMCHMIZoneCapabilities valueOf:enumString]];
+            [newList addObject:[FMCHmiZoneCapabilities valueOf:enumString]];
         }
         return newList;
     }
@@ -194,29 +194,21 @@
     }
 }
 
--(void) setPrerecordedSpeech:(NSMutableArray*)values {
-    if (values)
-    {
-        [parameters setObject:values forKey:NAMES_prerecordedSpeech];
-    }
-    else
-    {
+-(void) setPrerecordedSpeech:(NSMutableArray*) prerecordedSpeech {
+    if (prerecordedSpeech != nil) {
+        [parameters setObject:prerecordedSpeech forKey:NAMES_prerecordedSpeech];
+    } else {
         [parameters removeObjectForKey:NAMES_prerecordedSpeech];
     }
 }
 
 -(NSMutableArray*) prerecordedSpeech {
     NSMutableArray* array = [parameters objectForKey:NAMES_prerecordedSpeech];
-    if ([array count] == 0 ||
-        [[array objectAtIndex:0] isKindOfClass:FMCPrerecordedSpeech.class])
-    {
+    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCPrerecordedSpeech.class]) {
         return array;
-    }
-    else
-    {
+    } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
-        for (NSString* enumString in array)
-        {
+        for (NSString* enumString in array) {
             [newList addObject:[FMCPrerecordedSpeech valueOf:enumString]];
         }
         return newList;
@@ -235,7 +227,7 @@
     NSMutableArray* array = [parameters objectForKey:NAMES_vrCapabilities];
     if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCVrCapabilities.class]) {
         return array;
-    } else { 
+    } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSString* enumString in array) {
             [newList addObject:[FMCVrCapabilities valueOf:enumString]];
@@ -244,7 +236,7 @@
     }
 }
 
--(void) setAudioPassThruCapabilities:(NSMutableArray *) audioPassThruCapabilities {
+-(void) setAudioPassThruCapabilities:(NSMutableArray*) audioPassThruCapabilities {
     if (audioPassThruCapabilities != nil) {
         [parameters setObject:audioPassThruCapabilities forKey:NAMES_audioPassThruCapabilities];
     } else {
@@ -259,13 +251,13 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCAudioPassThruCapabilities alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCAudioPassThruCapabilities alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
 }
 
--(void) setVehicleType:(FMCVehicleType *) vehicleType {
+-(void) setVehicleType:(FMCVehicleType*) vehicleType {
     if (vehicleType != nil) {
         [parameters setObject:vehicleType forKey:NAMES_vehicleType];
     } else {
@@ -278,8 +270,20 @@
     if ([obj isKindOfClass:FMCVehicleType.class]) {
         return (FMCVehicleType*)obj;
     } else {
-        return [[[FMCVehicleType alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCVehicleType alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
+}
+
+-(void) setSupportedDiagModes:(NSMutableArray*) supportedDiagModes {
+    if (supportedDiagModes != nil) {
+        [parameters setObject:supportedDiagModes forKey:NAMES_supportedDiagModes];
+    } else {
+        [parameters removeObjectForKey:NAMES_supportedDiagModes];
+    }
+}
+
+-(NSMutableArray*) supportedDiagModes {
+    return [parameters objectForKey:NAMES_supportedDiagModes];
 }
 
 @end

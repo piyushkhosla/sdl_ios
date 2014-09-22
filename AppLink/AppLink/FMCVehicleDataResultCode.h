@@ -2,8 +2,8 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <Foundation/Foundation.h> 
-#import <AppLink/FMCEnum.h>   
+#import <Foundation/Foundation.h>
+#import <AppLink/FMCEnum.h>
 
 /*!
  Vehicle Data Result Code
@@ -20,7 +20,7 @@
  @abstract Store the enumeration of all possible FMCVehicleDataResultCode
  @result return an array that store all possible FMCVehicleDataResultCode
  */
-+(NSMutableArray*) values;                                 
++(NSMutableArray*) values;
 
 /*!
  @abstract return FMCVehicleDataResultCode : <font color=gray><i> SUCCESS </i></font>
@@ -30,6 +30,7 @@
  @abstract return FMCVehicleDataResultCode : <font color=gray><i> DISALLOWED </i></font>
  */
 +(FMCVehicleDataResultCode*) DISALLOWED;
++(FMCVehicleDataResultCode*) TRUNCATED_DATA;
 /*!
  @abstract return FMCVehicleDataResultCode : <font color=gray><i> USER_DISALLOWED </i></font>
  */
@@ -56,5 +57,3 @@
 +(FMCVehicleDataResultCode*) IGNORED;
 
 @end
-
-

@@ -38,6 +38,6 @@
  *            <p>
  *            <b>Notes: </b>Min Value: 0; Max Value: 2000000000
  */
-@property(assign) NSNumber* cmdID;
+@property(strong) NSNumber* cmdID;
 
 @end

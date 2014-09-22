@@ -2,7 +2,7 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <AppLink/FMCPermissionItem.h>
+#import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCNotification.h>
 
 /**
@@ -46,22 +46,22 @@
  * </table>
  * </p>
  */
-@interface FMCOnPermissionsChange : FMCRPCNotification
+@interface FMCOnPermissionsChange : FMCRPCNotification {}
 
 /**
  *Constructs a newly allocated FMCOnPermissionsChange object
  */
--(id)init;
+-(id) init;
 /**
  *<p>Constructs a newly allocated FMCOnPermissionsChange object indicated by the NSMutableDictionary parameter</p>
  *@param dict The NSMutableDictionary to use
  */
--(id)initWithDictionary:(NSMutableDictionary *)dict;
+-(id) initWithDictionary:(NSMutableDictionary*) dict;
 
 /**
  * @abstract an Array of FMCPermissionItem object describing change in permissions for a given set of RPCs
  * @discussion
  */
-@property(assign) NSMutableArray* permissionItem;
+@property(strong) NSMutableArray* permissionItem;
 
 @end

@@ -40,6 +40,6 @@
 /**
  * @abstract if Onscreen custom presets are available.
  */
-@property(assign) NSNumber* onScreenPresetsAvailable;
+@property(strong) NSNumber* onScreenPresetsAvailable;
 
 @end

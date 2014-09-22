@@ -2,8 +2,8 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <Foundation/Foundation.h> 
-#import <AppLink/FMCEnum.h>   
+#import <Foundation/Foundation.h>
+#import <AppLink/FMCEnum.h>
 
 /**
  * Reflects the status of a cluster instrument warning light.
@@ -22,7 +22,7 @@
  @abstract Store the enumeration of all possible FMCWarningLightStatus
  @result return an array that store all possible FMCWarningLightStatus
  */
-+(NSMutableArray*) values;                                 
++(NSMutableArray*) values;
 
 /*!
  @abstract Warninglight Off
@@ -46,5 +46,3 @@
 +(FMCWarningLightStatus*) NOT_USED;
 
 @end
-
-

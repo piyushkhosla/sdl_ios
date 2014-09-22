@@ -6,11 +6,11 @@
 #import <AppLink/FMCProtocol.h>
 #import <AppLink/FMCProxyListener.h>
 #import <AppLink/FMCRPCMessage.h>
-#import <AppLink/FMCSyncTransport.h>
+#import <AppLink/FMCTransport.h>
 
 @protocol FMCISyncProxy
 
--(id) initWithTransport:(NSObject<FMCSyncTransport>*) transport protocol:(NSObject<FMCProtocol>*) protocol delegate:(NSObject<FMCProxyListener>*) delegate;
+-(id) initWithTransport:(NSObject<FMCTransport>*) transport protocol:(NSObject<FMCProtocol>*) protocol delegate:(NSObject<FMCProxyListener>*) delegate;
 
 -(void) dispose;
 -(void) addDelegate:(NSObject<FMCProxyListener>*) delegate;

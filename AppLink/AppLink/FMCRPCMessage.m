@@ -5,13 +5,15 @@
 #import <AppLink/FMCRPCMessage.h>
 
 #import <AppLink/FMCNames.h>
-#import <AppLink/FMCDebugTool.h>
+//#import <AppLink/FMCDebugTool.h>
+
+#import <AppLink/Applink.h>
 
 @implementation FMCRPCStruct
 
 -(id) initWithDictionary:(NSMutableDictionary*) dict {
 	if (self = [super init]) {
-		store = [dict retain];
+		store = dict;
 	}
 	return self;
 }
@@ -64,9 +66,9 @@
 -(NSMutableDictionary*) serializeAsDictionary:(Byte) version {
     if (version == 2) {
         NSString* messageType = [[store keyEnumerator] nextObject];
-		NSMutableDictionary* function = [[store objectForKey:messageType] retain];
+		NSMutableDictionary* function = [store objectForKey:messageType];
         if ([function isKindOfClass:NSMutableDictionary.class]) {
-            NSMutableDictionary* parameters = [[function objectForKey:NAMES_parameters] retain];
+            NSMutableDictionary* parameters = [function objectForKey:NAMES_parameters];
             return [self serializeDictionary:parameters version:version];
         } else {
             return [self serializeDictionary:store version:version];
@@ -77,8 +79,7 @@
 }
 
 -(void) dealloc {
-    [store release];
-    [super dealloc];
+    store = nil;
 }
 
 @end
@@ -109,8 +110,9 @@
             }
         }
 		
-		function = [[store objectForKey:messageType] retain];
-		parameters = [[function objectForKey:NAMES_parameters] retain];
+		function = [store objectForKey:messageType];
+		parameters = [function objectForKey:NAMES_parameters];
+        self.bulkData = [dict objectForKey:@"bulkData"];
 	}
 	return self;
 }
@@ -139,29 +141,19 @@
     }
 }
 
--(NSData*) getBulkData {
-    return _bulkData;
-}
-
--(void) setBulkData:(NSData*) bulkData
-{
-    if(bulkData != _bulkData)
-    {
-        [_bulkData release];
-        _bulkData = [[NSData dataWithData:bulkData] retain];
-    }
-}
-
 -(void) dealloc {
-	[function release];
-	[parameters release];
-    [_bulkData release];
-	
-	[super dealloc];
+	function = nil;
+	parameters = nil;
 }
 
 -(NSString*) name {
 	return [function objectForKey:NAMES_operation_name];
+}
+
+- (NSString *)description {
+    NSMutableString *description = [NSMutableString stringWithFormat:@"%@ %@\n%@", self.name, self.messageType, self->parameters];
+
+    return description;
 }
 
 @end

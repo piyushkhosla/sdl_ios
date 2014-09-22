@@ -34,7 +34,7 @@
  *            <p>
  *            <b>Notes: </b>Maxlength=500
  */
-@property(assign) NSString* scrollableMessageBody;
+@property(strong) NSString* scrollableMessageBody;
 /**
  * @abstract Gets/Sets an App defined timeout. Indicates how long of a timeout in milliseconds from the
  * last action
@@ -42,7 +42,7 @@
  *            <p>
  *            <b>Notes</b>:Minval=0; Maxval=65535;Default=30000
  */
-@property(assign) NSNumber* timeout;
+@property(strong) NSNumber* timeout;
 /**
  * @abstract Gets/Sets App defined SoftButtons.If omitted on supported displays, only the
  * system defined "Close" SoftButton will be displayed
@@ -51,6 +51,6 @@
  *            <p>
  *            <b>Notes: </b>Minsize=0, Maxsize=8
  */
-@property(assign) NSMutableArray* softButtons;
+@property(strong) NSMutableArray* softButtons;
 
 @end

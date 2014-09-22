@@ -2,8 +2,8 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <Foundation/Foundation.h> 
-#import <AppLink/FMCEnum.h>   
+#import <Foundation/Foundation.h>
+#import <AppLink/FMCEnum.h>
 
 /**
  * The selected gear.
@@ -89,7 +89,7 @@
  * @abstract Eighth gear
  * @result return FMCPRNDL : <font color=gray><i> EIGHTH </i></font>
  */
-+(FMCPRNDL*) EIGTH;
++(FMCPRNDL*) EIGHTH;
 /**
  * @abstract Unknown
  * @result return FMCPRNDL : <font color=gray><i> UNKNOWN </i></font>
@@ -102,5 +102,3 @@
 +(FMCPRNDL*) FAULT;
 
 @end
-
-

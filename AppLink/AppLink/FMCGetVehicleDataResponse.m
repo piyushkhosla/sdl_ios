@@ -31,7 +31,7 @@
     if ([obj isKindOfClass:FMCGPSData.class]) {
         return (FMCGPSData*)obj;
     } else {
-        return [[[FMCGPSData alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCGPSData alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -71,16 +71,16 @@
     return [parameters objectForKey:NAMES_fuelLevel];
 }
 
--(void) setFuelLevelState:(FMCComponentVolumeStatus*) fuelLevelState {
-    if (fuelLevelState != nil) {
-        [parameters setObject:fuelLevelState forKey:NAMES_fuelLevelState];
+-(void) setFuelLevel_State:(FMCComponentVolumeStatus*) fuelLevel_State {
+    if (fuelLevel_State != nil) {
+        [parameters setObject:fuelLevel_State forKey:NAMES_fuelLevel_State];
     } else {
-        [parameters removeObjectForKey:NAMES_fuelLevelState];
+        [parameters removeObjectForKey:NAMES_fuelLevel_State];
     }
 }
 
--(FMCComponentVolumeStatus*) fuelLevelState {
-    NSObject* obj = [parameters objectForKey:NAMES_fuelLevelState];
+-(FMCComponentVolumeStatus*) fuelLevel_State {
+    NSObject* obj = [parameters objectForKey:NAMES_fuelLevel_State];
     if ([obj isKindOfClass:FMCComponentVolumeStatus.class]) {
         return (FMCComponentVolumeStatus*)obj;
     } else {
@@ -154,7 +154,7 @@
     if ([obj isKindOfClass:FMCTireStatus.class]) {
         return (FMCTireStatus*)obj;
     } else {
-        return [[[FMCTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -183,7 +183,7 @@
     if ([obj isKindOfClass:FMCBeltStatus.class]) {
         return (FMCBeltStatus*)obj;
     } else {
-        return [[[FMCBeltStatus alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCBeltStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -200,7 +200,7 @@
     if ([obj isKindOfClass:FMCBodyInformation.class]) {
         return (FMCBodyInformation*)obj;
     } else {
-        return [[[FMCBodyInformation alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCBodyInformation alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -217,7 +217,7 @@
     if ([obj isKindOfClass:FMCDeviceStatus.class]) {
         return (FMCDeviceStatus*)obj;
     } else {
-        return [[[FMCDeviceStatus alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCDeviceStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -268,7 +268,7 @@
     if ([obj isKindOfClass:FMCHeadLampStatus.class]) {
         return (FMCHeadLampStatus*)obj;
     } else {
-        return [[[FMCHeadLampStatus alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCHeadLampStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -306,6 +306,91 @@
 
 -(NSNumber*) steeringWheelAngle {
     return [parameters objectForKey:NAMES_steeringWheelAngle];
+}
+
+-(void) setECallInfo:(FMCECallInfo*) eCallInfo {
+    if (eCallInfo != nil) {
+        [parameters setObject:eCallInfo forKey:NAMES_eCallInfo];
+    } else {
+        [parameters removeObjectForKey:NAMES_eCallInfo];
+    }
+}
+
+-(FMCECallInfo*) eCallInfo {
+    NSObject* obj = [parameters objectForKey:NAMES_eCallInfo];
+    if ([obj isKindOfClass:FMCECallInfo.class]) {
+        return (FMCECallInfo*)obj;
+    } else {
+        return [[FMCECallInfo alloc] initWithDictionary:(NSMutableDictionary*)obj];
+    }
+}
+
+-(void) setAirbagStatus:(FMCAirbagStatus*) airbagStatus {
+    if (airbagStatus != nil) {
+        [parameters setObject:airbagStatus forKey:NAMES_airbagStatus];
+    } else {
+        [parameters removeObjectForKey:NAMES_airbagStatus];
+    }
+}
+
+-(FMCAirbagStatus*) airbagStatus {
+    NSObject* obj = [parameters objectForKey:NAMES_airbagStatus];
+    if ([obj isKindOfClass:FMCAirbagStatus.class]) {
+        return (FMCAirbagStatus*)obj;
+    } else {
+        return [[FMCAirbagStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
+    }
+}
+
+-(void) setEmergencyEvent:(FMCEmergencyEvent*) emergencyEvent {
+    if (emergencyEvent != nil) {
+        [parameters setObject:emergencyEvent forKey:NAMES_emergencyEvent];
+    } else {
+        [parameters removeObjectForKey:NAMES_emergencyEvent];
+    }
+}
+
+-(FMCEmergencyEvent*) emergencyEvent {
+    NSObject* obj = [parameters objectForKey:NAMES_emergencyEvent];
+    if ([obj isKindOfClass:FMCEmergencyEvent.class]) {
+        return (FMCEmergencyEvent*)obj;
+    } else {
+        return [[FMCEmergencyEvent alloc] initWithDictionary:(NSMutableDictionary*)obj];
+    }
+}
+
+-(void) setClusterModeStatus:(FMCClusterModeStatus*) clusterModeStatus {
+    if (clusterModeStatus != nil) {
+        [parameters setObject:clusterModeStatus forKey:NAMES_clusterModeStatus];
+    } else {
+        [parameters removeObjectForKey:NAMES_clusterModeStatus];
+    }
+}
+
+-(FMCClusterModeStatus*) clusterModeStatus {
+    NSObject* obj = [parameters objectForKey:NAMES_clusterModeStatus];
+    if ([obj isKindOfClass:FMCClusterModeStatus.class]) {
+        return (FMCClusterModeStatus*)obj;
+    } else {
+        return [[FMCClusterModeStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
+    }
+}
+
+-(void) setMyKey:(FMCMyKey*) myKey {
+    if (myKey != nil) {
+        [parameters setObject:myKey forKey:NAMES_myKey];
+    } else {
+        [parameters removeObjectForKey:NAMES_myKey];
+    }
+}
+
+-(FMCMyKey*) myKey {
+    NSObject* obj = [parameters objectForKey:NAMES_myKey];
+    if ([obj isKindOfClass:FMCMyKey.class]) {
+        return (FMCMyKey*)obj;
+    } else {
+        return [[FMCMyKey alloc] initWithDictionary:(NSMutableDictionary*)obj];
+    }
 }
 
 @end

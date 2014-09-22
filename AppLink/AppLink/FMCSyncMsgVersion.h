@@ -59,7 +59,7 @@
  * 				    <li>maxvalue="10"</li>
  *					</ul>
  */
-@property(assign) NSNumber* majorVersion;
+@property(strong) NSNumber* majorVersion;
 /**
  * @abstract Minor version
  * 					<ul>
@@ -67,6 +67,6 @@
  * 				    <li>maxvalue="1000"</li>
  *					</ul>
  */
-@property(assign) NSNumber* minorVersion;
+@property(strong) NSNumber* minorVersion;
 
 @end

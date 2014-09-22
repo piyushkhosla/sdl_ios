@@ -5,10 +5,13 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCMessage.h>
 
-@interface FMCTouchEventCapabilities : FMCRPCStruct
+@interface FMCTouchEventCapabilities : FMCRPCStruct {}
 
-@property (assign) NSNumber* pressAvailable;
-@property (assign) NSNumber* multiTouchAvailable;
-@property (assign) NSNumber* doublePressAvailable;
+-(id) init;
+-(id) initWithDictionary:(NSMutableDictionary*) dict;
+
+@property(strong) NSNumber* pressAvailable;
+@property(strong) NSNumber* multiTouchAvailable;
+@property(strong) NSNumber* doublePressAvailable;
 
 @end

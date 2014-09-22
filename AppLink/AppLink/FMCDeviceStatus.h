@@ -113,52 +113,52 @@
  * @abstract NSNumber value indicates whether the voice recognition on or off
  * @discussion
  */
-@property(assign) NSNumber* voiceRecOn;
+@property(strong) NSNumber* voiceRecOn;
 /**
  * @abstract NSNumber value indicates whether the bluetooth connection established
  * @discussion
  */
-@property(assign) NSNumber* btIconOn;
+@property(strong) NSNumber* btIconOn;
 /**
  * @abstract NSNumber value indicates whether a call is being active
  * @discussion
  */
-@property(assign) NSNumber* callActive;
+@property(strong) NSNumber* callActive;
 /**
  * @abstract NSNumber value indicates whether the phone is in roaming mode
  * @discussion
  */
-@property(assign) NSNumber* phoneRoaming;
+@property(strong) NSNumber* phoneRoaming;
 /**
  * @abstract NSNumber value indicates whether a textmessage is available
  * @discussion
  */
-@property(assign) NSNumber* textMsgAvailable;
+@property(strong) NSNumber* textMsgAvailable;
 /**
  * @abstract battery level status
  * @discussion
  */
-@property(assign) FMCDeviceLevelStatus* battLevelStatus;
+@property(strong) FMCDeviceLevelStatus* battLevelStatus;
 /**
  * @abstract the status of the stereo audio output channel
  * @discussion
  */
-@property(assign) NSNumber* stereoAudioOutputMuted;
+@property(strong) NSNumber* stereoAudioOutputMuted;
 /**
  * @abstract the status of the mono audio output channel
  * @discussion
  */
-@property(assign) NSNumber* monoAudioOutputMuted;
+@property(strong) NSNumber* monoAudioOutputMuted;
 /**
  * @abstract signal level status
  * @discussion
  */
-@property(assign) FMCDeviceLevelStatus* signalLevelStatus;
+@property(strong) FMCDeviceLevelStatus* signalLevelStatus;
 /**
  * @abstract the current primary audio source of SYNC (if selected).
  * @discussion
  */
-@property(assign) FMCPrimaryAudioSource* primaryAudioSource;
-@property(assign) NSNumber* eCallEventActive;
+@property(strong) FMCPrimaryAudioSource* primaryAudioSource;
+@property(strong) NSNumber* eCallEventActive;
 
 @end

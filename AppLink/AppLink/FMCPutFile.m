@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setSyncFileName:(NSString *) syncFileName {
+-(void) setSyncFileName:(NSString*) syncFileName {
     if (syncFileName != nil) {
         [parameters setObject:syncFileName forKey:NAMES_syncFileName];
     } else {
@@ -30,7 +30,7 @@
     return [parameters objectForKey:NAMES_syncFileName];
 }
 
--(void) setFileType:(FMCFileType *) fileType {
+-(void) setFileType:(FMCFileType*) fileType {
     if (fileType != nil) {
         [parameters setObject:fileType forKey:NAMES_fileType];
     } else {
@@ -47,7 +47,7 @@
     }
 }
 
--(void) setPersistentFile:(NSNumber *) persistentFile {
+-(void) setPersistentFile:(NSNumber*) persistentFile {
     if (persistentFile != nil) {
         [parameters setObject:persistentFile forKey:NAMES_persistentFile];
     } else {
@@ -59,56 +59,40 @@
     return [parameters objectForKey:NAMES_persistentFile];
 }
 
-- (void)setSystemFile:(NSNumber*)systemFile
-{
-    if (systemFile)
-    {
+-(void) setSystemFile:(NSNumber*) systemFile {
+    if (systemFile != nil) {
         [parameters setObject:systemFile forKey:NAMES_systemFile];
-    }
-    else
-    {
+    } else {
         [parameters removeObjectForKey:NAMES_systemFile];
     }
 }
 
-- (NSNumber*)systemFile
-{
+-(NSNumber*) systemFile {
     return [parameters objectForKey:NAMES_systemFile];
 }
 
-- (void)setOffset:(NSNumber*)value
-{
-    if (value)
-    {
-        [parameters setObject:value forKey:NAMES_offset];
-    }
-    else
-    {
+-(void) setOffset:(NSNumber*) offset {
+    if (offset != nil) {
+        [parameters setObject:offset forKey:NAMES_offset];
+    } else {
         [parameters removeObjectForKey:NAMES_offset];
     }
 }
 
-- (NSNumber*)offset
-{
+-(NSNumber*) offset {
     return [parameters objectForKey:NAMES_offset];
 }
 
-- (void)setLength:(NSNumber*)value
-{
-    if (value)
-    {
-        [parameters setObject:value forKey:NAMES_length];
-    }
-    else
-    {
+-(void) setLength:(NSNumber*) length {
+    if (length != nil) {
+        [parameters setObject:length forKey:NAMES_length];
+    } else {
         [parameters removeObjectForKey:NAMES_length];
     }
 }
 
-- (NSNumber*)length
-{
+-(NSNumber*) length {
     return [parameters objectForKey:NAMES_length];
 }
-
 
 @end

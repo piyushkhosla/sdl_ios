@@ -3,22 +3,20 @@
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <Foundation/Foundation.h>
-#import <AppLink/FMCSyncTransport.h>
+#import "FMCProtocolListener.h"
+#import "FMCAppLinkProtocolMessage.h"
+#import "FMCRPCRequest.h"
+#import "FMCTransport.h"
+#import "FMCTransportDelegate.h"
 
-#import <AppLink/FMCProtocolListener.h>
-#import <AppLink/FMCProtocolMessage.h>
+@protocol FMCProtocol<FMCTransportDelegate>
 
-@protocol FMCProtocol<FMCTransportListener>
+@property (weak) id<FMCProtocolListener> protocolDelegate;
+@property (strong) id<FMCTransport> transport;
 
--(void) handleBytesFromTransport:(Byte*) receivedBytes length:(long) receivedBytesLength;
-
--(void) sendStartSessionWithType:(FMCSessionType) sessionType;
--(void) sendEndSessionWithType:(FMCSessionType)sessionType sessionID:(Byte)sessionID;
--(void) sendData:(FMCProtocolMessage*) protocolMsg;
-
-@property(assign) NSObject<FMCSyncTransport>* transport;
-
--(void) addProtocolListener:(NSObject<FMCProtocolListener>*) listener;
--(void) removeProtocolListener:(NSObject<FMCProtocolListener>*) listener;
+- (void)handleBytesFromTransport:(NSData *)receivedData;
+- (void)sendStartSessionWithType:(FMCServiceType)sessionType;
+- (void)sendEndSessionWithType:(FMCServiceType)sessionType sessionID:(Byte)sessionID;
+- (void)sendRPCRequest:(FMCRPCRequest *)rpcRequest;
 
 @end

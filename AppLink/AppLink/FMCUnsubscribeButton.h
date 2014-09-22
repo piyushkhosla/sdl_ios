@@ -38,6 +38,6 @@
  * @discussion An Enumeration value, see <i>
  *         FMCButtonName</i>
  */
-@property(assign) FMCButtonName* buttonName;
+@property(strong) FMCButtonName* buttonName;
 
 @end

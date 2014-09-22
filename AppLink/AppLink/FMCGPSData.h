@@ -158,84 +158,84 @@
  * @abstract longitude degrees
  * @discussion
  */
-@property(assign) NSNumber* longitudeDegrees;
+@property(strong) NSNumber* longitudeDegrees;
 /**
  * @abstract latitude degrees
  * @discussion
  */
-@property(assign) NSNumber* latitudeDegrees;
+@property(strong) NSNumber* latitudeDegrees;
 /**
  * @abstract utc year
  * @discussion
  */
-@property(assign) NSNumber* utcYear;
+@property(strong) NSNumber* utcYear;
 /**
  * @abstract utc month 
  * @discussion
  */
-@property(assign) NSNumber* utcMonth;
+@property(strong) NSNumber* utcMonth;
 /**
  * @abstract utc day 
  * @discussion
  */
-@property(assign) NSNumber* utcDay;
+@property(strong) NSNumber* utcDay;
 /**
  * @abstract utc hours
  * @discussion
  */
-@property(assign) NSNumber* utcHours;
+@property(strong) NSNumber* utcHours;
 /**
  * @abstract utc minutes
  * @discussion
  */
-@property(assign) NSNumber* utcMinutes;
+@property(strong) NSNumber* utcMinutes;
 /**
  * @abstract utc seconds
  * @discussion
  */
-@property(assign) NSNumber* utcSeconds;
+@property(strong) NSNumber* utcSeconds;
 
-@property(assign) FMCCompassDirection* compassDirection;
+@property(strong) FMCCompassDirection* compassDirection;
 /**
  * @abstract the positional dilution of precision
  * @discussion
  */
-@property(assign) NSNumber* pdop;
+@property(strong) NSNumber* pdop;
 /**
  * @abstract the horizontal dilution of precision
  * @discussion
  */
-@property(assign) NSNumber* hdop;
+@property(strong) NSNumber* hdop;
 /**
  * @abstract the vertical dilution of precision
  * @discussion
  */
-@property(assign) NSNumber* vdop;
+@property(strong) NSNumber* vdop;
 /**
  * @abstract the coordinates based on 
  * @discussion 1, if coordinates are based on satellites. 0, if based on dead reckoning
  */
-@property(assign) NSNumber* actual;
+@property(strong) NSNumber* actual;
 /**
  * @abstract the number of satellites in view
  * @discussion
  */
-@property(assign) NSNumber* satellites;
-@property(assign) FMCDimension* dimension;
+@property(strong) NSNumber* satellites;
+@property(strong) FMCDimension* dimension;
 /**
  * @abstract altitude in meters
  * @discussion
  */
-@property(assign) NSNumber* altitude;
+@property(strong) NSNumber* altitude;
 /**
  * @abstract  the heading.North is 0, East is 90, etc.
  * @discussion
  */
-@property(assign) NSNumber* heading;
+@property(strong) NSNumber* heading;
 /**
  * @abstract speed in KPH
  * @discussion
  */
-@property(assign) NSNumber* speed;
+@property(strong) NSNumber* speed;
 
 @end

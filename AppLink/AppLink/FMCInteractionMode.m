@@ -9,6 +9,7 @@ FMCInteractionMode* FMCInteractionMode_VR_ONLY = nil;
 FMCInteractionMode* FMCInteractionMode_BOTH = nil;
 
 NSMutableArray* FMCInteractionMode_values = nil;
+
 @implementation FMCInteractionMode
 
 +(FMCInteractionMode*) valueOf:(NSString*) value {
@@ -32,24 +33,24 @@ NSMutableArray* FMCInteractionMode_values = nil;
 }
 
 +(FMCInteractionMode*) MANUAL_ONLY {
-    	if (FMCInteractionMode_MANUAL_ONLY == nil) {
-        		FMCInteractionMode_MANUAL_ONLY = [[FMCInteractionMode alloc] initWithValue:@"MANUAL_ONLY"];
-    	}
-    	return FMCInteractionMode_MANUAL_ONLY;
+    if (FMCInteractionMode_MANUAL_ONLY == nil) {
+        FMCInteractionMode_MANUAL_ONLY = [[FMCInteractionMode alloc] initWithValue:@"MANUAL_ONLY"];
+    }
+    return FMCInteractionMode_MANUAL_ONLY;
 }
 
 +(FMCInteractionMode*) VR_ONLY {
-    	if (FMCInteractionMode_VR_ONLY == nil) {
-        		FMCInteractionMode_VR_ONLY = [[FMCInteractionMode alloc] initWithValue:@"VR_ONLY"];
-    	}
-    	return FMCInteractionMode_VR_ONLY;
+    if (FMCInteractionMode_VR_ONLY == nil) {
+        FMCInteractionMode_VR_ONLY = [[FMCInteractionMode alloc] initWithValue:@"VR_ONLY"];
+    }
+    return FMCInteractionMode_VR_ONLY;
 }
 
 +(FMCInteractionMode*) BOTH {
-    	if (FMCInteractionMode_BOTH == nil) {
-        		FMCInteractionMode_BOTH = [[FMCInteractionMode alloc] initWithValue:@"BOTH"];
-    	}
-    	return FMCInteractionMode_BOTH;
+    if (FMCInteractionMode_BOTH == nil) {
+        FMCInteractionMode_BOTH = [[FMCInteractionMode alloc] initWithValue:@"BOTH"];
+    }
+    return FMCInteractionMode_BOTH;
 }
 
 @end

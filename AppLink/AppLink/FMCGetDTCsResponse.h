@@ -5,7 +5,6 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCResponse.h>
 
-#import <AppLink/FMCVehicleDataResultCode.h>
 /**
  * FMCGetDTCsResponse is sent, when FMCGetDTCs has been called
  *
@@ -16,7 +15,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* ecuHeader;
-@property(assign) NSMutableArray* dtc;
+@property(strong) NSNumber* ecuHeader;
+@property(strong) NSMutableArray* dtc;
 
 @end

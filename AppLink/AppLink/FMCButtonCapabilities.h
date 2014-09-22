@@ -61,21 +61,21 @@
  * @abstract The name of the SYNC HMI button.
  * @discussion
  */
-@property(assign) FMCButtonName* name;
+@property(strong) FMCButtonName* name;
 /**
  * @abstract A NSNumber value indicates whether the button supports a SHORT press
  * @discussion
  */
-@property(assign) NSNumber* shortPressAvailable;
+@property(strong) NSNumber* shortPressAvailable;
 /**
  * @abstract A NSNumber value indicates whether the button supports a LONG press
  * @discussion
  */
-@property(assign) NSNumber* longPressAvailable;
+@property(strong) NSNumber* longPressAvailable;
 /**
  * @abstract A NSNumber value indicates whether the button supports "button down" and "button up"
  * @discussion
  */
-@property(assign) NSNumber* upDownAvailable;
+@property(strong) NSNumber* upDownAvailable;
 
 @end

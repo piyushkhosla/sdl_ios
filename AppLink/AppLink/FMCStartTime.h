@@ -54,14 +54,14 @@
  * @abstract The hour. Minvalue="0", maxvalue="59"
  *					<p><b>Note:</b>Some display types only support a max value of 19. If out of range, it will be rejected.
  */
-@property(assign) NSNumber* hours;
+@property(strong) NSNumber* hours;
 /**
  * @abstract The minute. Minvalue="0", maxvalue="59".
  */
-@property(assign) NSNumber* minutes;
+@property(strong) NSNumber* minutes;
 /**
  * @abstract The second. Minvalue="0", maxvalue="59".
  */
-@property(assign) NSNumber* seconds;
+@property(strong) NSNumber* seconds;
 
 @end

@@ -4,8 +4,8 @@
 
 #import <AppLink/FMCPerformAudioPassThru.h>
 
-#import <AppLink/FMCTTSChunk.h>
 #import <AppLink/FMCNames.h>
+#import <AppLink/FMCTTSChunk.h>
 
 @implementation FMCPerformAudioPassThru
 
@@ -34,7 +34,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCTTSChunk alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCTTSChunk alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -49,7 +49,7 @@
 }
 
 -(NSString*) audioPassThruDisplayText1 {
-    return [parameters objectForKey:NAMES_audioPassThruDisplayText2];
+    return [parameters objectForKey:NAMES_audioPassThruDisplayText1];
 }
 
 -(void) setAudioPassThruDisplayText2:(NSString*) audioPassThruDisplayText2 {
@@ -64,7 +64,7 @@
     return [parameters objectForKey:NAMES_audioPassThruDisplayText2];
 }
 
--(void) setSamplingRate:(FMCSamplingRate *)samplingRate {
+-(void) setSamplingRate:(FMCSamplingRate*) samplingRate {
     if (samplingRate != nil) {
         [parameters setObject:samplingRate forKey:NAMES_samplingRate];
     } else {
@@ -74,7 +74,7 @@
 
 -(FMCSamplingRate*) samplingRate {
     NSObject* obj = [parameters objectForKey:NAMES_samplingRate];
-    if ([obj isKindOfClass:FMCBitsPerSample.class]) {
+    if ([obj isKindOfClass:FMCSamplingRate.class]) {
         return (FMCSamplingRate*)obj;
     } else {
         return [FMCSamplingRate valueOf:(NSString*)obj];
@@ -93,7 +93,7 @@
     return [parameters objectForKey:NAMES_maxDuration];
 }
 
--(void) setBitsPerSample:(FMCBitsPerSample *) bitsPerSample {
+-(void) setBitsPerSample:(FMCBitsPerSample*) bitsPerSample {
     if (bitsPerSample != nil) {
         [parameters setObject:bitsPerSample forKey:NAMES_bitsPerSample];
     } else {
@@ -105,12 +105,12 @@
     NSObject* obj = [parameters objectForKey:NAMES_bitsPerSample];
     if ([obj isKindOfClass:FMCBitsPerSample.class]) {
         return (FMCBitsPerSample*)obj;
-    } else { 
+    } else {
         return [FMCBitsPerSample valueOf:(NSString*)obj];
     }
 }
 
--(void) setAudioType:(FMCAudioType *)audioType {
+-(void) setAudioType:(FMCAudioType*) audioType {
     if (audioType != nil) {
         [parameters setObject:audioType forKey:NAMES_audioType];
     } else {
@@ -138,7 +138,5 @@
 -(NSNumber*) muteAudio {
     return [parameters objectForKey:NAMES_muteAudio];
 }
-
-
 
 @end

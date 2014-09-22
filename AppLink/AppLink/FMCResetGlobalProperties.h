@@ -5,8 +5,6 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCRequest.h>
 
-#import <AppLink/FMCGlobalProperty.h>
-
 /**
  * Resets the passed global properties to their default values as defined by
  * SYNC
@@ -40,6 +38,6 @@
  * @abstract An array of one or more GlobalProperty enumeration elements
  * indicating which global properties to reset to their default value
  */
-@property(assign) NSMutableArray* properties;
+@property(strong) NSMutableArray* properties;
 
 @end

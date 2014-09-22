@@ -2,7 +2,7 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <AppLink/FMCConsoleController.h>
+#import <AppLink/AppLink.h>
 
 #import <AppLink/FMCJSONEncoder.h>
 #import <AppLink/FMCRPCResponse.h>
@@ -23,20 +23,24 @@
 
 
 -(void) append:(id) toAppend {
-	//Insert the new data
-    NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-    
-    [dictionary setObject:toAppend forKey:@"object"];
-    [dictionary setObject:[NSDate date] forKey:@"date"];
-    
-	[messageList addObject:dictionary];
-	NSIndexPath *newIndex = [NSIndexPath indexPathForRow:(messageList.count - 1) inSection:0];
-	[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndex] withRowAnimation:UITableViewRowAnimationBottom];
-    
-	//If we were at the bottom, scroll to the new bottom.
-	if (atBottom) {
-		[self.tableView scrollToRowAtIndexPath:newIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-	}
+    dispatch_async(dispatch_get_main_queue(), ^{
+        //Insert the new data
+        NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+
+        [dictionary setObject:toAppend forKey:@"object"];
+        [dictionary setObject:[NSDate date] forKey:@"date"];
+
+        [messageList addObject:dictionary];
+        NSIndexPath *newIndex = [NSIndexPath indexPathForRow:(messageList.count - 1) inSection:0];
+        [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndex] withRowAnimation:UITableViewRowAnimationBottom];
+
+        //If we were at the bottom, scroll to the new bottom.
+        if (atBottom) {
+            [self.tableView scrollToRowAtIndexPath:newIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+        }
+
+        [self.tableView reloadData];
+    });
 }
 
 -(BOOL) isLastRowVisible {
@@ -56,19 +60,35 @@
     
 }
 
--(void) appendString:(NSString*) toAppend {
-	[self append:toAppend];
+
+#pragma mark -
+#pragma mark FMCDebugTool Console Delegate
+
+-(void) logInfo:(NSString*) info {
+	[self append:info];
 }
--(void) appendMessage:(FMCRPCMessage*) toAppend{
-	[self append:toAppend];
+
+-(void) logException:(NSException*) ex withMessage:(NSString*) message {
+	[self append:message];
+	[self append:[ex description]];
 }
+
+-(void) logMessage:(FMCRPCMessage*) message{
+	[self append:message];
+}
+
+
 
 #pragma mark -
 #pragma mark View lifecycle
 
 
 - (void)viewDidLoad {
+    
+    [FMCDebugTool addConsole:self];
+    
     [super viewDidLoad];
+    
     atBottom = YES;
 	
 	messageList = [[NSMutableArray alloc] initWithCapacity:100];
@@ -95,6 +115,7 @@
     [self updateWhetherScrolledToBottom];
 }
 
+
 #pragma mark -
 #pragma mark Table view data source
 
@@ -115,7 +136,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     
     NSDictionary *currentDictionary = [messageList objectAtIndex:indexPath.row];
@@ -129,7 +150,6 @@
 		NSString* title = [NSString stringWithFormat:@"%@ (%@)", rpc.name, rpc.messageType];
 		
         //TODO: Cell Color Based On Message Type
-//        cell.textLabel.textColor = [UIColor colorWithRed:255.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f];
         cell.textLabel.text = title;
         
 		if ([rpc.messageType isEqualToString:@"response"]) {
@@ -152,6 +172,7 @@
     return cell;
 }
 
+
 #pragma mark -
 #pragma mark Table view delegate
 
@@ -169,57 +190,31 @@
 		FMCRPCMessage *rpc = obj;
         
         //TODO:Get Internal Version Of Message For Line Below
-		NSData *jsonData = [[FMCJsonEncoder instance] encodeDictionary:[rpc serializeAsDictionary:2]];
-		alertText = [[[NSString alloc] initWithBytes:jsonData.bytes length:jsonData.length encoding:NSUTF8StringEncoding] autorelease];
+        NSDictionary* dictionary = [rpc serializeAsDictionary:2];
+        
+        NSError *error = nil;
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dictionary
+                                                           options:NSJSONWritingPrettyPrinted
+                                                             error:&error];
+        
+        if (!jsonData) {
+            alertText = @"Error parsing the JSON.";
+        } else {
+            alertText = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+        }
 				
 	} else {
-		alertText = [NSString stringWithFormat:@"%@",obj];
+		alertText = [NSString stringWithFormat:@"%@",[obj description]];
 	}
 	
 	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"RPCMessage" message:alertText delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 	[alertView show];
-	[alertView release];
+	alertView = nil;
     
 	[self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
-    // Navigation logic may go here. Create and push another view controller.
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
 }
 
--(void) logInfo:(NSString*) info {
-	[self appendString:info];
-}
 
--(void) logException:(NSException*) ex withMessage:(NSString*) message {
-	[self appendString:message];
-	[self append:[ex description]];
-}
-	 
-#pragma mark -
-#pragma mark Memory management
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Relinquish ownership any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
-    [messageList release];
-    [dateFormatter release];
-}
-
-- (void)dealloc {
-    [super dealloc];
-}
 
 @end

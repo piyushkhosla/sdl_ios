@@ -47,7 +47,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCTTSChunk alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCTTSChunk alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -65,7 +65,7 @@
     NSObject* obj = [parameters objectForKey:NAMES_interactionMode];
     if ([obj isKindOfClass:FMCInteractionMode.class]) {
         return (FMCInteractionMode*)obj;
-    } else { 
+    } else {
         return [FMCInteractionMode valueOf:(NSString*)obj];
     }
 }
@@ -78,7 +78,7 @@
     }
 }
 
--(NSMutableArray*) interactionChoiceSetIDList { 
+-(NSMutableArray*) interactionChoiceSetIDList {
     return [parameters objectForKey:NAMES_interactionChoiceSetIDList];
 }
 
@@ -97,7 +97,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCTTSChunk alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCTTSChunk alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -118,7 +118,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCTTSChunk alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCTTSChunk alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -136,7 +136,7 @@
     return [parameters objectForKey:NAMES_timeout];
 }
 
--(void) setVrHelp:(NSMutableArray *) vrHelp {
+-(void) setVrHelp:(NSMutableArray*) vrHelp {
     if (vrHelp != nil) {
         [parameters setObject:vrHelp forKey:NAMES_vrHelp];
     } else {
@@ -151,9 +151,26 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCVrHelpItem alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCVrHelpItem alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
+    }
+}
+
+-(void) setInteractionLayout:(FMCLayoutMode*) interactionLayout {
+    if (interactionLayout != nil) {
+        [parameters setObject:interactionLayout forKey:NAMES_interactionLayout];
+    } else {
+        [parameters removeObjectForKey:NAMES_interactionLayout];
+    }
+}
+
+-(FMCLayoutMode*) interactionLayout {
+    NSObject* obj = [parameters objectForKey:NAMES_interactionLayout];
+    if ([obj isKindOfClass:FMCLayoutMode.class]) {
+        return (FMCLayoutMode*)obj;
+    } else {
+        return [FMCLayoutMode valueOf:(NSString*)obj];
     }
 }
 

@@ -5,8 +5,8 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCNotification.h>
 
-#import <AppLink/FMCButtonEventMode.h>
 #import <AppLink/FMCButtonName.h>
+#import <AppLink/FMCButtonEventMode.h>
 
 /**
  * Notifies application that user has depressed or released a button to which
@@ -100,12 +100,12 @@
  * @abstract the name of the button
  * @discussion
  */
-@property(assign) FMCButtonName* buttonName;
+@property(strong) FMCButtonName* buttonName;
 /** 
  * @abstract button event indicates the button was depressed or released
  * @discussion
  */
-@property(assign) FMCButtonEventMode* buttonEventMode;
-@property(assign) NSNumber* customButtonID;
+@property(strong) FMCButtonEventMode* buttonEventMode;
+@property(strong) NSNumber* customButtonID;
 
 @end

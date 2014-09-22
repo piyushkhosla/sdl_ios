@@ -8,21 +8,17 @@
 
 @implementation FMCPermissionItem
 
--(id)init {
-    if (self = [super init]) {
-        
-    }
+-(id) init {
+    if (self = [super init]) {}
     return self;
 }
 
--(id)initWithDictionary:(NSMutableDictionary *)dict {
-    if (self = [super initWithDictionary:dict]) {
-        
-    }
+-(id) initWithDictionary:(NSMutableDictionary*) dict {
+    if (self = [super initWithDictionary:dict]) {}
     return self;
 }
 
--(void) setRpcName:(NSString *) rpcName {
+-(void) setRpcName:(NSString*) rpcName {
     if (rpcName != nil) {
         [store setObject:rpcName forKey:NAMES_rpcName];
     } else {
@@ -34,7 +30,7 @@
     return [store objectForKey:NAMES_rpcName];
 }
 
--(void) setHmiPermissions:(NSMutableArray*) hmiPermissions {
+-(void) setHmiPermissions:(FMCHMIPermissions*) hmiPermissions {
     if (hmiPermissions != nil) {
         [store setObject:hmiPermissions forKey:NAMES_hmiPermissions];
     } else {
@@ -42,20 +38,16 @@
     }
 }
 
--(NSMutableArray*) hmiPermissions {
-    NSMutableArray* array = [store objectForKey:NAMES_hmiPermissions];
-    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCHMIPermissions.class]) {
-        return array;
+-(FMCHMIPermissions*) hmiPermissions {
+    NSObject* obj = [store objectForKey:NAMES_hmiPermissions];
+    if ([obj isKindOfClass:FMCHMIPermissions.class]) {
+        return (FMCHMIPermissions*)obj;
     } else {
-        NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
-        for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCHMIPermissions alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
-        }
-        return newList;
+        return [[FMCHMIPermissions alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
--(void) setParameterPermissions:(NSMutableArray*) parameterPermissions {
+-(void) setParameterPermissions:(FMCParameterPermissions*) parameterPermissions {
     if (parameterPermissions != nil) {
         [store setObject:parameterPermissions forKey:NAMES_parameterPermissions];
     } else {
@@ -63,16 +55,12 @@
     }
 }
 
--(NSMutableArray*) parameterPermissions {
-    NSMutableArray* array = [store objectForKey:NAMES_parameterPermissions];
-    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCParameterPermissions.class]) {
-        return array;
+-(FMCParameterPermissions*) parameterPermissions {
+    NSObject* obj = [store objectForKey:NAMES_parameterPermissions];
+    if ([obj isKindOfClass:FMCParameterPermissions.class]) {
+        return (FMCParameterPermissions*)obj;
     } else {
-        NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
-        for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCParameterPermissions alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
-        }
-        return newList;
+        return [[FMCParameterPermissions alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 

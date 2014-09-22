@@ -5,8 +5,8 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCRequest.h>
 
-#import <AppLink/FMCImage.h>
 #import <AppLink/FMCMenuParams.h>
+#import <AppLink/FMCImage.h>
 
 /**
  *
@@ -54,7 +54,7 @@
  * <p>
  * <b>Notes:</b> Min Value: 0; Max Value: 2000000000
  */
-@property(assign) NSNumber* cmdID;
+@property(strong) NSNumber* cmdID;
 /**
  * @abstract a <I>FMCMenuParams</I> pointer which will defined the command and how
  * it is added to the Command Menu
@@ -62,7 +62,7 @@
  * Command Menu<br/>
  * If null, commands will not be accessible through the HMI application menu
  */
-@property(assign) FMCMenuParams* menuParams;
+@property(strong) FMCMenuParams* menuParams;
 /**
  * @abstract Voice Recognition Commands
  * @discussion If provided, defines one or more VR phrases the recognition of any of
@@ -71,13 +71,13 @@
  * If null, commands will not be accessible by voice commands (when the user
  * hits push-to-talk)
  */
-@property(assign) NSMutableArray* vrCommands;
+@property(strong) NSMutableArray* vrCommands;
 /**
  * @abstract an Image obj representing the Image obj shown along with a command
  * @discussion If provided, defines the image to be be shown along with a  command
  * Notes:   If omitted on supported displays, no (or the
  *            default if applicable) icon will be displayed
  */
-@property(assign) FMCImage* cmdIcon;
+@property(strong) FMCImage* cmdIcon;
 
 @end

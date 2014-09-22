@@ -30,7 +30,7 @@
     NSObject* obj = [parameters objectForKey:NAMES_buttonName];
     if ([obj isKindOfClass:FMCButtonName.class]) {
         return (FMCButtonName*)obj;
-    } else { 
+    } else {
         return [FMCButtonName valueOf:(NSString*)obj];
     }
 }
@@ -47,12 +47,12 @@
     NSObject* obj = [parameters objectForKey:NAMES_buttonPressMode];
     if ([obj isKindOfClass:FMCButtonPressMode.class]) {
         return (FMCButtonPressMode*)obj;
-    } else { 
+    } else {
         return [FMCButtonPressMode valueOf:(NSString*)obj];
     }
 }
 
--(void) setCustomButtonID:(NSNumber *) customButtonID {
+-(void) setCustomButtonID:(NSNumber*) customButtonID {
     if (customButtonID != nil) {
         [parameters setObject:customButtonID forKey:NAMES_customButtonID];
     } else {

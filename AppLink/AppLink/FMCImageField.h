@@ -4,13 +4,17 @@
 
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCMessage.h>
+
 #import <AppLink/FMCImageFieldName.h>
 #import <AppLink/FMCImageResolution.h>
 
-@interface FMCImageField : FMCRPCStruct
+@interface FMCImageField : FMCRPCStruct {}
 
-@property (assign) FMCImageFieldName* name;
-@property (assign) NSMutableArray* imageTypeSupported;
-@property (assign) FMCImageResolution* imageResolution;
+-(id) init;
+-(id) initWithDictionary:(NSMutableDictionary*) dict;
+
+@property(strong) FMCImageFieldName* name;
+@property(strong) NSMutableArray* imageTypeSupported;
+@property(strong) FMCImageResolution* imageResolution;
 
 @end

@@ -50,5 +50,4 @@
  */
 +(FMCUpdateMode*) CLEAR;
 
-
 @end

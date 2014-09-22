@@ -97,6 +97,6 @@
  *            <li>Each chunk can be no more than 500 characters</li>
  *            </ul>
  */
-@property(assign) NSMutableArray* ttsChunks;
+@property(strong) NSMutableArray* ttsChunks;
 
 @end

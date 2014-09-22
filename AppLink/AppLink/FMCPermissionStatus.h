@@ -2,6 +2,7 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
+#import <Foundation/Foundation.h>
 #import <AppLink/FMCEnum.h>
 
 /**
@@ -22,6 +23,7 @@
  @result return the array
  */
 +(NSMutableArray*) values;                                
++(NSMutableArray*) values;
 
 /*!
  @abstract permission : allowed

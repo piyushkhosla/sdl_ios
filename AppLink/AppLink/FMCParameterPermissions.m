@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setAllowed:(NSMutableArray *) allowed {
+-(void) setAllowed:(NSMutableArray*) allowed {
     if (allowed != nil) {
         [store setObject:allowed forKey:NAMES_allowed];
     } else {
@@ -30,7 +30,7 @@
     return [store objectForKey:NAMES_allowed];
 }
 
--(void) setUserDisallowed:(NSMutableArray *) userDisallowed {
+-(void) setUserDisallowed:(NSMutableArray*) userDisallowed {
     if (userDisallowed != nil) {
         [store setObject:userDisallowed forKey:NAMES_userDisallowed];
     } else {

@@ -9,6 +9,7 @@ FMCTextAlignment* FMCTextAlignment_RIGHT_ALIGNED = nil;
 FMCTextAlignment* FMCTextAlignment_CENTERED = nil;
 
 NSMutableArray* FMCTextAlignment_values = nil;
+
 @implementation FMCTextAlignment
 
 +(FMCTextAlignment*) valueOf:(NSString*) value {
@@ -32,24 +33,24 @@ NSMutableArray* FMCTextAlignment_values = nil;
 }
 
 +(FMCTextAlignment*) LEFT_ALIGNED {
-    	if (FMCTextAlignment_LEFT_ALIGNED == nil) {
-        		FMCTextAlignment_LEFT_ALIGNED = [[FMCTextAlignment alloc] initWithValue:@"LEFT_ALIGNED"];
-    	}
-    	return FMCTextAlignment_LEFT_ALIGNED;
+    if (FMCTextAlignment_LEFT_ALIGNED == nil) {
+        FMCTextAlignment_LEFT_ALIGNED = [[FMCTextAlignment alloc] initWithValue:@"LEFT_ALIGNED"];
+    }
+    return FMCTextAlignment_LEFT_ALIGNED;
 }
 
 +(FMCTextAlignment*) RIGHT_ALIGNED {
-    	if (FMCTextAlignment_RIGHT_ALIGNED == nil) {
-        		FMCTextAlignment_RIGHT_ALIGNED = [[FMCTextAlignment alloc] initWithValue:@"RIGHT_ALIGNED"];
-    	}
-    	return FMCTextAlignment_RIGHT_ALIGNED;
+    if (FMCTextAlignment_RIGHT_ALIGNED == nil) {
+        FMCTextAlignment_RIGHT_ALIGNED = [[FMCTextAlignment alloc] initWithValue:@"RIGHT_ALIGNED"];
+    }
+    return FMCTextAlignment_RIGHT_ALIGNED;
 }
 
 +(FMCTextAlignment*) CENTERED {
-    	if (FMCTextAlignment_CENTERED == nil) {
-        		FMCTextAlignment_CENTERED = [[FMCTextAlignment alloc] initWithValue:@"CENTERED"];
-    	}
-    	return FMCTextAlignment_CENTERED;
+    if (FMCTextAlignment_CENTERED == nil) {
+        FMCTextAlignment_CENTERED = [[FMCTextAlignment alloc] initWithValue:@"CENTERED"];
+    }
+    return FMCTextAlignment_CENTERED;
 }
 
 @end

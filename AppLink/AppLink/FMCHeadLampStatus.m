@@ -18,7 +18,7 @@
     return self;
 }
 
--(void) setLowBeamsOn:(NSNumber *) lowBeamsOn {
+-(void) setLowBeamsOn:(NSNumber*) lowBeamsOn {
     if (lowBeamsOn != nil) {
         [store setObject:lowBeamsOn forKey:NAMES_lowBeamsOn];
     } else {
@@ -30,7 +30,7 @@
     return [store objectForKey:NAMES_lowBeamsOn];
 }
 
--(void) setHighBeamsOn:(NSNumber *) highBeamsOn {
+-(void) setHighBeamsOn:(NSNumber*) highBeamsOn {
     if (highBeamsOn != nil) {
         [store setObject:highBeamsOn forKey:NAMES_highBeamsOn];
     } else {
@@ -42,21 +42,21 @@
     return [store objectForKey:NAMES_highBeamsOn];
 }
 
-- (void)setAmbientLightSensorStatus:(FMCAmbientLightStatus*)ambientLightSensorStatus
-{
-    if (ambientLightSensorStatus)
-    {
+-(void) setAmbientLightSensorStatus:(FMCAmbientLightStatus*) ambientLightSensorStatus {
+    if (ambientLightSensorStatus != nil) {
         [store setObject:ambientLightSensorStatus forKey:NAMES_ambientLightSensorStatus];
-    }
-    else
-    {
+    } else {
         [store removeObjectForKey:NAMES_ambientLightSensorStatus];
     }
 }
 
-- (FMCAmbientLightStatus*)ambientLightSensorStatus
-{
-    return [store objectForKey:NAMES_ambientLightSensorStatus];
+-(FMCAmbientLightStatus*) ambientLightSensorStatus {
+    NSObject* obj = [store objectForKey:NAMES_ambientLightSensorStatus];
+    if ([obj isKindOfClass:FMCAmbientLightStatus.class]) {
+        return (FMCAmbientLightStatus*)obj;
+    } else {
+        return [FMCAmbientLightStatus valueOf:(NSString*)obj];
+    }
 }
 
 @end
