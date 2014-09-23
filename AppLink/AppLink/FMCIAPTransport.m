@@ -12,8 +12,6 @@
 
 #define IAP_INPUT_BUFFER_SIZE 1024
 
-//#define DEBUG_USE_LEGACY
-
 
 @interface FMCIAPTransport ()
 
@@ -230,25 +228,26 @@
 
         self.useLegacyProtocol = NO;
         
-#ifdef DEBUG_USE_LEGACY
-        self.useLegacyProtocol = YES;
-#else
-		for (NSString *protocolString in [accessory protocolStrings]) {
-            if ([protocolString isEqualToString:LEGACY_PROTOCOL_STRING]) {
-                self.useLegacyProtocol = YES;
-            }
-            
-            if ([protocolString isEqualToString:CONTROL_PROTOCOL_STRING]) {
-                [FMCDebugTool logInfo:[NSString stringWithFormat:@"MultiApp Sync @ %@", CONTROL_PROTOCOL_STRING] withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+        if (self.forceLegacy) {
+            self.useLegacyProtocol = YES;
+        }
+        else {
+            for (NSString *protocolString in [accessory protocolStrings]) {
+                if ([protocolString isEqualToString:LEGACY_PROTOCOL_STRING]) {
+                    self.useLegacyProtocol = YES;
+                }
                 
-                self.useLegacyProtocol = NO;
-                
-                [self setupControllerForAccessory:accessory withProtocolString:CONTROL_PROTOCOL_STRING];
-                return;
+                if ([protocolString isEqualToString:CONTROL_PROTOCOL_STRING]) {
+                    [FMCDebugTool logInfo:[NSString stringWithFormat:@"MultiApp Sync @ %@", CONTROL_PROTOCOL_STRING] withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+                    
+                    self.useLegacyProtocol = NO;
+                    
+                    [self setupControllerForAccessory:accessory withProtocolString:CONTROL_PROTOCOL_STRING];
+                    return;
+                }
             }
         }
-#endif
-        
+
         if (self.useLegacyProtocol) {
             [FMCDebugTool logInfo:[NSString stringWithFormat:@"Legacy Sync @ %@", LEGACY_PROTOCOL_STRING] withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
             

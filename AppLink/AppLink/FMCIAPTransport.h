@@ -8,4 +8,6 @@
 
 @interface FMCIAPTransport : FMCAbstractTransport <NSStreamDelegate> {}
 
+@property (assign) BOOL forceLegacy;
+
 @end
