@@ -107,7 +107,8 @@
 
 -(void)applicationWillEnterForeground:(NSNotification *)notification {
     [FMCDebugTool logInfo:@"Will Enter Foreground" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-    [self.backgroundedTimer invalidate];
+    //TODO:DEBUG
+    //    [self.backgroundedTimer invalidate];
     
     [self setupControllerForAccessory:nil withProtocolString:nil];
     [self connect];
@@ -115,7 +116,8 @@
 
 -(void)applicationDidEnterBackground:(NSNotification *)notification {
     [FMCDebugTool logInfo:@"Did Enter Background" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-    self.backgroundedTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(backgroundButAwake:) userInfo: nil repeats: YES];
+    //TODO:DEBUG
+    //    self.backgroundedTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(backgroundButAwake:) userInfo: nil repeats: YES];
 }
 
 
@@ -165,8 +167,10 @@
 //                    float randomNumber = (float)arc4random() / UINT_MAX; // between 0 and 1
 //                    float randomMinMax = 0.0f + (0.5f-0.0f)*randomNumber; // between Min (0.0) and Max (0.5)
                     
-//                    [FMCDebugTool logInfo:[NSString stringWithFormat:@"Wait: %f", 1.5f] withType:FMCDebugType_Transport_iAP];
-                    [self performSelector:@selector(protocolIndexRestart) withObject:nil afterDelay:2.5f];
+                    //[FMCDebugTool logInfo:[NSString stringWithFormat:@"Wait: %f", 1.5f] withType:FMCDebugType_Transport_iAP];
+                    
+                    //TODO:DEBUG
+//                    [self performSelector:@selector(protocolIndexRestart) withObject:nil afterDelay:2.5f];
 
                 } else {
                     [FMCDebugTool logInfo:@"Transport Ready" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];

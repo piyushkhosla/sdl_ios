@@ -507,15 +507,15 @@
 		59BF0A7019790C56008C6783 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 59A02FE41978FBA1003E8ECF /* InfoPlist.strings */; };
 		E932AD8B19A26CCF00D8155B /* FMCPolicyDataParser.h in Headers */ = {isa = PBXBuildFile; fileRef = E932AD8919A26CCF00D8155B /* FMCPolicyDataParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E932AD8C19A26CCF00D8155B /* FMCPolicyDataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E932AD8A19A26CCF00D8155B /* FMCPolicyDataParser.m */; };
-		E98A9C8719C74C7400C84B3F /* FMCObjectWithPriority.h in Headers */ = {isa = PBXBuildFile; fileRef = E98A9C8519C74C7400C84B3F /* FMCObjectWithPriority.h */; };
+		E98A9C8719C74C7400C84B3F /* FMCObjectWithPriority.h in Headers */ = {isa = PBXBuildFile; fileRef = E98A9C8519C74C7400C84B3F /* FMCObjectWithPriority.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E98A9C8819C74C7400C84B3F /* FMCObjectWithPriority.m in Sources */ = {isa = PBXBuildFile; fileRef = E98A9C8619C74C7400C84B3F /* FMCObjectWithPriority.m */; };
-		E9A6E33A19CB27320054E1AD /* FMCLockScreenManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A6E33819CB27320054E1AD /* FMCLockScreenManager.h */; };
+		E9A6E33A19CB27320054E1AD /* FMCLockScreenManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A6E33819CB27320054E1AD /* FMCLockScreenManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9A6E33B19CB27320054E1AD /* FMCLockScreenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A6E33919CB27320054E1AD /* FMCLockScreenManager.m */; };
 		E9A6E33E19CB30FD0054E1AD /* FMCLockScreenStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A6E33C19CB30FD0054E1AD /* FMCLockScreenStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9A6E33F19CB30FD0054E1AD /* FMCLockScreenStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A6E33D19CB30FD0054E1AD /* FMCLockScreenStatus.m */; };
 		E9A6E34319CB3C880054E1AD /* FMCOnLockScreenStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A6E34119CB3C880054E1AD /* FMCOnLockScreenStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9A6E34419CB3C880054E1AD /* FMCOnLockScreenStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A6E34219CB3C880054E1AD /* FMCOnLockScreenStatus.m */; };
-		E9BA327819C1EC3100D59762 /* FMCPrioritizedObjectCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = E9BA327619C1EC3100D59762 /* FMCPrioritizedObjectCollection.h */; };
+		E9BA327819C1EC3100D59762 /* FMCPrioritizedObjectCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = E9BA327619C1EC3100D59762 /* FMCPrioritizedObjectCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9BA327919C1EC3100D59762 /* FMCPrioritizedObjectCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BA327719C1EC3100D59762 /* FMCPrioritizedObjectCollection.m */; };
 /* End PBXBuildFile section */
 
@@ -1747,8 +1747,6 @@
 				59A0305D1978FBA1003E8ECF /* FMCHMIZoneCapabilities.h in Headers */,
 				59A031791978FBAB003E8ECF /* FMCAudioPassThruCapabilities.h in Headers */,
 				59A0303D1978FBA1003E8ECF /* FMCButtonName.h in Headers */,
-				E98A9C8719C74C7400C84B3F /* FMCObjectWithPriority.h in Headers */,
-				E9BA327819C1EC3100D59762 /* FMCPrioritizedObjectCollection.h in Headers */,
 				59A030211978FBA1003E8ECF /* FMCRPCNotification.h in Headers */,
 				59A030F71978FBA5003E8ECF /* FMCListFiles.h in Headers */,
 				59A031CE1978FBB1003E8ECF /* FMCTCPTransport.h in Headers */,
@@ -1765,7 +1763,6 @@
 				59A0314F1978FBA9003E8ECF /* FMCReadDIDResponse.h in Headers */,
 				59A031611978FBAA003E8ECF /* FMCShowResponse.h in Headers */,
 				59A0318B1978FBAC003E8ECF /* FMCDisplayCapabilities.h in Headers */,
-				E9A6E33A19CB27320054E1AD /* FMCLockScreenManager.h in Headers */,
 				59A030371978FBA1003E8ECF /* FMCAudioType.h in Headers */,
 				59A0307D1978FBA2003E8ECF /* FMCPredefinedLayout.h in Headers */,
 				59A02FEF1978FBA1003E8ECF /* AppLink.h in Headers */,
@@ -1939,6 +1936,9 @@
 				59A030DF1978FBA4003E8ECF /* FMCAlertManeuver.h in Headers */,
 				59A02FF81978FBA1003E8ECF /* FMCAppLinkProtocol.h in Headers */,
 				E932AD8B19A26CCF00D8155B /* FMCPolicyDataParser.h in Headers */,
+				E98A9C8719C74C7400C84B3F /* FMCObjectWithPriority.h in Headers */,
+				E9BA327819C1EC3100D59762 /* FMCPrioritizedObjectCollection.h in Headers */,
+				E9A6E33A19CB27320054E1AD /* FMCLockScreenManager.h in Headers */,
 				5948760D1979089600D94C36 /* FMCSyncProxy.h in Headers */,
 				59279FF019AC394200025CD2 /* FMCHexUtility.h in Headers */,
 				59A030651978FBA1003E8ECF /* FMCImageType.h in Headers */,

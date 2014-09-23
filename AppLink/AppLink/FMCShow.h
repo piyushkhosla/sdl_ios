@@ -19,7 +19,7 @@
 @property(strong) NSString* mainField4;
 @property(strong) FMCTextAlignment* alignment;
 @property(strong) NSString* statusBar;
-@property(strong) NSString* mediaClock DEPRECATED_ATTRIBUTE;
+@property(strong) NSString* mediaClock;
 @property(strong) NSString* mediaTrack;
 @property(strong) FMCImage* graphic;
 @property(strong) FMCImage* secondaryGraphic;
