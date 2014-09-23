@@ -1016,8 +1016,8 @@
 		E932AD8A19A26CCF00D8155B /* FMCPolicyDataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCPolicyDataParser.m; sourceTree = "<group>"; };
 		E98A9C8519C74C7400C84B3F /* FMCObjectWithPriority.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCObjectWithPriority.h; sourceTree = "<group>"; };
 		E98A9C8619C74C7400C84B3F /* FMCObjectWithPriority.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCObjectWithPriority.m; sourceTree = "<group>"; };
-		E9A6E33819CB27320054E1AD /* FMCLockScreenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FMCLockScreenManager.h; path = AppLink/FMCLockScreenManager.h; sourceTree = "<group>"; };
-		E9A6E33919CB27320054E1AD /* FMCLockScreenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FMCLockScreenManager.m; path = AppLink/FMCLockScreenManager.m; sourceTree = "<group>"; };
+		E9A6E33819CB27320054E1AD /* FMCLockScreenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCLockScreenManager.h; sourceTree = "<group>"; };
+		E9A6E33919CB27320054E1AD /* FMCLockScreenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCLockScreenManager.m; sourceTree = "<group>"; };
 		E9A6E33C19CB30FD0054E1AD /* FMCLockScreenStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCLockScreenStatus.h; sourceTree = "<group>"; };
 		E9A6E33D19CB30FD0054E1AD /* FMCLockScreenStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCLockScreenStatus.m; sourceTree = "<group>"; };
 		E9A6E34119CB3C880054E1AD /* FMCOnLockScreenStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCOnLockScreenStatus.h; sourceTree = "<group>"; };
@@ -1120,6 +1120,8 @@
 				59A02E2E1978FBA0003E8ECF /* FMCJsonDecoder.m */,
 				59A02E2F1978FBA0003E8ECF /* FMCJsonEncoder.h */,
 				59A02E301978FBA0003E8ECF /* FMCJsonEncoder.m */,
+				E9A6E33819CB27320054E1AD /* FMCLockScreenManager.h */,
+				E9A6E33919CB27320054E1AD /* FMCLockScreenManager.m */,
 				59A02E311978FBA0003E8ECF /* FMCNames.h */,
 				59A02E321978FBA0003E8ECF /* FMCProxyListener.h */,
 				59A02E331978FBA0003E8ECF /* FMCRPCMessage.h */,
@@ -1627,8 +1629,6 @@
 		59E5A3C8194E318200B908AA = {
 			isa = PBXGroup;
 			children = (
-				E9A6E33819CB27320054E1AD /* FMCLockScreenManager.h */,
-				E9A6E33919CB27320054E1AD /* FMCLockScreenManager.m */,
 				59A02DFF1978FBA0003E8ECF /* AppLink */,
 				59E5A3EA194E318200B908AA /* AppLinkTests */,
 				59E5A3D3194E318200B908AA /* Frameworks */,
