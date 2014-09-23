@@ -14,11 +14,11 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCSoftButtonType* type;
-@property(assign) NSString* text;
-@property(assign) FMCImage* image;
-@property(assign) NSNumber* isHighlighted;
-@property(assign) NSNumber* softButtonID;
-@property(assign) FMCSystemAction* systemAction;
+@property(strong) FMCSoftButtonType* type;
+@property(strong) NSString* text;
+@property(strong) FMCImage* image;
+@property(strong) NSNumber* isHighlighted;
+@property(strong) NSNumber* softButtonID;
+@property(strong) FMCSystemAction* systemAction;
 
 @end

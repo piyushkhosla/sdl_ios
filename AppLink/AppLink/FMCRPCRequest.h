@@ -7,6 +7,6 @@
 
 @interface FMCRPCRequest : FMCRPCMessage {}
 
-@property(retain) NSNumber* correlationID;
+@property(strong) NSNumber* correlationID;
 
 @end

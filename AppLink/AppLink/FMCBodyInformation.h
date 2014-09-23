@@ -13,12 +13,12 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* parkBrakeActive;
-@property(assign) FMCIgnitionStableStatus* ignitionStableStatus;
-@property(assign) FMCIgnitionStatus* ignitionStatus;
-@property(assign) NSNumber* driverDoorAjar;
-@property(assign) NSNumber* passengerDoorAjar;
-@property(assign) NSNumber* rearLeftDoorAjar;
-@property(assign) NSNumber* rearRightDoorAjar;
+@property(strong) NSNumber* parkBrakeActive;
+@property(strong) FMCIgnitionStableStatus* ignitionStableStatus;
+@property(strong) FMCIgnitionStatus* ignitionStatus;
+@property(strong) NSNumber* driverDoorAjar;
+@property(strong) NSNumber* passengerDoorAjar;
+@property(strong) NSNumber* rearLeftDoorAjar;
+@property(strong) NSNumber* rearRightDoorAjar;
 
 @end

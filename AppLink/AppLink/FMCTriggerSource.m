@@ -6,6 +6,7 @@
 
 FMCTriggerSource* FMCTriggerSource_MENU = nil;
 FMCTriggerSource* FMCTriggerSource_VR = nil;
+FMCTriggerSource* FMCTriggerSource_KEYBOARD = nil;
 
 NSMutableArray* FMCTriggerSource_values = nil;
 
@@ -25,6 +26,7 @@ NSMutableArray* FMCTriggerSource_values = nil;
         FMCTriggerSource_values = [[NSMutableArray alloc] initWithObjects:
                 FMCTriggerSource.MENU,
                 FMCTriggerSource.VR,
+                FMCTriggerSource.KEYBOARD,
                 nil];
     }
     return FMCTriggerSource_values;
@@ -42,6 +44,13 @@ NSMutableArray* FMCTriggerSource_values = nil;
         FMCTriggerSource_VR = [[FMCTriggerSource alloc] initWithValue:@"VR"];
     }
     return FMCTriggerSource_VR;
+}
+
++(FMCTriggerSource*) KEYBOARD {
+    if (FMCTriggerSource_KEYBOARD == nil) {
+        FMCTriggerSource_KEYBOARD = [[FMCTriggerSource alloc] initWithValue:@"KEYBOARD"];
+    }
+    return FMCTriggerSource_KEYBOARD;
 }
 
 @end

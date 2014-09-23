@@ -12,6 +12,6 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCButtonName* buttonName;
+@property(strong) FMCButtonName* buttonName;
 
 @end

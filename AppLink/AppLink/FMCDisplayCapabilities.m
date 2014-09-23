@@ -6,6 +6,7 @@
 
 #import <AppLink/FMCNames.h>
 #import <AppLink/FMCTextField.h>
+#import <AppLink/FMCImageField.h>
 #import <AppLink/FMCMediaClockFormat.h>
 
 @implementation FMCDisplayCapabilities
@@ -52,7 +53,28 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCTextField alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCTextField alloc] initWithDictionary:(NSMutableDictionary*)dict]];
+        }
+        return newList;
+    }
+}
+
+-(void) setImageFields:(NSMutableArray*) imageFields {
+    if (imageFields != nil) {
+        [store setObject:imageFields forKey:NAMES_imageFields];
+    } else {
+        [store removeObjectForKey:NAMES_imageFields];
+    }
+}
+
+-(NSMutableArray*) imageFields {
+    NSMutableArray* array = [store objectForKey:NAMES_imageFields];
+    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:FMCImageField.class]) {
+        return array;
+    } else {
+        NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
+        for (NSDictionary* dict in array) {
+            [newList addObject:[[FMCImageField alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -89,6 +111,47 @@
 
 -(NSNumber*) graphicSupported {
     return [store objectForKey:NAMES_graphicSupported];
+}
+
+-(void) setTemplatesAvailable:(NSMutableArray*) templatesAvailable {
+    if (templatesAvailable != nil) {
+        [store setObject:templatesAvailable forKey:NAMES_templatesAvailable];
+    } else {
+        [store removeObjectForKey:NAMES_templatesAvailable];
+    }
+}
+
+-(NSMutableArray*) templatesAvailable {
+    return [store objectForKey:NAMES_templatesAvailable];
+}
+
+-(void) setScreenParams:(FMCScreenParams*) screenParams {
+    if (screenParams != nil) {
+        [store setObject:screenParams forKey:NAMES_screenParams];
+    } else {
+        [store removeObjectForKey:NAMES_screenParams];
+    }
+}
+
+-(FMCScreenParams*) screenParams {
+    NSObject* obj = [store objectForKey:NAMES_screenParams];
+    if ([obj isKindOfClass:FMCScreenParams.class]) {
+        return (FMCScreenParams*)obj;
+    } else {
+        return [[FMCScreenParams alloc] initWithDictionary:(NSMutableDictionary*)obj];
+    }
+}
+
+-(void) setNumCustomPresetsAvailable:(NSNumber*) numCustomPresetsAvailable {
+    if (numCustomPresetsAvailable != nil) {
+        [store setObject:numCustomPresetsAvailable forKey:NAMES_numCustomPresetsAvailable];
+    } else {
+        [store removeObjectForKey:NAMES_numCustomPresetsAvailable];
+    }
+}
+
+-(NSNumber*) numCustomPresetsAvailable {
+    return [store objectForKey:NAMES_numCustomPresetsAvailable];
 }
 
 @end

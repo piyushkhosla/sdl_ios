@@ -43,7 +43,7 @@
     if ([obj isKindOfClass:FMCHMIPermissions.class]) {
         return (FMCHMIPermissions*)obj;
     } else {
-        return [[[FMCHMIPermissions alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCHMIPermissions alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -60,7 +60,7 @@
     if ([obj isKindOfClass:FMCParameterPermissions.class]) {
         return (FMCParameterPermissions*)obj;
     } else {
-        return [[[FMCParameterPermissions alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCParameterPermissions alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 

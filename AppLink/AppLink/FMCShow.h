@@ -13,16 +13,17 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSString* mainField1;
-@property(assign) NSString* mainField2;
-@property(assign) NSString* mainField3;
-@property(assign) NSString* mainField4;
-@property(assign) FMCTextAlignment* alignment;
-@property(assign) NSString* statusBar;
-@property(assign) NSString* mediaClock;
-@property(assign) NSString* mediaTrack;
-@property(assign) FMCImage* graphic;
-@property(assign) NSMutableArray* softButtons;
-@property(assign) NSMutableArray* customPresets;
+@property(strong) NSString* mainField1;
+@property(strong) NSString* mainField2;
+@property(strong) NSString* mainField3;
+@property(strong) NSString* mainField4;
+@property(strong) FMCTextAlignment* alignment;
+@property(strong) NSString* statusBar;
+@property(strong) NSString* mediaClock;
+@property(strong) NSString* mediaTrack;
+@property(strong) FMCImage* graphic;
+@property(strong) FMCImage* secondaryGraphic;
+@property(strong) NSMutableArray* softButtons;
+@property(strong) NSMutableArray* customPresets;
 
 @end

@@ -8,26 +8,24 @@
 #import <AppLink/FMCProtocol.h>
 #import <AppLink/FMCProxyListener.h>
 #import <AppLink/FMCRPCRequestFactory.h>
-#import <AppLink/FMCSyncTransport.h>
+#import <AppLink/FMCTransport.h>
 
-@interface FMCSyncProxy : NSObject<FMCProtocolListener, NSURLConnectionDelegate> {
+@interface FMCSyncProxy : NSObject<FMCProtocolListener, NSStreamDelegate> {
     Byte _version;
-    
-	NSObject<FMCSyncTransport>* transport;
-	NSObject<FMCProtocol>* protocol;
-	NSMutableArray* proxyListeners;
 	Byte rpcSessionID;
 	Byte bulkSessionID;
-	
-    NSTimer* handshakeTimer;
-    
 	BOOL isConnected;
     BOOL alreadyDestructed;
-    
-    NSMutableData* httpResponseData;
+
 }
 
--(id)  initWithTransport:(NSObject<FMCSyncTransport>*) transport protocol:(NSObject<FMCProtocol>*) protocol delegate:(NSObject<FMCProxyListener>*) delegate;
+@property (strong) NSObject<FMCProtocol>* protocol;
+@property (strong) NSObject<FMCTransport>* transport;
+@property (strong) NSMutableArray* proxyListeners;
+@property (strong) NSTimer* handshakeTimer;
+@property (strong) NSString *debugConsoleGroupName;
+
+-(id) initWithTransport:(NSObject<FMCTransport>*) transport protocol:(NSObject<FMCProtocol>*) protocol delegate:(NSObject<FMCProxyListener>*) delegate;
 
 -(void) dispose;
 -(void) addDelegate:(NSObject<FMCProxyListener>*) delegate;
@@ -38,12 +36,14 @@
 -(NSString*) getProxyVersion;
 
 -(void) destroyHandshakeTimer;
--(void) handleProtocolMessage:(FMCProtocolMessage*) msgData;
+-(void) handleProtocolMessage:(FMCAppLinkProtocolMessage*) msgData;
 
 +(void)enableSiphonDebug;
 +(void)disableSiphonDebug;
 
--(NSObject<FMCSyncTransport>*)getTransport;
+-(NSObject<FMCTransport>*)getTransport;
 -(NSObject<FMCProtocol>*)getProtocol;
+
+- (void)putFileStream:(NSInputStream*)inputStream :(FMCPutFile*)putFileRPCRequest;
 
 @end

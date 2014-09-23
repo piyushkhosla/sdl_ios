@@ -14,8 +14,8 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCHMILevel* hmiLevel;
-@property(assign) FMCAudioStreamingState* audioStreamingState;
-@property(assign) FMCSystemContext* systemContext;
+@property(strong) FMCHMILevel* hmiLevel;
+@property(strong) FMCAudioStreamingState* audioStreamingState;
+@property(strong) FMCSystemContext* systemContext;
 
 @end

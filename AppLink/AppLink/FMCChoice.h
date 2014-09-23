@@ -12,9 +12,12 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* choiceID;
-@property(assign) NSString* menuName;
-@property(assign) NSMutableArray* vrCommands;
-@property(assign) FMCImage* image;
+@property(strong) NSNumber* choiceID;
+@property(strong) NSString* menuName;
+@property(strong) NSMutableArray* vrCommands;
+@property(strong) FMCImage* image;
+@property(strong) NSString* secondaryText;
+@property(strong) NSString* tertiaryText;
+@property(strong) FMCImage* secondaryImage;
 
 @end

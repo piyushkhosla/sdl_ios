@@ -2,7 +2,7 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <AppLink/FMCSubscribeVehicleData.h>
+#import <FMCSubscribeVehicleData.h>
 
 #import <AppLink/FMCNames.h>
 

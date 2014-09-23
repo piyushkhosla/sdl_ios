@@ -12,5 +12,6 @@
 
 +(FMCTriggerSource*) MENU;
 +(FMCTriggerSource*) VR;
++(FMCTriggerSource*) KEYBOARD;
 
 @end

@@ -39,6 +39,9 @@
                       NAMES_GetDTCs, @"24",
                       NAMES_ScrollableMessage, @"25",
                       NAMES_Slider, @"26",
+                      NAMES_ShowConstantTBT, @"27",
+                      NAMES_AlertManeuver, @"28",
+                      NAMES_UpdateTurnList, @"29",
                       NAMES_ChangeRegistration, @"30",
                       NAMES_GenericResponse, @"31",
                       NAMES_PutFile, @"32",
@@ -46,7 +49,9 @@
                       NAMES_ListFiles, @"34",
                       NAMES_SetAppIcon, @"35",
                       NAMES_SetDisplayLayout, @"36",
-                      
+                      NAMES_DiagnosticMessage, @"37",
+                      NAMES_SystemRequest, @"38",
+
                       NAMES_OnHMIStatus, @"32768",
                       NAMES_OnAppInterfaceUnregistered, @"32769",
                       NAMES_OnButtonEvent, @"32770",
@@ -58,7 +63,11 @@
                       NAMES_OnPermissionsChange, @"32776",
                       NAMES_OnAudioPassThru, @"32777",
                       NAMES_OnLanguageChange, @"32778",
-                      
+                      NAMES_OnKeyboardInput, @"32779",
+                      NAMES_OnTouchEvent, @"32780",
+                      NAMES_OnSystemRequest, @"32781",
+                      NAMES_OnHashChange, @"32782",
+
                       NAMES_EncodedSyncPData, @"65536",
                       NAMES_SyncPData, @"65537",
                       

@@ -8,6 +8,7 @@
 @interface FMCSyncProxyFactory : NSObject {}
 
 +(FMCSyncProxy*) buildSyncProxyWithListener:(NSObject<FMCProxyListener>*) listener;
+
 +(FMCSyncProxy*) buildSyncProxyWithListener:(NSObject<FMCProxyListener>*) listener
                               tcpIPAddress: (NSString*) ipaddress
                                    tcpPort: (NSString*) port;

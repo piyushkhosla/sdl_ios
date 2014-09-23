@@ -16,17 +16,19 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCSyncMsgVersion* syncMsgVersion;
-@property(assign) FMCLanguage* language;
-@property(assign) FMCLanguage* hmiDisplayLanguage;
-@property(assign) FMCDisplayCapabilities* displayCapabilities;
-@property(assign) NSMutableArray* buttonCapabilities;
-@property(assign) NSMutableArray* softButtonCapabilities;
-@property(assign) FMCPresetBankCapabilities* presetBankCapabilities;
-@property(assign) NSMutableArray* hmiZoneCapabilities;
-@property(assign) NSMutableArray* speechCapabilities;
-@property(assign) NSMutableArray* vrCapabilities;
-@property(assign) NSMutableArray* audioPassThruCapabilities;
-@property(assign) FMCVehicleType* vehicleType;
+@property(strong) FMCSyncMsgVersion* syncMsgVersion;
+@property(strong) FMCLanguage* language;
+@property(strong) FMCLanguage* hmiDisplayLanguage;
+@property(strong) FMCDisplayCapabilities* displayCapabilities;
+@property(strong) NSMutableArray* buttonCapabilities;
+@property(strong) NSMutableArray* softButtonCapabilities;
+@property(strong) FMCPresetBankCapabilities* presetBankCapabilities;
+@property(strong) NSMutableArray* hmiZoneCapabilities;
+@property(strong) NSMutableArray* speechCapabilities;
+@property(strong) NSMutableArray* prerecordedSpeech;
+@property(strong) NSMutableArray* vrCapabilities;
+@property(strong) NSMutableArray* audioPassThruCapabilities;
+@property(strong) FMCVehicleType* vehicleType;
+@property(strong) NSMutableArray* supportedDiagModes;
 
 @end

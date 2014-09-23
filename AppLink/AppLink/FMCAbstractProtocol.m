@@ -2,91 +2,44 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <AppLink/FMCAbstractProtocol.h>
+#import "FMCAbstractProtocol.h"
 
 @implementation FMCAbstractProtocol
-
--(void) sendStartSessionWithType:(FMCSessionType) sessionType {
-	[self doesNotRecognizeSelector:_cmd];
-}
-
--(void) sendEndSessionWithType:(FMCSessionType)sessionType sessionID:(Byte)sessionID {
-	[self doesNotRecognizeSelector:_cmd];
-}
-
-/*
--(void) sendData:(NSData*) data sessionType:(FMCSessionType)sessionType sessionID:(Byte)sessionID {
-	[self doesNotRecognizeSelector:_cmd];
-}
-*/
--(void) sendData:(FMCProtocolMessage*) protocolMsg {
-    [self doesNotRecognizeSelector:_cmd];
-}
-
--(void) handleBytesFromTransport:(Byte *)receivedBytes length:(long)receivedBytesLength {
-	[self doesNotRecognizeSelector:_cmd];
-}
-
--(id) init {
+- (id)init {
 	if (self = [super init]) {
-		protocolListeners = [[NSMutableArray alloc] initWithCapacity:1];
+        _debugConsoleGroupName = @"default";
 	}
 	return self;
 }
 
--(void) addProtocolListener:(NSObject<FMCProtocolListener>*)listener {
-	@synchronized (protocolListeners) {
-		[protocolListeners addObject:listener];
-	}
-}	
-
--(void) removeProtocolListener:(NSObject<FMCProtocolListener>*)listener {
-	@synchronized (protocolListeners) {
-		[protocolListeners removeObject:listener];
-	}
+- (void)sendStartSessionWithType:(FMCServiceType)serviceType {
+	[self doesNotRecognizeSelector:_cmd];
 }
 
--(void) setTransport:(NSObject<FMCSyncTransport>*) theTransport {
-	transport = theTransport;
+- (void)sendEndSessionWithType:(FMCServiceType)serviceType sessionID:(Byte)sessionID {
+	[self doesNotRecognizeSelector:_cmd];
 }
 
--(NSObject<FMCSyncTransport>*) transport {
-	return transport;
+- (void)sendRPCRequest:(FMCRPCRequest *)rpcRequest {
+    [self doesNotRecognizeSelector:_cmd];
 }
 
-- (void) onTransportConnected {
-	NSArray* localListeners = nil;
-	
-	@synchronized(protocolListeners) {
-		localListeners = [protocolListeners copy];
-	}
-	
-	for (NSObject<FMCProtocolListener>* listener in localListeners) {
-		
-		[listener onProtocolOpened];
-	}
-	[localListeners release];
+- (void)handleBytesFromTransport:(NSData *)receivedData {
+	[self doesNotRecognizeSelector:_cmd];
 }
 
-- (void) onTransportDisconnected {NSArray* localListeners = nil;
-	@synchronized(protocolListeners) {
-		localListeners = [protocolListeners copy];
-	}
-	
-	for (NSObject<FMCProtocolListener>* listener in localListeners) {
-		
-		[listener onProtocolClosed];
-	}
-	[localListeners release];
+
+#pragma - FMCTransportListener Implementation
+- (void)onTransportConnected {
+	[self.protocolDelegate onProtocolOpened];
 }
 
-- (void) onBytesReceived:(Byte*)bytes length:(long) length {
-	[self handleBytesFromTransport:(Byte*)bytes length:length];
+- (void)onTransportDisconnected {
+	[self.protocolDelegate onProtocolClosed];
 }
 
--(void) dealloc {
-	[protocolListeners release];
-	[super dealloc];
+- (void)onDataReceived:(NSData *)receivedData {
+	[self handleBytesFromTransport:receivedData];
 }
 
 @end

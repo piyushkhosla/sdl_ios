@@ -33,7 +33,7 @@
     if ([obj isKindOfClass:FMCSyncMsgVersion.class]) {
         return (FMCSyncMsgVersion*)obj;
     } else {
-        return [[[FMCSyncMsgVersion alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCSyncMsgVersion alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -64,7 +64,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCTTSChunk alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCTTSChunk alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }
@@ -158,6 +158,35 @@
             [newList addObject:[FMCAppHMIType valueOf:enumString]];
         }
         return newList;
+    }
+}
+
+-(void) setHashID:(NSString*) hashID {
+    if (hashID != nil) {
+        [parameters setObject:hashID forKey:NAMES_hashID];
+    } else {
+        [parameters removeObjectForKey:NAMES_hashID];
+    }
+}
+
+-(NSString*) hashID {
+    return [parameters objectForKey:NAMES_hashID];
+}
+
+-(void) setDeviceInfo:(FMCDeviceInfo*) deviceInfo {
+    if (deviceInfo != nil) {
+        [parameters setObject:deviceInfo forKey:NAMES_deviceInfo];
+    } else {
+        [parameters removeObjectForKey:NAMES_deviceInfo];
+    }
+}
+
+-(FMCDeviceInfo*) deviceInfo {
+    NSObject* obj = [parameters objectForKey:NAMES_deviceInfo];
+    if ([obj isKindOfClass:FMCDeviceInfo.class]) {
+        return (FMCDeviceInfo*)obj;
+    } else {
+        return [[FMCDeviceInfo alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 

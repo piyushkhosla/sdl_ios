@@ -10,6 +10,6 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* interactionChoiceSetID;
+@property(strong) NSNumber* interactionChoiceSetID;
 
 @end

@@ -14,13 +14,13 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSMutableArray* initialPrompt;
-@property(assign) NSString* audioPassThruDisplayText1;
-@property(assign) NSString* audioPassThruDisplayText2;
-@property(assign) FMCSamplingRate* samplingRate;
-@property(assign) NSNumber* maxDuration;
-@property(assign) FMCBitsPerSample* bitsPerSample;
-@property(assign) FMCAudioType* audioType;
-@property(assign) NSNumber* muteAudio;
+@property(strong) NSMutableArray* initialPrompt;
+@property(strong) NSString* audioPassThruDisplayText1;
+@property(strong) NSString* audioPassThruDisplayText2;
+@property(strong) FMCSamplingRate* samplingRate;
+@property(strong) NSNumber* maxDuration;
+@property(strong) FMCBitsPerSample* bitsPerSample;
+@property(strong) FMCAudioType* audioType;
+@property(strong) NSNumber* muteAudio;
 
 @end

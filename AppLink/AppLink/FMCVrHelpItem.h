@@ -12,8 +12,8 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSString* text;
-@property(assign) FMCImage* image;
-@property(assign) NSNumber* position;
+@property(strong) NSString* text;
+@property(strong) FMCImage* image;
+@property(strong) NSNumber* position;
 
 @end

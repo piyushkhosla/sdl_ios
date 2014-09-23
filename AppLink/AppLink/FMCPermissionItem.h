@@ -13,8 +13,8 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSString* rpcName;
-@property(assign) FMCHMIPermissions* hmiPermissions;
-@property(assign) FMCParameterPermissions* parameterPermissions;
+@property(strong) NSString* rpcName;
+@property(strong) FMCHMIPermissions* hmiPermissions;
+@property(strong) FMCParameterPermissions* parameterPermissions;
 
 @end

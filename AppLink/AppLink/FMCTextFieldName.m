@@ -24,6 +24,10 @@ FMCTextFieldName* FMCTextFieldName_audioPassThruDisplayText1 = nil;
 FMCTextFieldName* FMCTextFieldName_audioPassThruDisplayText2 = nil;
 FMCTextFieldName* FMCTextFieldName_sliderHeader = nil;
 FMCTextFieldName* FMCTextFieldName_sliderFooter = nil;
+FMCTextFieldName* FMCTextFieldName_menuName = nil;
+FMCTextFieldName* FMCTextFieldName_secondaryText = nil;
+FMCTextFieldName* FMCTextFieldName_tertiaryText = nil;
+FMCTextFieldName* FMCTextFieldName_menuTitle = nil;
 
 NSMutableArray* FMCTextFieldName_values = nil;
 
@@ -61,6 +65,10 @@ NSMutableArray* FMCTextFieldName_values = nil;
                 FMCTextFieldName.audioPassThruDisplayText2,
                 FMCTextFieldName.sliderHeader,
                 FMCTextFieldName.sliderFooter,
+                FMCTextFieldName.menuName,
+                FMCTextFieldName.secondaryText,
+                FMCTextFieldName.tertiaryText,
+                FMCTextFieldName.menuTitle,
                 nil];
     }
     return FMCTextFieldName_values;
@@ -204,6 +212,34 @@ NSMutableArray* FMCTextFieldName_values = nil;
         FMCTextFieldName_sliderFooter = [[FMCTextFieldName alloc] initWithValue:@"sliderFooter"];
     }
     return FMCTextFieldName_sliderFooter;
+}
+
++(FMCTextFieldName*) menuName {
+    if (FMCTextFieldName_menuName == nil) {
+        FMCTextFieldName_menuName = [[FMCTextFieldName alloc] initWithValue:@"menuName"];
+    }
+    return FMCTextFieldName_menuName;
+}
+
++(FMCTextFieldName*) secondaryText {
+    if (FMCTextFieldName_secondaryText == nil) {
+        FMCTextFieldName_secondaryText = [[FMCTextFieldName alloc] initWithValue:@"secondaryText"];
+    }
+    return FMCTextFieldName_secondaryText;
+}
+
++(FMCTextFieldName*) tertiaryText {
+    if (FMCTextFieldName_tertiaryText == nil) {
+        FMCTextFieldName_tertiaryText = [[FMCTextFieldName alloc] initWithValue:@"tertiaryText"];
+    }
+    return FMCTextFieldName_tertiaryText;
+}
+
++(FMCTextFieldName*) menuTitle {
+    if (FMCTextFieldName_menuTitle == nil) {
+        FMCTextFieldName_menuTitle = [[FMCTextFieldName alloc] initWithValue:@"menuTitle"];
+    }
+    return FMCTextFieldName_menuTitle;
 }
 
 @end

@@ -9,7 +9,9 @@ FMCFileType* FMCFileType_GRAPHIC_JPEG = nil;
 FMCFileType* FMCFileType_GRAPHIC_PNG = nil;
 FMCFileType* FMCFileType_AUDIO_WAVE = nil;
 FMCFileType* FMCFileType_AUDIO_MP3 = nil;
+FMCFileType* FMCFileType_AUDIO_AAC = nil;
 FMCFileType* FMCFileType_BINARY = nil;
+FMCFileType* FMCFileType_JSON = nil;
 
 NSMutableArray* FMCFileType_values = nil;
 
@@ -32,7 +34,9 @@ NSMutableArray* FMCFileType_values = nil;
                 FMCFileType.GRAPHIC_PNG,
                 FMCFileType.AUDIO_WAVE,
                 FMCFileType.AUDIO_MP3,
+                FMCFileType.AUDIO_AAC,
                 FMCFileType.BINARY,
+                FMCFileType.JSON,
                 nil];
     }
     return FMCFileType_values;
@@ -73,11 +77,25 @@ NSMutableArray* FMCFileType_values = nil;
     return FMCFileType_AUDIO_MP3;
 }
 
++(FMCFileType*) AUDIO_AAC {
+    if (FMCFileType_AUDIO_AAC == nil) {
+        FMCFileType_AUDIO_AAC = [[FMCFileType alloc] initWithValue:@"AUDIO_AAC"];
+    }
+    return FMCFileType_AUDIO_AAC;
+}
+
 +(FMCFileType*) BINARY {
     if (FMCFileType_BINARY == nil) {
         FMCFileType_BINARY = [[FMCFileType alloc] initWithValue:@"BINARY"];
     }
     return FMCFileType_BINARY;
+}
+
++(FMCFileType*) JSON {
+    if (FMCFileType_JSON == nil) {
+        FMCFileType_JSON = [[FMCFileType alloc] initWithValue:@"JSON"];
+    }
+    return FMCFileType_JSON;
 }
 
 @end

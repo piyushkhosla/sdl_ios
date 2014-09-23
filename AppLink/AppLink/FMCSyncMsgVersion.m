@@ -42,4 +42,7 @@
     return [store objectForKey:NAMES_minorVersion];
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@.%@", self.majorVersion, self.minorVersion];
+}
 @end

@@ -10,10 +10,10 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* numTicks;
-@property(assign) NSNumber* position;
-@property(assign) NSString* sliderHeader;
-@property(assign) NSMutableArray* sliderFooter;
-@property(assign) NSNumber* timeout;
+@property(strong) NSNumber* numTicks;
+@property(strong) NSNumber* position;
+@property(strong) NSString* sliderHeader;
+@property(strong) NSMutableArray* sliderFooter;
+@property(strong) NSNumber* timeout;
 
 @end

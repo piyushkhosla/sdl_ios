@@ -33,6 +33,9 @@ FMCResult* FMCResult_TRUNCATED_DATA = nil;
 FMCResult* FMCResult_RETRY = nil;
 FMCResult* FMCResult_WARNINGS = nil;
 FMCResult* FMCResult_SAVED = nil;
+FMCResult* FMCResult_INVALID_CERT = nil;
+FMCResult* FMCResult_EXPIRED_CERT = nil;
+FMCResult* FMCResult_RESUME_FAILED = nil;
 
 NSMutableArray* FMCResult_values = nil;
 
@@ -79,6 +82,9 @@ NSMutableArray* FMCResult_values = nil;
                 FMCResult.RETRY,
                 FMCResult.WARNINGS,
                 FMCResult.SAVED,
+                FMCResult.INVALID_CERT,
+                FMCResult.EXPIRED_CERT,
+                FMCResult.RESUME_FAILED,
                 nil];
     }
     return FMCResult_values;
@@ -285,6 +291,27 @@ NSMutableArray* FMCResult_values = nil;
         FMCResult_SAVED = [[FMCResult alloc] initWithValue:@"SAVED"];
     }
     return FMCResult_SAVED;
+}
+
++(FMCResult*) INVALID_CERT {
+    if (FMCResult_INVALID_CERT == nil) {
+        FMCResult_INVALID_CERT = [[FMCResult alloc] initWithValue:@"INVALID_CERT"];
+    }
+    return FMCResult_INVALID_CERT;
+}
+
++(FMCResult*) EXPIRED_CERT {
+    if (FMCResult_EXPIRED_CERT == nil) {
+        FMCResult_EXPIRED_CERT = [[FMCResult alloc] initWithValue:@"EXPIRED_CERT"];
+    }
+    return FMCResult_EXPIRED_CERT;
+}
+
++(FMCResult*) RESUME_FAILED {
+    if (FMCResult_RESUME_FAILED == nil) {
+        FMCResult_RESUME_FAILED = [[FMCResult alloc] initWithValue:@"RESUME_FAILED"];
+    }
+    return FMCResult_RESUME_FAILED;
 }
 
 @end

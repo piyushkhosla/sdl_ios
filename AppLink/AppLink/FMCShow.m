@@ -133,7 +133,24 @@
     if ([obj isKindOfClass:FMCImage.class]) {
         return (FMCImage*)obj;
     } else {
-        return [[[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj];
+    }
+}
+
+-(void) setSecondaryGraphic:(FMCImage*) secondaryGraphic {
+    if (secondaryGraphic != nil) {
+        [parameters setObject:secondaryGraphic forKey:NAMES_secondaryGraphic];
+    } else {
+        [parameters removeObjectForKey:NAMES_secondaryGraphic];
+    }
+}
+
+-(FMCImage*) secondaryGraphic {
+    NSObject* obj = [parameters objectForKey:NAMES_secondaryGraphic];
+    if ([obj isKindOfClass:FMCImage.class]) {
+        return (FMCImage*)obj;
+    } else {
+        return [[FMCImage alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -152,7 +169,7 @@
     } else {
         NSMutableArray* newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary* dict in array) {
-            [newList addObject:[[[FMCSoftButton alloc] initWithDictionary:(NSMutableDictionary*)dict] autorelease]];
+            [newList addObject:[[FMCSoftButton alloc] initWithDictionary:(NSMutableDictionary*)dict]];
         }
         return newList;
     }

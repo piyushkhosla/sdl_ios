@@ -13,16 +13,16 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* voiceRecOn;
-@property(assign) NSNumber* btIconOn;
-@property(assign) NSNumber* callActive;
-@property(assign) NSNumber* phoneRoaming;
-@property(assign) NSNumber* textMsgAvailable;
-@property(assign) FMCDeviceLevelStatus* battLevelStatus;
-@property(assign) NSNumber* stereoAudioOutputMuted;
-@property(assign) NSNumber* monoAudioOutputMuted;
-@property(assign) FMCDeviceLevelStatus* signalLevelStatus;
-@property(assign) FMCPrimaryAudioSource* primaryAudioSource;
-@property(assign) NSNumber* eCallEventActive;
+@property(strong) NSNumber* voiceRecOn;
+@property(strong) NSNumber* btIconOn;
+@property(strong) NSNumber* callActive;
+@property(strong) NSNumber* phoneRoaming;
+@property(strong) NSNumber* textMsgAvailable;
+@property(strong) FMCDeviceLevelStatus* battLevelStatus;
+@property(strong) NSNumber* stereoAudioOutputMuted;
+@property(strong) NSNumber* monoAudioOutputMuted;
+@property(strong) FMCDeviceLevelStatus* signalLevelStatus;
+@property(strong) FMCPrimaryAudioSource* primaryAudioSource;
+@property(strong) NSNumber* eCallEventActive;
 
 @end

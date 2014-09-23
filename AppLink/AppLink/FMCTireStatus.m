@@ -48,7 +48,7 @@
     if ([obj isKindOfClass:FMCSingleTireStatus.class]) {
         return (FMCSingleTireStatus*)obj;
     } else {
-        return [[[FMCSingleTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCSingleTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -65,7 +65,7 @@
     if ([obj isKindOfClass:FMCSingleTireStatus.class]) {
         return (FMCSingleTireStatus*)obj;
     } else {
-        return [[[FMCSingleTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCSingleTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -82,7 +82,7 @@
     if ([obj isKindOfClass:FMCSingleTireStatus.class]) {
         return (FMCSingleTireStatus*)obj;
     } else {
-        return [[[FMCSingleTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCSingleTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -99,7 +99,7 @@
     if ([obj isKindOfClass:FMCSingleTireStatus.class]) {
         return (FMCSingleTireStatus*)obj;
     } else {
-        return [[[FMCSingleTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCSingleTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -116,7 +116,7 @@
     if ([obj isKindOfClass:FMCSingleTireStatus.class]) {
         return (FMCSingleTireStatus*)obj;
     } else {
-        return [[[FMCSingleTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCSingleTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -133,7 +133,7 @@
     if ([obj isKindOfClass:FMCSingleTireStatus.class]) {
         return (FMCSingleTireStatus*)obj;
     } else {
-        return [[[FMCSingleTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCSingleTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 

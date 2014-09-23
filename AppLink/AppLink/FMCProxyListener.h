@@ -12,20 +12,30 @@
 #import <AppLink/FMCDeleteFileResponse.h>
 #import <AppLink/FMCDeleteInteractionChoiceSetResponse.h>
 #import <AppLink/FMCDeleteSubMenuResponse.h>
+#import <AppLink/FMCDiagnosticMessageResponse.h>
+#import <AppLink/FMCEncodedSyncPDataResponse.h>
 #import <AppLink/FMCEndAudioPassThruResponse.h>
 #import <AppLink/FMCGenericResponse.h>
 #import <AppLink/FMCGetDTCsResponse.h>
 #import <AppLink/FMCGetVehicleDataResponse.h>
 #import <AppLink/FMCListFilesResponse.h>
+#import <AppLink/FMCLockScreenStatus.h>
 #import <AppLink/FMCOnAppInterfaceUnregistered.h>
 #import <AppLink/FMCOnAudioPassThru.h>
 #import <AppLink/FMCOnButtonEvent.h>
 #import <AppLink/FMCOnButtonPress.h>
 #import <AppLink/FMCOnCommand.h>
 #import <AppLink/FMCOnDriverDistraction.h>
+#import <AppLink/FMCOnEncodedSyncPData.h>
+#import <AppLink/FMCOnHashChange.h>
 #import <AppLink/FMCOnHMIStatus.h>
 #import <AppLink/FMCOnLanguageChange.h>
 #import <AppLink/FMCOnPermissionsChange.h>
+#import <AppLink/FMCOnSyncPData.h>
+#import <AppLink/FMCOnSystemRequest.h>
+#import <AppLink/FMCOnVehicleData.h>
+#import <AppLink/FMCOnTBTClientState.h>
+#import <AppLink/FMCOnTouchEvent.h>
 #import <AppLink/FMCOnVehicleData.h>
 #import <AppLink/FMCPerformAudioPassThruResponse.h>
 #import <AppLink/FMCPerformInteractionResponse.h>
@@ -38,11 +48,14 @@
 #import <AppLink/FMCSetDisplayLayoutResponse.h>
 #import <AppLink/FMCSetGlobalPropertiesResponse.h>
 #import <AppLink/FMCSetMediaClockTimerResponse.h>
+#import <AppLink/FMCShowConstantTBTResponse.h>
 #import <AppLink/FMCShowResponse.h>
 #import <AppLink/FMCSliderResponse.h>
 #import <AppLink/FMCSpeakResponse.h>
 #import <AppLink/FMCSubscribeButtonResponse.h>
 #import <AppLink/FMCSubscribeVehicleDataResponse.h>
+#import <AppLink/FMCSyncPDataResponse.h>
+#import <AppLink/FMCUpdateTurnListResponse.h>
 #import <AppLink/FMCUnregisterAppInterfaceResponse.h>
 #import <AppLink/FMCUnsubscribeButtonResponse.h>
 #import <AppLink/FMCUnsubscribeVehicleDataResponse.h>
@@ -65,6 +78,8 @@
 -(void) onDeleteFileResponse:(FMCDeleteFileResponse*) response;
 -(void) onDeleteInteractionChoiceSetResponse:(FMCDeleteInteractionChoiceSetResponse*) response;
 -(void) onDeleteSubMenuResponse:(FMCDeleteSubMenuResponse*) response;
+-(void) onDiagnosticMessageResponse:(FMCDiagnosticMessageResponse*) response;
+-(void) onEncodedSyncPDataRespons:(FMCEncodedSyncPDataResponse*) response;
 -(void) onEndAudioPassThruResponse:(FMCEndAudioPassThruResponse*) response;
 -(void) onError:(NSException*) e;
 -(void) onGenericResponse:(FMCGenericResponse*) response;
@@ -76,8 +91,15 @@
 -(void) onOnButtonEvent:(FMCOnButtonEvent*) notification;
 -(void) onOnButtonPress:(FMCOnButtonPress*) notification;
 -(void) onOnCommand:(FMCOnCommand*) notification;
+-(void) onOnEncodedSyncPData:(FMCOnEncodedSyncPData*) notification;
+-(void) onOnHashChange:(FMCOnHashChange*) notification;
 -(void) onOnLanguageChange:(FMCOnLanguageChange*) notification;
+-(void) onOnLockScreenNotification:(FMCLockScreenStatus*) notification;
 -(void) onOnPermissionsChange:(FMCOnPermissionsChange*) notification;
+-(void) onOnSyncPData:(FMCOnSyncPData*) notification;
+-(void) onOnSystemRequest:(FMCOnSystemRequest*) notification;
+-(void) onOnTBTClientState:(FMCOnTBTClientState*) notification;
+-(void) onOnTouchEvent:(FMCOnTouchEvent*) notification;
 -(void) onOnVehicleData:(FMCOnVehicleData*) notification;
 -(void) onPerformAudioPassThruResponse:(FMCPerformAudioPassThruResponse*) response;
 -(void) onPerformInteractionResponse:(FMCPerformInteractionResponse*) response;
@@ -90,14 +112,18 @@
 -(void) onSetDisplayLayoutResponse:(FMCSetDisplayLayoutResponse*) response;
 -(void) onSetGlobalPropertiesResponse:(FMCSetGlobalPropertiesResponse*) response;
 -(void) onSetMediaClockTimerResponse:(FMCSetMediaClockTimerResponse*) response;
+-(void) onShowConstantTBTResponse:(FMCShowConstantTBTResponse*) response;
 -(void) onShowResponse:(FMCShowResponse*) response;
 -(void) onSliderResponse:(FMCSliderResponse*) response;
 -(void) onSpeakResponse:(FMCSpeakResponse*) response;
 -(void) onSubscribeButtonResponse:(FMCSubscribeButtonResponse*) response;
 -(void) onSubscribeVehicleDataResponse:(FMCSubscribeVehicleDataResponse*) response;
+-(void) onSyncPDataResponse:(FMCSyncPDataResponse*) response;
+-(void) onUpdateTurnListResponse:(FMCUpdateTurnListResponse*) response;
 -(void) onUnregisterAppInterfaceResponse:(FMCUnregisterAppInterfaceResponse*) response;
 -(void) onUnsubscribeButtonResponse:(FMCUnsubscribeButtonResponse*) response;
 -(void) onUnsubscribeVehicleDataResponse:(FMCUnsubscribeVehicleDataResponse*) response;
+
 
 
 @end

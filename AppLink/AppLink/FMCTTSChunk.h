@@ -12,7 +12,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSString* text;
-@property(assign) FMCSpeechCapabilities* type;
+@property(strong) NSString* text;
+@property(strong) FMCSpeechCapabilities* type;
 
 @end

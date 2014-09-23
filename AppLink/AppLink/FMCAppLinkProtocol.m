@@ -2,575 +2,275 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <AppLink/FMCAppLinkProtocol.h>
+#import <AppLink/FMCJsonEncoder.h>
+#import <AppLink/FMCFunctionID.h>
 
-#import <UIKit/UIKit.h>
-#import <AppLink/FMCBitConverter.h>
-#import <AppLink/FMCDebugTool.h>
-#import <AppLink/FMCProtocolFrameHeaderFactory.h>
-#import <AppLink/FMCProtocolFrameHeader.h>
-#import <AppLink/FMCBinaryFrameHeader.h>
+#import "FMCRPCRequest.h"
+#import "FMCAppLinkProtocol.h"
+#import "FMCAppLinkProtocolHeader.h"
+#import "FMCAppLinkV2ProtocolHeader.h"
+#import "FMCAppLinkProtocolMessageDisassembler.h"
+#import "FMCApplinkProtocolRecievedMessageRouter.h"
+#import "FMCRPCPayload.h"
+#import "FMCDebugTool.h"
+#import "FMCPrioritizedObjectCollection.h"
 
-#define HEADER_BUF_LENGTH 8
-#define PROT2_HEADER_BUF_LENGTH 12
-#define MTU_SIZE 512
+
+const NSUInteger MAX_TRANSMISSION_SIZE = 512;
+const UInt8 MAX_VERSION_TO_SEND = 3;
+
+@interface FMCAppLinkProtocol () {
+    UInt32 _messageID;
+    dispatch_queue_t _recieveQueue;
+    dispatch_queue_t _sendQueue;
+    FMCPrioritizedObjectCollection *prioritizedCollection;
+}
+
+@property (assign) UInt8 version;
+@property (assign) UInt8 maxVersionSupportedByHeadUnit;
+@property (assign) UInt8 sessionID;
+@property (strong) NSMutableData *recieveBuffer;
+@property (strong) FMCApplinkProtocolRecievedMessageRouter *messageRouter;
+
+- (void)sendDataToTransport:(NSData *)data withPriority:(NSInteger)priority;
+- (void)logRPCSend:(FMCAppLinkProtocolMessage *)message;
+
+@end
+
 
 @implementation FMCAppLinkProtocol
 
--(id) init {
+- (id)init {
 	if (self = [super init]) {
-		msgLock = [[NSObject alloc] init];
-		headerBuf = nil;
-		dataBuf = nil;
-		currentHeader = nil;
-		[self resetHeaderAndData];
-		frameAssemblerForSessionID = [[NSMutableDictionary alloc] initWithCapacity:2];
-        
         _version = 1;
         _messageID = 0;
-        _consecFrameNumber = 0;
+        _sessionID = 0;
+        _recieveQueue = dispatch_queue_create("com.ford.applink.recieve", DISPATCH_QUEUE_SERIAL);
+        _sendQueue = dispatch_queue_create("com.ford.applink.send.defaultpriority", DISPATCH_QUEUE_SERIAL);
+        prioritizedCollection = [FMCPrioritizedObjectCollection new];
+
+        self.messageRouter = [[FMCApplinkProtocolRecievedMessageRouter alloc] init];
+        self.messageRouter.delegate = self;
 	}
 	return self;
 }
 
--(void) resetHeaderAndData {
-    [headerBuf release];
 
-	haveHeader = NO;
-    if (_version == 1) {
-        headerSize = HEADER_BUF_LENGTH * sizeof(Byte);
+- (void)sendStartSessionWithType:(FMCServiceType)serviceType {
+
+    FMCAppLinkProtocolHeader *header = [FMCAppLinkProtocolHeader headerForVersion:1];
+    header.frameType = FMCFrameType_Control;
+    header.serviceType = serviceType;
+    header.frameData = FMCFrameData_StartSession;
+
+    FMCAppLinkProtocolMessage *message = [FMCAppLinkProtocolMessage messageWithHeader:header andPayload:nil];
+
+    [self sendDataToTransport:message.data withPriority:serviceType];
+}
+
+- (void)sendEndSessionWithType:(FMCServiceType)serviceType sessionID:(Byte)sessionID {
+
+	FMCAppLinkProtocolHeader *header = [FMCAppLinkProtocolHeader headerForVersion:self.version];
+    header.frameType = FMCFrameType_Control;
+    header.serviceType = serviceType;
+    header.frameData = FMCFrameData_StartSession;
+    header.sessionID = self.sessionID;
+
+    FMCAppLinkProtocolMessage *message = [FMCAppLinkProtocolMessage messageWithHeader:header andPayload:nil];
+
+    [self sendDataToTransport:message.data withPriority:serviceType];
+
+}
+
+// FMCRPCRequest in from app -> FMCAppLinkProtocolMessage out to transport layer.
+- (void)sendRPCRequest:(FMCRPCRequest *)rpcRequest {
+
+    NSData *jsonData = [[FMCJsonEncoder instance] encodeDictionary:[rpcRequest serializeAsDictionary:self.version]];
+    NSData* messagePayload = nil;
+
+    NSString *logMessage = [NSString stringWithFormat:@"%@", rpcRequest];
+    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+
+
+    if(self.version == 1) {
+        messagePayload = jsonData;
+    } else if (self.version == 2) {
+        // Serialize the RPC data into an NSData
+        FMCRPCPayload *rpcPayload = [[FMCRPCPayload alloc] init];
+        rpcPayload.rpcType = 0;
+        rpcPayload.functionID = [[[[FMCFunctionID alloc] init] getFunctionID:[rpcRequest getFunctionName]] intValue];
+        rpcPayload.correlationID = [rpcRequest.correlationID intValue];
+        rpcPayload.jsonData = jsonData;
+        rpcPayload.binaryData = rpcRequest.bulkData;
+        messagePayload = rpcPayload.data;
+    }
+
+    //
+    // Build the protocol level header & message
+    //
+    FMCAppLinkProtocolHeader *header = [FMCAppLinkProtocolHeader headerForVersion:self.version];
+    header.frameType = FMCFrameType_Single;
+    header.serviceType = FMCServiceType_RPC;
+    header.frameData = FMCFrameData_SingleFrame;
+    header.sessionID = self.sessionID;
+    header.bytesInPayload = (UInt32)messagePayload.length;
+
+    // V2+ messages need to have message ID property set.
+    if (self.version >= 2) {
+        [((FMCAppLinkV2ProtocolHeader*)header) setMessageID:++_messageID];
+    }
+    
+
+    FMCAppLinkProtocolMessage *message = [FMCAppLinkProtocolMessage messageWithHeader:header andPayload:messagePayload];
+
+
+    //
+    // See if the message is small enough to send in one transmission.
+    // If not, break it up into smaller messages and send.
+    //
+    if (message.size < MAX_TRANSMISSION_SIZE)
+    {
+        [self logRPCSend:message];
+        [self sendDataToTransport:message.data withPriority:FMCServiceType_RPC];
+    }
+    else
+    {
+        NSArray *messages = [FMCAppLinkProtocolMessageDisassembler disassemble:message withLimit:MAX_TRANSMISSION_SIZE];
+        for (FMCAppLinkProtocolMessage *smallerMessage in messages) {
+            [self logRPCSend:smallerMessage];
+            [self sendDataToTransport:smallerMessage.data withPriority:FMCServiceType_RPC];
+        }
+        
+    }
+
+}
+
+- (void)logRPCSend:(FMCAppLinkProtocolMessage *)message {
+    NSString *logMessage = [NSString stringWithFormat:@"Sending : %@", message];
+    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];
+}
+
+// Use for normal messages
+- (void)sendDataToTransport:(NSData *)data withPriority:(NSInteger)priority {
+
+    [prioritizedCollection addObject:data withPriority:priority];
+
+    dispatch_async(_sendQueue, ^{
+
+        NSData *dataToTransmit = nil;
+        while(dataToTransmit = (NSData *)[prioritizedCollection nextObject])
+        {
+            [self.transport sendData:dataToTransmit];
+        };
+
+    });
+
+}
+
+//
+// Turn recieved bytes into message objects.
+//
+- (void)handleBytesFromTransport:(NSData *)recievedData {
+
+    NSMutableString *logMessage = [[NSMutableString alloc]init];//
+    [logMessage appendFormat:@"Received: %ld", (long)recievedData.length];
+
+    // Initialize the recieve buffer which will contain bytes while messages are constructed.
+    if (self.recieveBuffer == nil) {
+        self.recieveBuffer = [NSMutableData dataWithCapacity:(4 * MAX_TRANSMISSION_SIZE)];
+    }
+
+    // Save the data
+    [self.recieveBuffer appendData:recievedData];
+    [logMessage appendFormat:@"(%ld) ", (long)self.recieveBuffer.length];
+
+    // Get the version
+    UInt8 incomingVersion = [FMCAppLinkProtocolMessage determineVersion:self.recieveBuffer];
+
+    // If we have enough bytes, create the header.
+    FMCAppLinkProtocolHeader* header = [FMCAppLinkProtocolHeader headerForVersion:incomingVersion];
+    NSUInteger headerSize = header.size;
+    if (self.recieveBuffer.length >= headerSize) {
+        [header parse:self.recieveBuffer];
     } else {
-        headerSize = PROT2_HEADER_BUF_LENGTH * sizeof(Byte);
+        // Need to wait for more bytes.
+        [logMessage appendString:@"header incomplete, waiting for more bytes."];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];
+        return;
     }
-	headerBuf = [[NSMutableData alloc] initWithCapacity:headerSize];
 
-    [dataBuf release];
-    dataBuf = nil;
-
-    [currentHeader release];
-    currentHeader = nil;
-}
-
-- (void) setVersion:(Byte) version {
-    _version = version;
-    
-    [headerBuf release];
-    headerBuf = nil;
-    
-    if (version == 2) {
-        headerSize = PROT2_HEADER_BUF_LENGTH * sizeof(Byte);
-        headerBuf = [[NSMutableData alloc] initWithCapacity:headerSize];
-    }
-}
-
-- (void) doAlertMessage:(NSString*) message withTitle:(NSString*) title{
-	UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:title message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-	[alertView show];
-	[alertView release];
-	
-}
-
--(FrameAssembler*) getFrameAssemblerForFrameHeader:(FMCProtocolFrameHeader*) header {
-	id sessionIDKey = [NSNumber numberWithInt:header._sessionID];
-    
-	FrameAssembler *ret = [frameAssemblerForSessionID objectForKey:sessionIDKey];
-
-	if (ret == nil) {
-		if (header._sessionType == FMCSessionType_RPC) {
-			ret = [[FrameAssembler alloc] initWithListeners:protocolListeners];
-		} else if (header._sessionType == FMCSessionType_BulkData) {
-			ret = [[BulkAssembler alloc] initWithListeners:protocolListeners];
-		} else {
-            //Invalid header session type, return nil
-            return nil;
-        }
-        
-		[frameAssemblerForSessionID setObject:ret forKey:sessionIDKey];
-        return [ret autorelease];
-	}
-	return ret;
-}
-
--(void) handleBytesFromTransport:(Byte *)receivedBytes length:(long)receivedBytesLength {
-	long receivedBytesReadPos = 0;
-    
-    //Check for a version difference
-    if (_version == 1) {
-        //Future proofing, nothing has been read into the buffer and version is >= 2
-        if (headerBuf.length == 0 && (receivedBytes[0] >> 4) >= 2) {
-            [self setVersion:(Byte) 0x02];
-        //Future proofing, buffer has something in it and version >= 2
-        } else if (headerBuf.length > 0 && (((Byte *)headerBuf.bytes)[0] >> 4) >= 2) {
-            //safe current state of the buffer and also set the new version
-            NSMutableData* tempHeader = nil;
-            tempHeader = [[NSMutableData alloc] initWithCapacity:headerBuf.length];
-            tempHeader = headerBuf;
-            [self setVersion:(Byte) 0x02];
-            headerBuf = tempHeader;
-        }
-    }
-    
-	// If I don't yet know the message size, grab those bytes.
-	if (!haveHeader) {
-		// If I can't get the size, just get the bytes that are there.
-        int sizeBytesNeeded;
-        if (_version == 1) {
-            sizeBytesNeeded = HEADER_BUF_LENGTH - headerBuf.length;
-        } else {
-            sizeBytesNeeded = PROT2_HEADER_BUF_LENGTH - headerBuf.length;
-        }
-        
-		if (receivedBytesLength < sizeBytesNeeded) {
-			[headerBuf appendBytes:receivedBytes + receivedBytesReadPos length:receivedBytesLength];
-			return;
-		} else {
-            // If I got the size, allocate the buffer
-			[headerBuf appendBytes:receivedBytes + receivedBytesReadPos length:sizeBytesNeeded];
-			receivedBytesReadPos += sizeBytesNeeded;
-			haveHeader = true;
-			dataBufFinalLength = [FMCBitConverter intFromByteArray:(Byte*)headerBuf.bytes offset:4];
-            
-            [dataBuf release];
-            dataBuf = nil;
-
-			dataBuf = [[NSMutableData alloc] initWithCapacity:dataBufFinalLength];
-			currentHeader = [[FMCProtocolFrameHeaderFactory parseHeader:headerBuf] retain];
-		}
-		
-	}
-	
-	int bytesLeft = receivedBytesLength - receivedBytesReadPos;
-	int bytesNeeded = dataBufFinalLength - dataBuf.length;
-	// If I don't have enough bytes for the message, just grab what's there.
-	if (bytesLeft < bytesNeeded) {
-		[dataBuf appendBytes:receivedBytes + receivedBytesReadPos length:bytesLeft];
-		return;
-	} else {
-        // Fill the buffer and call the handler!
-		[dataBuf appendBytes:receivedBytes + receivedBytesReadPos length:bytesNeeded];
-		receivedBytesReadPos += bytesNeeded;
-        FrameAssembler *assembler = [self getFrameAssemblerForFrameHeader:currentHeader];
-        
-        //Invalid Header Session Type
-        if (assembler == nil){
-            [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: Invalid Header Session Type"]];
-            [FMCDebugTool logInfo:@"Proxy: Invalid Header Session Type"];
-            [self resetHeaderAndData];
-            return;
-        }
-        
-		[assembler handleFrame:currentHeader data:dataBuf];
-		[self resetHeaderAndData];
-		
-		//If there are any bytes left, recurse.
-		int moreBytesLeft = receivedBytesLength - receivedBytesReadPos;
-		if (moreBytesLeft > 0) {
-			[self handleBytesFromTransport:receivedBytes + receivedBytesReadPos  length:moreBytesLeft];
-		}
-	}
-}
-
--(NSData*) assembleHeaderBytes:(FMCProtocolFrameHeader*) msg {
-	UInt32 header = 0;
-	header |= msg._version;
-	header <<= 1;
-	header |= (msg._compressed ? 1 : 0);
-	header <<= 3;
-	header |= msg._frameType;
-	header <<= 8;
-	header |= msg._sessionType;
-	header <<= 8;
-	header |= msg._frameData;
-	header <<= 8;
-	header |= msg._sessionID;
-	
-    NSData* ret;
-    if (_version == 1) {
-        Byte* mallocPtr = malloc(HEADER_BUF_LENGTH);
-        if (mallocPtr == nil) {
-            @throw [NSException exceptionWithName:@"OutOfMemoryException" reason:@"malloc failed" userInfo:nil];
-        }
-        ret = [[NSData alloc] initWithBytesNoCopy:mallocPtr length:HEADER_BUF_LENGTH];
-
-        memcpy((void*)ret.bytes, [FMCBitConverter intToByteArray:header].bytes, 4);
-        memcpy((void*)ret.bytes + 4, [FMCBitConverter intToByteArray:msg._dataSize].bytes, 4);
+    // If we have enough bytes, finish building the message.
+    FMCAppLinkProtocolMessage *message = nil;
+    NSUInteger payloadSize = header.bytesInPayload;
+    NSUInteger messageSize = headerSize + payloadSize;
+    if (self.recieveBuffer.length >= messageSize) {
+        NSUInteger payloadOffset = headerSize;
+        NSUInteger payloadLength = payloadSize;
+        NSData *payload = [self.recieveBuffer subdataWithRange:NSMakeRange(payloadOffset, payloadLength)];
+        message = [FMCAppLinkProtocolMessage messageWithHeader:header andPayload:payload];
+        [logMessage appendFormat:@"message complete. %@", message];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];
     } else {
-        Byte* mallocPtr = malloc(PROT2_HEADER_BUF_LENGTH);
-        if (mallocPtr == nil) {
-            @throw [NSException exceptionWithName:@"OutOfMemoryException" reason:@"malloc failed" userInfo:nil];
-        }
-        ret = [[NSData alloc] initWithBytesNoCopy:mallocPtr length:PROT2_HEADER_BUF_LENGTH];
-        
-        memcpy((void*)ret.bytes, [FMCBitConverter intToByteArray:header].bytes, 4);
-        memcpy((void*)ret.bytes + 4, [FMCBitConverter intToByteArray:msg._dataSize].bytes, 4);
-        memcpy((void*)ret.bytes + 8, [FMCBitConverter intToByteArray:msg._messageID].bytes, 4);
+        // Need to wait for more bytes.
+        [logMessage appendFormat:@"header complete. message incomplete, waiting for %ld more bytes. Header:%@", (long)(messageSize - self.recieveBuffer.length), header];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];
+        return;
     }
-	
-	return [ret autorelease];
+
+
+    // Need to maintain the recieveBuffer, remove the bytes from it which we just processed.
+    self.recieveBuffer = [[self.recieveBuffer subdataWithRange:NSMakeRange(messageSize, self.recieveBuffer.length - messageSize)] mutableCopy];
+
+
+    // Pass on ultimate disposition of the message to the message router.
+    dispatch_async(_recieveQueue, ^{
+        [self.messageRouter handleRecievedMessage:message];
+    });
+
 }
 
--(void) sendFrameToTransport:(FMCProtocolFrameHeader *)header withData:(NSData*) data {
-	if (data == nil || data.length == 0){
-		[transport sendBytes:[self assembleHeaderBytes:header]];
-	} else {
-        NSMutableData* toSend;
-        if (_version == 1) {
-            toSend = [NSMutableData dataWithCapacity:data.length + HEADER_BUF_LENGTH];
-        } else {
-            toSend = [NSMutableData dataWithCapacity:data.length + PROT2_HEADER_BUF_LENGTH];
-        }
-		
-		[toSend appendData:[self assembleHeaderBytes:header]];
-		
-		[toSend appendData:data];
-		
-		[transport sendBytes:toSend];
-	}
-	
+- (void)sendHeartbeat {
+	FMCAppLinkProtocolHeader *header = [FMCAppLinkProtocolHeader headerForVersion:self.version];
+    header.frameType = FMCFrameType_Control;
+    header.serviceType = 0;
+    header.frameData = FMCFrameData_Heartbeat;
+    header.sessionID = self.sessionID;
+
+    FMCAppLinkProtocolMessage *message = [FMCAppLinkProtocolMessage messageWithHeader:header andPayload:nil];
+
+    [self sendDataToTransport:message.data withPriority:header.serviceType];
+
 }
 
--(void) sendFrameToTransport:(FMCProtocolFrameHeader *)header {
-	[self sendFrameToTransport:header withData:nil];
-}
 
--(void) sendFrameToTransport:(FMCProtocolFrameHeader *)header withData:(NSData*) data offset:(NSInteger) offset length:(NSInteger) length{
-	
-    NSMutableData* toSend;
-    if (_version == 1) {
-        toSend = [NSMutableData dataWithCapacity:length + HEADER_BUF_LENGTH];
-    } else {
-        toSend = [NSMutableData dataWithCapacity:length + PROT2_HEADER_BUF_LENGTH];
+#pragma mark - FMCProtocolListener Implementation
+- (void)handleProtocolSessionStarted:(FMCServiceType)serviceType sessionID:(Byte)sessionID version:(Byte)version {
+    self.sessionID = sessionID;
+    self.maxVersionSupportedByHeadUnit = version;
+    self.version = MIN(self.maxVersionSupportedByHeadUnit, MAX_VERSION_TO_SEND);
+
+    if (self.version >= 3) {
+        // start hearbeat
     }
-	
-	[toSend appendData:[self assembleHeaderBytes:header]];
-	
-	[toSend appendBytes:data.bytes + offset length:length];
-	
-	[transport sendBytes:toSend];
-	
+
+    [self.protocolDelegate handleProtocolSessionStarted:serviceType sessionID:sessionID version:version];
 }
 
-//-(void) sendData:(NSData*)data sessionType:(FMCSessionType)sessionType sessionID:(Byte)sessionID {
--(void) sendData:(FMCProtocolMessage*) protocolMsg {
-    protocolMsg._rpcType = (Byte) 0x00;
-    FMCSessionType sessionType = protocolMsg._sessionType;
-    Byte sessionID = protocolMsg._sessionID;
-    
-    NSData* data;
-    if (_version == 2) {
-        if (protocolMsg._bulkData != nil) {
-            Byte* mallocPtr = malloc(12 + protocolMsg._jsonSize + protocolMsg._bulkData.length);
-            if (mallocPtr == nil) {
-                @throw [NSException exceptionWithName:@"OutOfMemoryException" reason:@"malloc failed" userInfo:nil];
-            }
-            data = [[NSData alloc] initWithBytesNoCopy:mallocPtr length:(12 + protocolMsg._jsonSize + protocolMsg._bulkData.length)];
-            sessionType = FMCSessionType_BulkData;
-        } else {
-            Byte* mallocPtr = malloc(12 + protocolMsg._jsonSize);
-            if (mallocPtr == nil) {
-                @throw [NSException exceptionWithName:@"OutOfMemoryException" reason:@"malloc failed" userInfo:nil];
-            }
-            data = [[NSData alloc] initWithBytesNoCopy:mallocPtr length:(12 + protocolMsg._jsonSize)];
-        }
-        FMCBinaryFrameHeader* binFrameHeader = [[FMCBinaryFrameHeader alloc] init];
-        binFrameHeader._rpcType = protocolMsg._rpcType;
-        binFrameHeader._functionID = protocolMsg._functionID;
-        binFrameHeader._correlationID = protocolMsg._correlationID;
-        binFrameHeader._jsonSize = protocolMsg._jsonSize;
-        
-        memcpy((void*)data.bytes, [binFrameHeader assembleHeaderBytes].bytes, 12);
-        memcpy((void*)data.bytes + 12, protocolMsg._data.bytes, protocolMsg._jsonSize);
-        
-        if (protocolMsg._bulkData != nil) {
-            memcpy((void*)data.bytes + 12 + protocolMsg._jsonSize, protocolMsg._bulkData.bytes, protocolMsg._bulkData.length);
-        }
-        protocolMsg._data = data;
-    }
-    
-    int maxDataSize;
-    if (_version == 1) {
-        maxDataSize = MTU_SIZE - HEADER_BUF_LENGTH;
-    } else {
-        maxDataSize = MTU_SIZE - PROT2_HEADER_BUF_LENGTH;
-    }
-	
-	@synchronized (msgLock) {
-        if (protocolMsg._data.length < maxDataSize) {
-            
-            _messageID++;
-            FMCProtocolFrameHeader *singleHeader = [FMCProtocolFrameHeaderFactory singleFrameWithSessionType:sessionType sessionID:sessionID dataSize:protocolMsg._data.length messageID:_messageID version:_version];
-            
-            [self sendFrameToTransport:singleHeader withData:protocolMsg._data];
-        } else {
-            _messageID++;
-            FMCProtocolFrameHeader *firstHeader = [FMCProtocolFrameHeaderFactory firstFrameWithSessionType:sessionType sessionID:sessionID messageID:_messageID version:_version];
-            
-            // Assemble first frame.
-            int frameCount = protocolMsg._data.length / maxDataSize;
-            if (protocolMsg._data.length % maxDataSize > 0) {
-                frameCount++;
-            }
-            NSMutableData *firstFrameData = [NSMutableData dataWithCapacity:8];
-            // First four bytes are data size.
-            [firstFrameData appendData:[FMCBitConverter intToByteArray:protocolMsg._data.length]];
-            // Second four bytes are frame count.
-            [firstFrameData appendData:[FMCBitConverter intToByteArray:frameCount]];
-            
-            [self sendFrameToTransport:firstHeader withData:firstFrameData];
-            
-            int currentOffset = 0;
-            
-            for (int i = 0; i < frameCount; i++) {
-                int bytesToWrite = protocolMsg._data.length - currentOffset;
-                if (bytesToWrite > maxDataSize) {
-                    bytesToWrite = maxDataSize;
-                }
-                
-                _consecFrameNumber++;
-
-                if (_consecFrameNumber == 0) {
-                    _consecFrameNumber++;
-                }
-
-                if ( (i+1) >= frameCount) {
-                    _consecFrameNumber = FMCFrameData_ConsecutiveLastFrame;
-                }
-
-                FMCProtocolFrameHeader *consecHeader = [FMCProtocolFrameHeaderFactory consecutiveFrameWithSessionType:sessionType sessionID:sessionID frameData:_consecFrameNumber dataSize:bytesToWrite messageID:_messageID version:_version];
-                [self sendFrameToTransport:consecHeader withData:protocolMsg._data offset:currentOffset length:bytesToWrite];
-                currentOffset += bytesToWrite;
-            }
-            
-            _consecFrameNumber = 0;
-
-        }
-		
-	}
+- (void)onProtocolMessageReceived:(FMCAppLinkProtocolMessage *)msg {
+    [self.protocolDelegate onProtocolMessageReceived:msg];
 }
 
--(void) sendStartSessionWithType:(FMCSessionType) sessionType {
-    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"consoleLog" object:@"Proxy: StartSession (request)"]];
-    [FMCDebugTool logInfo:@"Proxy: StartSession (request)"];
-    
-    FMCProtocolFrameHeader *header = [FMCProtocolFrameHeaderFactory startSessionWithSessionType:sessionType messageID:0x00 version:_version];
-	
-	@synchronized (msgLock) {
-		[self sendFrameToTransport:header];
-	}
+- (void)onProtocolOpened {
+    [self.protocolDelegate onProtocolOpened];
 }
 
--(void) sendEndSessionWithType:(FMCSessionType)sessionType sessionID:(Byte)sessionID {
-	FMCProtocolFrameHeader *header = [FMCProtocolFrameHeaderFactory endSessionWithSessionType:sessionType sessionID:sessionID messageID:0x00 version:_version];
-	@synchronized (msgLock) {
-		[self sendFrameToTransport:header];
-	}
+- (void)onProtocolClosed {
+    [self.protocolDelegate onProtocolClosed];
 }
 
-
--(void) dealloc {
-
-    [headerBuf release];
-    headerBuf = nil;
-
-    [dataBuf release];
-    dataBuf = nil;
-
-    [currentHeader release];
-    currentHeader = nil;
-
-    [frameAssemblerForSessionID release];
-    frameAssemblerForSessionID = nil;
-
-    [msgLock release];
-    msgLock = nil;
-	
-	[super dealloc];
+- (void)onError:(NSString *)info exception:(NSException *)e {
+    [self.protocolDelegate onError:info exception:e];
 }
+
 
 @end
-
-@implementation FrameAssembler
-
--(id) initWithListeners:(NSArray*)theListeners{
-	if (self = [super init]) {
-		listeners = [theListeners retain];
-	}
-	return self;
-}
-
--(void) handleFirstFrame:(FMCProtocolFrameHeader*) header data:(NSData*) data {
-	//The message is new, so let's figure out how big it is.
-	hasFirstFrame = true;
-	totalSize = [FMCBitConverter intFromByteArray:(Byte*)data.bytes offset:0] - 8;
-	framesRemaining = [FMCBitConverter intFromByteArray:(Byte*)data.bytes offset:4];
-    
-    [accumulator release];
-    accumulator = nil;
-    
-	accumulator = [[NSMutableData dataWithCapacity:totalSize] retain];
-	
-}
-
--(void) handleSecondFrame:(FMCProtocolFrameHeader*) header data:(NSData*) data {
-	[self handleRemainingFrame:header data:data];
-}
-
--(void) handleRemainingFrame:(FMCProtocolFrameHeader*) header data:(NSData*) data {
-	[accumulator appendData:data];
-	[self notifyIfFinished:header];
-	
-}
-
--(void) notifyIfFinished:(FMCProtocolFrameHeader*) header {
-	if (framesRemaining == 0) {
-		FMCProtocolMessage * message = [[FMCProtocolMessage alloc] init];
-        if (header._sessionType == FMCSessionType_RPC) {
-            message._messageType = FMCMessageType_RPC;
-        } else if (header._sessionType == FMCSessionType_BulkData) {
-            message._messageType = FMCMessageType_BULK;
-        } // end-if
-		message._sessionType = header._sessionType;
-		message._sessionID = header._sessionID;
-        
-        if (_version == 2) {
-            FMCBinaryFrameHeader* binFrameHeader = [FMCBinaryFrameHeader parseBinaryHeader:accumulator];
-            message._version = _version;
-            message._rpcType = binFrameHeader._rpcType;
-            message._functionID = binFrameHeader._functionID;
-            message._jsonSize = binFrameHeader._jsonSize;
-            message._correlationID = binFrameHeader._correlationID;
-            if (binFrameHeader._jsonSize > 0) {
-                message._data = binFrameHeader._jsonData;
-            }
-            if (binFrameHeader._bulkData != nil) {
-                message._bulkData = binFrameHeader._bulkData;
-            }
-        } else {
-            message._data = accumulator;
-        }
-		
-		NSArray* localListeners = nil;
-		@synchronized (listeners) {
-			localListeners = [listeners copy];
-		}
-			
-		for (NSObject<FMCProtocolListener> *listener in localListeners) {
-			[listener onProtocolMessageReceived:message];
-		}
-		[localListeners release];
-        
-        [message release];
-		
-		hasFirstFrame = false;
-		hasSecondFrame = false;
-
-        [accumulator release];
-        accumulator = nil;
-
-	}
-}
-
--(void) handleMultiFrame:(FMCProtocolFrameHeader*) header data:(NSData*) data {
-	if (!hasFirstFrame) {
-		hasFirstFrame = true;
-		[self handleFirstFrame:header data:data];
-	} else if (!hasSecondFrame) {
-		hasSecondFrame = true;
-		framesRemaining--;
-		[self handleSecondFrame:header data:data ];
-	} else {
-		framesRemaining--;
-		[self handleRemainingFrame:header data:data];
-	}
-	
-}
-
--(void) handleFrame:(FMCProtocolFrameHeader*) header data:(NSData*) data {
-    //Future proofing, header._version >= 2
-    if (header._version >= 2) {
-        _version = (Byte) 0x02;
-    }
-    
-    if (header._frameType == FMCFrameType_Control) {
-        if (header._frameData == FMCFrameData_StartSessionACK) {
-            if (_version == 2) {
-                _hashID = header._messageID;
-            }
-            NSArray* localListeners = nil;
-            @synchronized (listeners) {
-                localListeners = [listeners copy];
-            }
-            
-            for (NSObject<FMCProtocolListener> *listener in localListeners) {
-                [listener handleProtocolSessionStarted:header._sessionType sessionID:header._sessionID version:_version];
-            }
-            [localListeners release];
-        }
-    } else {
-        if (header._frameType == FMCFrameType_First || header._frameType == FMCFrameType_Consecutive) {
-            [self handleMultiFrame:header data:data];
-        } else {
-            FMCProtocolMessage * message = [[FMCProtocolMessage alloc] init];
-            if (header._sessionType == FMCSessionType_RPC) {
-                message._messageType = FMCMessageType_RPC;
-            } else if (header._sessionType == FMCSessionType_BulkData) {
-                message._messageType = FMCMessageType_BULK;
-            } // end-if
-            message._sessionType = header._sessionType;
-            message._sessionID = header._sessionID;
-            if (_version == 2) {
-                FMCBinaryFrameHeader* binFrameHeader = [FMCBinaryFrameHeader parseBinaryHeader:data];
-                message._version = _version;
-                message._rpcType = binFrameHeader._rpcType;
-                message._functionID = binFrameHeader._functionID;
-                message._jsonSize = binFrameHeader._jsonSize;
-                message._correlationID = binFrameHeader._correlationID;
-                if (binFrameHeader._jsonSize > 0) {
-                    message._data = binFrameHeader._jsonData;
-                }
-                if (binFrameHeader._bulkData != nil) {
-                    message._bulkData = binFrameHeader._bulkData;
-                }
-            } else {
-                message._data = data;
-            }
-            
-            NSArray* localListeners = nil;
-            @synchronized (listeners) {
-                localListeners = [listeners copy];
-            }
-            
-            for (NSObject<FMCProtocolListener> *listener in localListeners) {
-                [listener onProtocolMessageReceived:message];
-            }
-            [localListeners release];
-            
-            [message release];
-        }
-    }
-}
-
--(void) dealloc {
-
-    [accumulator release];
-    accumulator = nil;
-    
-    [listeners release];
-    listeners = nil;
-    
-    [super dealloc];
-}
-
-@end
-
-@implementation BulkAssembler
-
--(void) handleSecondFrame:(FMCProtocolFrameHeader*) header data:(NSData*) data {
-	bulkCorrId = [FMCBitConverter intFromByteArray:(Byte*)data.bytes offset:4];
-	[accumulator appendBytes:data.bytes + 8 length:header._dataSize - 8];
-	[self notifyIfFinished:header];
-}
-
-@end
-
-

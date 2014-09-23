@@ -12,6 +12,6 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCDriverDistractionState* state;
+@property(strong) FMCDriverDistractionState* state;
 
 @end

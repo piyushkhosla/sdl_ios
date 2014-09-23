@@ -12,6 +12,6 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCAppInterfaceUnregisteredReason* reason;
+@property(strong) FMCAppInterfaceUnregisteredReason* reason;
 
 @end

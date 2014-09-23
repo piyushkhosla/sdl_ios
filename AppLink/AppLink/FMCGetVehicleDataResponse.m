@@ -31,7 +31,7 @@
     if ([obj isKindOfClass:FMCGPSData.class]) {
         return (FMCGPSData*)obj;
     } else {
-        return [[[FMCGPSData alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCGPSData alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -154,7 +154,7 @@
     if ([obj isKindOfClass:FMCTireStatus.class]) {
         return (FMCTireStatus*)obj;
     } else {
-        return [[[FMCTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCTireStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -183,7 +183,7 @@
     if ([obj isKindOfClass:FMCBeltStatus.class]) {
         return (FMCBeltStatus*)obj;
     } else {
-        return [[[FMCBeltStatus alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCBeltStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -200,7 +200,7 @@
     if ([obj isKindOfClass:FMCBodyInformation.class]) {
         return (FMCBodyInformation*)obj;
     } else {
-        return [[[FMCBodyInformation alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCBodyInformation alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -217,7 +217,7 @@
     if ([obj isKindOfClass:FMCDeviceStatus.class]) {
         return (FMCDeviceStatus*)obj;
     } else {
-        return [[[FMCDeviceStatus alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCDeviceStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -268,7 +268,7 @@
     if ([obj isKindOfClass:FMCHeadLampStatus.class]) {
         return (FMCHeadLampStatus*)obj;
     } else {
-        return [[[FMCHeadLampStatus alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCHeadLampStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -321,7 +321,7 @@
     if ([obj isKindOfClass:FMCECallInfo.class]) {
         return (FMCECallInfo*)obj;
     } else {
-        return [[[FMCECallInfo alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCECallInfo alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -338,7 +338,7 @@
     if ([obj isKindOfClass:FMCAirbagStatus.class]) {
         return (FMCAirbagStatus*)obj;
     } else {
-        return [[[FMCAirbagStatus alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCAirbagStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -355,7 +355,7 @@
     if ([obj isKindOfClass:FMCEmergencyEvent.class]) {
         return (FMCEmergencyEvent*)obj;
     } else {
-        return [[[FMCEmergencyEvent alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCEmergencyEvent alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -372,7 +372,7 @@
     if ([obj isKindOfClass:FMCClusterModeStatus.class]) {
         return (FMCClusterModeStatus*)obj;
     } else {
-        return [[[FMCClusterModeStatus alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCClusterModeStatus alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 
@@ -389,7 +389,7 @@
     if ([obj isKindOfClass:FMCMyKey.class]) {
         return (FMCMyKey*)obj;
     } else {
-        return [[[FMCMyKey alloc] initWithDictionary:(NSMutableDictionary*)obj] autorelease];
+        return [[FMCMyKey alloc] initWithDictionary:(NSMutableDictionary*)obj];
     }
 }
 

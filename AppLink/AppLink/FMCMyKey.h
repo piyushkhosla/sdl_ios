@@ -12,6 +12,6 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCVehicleDataStatus* e911Override;
+@property(strong) FMCVehicleDataStatus* e911Override;
 
 @end

@@ -10,6 +10,6 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSString* displayLayout;
+@property(strong) NSString* displayLayout;
 
 @end

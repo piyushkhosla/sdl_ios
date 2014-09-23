@@ -13,7 +13,8 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCStartTime* startTime;
-@property(assign) FMCUpdateMode* updateMode;
+@property(strong) FMCStartTime* startTime;
+@property(strong) FMCStartTime* endTime;
+@property(strong) FMCUpdateMode* updateMode;
 
 @end

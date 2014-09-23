@@ -5,19 +5,15 @@
 #import <UIKit/UIKit.h>
 #import <AppLink/FMCDebugTool.h>
 
-#import <AppLink/FMCRPCMessage.h>
-
 @interface FMCConsoleController : UITableViewController <FMCDebugToolConsole> {
 	NSMutableArray* messageList;
     BOOL atBottom;
     NSDateFormatter* dateFormatter;
 }
 
-@property (readonly) NSMutableArray *messageList;
+@property (strong, readonly) NSMutableArray *messageList;
 
 -(id) initWithTableView:(UITableView*) tableView;
 
--(void) appendString:(NSString*) toAppend;
--(void) appendMessage:(FMCRPCMessage*) toAppend;
 
 @end

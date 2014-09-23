@@ -10,7 +10,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* ecuName;
-@property(assign) NSNumber* dtcMask;
+@property(strong) NSNumber* ecuName;
+@property(strong) NSNumber* dtcMask;
 
 @end

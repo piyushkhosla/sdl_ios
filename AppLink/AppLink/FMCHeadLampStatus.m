@@ -42,4 +42,21 @@
     return [store objectForKey:NAMES_highBeamsOn];
 }
 
+-(void) setAmbientLightSensorStatus:(FMCAmbientLightStatus*) ambientLightSensorStatus {
+    if (ambientLightSensorStatus != nil) {
+        [store setObject:ambientLightSensorStatus forKey:NAMES_ambientLightSensorStatus];
+    } else {
+        [store removeObjectForKey:NAMES_ambientLightSensorStatus];
+    }
+}
+
+-(FMCAmbientLightStatus*) ambientLightSensorStatus {
+    NSObject* obj = [store objectForKey:NAMES_ambientLightSensorStatus];
+    if ([obj isKindOfClass:FMCAmbientLightStatus.class]) {
+        return (FMCAmbientLightStatus*)obj;
+    } else {
+        return [FMCAmbientLightStatus valueOf:(NSString*)obj];
+    }
+}
+
 @end

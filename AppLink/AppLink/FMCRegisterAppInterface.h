@@ -7,21 +7,24 @@
 
 #import <AppLink/FMCSyncMsgVersion.h>
 #import <AppLink/FMCLanguage.h>
+#import <AppLink/FMCDeviceInfo.h>
 
 @interface FMCRegisterAppInterface : FMCRPCRequest {}
 
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) FMCSyncMsgVersion* syncMsgVersion;
-@property(assign) NSString* appName;
-@property(assign) NSMutableArray* ttsName;
-@property(assign) NSString* ngnMediaScreenAppName;
-@property(assign) NSMutableArray* vrSynonyms;
-@property(assign) NSNumber* isMediaApplication;
-@property(assign) FMCLanguage* languageDesired;
-@property(assign) FMCLanguage* hmiDisplayLanguageDesired;
-@property(assign) NSMutableArray* appHMIType;
-@property(assign) NSString* appID;
+@property(strong) FMCSyncMsgVersion* syncMsgVersion;
+@property(strong) NSString* appName;
+@property(strong) NSMutableArray* ttsName;
+@property(strong) NSString* ngnMediaScreenAppName;
+@property(strong) NSMutableArray* vrSynonyms;
+@property(strong) NSNumber* isMediaApplication;
+@property(strong) FMCLanguage* languageDesired;
+@property(strong) FMCLanguage* hmiDisplayLanguageDesired;
+@property(strong) NSMutableArray* appHMIType;
+@property(strong) NSString* hashID;
+@property(strong) FMCDeviceInfo* deviceInfo;
+@property(strong) NSString* appID;
 
 @end

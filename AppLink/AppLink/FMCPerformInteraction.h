@@ -6,19 +6,21 @@
 #import <AppLink/FMCRPCRequest.h>
 
 #import <AppLink/FMCInteractionMode.h>
+#import <AppLink/FMCLayoutMode.h>
 
 @interface FMCPerformInteraction : FMCRPCRequest {}
 
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSString* initialText;
-@property(assign) NSMutableArray* initialPrompt;
-@property(assign) FMCInteractionMode* interactionMode;
-@property(assign) NSMutableArray* interactionChoiceSetIDList;
-@property(assign) NSMutableArray* helpPrompt;
-@property(assign) NSMutableArray* timeoutPrompt;
-@property(assign) NSNumber* timeout;
-@property(assign) NSMutableArray* vrHelp;
+@property(strong) NSString* initialText;
+@property(strong) NSMutableArray* initialPrompt;
+@property(strong) FMCInteractionMode* interactionMode;
+@property(strong) NSMutableArray* interactionChoiceSetIDList;
+@property(strong) NSMutableArray* helpPrompt;
+@property(strong) NSMutableArray* timeoutPrompt;
+@property(strong) NSNumber* timeout;
+@property(strong) NSMutableArray* vrHelp;
+@property(strong) FMCLayoutMode* interactionLayout;
 
 @end

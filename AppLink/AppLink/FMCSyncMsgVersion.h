@@ -10,7 +10,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* majorVersion;
-@property(assign) NSNumber* minorVersion;
+@property(strong) NSNumber* majorVersion;
+@property(strong) NSNumber* minorVersion;
 
 @end

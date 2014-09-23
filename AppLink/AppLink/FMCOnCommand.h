@@ -12,7 +12,7 @@
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
-@property(assign) NSNumber* cmdID;
-@property(assign) FMCTriggerSource* triggerSource;
+@property(strong) NSNumber* cmdID;
+@property(strong) FMCTriggerSource* triggerSource;
 
 @end
