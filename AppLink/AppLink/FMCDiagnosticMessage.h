@@ -4,6 +4,11 @@
 
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCRequest.h>
+/** Non periodic vehicle diagnostic request
+ *
+ * @Since AppLink 3.0
+ *
+ */
 
 @interface FMCDiagnosticMessage : FMCRPCRequest {}
 
