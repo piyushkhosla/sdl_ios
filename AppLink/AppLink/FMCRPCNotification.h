@@ -7,4 +7,7 @@
 
 @interface FMCRPCNotification : FMCRPCMessage {}
 
+- (id)initWithName:(NSString *)name;
+- (id)initWithDictionary:(NSMutableDictionary *)dict;
+
 @end
