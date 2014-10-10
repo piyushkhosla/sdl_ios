@@ -54,7 +54,6 @@
 		59A030091978FBA1003E8ECF /* FMCAppLinkV2ProtocolHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A02E1C1978FBA0003E8ECF /* FMCAppLinkV2ProtocolHeader.m */; };
 		59A0300A1978FBA1003E8ECF /* FMCAppLinkV2ProtocolMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 59A02E1D1978FBA0003E8ECF /* FMCAppLinkV2ProtocolMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		59A0300B1978FBA1003E8ECF /* FMCAppLinkV2ProtocolMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A02E1E1978FBA0003E8ECF /* FMCAppLinkV2ProtocolMessage.m */; };
-		59A0300C1978FBA1003E8ECF /* FMCProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 59A02E1F1978FBA0003E8ECF /* FMCProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		59A0300D1978FBA1003E8ECF /* FMCProtocolListener.h in Headers */ = {isa = PBXBuildFile; fileRef = 59A02E201978FBA0003E8ECF /* FMCProtocolListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		59A0300E1978FBA1003E8ECF /* FMCRPCPayload.h in Headers */ = {isa = PBXBuildFile; fileRef = 59A02E211978FBA0003E8ECF /* FMCRPCPayload.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		59A0300F1978FBA1003E8ECF /* FMCRPCPayload.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A02E221978FBA0003E8ECF /* FMCRPCPayload.m */; };
@@ -64,7 +63,6 @@
 		59A030131978FBA1003E8ECF /* FMCEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A02E271978FBA0003E8ECF /* FMCEnum.m */; };
 		59A030141978FBA1003E8ECF /* FMCFunctionID.h in Headers */ = {isa = PBXBuildFile; fileRef = 59A02E281978FBA0003E8ECF /* FMCFunctionID.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		59A030151978FBA1003E8ECF /* FMCFunctionID.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A02E291978FBA0003E8ECF /* FMCFunctionID.m */; };
-		59A030161978FBA1003E8ECF /* FMCISyncProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 59A02E2A1978FBA0003E8ECF /* FMCISyncProxy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		59A030171978FBA1003E8ECF /* FMCJingle.h in Headers */ = {isa = PBXBuildFile; fileRef = 59A02E2B1978FBA0003E8ECF /* FMCJingle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		59A030181978FBA1003E8ECF /* FMCJingle.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A02E2C1978FBA0003E8ECF /* FMCJingle.m */; };
 		59A030191978FBA1003E8ECF /* FMCJsonDecoder.h in Headers */ = {isa = PBXBuildFile; fileRef = 59A02E2D1978FBA0003E8ECF /* FMCJsonDecoder.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -515,6 +513,8 @@
 		E9A6E33F19CB30FD0054E1AD /* FMCLockScreenStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A6E33D19CB30FD0054E1AD /* FMCLockScreenStatus.m */; };
 		E9A6E34319CB3C880054E1AD /* FMCOnLockScreenStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A6E34119CB3C880054E1AD /* FMCOnLockScreenStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9A6E34419CB3C880054E1AD /* FMCOnLockScreenStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A6E34219CB3C880054E1AD /* FMCOnLockScreenStatus.m */; };
+		E9A8045E19DC412C00C81862 /* FMCDataStreamHandlingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A8045C19DC412C00C81862 /* FMCDataStreamHandlingDelegate.h */; };
+		E9A8045F19DC412C00C81862 /* FMCDataStreamHandlingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A8045D19DC412C00C81862 /* FMCDataStreamHandlingDelegate.m */; };
 		E9BA327819C1EC3100D59762 /* FMCPrioritizedObjectCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = E9BA327619C1EC3100D59762 /* FMCPrioritizedObjectCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9BA327919C1EC3100D59762 /* FMCPrioritizedObjectCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BA327719C1EC3100D59762 /* FMCPrioritizedObjectCollection.m */; };
 /* End PBXBuildFile section */
@@ -554,7 +554,6 @@
 		59A02E1C1978FBA0003E8ECF /* FMCAppLinkV2ProtocolHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCAppLinkV2ProtocolHeader.m; sourceTree = "<group>"; };
 		59A02E1D1978FBA0003E8ECF /* FMCAppLinkV2ProtocolMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCAppLinkV2ProtocolMessage.h; sourceTree = "<group>"; };
 		59A02E1E1978FBA0003E8ECF /* FMCAppLinkV2ProtocolMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCAppLinkV2ProtocolMessage.m; sourceTree = "<group>"; };
-		59A02E1F1978FBA0003E8ECF /* FMCProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCProtocol.h; sourceTree = "<group>"; };
 		59A02E201978FBA0003E8ECF /* FMCProtocolListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCProtocolListener.h; sourceTree = "<group>"; };
 		59A02E211978FBA0003E8ECF /* FMCRPCPayload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCRPCPayload.h; sourceTree = "<group>"; };
 		59A02E221978FBA0003E8ECF /* FMCRPCPayload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCRPCPayload.m; sourceTree = "<group>"; };
@@ -564,7 +563,6 @@
 		59A02E271978FBA0003E8ECF /* FMCEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCEnum.m; sourceTree = "<group>"; };
 		59A02E281978FBA0003E8ECF /* FMCFunctionID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCFunctionID.h; sourceTree = "<group>"; };
 		59A02E291978FBA0003E8ECF /* FMCFunctionID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCFunctionID.m; sourceTree = "<group>"; };
-		59A02E2A1978FBA0003E8ECF /* FMCISyncProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCISyncProxy.h; sourceTree = "<group>"; };
 		59A02E2B1978FBA0003E8ECF /* FMCJingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCJingle.h; sourceTree = "<group>"; };
 		59A02E2C1978FBA0003E8ECF /* FMCJingle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCJingle.m; sourceTree = "<group>"; };
 		59A02E2D1978FBA0003E8ECF /* FMCJsonDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCJsonDecoder.h; sourceTree = "<group>"; };
@@ -1022,6 +1020,8 @@
 		E9A6E33D19CB30FD0054E1AD /* FMCLockScreenStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCLockScreenStatus.m; sourceTree = "<group>"; };
 		E9A6E34119CB3C880054E1AD /* FMCOnLockScreenStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCOnLockScreenStatus.h; sourceTree = "<group>"; };
 		E9A6E34219CB3C880054E1AD /* FMCOnLockScreenStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCOnLockScreenStatus.m; sourceTree = "<group>"; };
+		E9A8045C19DC412C00C81862 /* FMCDataStreamHandlingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCDataStreamHandlingDelegate.h; sourceTree = "<group>"; };
+		E9A8045D19DC412C00C81862 /* FMCDataStreamHandlingDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCDataStreamHandlingDelegate.m; sourceTree = "<group>"; };
 		E9BA327619C1EC3100D59762 /* FMCPrioritizedObjectCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCPrioritizedObjectCollection.h; sourceTree = "<group>"; };
 		E9BA327719C1EC3100D59762 /* FMCPrioritizedObjectCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCPrioritizedObjectCollection.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1092,7 +1092,6 @@
 				59A02E1C1978FBA0003E8ECF /* FMCAppLinkV2ProtocolHeader.m */,
 				59A02E1D1978FBA0003E8ECF /* FMCAppLinkV2ProtocolMessage.h */,
 				59A02E1E1978FBA0003E8ECF /* FMCAppLinkV2ProtocolMessage.m */,
-				59A02E1F1978FBA0003E8ECF /* FMCProtocol.h */,
 				59A02E201978FBA0003E8ECF /* FMCProtocolListener.h */,
 				59A02E211978FBA0003E8ECF /* FMCRPCPayload.h */,
 				59A02E221978FBA0003E8ECF /* FMCRPCPayload.m */,
@@ -1113,7 +1112,6 @@
 				59A02E271978FBA0003E8ECF /* FMCEnum.m */,
 				59A02E281978FBA0003E8ECF /* FMCFunctionID.h */,
 				59A02E291978FBA0003E8ECF /* FMCFunctionID.m */,
-				59A02E2A1978FBA0003E8ECF /* FMCISyncProxy.h */,
 				59A02E2B1978FBA0003E8ECF /* FMCJingle.h */,
 				59A02E2C1978FBA0003E8ECF /* FMCJingle.m */,
 				59A02E2D1978FBA0003E8ECF /* FMCJsonDecoder.h */,
@@ -1138,6 +1136,8 @@
 				59A02E401978FBA0003E8ECF /* FMCSyncProxyFactory.m */,
 				59A02E411978FBA0003E8ECF /* FMCTTSChunkFactory.h */,
 				59A02E421978FBA0003E8ECF /* FMCTTSChunkFactory.m */,
+				E9A8045C19DC412C00C81862 /* FMCDataStreamHandlingDelegate.h */,
+				E9A8045D19DC412C00C81862 /* FMCDataStreamHandlingDelegate.m */,
 			);
 			name = Proxy;
 			sourceTree = "<group>";
@@ -1732,6 +1732,7 @@
 				59A031931978FBAD003E8ECF /* FMCHeadLampStatus.h in Headers */,
 				59A030231978FBA1003E8ECF /* FMCRPCRequest.h in Headers */,
 				59A0309B1978FBA2003E8ECF /* FMCTextFieldName.h in Headers */,
+				E9A8045E19DC412C00C81862 /* FMCDataStreamHandlingDelegate.h in Headers */,
 				59A030E91978FBA4003E8ECF /* FMCDeleteInteractionChoiceSet.h in Headers */,
 				59A030171978FBA1003E8ECF /* FMCJingle.h in Headers */,
 				59A031731978FBAB003E8ECF /* FMCUnsubscribeVehicleDataResponse.h in Headers */,
@@ -1872,7 +1873,6 @@
 				59A031571978FBA9003E8ECF /* FMCSetAppIconResponse.h in Headers */,
 				59A0305F1978FBA1003E8ECF /* FMCIgnitionStableStatus.h in Headers */,
 				59A031171978FBA6003E8ECF /* FMCSubscribeButton.h in Headers */,
-				59A030161978FBA1003E8ECF /* FMCISyncProxy.h in Headers */,
 				59A030191978FBA1003E8ECF /* FMCJsonDecoder.h in Headers */,
 				59A030F31978FBA5003E8ECF /* FMCGetDTCs.h in Headers */,
 				59A030B11978FBA3003E8ECF /* FMCVrCapabilities.h in Headers */,
@@ -1890,7 +1890,6 @@
 				59A0302F1978FBA1003E8ECF /* FMCAmbientLightStatus.h in Headers */,
 				59A030AF1978FBA3003E8ECF /* FMCVehicleDataType.h in Headers */,
 				59A031D11978FBB1003E8ECF /* FMCTransportDelegate.h in Headers */,
-				59A0300C1978FBA1003E8ECF /* FMCProtocol.h in Headers */,
 				59A030F91978FBA5003E8ECF /* FMCPerformAudioPassThru.h in Headers */,
 				59A030C51978FBA3003E8ECF /* FMCOnHashChange.h in Headers */,
 				59A0301F1978FBA1003E8ECF /* FMCRPCMessage.h in Headers */,
@@ -2052,6 +2051,7 @@
 				59A031061978FBA5003E8ECF /* FMCScrollableMessage.m in Sources */,
 				59A030E61978FBA4003E8ECF /* FMCDeleteCommand.m in Sources */,
 				59A0303E1978FBA1003E8ECF /* FMCButtonName.m in Sources */,
+				E9A8045F19DC412C00C81862 /* FMCDataStreamHandlingDelegate.m in Sources */,
 				59A02FFB1978FBA1003E8ECF /* FMCAppLinkProtocolHeader.m in Sources */,
 				59A030BE1978FBA3003E8ECF /* FMCOnButtonPress.m in Sources */,
 				59A031CF1978FBB1003E8ECF /* FMCTCPTransport.m in Sources */,

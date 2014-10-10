@@ -1,49 +1,47 @@
 //  FMCSyncProxy.h
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
-//  Version: ##Version##
+//  Version: AppLink-20141001-130610-LOCAL-iOS
 
 #import <Foundation/Foundation.h>
-#import <AppLink/FMCISyncProxy.h>
-#import <AppLink/FMCProtocol.h>
 #import <AppLink/FMCProxyListener.h>
 #import <AppLink/FMCRPCRequestFactory.h>
 #import <AppLink/FMCTransport.h>
+#import "FMCAbstractProtocol.h"
 
-@interface FMCSyncProxy : NSObject<FMCProtocolListener, NSStreamDelegate> {
+@interface FMCSyncProxy : NSObject <FMCProtocolListener, NSStreamDelegate> {
     Byte _version;
-	Byte rpcSessionID;
 	Byte bulkSessionID;
 	BOOL isConnected;
     BOOL alreadyDestructed;
 
 }
 
-@property (strong) NSObject<FMCProtocol>* protocol;
+@property (strong) FMCAbstractProtocol* protocol;
 @property (strong) NSObject<FMCTransport>* transport;
 @property (strong) NSMutableArray* proxyListeners;
 @property (strong) NSTimer* handshakeTimer;
 @property (strong) NSString *debugConsoleGroupName;
 
--(id) initWithTransport:(NSObject<FMCTransport>*) transport protocol:(NSObject<FMCProtocol>*) protocol delegate:(NSObject<FMCProxyListener>*) delegate;
+-(id) initWithTransport:(NSObject<FMCTransport>*) transport protocol:(FMCAbstractProtocol *)protocol delegate:(NSObject<FMCProxyListener>*) delegate;
 
 -(void) dispose;
 -(void) addDelegate:(NSObject<FMCProxyListener>*) delegate;
 
 -(void) sendRPCRequest:(FMCRPCMessage*) msg;
 -(void) handleRpcMessage:(NSDictionary*) msg;
-
--(NSString*) getProxyVersion;
+-(void) handleProtocolMessage:(FMCAppLinkProtocolMessage*) msgData;
 
 -(void) destroyHandshakeTimer;
--(void) handleProtocolMessage:(FMCAppLinkProtocolMessage*) msgData;
 
 +(void)enableSiphonDebug;
 +(void)disableSiphonDebug;
 
+-(NSString*) getProxyVersion;
 -(NSObject<FMCTransport>*)getTransport;
--(NSObject<FMCProtocol>*)getProtocol;
+-(FMCAbstractProtocol*)getProtocol;
 
 - (void)putFileStream:(NSInputStream*)inputStream :(FMCPutFile*)putFileRPCRequest;
+
 
 @end

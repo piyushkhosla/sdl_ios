@@ -12,11 +12,13 @@
 	return self;
 }
 
+
+// Implement in subclasses.
 - (void)sendStartSessionWithType:(FMCServiceType)serviceType {
 	[self doesNotRecognizeSelector:_cmd];
 }
 
-- (void)sendEndSessionWithType:(FMCServiceType)serviceType sessionID:(Byte)sessionID {
+- (void)sendEndSessionWithType:(FMCServiceType)serviceType {
 	[self doesNotRecognizeSelector:_cmd];
 }
 
@@ -24,9 +26,22 @@
     [self doesNotRecognizeSelector:_cmd];
 }
 
+- (void)sendHeartbeat {
+    [self doesNotRecognizeSelector:_cmd];
+}
+
 - (void)handleBytesFromTransport:(NSData *)receivedData {
 	[self doesNotRecognizeSelector:_cmd];
 }
+
+- (void)sendRawDataStream:(NSInputStream *)inputStream withServiceType:(FMCServiceType)serviceType {
+    [self doesNotRecognizeSelector:_cmd];
+}
+
+- (void)sendRawData:(NSData *)data withServiceType:(FMCServiceType)serviceType {
+    [self doesNotRecognizeSelector:_cmd];
+}
+
 
 
 #pragma - FMCTransportListener Implementation

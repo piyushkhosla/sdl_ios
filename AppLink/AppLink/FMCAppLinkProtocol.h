@@ -9,10 +9,15 @@
 
 @interface FMCAppLinkProtocol : FMCAbstractProtocol <FMCProtocolListener>
 
+// Sending
 - (void)sendStartSessionWithType:(FMCServiceType)serviceType;
-- (void)sendEndSessionWithType:(FMCServiceType)serviceType sessionID:(Byte)sessionID;
+- (void)sendEndSessionWithType:(FMCServiceType)serviceType;
 - (void)sendRPCRequest:(FMCRPCRequest *)rpcRequest;
-- (void)handleBytesFromTransport:(NSData *)receivedData;
 - (void)sendHeartbeat;
+- (void)sendRawDataStream:(NSInputStream *)inputStream withServiceType:(FMCServiceType)serviceType;
+- (void)sendRawData:(NSData *)data withServiceType:(FMCServiceType)serviceType;
+
+// Recieving
+- (void)handleBytesFromTransport:(NSData *)receivedData;
 
 @end
