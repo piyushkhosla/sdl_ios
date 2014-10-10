@@ -66,6 +66,10 @@
  * existing rules for "collisions" still in effect</li>
  * </ul>
  * <p>
+ * <b>Additional Notes:</b><br><ul>Total character limit depends on platform.
+ * Chunks are limited to 500 characters; however you can have multiple TTS chunks.
+ * On Gen 1.1 there is a total character limit of 500 characters across all chunks. This could vary according to the VCA.
+ * <p>
  *
  * Since AppLink 1.0<br/>
  * See FMCAlert
