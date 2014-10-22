@@ -200,9 +200,15 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
     [self.recieveBuffer appendData:recievedData];
     [logMessage appendFormat:@"(%ld) ", (long)self.recieveBuffer.length];
 
+    [self processMessages];
+}
+
+- (void)processMessages {
+    NSMutableString *logMessage = [[NSMutableString alloc]init];
+    
     // Get the version
     UInt8 incomingVersion = [FMCAppLinkProtocolMessage determineVersion:self.recieveBuffer];
-
+    
     // If we have enough bytes, create the header.
     FMCAppLinkProtocolHeader* header = [FMCAppLinkProtocolHeader headerForVersion:incomingVersion];
     NSUInteger headerSize = header.size;
@@ -214,7 +220,7 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
         [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];
         return;
     }
-
+    
     // If we have enough bytes, finish building the message.
     FMCAppLinkProtocolMessage *message = nil;
     NSUInteger payloadSize = header.bytesInPayload;
@@ -232,17 +238,18 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
         [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];
         return;
     }
-
-
+    
     // Need to maintain the recieveBuffer, remove the bytes from it which we just processed.
     self.recieveBuffer = [[self.recieveBuffer subdataWithRange:NSMakeRange(messageSize, self.recieveBuffer.length - messageSize)] mutableCopy];
-
-
+    
     // Pass on ultimate disposition of the message to the message router.
     dispatch_async(_recieveQueue, ^{
         [self.messageRouter handleRecievedMessage:message];
     });
-
+    
+    // Call recursively until the buffer is empty or incomplete message is encountered
+    if (self.recieveBuffer.length > 0)
+        [self processMessages];
 }
 
 - (void)sendHeartbeat {
