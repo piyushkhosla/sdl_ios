@@ -100,7 +100,11 @@
 
 - (void)accessoryDisconnected:(NSNotification*) notification {
     [FMCDebugTool logInfo:@"Accessory Disconnected" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-    [self disconnect];
+
+    EAAccessory* accessory = [notification.userInfo objectForKey:EAAccessoryKey];
+    if (accessory.connectionID == self.session.accessory.connectionID) {
+        [self disconnect];
+    }
 }
 
 -(void)applicationWillEnterForeground:(NSNotification *)notification {
