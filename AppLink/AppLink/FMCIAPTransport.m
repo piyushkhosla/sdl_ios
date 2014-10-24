@@ -261,16 +261,17 @@
 	}
 }
 
-- (void)dealloc {
-    [FMCDebugTool logInfo:@"Dealloc" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-    
-    [self closeSession];
-    [self setupControllerForAccessory:nil withProtocolString:nil];
-    
+- (void)unregister {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EAAccessoryDidConnectNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:EAAccessoryDidDisconnectNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
+}
+
+- (void)dealloc {
+    [self unregister];
+    [self closeSession];
+    [self setupControllerForAccessory:nil withProtocolString:nil];
 }
 
 
