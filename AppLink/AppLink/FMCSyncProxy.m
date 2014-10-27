@@ -510,9 +510,7 @@ const int POLICIES_CORRELATION_ID = 65535;
         [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     }
 
-    // Send and log RPC Request
-    logMessage = [NSString stringWithFormat:@"SystemRequest (request)\n%@\nData length=%lu", [request serializeAsDictionary:2], (unsigned long)data.length ];
-    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    // Send RPC Request
     [self sendRPCRequestPrivate:request];
 
 }
