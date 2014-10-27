@@ -306,7 +306,7 @@
                 float randomMinMax = 0.0f + (0.5f-0.0f)*randomNumber; // between Min (0.0) and Max (0.5)
                 
                 [FMCDebugTool logInfo:[NSString stringWithFormat:@"Wait: %f", randomMinMax] withType:FMCDebugType_Transport_iAP];
-                [self performSelector:@selector(openSession) withObject:nil afterDelay:randomNumber];
+                [self performSelector:@selector(connect) withObject:nil afterDelay:randomNumber];
             } else {
                 [FMCDebugTool logInfo:@"Session Not Opened" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
             }
