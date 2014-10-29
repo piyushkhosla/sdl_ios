@@ -205,7 +205,11 @@
             if (!self.isOutputStreamReady && !self.isInputStreamReady) {
                 [FMCDebugTool logInfo:@"Streams Event End" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
                 [self disconnect];
-                [self connect];
+                
+                float randomNumber = (float)arc4random() / UINT_MAX; // between 0 and 1
+                float randomMinMax = 0.0f + (0.5f-0.0f)*randomNumber; // between Min (0.0) and Max (0.5)
+                [FMCDebugTool logInfo:[NSString stringWithFormat:@"Wait: %f", randomMinMax] withType:FMCDebugType_Transport_iAP];
+                [self performSelector:@selector(connect) withObject:nil afterDelay:randomMinMax];
             }
             break;
         }
@@ -306,7 +310,7 @@
                 float randomMinMax = 0.0f + (0.5f-0.0f)*randomNumber; // between Min (0.0) and Max (0.5)
                 
                 [FMCDebugTool logInfo:[NSString stringWithFormat:@"Wait: %f", randomMinMax] withType:FMCDebugType_Transport_iAP];
-                [self performSelector:@selector(connect) withObject:nil afterDelay:randomNumber];
+                [self performSelector:@selector(connect) withObject:nil afterDelay:randomMinMax];
             } else {
                 [FMCDebugTool logInfo:@"Session Not Opened" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
             }
