@@ -79,7 +79,6 @@
         if (!self.onControlProtocol) {
             [FMCDebugTool logInfo:@"Transport Not Ready" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
             self.transportReady = NO;
-            [self notifyTransportDisconnected];
         }
     }
 }
@@ -104,6 +103,7 @@
     EAAccessory* accessory = [notification.userInfo objectForKey:EAAccessoryKey];
     if (accessory.connectionID == self.session.accessory.connectionID) {
         [self disconnect];
+        [self notifyTransportDisconnected];
     }
 }
 
@@ -112,8 +112,10 @@
     //TODO:DEBUG
     //    [self.backgroundedTimer invalidate];
     
-    [self setupControllerForAccessory:nil withProtocolString:nil];
-    [self connect];
+    if (!self.session) {
+        [self setupControllerForAccessory:nil withProtocolString:nil];
+        [self connect];
+    }
 }
 
 -(void)applicationDidEnterBackground:(NSNotification *)notification {
@@ -206,10 +208,12 @@
                 [FMCDebugTool logInfo:@"Streams Event End" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
                 [self disconnect];
                 
-                float randomNumber = (float)arc4random() / UINT_MAX; // between 0 and 1
-                float randomMinMax = 0.0f + (0.5f-0.0f)*randomNumber; // between Min (0.0) and Max (0.5)
-                [FMCDebugTool logInfo:[NSString stringWithFormat:@"Wait: %f", randomMinMax] withType:FMCDebugType_Transport_iAP];
-                [self performSelector:@selector(connect) withObject:nil afterDelay:randomMinMax];
+                if (!self.useLegacyProtocol) {
+                    float randomNumber = (float)arc4random() / UINT_MAX; // between 0 and 1
+                    float randomMinMax = 0.0f + (0.5f-0.0f)*randomNumber; // between Min (0.0) and Max (0.5)
+                    [FMCDebugTool logInfo:[NSString stringWithFormat:@"Wait: %f", randomMinMax] withType:FMCDebugType_Transport_iAP];
+                    [self performSelector:@selector(connect) withObject:nil afterDelay:randomMinMax];
+                }
             }
             break;
         }
@@ -304,16 +308,15 @@
         } else {
             if ([self.protocolString isEqualToString:CONTROL_PROTOCOL_STRING]) {
                 [FMCDebugTool logInfo:@"Session Not Opened (Control Protocol)" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-                
-                //Begin Connection Retry
-                float randomNumber = (float)arc4random() / UINT_MAX; // between 0 and 1
-                float randomMinMax = 0.0f + (0.5f-0.0f)*randomNumber; // between Min (0.0) and Max (0.5)
-                
-                [FMCDebugTool logInfo:[NSString stringWithFormat:@"Wait: %f", randomMinMax] withType:FMCDebugType_Transport_iAP];
-                [self performSelector:@selector(connect) withObject:nil afterDelay:randomMinMax];
             } else {
                 [FMCDebugTool logInfo:@"Session Not Opened" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
             }
+            //Begin Connection Retry
+            float randomNumber = (float)arc4random() / UINT_MAX; // between 0 and 1
+            float randomMinMax = 0.0f + (0.5f-0.0f)*randomNumber; // between Min (0.0) and Max (0.5)
+            
+            [FMCDebugTool logInfo:[NSString stringWithFormat:@"Wait: %f", randomMinMax] withType:FMCDebugType_Transport_iAP];
+            [self performSelector:@selector(connect) withObject:nil afterDelay:randomMinMax];
         }
     } else {
         [FMCDebugTool logInfo:@"Accessory Or Protocol String Not Set" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];

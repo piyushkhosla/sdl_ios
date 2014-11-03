@@ -45,7 +45,7 @@ typedef void(^FMCCustomTaskCompletionHandler)(NSData *data, NSURLResponse *respo
 
 @implementation FMCSyncProxy
 
-const float handshakeTime = 30.0;
+const float handshakeTime = 10.0;
 const float notifyProxyClosedDelay = 0.1;
 const int POLICIES_CORRELATION_ID = 65535;
 
@@ -125,7 +125,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 #pragma mark - Handshake Timer
 - (void)handshakeTimerFired {
-    [FMCDebugTool logInfo:@"RPC Initial Handshake Timeout" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    [FMCDebugTool logInfo:@"Initial Handshake Timeout" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
     [self destroyHandshakeTimer];
     [self performSelector:@selector(notifyProxyClosed) withObject:nil afterDelay:notifyProxyClosedDelay];
@@ -162,6 +162,9 @@ const int POLICIES_CORRELATION_ID = 65535;
 }
 
 - (void)handleProtocolSessionStarted:(FMCServiceType)serviceType sessionID:(Byte)sessionID version:(Byte)maxVersionForModule {
+    // Turn off the timer, the handshake has succeeded
+    [self destroyHandshakeTimer];
+    
     NSString *logMessage = [NSString stringWithFormat:@"StartSession (response)\nSessionId: %d for serviceType %d", sessionID, serviceType];
     [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     
@@ -233,9 +236,6 @@ const int POLICIES_CORRELATION_ID = 65535;
     
     
     if ([functionName isEqualToString:@"RegisterAppInterfaceResponse"]) {
-        // Turn off the timer, the handshake has succeeded
-        [self destroyHandshakeTimer];
-        
         //Print Proxy Version To Console
         logMessage = [NSString stringWithFormat:@"Framework Version: %@", [self getProxyVersion]];
         [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
