@@ -2,6 +2,7 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
+#import <objc/runtime.h>
 #import <AppLink/FMCJsonEncoder.h>
 #import <AppLink/FMCFunctionID.h>
 
@@ -14,21 +15,22 @@
 #import "FMCRPCPayload.h"
 #import "FMCDebugTool.h"
 #import "FMCPrioritizedObjectCollection.h"
+#import "FMCDataStreamHandlingDelegate.h"
 
 
-const NSUInteger MAX_TRANSMISSION_SIZE = 512;
+const NSUInteger MAX_TRANSMISSION_SIZE = 1024;
 const UInt8 MAX_VERSION_TO_SEND = 3;
 
 @interface FMCAppLinkProtocol () {
     UInt32 _messageID;
     dispatch_queue_t _recieveQueue;
     dispatch_queue_t _sendQueue;
-    FMCPrioritizedObjectCollection *prioritizedCollection;
+    FMCPrioritizedObjectCollection *_prioritizedCollection;
+    NSMutableDictionary *_sessionIDs;
 }
 
 @property (assign) UInt8 version;
 @property (assign) UInt8 maxVersionSupportedByHeadUnit;
-@property (assign) UInt8 sessionID;
 @property (strong) NSMutableData *recieveBuffer;
 @property (strong) FMCApplinkProtocolRecievedMessageRouter *messageRouter;
 
@@ -44,10 +46,10 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 	if (self = [super init]) {
         _version = 1;
         _messageID = 0;
-        _sessionID = 0;
         _recieveQueue = dispatch_queue_create("com.ford.applink.recieve", DISPATCH_QUEUE_SERIAL);
         _sendQueue = dispatch_queue_create("com.ford.applink.send.defaultpriority", DISPATCH_QUEUE_SERIAL);
-        prioritizedCollection = [FMCPrioritizedObjectCollection new];
+        _prioritizedCollection = [FMCPrioritizedObjectCollection new];
+        _sessionIDs = [NSMutableDictionary new];
 
         self.messageRouter = [[FMCApplinkProtocolRecievedMessageRouter alloc] init];
         self.messageRouter.delegate = self;
@@ -55,6 +57,20 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 	return self;
 }
 
+- (void)storeSessionID:(UInt8)sessionID forServiceType:(FMCServiceType)serviceType {
+    [_sessionIDs setObject:[NSNumber numberWithUnsignedChar:sessionID] forKey:[NSNumber numberWithUnsignedChar:serviceType]];
+}
+
+- (UInt8)retrieveSessionIDforServiceType:(FMCServiceType)serviceType {
+
+    NSNumber *number = [_sessionIDs objectForKey:[NSNumber numberWithUnsignedChar:serviceType]];
+    if (!number) {
+        NSString *logMessage = [NSString stringWithFormat:@"Warning: Tried to retrieve sessionID for serviceType %i, but no sessionID is saved for that service type.", serviceType];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];
+    }
+
+    return number?[number unsignedIntegerValue]:0;
+}
 
 - (void)sendStartSessionWithType:(FMCServiceType)serviceType {
 
@@ -68,13 +84,13 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
     [self sendDataToTransport:message.data withPriority:serviceType];
 }
 
-- (void)sendEndSessionWithType:(FMCServiceType)serviceType sessionID:(Byte)sessionID {
+- (void)sendEndSessionWithType:(FMCServiceType)serviceType {
 
 	FMCAppLinkProtocolHeader *header = [FMCAppLinkProtocolHeader headerForVersion:self.version];
     header.frameType = FMCFrameType_Control;
     header.serviceType = serviceType;
     header.frameData = FMCFrameData_StartSession;
-    header.sessionID = self.sessionID;
+    header.sessionID = [self retrieveSessionIDforServiceType:serviceType];
 
     FMCAppLinkProtocolMessage *message = [FMCAppLinkProtocolMessage messageWithHeader:header andPayload:nil];
 
@@ -112,7 +128,7 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
     header.frameType = FMCFrameType_Single;
     header.serviceType = FMCServiceType_RPC;
     header.frameData = FMCFrameData_SingleFrame;
-    header.sessionID = self.sessionID;
+    header.sessionID = [self retrieveSessionIDforServiceType:FMCServiceType_RPC];
     header.bytesInPayload = (UInt32)messagePayload.length;
 
     // V2+ messages need to have message ID property set.
@@ -153,12 +169,12 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 // Use for normal messages
 - (void)sendDataToTransport:(NSData *)data withPriority:(NSInteger)priority {
 
-    [prioritizedCollection addObject:data withPriority:priority];
+    [_prioritizedCollection addObject:data withPriority:priority];
 
     dispatch_async(_sendQueue, ^{
 
         NSData *dataToTransmit = nil;
-        while(dataToTransmit = (NSData *)[prioritizedCollection nextObject])
+        while(dataToTransmit = (NSData *)[_prioritizedCollection nextObject])
         {
             [self.transport sendData:dataToTransmit];
         };
@@ -184,9 +200,15 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
     [self.recieveBuffer appendData:recievedData];
     [logMessage appendFormat:@"(%ld) ", (long)self.recieveBuffer.length];
 
+    [self processMessages];
+}
+
+- (void)processMessages {
+    NSMutableString *logMessage = [[NSMutableString alloc]init];
+    
     // Get the version
     UInt8 incomingVersion = [FMCAppLinkProtocolMessage determineVersion:self.recieveBuffer];
-
+    
     // If we have enough bytes, create the header.
     FMCAppLinkProtocolHeader* header = [FMCAppLinkProtocolHeader headerForVersion:incomingVersion];
     NSUInteger headerSize = header.size;
@@ -198,7 +220,7 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
         [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];
         return;
     }
-
+    
     // If we have enough bytes, finish building the message.
     FMCAppLinkProtocolMessage *message = nil;
     NSUInteger payloadSize = header.bytesInPayload;
@@ -216,17 +238,18 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
         [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];
         return;
     }
-
-
+    
     // Need to maintain the recieveBuffer, remove the bytes from it which we just processed.
     self.recieveBuffer = [[self.recieveBuffer subdataWithRange:NSMakeRange(messageSize, self.recieveBuffer.length - messageSize)] mutableCopy];
-
-
+    
     // Pass on ultimate disposition of the message to the message router.
     dispatch_async(_recieveQueue, ^{
         [self.messageRouter handleRecievedMessage:message];
     });
-
+    
+    // Call recursively until the buffer is empty or incomplete message is encountered
+    if (self.recieveBuffer.length > 0)
+        [self processMessages];
 }
 
 - (void)sendHeartbeat {
@@ -234,7 +257,6 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
     header.frameType = FMCFrameType_Control;
     header.serviceType = 0;
     header.frameData = FMCFrameData_Heartbeat;
-    header.sessionID = self.sessionID;
 
     FMCAppLinkProtocolMessage *message = [FMCAppLinkProtocolMessage messageWithHeader:header andPayload:nil];
 
@@ -242,10 +264,41 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 
 }
 
+- (void)sendRawDataStream:(NSInputStream *)inputStream withServiceType:(FMCServiceType)serviceType {
+
+    FMCDataStreamHandlingDelegate *streamDelegate = [FMCDataStreamHandlingDelegate new];
+    streamDelegate.serviceType = serviceType;
+    streamDelegate.protocol = self;
+    objc_setAssociatedObject(inputStream, @"RetainedDelegate", streamDelegate, OBJC_ASSOCIATION_RETAIN);
+
+
+    inputStream.delegate = streamDelegate;
+    [inputStream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [inputStream open];
+
+    // Stream events start getting processed and when there is data available it calls
+    // back to sendRawData:(NSData *)data withServiceType:(FMCServiceType)serviceType
+
+}
+
+- (void)sendRawData:(NSData *)data withServiceType:(FMCServiceType)serviceType {
+    FMCAppLinkV2ProtocolHeader *header = [FMCAppLinkV2ProtocolHeader new];
+    header.frameType = FMCFrameType_Single;
+    header.serviceType = serviceType;
+    header.sessionID = [self retrieveSessionIDforServiceType:serviceType];
+    header.bytesInPayload = (UInt32)data.length;
+    header.messageID = ++_messageID;
+
+    FMCAppLinkProtocolMessage *message = [FMCAppLinkProtocolMessage messageWithHeader:header andPayload:data];
+    [self sendDataToTransport:message.data withPriority:header.serviceType];
+}
+
 
 #pragma mark - FMCProtocolListener Implementation
 - (void)handleProtocolSessionStarted:(FMCServiceType)serviceType sessionID:(Byte)sessionID version:(Byte)version {
-    self.sessionID = sessionID;
+
+    [self storeSessionID:sessionID forServiceType:serviceType];
+
     self.maxVersionSupportedByHeadUnit = version;
     self.version = MIN(self.maxVersionSupportedByHeadUnit, MAX_VERSION_TO_SEND);
 

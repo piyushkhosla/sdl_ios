@@ -18,6 +18,7 @@
 #import "FMCRPCPayload.h"
 #import "FMCPolicyDataParser.h"
 #import "FMCLockScreenManager.h"
+#import "FMCAppLinkProtocolMessage.h"
 
 
 #define VERSION_STRING @"##Version##"
@@ -29,11 +30,14 @@ typedef void(^FMCCustomTaskCompletionHandler)(NSData *data, NSURLResponse *respo
 {
     FMCLockScreenManager *lsm;
 }
+
+- (void)startRPCSession;
 - (void)invokeMethodOnDelegates:(SEL)aSelector withObject:(id)object;
 - (void)notifyProxyClosed;
 - (void)handleProtocolMessage:(FMCAppLinkProtocolMessage *)msgData;
 - (void)OESPHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error;
 - (void)OSRHTTPRequestCompletionHandler:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error;
+- (void)sendDataStream:(NSInputStream *)inputStream withServiceType:(FMCServiceType)serviceType;
 
 @end
 
@@ -41,20 +45,19 @@ typedef void(^FMCCustomTaskCompletionHandler)(NSData *data, NSURLResponse *respo
 
 @implementation FMCSyncProxy
 
-const float handshakeTime = 30.0;
+const float handshakeTime = 10.0;
 const float notifyProxyClosedDelay = 0.1;
 const int POLICIES_CORRELATION_ID = 65535;
 
 
 #pragma mark - Object lifecycle
-- (id)initWithTransport:(NSObject<FMCTransport> *)theTransport protocol:(NSObject<FMCProtocol> *)theProtocol delegate:(NSObject<FMCProxyListener> *)theDelegate {
+- (id)initWithTransport:(NSObject<FMCTransport> *)theTransport protocol:(FMCAbstractProtocol *)theProtocol delegate:(NSObject<FMCProxyListener> *)theDelegate {
 	if (self = [super init]) {
         _debugConsoleGroupName = @"default";
         
 
         lsm = [FMCLockScreenManager new];
 
-        rpcSessionID = 0;
         alreadyDestructed = NO;
                 
         self.proxyListeners = [[NSMutableArray alloc] initWithObjects:theDelegate, nil];
@@ -107,7 +110,7 @@ const int POLICIES_CORRELATION_ID = 65535;
     return self.transport;// not needed except for backwards compatability?
 }
 
-- (NSObject<FMCProtocol> *)getProtocol {
+- (FMCAbstractProtocol *)getProtocol {
     return self.protocol;// not needed except for backwards compatability?
 }
 
@@ -122,7 +125,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 #pragma mark - Handshake Timer
 - (void)handshakeTimerFired {
-    [FMCDebugTool logInfo:@"RPC Initial Handshake Timeout" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    [FMCDebugTool logInfo:@"Initial Handshake Timeout" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
     [self destroyHandshakeTimer];
     [self performSelector:@selector(notifyProxyClosed) withObject:nil afterDelay:notifyProxyClosedDelay];
@@ -135,13 +138,16 @@ const int POLICIES_CORRELATION_ID = 65535;
     }
 }
 
+- (void)startRPCSession {
+    [self.protocol sendStartSessionWithType:FMCServiceType_RPC];
+}
 
 #pragma mark - FMCProtocolListener Implementation
 - (void) onProtocolOpened {
     isConnected = YES;
     [FMCDebugTool logInfo:@"StartSession (request)" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
-    [self.protocol sendStartSessionWithType:FMCServiceType_RPC];
+    [self startRPCSession];
 
     [self destroyHandshakeTimer];
     self.handshakeTimer = [NSTimer scheduledTimerWithTimeInterval:handshakeTime target:self selector:@selector(handshakeTimerFired) userInfo:nil repeats:NO];
@@ -155,8 +161,11 @@ const int POLICIES_CORRELATION_ID = 65535;
     [self invokeMethodOnDelegates:@selector(onError:) withObject:e];
 }
 
-- (void)handleProtocolSessionStarted:(FMCServiceType)sessionType sessionID:(Byte)sessionID version:(Byte)maxVersionForModule {
-    NSString *logMessage = [NSString stringWithFormat:@"StartSession (response)\nSessionId: %d", sessionID];
+- (void)handleProtocolSessionStarted:(FMCServiceType)serviceType sessionID:(Byte)sessionID version:(Byte)maxVersionForModule {
+    // Turn off the timer, the handshake has succeeded
+    [self destroyHandshakeTimer];
+    
+    NSString *logMessage = [NSString stringWithFormat:@"StartSession (response)\nSessionId: %d for serviceType %d", sessionID, serviceType];
     [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     
     if (_version <= 1) {
@@ -165,8 +174,7 @@ const int POLICIES_CORRELATION_ID = 65535;
         }
     }
 
-    if (sessionType == FMCServiceType_RPC || _version == 2) {
-        rpcSessionID = sessionID;
+    if (serviceType == FMCServiceType_RPC) {
         [self invokeMethodOnDelegates:@selector(onProxyOpened) withObject:nil];
     }
 }
@@ -228,9 +236,6 @@ const int POLICIES_CORRELATION_ID = 65535;
     
     
     if ([functionName isEqualToString:@"RegisterAppInterfaceResponse"]) {
-        // Turn off the timer, the handshake has succeeded
-        [self destroyHandshakeTimer];
-        
         //Print Proxy Version To Console
         logMessage = [NSString stringWithFormat:@"Framework Version: %@", [self getProxyVersion]];
         [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
@@ -359,8 +364,6 @@ const int POLICIES_CORRELATION_ID = 65535;
     // From the function name, create the corresponding RPCObject and initialize it
 	NSString* functionClassName = [NSString stringWithFormat:@"FMC%@", functionName];
     FMCRPCMessage *functionObject = [[NSClassFromString(functionClassName) alloc] initWithDictionary:msg];
-//	FMCRPCMessage *functionObject = [[NSClassFromString(functionClassName) alloc] init];
-//    NSObject* rpcCallbackObject = [functionObject initWithDictionary:[msg mutableCopy]];
 
     logMessage = [NSString stringWithFormat:@"%@", functionObject];
     [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
@@ -507,15 +510,18 @@ const int POLICIES_CORRELATION_ID = 65535;
         [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     }
 
-    // Send and log RPC Request
-    logMessage = [NSString stringWithFormat:@"SystemRequest (request)\n%@\nData length=%lu", [request serializeAsDictionary:2], (unsigned long)data.length ];
-    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    // Send RPC Request
     [self sendRPCRequestPrivate:request];
 
 }
 
 
 #pragma mark - PutFile Streaming
+- (void)sendDataStream:(NSInputStream *)inputStream withServiceType:(FMCServiceType)serviceType {
+
+    [self.protocol sendRawDataStream:inputStream withServiceType:serviceType];
+}
+
 - (void)putFileStream:(NSInputStream*)inputStream :(FMCPutFile*)putFileRPCRequest
 {
     inputStream.delegate = self;
