@@ -51,7 +51,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 
 #pragma mark - Object lifecycle
-- (id)initWithTransport:(NSObject<FMCTransport> *)theTransport protocol:(FMCAbstractProtocol *)theProtocol delegate:(NSObject<FMCProxyListener> *)theDelegate {
+- (id)initWithTransport:(FMCAbstractTransport *)theTransport protocol:(FMCAbstractProtocol *)theProtocol delegate:(NSObject<FMCProxyListener> *)theDelegate {
 	if (self = [super init]) {
         _debugConsoleGroupName = @"default";
         
@@ -104,24 +104,9 @@ const int POLICIES_CORRELATION_ID = 65535;
 	}
 }
 
-
-#pragma mark - Pseudo properties
-- (NSObject<FMCTransport> *)getTransport {
-    return self.transport;// not needed except for backwards compatability?
-}
-
-- (FMCAbstractProtocol *)getProtocol {
-    return self.protocol;// not needed except for backwards compatability?
-}
-
-- (NSString *)getProxyVersion {
+- (NSString *)proxyVersion {
     return VERSION_STRING;
 }
-
-- (NSString *)proxyVersion { // How it should have been named.
-    return VERSION_STRING;
-}
-
 
 #pragma mark - Handshake Timer
 - (void)handshakeTimerFired {
@@ -237,7 +222,7 @@ const int POLICIES_CORRELATION_ID = 65535;
     
     if ([functionName isEqualToString:@"RegisterAppInterfaceResponse"]) {
         //Print Proxy Version To Console
-        logMessage = [NSString stringWithFormat:@"Framework Version: %@", [self getProxyVersion]];
+        logMessage = [NSString stringWithFormat:@"Framework Version: %@", self.proxyVersion];
         [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     }
 

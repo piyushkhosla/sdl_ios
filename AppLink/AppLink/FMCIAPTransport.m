@@ -8,8 +8,11 @@
 #import "FMCIAPConfig.h"
 #import "FMCIAPConnectionManager.h"
 #import "FMCIAPTransport.h"
+#import "FMCStreamDelegate.h"
 
-@interface FMCIAPTransport ()
+@interface FMCIAPTransport () {
+    dispatch_queue_t _io_queue;
+}
 
 - (void)startEventListening;
 - (void)stopEventListening;
@@ -23,10 +26,12 @@
 - (instancetype)init {
     if (self = [super init]) {
 
-        [FMCDebugTool logInfo:@"Init"
+        [FMCDebugTool logInfo:@"FMCIAPTransport Init"
                      withType:FMCDebugType_Transport_iAP
                      toOutput:FMCDebugOutput_All
                       toGroup:self.debugConsoleGroupName];
+
+        _io_queue = dispatch_queue_create("com.ford.applink.protocol.recieve", DISPATCH_QUEUE_SERIAL);
 
         [self startEventListening];
         [FMCSiphonServer init];
@@ -84,26 +89,99 @@
 - (void)connect {
     [FMCDebugTool logInfo:@"Connect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
-    if (!self.session) {
-        self.session = [FMCIAPConnectionManager createSession];
-        [self.session open];
-    }
+    dispatch_async(_io_queue, ^{
+        if (!self.session) {
 
+            self.session = [FMCIAPConnectionManager createSession];
+
+
+
+            //
+            // Setup the stream reading block;
+            //
+            FMCStreamDelegate *IOStreamDelegate = [FMCStreamDelegate new];
+            FMCStreamHasBytesHandler streamReader = ^(NSInputStream *istream){
+
+                uint8_t buf[IAP_INPUT_BUFFER_SIZE];
+
+                while ([istream hasBytesAvailable])
+                {
+                    // Read bytes
+                    NSInteger bytesRead = [istream read:buf maxLength:IAP_INPUT_BUFFER_SIZE];
+                    NSData *dataIn = [NSData dataWithBytes:buf length:bytesRead];
+
+                    // Log
+                    NSString *logMessage = [NSString stringWithFormat:@"Incoming: (%ld)", (long)bytesRead];
+                    [FMCDebugTool logInfo:logMessage
+                            andBinaryData:dataIn
+                                 withType:FMCDebugType_Transport_iAP
+                                 toOutput:FMCDebugOutput_File];
+
+                    // If we read some bytes, pass on to delegate
+                    // If no bytes, quit reading.
+                    if (bytesRead > 0) {
+                        [self.delegate onDataReceived:dataIn];
+                    } else {
+                        break;
+                    }
+                }
+                
+            };
+            IOStreamDelegate.streamHasBytesHandler = streamReader;
+
+
+            [self.session open];
+        }
+    });
 
 }
 
 - (void)disconnect {
     [FMCDebugTool logInfo:@"Disconnect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
-    [self stopEventListening];
-    [self.session close];
-    self.session = nil;
+    dispatch_async(_io_queue, ^{
+        [self stopEventListening];
+        [self.session close];
+        self.session = nil;
+    });
 }
 
-- (void)sendData:(NSData*) data {
-    [self writeDataOut:data];
+- (void)sendData:(NSData *)data {
+
+    dispatch_async(_io_queue, ^{
+        NSOutputStream *ostream = self.session.easession.outputStream;
+        NSMutableData *remainder = data.mutableCopy;
+
+        while (1) {
+            if (remainder.length == 0)
+                break;
+
+            if (ostream.hasSpaceAvailable) {
+
+                //TODO: Added for debug, issue with module
+                //[NSThread sleepForTimeInterval:0.020];
+
+                NSInteger bytesWritten = [ostream write:remainder.bytes maxLength:remainder.length];
+                if (bytesWritten == -1) {
+                    NSLog(@"Error: %@", [ostream streamError]);
+                    break;
+                }
+
+                NSString *logMessage = [NSString stringWithFormat:@"Outgoing: (%ld)", (long)bytesWritten];
+                [FMCDebugTool logInfo:logMessage
+                        andBinaryData:[remainder subdataWithRange:NSMakeRange(0, bytesWritten)]
+                             withType:FMCDebugType_Transport_iAP
+                             toOutput:FMCDebugOutput_File];
+
+                [remainder replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
+            }
+        }
+    });
 }
 
+- (void)dealloc {
+    _io_queue = nil;
+}
 
 
 #pragma mark - EAAccessory Notifications
@@ -133,72 +211,5 @@
 -(void)applicationDidEnterBackground:(NSNotification *)notification {
     [FMCDebugTool logInfo:@"Did Enter Background" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 }
-
-
-
-
-#pragma mark Low Level Read/Write
-
-// Write data to the accessory while there is space available and data to write
-- (void)writeDataOut:(NSData *)dataOut {
-
-    NSMutableData *remainder = dataOut.mutableCopy;
-
-    while (1) {
-        if (remainder.length == 0) break;
-
-        if ( [[self.session outputStream] hasSpaceAvailable] ) {
-            
-            //TODO: Added for debug, issue with module
-            //[NSThread sleepForTimeInterval:0.020];
-            
-            NSInteger bytesWritten = [[self.session outputStream] write:remainder.bytes maxLength:remainder.length];
-            if (bytesWritten == -1) {
-                NSLog(@"Error: %@", [[self.session outputStream] streamError]);
-                break;
-            }
-
-            NSString *logMessage = [NSString stringWithFormat:@"Outgoing: (%ld)", (long)bytesWritten];
-            [FMCDebugTool logInfo:logMessage
-                    andBinaryData:[remainder subdataWithRange:NSMakeRange(0, bytesWritten)]
-                         withType:FMCDebugType_Transport_iAP
-                         toOutput:FMCDebugOutput_File];
-
-            [remainder replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
-        }
-    }
-
-}
-
-// Read data while there is data and space available in the input buffer
-- (void)readDataIn {
-    uint8_t buf[IAP_INPUT_BUFFER_SIZE];
-    while ([[self.session inputStream] hasBytesAvailable])
-    {
-        NSInteger bytesRead = [[self.session inputStream] read:buf maxLength:IAP_INPUT_BUFFER_SIZE];
-
-        NSData *dataIn = [NSData dataWithBytes:buf length:bytesRead];
-
-        NSString *logMessage = [NSString stringWithFormat:@"Incoming: (%ld)", (long)bytesRead];
-        [FMCDebugTool logInfo:logMessage
-                andBinaryData:dataIn
-                     withType:FMCDebugType_Transport_iAP
-                     toOutput:FMCDebugOutput_File];
-
-        if (bytesRead > 0) {
-            // TODO: change this to ndsata parameter for consistency
-            [self handleBytesReceivedFromTransport:buf length:bytesRead];
-        } else {
-            break;
-        }
-    }
-}
-
-
-// We recieved data. Give it to our delegate.
-- (void)handleBytesReceivedFromTransport:(Byte *)receivedBytes length:(NSInteger)receivedBytesLength {
-    [self.delegate onDataReceived:[NSData dataWithBytes:receivedBytes length:receivedBytesLength]];
-}
-
 
 @end

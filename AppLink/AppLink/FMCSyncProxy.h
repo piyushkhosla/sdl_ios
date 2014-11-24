@@ -8,6 +8,7 @@
 #import <AppLink/FMCRPCRequestFactory.h>
 #import <AppLink/FMCTransport.h>
 #import "FMCAbstractProtocol.h"
+#import "FMCAbstractTransport.h"
 
 @interface FMCSyncProxy : NSObject <FMCProtocolListener, NSStreamDelegate> {
     Byte _version;
@@ -17,31 +18,30 @@
 
 }
 
-@property (strong) FMCAbstractProtocol* protocol;
-@property (strong) NSObject<FMCTransport>* transport;
-@property (strong) NSMutableArray* proxyListeners;
-@property (strong) NSTimer* handshakeTimer;
+@property (strong) FMCAbstractProtocol *protocol;
+@property (strong) FMCAbstractTransport *transport;
+@property (strong) NSMutableArray *proxyListeners;
+@property (strong) NSTimer *handshakeTimer;
 @property (strong) NSString *debugConsoleGroupName;
+@property (readonly) NSString *proxyVersion;
 
--(id) initWithTransport:(NSObject<FMCTransport>*) transport protocol:(FMCAbstractProtocol *)protocol delegate:(NSObject<FMCProxyListener>*) delegate;
+- (id)initWithTransport:(FMCAbstractTransport *)transport
+               protocol:(FMCAbstractProtocol *)protocol
+               delegate:(NSObject<FMCProxyListener> *)delegate;
 
--(void) dispose;
--(void) addDelegate:(NSObject<FMCProxyListener>*) delegate;
+- (void)dispose;
+- (void)addDelegate:(NSObject<FMCProxyListener> *)delegate;
 
--(void) sendRPCRequest:(FMCRPCMessage*) msg;
--(void) handleRpcMessage:(NSDictionary*) msg;
--(void) handleProtocolMessage:(FMCAppLinkProtocolMessage*) msgData;
+- (void)sendRPCRequest:(FMCRPCMessage *)msg;
+- (void)handleRpcMessage:(NSDictionary *)msg;
+- (void)handleProtocolMessage:(FMCAppLinkProtocolMessage *)msgData;
 
--(void) destroyHandshakeTimer;
+- (void)destroyHandshakeTimer;
 
-+(void)enableSiphonDebug;
-+(void)disableSiphonDebug;
+- (void)putFileStream:(NSInputStream *)inputStream :(FMCPutFile *)putFileRPCRequest;
 
--(NSString*) getProxyVersion;
--(NSObject<FMCTransport>*)getTransport;
--(FMCAbstractProtocol*)getProtocol;
-
-- (void)putFileStream:(NSInputStream*)inputStream :(FMCPutFile*)putFileRPCRequest;
++ (void)enableSiphonDebug;
++ (void)disableSiphonDebug;
 
 
 @end

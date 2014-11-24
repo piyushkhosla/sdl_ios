@@ -10,6 +10,7 @@
 @property (weak) id<FMCTransportDelegate> delegate;
 @property (strong) NSString *debugConsoleGroupName;
 
+- (instancetype)init;
 - (void)connect;
 - (void)disconnect;
 - (void)sendData:(NSData *)dataToSend;

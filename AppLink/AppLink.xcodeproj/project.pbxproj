@@ -517,11 +517,11 @@
 		E9A8045F19DC412C00C81862 /* FMCDataStreamHandlingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A8045D19DC412C00C81862 /* FMCDataStreamHandlingDelegate.m */; };
 		E9AC35BB1A1E37F500706312 /* EAAccessoryManager+SyncProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = E9AC35B91A1E37F500706312 /* EAAccessoryManager+SyncProtocols.h */; };
 		E9AC35BC1A1E37F500706312 /* EAAccessoryManager+SyncProtocols.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AC35BA1A1E37F500706312 /* EAAccessoryManager+SyncProtocols.m */; };
-		E9AC35BF1A1E3FC500706312 /* FMCIAPSession.h in Headers */ = {isa = PBXBuildFile; fileRef = E9AC35BD1A1E3FC500706312 /* FMCIAPSession.h */; };
+		E9AC35BF1A1E3FC500706312 /* FMCIAPSession.h in Headers */ = {isa = PBXBuildFile; fileRef = E9AC35BD1A1E3FC500706312 /* FMCIAPSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9AC35C01A1E3FC500706312 /* FMCIAPSession.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AC35BE1A1E3FC500706312 /* FMCIAPSession.m */; };
 		E9AC35C51A1F876F00706312 /* FMCIAPConnectionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E9AC35C31A1F876F00706312 /* FMCIAPConnectionManager.h */; };
 		E9AC35C61A1F876F00706312 /* FMCIAPConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AC35C41A1F876F00706312 /* FMCIAPConnectionManager.m */; };
-		E9AC35CA1A1F9AC200706312 /* FMCStreamDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = E9AC35C81A1F9AC200706312 /* FMCStreamDelegate.h */; };
+		E9AC35CA1A1F9AC200706312 /* FMCStreamDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = E9AC35C81A1F9AC200706312 /* FMCStreamDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9AC35CB1A1F9AC200706312 /* FMCStreamDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AC35C91A1F9AC200706312 /* FMCStreamDelegate.m */; };
 		E9AC35CE1A23568600706312 /* EAAccessory+SyncProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = E9AC35CC1A23568600706312 /* EAAccessory+SyncProtocols.h */; };
 		E9AC35CF1A23568600706312 /* EAAccessory+SyncProtocols.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AC35CD1A23568600706312 /* EAAccessory+SyncProtocols.m */; };
@@ -1720,6 +1720,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E9AC35CA1A1F9AC200706312 /* FMCStreamDelegate.h in Headers */,
+				E9AC35BF1A1E3FC500706312 /* FMCIAPSession.h in Headers */,
 				59A031AB1978FBAE003E8ECF /* FMCSoftButton.h in Headers */,
 				59A0310D1978FBA6003E8ECF /* FMCSetMediaClockTimer.h in Headers */,
 				59A0312D1978FBA7003E8ECF /* FMCAlertResponse.h in Headers */,
@@ -1730,7 +1732,6 @@
 				59A030BD1978FBA3003E8ECF /* FMCOnButtonPress.h in Headers */,
 				59A030951978FBA2003E8ECF /* FMCSystemContext.h in Headers */,
 				59A0304D1978FBA1003E8ECF /* FMCDisplayType.h in Headers */,
-				E9AC35BF1A1E3FC500706312 /* FMCIAPSession.h in Headers */,
 				59A031B91978FBAF003E8ECF /* FMCTouchEvent.h in Headers */,
 				59A031D01978FBB1003E8ECF /* FMCTransport.h in Headers */,
 				59A031491978FBA8003E8ECF /* FMCPerformAudioPassThruResponse.h in Headers */,
@@ -1961,7 +1962,6 @@
 				59A0303F1978FBA1003E8ECF /* FMCButtonPressMode.h in Headers */,
 				59A0306F1978FBA2003E8ECF /* FMCLanguage.h in Headers */,
 				59A02FF01978FBA1003E8ECF /* FMCConsoleController.h in Headers */,
-				E9AC35CA1A1F9AC200706312 /* FMCStreamDelegate.h in Headers */,
 				59A0302B1978FBA1003E8ECF /* FMCSyncProxyFactory.h in Headers */,
 				59A030731978FBA2003E8ECF /* FMCMaintenanceModeStatus.h in Headers */,
 				59A031051978FBA5003E8ECF /* FMCScrollableMessage.h in Headers */,

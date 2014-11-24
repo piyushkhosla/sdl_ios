@@ -7,6 +7,13 @@
 
 @implementation FMCAbstractTransport
 
+- (instancetype)init {
+    if (self = [super init]) {
+
+    }
+    return self;
+}
+
 - (void)connect {
 	[self doesNotRecognizeSelector:_cmd];
 }
