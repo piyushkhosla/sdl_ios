@@ -1162,8 +1162,6 @@
 				59A02E421978FBA0003E8ECF /* FMCTTSChunkFactory.m */,
 				E9A8045C19DC412C00C81862 /* FMCDataStreamHandlingDelegate.h */,
 				E9A8045D19DC412C00C81862 /* FMCDataStreamHandlingDelegate.m */,
-				E9AC35C81A1F9AC200706312 /* FMCStreamDelegate.h */,
-				E9AC35C91A1F9AC200706312 /* FMCStreamDelegate.m */,
 			);
 			name = Proxy;
 			sourceTree = "<group>";
@@ -1653,6 +1651,8 @@
 				E9AC35C71A1F88C900706312 /* FMCIAPConfig.h */,
 				E9AC35C31A1F876F00706312 /* FMCIAPConnectionManager.h */,
 				E9AC35C41A1F876F00706312 /* FMCIAPConnectionManager.m */,
+				E9AC35C81A1F9AC200706312 /* FMCStreamDelegate.h */,
+				E9AC35C91A1F9AC200706312 /* FMCStreamDelegate.m */,
 				59A02FEB1978FBA1003E8ECF /* FMCTCPTransport.h */,
 				59A02FEC1978FBA1003E8ECF /* FMCTCPTransport.m */,
 				59A02FED1978FBA1003E8ECF /* FMCTransport.h */,

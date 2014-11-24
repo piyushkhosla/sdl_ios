@@ -30,7 +30,7 @@
     {
         case NSStreamEventOpenCompleted:
         {
-            self.streamOpenHandler();
+            self.streamOpenHandler(stream);
             break;
         }
         case NSStreamEventHasBytesAvailable:
@@ -61,7 +61,7 @@
     }
 }
 
-FMCStreamOpenHandler defaultStreamOpenHandler = ^(void) {
+FMCStreamOpenHandler defaultStreamOpenHandler = ^(NSStream *stream) {
     [FMCDebugTool logInfo:@"Stream Open."];
 };
 

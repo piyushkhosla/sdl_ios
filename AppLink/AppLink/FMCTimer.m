@@ -2,6 +2,8 @@
 //  FMCTimer.m
 //  AppLink
 //
+//  Copyright (c) 2014 FMC. All rights reserved.
+//
 
 #import "FMCTimer.h"
 
@@ -19,8 +21,8 @@
 - (id)init
 {
     if (self = [super init]) {
-        self.duration = 0;
-        self.timerRunning = NO;
+        _duration = 0;
+        _timerRunning = NO;
     }
     return self;
 }
@@ -28,8 +30,8 @@
 - (id)initWithDuration:(float)duration
 {
     if (self = [super init]) {
-        self.duration = duration;
-        self.timerRunning = NO;
+        _duration = duration;
+        _timerRunning = NO;
     }
     return self;
 }
@@ -47,6 +49,7 @@
 {
     [self stopAndDestroyTimer];
     if (self.timerRunning && self.canceledBlock != nil) {
+        self.timerRunning = NO;
         self.canceledBlock();
     }
     self.timerRunning = NO;
@@ -55,10 +58,10 @@
 - (void)timerElapsed
 {
     [self stopAndDestroyTimer];
+    self.timerRunning = NO;
     if (self.elapsedBlock != nil) {
         self.elapsedBlock();
     }
-    self.timerRunning = NO;
 }
 
 -(void)stopAndDestroyTimer {
