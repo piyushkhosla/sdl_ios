@@ -21,7 +21,7 @@
 #import "FMCAppLinkProtocolMessage.h"
 
 
-#define VERSION_STRING @"##Version##"
+#define VERSION_STRING @"AppLink-20141120-095841-LOCAL-iOS"
 typedef void(^FMCCustomTaskCompletionHandler)(NSData *data, NSURLResponse *response, NSError *error);
 
 
