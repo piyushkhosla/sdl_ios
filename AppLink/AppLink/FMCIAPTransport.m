@@ -92,55 +92,63 @@
     dispatch_async(_io_queue, ^{
         if (!self.session) {
 
-            self.session = [FMCIAPConnectionManager createSession];
-
-
-
-            //
-            // Setup the stream reading block;
-            //
-            FMCStreamDelegate *IOStreamDelegate = [FMCStreamDelegate new];
-            FMCStreamHasBytesHandler streamReader = ^(NSInputStream *istream){
-                [FMCDebugTool logInfo:@"In StreamHasBytes Handler"];
-
-                uint8_t buf[IAP_INPUT_BUFFER_SIZE];
-
-                while ([istream hasBytesAvailable])
-                {
-                    // Read bytes
-                    NSInteger bytesRead = [istream read:buf maxLength:IAP_INPUT_BUFFER_SIZE];
-                    NSData *dataIn = [NSData dataWithBytes:buf length:bytesRead];
-
-                    // Log
-                    NSString *logMessage = [NSString stringWithFormat:@"Incoming: (%ld)", (long)bytesRead];
-                    [FMCDebugTool logInfo:logMessage
-                            andBinaryData:dataIn
-                                 withType:FMCDebugType_Transport_iAP
-                                 toOutput:FMCDebugOutput_File];
-
-                    // If we read some bytes, pass on to delegate
-                    // If no bytes, quit reading.
-                    if (bytesRead > 0) {
-                        [FMCDebugTool logInfo:@"Bytes read."];
-                        [self.delegate onDataReceived:dataIn];
-                    } else {
-                        [FMCDebugTool logInfo:@"No bytes read."];
-                        break;
-                    }
+            for (int i=0; i<30; i++) {
+                self.session = [FMCIAPConnectionManager createSession];
+                if (self.session)
+                    break;
+                else {
+                    float randomNumber = (float)arc4random() / UINT_MAX; // between 0 and 1
+                    [NSThread sleepForTimeInterval:randomNumber];
                 }
-                [FMCDebugTool logInfo:@"Done reading."];
-                
-            };
-            self.session.streamDelegate = IOStreamDelegate;
-            IOStreamDelegate.streamHasBytesHandler = streamReader;
+            }
+            if (self.session) {
+
+                //
+                // Setup the stream reading block;
+                //
+                FMCStreamDelegate *IOStreamDelegate = [FMCStreamDelegate new];
+                FMCStreamHasBytesHandler streamReader = ^(NSInputStream *istream){
+                    [FMCDebugTool logInfo:@"In StreamHasBytes Handler"];
+
+                    uint8_t buf[IAP_INPUT_BUFFER_SIZE];
+
+                    while ([istream hasBytesAvailable])
+                    {
+                        // Read bytes
+                        NSInteger bytesRead = [istream read:buf maxLength:IAP_INPUT_BUFFER_SIZE];
+                        NSData *dataIn = [NSData dataWithBytes:buf length:bytesRead];
+
+                        // Log
+                        NSString *logMessage = [NSString stringWithFormat:@"Incoming: (%ld)", (long)bytesRead];
+                        [FMCDebugTool logInfo:logMessage
+                                andBinaryData:dataIn
+                                     withType:FMCDebugType_Transport_iAP
+                                     toOutput:FMCDebugOutput_File];
+
+                        // If we read some bytes, pass on to delegate
+                        // If no bytes, quit reading.
+                        if (bytesRead > 0) {
+                            [FMCDebugTool logInfo:@"Bytes read."];
+                            [self.delegate onDataReceived:dataIn];
+                        } else {
+                            [FMCDebugTool logInfo:@"No bytes read."];
+                            break;
+                        }
+                    }
+                    [FMCDebugTool logInfo:@"Done reading."];
+                    
+                };
+                self.session.streamDelegate = IOStreamDelegate;
+                IOStreamDelegate.streamHasBytesHandler = streamReader;
 
 
-            BOOL bOpened = [self.session open:(FMCIAPSessionRead|FMCIAPSessionWrite)];
-            if (bOpened) {
-                [FMCDebugTool logInfo:@"Open succeeded."];
-                [self.delegate onTransportConnected];
-            } else {
-                [FMCDebugTool logInfo:@"Open failed."];
+                BOOL bOpened = [self.session open:(FMCIAPSessionRead|FMCIAPSessionWrite)];
+                if (bOpened) {
+                    [FMCDebugTool logInfo:@"Open succeeded."];
+                    [self.delegate onTransportConnected];
+                } else {
+                    [FMCDebugTool logInfo:@"Open failed."];
+                }
             }
         }
     });
