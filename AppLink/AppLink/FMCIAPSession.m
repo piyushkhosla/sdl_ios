@@ -4,12 +4,15 @@
 //
 //  Copyright (c) 2014 FMC. All rights reserved.
 //
-
+#import "FMCDebugTool.h"
 #import "FMCIAPSession.h"
 
 @implementation FMCIAPSession
 
 - (instancetype)initWithAccessory:(EAAccessory *)accessory forProtocol:(NSString *)protocol{
+    NSString *logMessage = [NSString stringWithFormat:@"initWithAccessory:%@ forProtocol:%@" , accessory.name, protocol];
+    [FMCDebugTool logInfo:logMessage];
+
 
     self = [super init];
     if (self) {
@@ -21,13 +24,20 @@
     return self;
 }
 
-- (BOOL)open {
+- (BOOL)open:(NSUInteger)mode {
+    NSString *logMessage = [NSString stringWithFormat:@"open accessory:%@ forProtocol:%@" , _accessory.name, _protocol];
+    [FMCDebugTool logInfo:logMessage];
+
     BOOL success = NO;
 
     self.easession = [[EASession alloc] initWithAccessory:_accessory forProtocol:_protocol];
     if (_easession) {
-        [self startStream:_easession.inputStream];
-        [self startStream:_easession.outputStream];
+        if(mode & FMCIAPSessionRead)
+            [self startStream:_easession.inputStream];
+
+        if(mode & FMCIAPSessionWrite)
+            [self startStream:_easession.outputStream];
+        
         success = YES;
     }
 
@@ -35,6 +45,8 @@
 }
 
 - (void)close {
+    NSString *logMessage = [NSString stringWithFormat:@"session::close"];
+    [FMCDebugTool logInfo:logMessage];
 
     if (_easession) {
         [self stopStream:_easession.inputStream];
@@ -46,13 +58,13 @@
 
 - (void)startStream:(NSStream *)stream {
     stream.delegate = self.streamDelegate;
-    [stream scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [stream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode]; // TODO: Probably want a dedicated runloop, not the main.
     [stream open];
 }
 
 - (void)stopStream:(NSStream *)stream {
     [stream close];
-    [stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [stream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     [stream setDelegate:nil];
 }
 @end

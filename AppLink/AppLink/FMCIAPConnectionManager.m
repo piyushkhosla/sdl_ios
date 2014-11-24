@@ -9,6 +9,7 @@
 #import "EAAccessoryManager+SyncProtocols.h"
 #import "FMCIAPConfig.h"
 #import "FMCStreamDelegate.h"
+#import "FMCDebugTool.h"
 #import "FMCIAPConnectionManager.h"
 
 @implementation FMCIAPConnectionManager
@@ -25,6 +26,8 @@
 
     EAAccessory *accessory = nil;
     if ((accessory = [EAAccessoryManager findAccessoryForProtocol:CONTROL_PROTOCOL_STRING])) {
+        [FMCDebugTool logInfo:@"Create MultiApp Session on Control Protocol"];
+
         //
         // Multi-app
         //
@@ -35,6 +38,8 @@
         // Setup the control stream delegate
         FMCStreamDelegate *controlStreamDelegate = [FMCStreamDelegate new];
         controlStreamDelegate.streamHasBytesHandler = ^(NSInputStream *istream){
+            NSString *logMessage = [NSString stringWithFormat:@"Recieved data on control protocol."];
+            [FMCDebugTool logInfo:logMessage];
 
             // Grab a single byte from the stream
             const int bufferSize = 1;
@@ -51,24 +56,33 @@
         FMCIAPSession *controlSession = [[FMCIAPSession alloc] initWithAccessory:accessory
                                                                       forProtocol:CONTROL_PROTOCOL_STRING];
         controlSession.streamDelegate = controlStreamDelegate;
-        [controlSession open];
+        [controlSession open:FMCIAPSessionRead];
 
 
         // Wait here until we have recieved data (which should be the protocol index) or set a timeout
+        NSString *logMessage = [NSString stringWithFormat:@"Waiting for data on control protocol."];
+        [FMCDebugTool logInfo:logMessage];
         dispatch_semaphore_wait(protocol_index_semaphore, DISPATCH_TIME_FOREVER);
+        logMessage = [NSString stringWithFormat:@"Switching to protocol %@", [[NSNumber numberWithChar:protocolIndex] stringValue]];
+        [FMCDebugTool logInfo:logMessage];
 
         // Done with control protocol session, destroy it.
         [controlSession close];
         controlSession = nil;
 
         // Create session with indexed protocol
-        NSString *indexedProtocolString = [NSString stringWithFormat:@"%@%c", INDEXED_PROTOCOL_STRING_PREFIX, protocolIndex];
+        NSString *indexedProtocolString = [NSString stringWithFormat:@"%@%@",
+                                           INDEXED_PROTOCOL_STRING_PREFIX,
+                                           [[NSNumber numberWithChar:protocolIndex] stringValue]];
+        
         session = [[FMCIAPSession alloc] initWithAccessory:accessory
                                                forProtocol:indexedProtocolString];
         return session;
 
 
     } else if ((accessory = [EAAccessoryManager findAccessoryForProtocol:LEGACY_PROTOCOL_STRING])) {
+        [FMCDebugTool logInfo:@"Create Legacy Session"];
+
         //
         // Legacy
         //
@@ -80,6 +94,9 @@
         //
         // Error: No accessory supporting a required sync protocol was found!
         //
+        NSString *logMessage = [NSString stringWithFormat:@"Error: No accessory supporting a required sync protocol was found"];
+        [FMCDebugTool logInfo:logMessage];
+
         return nil;
     }
 

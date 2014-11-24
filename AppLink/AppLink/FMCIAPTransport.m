@@ -31,7 +31,7 @@
                      toOutput:FMCDebugOutput_All
                       toGroup:self.debugConsoleGroupName];
 
-        _io_queue = dispatch_queue_create("com.ford.applink.protocol.recieve", DISPATCH_QUEUE_SERIAL);
+        _io_queue = dispatch_queue_create("com.ford.applink.transport", DISPATCH_QUEUE_SERIAL);
 
         [self startEventListening];
         [FMCSiphonServer init];
@@ -130,7 +130,10 @@
             IOStreamDelegate.streamHasBytesHandler = streamReader;
 
 
-            [self.session open];
+            BOOL bOpened = [self.session open:(FMCIAPSessionRead|FMCIAPSessionWrite)];
+            if (bOpened) {
+                [self.delegate onTransportConnected];
+            }
         }
     });
 

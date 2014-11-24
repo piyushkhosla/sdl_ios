@@ -9,6 +9,9 @@
 #import <ExternalAccessory/ExternalAccessory.h>
 #import "FMCStreamDelegate.h"
 
+static const NSUInteger FMCIAPSessionRead = 1;
+static const NSUInteger FMCIAPSessionWrite = 1 << 1;
+
 @interface FMCIAPSession : NSObject
 @property (strong, atomic) EAAccessory *accessory;
 @property (strong, atomic) NSString *protocol;
@@ -18,7 +21,7 @@
 - (instancetype)initWithAccessory:(EAAccessory *)accessory
                       forProtocol:(NSString *)protocol;
 
-- (BOOL)open;
+- (BOOL)open:(NSUInteger)mode;
 - (void)close;
 
 @end
