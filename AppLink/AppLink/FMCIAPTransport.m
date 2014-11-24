@@ -101,6 +101,7 @@
             //
             FMCStreamDelegate *IOStreamDelegate = [FMCStreamDelegate new];
             FMCStreamHasBytesHandler streamReader = ^(NSInputStream *istream){
+                [FMCDebugTool logInfo:@"In StreamHasBytes Handler"];
 
                 uint8_t buf[IAP_INPUT_BUFFER_SIZE];
 
@@ -120,19 +121,26 @@
                     // If we read some bytes, pass on to delegate
                     // If no bytes, quit reading.
                     if (bytesRead > 0) {
+                        [FMCDebugTool logInfo:@"Bytes read."];
                         [self.delegate onDataReceived:dataIn];
                     } else {
+                        [FMCDebugTool logInfo:@"No bytes read."];
                         break;
                     }
                 }
+                [FMCDebugTool logInfo:@"Done reading."];
                 
             };
+            self.session.streamDelegate = IOStreamDelegate;
             IOStreamDelegate.streamHasBytesHandler = streamReader;
 
 
             BOOL bOpened = [self.session open:(FMCIAPSessionRead|FMCIAPSessionWrite)];
             if (bOpened) {
+                [FMCDebugTool logInfo:@"Open succeeded."];
                 [self.delegate onTransportConnected];
+            } else {
+                [FMCDebugTool logInfo:@"Open failed."];
             }
         }
     });
