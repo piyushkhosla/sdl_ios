@@ -515,8 +515,6 @@
 		E9A6E34419CB3C880054E1AD /* FMCOnLockScreenStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A6E34219CB3C880054E1AD /* FMCOnLockScreenStatus.m */; };
 		E9A8045E19DC412C00C81862 /* FMCDataStreamHandlingDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A8045C19DC412C00C81862 /* FMCDataStreamHandlingDelegate.h */; };
 		E9A8045F19DC412C00C81862 /* FMCDataStreamHandlingDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9A8045D19DC412C00C81862 /* FMCDataStreamHandlingDelegate.m */; };
-		E9AC35B71A1E362F00706312 /* EAAccessory+SyncProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = E9AC35B51A1E362F00706312 /* EAAccessory+SyncProtocols.h */; };
-		E9AC35B81A1E362F00706312 /* EAAccessory+SyncProtocols.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AC35B61A1E362F00706312 /* EAAccessory+SyncProtocols.m */; };
 		E9AC35BB1A1E37F500706312 /* EAAccessoryManager+SyncProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = E9AC35B91A1E37F500706312 /* EAAccessoryManager+SyncProtocols.h */; };
 		E9AC35BC1A1E37F500706312 /* EAAccessoryManager+SyncProtocols.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AC35BA1A1E37F500706312 /* EAAccessoryManager+SyncProtocols.m */; };
 		E9AC35BF1A1E3FC500706312 /* FMCIAPSession.h in Headers */ = {isa = PBXBuildFile; fileRef = E9AC35BD1A1E3FC500706312 /* FMCIAPSession.h */; };
@@ -525,6 +523,8 @@
 		E9AC35C61A1F876F00706312 /* FMCIAPConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AC35C41A1F876F00706312 /* FMCIAPConnectionManager.m */; };
 		E9AC35CA1A1F9AC200706312 /* FMCStreamDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = E9AC35C81A1F9AC200706312 /* FMCStreamDelegate.h */; };
 		E9AC35CB1A1F9AC200706312 /* FMCStreamDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AC35C91A1F9AC200706312 /* FMCStreamDelegate.m */; };
+		E9AC35CE1A23568600706312 /* EAAccessory+SyncProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = E9AC35CC1A23568600706312 /* EAAccessory+SyncProtocols.h */; };
+		E9AC35CF1A23568600706312 /* EAAccessory+SyncProtocols.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AC35CD1A23568600706312 /* EAAccessory+SyncProtocols.m */; };
 		E9BA327819C1EC3100D59762 /* FMCPrioritizedObjectCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = E9BA327619C1EC3100D59762 /* FMCPrioritizedObjectCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9BA327919C1EC3100D59762 /* FMCPrioritizedObjectCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BA327719C1EC3100D59762 /* FMCPrioritizedObjectCollection.m */; };
 /* End PBXBuildFile section */
@@ -1031,8 +1031,6 @@
 		E9A6E34219CB3C880054E1AD /* FMCOnLockScreenStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCOnLockScreenStatus.m; sourceTree = "<group>"; };
 		E9A8045C19DC412C00C81862 /* FMCDataStreamHandlingDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCDataStreamHandlingDelegate.h; sourceTree = "<group>"; };
 		E9A8045D19DC412C00C81862 /* FMCDataStreamHandlingDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCDataStreamHandlingDelegate.m; sourceTree = "<group>"; };
-		E9AC35B51A1E362F00706312 /* EAAccessory+SyncProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EAAccessory+SyncProtocols.h"; sourceTree = "<group>"; };
-		E9AC35B61A1E362F00706312 /* EAAccessory+SyncProtocols.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EAAccessory+SyncProtocols.m"; sourceTree = "<group>"; };
 		E9AC35B91A1E37F500706312 /* EAAccessoryManager+SyncProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EAAccessoryManager+SyncProtocols.h"; sourceTree = "<group>"; };
 		E9AC35BA1A1E37F500706312 /* EAAccessoryManager+SyncProtocols.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EAAccessoryManager+SyncProtocols.m"; sourceTree = "<group>"; };
 		E9AC35BD1A1E3FC500706312 /* FMCIAPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCIAPSession.h; sourceTree = "<group>"; };
@@ -1042,6 +1040,8 @@
 		E9AC35C71A1F88C900706312 /* FMCIAPConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMCIAPConfig.h; sourceTree = "<group>"; };
 		E9AC35C81A1F9AC200706312 /* FMCStreamDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCStreamDelegate.h; sourceTree = "<group>"; };
 		E9AC35C91A1F9AC200706312 /* FMCStreamDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCStreamDelegate.m; sourceTree = "<group>"; };
+		E9AC35CC1A23568600706312 /* EAAccessory+SyncProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EAAccessory+SyncProtocols.h"; sourceTree = "<group>"; };
+		E9AC35CD1A23568600706312 /* EAAccessory+SyncProtocols.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EAAccessory+SyncProtocols.m"; sourceTree = "<group>"; };
 		E9BA327619C1EC3100D59762 /* FMCPrioritizedObjectCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCPrioritizedObjectCollection.h; sourceTree = "<group>"; };
 		E9BA327719C1EC3100D59762 /* FMCPrioritizedObjectCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCPrioritizedObjectCollection.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1636,21 +1636,23 @@
 		59A02FE61978FBA1003E8ECF /* Transport */ = {
 			isa = PBXGroup;
 			children = (
+				E9AC35CC1A23568600706312 /* EAAccessory+SyncProtocols.h */,
+				E9AC35CD1A23568600706312 /* EAAccessory+SyncProtocols.m */,
+				E9AC35B91A1E37F500706312 /* EAAccessoryManager+SyncProtocols.h */,
+				E9AC35BA1A1E37F500706312 /* EAAccessoryManager+SyncProtocols.m */,
 				59A02FE71978FBA1003E8ECF /* FMCAbstractTransport.h */,
 				59A02FE81978FBA1003E8ECF /* FMCAbstractTransport.m */,
 				59A02FE91978FBA1003E8ECF /* FMCIAPTransport.h */,
 				59A02FEA1978FBA1003E8ECF /* FMCIAPTransport.m */,
 				E9AC35BD1A1E3FC500706312 /* FMCIAPSession.h */,
 				E9AC35BE1A1E3FC500706312 /* FMCIAPSession.m */,
+				E9AC35C71A1F88C900706312 /* FMCIAPConfig.h */,
 				E9AC35C31A1F876F00706312 /* FMCIAPConnectionManager.h */,
 				E9AC35C41A1F876F00706312 /* FMCIAPConnectionManager.m */,
-				E9AC35B91A1E37F500706312 /* EAAccessoryManager+SyncProtocols.h */,
-				E9AC35BA1A1E37F500706312 /* EAAccessoryManager+SyncProtocols.m */,
 				59A02FEB1978FBA1003E8ECF /* FMCTCPTransport.h */,
 				59A02FEC1978FBA1003E8ECF /* FMCTCPTransport.m */,
 				59A02FED1978FBA1003E8ECF /* FMCTransport.h */,
 				59A02FEE1978FBA1003E8ECF /* FMCTransportDelegate.h */,
-				E9AC35C71A1F88C900706312 /* FMCIAPConfig.h */,
 			);
 			name = Transport;
 			sourceTree = "<group>";
@@ -1658,8 +1660,6 @@
 		59E5A3C8194E318200B908AA = {
 			isa = PBXGroup;
 			children = (
-				E9AC35B51A1E362F00706312 /* EAAccessory+SyncProtocols.h */,
-				E9AC35B61A1E362F00706312 /* EAAccessory+SyncProtocols.m */,
 				59A02DFF1978FBA0003E8ECF /* AppLink */,
 				59E5A3EA194E318200B908AA /* AppLinkTests */,
 				59E5A3D3194E318200B908AA /* Frameworks */,
@@ -1816,6 +1816,7 @@
 				59A031951978FBAD003E8ECF /* FMCHMIPermissions.h in Headers */,
 				59A02FF41978FBA1003E8ECF /* FMCSiphonServer.h in Headers */,
 				59A0315B1978FBA9003E8ECF /* FMCSetGlobalPropertiesResponse.h in Headers */,
+				E9AC35CE1A23568600706312 /* EAAccessory+SyncProtocols.h in Headers */,
 				59A030591978FBA1003E8ECF /* FMCGlobalProperty.h in Headers */,
 				59A0300A1978FBA1003E8ECF /* FMCAppLinkV2ProtocolMessage.h in Headers */,
 				59A031BD1978FBB0003E8ECF /* FMCTTSChunk.h in Headers */,
@@ -1843,7 +1844,6 @@
 				59A0314B1978FBA8003E8ECF /* FMCPerformInteractionResponse.h in Headers */,
 				59A030C71978FBA3003E8ECF /* FMCOnHMIStatus.h in Headers */,
 				59A030331978FBA1003E8ECF /* FMCAppInterfaceUnregisteredReason.h in Headers */,
-				E9AC35B71A1E362F00706312 /* EAAccessory+SyncProtocols.h in Headers */,
 				59A030CD1978FBA4003E8ECF /* FMCOnPermissionsChange.h in Headers */,
 				59A030111978FBA1003E8ECF /* FMCEncoder.h in Headers */,
 				59A031851978FBAC003E8ECF /* FMCDeviceInfo.h in Headers */,
@@ -2241,6 +2241,7 @@
 				59A0315C1978FBA9003E8ECF /* FMCSetGlobalPropertiesResponse.m in Sources */,
 				59A031BE1978FBB0003E8ECF /* FMCTTSChunk.m in Sources */,
 				5948760E1979089600D94C36 /* FMCSyncProxy.m in Sources */,
+				E9AC35CF1A23568600706312 /* EAAccessory+SyncProtocols.m in Sources */,
 				59A031AA1978FBAE003E8ECF /* FMCSingleTireStatus.m in Sources */,
 				59A031981978FBAD003E8ECF /* FMCImage.m in Sources */,
 				59A030921978FBA2003E8ECF /* FMCSpeechCapabilities.m in Sources */,
@@ -2249,7 +2250,6 @@
 				59A030241978FBA1003E8ECF /* FMCRPCRequest.m in Sources */,
 				E9AC35CB1A1F9AC200706312 /* FMCStreamDelegate.m in Sources */,
 				E9AC35C61A1F876F00706312 /* FMCIAPConnectionManager.m in Sources */,
-				E9AC35B81A1E362F00706312 /* EAAccessory+SyncProtocols.m in Sources */,
 				59A031581978FBA9003E8ECF /* FMCSetAppIconResponse.m in Sources */,
 				59A030F61978FBA5003E8ECF /* FMCGetVehicleData.m in Sources */,
 				59A030661978FBA2003E8ECF /* FMCImageType.m in Sources */,
