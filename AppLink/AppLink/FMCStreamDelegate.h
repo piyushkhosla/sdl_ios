@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 // Convenience typedefs
-typedef void (^FMCStreamOpenHandler)(void);
+typedef void (^FMCStreamOpenHandler)(NSStream *stream);
 typedef void (^FMCStreamHasBytesHandler)(NSInputStream *istream);
 typedef void (^FMCStreamHasSpaceHandler)(NSOutputStream *ostream);
 typedef void (^FMCStreamErrorHandler)(void);
