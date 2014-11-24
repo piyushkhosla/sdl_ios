@@ -48,11 +48,11 @@
 
         self.streamDelegate.streamEndHandler = ^{
             [weakSelf close];
-            [weakSelf open];
+            [weakSelf open:mode];
         };
         void (^elapsedBlock)(void) = ^{
             [self close];
-            [self open];
+            [self open:mode];
         };
         self.streamDelegate.streamOpenHandler = ^(NSStream *stream){
             if (stream == [weakSelf.easession outputStream] &&
