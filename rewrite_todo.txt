@@ -1,10 +1,16 @@
+[Aaron]
 - Make stream delegate base class handle stream event open/end instead of via method overrides (using observers)
 - When on legacy protocol, getting stream end event should NOT cause a reconnection attempt
 
+- Change start session timer to use FMCTimer class
+
+
+[Hugh]
 - Change timeouts to be much shorter (1-2 seconds)
 - Add max retry counter (for stream open timer, ?)
 - One global retry counter; reset when?
 - Fix/add delays on retries
+
 
 - Each block that is GCD dispatched needs to verify at the start that objects are still valid
 
