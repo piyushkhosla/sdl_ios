@@ -1,1 +1,9 @@
-PUT TODO's IN HERE
+- When on legacy protocol, getting stream end event should NOT cause a reconnection attempt
+- Add max retry counter (for stream open timer, ?)
+- One global retry counter; reset when?
+- Each block that is GCD dispatched needs to verify at the start that objects are still valid
+- Remove byte-level transport logging that could slow down execution
+- Revamp the logging such that all code paths/events are covered and they are self-explanatory
+- Make stream delegate base class handle stream event open/end instead of via method overrides (using observers)
+- Fix/add delays on retries
+- Change FMCIAPSession to use FMCTimer instead of semaphore
