@@ -45,7 +45,7 @@ typedef void(^FMCCustomTaskCompletionHandler)(NSData *data, NSURLResponse *respo
 
 @implementation FMCSyncProxy
 
-const float handshakeTime = 10.0;
+const float startSessionTime = 10.0;
 const float notifyProxyClosedDelay = 0.1;
 const int POLICIES_CORRELATION_ID = 65535;
 
@@ -84,8 +84,6 @@ const int POLICIES_CORRELATION_ID = 65535;
         self.transport = nil;
         self.protocol = nil;
         self.proxyListeners = nil;
-
-        [self destroyHandshakeTimer];
     }
 }
 
@@ -108,21 +106,6 @@ const int POLICIES_CORRELATION_ID = 65535;
     return VERSION_STRING;
 }
 
-#pragma mark - Handshake Timer
-- (void)handshakeTimerFired {
-    [FMCDebugTool logInfo:@"Initial Handshake Timeout" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-
-    [self destroyHandshakeTimer];
-    [self performSelector:@selector(notifyProxyClosed) withObject:nil afterDelay:notifyProxyClosedDelay];
-}
-
--(void)destroyHandshakeTimer {
-    if (self.handshakeTimer != nil) {
-        [self.handshakeTimer invalidate];
-        self.handshakeTimer = nil;
-    }
-}
-
 - (void)startRPCSession {
     [self.protocol sendStartSessionWithType:FMCServiceType_RPC];
 }
@@ -134,8 +117,15 @@ const int POLICIES_CORRELATION_ID = 65535;
 
     [self startRPCSession];
 
-    [self destroyHandshakeTimer];
-    self.handshakeTimer = [NSTimer scheduledTimerWithTimeInterval:handshakeTime target:self selector:@selector(handshakeTimerFired) userInfo:nil repeats:NO];
+    if (self.startSessionTimer == nil) {
+        self.startSessionTimer = [[FMCTimer alloc] initWithDuration:startSessionTime];
+        __weak typeof(self) weakSelf = self;
+        self.startSessionTimer.elapsedBlock = ^{
+            [FMCDebugTool logInfo:@"Start Session Timeout" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:weakSelf.debugConsoleGroupName];
+            [weakSelf performSelector:@selector(notifyProxyClosed) withObject:nil afterDelay:notifyProxyClosedDelay];
+        };
+    }
+    [self.startSessionTimer start];
 }
 
 -(void) onProtocolClosed {
@@ -147,8 +137,8 @@ const int POLICIES_CORRELATION_ID = 65535;
 }
 
 - (void)handleProtocolSessionStarted:(FMCServiceType)serviceType sessionID:(Byte)sessionID version:(Byte)maxVersionForModule {
-    // Turn off the timer, the handshake has succeeded
-    [self destroyHandshakeTimer];
+    // Turn off the timer, the start session response came back
+    [self.startSessionTimer cancel];
     
     NSString *logMessage = [NSString stringWithFormat:@"StartSession (response)\nSessionId: %d for serviceType %d", sessionID, serviceType];
     [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];

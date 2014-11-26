@@ -9,6 +9,7 @@
 #import <AppLink/FMCTransport.h>
 #import "FMCAbstractProtocol.h"
 #import "FMCAbstractTransport.h"
+#import "FMCTimer.h"
 
 @interface FMCSyncProxy : NSObject <FMCProtocolListener, NSStreamDelegate> {
     Byte _version;
@@ -21,7 +22,7 @@
 @property (strong) FMCAbstractProtocol *protocol;
 @property (strong) FMCAbstractTransport *transport;
 @property (strong) NSMutableArray *proxyListeners;
-@property (strong) NSTimer *handshakeTimer;
+@property (strong) FMCTimer *startSessionTimer;
 @property (strong) NSString *debugConsoleGroupName;
 @property (readonly) NSString *proxyVersion;
 
