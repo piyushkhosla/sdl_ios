@@ -7,7 +7,7 @@
 #import "FMCDebugTool.h"
 #import "FMCIAPSession.h"
 #import "FMCTimer.h"
-
+#import "FMCIAPConfig.h"
 
 @interface FMCIAPSession ()
 
@@ -48,7 +48,9 @@
 
         self.streamDelegate.streamEndHandler = ^{
             [weakSelf close];
-            [weakSelf open:mode];
+            if (![LEGACY_PROTOCOL_STRING isEqualToString:weakSelf.protocol]) {
+                [weakSelf open:mode];
+            }
         };
         void (^elapsedBlock)(void) = ^{
             [self close];
