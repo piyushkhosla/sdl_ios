@@ -1,5 +1,5 @@
 [Hugh]
-- Change timeouts to be much shorter (1-2 seconds)
+- Cycle proxy fails
 - Add max retry counter (for stream open timer, ?)
 - One global retry counter; reset when?
 - Fix/add delays on retries

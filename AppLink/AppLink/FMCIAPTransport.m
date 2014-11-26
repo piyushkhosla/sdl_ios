@@ -165,18 +165,16 @@
 
 - (void)sendData:(NSData *)data {
 
+    NSOutputStream *ostream = self.session.easession.outputStream;
+    NSMutableData *remainder = data.mutableCopy;
+
     dispatch_async(_io_queue, ^{
-        NSOutputStream *ostream = self.session.easession.outputStream;
-        NSMutableData *remainder = data.mutableCopy;
 
         while (1) {
             if (remainder.length == 0)
                 break;
 
-            if (ostream.hasSpaceAvailable) {
-
-                //TODO: Added for debug, issue with module
-                //[NSThread sleepForTimeInterval:0.020];
+            if (ostream.streamStatus == NSStreamStatusOpen && ostream.hasSpaceAvailable) {
 
                 NSInteger bytesWritten = [ostream write:remainder.bytes maxLength:remainder.length];
                 if (bytesWritten == -1) {
