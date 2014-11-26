@@ -7,7 +7,5 @@
 
 - Each block that is GCD dispatched needs to verify at the start that objects are still valid
 
-- Remove byte-level transport logging that could slow down execution
-- Revamp the logging such that all code paths/events are covered and they are self-explanatory
 
 - Change FMCIAPSession to use FMCTimer instead of semaphore (if feasible)

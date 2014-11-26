@@ -87,7 +87,7 @@
 #pragma mark - FMCTransport Implementation
 
 - (void)connect {
-    [FMCDebugTool logInfo:@"Connect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    [FMCDebugTool logInfo:@"IAPTransport Connect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
     dispatch_async(_io_queue, ^{
         if (!self.session) {
@@ -108,7 +108,7 @@
                 //
                 FMCStreamDelegate *IOStreamDelegate = [FMCStreamDelegate new];
                 FMCStreamHasBytesHandler streamReader = ^(NSInputStream *istream){
-                    [FMCDebugTool logInfo:@"In StreamHasBytes Handler"];
+                    //[FMCDebugTool logInfo:@"In StreamHasBytes Handler"];
 
                     uint8_t buf[IAP_INPUT_BUFFER_SIZE];
 
@@ -119,23 +119,23 @@
                         NSData *dataIn = [NSData dataWithBytes:buf length:bytesRead];
 
                         // Log
-                        NSString *logMessage = [NSString stringWithFormat:@"Incoming: (%ld)", (long)bytesRead];
+                        /*NSString *logMessage = [NSString stringWithFormat:@"Incoming: (%ld)", (long)bytesRead];
                         [FMCDebugTool logInfo:logMessage
                                 andBinaryData:dataIn
                                      withType:FMCDebugType_Transport_iAP
-                                     toOutput:FMCDebugOutput_File];
+                                     toOutput:FMCDebugOutput_File];*/
 
                         // If we read some bytes, pass on to delegate
                         // If no bytes, quit reading.
                         if (bytesRead > 0) {
-                            [FMCDebugTool logInfo:@"Bytes read."];
+                            //[FMCDebugTool logInfo:@"Bytes read."];
                             [self.delegate onDataReceived:dataIn];
                         } else {
-                            [FMCDebugTool logInfo:@"No bytes read."];
+                            //[FMCDebugTool logInfo:@"No bytes read."];
                             break;
                         }
                     }
-                    [FMCDebugTool logInfo:@"Done reading."];
+                    //[FMCDebugTool logInfo:@"Done reading."];
                     
                 };
                 self.session.streamDelegate = IOStreamDelegate;
@@ -144,10 +144,7 @@
 
                 BOOL bOpened = [self.session open:(FMCIAPSessionRead|FMCIAPSessionWrite)];
                 if (bOpened) {
-                    [FMCDebugTool logInfo:@"Open succeeded."];
                     [self.delegate onTransportConnected];
-                } else {
-                    [FMCDebugTool logInfo:@"Open failed."];
                 }
             }
         }
@@ -156,10 +153,10 @@
 }
 
 - (void)disconnect {
-    [FMCDebugTool logInfo:@"Disconnect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    [FMCDebugTool logInfo:@"IAPTransport Disconnect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
     dispatch_async(_io_queue, ^{
-        [self stopEventListening];
+        [self stopEventListening]; // TODO: shoudn't this be called only when this FMCIAPTransport object is destroyed?
         [self.session close];
         self.session = nil;
     });
@@ -186,11 +183,11 @@
                     break;
                 }
 
-                NSString *logMessage = [NSString stringWithFormat:@"Outgoing: (%ld)", (long)bytesWritten];
+                /*NSString *logMessage = [NSString stringWithFormat:@"Outgoing: (%ld)", (long)bytesWritten];
                 [FMCDebugTool logInfo:logMessage
                         andBinaryData:[remainder subdataWithRange:NSMakeRange(0, bytesWritten)]
                              withType:FMCDebugType_Transport_iAP
-                             toOutput:FMCDebugOutput_File];
+                             toOutput:FMCDebugOutput_File];*/
 
                 [remainder replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
             }
@@ -222,13 +219,13 @@
 }
 
 -(void)applicationWillEnterForeground:(NSNotification *)notification {
-    [FMCDebugTool logInfo:@"Will Enter Foreground" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    [FMCDebugTool logInfo:@"App Foregrounded" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
     [self connect];
 }
 
 -(void)applicationDidEnterBackground:(NSNotification *)notification {
-    [FMCDebugTool logInfo:@"Did Enter Background" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    [FMCDebugTool logInfo:@"App Backgrounded" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 }
 
 @end
