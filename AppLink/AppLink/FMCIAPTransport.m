@@ -84,21 +84,23 @@
 }
 
 
-#pragma mark - FMCTransport Implementation
-
 - (void)connect {
     [FMCDebugTool logInfo:@"Connect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
-    dispatch_async(_io_queue, ^{
+    dispatch_sync(_io_queue, ^{
         if (!self.session) {
 
-            for (int i=0; i<30; i++) {
+            for (int i=0; i<CREATE_SESSION_RETRIES; i++) {
                 self.session = [FMCIAPConnectionManager createSession];
                 if (self.session)
                     break;
                 else {
                     float randomNumber = (float)arc4random() / UINT_MAX; // between 0 and 1
                     [NSThread sleepForTimeInterval:randomNumber];
+
+                    if (i == CREATE_SESSION_RETRIES-1) {
+                        [FMCDebugTool logInfo:@"Create session retries exhausted for this connect request."];
+                    }
                 }
             }
             if (self.session) {
@@ -108,7 +110,7 @@
                 //
                 FMCStreamDelegate *IOStreamDelegate = [FMCStreamDelegate new];
                 FMCStreamHasBytesHandler streamReader = ^(NSInputStream *istream){
-                    [FMCDebugTool logInfo:@"In StreamHasBytes Handler"];
+                    [FMCDebugTool logInfo:@"Reading data on input stream."];
 
                     uint8_t buf[IAP_INPUT_BUFFER_SIZE];
 
@@ -118,7 +120,7 @@
                         NSInteger bytesRead = [istream read:buf maxLength:IAP_INPUT_BUFFER_SIZE];
                         NSData *dataIn = [NSData dataWithBytes:buf length:bytesRead];
 
-                        // Log
+                        // Log received data to file.
                         NSString *logMessage = [NSString stringWithFormat:@"Incoming: (%ld)", (long)bytesRead];
                         [FMCDebugTool logInfo:logMessage
                                 andBinaryData:dataIn
@@ -128,14 +130,13 @@
                         // If we read some bytes, pass on to delegate
                         // If no bytes, quit reading.
                         if (bytesRead > 0) {
-                            [FMCDebugTool logInfo:@"Bytes read."];
                             [self.delegate onDataReceived:dataIn];
                         } else {
                             [FMCDebugTool logInfo:@"No bytes read."];
                             break;
                         }
                     }
-                    [FMCDebugTool logInfo:@"Done reading."];
+                    [FMCDebugTool logInfo:@"No more data on input stream."];
                     
                 };
                 self.session.streamDelegate = IOStreamDelegate;
@@ -144,10 +145,10 @@
 
                 BOOL bOpened = [self.session open:(FMCIAPSessionRead|FMCIAPSessionWrite)];
                 if (bOpened) {
-                    [FMCDebugTool logInfo:@"Open succeeded."];
+                    [FMCDebugTool logInfo:@"Session opened."];
                     [self.delegate onTransportConnected];
                 } else {
-                    [FMCDebugTool logInfo:@"Open failed."];
+                    [FMCDebugTool logInfo:@"Error: Session not opened."];
                 }
             }
         }
@@ -158,8 +159,7 @@
 - (void)disconnect {
     [FMCDebugTool logInfo:@"Disconnect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
-    dispatch_async(_io_queue, ^{
-        [self stopEventListening];
+    dispatch_sync(_io_queue, ^{
         [self.session close];
         self.session = nil;
     });
@@ -167,7 +167,7 @@
 
 - (void)sendData:(NSData *)data {
 
-    dispatch_async(_io_queue, ^{
+    dispatch_sync(_io_queue, ^{
         NSOutputStream *ostream = self.session.easession.outputStream;
         NSMutableData *remainder = data.mutableCopy;
 
@@ -199,6 +199,7 @@
 }
 
 - (void)dealloc {
+    [self stopEventListening];
     _io_queue = nil;
 }
 

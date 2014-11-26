@@ -70,7 +70,7 @@ FMCStreamHasBytesHandler defaultStreamHasBytesHandler = ^(NSInputStream *istream
 };
 
 FMCStreamHasSpaceHandler defaultStreamHasSpaceHandler = ^(NSOutputStream *ostream) {
-    [FMCDebugTool logInfo:@"Stream Has Space."];
+
 };
 
 FMCStreamErrorHandler defaultStreamErrorHandler = ^(void) {

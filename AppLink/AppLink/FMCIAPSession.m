@@ -7,6 +7,7 @@
 #import "FMCDebugTool.h"
 #import "FMCIAPSession.h"
 #import "FMCTimer.h"
+#import "FMCIAPConfig.h"
 
 
 @interface FMCIAPSession ()
@@ -20,7 +21,7 @@
 @implementation FMCIAPSession
 
 - (instancetype)initWithAccessory:(EAAccessory *)accessory forProtocol:(NSString *)protocol{
-    NSString *logMessage = [NSString stringWithFormat:@"initWithAccessory:%@ forProtocol:%@" , accessory.name, protocol];
+    NSString *logMessage = [NSString stringWithFormat:@"initWithAccessory:%@ forProtocol:%@" , accessory, protocol];
     [FMCDebugTool logInfo:logMessage];
 
 
@@ -37,7 +38,7 @@
 }
 
 - (BOOL)open:(NSUInteger)mode {
-    NSString *logMessage = [NSString stringWithFormat:@"open accessory:%@ forProtocol:%@" , _accessory.name, _protocol];
+    NSString *logMessage = [NSString stringWithFormat:@"Open EA Session - accessory:%@ forProtocol:%@" , _accessory.name, _protocol];
     [FMCDebugTool logInfo:logMessage];
 
     BOOL success = NO;
@@ -66,7 +67,7 @@
 
         if(mode & FMCIAPSessionRead) {
             if (self.inputStreamTimer == nil) {
-                self.inputStreamTimer = [[FMCTimer alloc] initWithDuration:10];
+                self.inputStreamTimer = [[FMCTimer alloc] initWithDuration:STREAM_OPEN_TIMEOUT_SECONDS];
                 self.inputStreamTimer.elapsedBlock = elapsedBlock;
             }
             [self.inputStreamTimer start];
@@ -75,7 +76,7 @@
 
         if(mode & FMCIAPSessionWrite) {
             if (self.outputStreamTimer == nil) {
-                self.outputStreamTimer = [[FMCTimer alloc] initWithDuration:10];
+                self.outputStreamTimer = [[FMCTimer alloc] initWithDuration:STREAM_OPEN_TIMEOUT_SECONDS];
                 self.outputStreamTimer.elapsedBlock = elapsedBlock;
             }
             [self.outputStreamTimer start];
@@ -89,7 +90,7 @@
 }
 
 - (void)close {
-    NSString *logMessage = [NSString stringWithFormat:@"session::close"];
+    NSString *logMessage = [NSString stringWithFormat:@"Session closing. Closing streams, deleting object."];
     [FMCDebugTool logInfo:logMessage];
 
     if (_easession) {
@@ -97,10 +98,12 @@
             [self.inputStreamTimer cancel];
         }
         [self stopStream:_easession.inputStream];
+
         if (self.outputStreamTimer) {
             [self.outputStreamTimer cancel];
         }
         [self stopStream:_easession.outputStream];
+        
         self.easession = nil;
     }
 
@@ -108,7 +111,7 @@
 
 - (void)startStream:(NSStream *)stream {
     stream.delegate = self.streamDelegate;
-    [stream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode]; // TODO: Probably want a dedicated runloop, not the main.
+    [stream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     [stream open];
 }
 
