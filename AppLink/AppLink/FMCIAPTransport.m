@@ -85,9 +85,9 @@
 
 
 - (void)connect {
-    [FMCDebugTool logInfo:@"Connect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    [FMCDebugTool logInfo:@"IAPTransport Connect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
-    dispatch_sync(_io_queue, ^{
+    dispatch_async(_io_queue, ^{
         if (!self.session) {
 
             for (int i=0; i<CREATE_SESSION_RETRIES; i++) {
@@ -110,7 +110,6 @@
                 //
                 FMCStreamDelegate *IOStreamDelegate = [FMCStreamDelegate new];
                 FMCStreamHasBytesHandler streamReader = ^(NSInputStream *istream){
-                    [FMCDebugTool logInfo:@"Reading data on input stream."];
 
                     uint8_t buf[IAP_INPUT_BUFFER_SIZE];
 
@@ -136,8 +135,7 @@
                             break;
                         }
                     }
-                    [FMCDebugTool logInfo:@"No more data on input stream."];
-                    
+
                 };
                 self.session.streamDelegate = IOStreamDelegate;
                 IOStreamDelegate.streamHasBytesHandler = streamReader;
@@ -157,9 +155,9 @@
 }
 
 - (void)disconnect {
-    [FMCDebugTool logInfo:@"Disconnect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    [FMCDebugTool logInfo:@"IAPTransport Disconnect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
-    dispatch_sync(_io_queue, ^{
+    dispatch_async(_io_queue, ^{
         [self.session close];
         self.session = nil;
     });
@@ -167,7 +165,7 @@
 
 - (void)sendData:(NSData *)data {
 
-    dispatch_sync(_io_queue, ^{
+    dispatch_async(_io_queue, ^{
         NSOutputStream *ostream = self.session.easession.outputStream;
         NSMutableData *remainder = data.mutableCopy;
 
@@ -223,13 +221,13 @@
 }
 
 -(void)applicationWillEnterForeground:(NSNotification *)notification {
-    [FMCDebugTool logInfo:@"Will Enter Foreground" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    [FMCDebugTool logInfo:@"App Foregrounded" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
     [self connect];
 }
 
 -(void)applicationDidEnterBackground:(NSNotification *)notification {
-    [FMCDebugTool logInfo:@"Did Enter Background" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    [FMCDebugTool logInfo:@"App Backgrounded" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 }
 
 @end

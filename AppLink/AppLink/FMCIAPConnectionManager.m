@@ -26,7 +26,7 @@
 
     EAAccessory *accessory = nil;
     if ((accessory = [EAAccessoryManager findAccessoryForProtocol:CONTROL_PROTOCOL_STRING])) {
-        [FMCDebugTool logInfo:@"Create MultiApp Session on Control Protocol"];
+        [FMCDebugTool logInfo:@"Starting MultiApp Session"];
 
         //
         // Multi-app
@@ -56,11 +56,12 @@
                                                                       forProtocol:CONTROL_PROTOCOL_STRING];
         controlSession.streamDelegate = controlStreamDelegate;
         [controlSession open:FMCIAPSessionRead];
+        // TODO: there's no error handling/retry here
 
 
         // Wait here until we have recieved data (which should be the protocol index) or set a timeout
-        [FMCDebugTool logInfo:@"Waiting for data on control protocol."];
-        
+        [FMCDebugTool logInfo:@"Waiting for protocol index."];
+
         long protocolSuccess = dispatch_semaphore_wait(protocol_index_semaphore,
                                                        dispatch_time(DISPATCH_TIME_NOW, (PROTOCOL_INDEX_TIMEOUT_SECONDS * NSEC_PER_SEC)));
         if (protocolSuccess == 0) {
@@ -87,7 +88,7 @@
             return nil;
         }
     } else if ((accessory = [EAAccessoryManager findAccessoryForProtocol:LEGACY_PROTOCOL_STRING])) {
-        [FMCDebugTool logInfo:@"Create Legacy Session"];
+        [FMCDebugTool logInfo:@"Starting Legacy Session"];
 
         //
         // Legacy

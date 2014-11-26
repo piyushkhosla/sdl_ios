@@ -527,7 +527,7 @@
 		E9BA327819C1EC3100D59762 /* FMCPrioritizedObjectCollection.h in Headers */ = {isa = PBXBuildFile; fileRef = E9BA327619C1EC3100D59762 /* FMCPrioritizedObjectCollection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9BA327919C1EC3100D59762 /* FMCPrioritizedObjectCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = E9BA327719C1EC3100D59762 /* FMCPrioritizedObjectCollection.m */; };
 		FB2F16691A237CDE0094FC69 /* FMCTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = FB2F16681A237CDE0094FC69 /* FMCTimer.m */; };
-		FB2F166B1A237D2E0094FC69 /* FMCTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = FB2F166A1A237D2E0094FC69 /* FMCTimer.h */; };
+		FB2F166B1A237D2E0094FC69 /* FMCTimer.h in Headers */ = {isa = PBXBuildFile; fileRef = FB2F166A1A237D2E0094FC69 /* FMCTimer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -1723,6 +1723,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB2F166B1A237D2E0094FC69 /* FMCTimer.h in Headers */,
 				E9AC35CA1A1F9AC200706312 /* FMCStreamDelegate.h in Headers */,
 				E9AC35BF1A1E3FC500706312 /* FMCIAPSession.h in Headers */,
 				59A031AB1978FBAE003E8ECF /* FMCSoftButton.h in Headers */,
@@ -1924,7 +1925,6 @@
 				59A031971978FBAD003E8ECF /* FMCImage.h in Headers */,
 				59A031591978FBA9003E8ECF /* FMCSetDisplayLayoutResponse.h in Headers */,
 				59A0302F1978FBA1003E8ECF /* FMCAmbientLightStatus.h in Headers */,
-				FB2F166B1A237D2E0094FC69 /* FMCTimer.h in Headers */,
 				59A030AF1978FBA3003E8ECF /* FMCVehicleDataType.h in Headers */,
 				59A031D11978FBB1003E8ECF /* FMCTransportDelegate.h in Headers */,
 				59A030F91978FBA5003E8ECF /* FMCPerformAudioPassThru.h in Headers */,

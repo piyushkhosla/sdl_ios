@@ -62,11 +62,11 @@
 }
 
 FMCStreamOpenHandler defaultStreamOpenHandler = ^(NSStream *stream) {
-    [FMCDebugTool logInfo:@"Stream Open."];
+    [FMCDebugTool logInfo:@"Stream Event Open"];
 };
 
 FMCStreamHasBytesHandler defaultStreamHasBytesHandler = ^(NSInputStream *istream) {
-    [FMCDebugTool logInfo:@"Stream Has Bytes."];
+    [FMCDebugTool logInfo:@"Stream Event Has Bytes"];
 };
 
 FMCStreamHasSpaceHandler defaultStreamHasSpaceHandler = ^(NSOutputStream *ostream) {
@@ -74,11 +74,11 @@ FMCStreamHasSpaceHandler defaultStreamHasSpaceHandler = ^(NSOutputStream *ostrea
 };
 
 FMCStreamErrorHandler defaultStreamErrorHandler = ^(void) {
-    [FMCDebugTool logInfo:@"Stream Error."];
+    [FMCDebugTool logInfo:@"Stream Event Error"];
 };
 
 FMCStreamEndHandler defaultStreamEndHandler = ^(void) {
-    [FMCDebugTool logInfo:@"Stream End."];
+    [FMCDebugTool logInfo:@"Stream Event End"];
 };
 
 @end

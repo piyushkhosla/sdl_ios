@@ -8,6 +8,7 @@
 #import <AppLink/FMCRPCRequestFactory.h>
 #import "FMCAbstractProtocol.h"
 #import "FMCAbstractTransport.h"
+#import "FMCTimer.h"
 
 @interface FMCSyncProxy : NSObject <FMCProtocolListener, NSStreamDelegate> {
     Byte _version;
@@ -20,7 +21,7 @@
 @property (strong) FMCAbstractProtocol *protocol;
 @property (strong) FMCAbstractTransport *transport;
 @property (strong) NSMutableArray *proxyListeners;
-@property (strong) NSTimer *handshakeTimer;
+@property (strong) FMCTimer *startSessionTimer;
 @property (strong) NSString *debugConsoleGroupName;
 @property (readonly) NSString *proxyVersion;
 
@@ -35,9 +36,7 @@
 - (void)handleRpcMessage:(NSDictionary *)msg;
 - (void)handleProtocolMessage:(FMCAppLinkProtocolMessage *)msgData;
 
-- (void)destroyHandshakeTimer;
-
-- (void)putFileStream:(NSInputStream *)inputStream :(FMCPutFile *)putFileRPCRequest;
+- (void)putFileStream:(NSInputStream *)inputStream withRequest:(FMCPutFile *)putFileRPCRequest;
 
 + (void)enableSiphonDebug;
 + (void)disableSiphonDebug;
