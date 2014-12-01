@@ -502,6 +502,7 @@
 		59A031CF1978FBB1003E8ECF /* FMCTCPTransport.m in Sources */ = {isa = PBXBuildFile; fileRef = 59A02FEC1978FBA1003E8ECF /* FMCTCPTransport.m */; };
 		59A031D11978FBB1003E8ECF /* FMCTransportDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 59A02FEE1978FBA1003E8ECF /* FMCTransportDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		59BF0A7019790C56008C6783 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 59A02FE41978FBA1003E8ECF /* InfoPlist.strings */; };
+		E923FF7A1A2CC4990002FAA5 /* FMCIAPSessionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = E923FF781A2CC4990002FAA5 /* FMCIAPSessionDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E932AD8B19A26CCF00D8155B /* FMCPolicyDataParser.h in Headers */ = {isa = PBXBuildFile; fileRef = E932AD8919A26CCF00D8155B /* FMCPolicyDataParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E932AD8C19A26CCF00D8155B /* FMCPolicyDataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E932AD8A19A26CCF00D8155B /* FMCPolicyDataParser.m */; };
 		E98A9C8719C74C7400C84B3F /* FMCObjectWithPriority.h in Headers */ = {isa = PBXBuildFile; fileRef = E98A9C8519C74C7400C84B3F /* FMCObjectWithPriority.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1019,6 +1020,7 @@
 		59E5A3EC194E318200B908AA /* AppLinkTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppLinkTests-Info.plist"; sourceTree = "<group>"; };
 		59E5A3EE194E318200B908AA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		59E5A3F0194E318200B908AA /* AppLinkTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppLinkTests.m; sourceTree = "<group>"; };
+		E923FF781A2CC4990002FAA5 /* FMCIAPSessionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCIAPSessionDelegate.h; sourceTree = "<group>"; };
 		E932AD8919A26CCF00D8155B /* FMCPolicyDataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCPolicyDataParser.h; sourceTree = "<group>"; };
 		E932AD8A19A26CCF00D8155B /* FMCPolicyDataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCPolicyDataParser.m; sourceTree = "<group>"; };
 		E98A9C8519C74C7400C84B3F /* FMCObjectWithPriority.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCObjectWithPriority.h; sourceTree = "<group>"; };
@@ -1654,6 +1656,7 @@
 				59A02FEB1978FBA1003E8ECF /* FMCTCPTransport.h */,
 				59A02FEC1978FBA1003E8ECF /* FMCTCPTransport.m */,
 				59A02FEE1978FBA1003E8ECF /* FMCTransportDelegate.h */,
+				E923FF781A2CC4990002FAA5 /* FMCIAPSessionDelegate.h */,
 			);
 			name = Transport;
 			sourceTree = "<group>";
@@ -1723,6 +1726,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E923FF7A1A2CC4990002FAA5 /* FMCIAPSessionDelegate.h in Headers */,
 				FB2F166B1A237D2E0094FC69 /* FMCTimer.h in Headers */,
 				E9AC35CA1A1F9AC200706312 /* FMCStreamDelegate.h in Headers */,
 				E9AC35BF1A1E3FC500706312 /* FMCIAPSession.h in Headers */,

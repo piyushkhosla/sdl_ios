@@ -40,7 +40,7 @@
 }
 
 - (void)startEventListening {
-
+    [FMCDebugTool logInfo:@"Began Listening for iAP events"];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(accessoryConnected:)
                                                  name:EAAccessoryDidConnectNotification
@@ -64,7 +64,7 @@
 }
 
 - (void)stopEventListening {
-
+    [FMCDebugTool logInfo:@"Stoped Listening for iAP events"];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:EAAccessoryDidConnectNotification
                                                   object:nil];
@@ -85,9 +85,9 @@
 
 
 - (void)connect {
-    [FMCDebugTool logInfo:@"IAPTransport Connect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-
     dispatch_async(_io_queue, ^{
+        [FMCDebugTool logInfo:@"IAPTransport Connect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+        
         if (!self.session) {
 
             for (int i=0; i<CREATE_SESSION_RETRIES; i++) {
@@ -140,24 +140,31 @@
                 self.session.streamDelegate = IOStreamDelegate;
                 IOStreamDelegate.streamHasBytesHandler = streamReader;
 
-
-                BOOL bOpened = [self.session open:(FMCIAPSessionRead|FMCIAPSessionWrite)];
-                if (bOpened) {
-                    [FMCDebugTool logInfo:@"Session opened."];
-                    [self.delegate onTransportConnected];
-                } else {
-                    [FMCDebugTool logInfo:@"Error: Session not opened."];
-                }
+                self.session.delegate = self;
+                [self.session open:(FMCIAPSessionRead|FMCIAPSessionWrite)];
             }
+        } else {
+            [FMCDebugTool logInfo:@"Already connected. Discarding this request."];
         }
     });
 
 }
 
-- (void)disconnect {
-    [FMCDebugTool logInfo:@"IAPTransport Disconnect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+// This gets called after both I/O streams of the session have opened.
+- (void)onSessionInitializationComplete:(BOOL)success {
+    if (success) {
+        [FMCDebugTool logInfo:@"Session opened."];
+        [self.delegate onTransportConnected];
+    } else {
+        [FMCDebugTool logInfo:@"Error: Session not opened."];
+    }
+}
 
+
+- (void)disconnect {
     dispatch_async(_io_queue, ^{
+        [FMCDebugTool logInfo:@"IAPTransport Disconnect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+        
         [self.session close];
         self.session = nil;
     });

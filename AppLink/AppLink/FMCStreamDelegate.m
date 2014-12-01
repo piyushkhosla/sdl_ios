@@ -45,12 +45,12 @@
         }
         case NSStreamEventErrorOccurred:
         {
-            self.streamErrorHandler();
+            self.streamErrorHandler(stream);
             break;
         }
         case NSStreamEventEndEncountered:
         {
-            self.streamEndHandler();
+            self.streamEndHandler(stream);
             break;
         }
         case NSStreamEventNone:
@@ -73,11 +73,11 @@ FMCStreamHasSpaceHandler defaultStreamHasSpaceHandler = ^(NSOutputStream *ostrea
 
 };
 
-FMCStreamErrorHandler defaultStreamErrorHandler = ^(void) {
+FMCStreamErrorHandler defaultStreamErrorHandler = ^(NSStream *stream) {
     [FMCDebugTool logInfo:@"Stream Event Error"];
 };
 
-FMCStreamEndHandler defaultStreamEndHandler = ^(void) {
+FMCStreamEndHandler defaultStreamEndHandler = ^(NSStream *stream) {
     [FMCDebugTool logInfo:@"Stream Event End"];
 };
 

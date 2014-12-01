@@ -11,8 +11,8 @@
 typedef void (^FMCStreamOpenHandler)(NSStream *stream);
 typedef void (^FMCStreamHasBytesHandler)(NSInputStream *istream);
 typedef void (^FMCStreamHasSpaceHandler)(NSOutputStream *ostream);
-typedef void (^FMCStreamErrorHandler)(void);
-typedef void (^FMCStreamEndHandler)(void);
+typedef void (^FMCStreamErrorHandler)(NSStream *stream);
+typedef void (^FMCStreamEndHandler)(NSStream *stream);
 
 
 

@@ -54,9 +54,12 @@
         // start the session on the control channel
         FMCIAPSession *controlSession = [[FMCIAPSession alloc] initWithAccessory:accessory
                                                                       forProtocol:CONTROL_PROTOCOL_STRING];
-        controlSession.streamDelegate = controlStreamDelegate;
-        [controlSession open:FMCIAPSessionRead];
-        // TODO: there's no error handling/retry here
+        if (controlSession) {
+            controlSession.streamDelegate = controlStreamDelegate;
+            [controlSession open:FMCIAPSessionRead];
+        } else {
+            return nil;
+        }
 
 
         // Wait here until we have recieved data (which should be the protocol index) or set a timeout
@@ -115,4 +118,5 @@
     }
 
 }
+
 @end
