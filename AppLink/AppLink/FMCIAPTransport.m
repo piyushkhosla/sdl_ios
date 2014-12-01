@@ -64,7 +64,7 @@
 }
 
 - (void)stopEventListening {
-    [FMCDebugTool logInfo:@"Stoped Listening for iAP events"];
+    [FMCDebugTool logInfo:@"Stopped Listening for iAP events"];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:EAAccessoryDidConnectNotification
                                                   object:nil];
