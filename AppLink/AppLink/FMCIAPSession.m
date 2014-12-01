@@ -72,8 +72,8 @@
         // Setup the stream open timed out event handler
         void (^elapsedBlock)(void) = ^{
             [FMCDebugTool logInfo:@"Stream Open Timeout"];
-            [self close];
-            [self open:mode];
+            [weakSelf close];
+            [weakSelf open:mode];
         };
 
         // Setup the stream open event handler
