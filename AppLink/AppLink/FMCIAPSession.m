@@ -132,6 +132,9 @@
 - (void)close {
     [FMCDebugTool logInfo:@"IAPSession Closing"];
 
+    self.accessory = nil;
+    self.streamDelegate = nil;
+
     if (_easession) {
         if (self.inputStreamTimer) {
             [self.inputStreamTimer cancel];
@@ -145,6 +148,11 @@
         
         self.easession = nil;
     }
+
+    self.inputStreamTimer = nil;
+    self.outputStreamTimer = nil;
+    self.streamDelegate = nil;
+    self.protocol = nil;
 }
 
 - (void)startStream:(NSStream *)stream {
