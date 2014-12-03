@@ -53,7 +53,7 @@
 
         // start the session on the control channel
         FMCIAPSession *controlSession = [[FMCIAPSession alloc] initWithAccessory:accessory
-                                                                      forProtocol:CONTROL_PROTOCOL_STRING];
+                                                                     forProtocol:CONTROL_PROTOCOL_STRING];
         if (controlSession) {
             controlSession.streamDelegate = controlStreamDelegate;
             BOOL isOpen = [controlSession open:FMCIAPSessionRead];

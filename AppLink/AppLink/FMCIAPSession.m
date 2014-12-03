@@ -23,7 +23,7 @@
 @implementation FMCIAPSession
 
 - (instancetype)initWithAccessory:(EAAccessory *)accessory forProtocol:(NSString *)protocol{
-    NSString *logMessage = [NSString stringWithFormat:@"IAPSession initWithAccessory:%@ forProtocol:%@" , accessory, protocol];
+    NSString *logMessage = [NSString stringWithFormat:@"FMCIAPSession initWithAccessory:%@ forProtocol:%@" , accessory, protocol];
     [FMCDebugTool logInfo:logMessage];
 
 
@@ -50,24 +50,21 @@
 
     self.easession = [[EASession alloc] initWithAccessory:_accessory forProtocol:_protocol];
     if (_easession) {
-        [FMCDebugTool logInfo:@"IAPSession Initialized, Opening Streams"];
+        [FMCDebugTool logInfo:@"EASession Initialized, Opening Streams"];
         __weak typeof(self) weakSelf = self;
 
         // Setup the stream close event handler
         self.streamDelegate.streamEndHandler = ^(NSStream *stream){
             [FMCDebugTool logInfo:@"Stream Event End"];
+
             [weakSelf close];
+
+            // If Multi-App capable, open stream(s) again.
             if (![LEGACY_PROTOCOL_STRING isEqualToString:weakSelf.protocol]) {
                 [weakSelf open:mode];
             }
-
-            // Clear stream open flags
-            if ([stream isMemberOfClass:[NSInputStream class]]) {
-                weakSelf.isInputStreamOpen = NO;
-            } else if ([stream isMemberOfClass:[NSOutputStream class]]) {
-                weakSelf.isOutputStreamOpen = NO;
-            }
         };
+
 
         // Setup the stream open timed out event handler
         void (^elapsedBlock)(void) = ^{
@@ -75,6 +72,7 @@
             [weakSelf close];
             [weakSelf open:mode];
         };
+
 
         // Setup the stream open event handler
         self.streamDelegate.streamOpenHandler = ^(NSStream *stream){
@@ -122,7 +120,7 @@
 
         success = YES;
     } else {
-        [FMCDebugTool logInfo:@"IAPSession Initialization Failed"];
+        [FMCDebugTool logInfo:@"EASession Initialization Failed"];
     }
 
 
@@ -130,29 +128,37 @@
 }
 
 - (void)close {
-    [FMCDebugTool logInfo:@"IAPSession Closing"];
+    [FMCDebugTool logInfo:@"FMCIAPSession Closing"];
 
-    self.accessory = nil;
-    self.streamDelegate = nil;
 
     if (_easession) {
+        // Cancel input stream open timer (if set)
         if (self.inputStreamTimer) {
             [self.inputStreamTimer cancel];
+            self.inputStreamTimer = nil;
         }
-        [self stopStream:_easession.inputStream];
+        // Close input stream (if open)
+        if (self.isInputStreamOpen) {
+            [self stopStream:_easession.inputStream];
+            self.isInputStreamOpen = NO;
+        }
 
+        // Cancel output stream open timer (if set)
         if (self.outputStreamTimer) {
             [self.outputStreamTimer cancel];
+            self.outputStreamTimer = nil;
         }
-        [self stopStream:_easession.outputStream];
-        
+        // Close output stream (if open)
+        if (self.isOutputStreamOpen) {
+            [self stopStream:_easession.outputStream];
+            self.isOutputStreamOpen = NO;
+        }
+
         self.easession = nil;
     }
 
-    self.inputStreamTimer = nil;
-    self.outputStreamTimer = nil;
-    self.streamDelegate = nil;
-    self.protocol = nil;
+
+
 }
 
 - (void)startStream:(NSStream *)stream {
@@ -162,9 +168,26 @@
 }
 
 - (void)stopStream:(NSStream *)stream {
-    [stream close];
-    [stream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-    [stream setDelegate:nil];
+
+    // Verify stream is in a state that can be closed.
+    // (N.B. Closing a stream that has not been opened has very, very bad effects.)
+    if (stream.streamStatus != NSStreamStatusNotOpen &&
+        stream.streamStatus != NSStreamStatusClosed) {
+
+        [stream close];
+        [stream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+        [stream setDelegate:nil];
+
+        if (stream == [self.easession inputStream]) {
+            [FMCDebugTool logInfo:@"Input Stream Closed"];
+        } else if (stream == [self.easession outputStream]) {
+            [FMCDebugTool logInfo:@"Output Stream Closed"];
+        }
+    }
+}
+
+- (void)dealloc {
+    [FMCDebugTool logInfo:@"FMCIAPSession Dealloc"];
 }
 
 @end

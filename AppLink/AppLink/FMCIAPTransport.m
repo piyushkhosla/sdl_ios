@@ -26,21 +26,18 @@
 - (instancetype)init {
     if (self = [super init]) {
 
-        [FMCDebugTool logInfo:@"FMCIAPTransport Init"
-                     withType:FMCDebugType_Transport_iAP
-                     toOutput:FMCDebugOutput_All
-                      toGroup:self.debugConsoleGroupName];
-
         _io_queue = dispatch_queue_create("com.ford.applink.transport", DISPATCH_QUEUE_SERIAL);
 
         [self startEventListening];
         [FMCSiphonServer init];
     }
+
+    [FMCDebugTool logInfo:@"FMCIAPTransport Init"];
+
     return self;
 }
 
 - (void)startEventListening {
-    [FMCDebugTool logInfo:@"Began Listening for iAP events"];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(accessoryConnected:)
                                                  name:EAAccessoryDidConnectNotification
@@ -64,7 +61,6 @@
 }
 
 - (void)stopEventListening {
-    [FMCDebugTool logInfo:@"Stopped Listening for iAP events"];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:EAAccessoryDidConnectNotification
                                                   object:nil];
@@ -86,7 +82,7 @@
 
 - (void)connect {
     dispatch_async(_io_queue, ^{
-        [FMCDebugTool logInfo:@"IAPTransport Connect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+        [FMCDebugTool logInfo:@"IAP Connecting" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
         
         if (!self.session) {
 
@@ -144,7 +140,7 @@
                 [self.session open:(FMCIAPSessionRead|FMCIAPSessionWrite)];
             }
         } else {
-            [FMCDebugTool logInfo:@"Already connected. Discarding this request."];
+            [FMCDebugTool logInfo:@"Already Connected. Discarding this request."];
         }
     });
 
@@ -153,7 +149,7 @@
 // This gets called after both I/O streams of the session have opened.
 - (void)onSessionInitializationComplete:(BOOL)success {
     if (success) {
-        [FMCDebugTool logInfo:@"Session opened."];
+        [FMCDebugTool logInfo:@"Session Opened"];
         [self.delegate onTransportConnected];
     } else {
         [FMCDebugTool logInfo:@"Error: Session not opened."];
@@ -162,8 +158,8 @@
 
 
 - (void)disconnect {
-    dispatch_async(_io_queue, ^{
-        [FMCDebugTool logInfo:@"IAPTransport Disconnect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    dispatch_sync(_io_queue, ^{
+        [FMCDebugTool logInfo:@"IAP Disconnecting" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
         
         [self.session close];
         self.session = nil;
@@ -204,19 +200,21 @@
 - (void)dealloc {
     [self stopEventListening];
     _io_queue = nil;
+
+    [FMCDebugTool logInfo:@"FMCIAPTransport Dealloc" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 }
 
 
 #pragma mark - EAAccessory Notifications
 
 - (void)accessoryConnected:(NSNotification*) notification {
-    [FMCDebugTool logInfo:@"Accessory Connected" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    [FMCDebugTool logInfo:@"Accessory Connected Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
     [self connect];
 }
 
 - (void)accessoryDisconnected:(NSNotification*) notification {
-    [FMCDebugTool logInfo:@"Accessory Disconnected" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    [FMCDebugTool logInfo:@"Accessory Disconnected Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
     EAAccessory* accessory = [notification.userInfo objectForKey:EAAccessoryKey];
     if (accessory.connectionID == self.session.accessory.connectionID) {
@@ -226,13 +224,13 @@
 }
 
 -(void)applicationWillEnterForeground:(NSNotification *)notification {
-    [FMCDebugTool logInfo:@"App Foregrounded" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    [FMCDebugTool logInfo:@"App Foregrounded Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 
     [self connect];
 }
 
 -(void)applicationDidEnterBackground:(NSNotification *)notification {
-    [FMCDebugTool logInfo:@"App Backgrounded" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    [FMCDebugTool logInfo:@"App Backgrounded Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 }
 
 @end

@@ -68,6 +68,7 @@ const int POLICIES_CORRELATION_ID = 65535;
         self.protocol.transport = self.transport;
         [self.transport connect];
 
+        [FMCDebugTool logInfo:@"FMCSyncProxy initWithTransport"];
         [[EAAccessoryManager sharedAccessoryManager] registerForLocalNotifications];
 
     }
@@ -93,6 +94,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 -(void) dealloc {
     [self destructObjects];
+    [FMCDebugTool logInfo:@"FMCSyncProxy Dealloc" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:_debugConsoleGroupName];
 }
 
 -(void) notifyProxyClosed {
