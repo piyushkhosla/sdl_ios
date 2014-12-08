@@ -176,12 +176,16 @@
 
         [stream close];
         [stream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-        [stream setDelegate:nil];
+            
+        if (stream.streamStatus == NSStreamStatusClosed) {
 
-        if (stream == [self.easession inputStream]) {
-            [FMCDebugTool logInfo:@"Input Stream Closed"];
-        } else if (stream == [self.easession outputStream]) {
-            [FMCDebugTool logInfo:@"Output Stream Closed"];
+            if (stream == [self.easession inputStream]) {
+                [FMCDebugTool logInfo:@"Input Stream Closed"];
+            } else if (stream == [self.easession outputStream]) {
+                [FMCDebugTool logInfo:@"Output Stream Closed"];
+            }
+
+            [stream setDelegate:nil];
         }
     }
 }
