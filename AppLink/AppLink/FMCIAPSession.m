@@ -42,7 +42,7 @@
     return self;
 }
 
-- (BOOL)open:(NSUInteger)mode {
+- (BOOL)open {
     NSString *logMessage = [NSString stringWithFormat:@"Opening IAPSession withAccessory:%@ forProtocol:%@" , _accessory.name, _protocol];
     [FMCDebugTool logInfo:logMessage];
 
@@ -61,7 +61,7 @@
 
             // If Multi-App capable, open stream(s) again.
             if (![LEGACY_PROTOCOL_STRING isEqualToString:weakSelf.protocol]) {
-                [weakSelf open:mode];
+                [weakSelf open];
             }
         };
 
@@ -70,7 +70,7 @@
         void (^elapsedBlock)(void) = ^{
             [FMCDebugTool logInfo:@"Stream Open Timeout"];
             [weakSelf close];
-            [weakSelf open:mode];
+            [weakSelf open];
         };
 
 
@@ -96,29 +96,26 @@
         };
 
         //
-        // Open the appropriate stream(s)
+        // Open the streams
         //
-        if(mode & FMCIAPSessionRead) {
-            if (self.inputStreamTimer == nil) {
-                self.inputStreamTimer = [[FMCTimer alloc] initWithDuration:STREAM_OPEN_TIMEOUT_SECONDS];
-                self.inputStreamTimer.elapsedBlock = elapsedBlock;
-            }
-            [FMCDebugTool logInfo:@"Opening Input Stream"];
-            [self.inputStreamTimer start];
-            [self startStream:_easession.inputStream];
+        if (self.inputStreamTimer == nil) {
+            self.inputStreamTimer = [[FMCTimer alloc] initWithDuration:STREAM_OPEN_TIMEOUT_SECONDS];
+            self.inputStreamTimer.elapsedBlock = elapsedBlock;
         }
+        [self.inputStreamTimer start];
+        [FMCDebugTool logInfo:@"Opening Input Stream"];
+        [self startStream:_easession.inputStream];
 
-        if(mode & FMCIAPSessionWrite) {
-            if (self.outputStreamTimer == nil) {
-                self.outputStreamTimer = [[FMCTimer alloc] initWithDuration:STREAM_OPEN_TIMEOUT_SECONDS];
-                self.outputStreamTimer.elapsedBlock = elapsedBlock;
-            }
-            [FMCDebugTool logInfo:@"Opening Output Stream"];
-            [self.outputStreamTimer start];
-            [self startStream:_easession.outputStream];
+        if (self.outputStreamTimer == nil) {
+            self.outputStreamTimer = [[FMCTimer alloc] initWithDuration:STREAM_OPEN_TIMEOUT_SECONDS];
+            self.outputStreamTimer.elapsedBlock = elapsedBlock;
         }
+        [self.outputStreamTimer start];
+        [FMCDebugTool logInfo:@"Opening Output Stream"];
+        [self startStream:_easession.outputStream];
 
         success = YES;
+
     } else {
         [FMCDebugTool logInfo:@"EASession Initialization Failed"];
     }

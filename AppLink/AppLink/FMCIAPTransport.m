@@ -137,7 +137,7 @@
                 IOStreamDelegate.streamHasBytesHandler = streamReader;
 
                 self.session.delegate = self;
-                [self.session open:(FMCIAPSessionRead|FMCIAPSessionWrite)];
+                [self.session open];
             }
         } else {
             [FMCDebugTool logInfo:@"Already Connected. Discarding this request."];

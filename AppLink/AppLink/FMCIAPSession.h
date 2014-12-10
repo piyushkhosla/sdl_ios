@@ -10,8 +10,6 @@
 #import "FMCIAPSessionDelegate.h"
 #import "FMCStreamDelegate.h"
 
-static const NSUInteger FMCIAPSessionRead = 1;
-static const NSUInteger FMCIAPSessionWrite = 1 << 1;
 
 @interface FMCIAPSession : NSObject
 
@@ -24,7 +22,7 @@ static const NSUInteger FMCIAPSessionWrite = 1 << 1;
 - (instancetype)initWithAccessory:(EAAccessory *)accessory
                       forProtocol:(NSString *)protocol;
 
-- (BOOL)open:(NSUInteger)mode;
+- (BOOL)open;
 - (void)close;
 
 @end

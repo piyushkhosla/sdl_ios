@@ -56,7 +56,7 @@
                                                                      forProtocol:CONTROL_PROTOCOL_STRING];
         if (controlSession) {
             controlSession.streamDelegate = controlStreamDelegate;
-            BOOL isOpen = [controlSession open:FMCIAPSessionRead|FMCIAPSessionWrite];
+            BOOL isOpen = [controlSession open];
             if (!isOpen) {
                 return nil;
             }
