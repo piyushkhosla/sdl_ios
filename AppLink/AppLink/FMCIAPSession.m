@@ -77,16 +77,20 @@
         // Setup the stream open event handler
         self.streamDelegate.streamOpenHandler = ^(NSStream *stream){
             // Cancel timers, set stream opened flag
-            if (stream == [weakSelf.easession outputStream] &&
-                weakSelf.outputStreamTimer != nil) {
+            if (stream == [weakSelf.easession outputStream]) {
                 [FMCDebugTool logInfo:@"Output Stream Opened"];
                 weakSelf.isOutputStreamOpen = YES;
-                [weakSelf.outputStreamTimer cancel];
-            } else if (stream == [weakSelf.easession inputStream] &&
-                        weakSelf.inputStreamTimer != nil) {
+
+                if (weakSelf.outputStreamTimer != nil) {
+                    [weakSelf.outputStreamTimer cancel];
+                }
+            } else if (stream == [weakSelf.easession inputStream]) {
                 [FMCDebugTool logInfo:@"Input Stream Opened"];
                 weakSelf.isInputStreamOpen = YES;
-                [weakSelf.inputStreamTimer cancel];
+
+                if (weakSelf.inputStreamTimer != nil) {
+                    [weakSelf.inputStreamTimer cancel];
+                }
             }
 
             // When both streams are open, session initialization is complete. Let the delegate know.
