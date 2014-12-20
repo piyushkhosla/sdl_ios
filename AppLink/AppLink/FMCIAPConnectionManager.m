@@ -20,7 +20,7 @@
 // legacy session on: com.ford.sync.prot0
 // or, a multi-app session on com.ford.sync.protNN where NN = [1-29]
 //
-+ (FMCIAPSession *)createSession {
++ (FMCIAPSession *)createSession:(NSError **)error {
 
     FMCIAPSession *session = nil;
 
@@ -44,7 +44,7 @@
             const int bufferSize = 1;
             uint8_t buf[bufferSize];
             NSUInteger len = [istream read:buf maxLength:bufferSize];
-            if(len > 0)
+            if(len > 0 && protocolIndex == 0)
             {
                 protocolIndex = buf[0];
                 dispatch_semaphore_signal(protocol_index_semaphore);
@@ -58,9 +58,14 @@
             controlSession.streamDelegate = controlStreamDelegate;
             BOOL isOpen = [controlSession open];
             if (!isOpen) {
+                *error = [NSError errorWithDomain:@"session" code:503 userInfo:nil];
+                controlSession.streamDelegate = nil;
+                controlSession = nil;
                 return nil;
             }
         } else {
+            *error = [NSError errorWithDomain:@"session" code:500 userInfo:nil];
+            controlSession = nil;
             return nil;
         }
 
@@ -76,6 +81,7 @@
 
             // Done with control protocol session, destroy it.
             [controlSession close];
+            controlSession.streamDelegate = nil;
             controlSession = nil;
 
             // Create session with indexed protocol
@@ -90,7 +96,9 @@
         else {
             [FMCDebugTool logInfo:@"Protocol index timeout"];
             [controlSession close];
+            controlSession.streamDelegate = nil;
             controlSession = nil;
+            *error = [NSError errorWithDomain:@"protocol" code:408 userInfo:nil];
             return nil;
         }
     } else if ((accessory = [EAAccessoryManager findAccessoryForProtocol:LEGACY_PROTOCOL_STRING])) {
@@ -107,15 +115,7 @@
         //
         // Error: No accessory supporting a required sync protocol was found!
         //
-        NSArray *accessories = [[EAAccessoryManager sharedAccessoryManager] connectedAccessories];
-        NSMutableString *logMessage = [NSMutableString stringWithString:@"Error: No accessory supporting a required sync protocol was found"];
-        if (accessories.count == 0) {
-            [logMessage appendString:@". No accessories are connected."];
-        }
-        for (EAAccessory *accessory in accessories) {
-            [logMessage appendFormat:@"\n accessory = %@", accessory];
-        }
-        [FMCDebugTool logInfo:logMessage];
+        *error = [NSError errorWithDomain:@"accessory" code:404 userInfo:nil];
 
         return nil;
     }

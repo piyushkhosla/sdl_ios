@@ -10,6 +10,6 @@
 
 @interface FMCIAPConnectionManager : NSObject
 
-+ (FMCIAPSession *)createSession;
++ (FMCIAPSession *)createSession:(NSError **)error;
 
 @end
