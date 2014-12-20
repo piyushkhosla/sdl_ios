@@ -9,8 +9,8 @@
 
 @interface FMCTimer : NSObject
 
-@property (strong) void (^elapsedBlock)(void);
-@property (strong) void (^canceledBlock)(void);
+@property (nonatomic, copy) void (^elapsedBlock)(void);
+@property (nonatomic, copy) void (^canceledBlock)(void);
 @property (assign) float duration;
 
 - (id)init;
