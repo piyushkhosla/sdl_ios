@@ -16,7 +16,7 @@
 @property (assign) BOOL isOutputStreamOpen;
 @property (strong) FMCTimer *inputStreamTimer;
 @property (strong) FMCTimer *outputStreamTimer;
-
+@property (assign) BOOL alreadyDestructed;
 @end
 
 
@@ -29,6 +29,7 @@
 
     self = [super init];
     if (self) {
+        _alreadyDestructed = NO;
         _delegate = nil;
         _accessory = accessory;
         _protocol = protocol;
@@ -61,10 +62,22 @@
 
             // If Multi-App capable, open stream(s) again.
             if (![LEGACY_PROTOCOL_STRING isEqualToString:weakSelf.protocol]) {
-                [weakSelf open];
+                float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
+                [weakSelf performSelector:@selector(open) withObject:nil afterDelay:randomNumber];
             }
         };
 
+        self.streamDelegate.streamErrorHandler = ^(NSStream *stream){
+            [FMCDebugTool logInfo:@"Stream Error"];
+            
+            [weakSelf close];
+            
+            // If Multi-App capable, open stream(s) again.
+            if (![LEGACY_PROTOCOL_STRING isEqualToString:weakSelf.protocol]) {
+                float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
+                [weakSelf performSelector:@selector(open) withObject:nil afterDelay:randomNumber];
+            }
+        };
 
         // Setup the stream open timed out event handler
         void (^elapsedBlock)(void) = ^{
@@ -118,6 +131,9 @@
         [FMCDebugTool logInfo:@"Opening Output Stream"];
         [self startStream:_easession.outputStream];
 
+        NSRunLoop *loop = [NSRunLoop currentRunLoop];
+        [loop run];
+        
         success = YES;
 
     } else {
@@ -163,20 +179,23 @@
 }
 
 - (void)startStream:(NSStream *)stream {
+    NSRunLoop *loop = [NSRunLoop currentRunLoop];
     stream.delegate = self.streamDelegate;
-    [stream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+    [stream scheduleInRunLoop:loop forMode:NSDefaultRunLoopMode];
     [stream open];
 }
 
 - (void)stopStream:(NSStream *)stream {
 
+    NSRunLoop *loop = [NSRunLoop currentRunLoop];
     // Verify stream is in a state that can be closed.
     // (N.B. Closing a stream that has not been opened has very, very bad effects.)
     if (stream.streamStatus != NSStreamStatusNotOpen &&
         stream.streamStatus != NSStreamStatusClosed) {
 
         [stream close];
-        [stream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
+        [stream removeFromRunLoop:loop forMode:NSDefaultRunLoopMode];
+        [stream setDelegate:nil];
             
         if (stream.streamStatus == NSStreamStatusClosed) {
 
@@ -185,13 +204,29 @@
             } else if (stream == [self.easession outputStream]) {
                 [FMCDebugTool logInfo:@"Output Stream Closed"];
             }
-
-            [stream setDelegate:nil];
         }
     }
 }
 
+- (void)destructObjects {
+    if(!self.alreadyDestructed) {
+        self.alreadyDestructed = YES;
+        self.delegate = nil;
+        self.accessory = nil;
+        self.protocol = nil;
+        self.streamDelegate = nil;
+        self.easession = nil;
+        self.inputStreamTimer = nil;
+        self.outputStreamTimer = nil;
+    }
+}
+
+- (void)dispose {
+    [self destructObjects];
+}
+
 - (void)dealloc {
+    [self destructObjects];
     [FMCDebugTool logInfo:@"FMCIAPSession Dealloc"];
 }
 

@@ -24,5 +24,6 @@
 
 - (BOOL)open;
 - (void)close;
+- (void)dispose;
 
 @end
