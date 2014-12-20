@@ -29,6 +29,8 @@ typedef void(^FMCCustomTaskCompletionHandler)(NSData *data, NSURLResponse *respo
 
 {
     FMCLockScreenManager *lsm;
+    NSURLSession *systemRequestSession;
+    NSURLSession *encodedSyncPDataSession;
 }
 
 - (void)startRPCSession;
@@ -54,19 +56,21 @@ const int POLICIES_CORRELATION_ID = 65535;
 - (id)initWithTransport:(FMCAbstractTransport *)theTransport protocol:(FMCAbstractProtocol *)theProtocol delegate:(NSObject<FMCProxyListener> *)theDelegate {
 	if (self = [super init]) {
         _debugConsoleGroupName = @"default";
-        
+
 
         lsm = [FMCLockScreenManager new];
 
         alreadyDestructed = NO;
-                
+
         self.proxyListeners = [[NSMutableArray alloc] initWithObjects:theDelegate, nil];
         self.protocol = theProtocol;
         self.transport = theTransport;
         self.transport.delegate = self.protocol;
         self.protocol.protocolDelegate = self;
         self.protocol.transport = self.transport;
-        [self.transport connect];
+
+        double delay = [self.transport getDelay];
+        [self.transport performSelector:@selector(connect) withObject:nil afterDelay:delay];
 
         [FMCDebugTool logInfo:@"FMCSyncProxy initWithTransport"];
         [[EAAccessoryManager sharedAccessoryManager] registerForLocalNotifications];
@@ -80,8 +84,16 @@ const int POLICIES_CORRELATION_ID = 65535;
     if(!alreadyDestructed) {
         alreadyDestructed = YES;
 
+        if (systemRequestSession != nil) {
+            [systemRequestSession invalidateAndCancel];
+        }
+        if (encodedSyncPDataSession != nil) {
+            [encodedSyncPDataSession invalidateAndCancel];
+        }
+
+        [self.protocol dispose];
+        [self.transport dispose];
         [[EAAccessoryManager sharedAccessoryManager] unregisterForLocalNotifications];
-        
         self.transport = nil;
         self.protocol = nil;
         self.proxyListeners = nil;
@@ -141,10 +153,10 @@ const int POLICIES_CORRELATION_ID = 65535;
 - (void)handleProtocolSessionStarted:(FMCServiceType)serviceType sessionID:(Byte)sessionID version:(Byte)maxVersionForModule {
     // Turn off the timer, the start session response came back
     [self.startSessionTimer cancel];
-    
+
     NSString *logMessage = [NSString stringWithFormat:@"StartSession (response)\nSessionId: %d for serviceType %d", sessionID, serviceType];
     [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-    
+
     if (_version <= 1) {
         if (maxVersionForModule == 2) {
             _version = maxVersionForModule;
@@ -205,13 +217,13 @@ const int POLICIES_CORRELATION_ID = 65535;
 		[self notifyProxyClosed];
 		return;
 	}
-    
+
 	if ([messageType isEqualToString:NAMES_response]) {
 		bool notGenericResponseMessage = ![functionName isEqualToString:@"GenericResponse"];
 		if(notGenericResponseMessage) functionName = [NSString stringWithFormat:@"%@Response", functionName];
 	}
-    
-    
+
+
     if ([functionName isEqualToString:@"RegisterAppInterfaceResponse"]) {
         //Print Proxy Version To Console
         logMessage = [NSString stringWithFormat:@"Framework Version: %@", self.proxyVersion];
@@ -239,7 +251,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
         return;
     }
-    
+
     // Intercept OnSystemRequest.
     if ([functionName isEqualToString:@"OnSystemRequest"]) {
 
@@ -304,7 +316,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
             // HTTP Request configuration
             NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-            NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+            systemRequestSession = [NSURLSession sessionWithConfiguration:config];
             NSURL *url = [NSURL URLWithString:urlString];
             NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
             [request setValue:contentType forHTTPHeaderField:@"content-type"];
@@ -322,8 +334,8 @@ const int POLICIES_CORRELATION_ID = 65535;
             {
                 [self OSRHTTPRequestCompletionHandler:data response:response error:error];
             };
-            NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:bodyData completionHandler:handler];
-            [uploadTask resume];
+            NSURLSessionUploadTask *systemRequestUploadTask = [systemRequestSession uploadTaskWithRequest:request fromData:bodyData completionHandler:handler];
+            [systemRequestUploadTask resume];
 
             return;
         }
@@ -402,7 +414,7 @@ const int POLICIES_CORRELATION_ID = 65535;
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     config.HTTPAdditionalHeaders = @{@"Content-Type": @"application/json"};
     config.timeoutIntervalForRequest = 60;
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+    encodedSyncPDataSession = [NSURLSession sessionWithConfiguration:config];
 
     // Prepare the data in the required format
     NSString *encodedSyncPDataString = [[NSString stringWithFormat:@"%@", encodedSyncPData] componentsSeparatedByString:@"\""][1];
@@ -424,8 +436,8 @@ const int POLICIES_CORRELATION_ID = 65535;
 
     // Send the HTTP Request
     [FMCDebugTool logInfo:@"OnEncodedSyncPData (HTTP request)" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-    NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:data completionHandler:handler];
-    [uploadTask resume];
+    NSURLSessionUploadTask *encodedSyncPDataUploadTask = [encodedSyncPDataSession uploadTaskWithRequest:request fromData:data completionHandler:handler];
+    [encodedSyncPDataUploadTask resume];
 
 }
 

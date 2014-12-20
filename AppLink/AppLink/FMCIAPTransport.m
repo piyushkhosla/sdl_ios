@@ -9,9 +9,11 @@
 #import "FMCIAPConnectionManager.h"
 #import "FMCIAPTransport.h"
 #import "FMCStreamDelegate.h"
+#import <CommonCrypto/CommonDigest.h>
 
 @interface FMCIAPTransport () {
     dispatch_queue_t _io_queue;
+    BOOL alreadyDestructed;
 }
 
 - (void)startEventListening;
@@ -26,6 +28,7 @@
 - (instancetype)init {
     if (self = [super init]) {
 
+        alreadyDestructed = NO;
         _io_queue = dispatch_queue_create("com.ford.applink.transport", DISPATCH_QUEUE_SERIAL);
 
         [self startEventListening];
@@ -38,6 +41,7 @@
 }
 
 - (void)startEventListening {
+    [FMCDebugTool logInfo:@"FMCIAPTransport Listening For Events"];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(accessoryConnected:)
                                                  name:EAAccessoryDidConnectNotification
@@ -61,6 +65,7 @@
 }
 
 - (void)stopEventListening {
+    [FMCDebugTool logInfo:@"FMCIAPTransport Stopped Listening For Events"];
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:EAAccessoryDidConnectNotification
                                                   object:nil];
@@ -87,11 +92,16 @@
         if (!self.session) {
 
             for (int i=0; i<CREATE_SESSION_RETRIES; i++) {
-                self.session = [FMCIAPConnectionManager createSession];
+                NSError* error = nil;
+                self.session = [FMCIAPConnectionManager createSession:&error];
                 if (self.session)
                     break;
+                else if (error != nil && [@"accessory" isEqualToString:error.domain]) {
+                    [FMCDebugTool logInfo:@"No accessory supporting a required sync protocol was found."];
+                    break;
+                }
                 else {
-                    float randomNumber = (float)arc4random() / UINT_MAX; // between 0 and 1
+                    float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
                     [NSThread sleepForTimeInterval:randomNumber];
 
                     if (i == CREATE_SESSION_RETRIES-1) {
@@ -116,25 +126,25 @@
                         NSData *dataIn = [NSData dataWithBytes:buf length:bytesRead];
 
                         // Log received data to file.
-                        NSString *logMessage = [NSString stringWithFormat:@"Incoming: (%ld)", (long)bytesRead];
+                        /*NSString *logMessage = [NSString stringWithFormat:@"Incoming: (%ld)", (long)bytesRead];
                         [FMCDebugTool logInfo:logMessage
                                 andBinaryData:dataIn
                                      withType:FMCDebugType_Transport_iAP
-                                     toOutput:FMCDebugOutput_File];
+                                     toOutput:FMCDebugOutput_File];*/
 
                         // If we read some bytes, pass on to delegate
                         // If no bytes, quit reading.
                         if (bytesRead > 0) {
                             [self.delegate onDataReceived:dataIn];
                         } else {
-                            [FMCDebugTool logInfo:@"No bytes read."];
+                            //[FMCDebugTool logInfo:@"No bytes read."];
                             break;
                         }
                     }
 
                 };
-                self.session.streamDelegate = IOStreamDelegate;
                 IOStreamDelegate.streamHasBytesHandler = streamReader;
+                self.session.streamDelegate = IOStreamDelegate;
 
                 self.session.delegate = self;
                 [self.session open];
@@ -160,9 +170,11 @@
 - (void)disconnect {
     dispatch_sync(_io_queue, ^{
         [FMCDebugTool logInfo:@"IAP Disconnecting" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-        
-        [self.session close];
-        self.session = nil;
+        if (self.session != nil) {
+            [self.session close];
+            [self.session dispose];
+            self.session = nil;
+        }
     });
 }
 
@@ -185,11 +197,11 @@
                     break;
                 }
 
-                NSString *logMessage = [NSString stringWithFormat:@"Outgoing: (%ld)", (long)bytesWritten];
+                /*NSString *logMessage = [NSString stringWithFormat:@"Outgoing: (%ld)", (long)bytesWritten];
                 [FMCDebugTool logInfo:logMessage
                         andBinaryData:[remainder subdataWithRange:NSMakeRange(0, bytesWritten)]
                              withType:FMCDebugType_Transport_iAP
-                             toOutput:FMCDebugOutput_File];
+                             toOutput:FMCDebugOutput_File];*/
 
                 [remainder replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
             }
@@ -197,20 +209,50 @@
     });
 }
 
-- (void)dealloc {
-    [self stopEventListening];
-    _io_queue = nil;
+- (void)destructObjects {
+    if(!alreadyDestructed) {
+        alreadyDestructed = YES;
+        [self stopEventListening];
+        _io_queue = nil;
+        self.delegate = nil;
+    }
+}
 
+- (void)dispose {
+    [self destructObjects];
+}
+
+- (void)dealloc {
+    [self destructObjects];
     [FMCDebugTool logInfo:@"FMCIAPTransport Dealloc" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 }
 
+- (double)getDelay {
+    NSString *appName = [[NSProcessInfo processInfo] processName];
+    if (appName == nil) {
+        appName = @"noname";
+    }
+    const char *ptr = [appName UTF8String];
+    unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
+    CC_MD5(ptr, strlen(ptr), md5Buffer);
+    NSMutableString *output = [NSMutableString stringWithString:@"0x"];
+    for(int i = 0; i < 8; i++)
+        [output appendFormat:@"%02X",md5Buffer[i]];
+    unsigned long long firstHalf;
+    NSScanner* pScanner = [NSScanner scannerWithString: output];
+    [pScanner scanHexLongLong:&firstHalf];
+    return 2.0 * (firstHalf * 1.0) / 0xffffffffffffffff;
+}
 
 #pragma mark - EAAccessory Notifications
 
 - (void)accessoryConnected:(NSNotification*) notification {
     [FMCDebugTool logInfo:@"Accessory Connected Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-
-    [self connect];
+    
+    double delay = [self getDelay];
+    NSString *logMessage = [NSString stringWithFormat:@"Connect Delay: %f", delay];
+    [FMCDebugTool logInfo:logMessage];
+    [self performSelector:@selector(connect) withObject:nil afterDelay:delay];
 }
 
 - (void)accessoryDisconnected:(NSNotification*) notification {

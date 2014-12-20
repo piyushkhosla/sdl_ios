@@ -26,5 +26,13 @@
 	[self doesNotRecognizeSelector:_cmd];
 }
 
+- (void)dispose {
+    [self doesNotRecognizeSelector:_cmd];
+}
+
+- (double)getDelay {
+    [self doesNotRecognizeSelector:_cmd];
+    return 0.0;
+}
 
 @end
