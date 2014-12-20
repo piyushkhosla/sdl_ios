@@ -27,6 +27,7 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
     dispatch_queue_t _sendQueue;
     FMCPrioritizedObjectCollection *_prioritizedCollection;
     NSMutableDictionary *_sessionIDs;
+    BOOL alreadyDestructed;
 }
 
 @property (assign) UInt8 version;
@@ -44,6 +45,7 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 
 - (id)init {
 	if (self = [super init]) {
+        alreadyDestructed = NO;
         _version = 1;
         _messageID = 0;
         _recieveQueue = dispatch_queue_create("com.ford.applink.protocol.recieve", DISPATCH_QUEUE_SERIAL);
@@ -216,8 +218,8 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
         [header parse:self.recieveBuffer];
     } else {
         // Need to wait for more bytes.
-        [logMessage appendString:@"header incomplete, waiting for more bytes."];
-        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];
+        /*[logMessage appendString:@"header incomplete, waiting for more bytes."];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];*/
         return;
     }
     
@@ -230,12 +232,12 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
         NSUInteger payloadLength = payloadSize;
         NSData *payload = [self.recieveBuffer subdataWithRange:NSMakeRange(payloadOffset, payloadLength)];
         message = [FMCAppLinkProtocolMessage messageWithHeader:header andPayload:payload];
-        [logMessage appendFormat:@"message complete. %@", message];
-        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];
+        /*[logMessage appendFormat:@"message complete. %@", message];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];*/
     } else {
         // Need to wait for more bytes.
-        [logMessage appendFormat:@"header complete. message incomplete, waiting for %ld more bytes. Header:%@", (long)(messageSize - self.recieveBuffer.length), header];
-        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];
+        /*[logMessage appendFormat:@"header complete. message incomplete, waiting for %ld more bytes. Header:%@", (long)(messageSize - self.recieveBuffer.length), header];
+        [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Protocol toOutput:FMCDebugOutput_File|FMCDebugOutput_DeviceConsole toGroup:self.debugConsoleGroupName];*/
         return;
     }
     
@@ -325,5 +327,23 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
     [self.protocolDelegate onError:info exception:e];
 }
 
+- (void)destructObjects {
+    if(!alreadyDestructed) {
+        alreadyDestructed = YES;
+        self.messageRouter.delegate = nil;
+        self.messageRouter = nil;
+        self.transport = nil;
+        self.protocolDelegate = nil;
+    }
+}
+
+- (void)dispose {
+    [self destructObjects];
+}
+
+- (void)dealloc {
+    [self destructObjects];
+    [FMCDebugTool logInfo:@"FMCAppLinkProtocol Dealloc" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+}
 
 @end

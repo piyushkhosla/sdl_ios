@@ -14,6 +14,7 @@
 
 @interface FMCApplinkProtocolRecievedMessageRouter ()
 
+@property (assign) BOOL alreadyDestructed;
 @property (strong) NSMutableDictionary *messageAssemblers;
 
 - (void)dispatchProtocolMessage:(FMCAppLinkProtocolMessage *)message;
@@ -27,6 +28,7 @@
 
 - (id)init {
 	if (self = [super init]) {
+        _alreadyDestructed = NO;
         self.messageAssemblers = [NSMutableDictionary dictionaryWithCapacity:2];
 	}
 	return self;
@@ -89,5 +91,19 @@
 
 }
 
+- (void)destructObjects {
+    if(!self.alreadyDestructed) {
+        self.alreadyDestructed = YES;
+        self.delegate = nil;
+    }
+}
+
+- (void)dispose {
+    [self destructObjects];
+}
+
+- (void)dealloc {
+    [self destructObjects];
+}
 
 @end

@@ -25,4 +25,6 @@
 // Recieving
 - (void)handleBytesFromTransport:(NSData *)receivedData;
 
+- (void)dispose;
+
 @end
