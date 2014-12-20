@@ -206,7 +206,7 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 }
 
 - (void)processMessages {
-    NSMutableString *logMessage = [[NSMutableString alloc]init];
+    //NSMutableString *logMessage = [[NSMutableString alloc]init];
     
     // Get the version
     UInt8 incomingVersion = [FMCAppLinkProtocolMessage determineVersion:self.recieveBuffer];

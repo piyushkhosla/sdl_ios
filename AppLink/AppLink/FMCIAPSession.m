@@ -59,24 +59,12 @@
             [FMCDebugTool logInfo:@"Stream Event End"];
 
             [weakSelf close];
-
-            // If Multi-App capable, open stream(s) again.
-            if (![LEGACY_PROTOCOL_STRING isEqualToString:weakSelf.protocol]) {
-                float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
-                [weakSelf performSelector:@selector(open) withObject:nil afterDelay:randomNumber];
-            }
         };
 
         self.streamDelegate.streamErrorHandler = ^(NSStream *stream){
             [FMCDebugTool logInfo:@"Stream Error"];
             
             [weakSelf close];
-            
-            // If Multi-App capable, open stream(s) again.
-            if (![LEGACY_PROTOCOL_STRING isEqualToString:weakSelf.protocol]) {
-                float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
-                [weakSelf performSelector:@selector(open) withObject:nil afterDelay:randomNumber];
-            }
         };
 
         // Setup the stream open timed out event handler

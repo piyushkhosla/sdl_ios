@@ -9,12 +9,18 @@
 #import "FMCIAPConnectionManager.h"
 #import "FMCIAPTransport.h"
 #import "FMCStreamDelegate.h"
+#import "EAAccessoryManager+SyncProtocols.h"
+#import "FMCTimer.h"
 #import <CommonCrypto/CommonDigest.h>
 
 @interface FMCIAPTransport () {
     dispatch_queue_t _io_queue;
     BOOL alreadyDestructed;
 }
+
+@property (assign) int retryCounter;
+@property (assign) BOOL sessionSetupInProgress;
+@property (strong) FMCTimer *protocolIndexTimer;
 
 - (void)startEventListening;
 - (void)stopEventListening;
@@ -31,6 +37,10 @@
         alreadyDestructed = NO;
         _io_queue = dispatch_queue_create("com.ford.applink.transport", DISPATCH_QUEUE_SERIAL);
 
+        _session = nil;
+        _retryCounter = 0;
+        _sessionSetupInProgress = NO;
+        _protocolIndexTimer = nil;
         [self startEventListening];
         [FMCSiphonServer init];
     }
@@ -84,80 +94,214 @@
 
 }
 
-
 - (void)connect {
-    dispatch_async(_io_queue, ^{
-        [FMCDebugTool logInfo:@"IAP Connecting" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-        
-        if (!self.session) {
+    // Make sure we don't have a session setup or already in progress
+    if (!self.session && !self.sessionSetupInProgress) {
+        self.sessionSetupInProgress = YES;
+        // Reset the retry counter
+        self.retryCounter = 0;
+        // Start the session setup in the background
+        dispatch_async(_io_queue, ^{
+            [self establishSession];
+        });
+    }
+}
 
-            for (int i=0; i<CREATE_SESSION_RETRIES; i++) {
-                NSError* error = nil;
-                self.session = [FMCIAPConnectionManager createSession:&error];
-                if (self.session)
-                    break;
-                else if (error != nil && [@"accessory" isEqualToString:error.domain]) {
-                    [FMCDebugTool logInfo:@"No accessory supporting a required sync protocol was found."];
-                    break;
-                }
-                else {
-                    float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
-                    [NSThread sleepForTimeInterval:randomNumber];
-
-                    if (i == CREATE_SESSION_RETRIES-1) {
-                        [FMCDebugTool logInfo:@"Create session retries exhausted for this connect request."];
-                    }
-                }
-            }
-            if (self.session) {
-
-                //
-                // Setup the stream reading block;
-                //
-                FMCStreamDelegate *IOStreamDelegate = [FMCStreamDelegate new];
-                FMCStreamHasBytesHandler streamReader = ^(NSInputStream *istream){
-
-                    uint8_t buf[IAP_INPUT_BUFFER_SIZE];
-
-                    while ([istream hasBytesAvailable])
-                    {
-                        // Read bytes
-                        NSInteger bytesRead = [istream read:buf maxLength:IAP_INPUT_BUFFER_SIZE];
-                        NSData *dataIn = [NSData dataWithBytes:buf length:bytesRead];
-
-                        // Log received data to file.
-                        /*NSString *logMessage = [NSString stringWithFormat:@"Incoming: (%ld)", (long)bytesRead];
-                        [FMCDebugTool logInfo:logMessage
-                                andBinaryData:dataIn
-                                     withType:FMCDebugType_Transport_iAP
-                                     toOutput:FMCDebugOutput_File];*/
-
-                        // If we read some bytes, pass on to delegate
-                        // If no bytes, quit reading.
-                        if (bytesRead > 0) {
-                            [self.delegate onDataReceived:dataIn];
-                        } else {
-                            //[FMCDebugTool logInfo:@"No bytes read."];
-                            break;
-                        }
-                    }
-
-                };
-                IOStreamDelegate.streamHasBytesHandler = streamReader;
-                self.session.streamDelegate = IOStreamDelegate;
-
-                self.session.delegate = self;
-                [self.session open];
-            }
-        } else {
-            [FMCDebugTool logInfo:@"Already Connected. Discarding this request."];
+- (void)establishSession {
+    [FMCDebugTool logInfo:@"Establish Session"];
+    if (self.retryCounter < CREATE_SESSION_RETRIES) {
+        self.retryCounter++;
+        EAAccessory *accessory = nil;
+        // Multiapp session
+        if ((accessory = [EAAccessoryManager findAccessoryForProtocol:CONTROL_PROTOCOL_STRING])) {
+            [self createIAPControlSessionWithAccessory:accessory];
         }
-    });
+        // Legacy session
+        else if ((accessory = [EAAccessoryManager findAccessoryForProtocol:LEGACY_PROTOCOL_STRING])) {
+            [self createIAPDataSessionWithAccessory:accessory forProtocol:LEGACY_PROTOCOL_STRING];
+        }
+        // No compatible accessory
+        else {
+            [FMCDebugTool logInfo:@"No accessory supporting a required sync protocol was found."];
+            self.sessionSetupInProgress = NO;
+        }
+    }
+    else if (self.retryCounter == CREATE_SESSION_RETRIES) {
+        self.retryCounter++;
+        [FMCDebugTool logInfo:@"Create session retries exhausted."];
+        self.sessionSetupInProgress = NO;
+    }
+    else {
+        [FMCDebugTool logInfo:@"Session attempts exhausted - Debug remove me"];
+    }
+}
 
+- (void)createIAPControlSessionWithAccessory:(EAAccessory *)accessory {
+    [FMCDebugTool logInfo:@"Starting MultiApp Session"];
+    
+    // Setup the control stream delegate
+    FMCStreamDelegate *controlStreamDelegate = [FMCStreamDelegate new];
+    // Setup the session on the control channel
+    FMCIAPSession *controlSession = [[FMCIAPSession alloc] initWithAccessory:accessory
+                                                                 forProtocol:CONTROL_PROTOCOL_STRING];
+    if (self.protocolIndexTimer == nil) {
+        self.protocolIndexTimer = [[FMCTimer alloc] initWithDuration:PROTOCOL_INDEX_TIMEOUT_SECONDS];
+    }
+    
+    __weak typeof(self) weakSelf = self;
+    __weak __block typeof(controlSession) weakSession = controlSession;
+    
+    // Setup the protocol index timed out event handler
+    void (^elapsedBlock)(void) = ^{
+        [FMCDebugTool logInfo:@"Protocol Index Timeout"];
+        [weakSession close];
+        weakSession.streamDelegate = nil;
+        weakSession = nil;
+        float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
+        [weakSelf performSelector:@selector(establishSession) withObject:nil afterDelay:randomNumber];
+    };
+    self.protocolIndexTimer.elapsedBlock = elapsedBlock;
+
+    controlStreamDelegate.streamHasBytesHandler = ^(NSInputStream *istream) {
+        // Grab a single byte from the stream
+        uint8_t buf[1];
+        NSUInteger len = [istream read:buf maxLength:1];
+        if(len > 0)
+        {
+            [self.protocolIndexTimer cancel];
+            NSString *logMessage = [NSString stringWithFormat:@"Switching to protocol %@", [[NSNumber numberWithChar:buf[0]] stringValue]];
+            [FMCDebugTool logInfo:logMessage];
+            // Done with control protocol session, destroy it.
+            [weakSession close];
+            weakSession.streamDelegate = nil;
+            weakSession = nil;
+            
+            // Create session with indexed protocol
+            NSString *indexedProtocolString = [NSString stringWithFormat:@"%@%@",
+                                               INDEXED_PROTOCOL_STRING_PREFIX,
+                                               [[NSNumber numberWithChar:buf[0]] stringValue]];
+            
+            [weakSelf createIAPDataSessionWithAccessory:accessory forProtocol:indexedProtocolString];
+        }
+    };
+    
+    controlStreamDelegate.streamEndHandler = ^(NSStream *stream) {
+        [FMCDebugTool logInfo:@"Stream Event End"];
+        [self.protocolIndexTimer cancel];
+        [weakSession close];
+        weakSession.streamDelegate = nil;
+        weakSession = nil;
+        float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
+        if (!weakSelf) {
+            [FMCDebugTool logInfo:@"weakSelf is nil"];
+        }
+        [weakSelf performSelector:@selector(establishSession) withObject:nil afterDelay:randomNumber];
+    };
+    
+    controlStreamDelegate.streamErrorHandler = ^(NSStream *stream) {
+        [FMCDebugTool logInfo:@"Stream Error"];
+        [self.protocolIndexTimer cancel];
+        [weakSession close];
+        weakSession.streamDelegate = nil;
+        weakSession = nil;
+        float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
+        [weakSelf performSelector:@selector(establishSession) withObject:nil afterDelay:randomNumber];
+    };
+    
+    if (controlSession) {
+        controlSession.streamDelegate = controlStreamDelegate;
+        BOOL isOpen = [controlSession open];
+        if (!isOpen) {
+            [FMCDebugTool logInfo:@"Couldn't open control session, trying again"];
+            controlSession.streamDelegate = nil;
+            controlSession = nil;
+            if (!weakSelf) {
+                [FMCDebugTool logInfo:@"weakSelf is nil"];
+            }
+            float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
+            [weakSelf performSelector:@selector(establishSession) withObject:nil afterDelay:randomNumber];
+        }
+        else {
+            [self.protocolIndexTimer start];
+        }
+    } else {
+        controlSession = nil;
+        float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
+        [weakSelf performSelector:@selector(establishSession) withObject:nil afterDelay:randomNumber];
+    }
+}
+
+- (void)createIAPDataSessionWithAccessory:(EAAccessory *)accessory forProtocol:(NSString *)protocol {
+    self.session = [[FMCIAPSession alloc] initWithAccessory:accessory forProtocol:protocol];
+    
+    __weak typeof(self) weakSelf = self;
+
+    if (self.session) {
+        FMCStreamDelegate *ioStreamDelegate = [FMCStreamDelegate new];
+        ioStreamDelegate.streamHasBytesHandler = ^(NSInputStream *istream){
+            
+            uint8_t buf[IAP_INPUT_BUFFER_SIZE];
+            
+            while ([istream hasBytesAvailable])
+            {
+                // Read bytes
+                NSInteger bytesRead = [istream read:buf maxLength:IAP_INPUT_BUFFER_SIZE];
+                NSData *dataIn = [NSData dataWithBytes:buf length:bytesRead];
+                
+                // If we read some bytes, pass on to delegate
+                // If no bytes, quit reading.
+                if (bytesRead > 0) {
+                    [self.delegate onDataReceived:dataIn];
+                } else {
+                    //[FMCDebugTool logInfo:@"No bytes read."];
+                    break;
+                }
+            }
+            
+        };
+        
+        ioStreamDelegate.streamEndHandler = ^(NSStream *stream) {
+            [FMCDebugTool logInfo:@"Stream Event End"];
+            [self.session close];
+            self.session.streamDelegate = nil;
+            if (![LEGACY_PROTOCOL_STRING isEqualToString:self.session.protocol]) {
+                float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
+                [weakSelf performSelector:@selector(establishSession) withObject:nil afterDelay:randomNumber];
+            }
+            self.session = nil;
+        };
+        
+        ioStreamDelegate.streamErrorHandler = ^(NSStream *stream) {
+            [FMCDebugTool logInfo:@"Stream Error"];
+            [self.session close];
+            self.session.streamDelegate = nil;
+            if (![LEGACY_PROTOCOL_STRING isEqualToString:self.session.protocol]) {
+                float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
+                [weakSelf performSelector:@selector(establishSession) withObject:nil afterDelay:randomNumber];
+            }
+            self.session = nil;
+        };
+        
+        self.session.streamDelegate = ioStreamDelegate;
+        self.session.delegate = self;
+        
+        BOOL isOpen = [self.session open];
+        if (!isOpen) {
+            self.session.streamDelegate = nil;
+            self.session = nil;
+            float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
+            [weakSelf performSelector:@selector(establishSession) withObject:nil afterDelay:randomNumber];
+        }
+    }
+    else {
+        float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
+        [weakSelf performSelector:@selector(establishSession) withObject:nil afterDelay:randomNumber];
+    }
 }
 
 // This gets called after both I/O streams of the session have opened.
 - (void)onSessionInitializationComplete:(BOOL)success {
+    self.sessionSetupInProgress = NO;
     if (success) {
         [FMCDebugTool logInfo:@"Session Opened"];
         [self.delegate onTransportConnected];
@@ -234,7 +378,7 @@
     }
     const char *ptr = [appName UTF8String];
     unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
-    CC_MD5(ptr, strlen(ptr), md5Buffer);
+    CC_MD5(ptr, (unsigned int)strlen(ptr), md5Buffer);
     NSMutableString *output = [NSMutableString stringWithString:@"0x"];
     for(int i = 0; i < 8; i++)
         [output appendFormat:@"%02X",md5Buffer[i]];
