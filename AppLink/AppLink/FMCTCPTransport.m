@@ -21,7 +21,7 @@ int call_socket(const char* hostname, const char* port);
 static void TCPCallback(CFSocketRef socket, CFSocketCallBackType type, CFDataRef address, const void *data, void *info);
 
 @interface FMCTCPTransport () {
-    BOOL alreadyDestructed;
+    BOOL _alreadyDestructed;
 }
 
 @end
@@ -33,7 +33,7 @@ static void TCPCallback(CFSocketRef socket, CFSocketCallBackType type, CFDataRef
 - (instancetype)init {
     if (self = [super init]) {
 
-        alreadyDestructed = NO;
+        _alreadyDestructed = NO;
         [FMCDebugTool logInfo:@"FMCTCPTransport Init"
                      withType:FMCDebugType_Transport_iAP
                      toOutput:FMCDebugOutput_All
@@ -89,8 +89,8 @@ static void TCPCallback(CFSocketRef socket, CFSocketCallBackType type, CFDataRef
 }
 
 - (void)destructObjects {
-    if(!alreadyDestructed) {
-        alreadyDestructed = YES;
+    if(!_alreadyDestructed) {
+        _alreadyDestructed = YES;
         if (socket != nil) {
             CFSocketInvalidate(socket);
             CFRelease(socket);

@@ -60,7 +60,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
         lsm = [FMCLockScreenManager new];
 
-        alreadyDestructed = NO;
+        _alreadyDestructed = NO;
 
         self.proxyListeners = [[NSMutableArray alloc] initWithObjects:theDelegate, nil];
         self.protocol = theProtocol;
@@ -81,8 +81,8 @@ const int POLICIES_CORRELATION_ID = 65535;
 }
 
 -(void) destructObjects {
-    if(!alreadyDestructed) {
-        alreadyDestructed = YES;
+    if(!_alreadyDestructed) {
+        _alreadyDestructed = YES;
 
         if (systemRequestSession != nil) {
             [systemRequestSession invalidateAndCancel];

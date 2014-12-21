@@ -14,7 +14,7 @@
     Byte _version;
 	Byte bulkSessionID;
 	BOOL isConnected;
-    BOOL alreadyDestructed;
+    BOOL _alreadyDestructed;
 
 }
 

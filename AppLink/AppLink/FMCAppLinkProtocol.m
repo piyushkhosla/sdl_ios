@@ -27,7 +27,7 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
     dispatch_queue_t _sendQueue;
     FMCPrioritizedObjectCollection *_prioritizedCollection;
     NSMutableDictionary *_sessionIDs;
-    BOOL alreadyDestructed;
+    BOOL _alreadyDestructed;
 }
 
 @property (assign) UInt8 version;
@@ -45,7 +45,7 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 
 - (id)init {
 	if (self = [super init]) {
-        alreadyDestructed = NO;
+        _alreadyDestructed = NO;
         _version = 1;
         _messageID = 0;
         _recieveQueue = dispatch_queue_create("com.ford.applink.protocol.recieve", DISPATCH_QUEUE_SERIAL);
@@ -328,8 +328,8 @@ const UInt8 MAX_VERSION_TO_SEND = 3;
 }
 
 - (void)destructObjects {
-    if(!alreadyDestructed) {
-        alreadyDestructed = YES;
+    if(!_alreadyDestructed) {
+        _alreadyDestructed = YES;
         self.messageRouter.delegate = nil;
         self.messageRouter = nil;
         self.transport = nil;
