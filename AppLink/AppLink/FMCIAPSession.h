@@ -10,6 +10,7 @@
 #import "FMCIAPSessionDelegate.h"
 #import "FMCStreamDelegate.h"
 
+typedef void(^SessionCompletionHandler)(BOOL success);
 
 @interface FMCIAPSession : NSObject
 
@@ -22,7 +23,7 @@
 - (instancetype)initWithAccessory:(EAAccessory *)accessory
                       forProtocol:(NSString *)protocol;
 
-- (BOOL)open;
+- (void)openWithCompletionHandler:(SessionCompletionHandler)completionHandler;
 - (void)close;
 - (void)dispose;
 

@@ -519,8 +519,6 @@
 		E9AC35BC1A1E37F500706312 /* EAAccessoryManager+SyncProtocols.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AC35BA1A1E37F500706312 /* EAAccessoryManager+SyncProtocols.m */; };
 		E9AC35BF1A1E3FC500706312 /* FMCIAPSession.h in Headers */ = {isa = PBXBuildFile; fileRef = E9AC35BD1A1E3FC500706312 /* FMCIAPSession.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9AC35C01A1E3FC500706312 /* FMCIAPSession.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AC35BE1A1E3FC500706312 /* FMCIAPSession.m */; };
-		E9AC35C51A1F876F00706312 /* FMCIAPConnectionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E9AC35C31A1F876F00706312 /* FMCIAPConnectionManager.h */; };
-		E9AC35C61A1F876F00706312 /* FMCIAPConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AC35C41A1F876F00706312 /* FMCIAPConnectionManager.m */; };
 		E9AC35CA1A1F9AC200706312 /* FMCStreamDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = E9AC35C81A1F9AC200706312 /* FMCStreamDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E9AC35CB1A1F9AC200706312 /* FMCStreamDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AC35C91A1F9AC200706312 /* FMCStreamDelegate.m */; };
 		E9AC35CE1A23568600706312 /* EAAccessory+SyncProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = E9AC35CC1A23568600706312 /* EAAccessory+SyncProtocols.h */; };
@@ -1037,8 +1035,6 @@
 		E9AC35BA1A1E37F500706312 /* EAAccessoryManager+SyncProtocols.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EAAccessoryManager+SyncProtocols.m"; sourceTree = "<group>"; };
 		E9AC35BD1A1E3FC500706312 /* FMCIAPSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCIAPSession.h; sourceTree = "<group>"; };
 		E9AC35BE1A1E3FC500706312 /* FMCIAPSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCIAPSession.m; sourceTree = "<group>"; };
-		E9AC35C31A1F876F00706312 /* FMCIAPConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCIAPConnectionManager.h; sourceTree = "<group>"; };
-		E9AC35C41A1F876F00706312 /* FMCIAPConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCIAPConnectionManager.m; sourceTree = "<group>"; };
 		E9AC35C71A1F88C900706312 /* FMCIAPConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMCIAPConfig.h; sourceTree = "<group>"; };
 		E9AC35C81A1F9AC200706312 /* FMCStreamDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCStreamDelegate.h; sourceTree = "<group>"; };
 		E9AC35C91A1F9AC200706312 /* FMCStreamDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCStreamDelegate.m; sourceTree = "<group>"; };
@@ -1649,8 +1645,6 @@
 				59A02FEA1978FBA1003E8ECF /* FMCIAPTransport.m */,
 				E9AC35BD1A1E3FC500706312 /* FMCIAPSession.h */,
 				E9AC35BE1A1E3FC500706312 /* FMCIAPSession.m */,
-				E9AC35C31A1F876F00706312 /* FMCIAPConnectionManager.h */,
-				E9AC35C41A1F876F00706312 /* FMCIAPConnectionManager.m */,
 				E9AC35C81A1F9AC200706312 /* FMCStreamDelegate.h */,
 				E9AC35C91A1F9AC200706312 /* FMCStreamDelegate.m */,
 				59A02FEB1978FBA1003E8ECF /* FMCTCPTransport.h */,
@@ -1957,7 +1951,6 @@
 				59A030DB1978FBA4003E8ECF /* FMCAddSubMenu.h in Headers */,
 				59A030451978FBA1003E8ECF /* FMCCompassDirection.h in Headers */,
 				59A030711978FBA2003E8ECF /* FMCLayoutMode.h in Headers */,
-				E9AC35C51A1F876F00706312 /* FMCIAPConnectionManager.h in Headers */,
 				59A030A71978FBA3003E8ECF /* FMCVehicleDataEventStatus.h in Headers */,
 				59A030CF1978FBA4003E8ECF /* FMCOnSyncPData.h in Headers */,
 				59A031C11978FBB0003E8ECF /* FMCVehicleDataResult.h in Headers */,
@@ -2257,7 +2250,6 @@
 				59A031281978FBA7003E8ECF /* FMCAddCommandResponse.m in Sources */,
 				59A030241978FBA1003E8ECF /* FMCRPCRequest.m in Sources */,
 				E9AC35CB1A1F9AC200706312 /* FMCStreamDelegate.m in Sources */,
-				E9AC35C61A1F876F00706312 /* FMCIAPConnectionManager.m in Sources */,
 				59A031581978FBA9003E8ECF /* FMCSetAppIconResponse.m in Sources */,
 				59A030F61978FBA5003E8ECF /* FMCGetVehicleData.m in Sources */,
 				59A030661978FBA2003E8ECF /* FMCImageType.m in Sources */,

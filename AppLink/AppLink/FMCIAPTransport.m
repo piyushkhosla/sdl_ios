@@ -6,7 +6,6 @@
 #import "FMCDebugTool.h"
 #import "FMCSiphonServer.h"
 #import "FMCIAPConfig.h"
-#import "FMCIAPConnectionManager.h"
 #import "FMCIAPTransport.h"
 #import "FMCStreamDelegate.h"
 #import "EAAccessoryManager+SyncProtocols.h"
@@ -14,8 +13,8 @@
 #import <CommonCrypto/CommonDigest.h>
 
 @interface FMCIAPTransport () {
-    dispatch_queue_t _io_queue;
-    BOOL alreadyDestructed;
+    dispatch_queue_t _transport_queue;
+    BOOL _alreadyDestructed;
 }
 
 @property (assign) int retryCounter;
@@ -34,8 +33,8 @@
 - (instancetype)init {
     if (self = [super init]) {
 
-        alreadyDestructed = NO;
-        _io_queue = dispatch_queue_create("com.ford.applink.transport", DISPATCH_QUEUE_SERIAL);
+        _alreadyDestructed = NO;
+        _transport_queue = dispatch_queue_create("com.ford.applink.transport", DISPATCH_QUEUE_SERIAL);
 
         _session = nil;
         _retryCounter = 0;
@@ -94,6 +93,39 @@
 
 }
 
+#pragma mark - EAAccessory Notifications
+
+- (void)accessoryConnected:(NSNotification*) notification {
+    [FMCDebugTool logInfo:@"Accessory Connected Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    
+    double delay = [self getDelay];
+    NSString *logMessage = [NSString stringWithFormat:@"Connect Delay: %f", delay];
+    [FMCDebugTool logInfo:logMessage];
+    [self performSelector:@selector(connect) withObject:nil afterDelay:delay];
+}
+
+- (void)accessoryDisconnected:(NSNotification*) notification {
+    [FMCDebugTool logInfo:@"Accessory Disconnected Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    
+    EAAccessory* accessory = [notification.userInfo objectForKey:EAAccessoryKey];
+    if (accessory.connectionID == self.session.accessory.connectionID) {
+        self.sessionSetupInProgress = NO;
+        [self disconnect];
+        self.session = nil;
+        [self.delegate onTransportDisconnected];
+    }
+}
+
+-(void)applicationWillEnterForeground:(NSNotification *)notification {
+    [FMCDebugTool logInfo:@"App Foregrounded Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    
+    [self connect];
+}
+
+-(void)applicationDidEnterBackground:(NSNotification *)notification {
+    [FMCDebugTool logInfo:@"App Backgrounded Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+}
+
 - (void)connect {
     // Make sure we don't have a session setup or already in progress
     if (!self.session && !self.sessionSetupInProgress) {
@@ -101,9 +133,16 @@
         // Reset the retry counter
         self.retryCounter = 0;
         // Start the session setup in the background
-        dispatch_async(_io_queue, ^{
+        dispatch_async(_transport_queue, ^{
             [self establishSession];
         });
+    }
+    // DEBUG only
+    else if (self.session) {
+        [FMCDebugTool logInfo:@"Session already established."];
+    }
+    else {
+        [FMCDebugTool logInfo:@"Session setup already in progress."];
     }
 }
 
@@ -192,9 +231,6 @@
         weakSession.streamDelegate = nil;
         weakSession = nil;
         float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
-        if (!weakSelf) {
-            [FMCDebugTool logInfo:@"weakSelf is nil"];
-        }
         [weakSelf performSelector:@selector(establishSession) withObject:nil afterDelay:randomNumber];
     };
     
@@ -208,22 +244,23 @@
         [weakSelf performSelector:@selector(establishSession) withObject:nil afterDelay:randomNumber];
     };
     
-    if (controlSession) {
-        controlSession.streamDelegate = controlStreamDelegate;
-        BOOL isOpen = [controlSession open];
-        if (!isOpen) {
-            [FMCDebugTool logInfo:@"Couldn't open control session, trying again"];
+    SessionCompletionHandler completionHandler = ^void(BOOL success) {
+        if (!success) {
+            [FMCDebugTool logInfo:@"Couldn't open control session"];
             controlSession.streamDelegate = nil;
-            controlSession = nil;
-            if (!weakSelf) {
-                [FMCDebugTool logInfo:@"weakSelf is nil"];
-            }
+            weakSession = nil;
             float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
             [weakSelf performSelector:@selector(establishSession) withObject:nil afterDelay:randomNumber];
         }
         else {
             [self.protocolIndexTimer start];
         }
+    };
+    
+    if (controlSession) {
+        controlSession.streamDelegate = controlStreamDelegate;
+        controlSession.delegate = self;
+        [controlSession openWithCompletionHandler:completionHandler];
     } else {
         controlSession = nil;
         float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
@@ -285,13 +322,20 @@
         self.session.streamDelegate = ioStreamDelegate;
         self.session.delegate = self;
         
-        BOOL isOpen = [self.session open];
-        if (!isOpen) {
-            self.session.streamDelegate = nil;
-            self.session = nil;
-            float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
-            [weakSelf performSelector:@selector(establishSession) withObject:nil afterDelay:randomNumber];
-        }
+        SessionCompletionHandler completionHandler = ^void(BOOL success) {
+            if (!success) {
+                [FMCDebugTool logInfo:@"Couldn't open data session"];
+                self.session.streamDelegate = nil;
+                self.session = nil;
+                float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
+                [weakSelf performSelector:@selector(establishSession) withObject:nil afterDelay:randomNumber];
+            }
+            else {
+                [self.protocolIndexTimer start];
+            }
+        };
+
+        [self.session openWithCompletionHandler:completionHandler];
     }
     else {
         float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
@@ -300,19 +344,33 @@
 }
 
 // This gets called after both I/O streams of the session have opened.
-- (void)onSessionInitializationComplete:(BOOL)success {
-    self.sessionSetupInProgress = NO;
-    if (success) {
-        [FMCDebugTool logInfo:@"Session Opened"];
-        [self.delegate onTransportConnected];
-    } else {
-        [FMCDebugTool logInfo:@"Error: Session not opened."];
+- (void)onSessionInitializationComplete:(BOOL)success forSession:(FMCIAPSession *)session {
+    if (![CONTROL_PROTOCOL_STRING isEqualToString:session.protocol]) {
+        self.sessionSetupInProgress = NO;
+        if (success) {
+            [FMCDebugTool logInfo:@"Session Opened"];
+            [self.delegate onTransportConnected];
+        } else {
+            [FMCDebugTool logInfo:@"Error: Session not opened."];
+        }
     }
 }
 
+// Retry establishSession on Stream End events only if it was the control session and we haven't already connected on non-control protocol
+- (void)onSessionStreamsEnded:(FMCIAPSession *)session {
+    if (!self.session && [CONTROL_PROTOCOL_STRING isEqualToString:session.protocol]) {
+        [FMCDebugTool logInfo:@"onSessionStreamsEnded"];
+        [session close];
+        [session dispose];
+        session = nil;
+        [FMCDebugTool logInfo:@"Retrying establishConnection"];
+        float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
+        [self performSelector:@selector(establishSession) withObject:nil afterDelay:randomNumber];
+    }
+}
 
 - (void)disconnect {
-    dispatch_sync(_io_queue, ^{
+    dispatch_sync(_transport_queue, ^{
         [FMCDebugTool logInfo:@"IAP Disconnecting" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
         if (self.session != nil) {
             [self.session close];
@@ -327,7 +385,7 @@
     NSOutputStream *ostream = self.session.easession.outputStream;
     NSMutableData *remainder = data.mutableCopy;
 
-    dispatch_async(_io_queue, ^{
+    dispatch_async(_transport_queue, ^{
 
         while (1) {
             if (remainder.length == 0)
@@ -354,10 +412,10 @@
 }
 
 - (void)destructObjects {
-    if(!alreadyDestructed) {
-        alreadyDestructed = YES;
+    if(!_alreadyDestructed) {
+        _alreadyDestructed = YES;
         [self stopEventListening];
-        _io_queue = nil;
+        _transport_queue = nil;
         self.delegate = nil;
     }
 }
@@ -386,37 +444,6 @@
     NSScanner* pScanner = [NSScanner scannerWithString: output];
     [pScanner scanHexLongLong:&firstHalf];
     return 2.0 * (firstHalf * 1.0) / 0xffffffffffffffff;
-}
-
-#pragma mark - EAAccessory Notifications
-
-- (void)accessoryConnected:(NSNotification*) notification {
-    [FMCDebugTool logInfo:@"Accessory Connected Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-    
-    double delay = [self getDelay];
-    NSString *logMessage = [NSString stringWithFormat:@"Connect Delay: %f", delay];
-    [FMCDebugTool logInfo:logMessage];
-    [self performSelector:@selector(connect) withObject:nil afterDelay:delay];
-}
-
-- (void)accessoryDisconnected:(NSNotification*) notification {
-    [FMCDebugTool logInfo:@"Accessory Disconnected Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-
-    EAAccessory* accessory = [notification.userInfo objectForKey:EAAccessoryKey];
-    if (accessory.connectionID == self.session.accessory.connectionID) {
-        [self disconnect];
-        [self.delegate onTransportDisconnected];
-    }
-}
-
--(void)applicationWillEnterForeground:(NSNotification *)notification {
-    [FMCDebugTool logInfo:@"App Foregrounded Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-
-    [self connect];
-}
-
--(void)applicationDidEnterBackground:(NSNotification *)notification {
-    [FMCDebugTool logInfo:@"App Backgrounded Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 }
 
 @end
