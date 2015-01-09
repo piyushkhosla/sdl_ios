@@ -98,7 +98,7 @@
 - (void)accessoryConnected:(NSNotification*) notification {
     [FMCDebugTool logInfo:@"Accessory Connected Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     
-    double delay = [self getDelay];
+    double delay = [self retryDelay];
     NSString *logMessage = [NSString stringWithFormat:@"Connect Delay: %f", delay];
     [FMCDebugTool logInfo:logMessage];
     [self performSelector:@selector(connect) withObject:nil afterDelay:delay];
@@ -111,7 +111,6 @@
     if (accessory.connectionID == self.session.accessory.connectionID) {
         self.sessionSetupInProgress = NO;
         [self disconnect];
-        self.session = nil;
         [self.delegate onTransportDisconnected];
     }
 }

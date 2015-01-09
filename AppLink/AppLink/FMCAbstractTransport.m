@@ -30,7 +30,7 @@
     [self doesNotRecognizeSelector:_cmd];
 }
 
-- (double)getDelay {
+- (double)retryDelay {
     [self doesNotRecognizeSelector:_cmd];
     return 0.0;
 }

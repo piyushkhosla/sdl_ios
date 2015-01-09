@@ -15,6 +15,6 @@
 - (void)disconnect;
 - (void)sendData:(NSData *)dataToSend;
 - (void)dispose;
-- (double)getDelay;
+- (double)retryDelay;
 
 @end
