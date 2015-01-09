@@ -69,7 +69,7 @@ const int POLICIES_CORRELATION_ID = 65535;
         self.protocol.protocolDelegate = self;
         self.protocol.transport = self.transport;
 
-        double delay = [self.transport getDelay];
+        double delay = [self.transport retryDelay];
         [self.transport performSelector:@selector(connect) withObject:nil afterDelay:delay];
 
         [FMCDebugTool logInfo:@"FMCSyncProxy initWithTransport"];
