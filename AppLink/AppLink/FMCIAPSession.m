@@ -65,21 +65,7 @@
                 [weakSelf openWithCompletionHandler:completionHandler];
             };
             
-            self.streamDelegate.streamEndHandler = ^(NSStream *stream) {
-                if (stream == [weakSelf.easession outputStream]) {
-                    [FMCDebugTool logInfo:@"Output Stream End"];
-                    weakSelf.isOutputStreamOpen = NO;
-                } else if (stream == [weakSelf.easession inputStream]) {
-                    [FMCDebugTool logInfo:@"Input Stream End"];
-                    weakSelf.isInputStreamOpen = NO;
-                }
-                // When both streams are closed, stream end is complete. Let the delegate know.
-                if (!weakSelf.isInputStreamOpen && !weakSelf.isOutputStreamOpen) {
-                    [FMCDebugTool logInfo:@"Calling streams ended delegate"];
-                    [weakSelf.delegate onSessionStreamsEnded:weakSelf];
-                }
-            };
-            
+
             self.streamDelegate.streamErrorHandler = ^(NSStream *stream) {
                 if (stream == [weakSelf.easession outputStream]) {
                     [FMCDebugTool logInfo:@"Output Stream Error"];
