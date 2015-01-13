@@ -5,6 +5,11 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCResponse.h>
 
+/**
+ * FMCEndAudioPassThruResponse is sent, when FMCEndAudioPassThru has been called
+ *
+ * Since <b>AppLink 2.0</b>
+ */
 @interface FMCEndAudioPassThruResponse : FMCRPCResponse {}
 
 -(id) init;

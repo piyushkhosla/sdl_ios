@@ -5,6 +5,11 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCResponse.h>
 
+/**
+ * FMCChangeRegistrationResponse is sent, when FMCChangeRegistration has been called
+ *
+ * Since <b>AppLink 2.0</b>
+ */
 @interface FMCChangeRegistrationResponse : FMCRPCResponse {}
 
 -(id) init;

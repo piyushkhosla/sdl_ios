@@ -5,6 +5,11 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCResponse.h>
 
+/**
+ * FMCDeleteCommandResponse is sent, when FMCDeleteCommand has been called
+ *
+ * Since <b>AppLink 1.0</b><br>
+ */
 @interface FMCDeleteCommandResponse : FMCRPCResponse {}
 
 -(id) init;

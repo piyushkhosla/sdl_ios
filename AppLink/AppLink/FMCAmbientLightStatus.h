@@ -1,7 +1,11 @@
 //  FMCAmbientLightStatus.h
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
-
+/** Reflects the status of the ambient light sensor.
+ *
+ * <b>Since</b> AppLink 3.0
+ *
+ */
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCEnum.h>
 

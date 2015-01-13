@@ -4,7 +4,9 @@
 
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCResponse.h>
-
+/** FMCDiagnosticMessageResponse is sent, when FMCDiagnosticMessage has been called.
+ * Since<b>AppLink 3.0</b>
+ */
 @interface FMCDiagnosticMessageResponse : FMCRPCResponse {}
 
 -(id) init;

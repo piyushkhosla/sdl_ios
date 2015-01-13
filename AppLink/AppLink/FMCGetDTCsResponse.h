@@ -5,6 +5,11 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCResponse.h>
 
+/**
+ * FMCGetDTCsResponse is sent, when FMCGetDTCs has been called
+ *
+ * Since <b>AppLink 2.0</b>
+ */
 @interface FMCGetDTCsResponse : FMCRPCResponse {}
 
 -(id) init;

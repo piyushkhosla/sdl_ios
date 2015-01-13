@@ -4,7 +4,9 @@
 
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCResponse.h>
-
+/** FMCUpdateTurnListResponse is sent, when FMCUpdateTurnList has been called.
+ * Since<b>AppLink 2.0</b>
+ */
 @interface FMCUpdateTurnListResponse : FMCRPCResponse {}
 
 -(id) init;

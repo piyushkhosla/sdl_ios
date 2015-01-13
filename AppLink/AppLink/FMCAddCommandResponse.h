@@ -5,6 +5,11 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCResponse.h>
 
+/**
+ * FMCAddCommandResponse is sent, when FMCAddCommand has been called
+ *
+ * Since <b>AppLink 1.0</b>
+ */
 @interface FMCAddCommandResponse : FMCRPCResponse {}
 
 -(id) init;

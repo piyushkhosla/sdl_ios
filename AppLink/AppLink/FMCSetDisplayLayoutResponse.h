@@ -8,8 +8,16 @@
 #import <AppLink/FMCDisplayCapabilities.h>
 #import <AppLink/FMCPresetBankCapabilities.h>
 
+/**
+ * Set Display Layout Response is sent, when SetDisplayLayout has been called
+ *
+ * Since AppLink 2.0
+ */
 @interface FMCSetDisplayLayoutResponse : FMCRPCResponse {}
 
+/**
+ * @abstract Constructs a new FMCSetDisplayLayoutResponse object
+ */
 -(id) init;
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 

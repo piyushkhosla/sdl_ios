@@ -21,30 +21,125 @@
 #import <AppLink/FMCClusterModeStatus.h>
 #import <AppLink/FMCMyKey.h>
 
+/**
+ * Get Vehicle Data Response is sent, when FMCGetVehicleData has been called
+ *
+ * Since AppLink 2.0
+ */
 @interface FMCGetVehicleDataResponse : FMCRPCResponse {}
 
+
+/**
+ * @abstract Constructs a new FMCGetVehicleDataResponse object
+ */
 -(id) init;
+
+/**
+ * @abstract Constructs a new FMCGetVehicleDataResponse object indicated by the NSMutableDictionary
+ * parameter
+ * @param dict The NSMutableDictionary to use
+ */
 -(id) initWithDictionary:(NSMutableDictionary*) dict;
 
+
+/**
+ * @abstract A FMCGPSData* value. See GPSData.
+ */
 @property(strong) FMCGPSData* gps;
+
+/**
+ * @abstract The vehicle speed in kilometers per hour.
+ */
 @property(strong) NSNumber* speed;
+
+/**
+ * @abstract The number of revolutions per minute of the engine.
+ */
 @property(strong) NSNumber* rpm;
+
+/**
+ * @abstract The fuel level in the tank (percentage)
+ */
 @property(strong) NSNumber* fuelLevel;
+
+/**
+ * @abstract A FMCComponentVolumeStatus* value. The fuel level state.
+ */
 @property(strong) FMCComponentVolumeStatus* fuelLevel_State;
+
+/**
+ * @abstract The instantaneous fuel consumption in microlitres.
+ */
 @property(strong) NSNumber* instantFuelConsumption;
+
+/**
+ * @abstract The external temperature in degrees celsius.
+ */
 @property(strong) NSNumber* externalTemperature;
+
+/**
+ * @abstract The Vehicle Identification Number
+ */
 @property(strong) NSString* vin;
+
+/**
+ * @abstract See PRNDL.
+ */
 @property(strong) FMCPRNDL* prndl;
+
+/**
+ * @abstract A FMCTireStatus* value. See TireStatus.
+ */
 @property(strong) FMCTireStatus* tirePressure;
+
+/**
+ * @abstract Odometer reading in km.
+ */
 @property(strong) NSNumber* odometer;
+
+/**
+ * @abstract A FMCBeltStatus* value. The status of the seat belts.
+ */
 @property(strong) FMCBeltStatus* beltStatus;
+
+/**
+ * @abstract A FMCBodyInformation* value. The body information including power modes.
+ */
 @property(strong) FMCBodyInformation* bodyInformation;
+
+/**
+ * @abstract A FMCDeviceStatus* value. The device status including signal and battery strength.
+ */
 @property(strong) FMCDeviceStatus* deviceStatus;
+
+/**
+ * @abstract A FMCVehicleDataResult* value. The status of the brake pedal.
+ */
 @property(strong) FMCVehicleDataEventStatus* driverBraking;
+
+/**
+ * @abstract A FMCWiperStatus* value. The status of the wipers.
+ */
 @property(strong) FMCWiperStatus* wiperStatus;
+
+/**
+ * @abstract A FMCHeadLampStatus* value. Status of the head lamps.
+ */
 @property(strong) FMCHeadLampStatus* headLampStatus;
+
+/**
+ * @abstract Torque value for engine (in Nm) on non-diesel variants.
+ */
 @property(strong) NSNumber* engineTorque;
+
+/**
+ * @abstract Accelerator pedal position (percentage depressed)
+ */
 @property(strong) NSNumber* accPedalPosition;
+
+/**
+ * @abstract Current angle of the steering wheel (in deg)
+ */
 @property(strong) NSNumber* steeringWheelAngle;
 @property(strong) FMCECallInfo* eCallInfo;
 @property(strong) FMCAirbagStatus* airbagStatus;

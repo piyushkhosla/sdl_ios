@@ -4,7 +4,9 @@
 
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCRPCRequest.h>
-
+/**
+ @Since AppLink 1.0
+ */
 @interface FMCAlertManeuver : FMCRPCRequest {}
 
 -(id) init;
