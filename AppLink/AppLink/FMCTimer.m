@@ -40,7 +40,8 @@
 {
     if (self.duration > 0) {
         [self stopAndDestroyTimer];
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:self.duration target:self selector:@selector(timerElapsed) userInfo:nil repeats:NO];
+        self.timer = [NSTimer timerWithTimeInterval:self.duration target:self selector:@selector(timerElapsed) userInfo:nil repeats:NO];
+        [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
         self.timerRunning = YES;
     }
 }

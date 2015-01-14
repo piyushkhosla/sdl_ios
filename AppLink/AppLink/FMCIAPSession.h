@@ -23,8 +23,7 @@ typedef void(^SessionCompletionHandler)(BOOL success);
 - (instancetype)initWithAccessory:(EAAccessory *)accessory
                       forProtocol:(NSString *)protocol;
 
-- (void)openWithCompletionHandler:(SessionCompletionHandler)completionHandler;
-- (void)close;
-- (void)dispose;
+- (BOOL)start;
+- (void)stop;
 
 @end

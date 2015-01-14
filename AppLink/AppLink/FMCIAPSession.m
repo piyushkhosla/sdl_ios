@@ -10,15 +10,14 @@
 #import "FMCIAPConfig.h"
 
 
-@interface FMCIAPSession () {
-    dispatch_queue_t _session_queue;
-}
+@interface FMCIAPSession ()
 
 @property (assign) BOOL isInputStreamOpen;
 @property (assign) BOOL isOutputStreamOpen;
-@property (strong) FMCTimer *inputStreamTimer;
-@property (strong) FMCTimer *outputStreamTimer;
-@property (assign) BOOL alreadyDestructed;
+
+- (void)startStream:(NSStream *)stream ;
+- (void)stopStream:(NSStream *)stream;
+
 @end
 
 
@@ -31,8 +30,6 @@
 
     self = [super init];
     if (self) {
-        _session_queue = dispatch_queue_create("com.ford.applink.session", DISPATCH_QUEUE_SERIAL);
-        _alreadyDestructed = NO;
         _delegate = nil;
         _accessory = accessory;
         _protocol = protocol;
@@ -40,129 +37,67 @@
         _easession = nil;
         _isInputStreamOpen = NO;
         _isOutputStreamOpen = NO;
-        _inputStreamTimer = nil;
-        _outputStreamTimer = nil;
     }
     return self;
 }
 
-- (void)openWithCompletionHandler:(SessionCompletionHandler)completionHandler {
-    
-    dispatch_async(_session_queue, ^{
-        BOOL success = NO;
-        NSString *logMessage = [NSString stringWithFormat:@"Opening IAPSession withAccessory:%@ forProtocol:%@" , _accessory.name, _protocol];
-        [FMCDebugTool logInfo:logMessage];
 
-        self.easession = [[EASession alloc] initWithAccessory:_accessory forProtocol:_protocol];
-        if (_easession) {
-            [FMCDebugTool logInfo:@"EASession Initialized, Opening Streams"];
-            __weak typeof(self) weakSelf = self;
+- (BOOL)start {
 
-            // Setup the stream open timed out event handler
-            void (^elapsedBlock)(void) = ^{
-                [FMCDebugTool logInfo:@"Stream Open Timeout"];
-                [weakSelf close];
-                [weakSelf openWithCompletionHandler:completionHandler];
-            };
-            
+    __weak typeof(self) weakSelf = self;
 
-            self.streamDelegate.streamErrorHandler = ^(NSStream *stream) {
-                if (stream == [weakSelf.easession outputStream]) {
-                    [FMCDebugTool logInfo:@"Output Stream Error"];
-                } else if (stream == [weakSelf.easession inputStream]) {
-                    [FMCDebugTool logInfo:@"Input Stream Error"];
-                }
+    NSString *logMessage = [NSString stringWithFormat:@"Opening EASession withAccessory:%@ forProtocol:%@" , _accessory.name, _protocol];
+    [FMCDebugTool logInfo:logMessage];
+
+    if ((self.easession = [[EASession alloc] initWithAccessory:_accessory forProtocol:_protocol])) {
+        [FMCDebugTool logInfo:@"Created Session Object"];
+
+        dispatch_queue_t _session_queue = dispatch_queue_create("com.ford.applink.session", DISPATCH_QUEUE_SERIAL);
+        dispatch_async(_session_queue, ^{
+
+            // Stream Error Handler
+            weakSelf.streamDelegate.streamErrorHandler = ^(NSStream *stream) {
+                [FMCDebugTool logInfo:@"Stream Error"];
                 [weakSelf.delegate onSessionStreamsEnded:weakSelf];
             };
 
-            // Setup the stream open event handler
-            self.streamDelegate.streamOpenHandler = ^(NSStream *stream){
-                // Cancel timers, set stream opened flag
+            // Stream Open Handler
+            weakSelf.streamDelegate.streamOpenHandler = ^(NSStream *stream){
+
                 if (stream == [weakSelf.easession outputStream]) {
                     [FMCDebugTool logInfo:@"Output Stream Opened"];
                     weakSelf.isOutputStreamOpen = YES;
-
-                    if (weakSelf.outputStreamTimer != nil) {
-                        [weakSelf.outputStreamTimer cancel];
-                    }
                 } else if (stream == [weakSelf.easession inputStream]) {
                     [FMCDebugTool logInfo:@"Input Stream Opened"];
                     weakSelf.isInputStreamOpen = YES;
-
-                    if (weakSelf.inputStreamTimer != nil) {
-                        [weakSelf.inputStreamTimer cancel];
-                    }
                 }
 
                 // When both streams are open, session initialization is complete. Let the delegate know.
                 if (weakSelf.isInputStreamOpen && weakSelf.isOutputStreamOpen) {
-                    [weakSelf.delegate onSessionInitializationComplete:YES forSession:weakSelf];
+                    [weakSelf.delegate onSessionInitializationCompleteForSession:weakSelf];
                 }
             };
 
-            //
-            // Open the streams
-            //
-            if (self.inputStreamTimer == nil) {
-                self.inputStreamTimer = [[FMCTimer alloc] initWithDuration:STREAM_OPEN_TIMEOUT_SECONDS];
-                self.inputStreamTimer.elapsedBlock = elapsedBlock;
-            }
-            [self.inputStreamTimer start];
-            [FMCDebugTool logInfo:@"Opening Input Stream"];
-            [self startStream:_easession.inputStream];
 
-            if (self.outputStreamTimer == nil) {
-                self.outputStreamTimer = [[FMCTimer alloc] initWithDuration:STREAM_OPEN_TIMEOUT_SECONDS];
-                self.outputStreamTimer.elapsedBlock = elapsedBlock;
-            }
-            [self.outputStreamTimer start];
-            [FMCDebugTool logInfo:@"Opening Output Stream"];
-            [self startStream:_easession.outputStream];
+            // Start the streams.
+            [weakSelf startStream:weakSelf.easession.outputStream];
+            [weakSelf startStream:weakSelf.easession.inputStream];
+            [[NSRunLoop currentRunLoop] run]; // Note: This does not return! Thread stuck here.
+        });
 
-            NSRunLoop *loop = [NSRunLoop currentRunLoop];
-            [loop run];
-            
-            success = YES;
-        } else {
-            [FMCDebugTool logInfo:@"EASession Initialization Failed"];
-        }
-        
-        if (completionHandler != nil) {
-            completionHandler(success);
-        }
-    });
+        return YES;
+
+    } else {
+        [FMCDebugTool logInfo:@"Error: Could Not Create Session Object"];
+        return NO;
+    }
+
 }
 
-- (void)close {
-    dispatch_async(_session_queue, ^{
-        [FMCDebugTool logInfo:@"FMCIAPSession Closing"];
-
-        if (_easession) {
-            // Cancel input stream open timer (if set)
-            if (self.inputStreamTimer) {
-                [self.inputStreamTimer cancel];
-                self.inputStreamTimer = nil;
-            }
-            // Close input stream (if open)
-            if (self.isInputStreamOpen) {
-                [self stopStream:_easession.inputStream];
-                self.isInputStreamOpen = NO;
-            }
-
-            // Cancel output stream open timer (if set)
-            if (self.outputStreamTimer) {
-                [self.outputStreamTimer cancel];
-                self.outputStreamTimer = nil;
-            }
-            // Close output stream (if open)
-            if (self.isOutputStreamOpen) {
-                [self stopStream:_easession.outputStream];
-                self.isOutputStreamOpen = NO;
-            }
-
-            self.easession = nil;
-        }
-    });
+- (void)stop {
+    [self stopStream:self.easession.outputStream];
+    [self stopStream:self.easession.inputStream];
+    self.easession = nil;
 }
 
 - (void)startStream:(NSStream *)stream {
@@ -174,46 +109,38 @@
 
 - (void)stopStream:(NSStream *)stream {
 
-    NSRunLoop *loop = [NSRunLoop currentRunLoop];
     // Verify stream is in a state that can be closed.
     // (N.B. Closing a stream that has not been opened has very, very bad effects.)
-    if (stream.streamStatus != NSStreamStatusNotOpen &&
-        stream.streamStatus != NSStreamStatusClosed) {
+
+    // When you disconect the cable you get a stream end event and come here but stream is already in closed state.
+    // Still need to remove from run loop.
+
+    NSUInteger status1 = stream.streamStatus;
+    if (status1 != NSStreamStatusNotOpen &&
+        status1 != NSStreamStatusClosed) {
 
         [stream close];
-        [stream removeFromRunLoop:loop forMode:NSDefaultRunLoopMode];
-        [stream setDelegate:nil];
-            
-        if (stream.streamStatus == NSStreamStatusClosed) {
+    }
 
-            if (stream == [self.easession inputStream]) {
-                [FMCDebugTool logInfo:@"Input Stream Closed"];
-            } else if (stream == [self.easession outputStream]) {
-                [FMCDebugTool logInfo:@"Output Stream Closed"];
-            }
+    [stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [stream setDelegate:nil];
+
+    NSUInteger status2 = stream.streamStatus;
+    if (status2 == NSStreamStatusClosed) {
+        if (stream == [self.easession inputStream]) {
+            [FMCDebugTool logInfo:@"Input Stream Closed"];
+        } else if (stream == [self.easession outputStream]) {
+            [FMCDebugTool logInfo:@"Output Stream Closed"];
         }
     }
 }
 
-- (void)destructObjects {
-    if(!self.alreadyDestructed) {
-        self.alreadyDestructed = YES;
-        self.delegate = nil;
-        self.accessory = nil;
-        self.protocol = nil;
-        self.streamDelegate = nil;
-        self.easession = nil;
-        self.inputStreamTimer = nil;
-        self.outputStreamTimer = nil;
-    }
-}
-
-- (void)dispose {
-    [self destructObjects];
-}
-
 - (void)dealloc {
-    [self destructObjects];
+    self.delegate = nil;
+    self.accessory = nil;
+    self.protocol = nil;
+    self.streamDelegate = nil;
+    self.easession = nil;
     [FMCDebugTool logInfo:@"FMCIAPSession Dealloc"];
 }
 

@@ -9,6 +9,7 @@
 
 @interface FMCIAPTransport : FMCAbstractTransport<FMCIAPSessionDelegate>
 
+@property (strong, atomic) FMCIAPSession *controlSession;
 @property (strong, atomic) FMCIAPSession *session;
 
 - (instancetype)init;

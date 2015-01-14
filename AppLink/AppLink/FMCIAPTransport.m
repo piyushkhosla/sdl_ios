@@ -37,6 +37,7 @@
         _transport_queue = dispatch_queue_create("com.ford.applink.transport", DISPATCH_QUEUE_SERIAL);
 
         _session = nil;
+        _controlSession = nil;
         _retryCounter = 0;
         _sessionSetupInProgress = NO;
         _protocolIndexTimer = nil;
@@ -101,7 +102,7 @@
     double delay = [self retryDelay];
     NSString *logMessage = [NSString stringWithFormat:@"Connect Delay: %f", delay];
     [FMCDebugTool logInfo:logMessage];
-    [self performSelector:@selector(connect) withObject:nil afterDelay:delay];
+    [self connect];
 }
 
 - (void)accessoryDisconnected:(NSNotification*) notification {
@@ -146,7 +147,7 @@
 }
 
 - (void)establishSession {
-    [FMCDebugTool logInfo:@"Establish Session"];
+    [FMCDebugTool logInfo:@"Attempting To Connect"];
     if (self.retryCounter < CREATE_SESSION_RETRIES) {
         self.retryCounter++;
         EAAccessory *accessory = nil;
@@ -175,101 +176,98 @@
 }
 
 - (void)createIAPControlSessionWithAccessory:(EAAccessory *)accessory {
-    [FMCDebugTool logInfo:@"Starting MultiApp Session"];
-    
-    // Setup the control stream delegate
-    FMCStreamDelegate *controlStreamDelegate = [FMCStreamDelegate new];
-    // Setup the session on the control channel
-    FMCIAPSession *controlSession = [[FMCIAPSession alloc] initWithAccessory:accessory
-                                                                 forProtocol:CONTROL_PROTOCOL_STRING];
-    if (self.protocolIndexTimer == nil) {
-        self.protocolIndexTimer = [[FMCTimer alloc] initWithDuration:PROTOCOL_INDEX_TIMEOUT_SECONDS];
-    }
-    
-    __weak typeof(self) weakSelf = self;
-    __weak __block typeof(controlSession) weakSession = controlSession;
-    
-    // Setup the protocol index timed out event handler
-    void (^elapsedBlock)(void) = ^{
-        [FMCDebugTool logInfo:@"Protocol Index Timeout"];
-        [weakSession close];
-        weakSession.streamDelegate = nil;
-        weakSession = nil;
-        [weakSelf retryEstablish];
-    };
-    self.protocolIndexTimer.elapsedBlock = elapsedBlock;
 
-    controlStreamDelegate.streamHasBytesHandler = ^(NSInputStream *istream) {
-        // Grab a single byte from the stream
-        uint8_t buf[1];
-        NSUInteger len = [istream read:buf maxLength:1];
-        if(len > 0)
-        {
+    [FMCDebugTool logInfo:@"Starting MultiApp Session"];
+    self.controlSession = [[FMCIAPSession alloc] initWithAccessory:accessory forProtocol:CONTROL_PROTOCOL_STRING];
+    if (self.controlSession) {
+        self.controlSession.delegate = self;
+
+        // Create Protocol Index Timer
+        if (self.protocolIndexTimer == nil) {
+            self.protocolIndexTimer = [[FMCTimer alloc] initWithDuration:PROTOCOL_INDEX_TIMEOUT_SECONDS];
+        }
+        
+        __weak typeof(self) weakSelf = self;
+
+        // Protocol index timeout handler
+        void (^elapsedBlock)(void) = ^{
+            [FMCDebugTool logInfo:@"Protocol Index Timeout"];
+            [weakSelf.controlSession stop];
+            weakSelf.controlSession.streamDelegate = nil;
+            weakSelf.controlSession = nil;
+            [weakSelf retryEstablishSession];
+        };
+        self.protocolIndexTimer.elapsedBlock = elapsedBlock;
+
+        // Configure Streams Delegate
+        FMCStreamDelegate *controlStreamDelegate = [FMCStreamDelegate new];
+        self.controlSession.streamDelegate = controlStreamDelegate;
+
+        // Control Session Has Bytes Handler
+        controlStreamDelegate.streamHasBytesHandler = ^(NSInputStream *istream) {
+            [FMCDebugTool logInfo:@"Control Stream Received Data"];
+
+            // Grab a single byte from the stream
+            uint8_t buf[1];
+            NSUInteger len = [istream read:buf maxLength:1];
+            if(len > 0)
+            {
+                NSString *logMessage = [NSString stringWithFormat:@"Switching to protocol %@", [[NSNumber numberWithChar:buf[0]] stringValue]];
+                [FMCDebugTool logInfo:logMessage];
+                // Done with control protocol session, destroy it.
+                [weakSelf.protocolIndexTimer cancel];
+                [weakSelf.controlSession stop];
+                weakSelf.controlSession.streamDelegate = nil;
+                weakSelf.controlSession = nil;
+                
+                // Create session with indexed protocol
+                NSString *indexedProtocolString = [NSString stringWithFormat:@"%@%@",
+                                                   INDEXED_PROTOCOL_STRING_PREFIX,
+                                                   [[NSNumber numberWithChar:buf[0]] stringValue]];
+                
+                [weakSelf createIAPDataSessionWithAccessory:accessory forProtocol:indexedProtocolString];
+            }
+        };
+        
+        // Control Session Stream End Handler
+        controlStreamDelegate.streamEndHandler = ^(NSStream *stream) {
+            [FMCDebugTool logInfo:@"Control Stream Event End"];
+            if (weakSelf.controlSession != nil) { // End events come in pairs, only perform this once per set.
+                [weakSelf.protocolIndexTimer cancel];
+                [weakSelf.controlSession stop];
+                weakSelf.controlSession.streamDelegate = nil;
+                weakSelf.controlSession = nil;
+                [weakSelf retryEstablishSession];
+            }
+        };
+        
+        // Control Session Stream Error Handler
+        controlStreamDelegate.streamErrorHandler = ^(NSStream *stream) {
+            [FMCDebugTool logInfo:@"Stream Error"];
             [weakSelf.protocolIndexTimer cancel];
-            NSString *logMessage = [NSString stringWithFormat:@"Switching to protocol %@", [[NSNumber numberWithChar:buf[0]] stringValue]];
-            [FMCDebugTool logInfo:logMessage];
-            // Done with control protocol session, destroy it.
-            [weakSession close];
-            weakSession.streamDelegate = nil;
-            weakSession = nil;
-            
-            // Create session with indexed protocol
-            NSString *indexedProtocolString = [NSString stringWithFormat:@"%@%@",
-                                               INDEXED_PROTOCOL_STRING_PREFIX,
-                                               [[NSNumber numberWithChar:buf[0]] stringValue]];
-            
-            [weakSelf createIAPDataSessionWithAccessory:accessory forProtocol:indexedProtocolString];
+            [weakSelf.controlSession stop];
+            weakSelf.controlSession.streamDelegate = nil;
+            weakSelf.controlSession = nil;
+            [weakSelf retryEstablishSession];
+        };
+
+
+
+        if (![self.controlSession start]) {
+            [FMCDebugTool logInfo:@"Control Session Failed"];
+            self.controlSession.streamDelegate = nil;
+            self.controlSession = nil;
+            [self retryEstablishSession];
         }
-    };
-    
-    controlStreamDelegate.streamEndHandler = ^(NSStream *stream) {
-        if (weakSession != nil) { // End events come in pairs, only perform this once per set.
-            [FMCDebugTool logInfo:@"Stream Event End"];
-            [weakSelf.protocolIndexTimer cancel];
-            [weakSession close];
-            weakSession.streamDelegate = nil;
-            weakSession = nil;
-            [weakSelf retryEstablish];
-        }
-    };
-    
-    controlStreamDelegate.streamErrorHandler = ^(NSStream *stream) {
-        [FMCDebugTool logInfo:@"Stream Error"];
-        [weakSelf.protocolIndexTimer cancel];
-        [weakSession close];
-        weakSession.streamDelegate = nil;
-        weakSession = nil;
-        [weakSelf retryEstablish];
-    };
-    
-    SessionCompletionHandler completionHandler = ^void(BOOL success) {
-        if (!success) {
-            [FMCDebugTool logInfo:@"Couldn't open control session"];
-            weakSession.streamDelegate = nil;
-            weakSession = nil;
-            [weakSelf retryEstablish];
-        }
-        else {
-            [FMCDebugTool logInfo:@"Control session opened."];
-            [weakSelf.protocolIndexTimer start];
-        }
-    };
-    
-    if (controlSession) {
-        controlSession.streamDelegate = controlStreamDelegate;
-        controlSession.delegate = self;
-        [self.protocolIndexTimer start];
-        [controlSession openWithCompletionHandler:completionHandler];
+
     } else {
-        [self retryEstablish];
+        [FMCDebugTool logInfo:@"Failed MultiApp Control FMCIAPSession Initialization"];
+        [self retryEstablishSession];
     }
 }
 
-- (void)retryEstablish {
-    [FMCDebugTool logInfo:@"Queue retry request."];
-//    float randomNumber = ((float)arc4random() / UINT_MAX) + 0.2; // between 0.2 and 1.2
-//    [self performSelector:@selector(establishSession) withObject:nil afterDelay:randomNumber];
-//    [[NSRunLoop currentRunLoop] run];
+- (void)retryEstablishSession {
+    [FMCDebugTool logInfo:@"Retry"];
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)([self retryDelay] * NSEC_PER_SEC)), _transport_queue, ^{
         [self establishSession];
@@ -278,14 +276,19 @@
 
 - (void)createIAPDataSessionWithAccessory:(EAAccessory *)accessory forProtocol:(NSString *)protocol {
 
+    [FMCDebugTool logInfo:@"Starting Data Session"];
     self.session = [[FMCIAPSession alloc] initWithAccessory:accessory forProtocol:protocol];
-    
-    __weak typeof(self) weakSelf = self;
-
     if (self.session) {
+        self.session.delegate = self;
+
+        __weak typeof(self) weakSelf = self;
+
+        // Configure Streams Delegate
         FMCStreamDelegate *ioStreamDelegate = [FMCStreamDelegate new];
+        self.session.streamDelegate = ioStreamDelegate;
+
+        // Data Session Has Bytes Handler
         ioStreamDelegate.streamHasBytesHandler = ^(NSInputStream *istream){
-            
             uint8_t buf[IAP_INPUT_BUFFER_SIZE];
             
             while ([istream hasBytesAvailable])
@@ -306,58 +309,60 @@
             
         };
         
+        // Data Session Stream End Handler
         ioStreamDelegate.streamEndHandler = ^(NSStream *stream) {
-            [FMCDebugTool logInfo:@"Stream Event End"];
-            [weakSelf.session close];
+            [FMCDebugTool logInfo:@"Data Stream Event End"];
+            [weakSelf.session stop];
             weakSelf.session.streamDelegate = nil;
             if (![LEGACY_PROTOCOL_STRING isEqualToString:weakSelf.session.protocol]) {
-                [weakSelf retryEstablish];
+                [weakSelf retryEstablishSession];
             }
             weakSelf.session = nil;
         };
         
+        // Data Session Stream Error Handler
         ioStreamDelegate.streamErrorHandler = ^(NSStream *stream) {
-            [FMCDebugTool logInfo:@"Stream Error"];
-            [weakSelf.session close];
+            [FMCDebugTool logInfo:@"Data Stream Error"];
+            [weakSelf.session stop];
             weakSelf.session.streamDelegate = nil;
             if (![LEGACY_PROTOCOL_STRING isEqualToString:weakSelf.session.protocol]) {
-                [weakSelf retryEstablish];
+                [weakSelf retryEstablishSession];
             }
             weakSelf.session = nil;
         };
         
-        self.session.streamDelegate = ioStreamDelegate;
-        self.session.delegate = self;
-        
-        SessionCompletionHandler completionHandler = ^void(BOOL success) {
-            if (!success) {
-                [FMCDebugTool logInfo:@"Couldn't open data session"];
-                weakSelf.session.streamDelegate = nil;
-                weakSelf.session = nil;
-                [weakSelf retryEstablish];
-            }
-            else {
-                [weakSelf.protocolIndexTimer start];
-            }
-        };
 
-        [self.session openWithCompletionHandler:completionHandler];
+        if (![self.session start]) {
+            [FMCDebugTool logInfo:@"Data Session Failed"];
+            self.session.streamDelegate = nil;
+            self.session = nil;
+            [self retryEstablishSession];
+        }
+
     }
     else {
-        [self retryEstablish];
+        [FMCDebugTool logInfo:@"Failed MultiApp Data FMCIAPSession Initialization"];
+        [self retryEstablishSession];
     }
+
 }
 
 // This gets called after both I/O streams of the session have opened.
-- (void)onSessionInitializationComplete:(BOOL)success forSession:(FMCIAPSession *)session {
+- (void)onSessionInitializationCompleteForSession:(FMCIAPSession *)session {
+
+    // Control Session Opened
+    if ([CONTROL_PROTOCOL_STRING isEqualToString:session.protocol]) {
+        [FMCDebugTool logInfo:@"Control Session Established"];
+        [self.protocolIndexTimer start];
+    }
+
+    // Data Session Opened
     if (![CONTROL_PROTOCOL_STRING isEqualToString:session.protocol]) {
         self.sessionSetupInProgress = NO;
-        if (success) {
-            [FMCDebugTool logInfo:@"Session Opened"];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [FMCDebugTool logInfo:@"Data Session Established"];
             [self.delegate onTransportConnected];
-        } else {
-            [FMCDebugTool logInfo:@"Error: Session not opened."];
-        }
+        });
     }
 }
 
@@ -365,9 +370,8 @@
 - (void)onSessionStreamsEnded:(FMCIAPSession *)session {
     if (!self.session && [CONTROL_PROTOCOL_STRING isEqualToString:session.protocol]) {
         [FMCDebugTool logInfo:@"onSessionStreamsEnded"];
-        [session close];
-        [session dispose];
-        [self retryEstablish];
+        [session stop];
+        [self retryEstablishSession];
     }
 }
 
@@ -375,8 +379,7 @@
     dispatch_sync(_transport_queue, ^{
         [FMCDebugTool logInfo:@"IAP Disconnecting" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
         if (self.session != nil) {
-            [self.session close];
-            [self.session dispose];
+            [self.session stop];
             self.session = nil;
         }
     });
@@ -388,7 +391,6 @@
     NSMutableData *remainder = data.mutableCopy;
 
     dispatch_async(_transport_queue, ^{
-
         while (1) {
             if (remainder.length == 0)
                 break;
@@ -410,6 +412,7 @@
                 [remainder replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
             }
         }
+
     });
 }
 
@@ -418,6 +421,8 @@
         _alreadyDestructed = YES;
         [self stopEventListening];
         _transport_queue = nil;
+        self.controlSession = nil;
+        self.session = nil;
         self.delegate = nil;
     }
 }

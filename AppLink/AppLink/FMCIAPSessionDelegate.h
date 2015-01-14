@@ -8,7 +8,7 @@
 
 @protocol FMCIAPSessionDelegate
 
-- (void)onSessionInitializationComplete:(BOOL)success forSession:(FMCIAPSession *)session;
+- (void)onSessionInitializationCompleteForSession:(FMCIAPSession *)session;
 - (void)onSessionStreamsEnded:(FMCIAPSession *)session;
 
 @end
