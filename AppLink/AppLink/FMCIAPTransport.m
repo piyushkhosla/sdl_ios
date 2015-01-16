@@ -102,6 +102,8 @@
     double delay = [self retryDelay];
     NSString *logMessage = [NSString stringWithFormat:@"Connect Delay: %f", delay];
     [FMCDebugTool logInfo:logMessage];
+
+    self.retryCounter = 0;
     [self connect];
 }
 
@@ -267,7 +269,7 @@
 
 - (void)retryEstablishSession {
     self.sessionSetupInProgress = NO;
-    
+
     [FMCDebugTool logInfo:@"Retry"];
     [FMCDebugTool logInfo:@"No retries allowed"];
     return;
