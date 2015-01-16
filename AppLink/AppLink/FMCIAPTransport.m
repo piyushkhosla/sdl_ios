@@ -97,14 +97,11 @@
 #pragma mark - EAAccessory Notifications
 
 - (void)accessoryConnected:(NSNotification*) notification {
-    [FMCDebugTool logInfo:@"Accessory Connected Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    NSMutableString *logMessage = [NSMutableString stringWithFormat:@"Accessory Connected Connecting in %0.03fs", self.retryDelay];
+    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     
-    double delay = [self retryDelay];
-    NSString *logMessage = [NSString stringWithFormat:@"Connect Delay: %f", delay];
-    [FMCDebugTool logInfo:logMessage];
-
     self.retryCounter = 0;
-    [self connect];
+    [self performSelector:@selector(connect) withObject:nil afterDelay:self.retryDelay];
 }
 
 - (void)accessoryDisconnected:(NSNotification*) notification {
