@@ -118,7 +118,7 @@
 
 -(void)applicationWillEnterForeground:(NSNotification *)notification {
     [FMCDebugTool logInfo:@"App Foregrounded Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-    
+    self.retryCounter = 0;
     [self connect];
 }
 
@@ -130,8 +130,7 @@
     // Make sure we don't have a session setup or already in progress
     if (!self.session && !self.sessionSetupInProgress) {
         self.sessionSetupInProgress = YES;
-        // Reset the retry counter
-        self.retryCounter = 0;
+
         // Start the session setup in the background
         dispatch_async(_transport_queue, ^{
             [self establishSession];
@@ -267,7 +266,11 @@
 }
 
 - (void)retryEstablishSession {
+    self.sessionSetupInProgress = NO;
+    
     [FMCDebugTool logInfo:@"Retry"];
+    [FMCDebugTool logInfo:@"No retries allowed"];
+    return;
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)([self retryDelay] * NSEC_PER_SEC)), _transport_queue, ^{
         [self establishSession];
@@ -438,6 +441,10 @@
 
 - (double)retryDelay {
 
+    const double min_value = 0.0;
+    const double max_value = 10.0;
+    double range_length = max_value - min_value;
+
     static double delay = 0;
 
     if (delay == 0) {
@@ -454,7 +461,12 @@
         unsigned long long firstHalf;
         NSScanner* pScanner = [NSScanner scannerWithString: output];
         [pScanner scanHexLongLong:&firstHalf];
-        delay = 2.0 * (firstHalf * 1.0) / 0xffffffffffffffff;
+        double hashBasedValueInRange0to1 = ((double)firstHalf)/0xffffffffffffffff;
+        delay = range_length * hashBasedValueInRange0to1 + min_value;
+
+        NSMutableString *logMessage = [NSMutableString stringWithFormat:@"Preconnect Delay = %0.03fs", delay];
+        [FMCDebugTool logInfo:logMessage];
+
     }
 
     return delay;
