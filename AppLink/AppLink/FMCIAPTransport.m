@@ -97,7 +97,7 @@
 #pragma mark - EAAccessory Notifications
 
 - (void)accessoryConnected:(NSNotification*) notification {
-    NSMutableString *logMessage = [NSMutableString stringWithFormat:@"Accessory Connected Connecting in %0.03fs", self.retryDelay];
+    NSMutableString *logMessage = [NSMutableString stringWithFormat:@"Accessory Connected, Opening in %0.03fs", self.retryDelay];
     [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     
     self.retryCounter = 0;
@@ -267,13 +267,13 @@
 - (void)retryEstablishSession {
     self.sessionSetupInProgress = NO;
 
-    [FMCDebugTool logInfo:@"Retry"];
-    [FMCDebugTool logInfo:@"No retries allowed"];
+    // Current strategy disallows automatic retries.
     return;
 
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)([self retryDelay] * NSEC_PER_SEC)), _transport_queue, ^{
-        [self establishSession];
-    });
+//    [FMCDebugTool logInfo:@"Retry"];
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)([self retryDelay] * NSEC_PER_SEC)), _transport_queue, ^{
+//        [self establishSession];
+//    });
 }
 
 - (void)createIAPDataSessionWithAccessory:(EAAccessory *)accessory forProtocol:(NSString *)protocol {
@@ -462,9 +462,6 @@
         [pScanner scanHexLongLong:&firstHalf];
         double hashBasedValueInRange0to1 = ((double)firstHalf)/0xffffffffffffffff;
         delay = range_length * hashBasedValueInRange0to1 + min_value;
-
-        NSMutableString *logMessage = [NSMutableString stringWithFormat:@"Preconnect Delay = %0.03fs", delay];
-        [FMCDebugTool logInfo:logMessage];
 
     }
 
