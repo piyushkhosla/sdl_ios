@@ -30,6 +30,7 @@
 #import <AppLink/FMCOnHashChange.h>
 #import <AppLink/FMCOnHMIStatus.h>
 #import <AppLink/FMCOnLanguageChange.h>
+#import <AppLink/FMCOnLockScreenStatus.h>
 #import <AppLink/FMCOnPermissionsChange.h>
 #import <AppLink/FMCOnSyncPData.h>
 #import <AppLink/FMCOnSystemRequest.h>
@@ -94,7 +95,7 @@
 -(void) onOnEncodedSyncPData:(FMCOnEncodedSyncPData*) notification;
 -(void) onOnHashChange:(FMCOnHashChange*) notification;
 -(void) onOnLanguageChange:(FMCOnLanguageChange*) notification;
--(void) onOnLockScreenNotification:(FMCLockScreenStatus*) notification;
+-(void) onOnLockScreenNotification:(FMCOnLockScreenStatus*) notification;
 -(void) onOnPermissionsChange:(FMCOnPermissionsChange*) notification;
 -(void) onOnSyncPData:(FMCOnSyncPData*) notification;
 -(void) onOnSystemRequest:(FMCOnSystemRequest*) notification;

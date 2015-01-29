@@ -3,7 +3,9 @@
 //  AppLink
 //
 
-#import <AppLink/AppLink.h>
+#import <Foundation/Foundation.h>
+#import <AppLink/FMCRPCNotification.h>
+#import <AppLink/FMCHMILevel.h>
 #import "FMCLockScreenStatus.h"
 
 @interface FMCOnLockScreenStatus : FMCRPCNotification
