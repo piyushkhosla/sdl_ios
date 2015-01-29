@@ -8,6 +8,13 @@
 #import "FMCDebugTool.h"
 #import "FMCStreamDelegate.h"
 
+@interface FMCStreamDelegate () {
+    dispatch_queue_t _input_stream_queue;
+}
+
+@end
+
+
 @implementation FMCStreamDelegate
 
 - (instancetype)init
@@ -19,6 +26,10 @@
         _streamHasSpaceHandler = defaultStreamHasSpaceHandler;
         _streamErrorHandler = defaultStreamErrorHandler;
         _streamEndHandler = defaultStreamErrorHandler;
+
+        _input_stream_queue = dispatch_queue_create("com.ford.applink.session.inputreader", DISPATCH_QUEUE_SERIAL);
+        dispatch_queue_t high = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+        dispatch_set_target_queue(_input_stream_queue, high);
     }
     return self;
 }
@@ -30,27 +41,39 @@
     {
         case NSStreamEventOpenCompleted:
         {
-            self.streamOpenHandler(stream);
+            if (_streamOpenHandler) {
+                self.streamOpenHandler(stream);
+            }
             break;
         }
         case NSStreamEventHasBytesAvailable:
         {
-            self.streamHasBytesHandler((NSInputStream *)stream);
+            if (_streamHasBytesHandler) {
+                dispatch_async(_input_stream_queue, ^{
+                    self.streamHasBytesHandler((NSInputStream *)stream);
+                });
+            }
             break;
         }
         case NSStreamEventHasSpaceAvailable:
         {
-            self.streamHasSpaceHandler((NSOutputStream *)stream);
+            if (_streamHasSpaceHandler) {
+                self.streamHasSpaceHandler((NSOutputStream *)stream);
+            }
             break;
         }
         case NSStreamEventErrorOccurred:
         {
-            self.streamErrorHandler(stream);
+            if (_streamErrorHandler) {
+                self.streamErrorHandler(stream);
+            }
             break;
         }
         case NSStreamEventEndEncountered:
         {
-            self.streamEndHandler(stream);
+            if (_streamEndHandler) {
+                self.streamEndHandler(stream);
+            }
             break;
         }
         case NSStreamEventNone:

@@ -52,38 +52,33 @@
     if ((self.easession = [[EASession alloc] initWithAccessory:_accessory forProtocol:_protocol])) {
         [FMCDebugTool logInfo:@"Created Session Object"];
 
-        dispatch_queue_t _session_queue = dispatch_queue_create("com.ford.applink.session", DISPATCH_QUEUE_SERIAL);
-        dispatch_async(_session_queue, ^{
+        // Stream Error Handler
+        weakSelf.streamDelegate.streamErrorHandler = ^(NSStream *stream) {
+            [FMCDebugTool logInfo:@"Stream Error"];
+            [weakSelf.delegate onSessionStreamsEnded:weakSelf];
+        };
 
-            // Stream Error Handler
-            weakSelf.streamDelegate.streamErrorHandler = ^(NSStream *stream) {
-                [FMCDebugTool logInfo:@"Stream Error"];
-                [weakSelf.delegate onSessionStreamsEnded:weakSelf];
-            };
+        // Stream Open Handler
+        weakSelf.streamDelegate.streamOpenHandler = ^(NSStream *stream){
 
-            // Stream Open Handler
-            weakSelf.streamDelegate.streamOpenHandler = ^(NSStream *stream){
+            if (stream == [weakSelf.easession outputStream]) {
+                [FMCDebugTool logInfo:@"Output Stream Opened"];
+                weakSelf.isOutputStreamOpen = YES;
+            } else if (stream == [weakSelf.easession inputStream]) {
+                [FMCDebugTool logInfo:@"Input Stream Opened"];
+                weakSelf.isInputStreamOpen = YES;
+            }
 
-                if (stream == [weakSelf.easession outputStream]) {
-                    [FMCDebugTool logInfo:@"Output Stream Opened"];
-                    weakSelf.isOutputStreamOpen = YES;
-                } else if (stream == [weakSelf.easession inputStream]) {
-                    [FMCDebugTool logInfo:@"Input Stream Opened"];
-                    weakSelf.isInputStreamOpen = YES;
-                }
-
-                // When both streams are open, session initialization is complete. Let the delegate know.
-                if (weakSelf.isInputStreamOpen && weakSelf.isOutputStreamOpen) {
-                    [weakSelf.delegate onSessionInitializationCompleteForSession:weakSelf];
-                }
-            };
+            // When both streams are open, session initialization is complete. Let the delegate know.
+            if (weakSelf.isInputStreamOpen && weakSelf.isOutputStreamOpen) {
+                [weakSelf.delegate onSessionInitializationCompleteForSession:weakSelf];
+            }
+        };
 
 
-            // Start the streams.
-            [weakSelf startStream:weakSelf.easession.outputStream];
-            [weakSelf startStream:weakSelf.easession.inputStream];
-            [[NSRunLoop currentRunLoop] run]; // Note: This does not return! Thread stuck here.
-        });
+        // Start the streams.
+        [weakSelf startStream:weakSelf.easession.outputStream];
+        [weakSelf startStream:weakSelf.easession.inputStream];
 
         return YES;
 
@@ -101,9 +96,8 @@
 }
 
 - (void)startStream:(NSStream *)stream {
-    NSRunLoop *loop = [NSRunLoop currentRunLoop];
     stream.delegate = self.streamDelegate;
-    [stream scheduleInRunLoop:loop forMode:NSDefaultRunLoopMode];
+    [stream scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     [stream open];
 }
 
@@ -122,7 +116,7 @@
         [stream close];
     }
 
-    [stream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    [stream removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     [stream setDelegate:nil];
 
     NSUInteger status2 = stream.streamStatus;

@@ -13,7 +13,6 @@
 #import <CommonCrypto/CommonDigest.h>
 
 @interface FMCIAPTransport () {
-    dispatch_queue_t _transport_queue;
     BOOL _alreadyDestructed;
 }
 
@@ -34,13 +33,12 @@
     if (self = [super init]) {
 
         _alreadyDestructed = NO;
-        _transport_queue = dispatch_queue_create("com.ford.applink.transport", DISPATCH_QUEUE_SERIAL);
-
         _session = nil;
         _controlSession = nil;
         _retryCounter = 0;
         _sessionSetupInProgress = NO;
         _protocolIndexTimer = nil;
+
         [self startEventListening];
         [FMCSiphonServer init];
     }
@@ -102,6 +100,7 @@
     
     self.retryCounter = 0;
     [self performSelector:@selector(connect) withObject:nil afterDelay:self.retryDelay];
+
 }
 
 - (void)accessoryDisconnected:(NSNotification*) notification {
@@ -122,6 +121,13 @@
 }
 
 -(void)applicationDidEnterBackground:(NSNotification *)notification {
+    __block UIBackgroundTaskIdentifier taskID;
+
+    taskID = [[UIApplication sharedApplication] beginBackgroundTaskWithName:@"backgroundTaskName" expirationHandler:^{
+        [FMCDebugTool logInfo:@"Warning: Background Task Expiring"];
+        [[UIApplication sharedApplication] endBackgroundTask:taskID];
+    }];
+
     [FMCDebugTool logInfo:@"App Backgrounded Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 }
 
@@ -129,12 +135,9 @@
     // Make sure we don't have a session setup or already in progress
     if (!self.session && !self.sessionSetupInProgress) {
         self.sessionSetupInProgress = YES;
-
-        // Start the session setup in the background
-        dispatch_async(_transport_queue, ^{
-            [self establishSession];
-        });
+        [self establishSession];
     }
+
     // DEBUG only
     else if (self.session) {
         [FMCDebugTool logInfo:@"Session already established."];
@@ -222,8 +225,13 @@
                 NSString *indexedProtocolString = [NSString stringWithFormat:@"%@%@",
                                                    INDEXED_PROTOCOL_STRING_PREFIX,
                                                    [[NSNumber numberWithChar:buf[0]] stringValue]];
-                
-                [weakSelf createIAPDataSessionWithAccessory:accessory forProtocol:indexedProtocolString];
+
+
+                // Create Data Session
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [weakSelf createIAPDataSessionWithAccessory:accessory forProtocol:indexedProtocolString];
+                });
+
             }
         };
         
@@ -238,7 +246,7 @@
                 [weakSelf retryEstablishSession];
             }
         };
-        
+
         // Control Session Stream Error Handler
         controlStreamDelegate.streamErrorHandler = ^(NSStream *stream) {
             [FMCDebugTool logInfo:@"Stream Error"];
@@ -265,15 +273,11 @@
 }
 
 - (void)retryEstablishSession {
-    self.sessionSetupInProgress = NO;
-
     // Current strategy disallows automatic retries.
-    return;
+    self.sessionSetupInProgress = NO;
+    [FMCDebugTool logInfo:@"No Retry"];
 
-//    [FMCDebugTool logInfo:@"Retry"];
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)([self retryDelay] * NSEC_PER_SEC)), _transport_queue, ^{
-//        [self establishSession];
-//    });
+    return;
 }
 
 - (void)createIAPDataSessionWithAccessory:(EAAccessory *)accessory forProtocol:(NSString *)protocol {
@@ -291,6 +295,7 @@
 
         // Data Session Has Bytes Handler
         ioStreamDelegate.streamHasBytesHandler = ^(NSInputStream *istream){
+            [FMCDebugTool logInfo:@"Receiving Data"];
             uint8_t buf[IAP_INPUT_BUFFER_SIZE];
             
             while ([istream hasBytesAvailable])
@@ -361,10 +366,8 @@
     // Data Session Opened
     if (![CONTROL_PROTOCOL_STRING isEqualToString:session.protocol]) {
         self.sessionSetupInProgress = NO;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [FMCDebugTool logInfo:@"Data Session Established"];
-            [self.delegate onTransportConnected];
-        });
+        [FMCDebugTool logInfo:@"Data Session Established"];
+        [self.delegate onTransportConnected];
     }
 }
 
@@ -378,13 +381,11 @@
 }
 
 - (void)disconnect {
-    dispatch_sync(_transport_queue, ^{
-        [FMCDebugTool logInfo:@"IAP Disconnecting" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-        if (self.session != nil) {
-            [self.session stop];
-            self.session = nil;
+    [FMCDebugTool logInfo:@"IAP Disconnecting" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    if (self.session != nil) {
+        [self.session stop];
+        self.session = nil;
         }
-    });
 }
 
 - (void)sendData:(NSData *)data {
@@ -392,37 +393,34 @@
     NSOutputStream *ostream = self.session.easession.outputStream;
     NSMutableData *remainder = data.mutableCopy;
 
-    dispatch_async(_transport_queue, ^{
-        while (1) {
-            if (remainder.length == 0)
+    while (1) {
+        if (remainder.length == 0)
+            break;
+
+        if (ostream.streamStatus == NSStreamStatusOpen && ostream.hasSpaceAvailable) {
+
+            NSInteger bytesWritten = [ostream write:remainder.bytes maxLength:remainder.length];
+            if (bytesWritten == -1) {
+                NSLog(@"Error: %@", [ostream streamError]);
                 break;
-
-            if (ostream.streamStatus == NSStreamStatusOpen && ostream.hasSpaceAvailable) {
-
-                NSInteger bytesWritten = [ostream write:remainder.bytes maxLength:remainder.length];
-                if (bytesWritten == -1) {
-                    NSLog(@"Error: %@", [ostream streamError]);
-                    break;
-                }
-
-                /*NSString *logMessage = [NSString stringWithFormat:@"Outgoing: (%ld)", (long)bytesWritten];
-                [FMCDebugTool logInfo:logMessage
-                        andBinaryData:[remainder subdataWithRange:NSMakeRange(0, bytesWritten)]
-                             withType:FMCDebugType_Transport_iAP
-                             toOutput:FMCDebugOutput_File];*/
-
-                [remainder replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
             }
-        }
 
-    });
+            /*NSString *logMessage = [NSString stringWithFormat:@"Outgoing: (%ld)", (long)bytesWritten];
+            [FMCDebugTool logInfo:logMessage
+                    andBinaryData:[remainder subdataWithRange:NSMakeRange(0, bytesWritten)]
+                         withType:FMCDebugType_Transport_iAP
+                         toOutput:FMCDebugOutput_File];*/
+
+            [remainder replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
+        }
+    }
+
 }
 
 - (void)destructObjects {
     if(!_alreadyDestructed) {
         _alreadyDestructed = YES;
         [self stopEventListening];
-        _transport_queue = nil;
         self.controlSession = nil;
         self.session = nil;
         self.delegate = nil;
