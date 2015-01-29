@@ -505,6 +505,8 @@
 		E923FF7A1A2CC4990002FAA5 /* FMCIAPSessionDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = E923FF781A2CC4990002FAA5 /* FMCIAPSessionDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E932AD8B19A26CCF00D8155B /* FMCPolicyDataParser.h in Headers */ = {isa = PBXBuildFile; fileRef = E932AD8919A26CCF00D8155B /* FMCPolicyDataParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E932AD8C19A26CCF00D8155B /* FMCPolicyDataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E932AD8A19A26CCF00D8155B /* FMCPolicyDataParser.m */; };
+		E96AF6121A7A8C840037F91A /* NSThread+ThreadIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = E96AF6101A7A8C840037F91A /* NSThread+ThreadIndex.h */; };
+		E96AF6131A7A8C840037F91A /* NSThread+ThreadIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = E96AF6111A7A8C840037F91A /* NSThread+ThreadIndex.m */; };
 		E98A9C8719C74C7400C84B3F /* FMCObjectWithPriority.h in Headers */ = {isa = PBXBuildFile; fileRef = E98A9C8519C74C7400C84B3F /* FMCObjectWithPriority.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E98A9C8819C74C7400C84B3F /* FMCObjectWithPriority.m in Sources */ = {isa = PBXBuildFile; fileRef = E98A9C8619C74C7400C84B3F /* FMCObjectWithPriority.m */; };
 		E9A6E33A19CB27320054E1AD /* FMCLockScreenManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E9A6E33819CB27320054E1AD /* FMCLockScreenManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1021,6 +1023,8 @@
 		E923FF781A2CC4990002FAA5 /* FMCIAPSessionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCIAPSessionDelegate.h; sourceTree = "<group>"; };
 		E932AD8919A26CCF00D8155B /* FMCPolicyDataParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCPolicyDataParser.h; sourceTree = "<group>"; };
 		E932AD8A19A26CCF00D8155B /* FMCPolicyDataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCPolicyDataParser.m; sourceTree = "<group>"; };
+		E96AF6101A7A8C840037F91A /* NSThread+ThreadIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSThread+ThreadIndex.h"; sourceTree = "<group>"; };
+		E96AF6111A7A8C840037F91A /* NSThread+ThreadIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSThread+ThreadIndex.m"; sourceTree = "<group>"; };
 		E98A9C8519C74C7400C84B3F /* FMCObjectWithPriority.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCObjectWithPriority.h; sourceTree = "<group>"; };
 		E98A9C8619C74C7400C84B3F /* FMCObjectWithPriority.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMCObjectWithPriority.m; sourceTree = "<group>"; };
 		E9A6E33819CB27320054E1AD /* FMCLockScreenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMCLockScreenManager.h; sourceTree = "<group>"; };
@@ -1081,6 +1085,8 @@
 				59A02E051978FBA0003E8ECF /* FMCDebugTool.m */,
 				59A02E061978FBA0003E8ECF /* FMCSiphonServer.h */,
 				59A02E071978FBA0003E8ECF /* FMCSiphonServer.m */,
+				E96AF6101A7A8C840037F91A /* NSThread+ThreadIndex.h */,
+				E96AF6111A7A8C840037F91A /* NSThread+ThreadIndex.m */,
 			);
 			name = Debug;
 			sourceTree = "<group>";
@@ -1843,6 +1849,7 @@
 				59A030FD1978FBA5003E8ECF /* FMCPutFile.h in Headers */,
 				59A030E31978FBA4003E8ECF /* FMCCreateInteractionChoiceSet.h in Headers */,
 				59A030631978FBA1003E8ECF /* FMCImageFieldName.h in Headers */,
+				E96AF6121A7A8C840037F91A /* NSThread+ThreadIndex.h in Headers */,
 				59A0314B1978FBA8003E8ECF /* FMCPerformInteractionResponse.h in Headers */,
 				59A030C71978FBA3003E8ECF /* FMCOnHMIStatus.h in Headers */,
 				59A030331978FBA1003E8ECF /* FMCAppInterfaceUnregisteredReason.h in Headers */,
@@ -2297,6 +2304,7 @@
 				59A031A61978FBAE003E8ECF /* FMCPermissionItem.m in Sources */,
 				59A031941978FBAD003E8ECF /* FMCHeadLampStatus.m in Sources */,
 				59A030821978FBA2003E8ECF /* FMCPrimaryAudioSource.m in Sources */,
+				E96AF6131A7A8C840037F91A /* NSThread+ThreadIndex.m in Sources */,
 				59A031A81978FBAE003E8ECF /* FMCPresetBankCapabilities.m in Sources */,
 				59A030981978FBA2003E8ECF /* FMCTBTState.m in Sources */,
 				59A031681978FBAA003E8ECF /* FMCSubscribeButtonResponse.m in Sources */,

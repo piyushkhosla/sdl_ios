@@ -6,6 +6,7 @@
 #import <AppLink/FMCRPCMessage.h>
 #import <AppLink/FMCSiphonServer.h>
 #import "FMCHexUtility.h"
+#import "NSThread+ThreadIndex.h"
 
 #define LOG_ERROR_ENABLED
 
@@ -83,28 +84,11 @@ bool debugToLogFile = false;
     [FMCDebugTool logInfo:outputString withType:type toOutput:output toGroup:@"default"];
 }
 
-+ (NSInteger)getThreadNum
-{
-    NSString * description = [ [NSThread currentThread] description] ;
-    NSArray * keyValuePairs = [ description componentsSeparatedByString:@"," ] ;
-    for( NSString * keyValuePair in keyValuePairs )
-    {
-        NSArray * components = [ keyValuePair componentsSeparatedByString:@"=" ] ;
-        NSString * key = components[0] ;
-        key = [ key stringByTrimmingCharactersInSet:[ NSCharacterSet whitespaceCharacterSet ] ] ;
-        if ([key rangeOfString:@"number"].location != NSNotFound)
-        {
-            return [ components[1] integerValue ] ;
-        }
-    }
-    return -1 ;
-}
-
 // The designated logInfo method. All outputs should be performed here.
 + (void)logInfo:(NSString *)info withType:(FMCDebugType)type toOutput:(FMCDebugOutput)output toGroup:(NSString *)consoleGroupName {
 
-    // Format the message, start with type
-    NSMutableString *outputString = [NSMutableString  stringWithFormat:@"[%li] %@", (long)[self getThreadNum], info];
+    // Format the message, prepend the thread id
+    NSMutableString *outputString = [NSMutableString  stringWithFormat:@"[%li] %@", (long)[[NSThread currentThread] threadIndex] , info];
 
 
     ////////////////////////////////////////////////
