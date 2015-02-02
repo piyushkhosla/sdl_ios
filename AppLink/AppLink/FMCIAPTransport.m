@@ -13,6 +13,7 @@
 #import <CommonCrypto/CommonDigest.h>
 
 @interface FMCIAPTransport () {
+    dispatch_queue_t _transmit_queue;
     BOOL _alreadyDestructed;
 }
 
@@ -38,6 +39,7 @@
         _retryCounter = 0;
         _sessionSetupInProgress = NO;
         _protocolIndexTimer = nil;
+        _transmit_queue = dispatch_queue_create("com.smartdevicelink.transport.transmit", DISPATCH_QUEUE_SERIAL);
 
         [self startEventListening];
         [FMCSiphonServer init];
@@ -390,30 +392,32 @@
 
 - (void)sendData:(NSData *)data {
 
-    NSOutputStream *ostream = self.session.easession.outputStream;
-    NSMutableData *remainder = data.mutableCopy;
+    dispatch_async(_transmit_queue, ^{
+        NSOutputStream *ostream = self.session.easession.outputStream;
+        NSMutableData *remainder = data.mutableCopy;
 
-    while (1) {
-        if (remainder.length == 0)
-            break;
-
-        if (ostream.streamStatus == NSStreamStatusOpen && ostream.hasSpaceAvailable) {
-
-            NSInteger bytesWritten = [ostream write:remainder.bytes maxLength:remainder.length];
-            if (bytesWritten == -1) {
-                NSLog(@"Error: %@", [ostream streamError]);
+        while (1) {
+            if (remainder.length == 0)
                 break;
+
+            if (ostream.streamStatus == NSStreamStatusOpen && ostream.hasSpaceAvailable) {
+
+                NSInteger bytesWritten = [ostream write:remainder.bytes maxLength:remainder.length];
+                if (bytesWritten == -1) {
+                    NSLog(@"Error: %@", [ostream streamError]);
+                    break;
+                }
+
+                /*NSString *logMessage = [NSString stringWithFormat:@"Outgoing: (%ld)", (long)bytesWritten];
+                [FMCDebugTool logInfo:logMessage
+                        andBinaryData:[remainder subdataWithRange:NSMakeRange(0, bytesWritten)]
+                             withType:FMCDebugType_Transport_iAP
+                             toOutput:FMCDebugOutput_File];*/
+
+                [remainder replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
             }
-
-            /*NSString *logMessage = [NSString stringWithFormat:@"Outgoing: (%ld)", (long)bytesWritten];
-            [FMCDebugTool logInfo:logMessage
-                    andBinaryData:[remainder subdataWithRange:NSMakeRange(0, bytesWritten)]
-                         withType:FMCDebugType_Transport_iAP
-                         toOutput:FMCDebugOutput_File];*/
-
-            [remainder replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
         }
-    }
+    });
 
 }
 
