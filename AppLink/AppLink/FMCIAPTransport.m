@@ -2,32 +2,27 @@
 //  SyncProxy
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
-#import <UIKit/UIKit.h>
-#import "FMCIAPTransport.h"
+#import "FMCIAPSession.h"
 #import "FMCDebugTool.h"
 #import "FMCSiphonServer.h"
+#import "FMCIAPConfig.h"
+#import "FMCIAPTransport.h"
+#import "FMCStreamDelegate.h"
+#import "EAAccessoryManager+SyncProtocols.h"
+#import "FMCTimer.h"
+#import <CommonCrypto/CommonDigest.h>
 
-#define LEGACY_PROTOCOL_STRING @"com.ford.sync.prot0"
-#define CONTROL_PROTOCOL_STRING @"com.smartdevicelink.prot0"
+@interface FMCIAPTransport () {
+    dispatch_queue_t _transmit_queue;
+    BOOL _alreadyDestructed;
+}
 
-#define IAP_INPUT_BUFFER_SIZE 1024
+@property (assign) int retryCounter;
+@property (assign) BOOL sessionSetupInProgress;
+@property (strong) FMCTimer *protocolIndexTimer;
 
-
-@interface FMCIAPTransport ()
-
-@property (strong) EASession *session;
-@property (strong) EAAccessory *accessory;
-@property (strong) NSMutableData *writeData;
-@property (assign) BOOL onControlProtocol;
-@property (assign) BOOL useLegacyProtocol;
-@property (strong) NSString *protocolString;
-@property (assign) BOOL isOutputStreamReady;
-@property (assign) BOOL isInputStreamReady;
-@property (assign) BOOL transportReady;
-
-
-@property (strong) NSTimer* backgroundedTimer;
-
+- (void)startEventListening;
+- (void)stopEventListening;
 
 @end
 
@@ -35,418 +30,444 @@
 
 @implementation FMCIAPTransport
 
-- (id)init {
-    if (self = [super initWithEndpoint:nil endpointParam:nil]) {
+- (instancetype)init {
+    if (self = [super init]) {
 
-        [FMCDebugTool logInfo:@"Init" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+        _alreadyDestructed = NO;
+        _session = nil;
+        _controlSession = nil;
+        _retryCounter = 0;
+        _sessionSetupInProgress = NO;
+        _protocolIndexTimer = nil;
+        _transmit_queue = dispatch_queue_create("com.smartdevicelink.transport.transmit", DISPATCH_QUEUE_SERIAL);
 
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessoryConnected:) name:EAAccessoryDidConnectNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(accessoryDisconnected:) name:EAAccessoryDidDisconnectNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
-        
+        [self startEventListening];
         [FMCSiphonServer init];
     }
+
+    [FMCDebugTool logInfo:@"FMCIAPTransport Init"];
+
     return self;
 }
 
+- (void)startEventListening {
+    [FMCDebugTool logInfo:@"FMCIAPTransport Listening For Events"];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(accessoryConnected:)
+                                                 name:EAAccessoryDidConnectNotification
+                                               object:nil];
 
-#pragma mark -
-#pragma mark FMCTransport Implementation
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(accessoryDisconnected:)
+                                                 name:EAAccessoryDidDisconnectNotification
+                                               object:nil];
 
-- (void)connect {
-    [FMCDebugTool logInfo:@"Connect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-    
-    if (!self.session){
-        [self checkForValidConnectedAccessory];
-        
-        if (self.accessory && self.protocolString) {
-            [self openSession];
-        } else {
-            [FMCDebugTool logInfo:@"No Devices Found" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-        }
-    } else {
-        [FMCDebugTool logInfo:@"Session Already Open" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationWillEnterForeground:)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidEnterBackground:)
+                                                 name:UIApplicationDidEnterBackgroundNotification
+                                               object:nil];
+
 }
 
-- (void)disconnect {
-    [FMCDebugTool logInfo:@"Disconnect" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-    
-    if (self.session) {
-        [self closeSession];
-        
-        if (!self.onControlProtocol) {
-            [FMCDebugTool logInfo:@"Transport Not Ready" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-            self.transportReady = NO;
-        }
-    }
+- (void)stopEventListening {
+    [FMCDebugTool logInfo:@"FMCIAPTransport Stopped Listening For Events"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:EAAccessoryDidConnectNotification
+                                                  object:nil];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:EAAccessoryDidDisconnectNotification
+                                                  object:nil];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidEnterBackgroundNotification
+                                                  object:nil];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationWillEnterForegroundNotification
+                                                  object:nil];
+
 }
 
-- (void)sendData:(NSData*) data {
-    [self writeDataOut:data];
-}
-
-
-
-#pragma mark -
-#pragma mark EAAccessory Notifications
+#pragma mark - EAAccessory Notifications
 
 - (void)accessoryConnected:(NSNotification*) notification {
-    [FMCDebugTool logInfo:@"Accessory Connected" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-    [self connect];
+    NSMutableString *logMessage = [NSMutableString stringWithFormat:@"Accessory Connected, Opening in %0.03fs", self.retryDelay];
+    [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    
+    self.retryCounter = 0;
+    [self performSelector:@selector(connect) withObject:nil afterDelay:self.retryDelay];
+
 }
 
 - (void)accessoryDisconnected:(NSNotification*) notification {
-    [FMCDebugTool logInfo:@"Accessory Disconnected" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-
+    [FMCDebugTool logInfo:@"Accessory Disconnected Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    
     EAAccessory* accessory = [notification.userInfo objectForKey:EAAccessoryKey];
     if (accessory.connectionID == self.session.accessory.connectionID) {
+        self.sessionSetupInProgress = NO;
         [self disconnect];
-        [self notifyTransportDisconnected];
+        [self.delegate onTransportDisconnected];
     }
 }
 
 -(void)applicationWillEnterForeground:(NSNotification *)notification {
-    [FMCDebugTool logInfo:@"Will Enter Foreground" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-    //TODO:DEBUG
-    //    [self.backgroundedTimer invalidate];
-    
-    if (!self.session) {
-        [self setupControllerForAccessory:nil withProtocolString:nil];
-        [self connect];
-    }
+    [FMCDebugTool logInfo:@"App Foregrounded Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    self.retryCounter = 0;
+    [self connect];
 }
 
 -(void)applicationDidEnterBackground:(NSNotification *)notification {
-    [FMCDebugTool logInfo:@"Did Enter Background" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-    //TODO:DEBUG
-    //    self.backgroundedTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(backgroundButAwake:) userInfo: nil repeats: YES];
+    __block UIBackgroundTaskIdentifier taskID;
+
+    taskID = [[UIApplication sharedApplication] beginBackgroundTaskWithName:@"backgroundTaskName" expirationHandler:^{
+        [FMCDebugTool logInfo:@"Warning: Background Task Expiring"];
+        [[UIApplication sharedApplication] endBackgroundTask:taskID];
+    }];
+
+    [FMCDebugTool logInfo:@"App Backgrounded Event" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 }
 
-
-#pragma mark -
-#pragma mark Response Timers
-
-
-- (void)protocolIndexRestart{
-    
-    //TODO:DEBUG
-    [FMCDebugTool logInfo:@"PI Timer" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-    
-    if (!self.transportReady) {
-        [FMCDebugTool logInfo:@"PI Restart" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-        [self closeSession];
-        [self connect];
+- (void)connect {
+    // Make sure we don't have a session setup or already in progress
+    if (!self.session && !self.sessionSetupInProgress) {
+        self.sessionSetupInProgress = YES;
+        [self establishSession];
     }
-        
-}
 
-
-
-#pragma mark -
-#pragma mark NSStreamDelegateEventExtensions
-
-- (void)stream:(NSStream *)stream handleEvent:(NSStreamEvent)event
-{
-
-    switch (event) {
-        case NSStreamEventNone:
-            break;
-        case NSStreamEventOpenCompleted:
-        {
-            if (stream == [_session outputStream]) {
-                self.isOutputStreamReady = YES;
-            } else if (stream == [_session inputStream]) {
-                self.isInputStreamReady = YES;
-            }
-            
-            if (self.isOutputStreamReady && self.isInputStreamReady) {
-                [FMCDebugTool logInfo:@"Streams Event Open" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-                
-                if (self.onControlProtocol) {
-                    [FMCDebugTool logInfo:@"Waiting For Protocol Index" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-                    
-                    //Begin Connection Retry
-//                    float randomNumber = (float)arc4random() / UINT_MAX; // between 0 and 1
-//                    float randomMinMax = 0.0f + (0.5f-0.0f)*randomNumber; // between Min (0.0) and Max (0.5)
-                    
-                    //[FMCDebugTool logInfo:[NSString stringWithFormat:@"Wait: %f", 1.5f] withType:FMCDebugType_Transport_iAP];
-                    
-                    //TODO:DEBUG
-//                    [self performSelector:@selector(protocolIndexRestart) withObject:nil afterDelay:2.5f];
-
-                } else {
-                    [FMCDebugTool logInfo:@"Transport Ready" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-                    self.transportReady = YES;
-                    [self notifyTransportConnected];
-                }
-                
-            }
-            break;
-        }
-        case NSStreamEventHasBytesAvailable:
-            [self readDataIn];
-            break;
-        case NSStreamEventHasSpaceAvailable:
-            break;
-        case NSStreamEventErrorOccurred:
-        {
-            NSString *logMessage = [NSString stringWithFormat:@"Stream Error:%@", [[stream streamError] localizedDescription]];
-            [FMCDebugTool logInfo:logMessage withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-            break;
-        }
-        case NSStreamEventEndEncountered:
-        {
-            if (stream == [_session outputStream]) {
-                self.isOutputStreamReady = NO;
-            } else if (stream == [_session inputStream]) {
-                self.isInputStreamReady = NO;
-            }
-            
-            if (!self.isOutputStreamReady && !self.isInputStreamReady) {
-                [FMCDebugTool logInfo:@"Streams Event End" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-                [self disconnect];
-                
-                if (!self.useLegacyProtocol) {
-                    float randomNumber = (float)arc4random() / UINT_MAX; // between 0 and 1
-                    float randomMinMax = 0.0f + (0.5f-0.0f)*randomNumber; // between Min (0.0) and Max (0.5)
-                    [FMCDebugTool logInfo:[NSString stringWithFormat:@"Wait: %f", randomMinMax] withType:FMCDebugType_Transport_iAP];
-                    [self performSelector:@selector(connect) withObject:nil afterDelay:randomMinMax];
-                }
-            }
-            break;
-        }
-        default:
-            break;
+    // DEBUG only
+    else if (self.session) {
+        [FMCDebugTool logInfo:@"Session already established."];
+    }
+    else {
+        [FMCDebugTool logInfo:@"Session setup already in progress."];
     }
 }
 
-
-
-#pragma mark -
-#pragma mark Class Methods
-
-- (void)setupControllerForAccessory:(EAAccessory *)accessory withProtocolString:(NSString *)protocolString
-{
-    self.accessory = accessory;
-    self.protocolString = protocolString;
-}
-
-- (void)checkForValidConnectedAccessory {
-    for (EAAccessory* accessory in [[EAAccessoryManager sharedAccessoryManager] connectedAccessories]) {
-        
-        [FMCDebugTool logInfo:[NSString stringWithFormat:@"Check Accessory: %@", accessory] withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-
-        self.useLegacyProtocol = NO;
-        
-        if (self.forceLegacy) {
-            self.useLegacyProtocol = YES;
+- (void)establishSession {
+    [FMCDebugTool logInfo:@"Attempting To Connect"];
+    if (self.retryCounter < CREATE_SESSION_RETRIES) {
+        self.retryCounter++;
+        EAAccessory *accessory = nil;
+        // Multiapp session
+        if ((accessory = [EAAccessoryManager findAccessoryForProtocol:CONTROL_PROTOCOL_STRING])) {
+            [self createIAPControlSessionWithAccessory:accessory];
         }
+        // Legacy session
+        else if ((accessory = [EAAccessoryManager findAccessoryForProtocol:LEGACY_PROTOCOL_STRING])) {
+            [self createIAPDataSessionWithAccessory:accessory forProtocol:LEGACY_PROTOCOL_STRING];
+        }
+        // No compatible accessory
         else {
-            for (NSString *protocolString in [accessory protocolStrings]) {
-                if ([protocolString isEqualToString:LEGACY_PROTOCOL_STRING]) {
-                    self.useLegacyProtocol = YES;
-                }
-                
-                if ([protocolString isEqualToString:CONTROL_PROTOCOL_STRING]) {
-                    [FMCDebugTool logInfo:[NSString stringWithFormat:@"MultiApp Sync @ %@", CONTROL_PROTOCOL_STRING] withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-                    
-                    self.useLegacyProtocol = NO;
-                    
-                    [self setupControllerForAccessory:accessory withProtocolString:CONTROL_PROTOCOL_STRING];
-                    return;
-                }
-            }
+            [FMCDebugTool logInfo:@"No accessory supporting a required sync protocol was found."];
+            self.sessionSetupInProgress = NO;
         }
-
-        if (self.useLegacyProtocol) {
-            [FMCDebugTool logInfo:[NSString stringWithFormat:@"Legacy Sync @ %@", LEGACY_PROTOCOL_STRING] withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-            
-            [self setupControllerForAccessory:accessory withProtocolString:LEGACY_PROTOCOL_STRING];
-            return;
-        }
-	}
+    }
+    else if (self.retryCounter == CREATE_SESSION_RETRIES) {
+        self.retryCounter++;
+        [FMCDebugTool logInfo:@"Create session retries exhausted."];
+        self.sessionSetupInProgress = NO;
+    }
+    else {
+        [FMCDebugTool logInfo:@"Session attempts exhausted - Debug remove me"];
+    }
 }
 
-- (void)unregister {
+- (void)createIAPControlSessionWithAccessory:(EAAccessory *)accessory {
 
-    [self closeSession];
+    [FMCDebugTool logInfo:@"Starting MultiApp Session"];
+    self.controlSession = [[FMCIAPSession alloc] initWithAccessory:accessory forProtocol:CONTROL_PROTOCOL_STRING];
+    if (self.controlSession) {
+        self.controlSession.delegate = self;
 
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:EAAccessoryDidConnectNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:EAAccessoryDidDisconnectNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidEnterBackgroundNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillEnterForegroundNotification object:nil];
+        // Create Protocol Index Timer
+        if (self.protocolIndexTimer == nil) {
+            self.protocolIndexTimer = [[FMCTimer alloc] initWithDuration:PROTOCOL_INDEX_TIMEOUT_SECONDS];
+        }
+        
+        __weak typeof(self) weakSelf = self;
+
+        // Protocol index timeout handler
+        void (^elapsedBlock)(void) = ^{
+            [FMCDebugTool logInfo:@"Protocol Index Timeout"];
+            [weakSelf.controlSession stop];
+            weakSelf.controlSession.streamDelegate = nil;
+            weakSelf.controlSession = nil;
+            [weakSelf retryEstablishSession];
+        };
+        self.protocolIndexTimer.elapsedBlock = elapsedBlock;
+
+        // Configure Streams Delegate
+        FMCStreamDelegate *controlStreamDelegate = [FMCStreamDelegate new];
+        self.controlSession.streamDelegate = controlStreamDelegate;
+
+        // Control Session Has Bytes Handler
+        controlStreamDelegate.streamHasBytesHandler = ^(NSInputStream *istream) {
+            [FMCDebugTool logInfo:@"Control Stream Received Data"];
+
+            // Grab a single byte from the stream
+            uint8_t buf[1];
+            NSUInteger len = [istream read:buf maxLength:1];
+            if(len > 0)
+            {
+                NSString *logMessage = [NSString stringWithFormat:@"Switching to protocol %@", [[NSNumber numberWithChar:buf[0]] stringValue]];
+                [FMCDebugTool logInfo:logMessage];
+                // Done with control protocol session, destroy it.
+                [weakSelf.protocolIndexTimer cancel];
+                [weakSelf.controlSession stop];
+                weakSelf.controlSession.streamDelegate = nil;
+                weakSelf.controlSession = nil;
+                
+                // Create session with indexed protocol
+                NSString *indexedProtocolString = [NSString stringWithFormat:@"%@%@",
+                                                   INDEXED_PROTOCOL_STRING_PREFIX,
+                                                   [[NSNumber numberWithChar:buf[0]] stringValue]];
+
+
+                // Create Data Session
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    [weakSelf createIAPDataSessionWithAccessory:accessory forProtocol:indexedProtocolString];
+                });
+
+            }
+        };
+        
+        // Control Session Stream End Handler
+        controlStreamDelegate.streamEndHandler = ^(NSStream *stream) {
+            [FMCDebugTool logInfo:@"Control Stream Event End"];
+            if (weakSelf.controlSession != nil) { // End events come in pairs, only perform this once per set.
+                [weakSelf.protocolIndexTimer cancel];
+                [weakSelf.controlSession stop];
+                weakSelf.controlSession.streamDelegate = nil;
+                weakSelf.controlSession = nil;
+                [weakSelf retryEstablishSession];
+            }
+        };
+
+        // Control Session Stream Error Handler
+        controlStreamDelegate.streamErrorHandler = ^(NSStream *stream) {
+            [FMCDebugTool logInfo:@"Stream Error"];
+            [weakSelf.protocolIndexTimer cancel];
+            [weakSelf.controlSession stop];
+            weakSelf.controlSession.streamDelegate = nil;
+            weakSelf.controlSession = nil;
+            [weakSelf retryEstablishSession];
+        };
+
+
+
+        if (![self.controlSession start]) {
+            [FMCDebugTool logInfo:@"Control Session Failed"];
+            self.controlSession.streamDelegate = nil;
+            self.controlSession = nil;
+            [self retryEstablishSession];
+        }
+
+    } else {
+        [FMCDebugTool logInfo:@"Failed MultiApp Control FMCIAPSession Initialization"];
+        [self retryEstablishSession];
+    }
+}
+
+- (void)retryEstablishSession {
+    // Current strategy disallows automatic retries.
+    self.sessionSetupInProgress = NO;
+    [FMCDebugTool logInfo:@"No Retry"];
+
+    return;
+}
+
+- (void)createIAPDataSessionWithAccessory:(EAAccessory *)accessory forProtocol:(NSString *)protocol {
+
+    [FMCDebugTool logInfo:@"Starting Data Session"];
+    self.session = [[FMCIAPSession alloc] initWithAccessory:accessory forProtocol:protocol];
+    if (self.session) {
+        self.session.delegate = self;
+
+        __weak typeof(self) weakSelf = self;
+
+        // Configure Streams Delegate
+        FMCStreamDelegate *ioStreamDelegate = [FMCStreamDelegate new];
+        self.session.streamDelegate = ioStreamDelegate;
+
+        // Data Session Has Bytes Handler
+        ioStreamDelegate.streamHasBytesHandler = ^(NSInputStream *istream){
+            [FMCDebugTool logInfo:@"Receiving Data"];
+            uint8_t buf[IAP_INPUT_BUFFER_SIZE];
+            
+            while ([istream hasBytesAvailable])
+            {
+                // Read bytes
+                NSInteger bytesRead = [istream read:buf maxLength:IAP_INPUT_BUFFER_SIZE];
+                NSData *dataIn = [NSData dataWithBytes:buf length:bytesRead];
+                
+                // If we read some bytes, pass on to delegate
+                // If no bytes, quit reading.
+                if (bytesRead > 0) {
+                    [weakSelf.delegate onDataReceived:dataIn];
+                } else {
+                    //[FMCDebugTool logInfo:@"No bytes read."];
+                    break;
+                }
+            }
+            
+        };
+        
+        // Data Session Stream End Handler
+        ioStreamDelegate.streamEndHandler = ^(NSStream *stream) {
+            [FMCDebugTool logInfo:@"Data Stream Event End"];
+            [weakSelf.session stop];
+            weakSelf.session.streamDelegate = nil;
+            if (![LEGACY_PROTOCOL_STRING isEqualToString:weakSelf.session.protocol]) {
+                [weakSelf retryEstablishSession];
+            }
+            weakSelf.session = nil;
+        };
+        
+        // Data Session Stream Error Handler
+        ioStreamDelegate.streamErrorHandler = ^(NSStream *stream) {
+            [FMCDebugTool logInfo:@"Data Stream Error"];
+            [weakSelf.session stop];
+            weakSelf.session.streamDelegate = nil;
+            if (![LEGACY_PROTOCOL_STRING isEqualToString:weakSelf.session.protocol]) {
+                [weakSelf retryEstablishSession];
+            }
+            weakSelf.session = nil;
+        };
+        
+
+        if (![self.session start]) {
+            [FMCDebugTool logInfo:@"Data Session Failed"];
+            self.session.streamDelegate = nil;
+            self.session = nil;
+            [self retryEstablishSession];
+        }
+
+    }
+    else {
+        [FMCDebugTool logInfo:@"Failed MultiApp Data FMCIAPSession Initialization"];
+        [self retryEstablishSession];
+    }
+
+}
+
+// This gets called after both I/O streams of the session have opened.
+- (void)onSessionInitializationCompleteForSession:(FMCIAPSession *)session {
+
+    // Control Session Opened
+    if ([CONTROL_PROTOCOL_STRING isEqualToString:session.protocol]) {
+        [FMCDebugTool logInfo:@"Control Session Established"];
+        [self.protocolIndexTimer start];
+    }
+
+    // Data Session Opened
+    if (![CONTROL_PROTOCOL_STRING isEqualToString:session.protocol]) {
+        self.sessionSetupInProgress = NO;
+        [FMCDebugTool logInfo:@"Data Session Established"];
+        [self.delegate onTransportConnected];
+    }
+}
+
+// Retry establishSession on Stream End events only if it was the control session and we haven't already connected on non-control protocol
+- (void)onSessionStreamsEnded:(FMCIAPSession *)session {
+    if (!self.session && [CONTROL_PROTOCOL_STRING isEqualToString:session.protocol]) {
+        [FMCDebugTool logInfo:@"onSessionStreamsEnded"];
+        [session stop];
+        [self retryEstablishSession];
+    }
+}
+
+- (void)disconnect {
+    [FMCDebugTool logInfo:@"IAP Disconnecting" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    if (self.session != nil) {
+        [self.session stop];
+        self.session = nil;
+        }
+}
+
+- (void)sendData:(NSData *)data {
+
+    dispatch_async(_transmit_queue, ^{
+        NSOutputStream *ostream = self.session.easession.outputStream;
+        NSMutableData *remainder = data.mutableCopy;
+
+        while (1) {
+            if (remainder.length == 0)
+                break;
+
+            if (ostream.streamStatus == NSStreamStatusOpen && ostream.hasSpaceAvailable) {
+
+                NSInteger bytesWritten = [ostream write:remainder.bytes maxLength:remainder.length];
+                if (bytesWritten == -1) {
+                    NSLog(@"Error: %@", [ostream streamError]);
+                    break;
+                }
+
+                /*NSString *logMessage = [NSString stringWithFormat:@"Outgoing: (%ld)", (long)bytesWritten];
+                [FMCDebugTool logInfo:logMessage
+                        andBinaryData:[remainder subdataWithRange:NSMakeRange(0, bytesWritten)]
+                             withType:FMCDebugType_Transport_iAP
+                             toOutput:FMCDebugOutput_File];*/
+
+                [remainder replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
+            }
+        }
+    });
+
+}
+
+- (void)destructObjects {
+    if(!_alreadyDestructed) {
+        _alreadyDestructed = YES;
+        [self stopEventListening];
+        self.controlSession = nil;
+        self.session = nil;
+        self.delegate = nil;
+    }
+}
+
+- (void)dispose {
+    [self destructObjects];
 }
 
 - (void)dealloc {
-    [self unregister];
-    [self closeSession];
-    [self setupControllerForAccessory:nil withProtocolString:nil];
+    [self destructObjects];
+    [FMCDebugTool logInfo:@"FMCIAPTransport Dealloc" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
 }
 
+- (double)retryDelay {
 
+    const double min_value = 0.0;
+    const double max_value = 10.0;
+    double range_length = max_value - min_value;
 
-#pragma mark Session Control
+    static double delay = 0;
 
-- (void)openSession {
-    if (self.accessory && self.protocolString) {
-        
-        self.session = [[EASession alloc] initWithAccessory:self.accessory forProtocol:self.protocolString];
-        
-        if (self.session) {
-            [FMCDebugTool logInfo:@"Opening Streams" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-            
-            [[self.session inputStream] setDelegate:self];
-            [[self.session inputStream] scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-            [[self.session inputStream] open];
-            
-            [[self.session outputStream] setDelegate:self];
-            [[self.session outputStream] scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-            [[self.session outputStream] open];
-            
-            if ([self.protocolString isEqualToString:CONTROL_PROTOCOL_STRING]) {
-                self.onControlProtocol = YES;
-            }
-        } else {
-            if ([self.protocolString isEqualToString:CONTROL_PROTOCOL_STRING]) {
-                [FMCDebugTool logInfo:@"Session Not Opened (Control Protocol)" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-            } else {
-                [FMCDebugTool logInfo:@"Session Not Opened" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-            }
-            //Begin Connection Retry
-            float randomNumber = (float)arc4random() / UINT_MAX; // between 0 and 1
-            float randomMinMax = 0.0f + (0.5f-0.0f)*randomNumber; // between Min (0.0) and Max (0.5)
-            
-            [FMCDebugTool logInfo:[NSString stringWithFormat:@"Wait: %f", randomMinMax] withType:FMCDebugType_Transport_iAP];
-            [self performSelector:@selector(connect) withObject:nil afterDelay:randomMinMax];
+    if (delay == 0) {
+        NSString *appName = [[NSProcessInfo processInfo] processName];
+        if (appName == nil) {
+            appName = @"noname";
         }
-    } else {
-        [FMCDebugTool logInfo:@"Accessory Or Protocol String Not Set" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-    }
-}
+        const char *ptr = [appName UTF8String];
+        unsigned char md5Buffer[CC_MD5_DIGEST_LENGTH];
+        CC_MD5(ptr, (unsigned int)strlen(ptr), md5Buffer);
+        NSMutableString *output = [NSMutableString stringWithString:@"0x"];
+        for(int i = 0; i < 8; i++)
+            [output appendFormat:@"%02X",md5Buffer[i]];
+        unsigned long long firstHalf;
+        NSScanner* pScanner = [NSScanner scannerWithString: output];
+        [pScanner scanHexLongLong:&firstHalf];
+        double hashBasedValueInRange0to1 = ((double)firstHalf)/0xffffffffffffffff;
+        delay = range_length * hashBasedValueInRange0to1 + min_value;
 
-- (void)closeSession {
-    if (self.session) {
-        [FMCDebugTool logInfo:@"Closing Streams" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-        
-        [[self.session inputStream] close];
-        [[self.session inputStream] removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        [[self.session inputStream] setDelegate:nil];
-        
-        [[self.session outputStream] close];
-        [[self.session outputStream] removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
-        [[self.session outputStream] setDelegate:nil];
-        
-        self.session = nil;
-        self.writeData = nil;
-        
-        self.isOutputStreamReady = NO;
-        self.isInputStreamReady = NO;
-    }
-}
-
-
-
-#pragma mark Low Level Read/Write
-
-// Write data to the accessory while there is space available and data to write
-- (void)writeDataOut:(NSData *)dataOut {
-
-    NSMutableData *remainder = dataOut.mutableCopy;
-
-    while (1) {
-        if (remainder.length == 0) break;
-
-        if ( [[self.session outputStream] hasSpaceAvailable] ) {
-            
-            //TODO: Added for debug, issue with module
-            //[NSThread sleepForTimeInterval:0.020];
-            
-            NSInteger bytesWritten = [[self.session outputStream] write:remainder.bytes maxLength:remainder.length];
-            if (bytesWritten == -1) {
-                NSLog(@"Error: %@", [[self.session outputStream] streamError]);
-                break;
-            }
-
-            NSString *logMessage = [NSString stringWithFormat:@"Outgoing: (%ld)", (long)bytesWritten];
-            [FMCDebugTool logInfo:logMessage
-                    andBinaryData:[remainder subdataWithRange:NSMakeRange(0, bytesWritten)]
-                         withType:FMCDebugType_Transport_iAP
-                         toOutput:FMCDebugOutput_File];
-
-            [remainder replaceBytesInRange:NSMakeRange(0, bytesWritten) withBytes:NULL length:0];
-        }
     }
 
-}
-
-// Read data while there is data and space available in the input buffer
-- (void)readDataIn {
-    uint8_t buf[IAP_INPUT_BUFFER_SIZE];
-    while ([[self.session inputStream] hasBytesAvailable])
-    {
-        NSInteger bytesRead = [[self.session inputStream] read:buf maxLength:IAP_INPUT_BUFFER_SIZE];
-
-        NSData *dataIn = [NSData dataWithBytes:buf length:bytesRead];
-
-        NSString *logMessage = [NSString stringWithFormat:@"Incoming: (%ld)", (long)bytesRead];
-        [FMCDebugTool logInfo:logMessage
-                andBinaryData:dataIn
-                     withType:FMCDebugType_Transport_iAP
-                     toOutput:FMCDebugOutput_File];
-
-        if (bytesRead > 0) {
-            // TODO: change this to ndsata parameter for consistency
-            [self handleBytesReceivedFromTransport:buf length:bytesRead];
-        } else {
-            break;
-        }
-    }
-}
-
-
-
-#pragma mark -
-#pragma mark Overridden Methods
-
-- (void)handleBytesReceivedFromTransport:(Byte *)receivedBytes length:(NSInteger)receivedBytesLength {
-    
-    if (self.onControlProtocol){
-
-        NSNumber *dataProtocol = [NSNumber numberWithUnsignedInt:receivedBytes[0]];
-        
-        [FMCDebugTool logInfo:[NSString stringWithFormat:@"Moving To Protocol Index: %@", dataProtocol] withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-        
-        if ([dataProtocol isEqualToNumber:[NSNumber numberWithInt:255]]) {
-            [FMCDebugTool logInfo:@"All Available Protocol Strings Are In Use" withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-            
-            //FIXME: Restart but dont call back up to app or connect will keep getting called when busy...
-            return;
-        }
-        else {
-            NSString *currentProtocolString = [NSString stringWithFormat:@"com.smartdevicelink.prot%@", dataProtocol];
-            
-            [self closeSession];
-            self.onControlProtocol = NO;
-
-            [self setupControllerForAccessory:self.accessory withProtocolString:currentProtocolString];
-            [self openSession];
-        }
-    }
-    else {
-        [super handleDataReceivedFromTransport:[NSData dataWithBytes:receivedBytes length:receivedBytesLength]];
-    }
-}
-
-
-
-#pragma mark -
-#pragma mark Debug Helpers
-
--(void) backgroundButAwake:(NSTimer*) t
-{
-    [FMCDebugTool logInfo:@"Still Awake..." withType:FMCDebugType_Transport_iAP toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
+    return delay;
 }
 
 @end

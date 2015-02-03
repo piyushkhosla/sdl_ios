@@ -3,13 +3,15 @@
 //  Copyright (c) 2014 Ford Motor Company. All rights reserved.
 
 #import <Foundation/Foundation.h>
-#import <ExternalAccessory/ExternalAccessory.h>
+#import "FMCIAPSessionDelegate.h"
 #import "FMCAbstractTransport.h"
+#import "FMCIAPSession.h"
 
-@interface FMCIAPTransport : FMCAbstractTransport <NSStreamDelegate> {}
+@interface FMCIAPTransport : FMCAbstractTransport<FMCIAPSessionDelegate>
 
-@property (assign) BOOL forceLegacy;
+@property (strong, atomic) FMCIAPSession *controlSession;
+@property (strong, atomic) FMCIAPSession *session;
 
-- (void)unregister;
+- (instancetype)init;
 
 @end

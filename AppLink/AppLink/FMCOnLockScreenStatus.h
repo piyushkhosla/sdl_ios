@@ -3,7 +3,9 @@
 //  AppLink
 //
 
-#import <AppLink/AppLink.h>
+#import <Foundation/Foundation.h>
+#import <AppLink/FMCRPCNotification.h>
+#import <AppLink/FMCHMILevel.h>
 #import "FMCLockScreenStatus.h"
 /**
  * 	As per Ford Motor Company’s driver distraction rules, any AppLink application is required to implement a lockscreen that must be enforced while the application is active on the system while the vehicle is in motion.

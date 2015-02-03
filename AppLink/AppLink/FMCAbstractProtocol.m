@@ -42,6 +42,9 @@
     [self doesNotRecognizeSelector:_cmd];
 }
 
+- (void)dispose {
+    [self doesNotRecognizeSelector:_cmd];
+}
 
 
 #pragma - FMCTransportListener Implementation

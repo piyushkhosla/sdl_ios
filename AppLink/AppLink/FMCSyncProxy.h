@@ -6,40 +6,36 @@
 #import <Foundation/Foundation.h>
 #import <AppLink/FMCProxyListener.h>
 #import <AppLink/FMCRPCRequestFactory.h>
-#import <AppLink/FMCTransport.h>
 #import "FMCAbstractProtocol.h"
+#import "FMCAbstractTransport.h"
+#import "FMCTimer.h"
 
 @interface FMCSyncProxy : NSObject <FMCProtocolListener, NSStreamDelegate> {
     Byte _version;
 	Byte bulkSessionID;
 	BOOL isConnected;
-    BOOL alreadyDestructed;
+    BOOL _alreadyDestructed;
 
 }
 
-@property (strong) FMCAbstractProtocol* protocol;
-@property (strong) NSObject<FMCTransport>* transport;
-@property (strong) NSMutableArray* proxyListeners;
-@property (strong) NSTimer* handshakeTimer;
+@property (strong) FMCAbstractProtocol *protocol;
+@property (strong) FMCAbstractTransport *transport;
+@property (strong) NSMutableArray *proxyListeners;
+@property (strong) FMCTimer *startSessionTimer;
 @property (strong) NSString *debugConsoleGroupName;
+@property (readonly) NSString *proxyVersion;
 
--(id) initWithTransport:(NSObject<FMCTransport>*) transport protocol:(FMCAbstractProtocol *)protocol delegate:(NSObject<FMCProxyListener>*) delegate;
+- (id)initWithTransport:(FMCAbstractTransport *)transport
+               protocol:(FMCAbstractProtocol *)protocol
+               delegate:(NSObject<FMCProxyListener> *)delegate;
 
--(void) dispose;
--(void) addDelegate:(NSObject<FMCProxyListener>*) delegate;
+- (void)dispose;
+- (void)addDelegate:(NSObject<FMCProxyListener> *)delegate;
 
--(void) sendRPCRequest:(FMCRPCMessage*) msg;
--(void) handleRpcMessage:(NSDictionary*) msg;
--(void) handleProtocolMessage:(FMCAppLinkProtocolMessage*) msgData;
+- (void)sendRPCRequest:(FMCRPCMessage *)msg;
+- (void)handleRpcMessage:(NSDictionary *)msg;
+- (void)handleProtocolMessage:(FMCAppLinkProtocolMessage *)msgData;
 
--(void) destroyHandshakeTimer;
-
-+(void)enableSiphonDebug;
-+(void)disableSiphonDebug;
-
--(NSString*) getProxyVersion;
--(NSObject<FMCTransport>*)getTransport;
--(FMCAbstractProtocol*)getProtocol;
 
 /**
  * Puts data into a file on the module
@@ -50,7 +46,10 @@
  * This may result in multiple responses being recieved, one for each request.
  * Note: the length parameter of the putFileRPCRequest will be ignored. The proxy will substitute the number of bytes read from the stream.
  */
-- (void)putFileStream:(NSInputStream*)inputStream :(FMCPutFile*)putFileRPCRequest;
+- (void)putFileStream:(NSInputStream *)inputStream withRequest:(FMCPutFile *)putFileRPCRequest;
+
++ (void)enableSiphonDebug;
++ (void)disableSiphonDebug;
 
 
 @end

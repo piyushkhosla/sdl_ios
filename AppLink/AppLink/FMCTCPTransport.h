@@ -9,4 +9,7 @@
 	CFSocketRef socket;
 }
 
+@property (strong, atomic) NSString *hostName;
+@property (strong, atomic) NSString *portNumber;
+
 @end

@@ -21,7 +21,7 @@
 #import "FMCAppLinkProtocolMessage.h"
 
 
-#define VERSION_STRING @"##Version##"
+#define VERSION_STRING @"AppLink-20141120-095841-LOCAL-iOS"
 typedef void(^FMCCustomTaskCompletionHandler)(NSData *data, NSURLResponse *response, NSError *error);
 
 
@@ -29,6 +29,8 @@ typedef void(^FMCCustomTaskCompletionHandler)(NSData *data, NSURLResponse *respo
 
 {
     FMCLockScreenManager *lsm;
+    NSURLSession *systemRequestSession;
+    NSURLSession *encodedSyncPDataSession;
 }
 
 - (void)startRPCSession;
@@ -45,29 +47,31 @@ typedef void(^FMCCustomTaskCompletionHandler)(NSData *data, NSURLResponse *respo
 
 @implementation FMCSyncProxy
 
-const float handshakeTime = 10.0;
+const float startSessionTime = 10.0;
 const float notifyProxyClosedDelay = 0.1;
 const int POLICIES_CORRELATION_ID = 65535;
 
 
 #pragma mark - Object lifecycle
-- (id)initWithTransport:(NSObject<FMCTransport> *)theTransport protocol:(FMCAbstractProtocol *)theProtocol delegate:(NSObject<FMCProxyListener> *)theDelegate {
+- (id)initWithTransport:(FMCAbstractTransport *)theTransport protocol:(FMCAbstractProtocol *)theProtocol delegate:(NSObject<FMCProxyListener> *)theDelegate {
 	if (self = [super init]) {
         _debugConsoleGroupName = @"default";
-        
+
 
         lsm = [FMCLockScreenManager new];
 
-        alreadyDestructed = NO;
-                
+        _alreadyDestructed = NO;
+
         self.proxyListeners = [[NSMutableArray alloc] initWithObjects:theDelegate, nil];
         self.protocol = theProtocol;
         self.transport = theTransport;
         self.transport.delegate = self.protocol;
         self.protocol.protocolDelegate = self;
         self.protocol.transport = self.transport;
-        [self.transport connect];
 
+        [self.transport performSelector:@selector(connect) withObject:nil afterDelay:0];
+
+        [FMCDebugTool logInfo:@"FMCSyncProxy initWithTransport"];
         [[EAAccessoryManager sharedAccessoryManager] registerForLocalNotifications];
 
     }
@@ -76,16 +80,22 @@ const int POLICIES_CORRELATION_ID = 65535;
 }
 
 -(void) destructObjects {
-    if(!alreadyDestructed) {
-        alreadyDestructed = YES;
+    if(!_alreadyDestructed) {
+        _alreadyDestructed = YES;
 
+        if (systemRequestSession != nil) {
+            [systemRequestSession invalidateAndCancel];
+        }
+        if (encodedSyncPDataSession != nil) {
+            [encodedSyncPDataSession invalidateAndCancel];
+        }
+
+        [self.protocol dispose];
+        [self.transport dispose];
         [[EAAccessoryManager sharedAccessoryManager] unregisterForLocalNotifications];
-        
         self.transport = nil;
         self.protocol = nil;
         self.proxyListeners = nil;
-
-        [self destroyHandshakeTimer];
     }
 }
 
@@ -95,6 +105,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 -(void) dealloc {
     [self destructObjects];
+    [FMCDebugTool logInfo:@"FMCSyncProxy Dealloc" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:_debugConsoleGroupName];
 }
 
 -(void) notifyProxyClosed {
@@ -104,38 +115,8 @@ const int POLICIES_CORRELATION_ID = 65535;
 	}
 }
 
-
-#pragma mark - Pseudo properties
-- (NSObject<FMCTransport> *)getTransport {
-    return self.transport;// not needed except for backwards compatability?
-}
-
-- (FMCAbstractProtocol *)getProtocol {
-    return self.protocol;// not needed except for backwards compatability?
-}
-
-- (NSString *)getProxyVersion {
+- (NSString *)proxyVersion {
     return VERSION_STRING;
-}
-
-- (NSString *)proxyVersion { // How it should have been named.
-    return VERSION_STRING;
-}
-
-
-#pragma mark - Handshake Timer
-- (void)handshakeTimerFired {
-    [FMCDebugTool logInfo:@"Initial Handshake Timeout" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-
-    [self destroyHandshakeTimer];
-    [self performSelector:@selector(notifyProxyClosed) withObject:nil afterDelay:notifyProxyClosedDelay];
-}
-
--(void)destroyHandshakeTimer {
-    if (self.handshakeTimer != nil) {
-        [self.handshakeTimer invalidate];
-        self.handshakeTimer = nil;
-    }
 }
 
 - (void)startRPCSession {
@@ -149,8 +130,15 @@ const int POLICIES_CORRELATION_ID = 65535;
 
     [self startRPCSession];
 
-    [self destroyHandshakeTimer];
-    self.handshakeTimer = [NSTimer scheduledTimerWithTimeInterval:handshakeTime target:self selector:@selector(handshakeTimerFired) userInfo:nil repeats:NO];
+    if (self.startSessionTimer == nil) {
+        self.startSessionTimer = [[FMCTimer alloc] initWithDuration:startSessionTime];
+        __weak typeof(self) weakSelf = self;
+        self.startSessionTimer.elapsedBlock = ^{
+            [FMCDebugTool logInfo:@"Start Session Timeout" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:weakSelf.debugConsoleGroupName];
+            [weakSelf performSelector:@selector(notifyProxyClosed) withObject:nil afterDelay:notifyProxyClosedDelay];
+        };
+    }
+    [self.startSessionTimer start];
 }
 
 -(void) onProtocolClosed {
@@ -162,12 +150,12 @@ const int POLICIES_CORRELATION_ID = 65535;
 }
 
 - (void)handleProtocolSessionStarted:(FMCServiceType)serviceType sessionID:(Byte)sessionID version:(Byte)maxVersionForModule {
-    // Turn off the timer, the handshake has succeeded
-    [self destroyHandshakeTimer];
-    
+    // Turn off the timer, the start session response came back
+    [self.startSessionTimer cancel];
+
     NSString *logMessage = [NSString stringWithFormat:@"StartSession (response)\nSessionId: %d for serviceType %d", sessionID, serviceType];
     [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-    
+
     if (_version <= 1) {
         if (maxVersionForModule == 2) {
             _version = maxVersionForModule;
@@ -228,16 +216,16 @@ const int POLICIES_CORRELATION_ID = 65535;
 		[self notifyProxyClosed];
 		return;
 	}
-    
+
 	if ([messageType isEqualToString:NAMES_response]) {
 		bool notGenericResponseMessage = ![functionName isEqualToString:@"GenericResponse"];
 		if(notGenericResponseMessage) functionName = [NSString stringWithFormat:@"%@Response", functionName];
 	}
-    
-    
+
+
     if ([functionName isEqualToString:@"RegisterAppInterfaceResponse"]) {
         //Print Proxy Version To Console
-        logMessage = [NSString stringWithFormat:@"Framework Version: %@", [self getProxyVersion]];
+        logMessage = [NSString stringWithFormat:@"Framework Version: %@", self.proxyVersion];
         [FMCDebugTool logInfo:logMessage withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
     }
 
@@ -262,7 +250,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
         return;
     }
-    
+
     // Intercept OnSystemRequest.
     if ([functionName isEqualToString:@"OnSystemRequest"]) {
 
@@ -327,7 +315,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 
             // HTTP Request configuration
             NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-            NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+            systemRequestSession = [NSURLSession sessionWithConfiguration:config];
             NSURL *url = [NSURL URLWithString:urlString];
             NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
             [request setValue:contentType forHTTPHeaderField:@"content-type"];
@@ -345,8 +333,8 @@ const int POLICIES_CORRELATION_ID = 65535;
             {
                 [self OSRHTTPRequestCompletionHandler:data response:response error:error];
             };
-            NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:bodyData completionHandler:handler];
-            [uploadTask resume];
+            NSURLSessionUploadTask *systemRequestUploadTask = [systemRequestSession uploadTaskWithRequest:request fromData:bodyData completionHandler:handler];
+            [systemRequestUploadTask resume];
 
             return;
         }
@@ -425,7 +413,7 @@ const int POLICIES_CORRELATION_ID = 65535;
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     config.HTTPAdditionalHeaders = @{@"Content-Type": @"application/json"};
     config.timeoutIntervalForRequest = 60;
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:config];
+    encodedSyncPDataSession = [NSURLSession sessionWithConfiguration:config];
 
     // Prepare the data in the required format
     NSString *encodedSyncPDataString = [[NSString stringWithFormat:@"%@", encodedSyncPData] componentsSeparatedByString:@"\""][1];
@@ -447,8 +435,8 @@ const int POLICIES_CORRELATION_ID = 65535;
 
     // Send the HTTP Request
     [FMCDebugTool logInfo:@"OnEncodedSyncPData (HTTP request)" withType:FMCDebugType_RPC toOutput:FMCDebugOutput_All toGroup:self.debugConsoleGroupName];
-    NSURLSessionUploadTask *uploadTask = [session uploadTaskWithRequest:request fromData:data completionHandler:handler];
-    [uploadTask resume];
+    NSURLSessionUploadTask *encodedSyncPDataUploadTask = [encodedSyncPDataSession uploadTaskWithRequest:request fromData:data completionHandler:handler];
+    [encodedSyncPDataUploadTask resume];
 
 }
 
@@ -522,7 +510,7 @@ const int POLICIES_CORRELATION_ID = 65535;
     [self.protocol sendRawDataStream:inputStream withServiceType:serviceType];
 }
 
-- (void)putFileStream:(NSInputStream*)inputStream :(FMCPutFile*)putFileRPCRequest
+- (void)putFileStream:(NSInputStream*)inputStream withRequest:(FMCPutFile*)putFileRPCRequest
 {
     inputStream.delegate = self;
     objc_setAssociatedObject(inputStream, @"FMCPutFile", putFileRPCRequest, OBJC_ASSOCIATION_RETAIN);

@@ -4,14 +4,14 @@
 
 #import <Foundation/Foundation.h>
 #import "FMCRPCRequest.h"
-#import "FMCTransport.h"
+#import "FMCAbstractTransport.h"
 #import "FMCProtocolListener.h"
 
 
 @interface FMCAbstractProtocol : NSObject <FMCTransportDelegate>
 
 @property (strong) NSString *debugConsoleGroupName;
-@property (strong) id<FMCTransport> transport;
+@property (weak) FMCAbstractTransport *transport;
 @property (weak) id<FMCProtocolListener> protocolDelegate;
 
 // Sending
@@ -24,5 +24,7 @@
 
 // Recieving
 - (void)handleBytesFromTransport:(NSData *)receivedData;
+
+- (void)dispose;
 
 @end
