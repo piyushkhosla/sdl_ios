@@ -3,8 +3,11 @@
 //  SmartDeviceLink
 
 #import "SDLSendLocation.h"
-
+#import "SDLDeliveryMode.h"
 #import "SDLNames.h"
+#import "SDLImage.h"
+#import "SDLDateTime.h"
+#import "SDLOasisAddress.h"
 
 @implementation SDLSendLocation
 
@@ -106,4 +109,54 @@
     }
 }
 
+- (void)setDeliveryMode:(SDLDeliveryMode *)deliveryMode {
+    if (deliveryMode != nil) {
+        parameters[SDLNameDeliveryMode] = deliveryMode;
+    } else {
+        [parameters removeObjectForKey:SDLNameDeliveryMode];
+    }
+}
+
+- (SDLDeliveryMode *)deliveryMode {
+    id obj = [parameters objectForKey:SDLNameDeliveryMode];
+    if (obj == nil || [obj isKindOfClass:SDLDeliveryMode.class]) {
+        return (SDLDeliveryMode *)obj;
+    } else {
+        return [SDLDeliveryMode valueOf:(NSString *)obj];
+    }
+}
+
+- (void)setTimeStamp:(SDLDateTime *)timeStamp {
+    if (timeStamp != nil) {
+        parameters[SDLNameDateTimeStamp] = timeStamp;
+    } else {
+        [parameters removeObjectForKey:SDLNameDateTimeStamp];
+    }
+}
+
+- (SDLDateTime *)timeStamp {
+    id obj = parameters[SDLNameDateTimeStamp];
+    if (obj == nil || [obj isKindOfClass:[SDLDateTime class]]) {
+        return (SDLDateTime *)obj;
+    } else {
+        return [[SDLDateTime alloc] initWithDictionary:obj];
+    }
+}
+
+- (void)setAddress:(SDLOasisAddress *)address {
+    if (address != nil) {
+        parameters[SDLNameAddress] = address;
+    } else {
+        [parameters removeObjectForKey:SDLNameAddress];
+    }
+}
+
+- (SDLOasisAddress *)address {
+    id obj = [parameters objectForKey:SDLNameAddress];
+    if (obj == nil || [obj isKindOfClass:[SDLOasisAddress class]]) {
+        return (SDLOasisAddress *)obj;
+    } else {
+        return [[SDLOasisAddress alloc] initWithDictionary:obj];
+    }
+}
 @end

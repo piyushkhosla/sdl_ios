@@ -15,11 +15,13 @@
 #import "SDLAppInfo.h"
 #import "SDLChangeRegistration.h"
 #import "SDLCreateInteractionChoiceSet.h"
+#import "SDLDateTime.h"
 #import "SDLDebugTool.h"
 #import "SDLDeleteCommand.h"
 #import "SDLDeleteFile.h"
 #import "SDLDeleteInteractionChoiceSet.h"
 #import "SDLDeleteSubMenu.h"
+#import "SDLDeliveryMode.h"
 #import "SDLDeviceInfo.h"
 #import "SDLDialNumber.h"
 #import "SDLEndAudioPassThru.h"
@@ -30,6 +32,7 @@
 #import "SDLInteractionMode.h"
 #import "SDLListFiles.h"
 #import "SDLMenuParams.h"
+#import "SDLOasisAddress.h"
 #import "SDLPerformAudioPassThru.h"
 #import "SDLPerformInteraction.h"
 #import "SDLPutFile.h"
@@ -479,7 +482,16 @@ static NSString *const SDLBundleShortVersionStringKey = @"CFBundleShortVersionSt
     msg.addressLines = address;
     msg.phoneNumber = phoneNumber;
     msg.locationImage = image;
+    
+    return msg;
+}
 
++ (SDLSendLocation *)buildSendLocationWithLongitude:(NSNumber *)longitude latitude:(NSNumber *)latitude locationName:(NSString *)locationName locationDescription:(NSString *)locationDescription address:(NSArray *)addressLines phoneNumber:(NSString *)phoneNumber image:(SDLImage *)image deliveryMode:(SDLDeliveryMode *)deliveryMode dateTime:(SDLDateTime *)timeStamp address:(SDLOasisAddress *)address {
+    SDLSendLocation *msg = [SDLRPCRequestFactory buildSendLocationWithLongitude:longitude latitude:latitude locationName:locationName locationDescription:locationDescription address:addressLines phoneNumber:phoneNumber image:image];
+    msg.deliveryMode = deliveryMode;
+    msg.timeStamp = timeStamp;
+    msg.address = address;
+    
     return msg;
 }
 

@@ -17,10 +17,12 @@
 @class SDLChangeRegistration;
 @class SDLChoice;
 @class SDLCreateInteractionChoiceSet;
+@class SDLDateTime;
 @class SDLDeleteCommand;
 @class SDLDeleteFile;
 @class SDLDeleteInteractionChoiceSet;
 @class SDLDeleteSubMenu;
+@class SDLDeliveryMode;
 @class SDLDialNumber;
 @class SDLEndAudioPassThru;
 @class SDLFileType;
@@ -32,6 +34,7 @@
 @class SDLInteractionMode;
 @class SDLLanguage;
 @class SDLListFiles;
+@class SDLOasisAddress;
 @class SDLPerformAudioPassThru;
 @class SDLPerformInteraction;
 @class SDLPutFile;
@@ -167,6 +170,8 @@
 + (SDLResetGlobalProperties *)buildResetGlobalPropertiesWithProperties:(NSArray<SDLGlobalProperty *> *)properties correlationID:(NSNumber *)correlationID;
 
 + (SDLSendLocation *)buildSendLocationWithLongitude:(NSNumber *)longitude latitude:(NSNumber *)latitude locationName:(NSString *)locationName locationDescription:(NSString *)locationDescription address:(NSArray<NSString *> *)address phoneNumber:(NSString *)phoneNumber image:(SDLImage *)image;
+
++ (SDLSendLocation *)buildSendLocationWithLongitude:(NSNumber *)longitude latitude:(NSNumber *)latitude locationName:(NSString *)locationName locationDescription:(NSString *)locationDescription address:(NSArray *)addressLines phoneNumber:(NSString *)phoneNumber image:(SDLImage *)image deliveryMode:(SDLDeliveryMode *)deliveryMode dateTime:(SDLDateTime *)timeStamp address:(SDLOasisAddress *)address;
 
 + (SDLScrollableMessage *)buildScrollableMessage:(NSString *)scrollableMessageBody timeout:(NSNumber *)timeout softButtons:(NSArray<SDLSoftButton *> *)softButtons correlationID:(NSNumber *)correlationID;
 

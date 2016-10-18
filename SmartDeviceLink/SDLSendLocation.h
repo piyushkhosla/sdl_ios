@@ -2,10 +2,12 @@
 //  SDLSendLocation.h
 //  SmartDeviceLink
 
-#import <Foundation/Foundation.h>
-
-#import "SDLImage.h"
 #import "SDLRPCRequest.h"
+
+@class SDLDeliveryMode;
+@class SDLOasisAddress;
+@class SDLDateTime;
+@class SDLImage;
 
 
 @interface SDLSendLocation : SDLRPCRequest
@@ -57,6 +59,28 @@
  *
  * Optional
  */
-@property (strong, nonatomic) SDLImage *locationImage;
+@property (strong) SDLImage *locationImage;
+
+/**
+ * Mode in which the sendLocation request is sent
+ *
+ * Optional
+ */
+@property (strong) SDLDeliveryMode *deliveryMode;
+
+/**
+ * timestamp in ISO 8601 format
+ *
+ * Optional
+ */
+@property (strong) SDLDateTime *timeStamp;
+
+/**
+ * Address to be used for setting destination
+ *
+ * Optional
+ */
+@property (strong) SDLOasisAddress *address;
+
 
 @end
