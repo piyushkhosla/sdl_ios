@@ -26,6 +26,7 @@
 @class SDLFileType;
 @class SDLGetDTCs;
 @class SDLGetVehicleData;
+@class SDLGetWayPoints;
 @class SDLGlobalProperty;
 @class SDLImage;
 @class SDLImageType;
@@ -53,6 +54,7 @@
 @class SDLSpeak;
 @class SDLSubscribeButton;
 @class SDLSubscribeVehicleData;
+@class SDLSubscribeWayPoints;
 @class SDLSystemAction;
 @class SDLTextAlignment;
 @class SDLTTSChunk;
@@ -60,8 +62,11 @@
 @class SDLUnregisterAppInterface;
 @class SDLUnsubscribeButton;
 @class SDLUnsubscribeVehicleData;
+@class SDLUnsubscribeWayPoints;
 @class SDLUpdateMode;
 @class SDLUpdateTurnList;
+@class SDLWayPointType;
+
 
 
 @interface SDLRPCRequestFactory : NSObject {
@@ -166,6 +171,14 @@
 
 + (SDLResetGlobalProperties *)buildResetGlobalPropertiesWithProperties:(NSArray<SDLGlobalProperty *> *)properties correlationID:(NSNumber *)correlationID;
 
+//***** SetGetWayPoints *****
++ (SDLGetWayPoints *)buildGetWayPointsWithWayPointType:(SDLWayPointType *)wayPointType correlationID:(NSNumber *)correlationID;;
+//*****
+
+//***** SubscribeWayPoints *****
++ (SDLSubscribeWayPoints *)buildSubscribeWayPointsWithCorrelationID:(NSNumber *)correlationID;
+//*****
+
 + (SDLSendLocation *)buildSendLocationWithLongitude:(NSNumber *)longitude latitude:(NSNumber *)latitude locationName:(NSString *)locationName locationDescription:(NSString *)locationDescription address:(NSArray<NSString *> *)address phoneNumber:(NSString *)phoneNumber image:(SDLImage *)image;
 
 + (SDLScrollableMessage *)buildScrollableMessage:(NSString *)scrollableMessageBody timeout:(NSNumber *)timeout softButtons:(NSArray<SDLSoftButton *> *)softButtons correlationID:(NSNumber *)correlationID;
@@ -211,6 +224,10 @@
 
 //***
 + (SDLSpeak *)buildSpeakWithTTS:(NSString *)ttsText correlationID:(NSNumber *)correlationID;
+//*****
+
+//***** UnsubscribeWayPoints *****
++ (SDLUnsubscribeWayPoints *)buildUnsubscribeWayPointsWithCorrelationID:(NSNumber *)correlationID;
 //*****
 
 + (SDLSubscribeButton *)buildSubscribeButtonWithName:(SDLButtonName *)buttonName correlationID:(NSNumber *)correlationID __deprecated_msg("use buildSubscribeButtonWithName:handler: with SDLManager instead");

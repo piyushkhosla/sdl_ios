@@ -26,6 +26,7 @@
 #import "SDLFileType.h"
 #import "SDLGetDTCs.h"
 #import "SDLGetVehicleData.h"
+#import "SDLGetWayPoints.h"
 #import "SDLImage.h"
 #import "SDLInteractionMode.h"
 #import "SDLListFiles.h"
@@ -51,13 +52,17 @@
 #import "SDLStartTime.h"
 #import "SDLSubscribeButton.h"
 #import "SDLSubscribeVehicleData.h"
+#import "SDLSubscribeWayPoints.h"
 #import "SDLSyncMsgVersion.h"
 #import "SDLTTSChunk.h"
 #import "SDLTTSChunkFactory.h"
 #import "SDLUnregisterAppInterface.h"
 #import "SDLUnsubscribeButton.h"
 #import "SDLUnsubscribeVehicleData.h"
+#import "SDLUnsubscribeWayPoints.h"
 #import "SDLUpdateTurnList.h"
+#import "SDLWayPointType.h"
+
 
 static NSString *const SDLBundleShortVersionStringKey = @"CFBundleShortVersionString";
 
@@ -460,6 +465,15 @@ static NSString *const SDLBundleShortVersionStringKey = @"CFBundleShortVersionSt
     return msg;
 }
 
+//***** SetGetWayPoints *****
++ (SDLGetWayPoints *)buildGetWayPointsWithWayPointType:(SDLWayPointType *)wayPointType correlationID:(NSNumber *)correlationID {
+    SDLGetWayPoints *msg = [[SDLGetWayPoints  alloc] init];
+    msg.wayPointType = wayPointType;
+    msg.correlationID = correlationID;
+    
+    return msg;
+}
+
 + (SDLScrollableMessage *)buildScrollableMessage:(NSString *)scrollableMessageBody timeout:(NSNumber *)timeout softButtons:(NSArray<SDLSoftButton *> *)softButtons correlationID:(NSNumber *)correlationID {
     SDLScrollableMessage *msg = [[SDLScrollableMessage alloc] init];
     msg.scrollableMessageBody = scrollableMessageBody;
@@ -499,6 +513,23 @@ static NSString *const SDLBundleShortVersionStringKey = @"CFBundleShortVersionSt
     return msg;
 }
 
+//***** SubscribeWayPoints *****
++ (SDLSubscribeWayPoints *)buildSubscribeWayPointsWithCorrelationID:(NSNumber *)correlationID {
+    SDLSubscribeWayPoints *msg = [[SDLSubscribeWayPoints  alloc] init];
+    msg.correlationID = correlationID;
+    
+    return msg;
+}
+//*****
+
+//***** UnsubscribeWayPoints *****
++ (SDLUnsubscribeWayPoints *)buildUnsubscribeWayPointsWithCorrelationID:(NSNumber *)correlationID {
+    SDLUnsubscribeWayPoints * msg = [[SDLUnsubscribeWayPoints alloc] init];
+    msg.correlationID = correlationID;
+    
+    return msg;
+}
+//*****
 
 //***** SetGlobalProperties *****
 + (SDLSetGlobalProperties *)buildSetGlobalPropertiesWithHelpText:(NSString *)helpText timeoutText:(NSString *)timeoutText vrHelpTitle:(NSString *)vrHelpTitle vrHelp:(NSArray<SDLVRHelpItem *> *)vrHelp correlationID:(NSNumber *)correlationID {
