@@ -6,6 +6,7 @@
 
 SDLImageType *SDLImageType_STATIC = nil;
 SDLImageType *SDLImageType_DYNAMIC = nil;
+SDLImageType *SDLImageType_TEMPLATE = nil;
 
 NSArray *SDLImageType_values = nil;
 
@@ -25,6 +26,7 @@ NSArray *SDLImageType_values = nil;
         SDLImageType_values = @[
             SDLImageType.STATIC,
             SDLImageType.DYNAMIC,
+            SDLImageType.TEMPLATE
         ];
     }
     return SDLImageType_values;
@@ -44,4 +46,10 @@ NSArray *SDLImageType_values = nil;
     return SDLImageType_DYNAMIC;
 }
 
++ (SDLImageType *)TEMPLATE {
+    if (SDLImageType_TEMPLATE == nil) {
+        SDLImageType_TEMPLATE = [[SDLImageType alloc] initWithValue:@"TEMPLATE"];
+    }
+    return SDLImageType_TEMPLATE;
+}
 @end

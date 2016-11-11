@@ -6,6 +6,7 @@
 @class SDLSamplingRate;
 @class SDLBitsPerSample;
 @class SDLAudioType;
+@class SDLImage;
 
 
 /**
@@ -104,5 +105,13 @@
  * muted during the APT session<br/>
  */
 @property (strong) NSNumber *muteAudio;
+@property (strong) NSString *menuName;
+/**
+ * @abstract a icon which is displayed 
+ * If omitted on supported displays, no (or the default if applicable) icon
+ * shall be displayed
+ *  
+ */
+@property (strong) SDLImage *audioPassThruIcon;
 
 @end

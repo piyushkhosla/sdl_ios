@@ -122,6 +122,31 @@
  * @abstract A boolean value. If true, unsubscribes accPedalPosition data
  */
 @property (strong) NSNumber *accPedalPosition;
+/**
+ * @abstract A boolean value. If true, unsubscribes fuelRange data.
+ */
+@property (strong) NSNumber *fuelRange;
+
+/**
+ * @abstract A boolean value. If true, unsubscribes abs_State data.
+ */
+@property (strong) NSNumber *abs_State;
+
+/**
+ * @abstract A boolean value. If true, unsubscribes tirePressureValue data.
+ */
+@property (strong) NSNumber *tirePressureValue;
+
+/**
+ * @abstract A boolean value. If true, unsubscribes tpms data.
+ */
+@property (strong) NSNumber *tpms;
+
+/**
+ * @abstract A boolean value. If true, unsubscribes turnSignal data.
+ */
+@property (strong) NSNumber *turnSignal;
+
 @property (strong) NSNumber *steeringWheelAngle;
 @property (strong) NSNumber *eCallInfo;
 @property (strong) NSNumber *airbagStatus;

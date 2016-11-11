@@ -126,6 +126,35 @@
  * subscribed.
  */
 @property (strong) NSNumber *accPedalPosition;
+/**
+ * @abstract A boolean value. If true, means the fuelRange data has been
+ * subscribed.
+ */
+@property (strong) NSNumber *fuelRange;
+
+/**
+ * @abstract A boolean value. If true, means the abs_State data has been
+ * subscribed.
+ */
+@property (strong) NSNumber *abs_State;
+
+/**
+ * @abstract A boolean value. If true, means the tirePressureValue data has been
+ * subscribed.
+ */
+@property (strong) NSNumber *tirePressureValue;
+
+/**
+ * @abstract A boolean value. If true, means the tpms data has been
+ * subscribed.
+ */
+@property (strong) NSNumber *tpms;
+
+/**
+ * @abstract A boolean value. If true, means the turnSignal data has been
+ * subscribed.
+ */
+@property (strong) NSNumber *turnSignal;
 
 /**
  * @abstract A boolean value. If true, means the steeringWheelAngle data has been

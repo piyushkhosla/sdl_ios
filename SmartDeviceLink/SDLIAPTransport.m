@@ -147,15 +147,30 @@ int const streamOpenTimeoutSeconds = 2;
         self.retryCounter++;
         EAAccessory *accessory = nil;
 
-        // Determine if we can start a multi-app session or a legacy (single-app) session
-        if ((accessory = [EAAccessoryManager findAccessoryForProtocol:controlProtocolString])) {
-            [self sdl_createIAPControlSessionWithAccessory:accessory];
-        } else if ((accessory = [EAAccessoryManager findAccessoryForProtocol:legacyProtocolString])) {
-            [self sdl_createIAPDataSessionWithAccessory:accessory forProtocol:legacyProtocolString];
+        if (self.protocolString.length == 0 || [self.protocolString isEqualToString:@"default"]) {
+            [SDLDebugTool logInfo:@"Using Default Protocol"];
+            
+            // Determine if we can start a multi-app session or a legacy (single-app) session
+            if ((accessory = [EAAccessoryManager findAccessoryForProtocol:controlProtocolString])) {
+                [self sdl_createIAPControlSessionWithAccessory:accessory];
+            } else if ((accessory = [EAAccessoryManager findAccessoryForProtocol:legacyProtocolString])) {
+                [self sdl_createIAPDataSessionWithAccessory:accessory forProtocol:legacyProtocolString];
+            } else {
+                // No compatible accessory
+                [SDLDebugTool logInfo:@"No accessory supporting a required sync protocol was found."];
+                self.sessionSetupInProgress = NO;
+            }
         } else {
-            // No compatible accessory
-            [SDLDebugTool logInfo:@"No accessory supporting a required sync protocol was found."];
-            self.sessionSetupInProgress = NO;
+            NSString *stringwith = [NSString stringWithFormat:@"FindAccessoryForProtocol :%@",self.protocolString];
+            [SDLDebugTool logInfo:stringwith];
+            
+            if ((accessory = [EAAccessoryManager findAccessoryForProtocol:self.protocolString])) {
+                [SDLDebugTool logInfo:@"Accessory supporting sync protocol was found."];
+                [self sdl_createIAPDataSessionWithAccessory:accessory forProtocol:self.protocolString];
+            } else {
+                [SDLDebugTool logInfo:@"No accessory supporting a required sync protocol was found."];
+                self.sessionSetupInProgress = NO;
+            }
         }
     } else {
         // We are beyond the number of retries allowed

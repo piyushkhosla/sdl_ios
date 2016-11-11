@@ -68,5 +68,13 @@
  *            </ul>
  */
 @property (strong) SDLUpdateMode *updateMode;
+/**
+ * Defines if seek media clock timer functionality will be available (when DD is off)
+ * allowing for touch input on the media clock timer from the user.
+ * If omitted, the value is set to false.
+ */
+
+@property (strong) NSNumber *enableSeek;
+
 
 @end

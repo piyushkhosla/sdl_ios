@@ -118,6 +118,31 @@
 @property (strong) SDLVehicleDataResult *accPedalPosition;
 
 /**
+ * @abstract A SDLVehicleDataResult* value. Range in KM based on fuel consumption/level
+ */
+@property (strong) SDLVehicleDataResult *fuelRange;
+
+/**
+ * @abstract A SDLVehicleDataResult* value. The status of the abs.
+ */
+@property (strong) SDLVehicleDataResult *abs_State;
+
+/**
+ * @abstract A SDLVehicleDataResult* value. The status of the tirePressureValue.
+ */
+@property (strong) SDLVehicleDataResult *tirePressureValue;
+
+/**
+ * @abstract A SDLVehicleDataResult* value. The status of the tpms.
+ */
+@property (strong) SDLVehicleDataResult *tpms;
+
+/**
+ * @abstract A SDLVehicleDataResult* value. The status of the turnSignal.
+ */
+@property (strong) SDLVehicleDataResult *turnSignal;
+
+/**
  * @abstract A SDLVehicleDataResult* value. Current angle of the steering wheel (in deg)
  */
 @property (strong) SDLVehicleDataResult *steeringWheelAngle;

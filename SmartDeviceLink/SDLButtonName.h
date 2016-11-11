@@ -147,6 +147,17 @@
 
 + (SDLButtonName *)CUSTOM_BUTTON;
 
+/**
+ * @abstract Represents the SEARCH button.
+ *
+ * @return a SDLButtonName with the value of *SEARCH*
+ */
 + (SDLButtonName *)SEARCH;
 
+/**
+ * @abstract Represents the play/pause button.
+ *
+ * @return a SDLButtonName with the value of *PLAY_PAUSE*
+ */
++ (SDLButtonName *)PLAY_PAUSE;
 @end

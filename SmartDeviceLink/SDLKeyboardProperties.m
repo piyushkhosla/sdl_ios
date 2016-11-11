@@ -113,4 +113,16 @@
     return [store objectForKey:NAMES_autoCompleteText];
 }
 
+- (void)setAutoCompleteList:(NSString *)autoCompleteList {
+    if (autoCompleteList != nil) {
+        [store setObject:autoCompleteList forKey:NAMES_autoCompleteList];
+    } else {
+        [store removeObjectForKey:NAMES_autoCompleteList];
+    }
+}
+
+- (NSString *)autoCompleteList {
+    return [store objectForKey:NAMES_autoCompleteList];
+}
+
 @end

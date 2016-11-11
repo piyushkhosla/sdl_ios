@@ -2,6 +2,7 @@
 
 
 #import "SDLRPCRequest.h"
+@class SDLImage;
 
 /**
  * Add a SDLSubMenu to the Command Menu
@@ -66,5 +67,13 @@
  * @discussion NSString which will be displayed representing this submenu item
  */
 @property (strong) NSString *menuName;
+/**
+ * @abstract a menu icon which is displayed respresenting this submenu item
+ * If omitted on supported displays, no (or the default if applicable) icon
+ * shall be displayed
+ *  */
+@property (strong) SDLImage *subMenuIcon;
+
+
 
 @end

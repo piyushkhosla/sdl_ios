@@ -79,4 +79,14 @@
  */
 + (SDLImageFieldName *)locationImage;
 
+/** The image for subMenu Icon.
+ *
+ */
++ (SDLImageFieldName *)subMenuIcon;
+
+/** The image for audioPassThru Icon.
+ *
+ */
++ (SDLImageFieldName *)audioPassThruIcon;
+
 @end

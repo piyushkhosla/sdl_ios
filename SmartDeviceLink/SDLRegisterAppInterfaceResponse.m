@@ -18,6 +18,7 @@
 #import "SDLSyncMsgVersion.h"
 #import "SDLVRCapabilities.h"
 #import "SDLVehicleType.h"
+#import "SDLSteeringWheelLocation.h"
 
 
 @implementation SDLRegisterAppInterfaceResponse
@@ -334,6 +335,35 @@
 
 - (NSString *)systemSoftwareVersion {
     return parameters[NAMES_systemSoftwareVersion];
+}
+
+- (void)setSteeringWheelLocation:(SDLSteeringWheelLocation *)steeringWheelLocation {
+    if (steeringWheelLocation != nil) {
+        [parameters setObject:steeringWheelLocation forKey:NAMES_steeringWheelLocation];
+    } else {
+        [parameters removeObjectForKey:NAMES_steeringWheelLocation];
+    }
+}
+
+- (SDLSteeringWheelLocation *)steeringWheelLocation {
+    NSObject *obj = [parameters objectForKey:NAMES_steeringWheelLocation];
+    if (obj == nil || [obj isKindOfClass:SDLLanguage.class]) {
+        return (SDLSteeringWheelLocation *)obj;
+    } else {
+        return [SDLSteeringWheelLocation valueOf:(NSString *)obj];
+    }
+}
+
+- (void)setIconResumed:(NSNumber *)iconResumed {
+    if (iconResumed != nil) {
+        [parameters setObject:iconResumed forKey:NAMES_iconResumed];
+    } else {
+        [parameters removeObjectForKey:NAMES_iconResumed];
+    }
+}
+
+- (NSNumber *)iconResumed {
+    return [parameters objectForKey:NAMES_iconResumed];
 }
 
 @end

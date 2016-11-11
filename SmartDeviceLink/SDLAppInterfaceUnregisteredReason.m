@@ -13,6 +13,8 @@ SDLAppInterfaceUnregisteredReason *SDLAppInterfaceUnregisteredReason_LANGUAGE_CH
 SDLAppInterfaceUnregisteredReason *SDLAppInterfaceUnregisteredReason_MASTER_RESET = nil;
 SDLAppInterfaceUnregisteredReason *SDLAppInterfaceUnregisteredReason_FACTORY_DEFAULTS = nil;
 SDLAppInterfaceUnregisteredReason *SDLAppInterfaceUnregisteredReason_APP_UNAUTHORIZED = nil;
+SDLAppInterfaceUnregisteredReason *SDLAppInterfaceUnregisteredReason_PROTOCOL_VIOLATION = nil;
+SDLAppInterfaceUnregisteredReason *SDLAppInterfaceUnregisteredReason_UNSUPPORTED_HMI_RESOURCE = nil;
 
 NSArray *SDLAppInterfaceUnregisteredReason_values = nil;
 
@@ -113,6 +115,21 @@ NSArray *SDLAppInterfaceUnregisteredReason_values = nil;
         SDLAppInterfaceUnregisteredReason_APP_UNAUTHORIZED = [[SDLAppInterfaceUnregisteredReason alloc] initWithValue:@"APP_UNAUTHORIZED"];
     }
     return SDLAppInterfaceUnregisteredReason_APP_UNAUTHORIZED;
+}
+
++ (SDLAppInterfaceUnregisteredReason *)PROTOCOL_VIOLATION {
+    if (SDLAppInterfaceUnregisteredReason_PROTOCOL_VIOLATION == nil) {
+        SDLAppInterfaceUnregisteredReason_PROTOCOL_VIOLATION = [[SDLAppInterfaceUnregisteredReason alloc] initWithValue:@"PROTOCOL_VIOLATION"];
+    }
+    return SDLAppInterfaceUnregisteredReason_PROTOCOL_VIOLATION;
+}
+
+
++ (SDLAppInterfaceUnregisteredReason *)UNSUPPORTED_HMI_RESOURCE {
+    if (SDLAppInterfaceUnregisteredReason_UNSUPPORTED_HMI_RESOURCE == nil) {
+        SDLAppInterfaceUnregisteredReason_UNSUPPORTED_HMI_RESOURCE = [[SDLAppInterfaceUnregisteredReason alloc] initWithValue:@"UNSUPPORTED_HMI_RESOURCE"];
+    }
+    return SDLAppInterfaceUnregisteredReason_UNSUPPORTED_HMI_RESOURCE;
 }
 
 @end

@@ -147,4 +147,29 @@
  */
 + (SDLLanguage *)NO_NO;
 
+/**
+ * @abstract Dutch (Flemish) - Belgium
+ */
++ (SDLLanguage *)NL_BE;
+
+/**
+ * @abstract Greek - Greece
+ */
++ (SDLLanguage *)EL_GR;
+
+/**
+ * @abstract Hungarian - Hungary
+ */
++ (SDLLanguage *)HU_HU;
+
+/**
+ * @abstract Finnish - Finland
+ */
++ (SDLLanguage *)FI_FI;
+
+/**
+ * @abstract Slovak - Slovakia
+ */
++ (SDLLanguage *)SK_SK;
+
 @end

@@ -1,17 +1,38 @@
-//  SDLOnWaypointChange.h
+//
+//  SDLOnWayPointChange.h
 //
 
 #import "SDLRPCNotification.h"
 
 @class SDLLocationDetails;
 
-@interface SDLOnWaypointChange : SDLRPCNotification
+/**
+ * 	This notification provides the entire LocationDetails
+ *  when there is a change to any waypoints or destination.
+ */
+@interface SDLOnWayPointChange : SDLRPCNotification {
+}
+
 
 /**
- * @abstract Location address for display purposes only.
- *
- * Required, Array of Strings, Array size 1 - 10
+ * Constructs a newly allocated SDLOnWayPointChange object
  */
-@property (copy, nonatomic) NSArray<SDLLocationDetails *> *waypoints;
+- (instancetype)init;
+
+/**
+ * Constructs a newly allocated SDLOnWayPointChange object indicated by the dictionary parameter
+ * @param dict The dictionary to use
+ */
+- (instancetype)initWithDictionary:(NSMutableDictionary *)dict;
+
+/**
+ * @abstract See SDLLocationDeatils
+ *
+ * Required, Array of SDLLocationDetails, Array size 0 - 10
+ *
+ * @see SDLPermissionItem
+ */
+@property (strong) NSMutableArray *wayPoints;
+
 
 @end

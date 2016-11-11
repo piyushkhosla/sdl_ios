@@ -12,6 +12,7 @@
 #import "SDLNames.h"
 #import "SDLSyncMsgVersion.h"
 #import "SDLTTSChunk.h"
+#import "SDLAppInfo.h"
 
 
 @implementation SDLRegisterAppInterface

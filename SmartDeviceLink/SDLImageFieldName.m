@@ -16,6 +16,9 @@ SDLImageFieldName *SDLImageFieldName_graphic = nil;
 SDLImageFieldName *SDLImageFieldName_showConstantTBTIcon = nil;
 SDLImageFieldName *SDLImageFieldName_showConstantTBTNextTurnIcon = nil;
 SDLImageFieldName *SDLImageFieldName_locationImage = nil;
+SDLImageFieldName *SDLImageFieldName_subMenuIcon = nil;
+SDLImageFieldName *SDLImageFieldName_audioPassThruIcon = nil;
+
 
 NSArray *SDLImageFieldName_values = nil;
 
@@ -134,4 +137,17 @@ NSArray *SDLImageFieldName_values = nil;
     return SDLImageFieldName_locationImage;
 }
 
++ (SDLImageFieldName *)subMenuIcon {
+    if (SDLImageFieldName_subMenuIcon == nil) {
+        SDLImageFieldName_subMenuIcon = [[SDLImageFieldName alloc] initWithValue:@"subMenuIcon"];
+    }
+    return SDLImageFieldName_subMenuIcon;
+}
+
++ (SDLImageFieldName *)audioPassThruIcon {
+    if (SDLImageFieldName_audioPassThruIcon == nil) {
+        SDLImageFieldName_audioPassThruIcon = [[SDLImageFieldName alloc] initWithValue:@"audioPassThruIcon"];
+    }
+    return SDLImageFieldName_audioPassThruIcon;
+}
 @end

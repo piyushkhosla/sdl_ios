@@ -160,4 +160,9 @@
  */
 @property (strong) NSNumber *speed;
 
+/**
+ @abstract True, if GPS lat/long, time, and altitude have been purposefully shifted (requiring a proprietary algorithm to unshift). False, if the GPS data is raw and un-shifted. If not provided, then value is assumed False.
+ **/
+@property (strong) NSNumber *shifted;
+
 @end

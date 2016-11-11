@@ -19,7 +19,9 @@
 @class SDLEndAudioPassThruResponse;
 @class SDLGenericResponse;
 @class SDLGetDTCsResponse;
+@class SDLGetSettingDataResponse;
 @class SDLGetVehicleDataResponse;
+@class SDLGetWayPointsResponse;
 @class SDLListFilesResponse;
 @class SDLOnAppInterfaceUnregistered;
 @class SDLOnAudioPassThru;
@@ -34,12 +36,15 @@
 @class SDLOnLanguageChange;
 @class SDLOnLockScreenStatus;
 @class SDLOnPermissionsChange;
+@class SDLOnSeekMediaClockTimer;
+@class SDLOnSettingData;
 @class SDLOnSyncPData;
 @class SDLOnSystemRequest;
 @class SDLOnVehicleData;
 @class SDLOnTBTClientState;
 @class SDLOnTouchEvent;
 @class SDLOnVehicleData;
+@class SDLOnWayPointChange;
 @class SDLPerformAudioPassThruResponse;
 @class SDLPerformInteractionResponse;
 @class SDLPutFileResponse;
@@ -49,6 +54,7 @@
 @class SDLScrollableMessageResponse;
 @class SDLSendLocationResponse;
 @class SDLSetAppIconResponse;
+@class SDLSetAudioStreamingIndicatorResponse;
 @class SDLSetDisplayLayoutResponse;
 @class SDLSetGlobalPropertiesResponse;
 @class SDLSetMediaClockTimerResponse;
@@ -57,12 +63,17 @@
 @class SDLSliderResponse;
 @class SDLSpeakResponse;
 @class SDLSubscribeButtonResponse;
+@class SDLSubscribeSettingDataResponse;
 @class SDLSubscribeVehicleDataResponse;
+@class SDLSubscribeWayPointsResponse;
 @class SDLSyncPDataResponse;
+@class SDLSystemRequestResponse;
 @class SDLUpdateTurnListResponse;
 @class SDLUnregisterAppInterfaceResponse;
 @class SDLUnsubscribeButtonResponse;
+@class SDLUnsubscribeSettingDataResponse;
 @class SDLUnsubscribeVehicleDataResponse;
+@class SDLUnsubscribeWayPointsResponse;
 
 
 @protocol SDLProxyListener <NSObject>
@@ -91,7 +102,9 @@
 - (void)onError:(NSException *)e;
 - (void)onGenericResponse:(SDLGenericResponse *)response;
 - (void)onGetDTCsResponse:(SDLGetDTCsResponse *)response;
+- (void)onGetSettingDataResponse:(SDLGetSettingDataResponse *)response;
 - (void)onGetVehicleDataResponse:(SDLGetVehicleDataResponse *)response;
+- (void)onGetWayPointsResponse:(SDLGetWayPointsResponse *)response;
 - (void)onListFilesResponse:(SDLListFilesResponse *)response;
 - (void)onReceivedLockScreenIcon:(UIImage *)icon;
 - (void)onOnAppInterfaceUnregistered:(SDLOnAppInterfaceUnregistered *)notification;
@@ -105,11 +118,14 @@
 - (void)onOnLanguageChange:(SDLOnLanguageChange *)notification;
 - (void)onOnLockScreenNotification:(SDLOnLockScreenStatus *)notification;
 - (void)onOnPermissionsChange:(SDLOnPermissionsChange *)notification;
+- (void)onOnSeekMediaClockTimer:(SDLOnSeekMediaClockTimer *)notification;
+- (void)onOnSettingData:(SDLOnSettingData *)notification;
 - (void)onOnSyncPData:(SDLOnSyncPData *)notification;
 - (void)onOnSystemRequest:(SDLOnSystemRequest *)notification;
 - (void)onOnTBTClientState:(SDLOnTBTClientState *)notification;
 - (void)onOnTouchEvent:(SDLOnTouchEvent *)notification;
 - (void)onOnVehicleData:(SDLOnVehicleData *)notification;
+- (void)onOnWayPointChange:(SDLOnWayPointChange *)notification;
 - (void)onPerformAudioPassThruResponse:(SDLPerformAudioPassThruResponse *)response;
 - (void)onPerformInteractionResponse:(SDLPerformInteractionResponse *)response;
 - (void)onPutFileResponse:(SDLPutFileResponse *)response;
@@ -119,6 +135,7 @@
 - (void)onScrollableMessageResponse:(SDLScrollableMessageResponse *)response;
 - (void)onSendLocationResponse:(SDLSendLocationResponse *)response;
 - (void)onSetAppIconResponse:(SDLSetAppIconResponse *)response;
+- (void)onSetAudioStreamingIndicatorResponse:(SDLSetAudioStreamingIndicatorResponse *)response;
 - (void)onSetDisplayLayoutResponse:(SDLSetDisplayLayoutResponse *)response;
 - (void)onSetGlobalPropertiesResponse:(SDLSetGlobalPropertiesResponse *)response;
 - (void)onSetMediaClockTimerResponse:(SDLSetMediaClockTimerResponse *)response;
@@ -127,11 +144,15 @@
 - (void)onSliderResponse:(SDLSliderResponse *)response;
 - (void)onSpeakResponse:(SDLSpeakResponse *)response;
 - (void)onSubscribeButtonResponse:(SDLSubscribeButtonResponse *)response;
+- (void)onSubscribeSettingDataResponse:(SDLSubscribeSettingDataResponse *)response;
 - (void)onSubscribeVehicleDataResponse:(SDLSubscribeVehicleDataResponse *)response;
+- (void)onSubscribeWayPointsResponse:(SDLSubscribeWayPointsResponse *)response;
 - (void)onSyncPDataResponse:(SDLSyncPDataResponse *)response;
+- (void)onSystemRequestResponse:(SDLSystemRequestResponse *)response;
 - (void)onUpdateTurnListResponse:(SDLUpdateTurnListResponse *)response;
 - (void)onUnregisterAppInterfaceResponse:(SDLUnregisterAppInterfaceResponse *)response;
 - (void)onUnsubscribeButtonResponse:(SDLUnsubscribeButtonResponse *)response;
+- (void)onUnsubscribeSettingDataResponse:(SDLUnsubscribeSettingDataResponse *)response;
 - (void)onUnsubscribeVehicleDataResponse:(SDLUnsubscribeVehicleDataResponse *)response;
-
+- (void)onUnsubscribeWayPointsResponse:(SDLUnsubscribeWayPointsResponse *)response;
 @end

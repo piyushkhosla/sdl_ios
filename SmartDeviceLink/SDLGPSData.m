@@ -248,4 +248,16 @@
     return [store objectForKey:NAMES_speed];
 }
 
+- (void)setShifted:(NSNumber *)shifted {
+    if (shifted != nil) {
+        [store setObject:shifted forKey:NAMES_shifted];
+    } else {
+        [store removeObjectForKey:NAMES_shifted];
+    }
+}
+
+- (NSNumber *)shifted {
+    return [store objectForKey:NAMES_shifted];
+}
+
 @end

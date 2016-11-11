@@ -1,17 +1,18 @@
-//  SDLWaypointType.m
+//
+//  SDLWayPointType.m
 //
 
-#import "SDLWaypointType.h"
+#import "SDLWayPointType.h"
+SDLWayPointType *SDLWayPointType_ALL = nil;
+SDLWayPointType *SDLWayPointType_DESTINATION = nil;
 
-SDLWaypointType *SDLWaypointType_ALL = nil;
-SDLWaypointType *SDLWaypointType_DESTINATION = nil;
 
-NSArray *SDLWaypointType_values = nil;
+NSArray *SDLWayPointType_values = nil;
 
-@implementation SDLWaypointType
+@implementation SDLWayPointType
 
-+ (SDLWaypointType *)valueOf:(NSString *)value {
-    for (SDLWaypointType *item in SDLWaypointType.values) {
++ (SDLWayPointType *)valueOf:(NSString *)value {
+    for (SDLWayPointType *item in SDLWayPointType.values) {
         if ([item.value isEqualToString:value]) {
             return item;
         }
@@ -20,27 +21,27 @@ NSArray *SDLWaypointType_values = nil;
 }
 
 + (NSArray *)values {
-    if (SDLWaypointType_values == nil) {
-        SDLWaypointType_values = @[
-            SDLWaypointType.ALL,
-            SDLWaypointType.DESTINATION,
-        ];
+    if (SDLWayPointType_values == nil) {
+        SDLWayPointType_values = @[
+                                   SDLWayPointType.ALL,
+                                   SDLWayPointType.DESTINATION,
+                                   ];
     }
-    return SDLWaypointType_values;
+    return SDLWayPointType_values;
 }
 
-+ (SDLWaypointType *)ALL {
-    if (SDLWaypointType_ALL == nil) {
-        SDLWaypointType_ALL = [[SDLWaypointType alloc] initWithValue:@"ALL"];
++ (SDLWayPointType *)ALL {
+    if (SDLWayPointType_ALL == nil) {
+        SDLWayPointType_ALL = [[SDLWayPointType alloc] initWithValue:@"ALL"];
     }
-    return SDLWaypointType_ALL;
+    return SDLWayPointType_ALL;
 }
 
-+ (SDLWaypointType *)DESTINATION {
-    if (SDLWaypointType_DESTINATION == nil) {
-        SDLWaypointType_DESTINATION = [[SDLWaypointType alloc] initWithValue:@"DESTINATION"];
++ (SDLWayPointType *)DESTINATION {
+    if (SDLWayPointType_DESTINATION == nil) {
+        SDLWayPointType_DESTINATION = [[SDLWayPointType alloc] initWithValue:@"DESTINATION"];
     }
-    return SDLWaypointType_DESTINATION;
+    return SDLWayPointType_DESTINATION;
 }
 
 @end

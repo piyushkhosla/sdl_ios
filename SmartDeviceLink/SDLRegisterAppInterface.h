@@ -226,9 +226,10 @@
 @property (strong) NSString *appID;
 
 /**
- * @abstract Information about the application running
+ * @abstract Contains detailed information about the registered application.
  *
- * Optional
+ * Optional,
+ *
  */
 @property (strong) SDLAppInfo *appInfo;
 

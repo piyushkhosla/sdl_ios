@@ -21,5 +21,6 @@
 @property (strong) SDLKeypressMode *keypressMode;
 @property (strong) NSMutableArray *limitedCharacterList;
 @property (strong) NSString *autoCompleteText;
+@property (strong) NSString *autoCompleteList;
 
 @end

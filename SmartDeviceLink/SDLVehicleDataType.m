@@ -30,6 +30,12 @@ SDLVehicleDataType *SDLVehicleDataType_VEHICLEDATA_BATTVOLTAGE = nil;
 SDLVehicleDataType *SDLVehicleDataType_VEHICLEDATA_ENGINETORQUE = nil;
 SDLVehicleDataType *SDLVehicleDataType_VEHICLEDATA_ACCPEDAL = nil;
 SDLVehicleDataType *SDLVehicleDataType_VEHICLEDATA_STEERINGWHEEL = nil;
+SDLVehicleDataType *SDLVehicleDataType_VEHICLEDATA_FUELRANGE = nil;
+SDLVehicleDataType *SDLVehicleDataType_VEHICLEDATA_ABS_STATE = nil;
+SDLVehicleDataType *SDLVehicleDataType_VEHICLEDATA_TIREPRESSURE_VALUE = nil;
+SDLVehicleDataType *SDLVehicleDataType_VEHICLEDATA_TPMS = nil;
+SDLVehicleDataType *SDLVehicleDataType_VEHICLEDATA_TURNSIGNAL = nil;
+
 
 NSArray *SDLVehicleDataType_values = nil;
 
@@ -73,6 +79,11 @@ NSArray *SDLVehicleDataType_values = nil;
             SDLVehicleDataType.VEHICLEDATA_ENGINETORQUE,
             SDLVehicleDataType.VEHICLEDATA_ACCPEDAL,
             SDLVehicleDataType.VEHICLEDATA_STEERINGWHEEL,
+            SDLVehicleDataType.VEHICLEDATA_FUELRANGE,
+            SDLVehicleDataType.VEHICLEDATA_ABS_STATE,
+            SDLVehicleDataType.VEHICLEDATA_TIREPRESSURE_VALUE,
+            SDLVehicleDataType.VEHICLEDATA_TPMS,
+            SDLVehicleDataType.VEHICLEDATA_TURNSIGNAL
         ];
     }
     return SDLVehicleDataType_values;
@@ -260,4 +271,38 @@ NSArray *SDLVehicleDataType_values = nil;
     return SDLVehicleDataType_VEHICLEDATA_STEERINGWHEEL;
 }
 
++ (SDLVehicleDataType *)VEHICLEDATA_FUELRANGE {
+    if (SDLVehicleDataType_VEHICLEDATA_FUELRANGE == nil) {
+        SDLVehicleDataType_VEHICLEDATA_FUELRANGE = [[SDLVehicleDataType alloc] initWithValue:@"VEHICLEDATA_FUELRANGE"];
+    }
+    return SDLVehicleDataType_VEHICLEDATA_FUELRANGE;
+}
+
++ (SDLVehicleDataType *)VEHICLEDATA_ABS_STATE {
+    if (SDLVehicleDataType_VEHICLEDATA_ABS_STATE == nil) {
+        SDLVehicleDataType_VEHICLEDATA_ABS_STATE = [[SDLVehicleDataType alloc] initWithValue:@"VEHICLEDATA_ABS_STATE"];
+    }
+    return SDLVehicleDataType_VEHICLEDATA_ABS_STATE;
+}
+
++ (SDLVehicleDataType *)VEHICLEDATA_TIREPRESSURE_VALUE {
+    if (SDLVehicleDataType_VEHICLEDATA_TIREPRESSURE_VALUE== nil) {
+        SDLVehicleDataType_VEHICLEDATA_TIREPRESSURE_VALUE = [[SDLVehicleDataType alloc] initWithValue:@"VEHICLEDATA_TIREPRESSURE_VALUE"];
+    }
+    return SDLVehicleDataType_VEHICLEDATA_TIREPRESSURE_VALUE;
+}
+
++ (SDLVehicleDataType *)VEHICLEDATA_TPMS {
+    if (SDLVehicleDataType_VEHICLEDATA_TPMS== nil) {
+        SDLVehicleDataType_VEHICLEDATA_TPMS = [[SDLVehicleDataType alloc] initWithValue:@"VEHICLEDATA_TPMS"];
+    }
+    return SDLVehicleDataType_VEHICLEDATA_TPMS;
+}
+
++ (SDLVehicleDataType *)VEHICLEDATA_TURNSIGNAL {
+    if (SDLVehicleDataType_VEHICLEDATA_TURNSIGNAL== nil) {
+        SDLVehicleDataType_VEHICLEDATA_TURNSIGNAL = [[SDLVehicleDataType alloc] initWithValue:@"VEHICLEDATA_TURNSIGNAL"];
+    }
+    return SDLVehicleDataType_VEHICLEDATA_TURNSIGNAL;
+}
 @end

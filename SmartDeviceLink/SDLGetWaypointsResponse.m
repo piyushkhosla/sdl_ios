@@ -1,10 +1,11 @@
-//  SDLGetWaypointsResponse.m
+//
+//  SDLGetWayPointsResponse.m
 //
 
-#import "SDLGetWaypointsResponse.h"
+#import "SDLGetWayPointsResponse.h"
 #import "SDLNames.h"
 
-@implementation SDLGetWaypointsResponse
+@implementation SDLGetWayPointsResponse
 
 - (instancetype)init {
     if (self = [super initWithName:NAMES_GetWaypoints]) {
@@ -12,16 +13,22 @@
     return self;
 }
 
-- (void)setWaypoints:(NSArray<SDLLocationDetails *> *)waypoints {
-    if (waypoints != nil) {
-        parameters[NAMES_waypoints] = waypoints;
+- (instancetype)initWithDictionary:(NSMutableDictionary *)dict {
+    if (self = [super initWithDictionary:dict]) {
+    }
+    return self;
+}
+
+- (void)setWayPoints:(NSMutableArray *)wayPoints {
+    if (wayPoints != nil) {
+        [parameters setObject:wayPoints forKey:NAMES_waypoints];
     } else {
         [parameters removeObjectForKey:NAMES_waypoints];
     }
 }
 
-- (NSArray<SDLLocationDetails *> *)waypoints {
-    return parameters[NAMES_waypoints];
+- (NSMutableArray *)wayPoints {
+    return [parameters objectForKey:NAMES_waypoints];
 }
 
 @end

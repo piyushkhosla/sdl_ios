@@ -342,4 +342,63 @@
     return [parameters objectForKey:NAMES_myKey];
 }
 
+- (void)setFuelRange:(NSNumber *)fuelRange {
+    if (fuelRange != nil) {
+        [parameters setObject:fuelRange forKey:NAMES_fuelRange];
+    } else {
+        [parameters removeObjectForKey:NAMES_fuelRange];
+    }
+}
+
+- (NSNumber *)fuelRange {
+    return [parameters objectForKey:NAMES_fuelRange];
+}
+
+- (void)setAbs_State:(NSNumber *)abs_State {
+    if (abs_State != nil) {
+        [parameters setObject:abs_State forKey:NAMES_abs_State];
+    } else {
+        [parameters removeObjectForKey:NAMES_abs_State];
+    }
+}
+
+- (NSNumber *)abs_State {
+    return [parameters objectForKey:NAMES_abs_State];
+}
+
+- (void)setTirePressureValue:(NSNumber *)tirePressureValue {
+    if (tirePressureValue != nil) {
+        [parameters setObject:tirePressureValue forKey:NAMES_tirePressureValue];
+    } else {
+        [parameters removeObjectForKey:NAMES_tirePressureValue];
+    }
+}
+
+- (NSNumber *)tirePressureValue {
+    return [parameters objectForKey:NAMES_tirePressureValue];
+}
+
+- (void)setTpms:(NSNumber *)tpms {
+    if (tpms != nil) {
+        [parameters setObject:tpms forKey:NAMES_tpms];
+    } else {
+        [parameters removeObjectForKey:NAMES_tpms];
+    }
+}
+
+- (NSNumber *)tpms {
+    return [parameters objectForKey:NAMES_tpms];
+}
+
+- (void)setTurnSignal:(NSNumber *)turnSignal {
+    if (turnSignal != nil) {
+        [parameters setObject:turnSignal forKey:NAMES_turnSignal];
+    } else {
+        [parameters removeObjectForKey:NAMES_turnSignal];
+    }
+}
+
+- (NSNumber *)turnSignal {
+    return [parameters objectForKey:NAMES_turnSignal];
+}
 @end

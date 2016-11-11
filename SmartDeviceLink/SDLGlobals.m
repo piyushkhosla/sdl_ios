@@ -52,6 +52,10 @@ static const NSUInteger maxProxyVersion = 4;
 }
 
 - (NSUInteger)maxMTUSize {
+    if (_overrideMTUSize
+        && _maxMTUSizeOverride) {
+        return _maxMTUSizeOverride;
+    }
     switch (self.protocolVersion) {
         case 1: // fallthrough
         case 2: {

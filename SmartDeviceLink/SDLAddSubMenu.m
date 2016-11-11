@@ -3,6 +3,7 @@
 #import "SDLAddSubMenu.h"
 
 #import "SDLNames.h"
+#import "SDLImage.h"
 
 @implementation SDLAddSubMenu
 
@@ -77,5 +78,21 @@
 - (NSString *)menuName {
     return [parameters objectForKey:NAMES_menuName];
 }
+
+- (void)setSubMenuIcon:(SDLImage *)subMenuIcon {
+    if (subMenuIcon != nil) {
+        [parameters setObject:subMenuIcon forKey:NAMES_subMenuIcon];
+    } else {
+        [parameters removeObjectForKey:NAMES_subMenuIcon];
+    }
+}
+
+- (SDLImage *)subMenuIcon {
+    NSObject *obj = [parameters objectForKey:NAMES_subMenuIcon];
+    if (obj == nil || [obj isKindOfClass:SDLImage.class]) {
+        return (SDLImage *)obj;
+    } else {
+        return [[SDLImage alloc] initWithDictionary:(NSMutableDictionary *)obj];
+    }}
 
 @end

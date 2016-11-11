@@ -44,4 +44,6 @@
  */
 + (SDLImageType *)DYNAMIC;
 
++ (SDLImageType *)TEMPLATE;
+
 @end

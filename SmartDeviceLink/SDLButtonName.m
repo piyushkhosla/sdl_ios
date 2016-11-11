@@ -21,6 +21,7 @@ SDLButtonName *SDLButtonName_PRESET_8 = nil;
 SDLButtonName *SDLButtonName_PRESET_9 = nil;
 SDLButtonName *SDLButtonName_CUSTOM_BUTTON = nil;
 SDLButtonName *SDLButtonName_SEARCH = nil;
+SDLButtonName *SDLButtonName_PLAY_PAUSE = nil;
 
 NSArray *SDLButtonName_values = nil;
 
@@ -55,6 +56,7 @@ NSArray *SDLButtonName_values = nil;
             SDLButtonName.PRESET_9,
             SDLButtonName.CUSTOM_BUTTON,
             SDLButtonName.SEARCH,
+            SDLButtonName.PLAY_PAUSE
         ];
     }
     return SDLButtonName_values;
@@ -179,4 +181,10 @@ NSArray *SDLButtonName_values = nil;
     return SDLButtonName_SEARCH;
 }
 
++ (SDLButtonName *)PLAY_PAUSE {
+    if (SDLButtonName_PLAY_PAUSE == nil) {
+        SDLButtonName_PLAY_PAUSE = [[SDLButtonName alloc] initWithValue:@"PLAY_PAUSE"];
+    }
+    return SDLButtonName_PLAY_PAUSE;
+}
 @end

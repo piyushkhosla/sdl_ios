@@ -19,6 +19,10 @@
 #import "SDLTireStatus.h"
 #import "SDLVehicleDataEventStatus.h"
 #import "SDLWiperStatus.h"
+#import "SDLABS_STATE.h"
+#import "SDLTirePressureValue.h"
+#import "SDLTPMS.h"
+#import "SDLTurnSignal.h"
 
 
 @implementation SDLOnVehicleData
@@ -407,6 +411,88 @@
         return (SDLMyKey *)obj;
     } else {
         return [[SDLMyKey alloc] initWithDictionary:(NSMutableDictionary *)obj];
+    }
+}
+
+
+- (void)setFuelRange:(NSNumber *)fuelRange {
+    if (fuelRange != nil) {
+        [parameters setObject:fuelRange forKey:NAMES_fuelRange];
+    } else {
+        [parameters removeObjectForKey:NAMES_fuelRange];
+    }
+    
+}
+
+- (NSNumber *)fuelRange {
+    return [parameters objectForKey:NAMES_fuelRange];
+}
+
+- (void)setAbs_State:(SDLABS_STATE *)abs_State {
+    if (abs_State != nil) {
+        [parameters setObject:abs_State forKey:NAMES_abs_State];
+    } else {
+        [parameters removeObjectForKey:NAMES_abs_State];
+    }
+}
+
+- (SDLABS_STATE *)abs_State {
+    NSObject *obj = [parameters objectForKey:NAMES_abs_State];
+    if (obj == nil || [obj isKindOfClass:SDLABS_STATE.class]) {
+        return (SDLABS_STATE *)obj;
+    } else {
+        return [SDLABS_STATE valueOf:(NSString *)obj];
+    }
+}
+
+- (void)setTirePressureValue:(SDLTirePressureValue *)tirePressureValue {
+    if (tirePressureValue != nil) {
+        [parameters setObject:tirePressureValue forKey:NAMES_tirePressureValue];
+    } else {
+        [parameters removeObjectForKey:NAMES_tirePressureValue];
+    }
+}
+
+- (SDLTirePressureValue *)tirePressureValue {
+    NSObject *obj = [parameters objectForKey:NAMES_tirePressureValue];
+    if (obj == nil || [obj isKindOfClass:SDLTirePressureValue.class]) {
+        return (SDLTirePressureValue *)obj;
+    } else {
+        return [[SDLTirePressureValue alloc] initWithDictionary:(NSMutableDictionary *)obj];
+    }
+}
+
+- (void)setTpms:(SDLTPMS *)tpms {
+    if (tpms != nil) {
+        [parameters setObject:tpms forKey:NAMES_tpms];
+    } else {
+        [parameters removeObjectForKey:NAMES_tpms];
+    }
+}
+
+- (SDLTPMS *)tpms {
+    NSObject *obj = [parameters objectForKey:NAMES_tpms];
+    if (obj == nil || [obj isKindOfClass:SDLTPMS.class]) {
+        return (SDLTPMS *)obj;
+    } else {
+        return [SDLTPMS valueOf:(NSString *)obj];
+    }
+}
+
+- (void)setTurnSignal:(SDLTurnSignal *)turnSignal {
+    if (turnSignal != nil) {
+        [parameters setObject:turnSignal forKey:NAMES_turnSignal];
+    } else {
+        [parameters removeObjectForKey:NAMES_turnSignal];
+    }
+}
+
+- (SDLTurnSignal *)turnSignal {
+    NSObject *obj = [parameters objectForKey:NAMES_turnSignal];
+    if (obj == nil || [obj isKindOfClass:SDLTurnSignal.class]) {
+        return (SDLTurnSignal *)obj;
+    } else {
+        return [SDLTurnSignal valueOf:(NSString *)obj];
     }
 }
 

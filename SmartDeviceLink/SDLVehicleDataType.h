@@ -156,4 +156,29 @@
  */
 + (SDLVehicleDataType *)VEHICLEDATA_STEERINGWHEEL;
 
+/**
+ * @abstract SDLVehicleDataType: *VEHICLEDATA_FUELRANGE*
+ */
++ (SDLVehicleDataType *)VEHICLEDATA_FUELRANGE;
+
+/**
+ * @abstract SDLVehicleDataType: *VEHICLEDATA_ABS_STATE*
+ */
++ (SDLVehicleDataType *)VEHICLEDATA_ABS_STATE;
+
+/**
+ * @abstract SDLVehicleDataType: *VEHICLEDATA_TIREPRESSURE_VALUE*
+ */
++ (SDLVehicleDataType *)VEHICLEDATA_TIREPRESSURE_VALUE;
+
+/**
+ * @abstract SDLVehicleDataType: *VEHICLEDATA_TPMS*
+ */
++ (SDLVehicleDataType *)VEHICLEDATA_TPMS;
+
+/**
+ * @abstract SDLVehicleDataType: *VEHICLEDATA_TURNSIGNAL*
+ */
++ (SDLVehicleDataType *)VEHICLEDATA_TURNSIGNAL;
+
 @end

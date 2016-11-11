@@ -10,6 +10,7 @@
 @class SDLPresetBankCapabilities;
 @class SDLSyncMsgVersion;
 @class SDLVehicleType;
+@class SDLSteeringWheelLocation;
 
 
 /**
@@ -162,5 +163,24 @@
  */
 @property (strong) NSString *systemSoftwareVersion;
 
+
+/**
+ * Specifies the location of the Steering Wheel.
+ *
+ * @see SDLSteeringWheelLocation
+ *
+ * Optional
+ */
+@property (strong) SDLSteeringWheelLocation *steeringWheelLocation;
+
+/**
+ * @abstract Existence of apps icon at system.
+ * If true, apps icon was resumed at system.
+ * If false, apps icon was not resumed at system.
+ *
+ * Required
+ *
+ */
+@property (strong) NSNumber *iconResumed;
 
 @end

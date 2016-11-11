@@ -15,8 +15,22 @@
 + (SDLProxy *)buildSDLProxyWithListener:(NSObject<SDLProxyListener> *)delegate {
     SDLIAPTransport *transport = [[SDLIAPTransport alloc] init];
     SDLProtocol *protocol = [[SDLProtocol alloc] init];
-    SDLProxy *ret = [[SDLProxy alloc] initWithTransport:transport protocol:protocol delegate:delegate];
+    SDLProxy *ret = [[SDLProxy alloc] initWithTransport:transport
+                                               protocol:protocol
+                                               delegate:delegate];
+    
+    return ret;
+}
 
++ (SDLProxy *)buildSDLProxyWithListener:(NSObject<SDLProxyListener> *)delegate
+                         protocolString:(NSString *)protocolString {
+    SDLIAPTransport *transport = [[SDLIAPTransport alloc] init];
+    transport.protocolString = protocolString;
+    SDLProtocol *protocol = [[SDLProtocol alloc] init];
+    SDLProxy *ret = [[SDLProxy alloc] initWithTransport:transport
+                                               protocol:protocol
+                                               delegate:delegate];
+    
     return ret;
 }
 
@@ -26,11 +40,13 @@
     SDLTCPTransport *transport = [[SDLTCPTransport alloc] init];
     transport.hostName = ipaddress;
     transport.portNumber = port;
-
+    
     SDLProtocol *protocol = [[SDLProtocol alloc] init];
-
-    SDLProxy *ret = [[SDLProxy alloc] initWithTransport:transport protocol:protocol delegate:delegate];
-
+    
+    SDLProxy *ret = [[SDLProxy alloc] initWithTransport:transport
+                                               protocol:protocol
+                                               delegate:delegate];
+    
     return ret;
 }
 

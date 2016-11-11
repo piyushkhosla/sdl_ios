@@ -100,4 +100,18 @@
  */
 + (SDLAppInterfaceUnregisteredReason *)APP_UNAUTHORIZED;
 
+/**
+ * @abstract Protocol voilation.
+ *
+ * @return SDLAppInterfaceUnregisteredReason with value *PROTOCOL_VIOLATION*
+ */
++ (SDLAppInterfaceUnregisteredReason *)PROTOCOL_VIOLATION;
+
+/**
+ * @abstract App connected to Unsupported HMI Resource.
+ *
+ * @return SDLAppInterfaceUnregisteredReason with value *UNSUPPORTED_HMI_RESOURCE*
+ */
++ (SDLAppInterfaceUnregisteredReason *)UNSUPPORTED_HMI_RESOURCE;
+
 @end

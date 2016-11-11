@@ -15,7 +15,9 @@
 
 @property (assign, nonatomic, readonly) NSUInteger protocolVersion;
 @property (assign, nonatomic, readonly) NSUInteger maxMTUSize;
+@property (assign, nonatomic) NSUInteger maxMTUSizeOverride;
 @property (assign, nonatomic) NSUInteger maxHeadUnitVersion;
+@property (assign, nonatomic, setter=shouldOverrideMTUSize:) BOOL overrideMTUSize;
 
 + (instancetype)globals;
 

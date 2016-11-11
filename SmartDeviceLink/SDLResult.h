@@ -107,8 +107,8 @@
 + (SDLResult *)IN_USE;
 
 /**
- * The user has turned off access to vehicle data, and it is globally unavailable to mobile applications.
- */
+* The user has turned off access to vehicle data, and it is globally unavailable to mobile applications.
+*/
 + (SDLResult *)VEHICLE_DATA_NOT_ALLOWED;
 
 /**

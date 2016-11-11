@@ -1,9 +1,13 @@
-//  SDLWaypointType.h
+//
+//  SDLWayPointType.h
 //
 
 #import "SDLEnum.h"
 
-@interface SDLWaypointType : SDLEnum
+/**
+ * Describes what kind of waypoint is requested.
+ */
+@interface SDLWayPointType : SDLEnum
 
 /**
  * @abstract Convert String to SDLWayPointType
@@ -12,7 +16,7 @@
  *
  * @return SDLWayPointType
  */
-+ (SDLWaypointType *)valueOf:(NSString *)value;
++ (SDLWayPointType *)valueOf:(NSString *)value;
 
 /**
  * @abstract Store the enumeration of all possible SDLWayPointType
@@ -25,12 +29,13 @@
  *
  * @return a SDLWayPointType with value of *PROMPT*
  */
-+ (SDLWaypointType *)ALL;
++ (SDLWayPointType *)ALL;
 
 /**
  *
  * @return a SDLWayPointType with value of *DESTINATION*
  */
-+ (SDLWaypointType *)DESTINATION;
++ (SDLWayPointType *)DESTINATION;
+
 
 @end

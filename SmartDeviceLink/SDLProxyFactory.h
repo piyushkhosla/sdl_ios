@@ -13,7 +13,11 @@ __deprecated_msg("Use SDLManager instead")
 
 + (SDLProxy *)buildSDLProxyWithListener:(NSObject<SDLProxyListener> *)listener;
 
++ (SDLProxy *)buildSDLProxyWithListener:(NSObject<SDLProxyListener> *)delegate
+                         protocolString:(NSString *)protocolString;
+
 + (SDLProxy *)buildSDLProxyWithListener:(NSObject<SDLProxyListener> *)listener
                            tcpIPAddress:(NSString *)ipaddress
                                 tcpPort:(NSString *)port;
+
 @end

@@ -11,5 +11,6 @@
 
 @property (strong, atomic) SDLIAPSession *controlSession;
 @property (strong, atomic) SDLIAPSession *session;
+@property (strong, atomic) NSString *protocolString;
 
 @end

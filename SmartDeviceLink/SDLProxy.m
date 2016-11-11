@@ -56,7 +56,8 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 
 @interface SDLProxy () {
-    SDLLockScreenStatusManager *_lsm;
+    SDLLockScreenStatusManager *_lsm;;
+    NSString* _policyURLString;
 }
 
 @property (copy, nonatomic) NSString *appId;
@@ -179,6 +180,10 @@ const int POLICIES_CORRELATION_ID = 65535;
     return SDLProxyVersion;
 }
 
+- (NSUInteger)protocolVersion {
+    return [SDLGlobals globals].protocolVersion;
+}
+
 - (SDLStreamingMediaManager *)streamingMediaManager {
     if (_streamingMediaManager == nil) {
         if (self.displayCapabilities == nil) {
@@ -192,6 +197,17 @@ const int POLICIES_CORRELATION_ID = 65535;
     return _streamingMediaManager;
 }
 
+- (void)setMTUSize:(NSUInteger)maxMTUSize {
+    [SDLGlobals globals].maxMTUSizeOverride = maxMTUSize;
+}
+
+- (void)setShouldOverrideMTUSize:(BOOL)overrideMTUSize {
+    [[SDLGlobals globals] shouldOverrideMTUSize:overrideMTUSize];
+}
+
+- (void)setPolicyUpdateURLString:(NSString *)policyURLString {
+    _policyURLString = policyURLString;
+}
 
 #pragma mark - SecurityManager
 
@@ -231,7 +247,6 @@ const int POLICIES_CORRELATION_ID = 65535;
 
 
 #pragma mark - SDLProtocolListener Implementation
-
 - (void)onProtocolOpened {
     _isConnected = YES;
     [SDLDebugTool logInfo:@"StartSession (request)" withType:SDLDebugType_RPC toOutput:SDLDebugOutput_All toGroup:self.debugConsoleGroupName];

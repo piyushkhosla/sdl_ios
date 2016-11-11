@@ -44,3 +44,7 @@ infer-out
 Carthage/Build
 
 docs/docsets/
+
+# Universal Build Target Framework #
+####################################
+*SmartDeviceLink.framework

@@ -18,6 +18,10 @@
 @class SDLTireStatus;
 @class SDLVehicleDataEventStatus;
 @class SDLWiperStatus;
+@class SDLABS_STATE;
+@class SDLTirePressureValue;
+@class SDLTPMS;
+@class SDLTurnSignal;
 
 
 /**
@@ -135,6 +139,31 @@
  * @abstract Accelerator pedal position (percentage depressed)
  */
 @property (strong) NSNumber *accPedalPosition;
+
+/**
+ * @abstract Range in KM based on fuel consumption/level
+ */
+@property (strong) NSNumber *fuelRange;
+
+/**
+ * @abstract A SDLABS_STATE* value. The status of the abs.
+ */
+@property (strong) SDLABS_STATE *abs_State;
+
+/**
+ * @abstract A SDLTirePressureValue* value. The status of the tirePressureValue.
+ */
+@property (strong) SDLTirePressureValue *tirePressureValue;
+
+/**
+ * @abstract A SDLTPMS* value. The status of the tpms.
+ */
+@property (strong) SDLTPMS *tpms;
+
+/**
+ * @abstract A SDLTurnSignal* value. The status of the turnSignal.
+ */
+@property (strong) SDLTurnSignal *turnSignal;
 
 /**
  * @abstract Current angle of the steering wheel (in deg)

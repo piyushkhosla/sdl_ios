@@ -97,4 +97,16 @@
     }
 }
 
+- (void)setEnableSeek:(NSNumber *)enableSeek {
+    if (enableSeek != nil) {
+        [parameters setObject:enableSeek forKey:NAMES_enableSeek];
+    } else {
+        [parameters removeObjectForKey:NAMES_enableSeek];
+    }
+}
+
+-(NSNumber *)enableSeek {
+    return [parameters objectForKey:NAMES_enableSeek];
+}
+
 @end

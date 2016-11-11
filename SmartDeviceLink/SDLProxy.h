@@ -28,6 +28,7 @@ __deprecated_msg("Use SDLManager instead")
 @property (strong) SDLTimer *startSessionTimer;
 @property (copy) NSString *debugConsoleGroupName;
 @property (readonly, copy) NSString *proxyVersion;
+@property (nonatomic, readonly) NSUInteger protocolVersion;
 @property (nonatomic, strong, readonly) SDLStreamingMediaManager *streamingMediaManager;
 
 - (id)initWithTransport:(SDLAbstractTransport *)transport
@@ -46,6 +47,10 @@ __deprecated_msg("Use SDLManager instead")
 
 - (void)handleProtocolMessage:(SDLProtocolMessage *)msgData;
 
+- (void)setMTUSize:(NSUInteger)maxMTUSize;
+- (void)setShouldOverrideMTUSize:(BOOL)overrideMTUSize;
+
+- (void)setPolicyUpdateURLString:(NSString*)policyURLString;
 - (void)addSecurityManagers:(NSArray<Class> *)securityManagerClasses forAppId:(NSString *)appId;
 
 + (void)enableSiphonDebug;
