@@ -1,10 +1,10 @@
-//
-//  SDLGetWayPoints.m
+//  SDLGetWaypoints.m
 //
 
-#import "SDLGetWayPoints.h"
-#import "SDLWayPointType.h"
+#import "SDLGetWaypoints.h"
+
 #import "SDLNames.h"
+#import "SDLWaypointType.h"
 
 @implementation SDLGetWayPoints
 
@@ -14,30 +14,37 @@
     return self;
 }
 
-- (instancetype)initWithDictionary:(NSMutableDictionary *)dict {
-    if (self = [super initWithDictionary:dict]) {
-    }
-    return self;
-}
 
-- (instancetype)initWithWayPointType:(SDLWayPointType *)wayPointType {
-    if (self = [self init]) {
+- (instancetype)initWithType:(SDLWaypointType *)type {
+    self = [self init];
+    if (!self) {
+        return nil;
     }
-    self.wayPointType = wayPointType;
-    return self;
     
+    self.waypointType = type;
+    
+    return self;
 }
 
-- (void)setWayPointType:(SDLWayPointType *)wayPointType {
-    if (wayPointType != nil) {
-        [parameters setObject:wayPointType forKey:NAMES_waypointType];
+- (void)setWaypointType:(SDLWaypointType *)waypointType {
+    if (waypointType != nil) {
+        parameters[NAMES_waypointType] = waypointType;
     } else {
         [parameters removeObjectForKey:NAMES_waypointType];
     }
 }
 
-- (SDLWayPointType *)wayPointType {
-    return [parameters objectForKey:NAMES_waypointType];
+- (SDLWaypointType *)waypointType {
+    NSObject *obj = parameters[NAMES_waypointType];
+    if (obj == nil || [obj isKindOfClass:SDLWaypointType.class]) {
+        return (SDLWaypointType *)obj;
+    } else {
+        return [SDLWaypointType valueOf:(NSString *)obj];
+    }
 }
+
+@end
+
+@implementation SDLGetWaypoints
 
 @end

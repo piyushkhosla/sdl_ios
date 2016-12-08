@@ -1,13 +1,10 @@
-//
-//  SDLSubscribeWayPoints.m
-//  SmartDeviceLink-iOS
+//  SDLSubscribeWaypoints.m
 //
 
-#import "SDLSubscribeWayPoints.h"
+#import "SDLSubscribeWaypoints.h"
 #import "SDLNames.h"
 
 @implementation SDLSubscribeWayPoints
-
 
 - (instancetype)init {
     if (self = [super initWithName:NAMES_SubscribeWaypoints]) {
@@ -15,10 +12,8 @@
     return self;
 }
 
-- (instancetype)initWithDictionary:(NSMutableDictionary *)dict {
-    if (self = [super initWithDictionary:dict]) {
-    }
-    return self;
-}
+@end
+
+@implementation SDLSubscribeWaypoints
 
 @end

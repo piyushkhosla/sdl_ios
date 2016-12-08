@@ -1,30 +1,20 @@
-//
-//  SDLSubscribeWayPoints.h
+//  SDLSubscribeWaypoints.h
 //
 
 #import "SDLRPCRequest.h"
 
-
 /**
-
- * A SDLSubscribeWayPoints can be sent to subscribe
+ * A SDLSubscribeWaypoints can be sent to subscribe
  * for any changes in waypoints/destinations
  *
- * also see SDLUnsubscribeWayPoints
+ * @see SDLUnsubscribeWaypoints
+ *
  */
 @interface SDLSubscribeWayPoints : SDLRPCRequest
 
-/**
- * Constructs a new SDLSubscribeWayPoints object
- */
-- (instancetype)init;
-
-/**
- * Constructs a new SDLSubscribeWayPoints object indicated by the dictionary parameter
- *
- * @param dict The dictionary to use
- */
-- (instancetype)initWithDictionary:(NSMutableDictionary *)dict;
-
-
 @end
+
+__deprecated_msg("Use SDLSubscribeWayPoints instead")
+    @interface SDLSubscribeWaypoints : SDLSubscribeWayPoints
+
+                                       @end

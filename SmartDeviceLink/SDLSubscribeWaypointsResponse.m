@@ -1,10 +1,9 @@
-//
-//  SDLSubscribeWayPointsResponse.m
+
+//  SDLSubscribeWaypointsResponse.m
 //
 
-#import "SDLSubscribeWayPointsResponse.h"
+#import "SDLSubscribeWaypointsResponse.h"
 #import "SDLNames.h"
-
 
 @implementation SDLSubscribeWayPointsResponse
 
@@ -14,10 +13,8 @@
     return self;
 }
 
-- (instancetype)initWithDictionary:(NSMutableDictionary *)dict {
-    if (self = [super initWithDictionary:dict]) {
-    }
-    return self;
-}
+@end
+
+@implementation SDLSubscribeWaypointsResponse
 
 @end

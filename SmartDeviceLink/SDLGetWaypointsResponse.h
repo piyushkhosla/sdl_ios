@@ -1,19 +1,24 @@
-//
-//  SDLGetWayPointsResponse.h
-//  SmartDeviceLink-iOS
+//  SDLGetWaypointsResponse.h
 //
 
 #import "SDLRPCResponse.h"
 
+@class SDLLocationDetails;
+
 @interface SDLGetWayPointsResponse : SDLRPCResponse
 
-- (instancetype)init;
-- (instancetype)initWithDictionary:(NSMutableDictionary *)dict;
-
 /**
- * @abstract Array of SDLLocationDetails
- * size 1 - 10
+ * @abstract Array of waypoints
+ *
+ * @see SDLLocationDetails
+ *
+ * Optional, Array size 1 - 10
  */
-@property (strong) NSMutableArray *wayPoints;
+@property (strong) NSArray<SDLLocationDetails *> *waypoints;
 
 @end
+
+__deprecated_msg("Use SDLGetWayPointsResponse instead")
+    @interface SDLGetWaypointsResponse : SDLGetWayPointsResponse
+
+                                         @end

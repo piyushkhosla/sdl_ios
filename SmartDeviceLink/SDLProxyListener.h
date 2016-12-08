@@ -21,7 +21,7 @@
 @class SDLGetDTCsResponse;
 @class SDLGetSettingDataResponse;
 @class SDLGetVehicleDataResponse;
-@class SDLGetWayPointsResponse;
+@class SDLGetWaypointsResponse;
 @class SDLListFilesResponse;
 @class SDLOnAppInterfaceUnregistered;
 @class SDLOnAudioPassThru;
@@ -65,7 +65,7 @@
 @class SDLSubscribeButtonResponse;
 @class SDLSubscribeSettingDataResponse;
 @class SDLSubscribeVehicleDataResponse;
-@class SDLSubscribeWayPointsResponse;
+@class SDLSubscribeWaypointsResponse;
 @class SDLSyncPDataResponse;
 @class SDLSystemRequestResponse;
 @class SDLUpdateTurnListResponse;
@@ -73,7 +73,7 @@
 @class SDLUnsubscribeButtonResponse;
 @class SDLUnsubscribeSettingDataResponse;
 @class SDLUnsubscribeVehicleDataResponse;
-@class SDLUnsubscribeWayPointsResponse;
+@class SDLUnsubscribeWaypointsResponse;
 
 
 @protocol SDLProxyListener <NSObject>
@@ -104,7 +104,7 @@
 - (void)onGetDTCsResponse:(SDLGetDTCsResponse *)response;
 - (void)onGetSettingDataResponse:(SDLGetSettingDataResponse *)response;
 - (void)onGetVehicleDataResponse:(SDLGetVehicleDataResponse *)response;
-- (void)onGetWayPointsResponse:(SDLGetWayPointsResponse *)response;
+- (void)onGetWayPointsResponse:(SDLGetWaypointsResponse *)response;
 - (void)onListFilesResponse:(SDLListFilesResponse *)response;
 - (void)onReceivedLockScreenIcon:(UIImage *)icon;
 - (void)onOnAppInterfaceUnregistered:(SDLOnAppInterfaceUnregistered *)notification;
@@ -146,7 +146,7 @@
 - (void)onSubscribeButtonResponse:(SDLSubscribeButtonResponse *)response;
 - (void)onSubscribeSettingDataResponse:(SDLSubscribeSettingDataResponse *)response;
 - (void)onSubscribeVehicleDataResponse:(SDLSubscribeVehicleDataResponse *)response;
-- (void)onSubscribeWayPointsResponse:(SDLSubscribeWayPointsResponse *)response;
+- (void)onSubscribeWayPointsResponse:(SDLSubscribeWaypointsResponse *)response;
 - (void)onSyncPDataResponse:(SDLSyncPDataResponse *)response;
 - (void)onSystemRequestResponse:(SDLSystemRequestResponse *)response;
 - (void)onUpdateTurnListResponse:(SDLUpdateTurnListResponse *)response;
@@ -154,5 +154,6 @@
 - (void)onUnsubscribeButtonResponse:(SDLUnsubscribeButtonResponse *)response;
 - (void)onUnsubscribeSettingDataResponse:(SDLUnsubscribeSettingDataResponse *)response;
 - (void)onUnsubscribeVehicleDataResponse:(SDLUnsubscribeVehicleDataResponse *)response;
-- (void)onUnsubscribeWayPointsResponse:(SDLUnsubscribeWayPointsResponse *)response;
+- (void)onUnsubscribeWayPointsResponse:(SDLUnsubscribeWaypointsResponse *)response;
+
 @end

@@ -43,3 +43,7 @@
 }
 
 @end
+
+@implementation SDLOnWaypointChange
+
+@end
