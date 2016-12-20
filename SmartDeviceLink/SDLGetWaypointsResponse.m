@@ -1,8 +1,9 @@
-//
-//  SDLGetWayPointsResponse.m
+//  SDLGetWaypointsResponse.m
 //
 
-#import "SDLGetWayPointsResponse.h"
+#import "SDLGetWaypointsResponse.h"
+
+#import "SDLLocationDetails.h"
 #import "SDLNames.h"
 
 @implementation SDLGetWayPointsResponse
@@ -13,22 +14,25 @@
     return self;
 }
 
-- (instancetype)initWithDictionary:(NSMutableDictionary *)dict {
-    if (self = [super initWithDictionary:dict]) {
-    }
-    return self;
-}
-
-- (void)setWayPoints:(NSMutableArray *)wayPoints {
-    if (wayPoints != nil) {
-        [parameters setObject:wayPoints forKey:NAMES_waypoints];
+- (void)setWaypoints:(NSArray<SDLLocationDetails *> *)waypoints {
+    if (waypoints != nil) {
+        parameters[NAMES_waypoints] = waypoints;
     } else {
         [parameters removeObjectForKey:NAMES_waypoints];
     }
 }
 
-- (NSMutableArray *)wayPoints {
-    return [parameters objectForKey:NAMES_waypoints];
+- (NSArray<SDLLocationDetails *> *)waypoints {
+    NSMutableArray *array = [parameters objectForKey:NAMES_waypoints];
+    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:SDLLocationDetails.class]) {
+        return [array copy];
+    } else {
+        NSMutableArray *newList = [NSMutableArray arrayWithCapacity:[array count]];
+        for (NSDictionary *dict in array) {
+            [newList addObject:[[SDLLocationDetails alloc] initWithDictionary:(NSMutableDictionary *)dict]];
+        }
+        return [newList copy];
+    }
 }
 
 @end

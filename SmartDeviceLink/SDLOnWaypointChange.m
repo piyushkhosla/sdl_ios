@@ -1,11 +1,10 @@
-//
-//  SDLOnWayPointChange.m
-//  SmartDeviceLink-iOS
+//  SDLOnWaypointChange.m
 //
 
-#import "SDLOnWayPointChange.h"
-#import "SDLNames.h"
+#import "SDLOnWaypointChange.h"
+
 #import "SDLLocationDetails.h"
+#import "SDLNames.h"
 
 @implementation SDLOnWayPointChange
 
@@ -15,30 +14,24 @@
     return self;
 }
 
-- (instancetype)initWithDictionary:(NSMutableDictionary *)dict {
-    if (self = [super initWithDictionary:dict]) {
-    }
-    return self;
-}
-
-- (void)setWayPoints:(NSMutableArray *)wayPoints {
-    if (wayPoints != nil) {
-        [parameters setObject:wayPoints forKey:NAMES_OnWaypointChange];
+- (void)setWaypoints:(NSArray<SDLLocationDetails *> *)waypoints {
+    if (waypoints != nil) {
+        parameters[NAMES_waypoints] = waypoints;
     } else {
-        [parameters removeObjectForKey:NAMES_OnWaypointChange];
+        [parameters removeObjectForKey:NAMES_waypoints];
     }
 }
 
-- (NSMutableArray *)wayPoints {
+- (NSArray<SDLLocationDetails *> *)waypoints {
     NSMutableArray *array = [parameters objectForKey:NAMES_waypoints];
     if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:SDLLocationDetails.class]) {
-        return array;
+        return [array copy];
     } else {
         NSMutableArray *newList = [NSMutableArray arrayWithCapacity:[array count]];
         for (NSDictionary *dict in array) {
             [newList addObject:[[SDLLocationDetails alloc] initWithDictionary:(NSMutableDictionary *)dict]];
         }
-        return newList;
+        return [newList copy];
     }
 }
 

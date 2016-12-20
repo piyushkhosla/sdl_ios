@@ -9,5 +9,4 @@
 
 __deprecated_msg("Use SDLUnsubscribeWayPointsResponse instead")
     @interface SDLUnsubscribeWaypointsResponse : SDLUnsubscribeWayPointsResponse
-
                                                  @end

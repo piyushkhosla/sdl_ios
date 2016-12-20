@@ -318,7 +318,7 @@ NS_ASSUME_NONNULL_BEGIN
     [self postRPCNotificationNotification:SDLDidReceiveVehicleDataNotification notification:notification];
 }
 
-- (void)onOnWayPointChange:(SDLOnWayPointChange *)notification {
+- (void)onOnWayPointChange:(SDLOnWaypointChange *)notification {
     [self postRPCNotificationNotification:SDLDidReceiveWaypointNotification notification:notification];
 }
 
