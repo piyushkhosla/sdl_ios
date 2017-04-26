@@ -62,9 +62,11 @@ SDLStateMachineTransitionFormat const SDLStateMachineTransitionFormatDidEnter = 
     }
 
     if (![self sdl_canState:self.currentState transitionToState:state]) {
+        NSString *targetClassString = NSStringFromClass([self.target class]);
+        NSString *reasonMessage = [NSString stringWithFormat:@"Invalid state machine %@ transition of target %@ occurred from %@ to %@", NSStringFromClass(self.class), targetClassString, self.currentState, state];
         @throw [NSException exceptionWithName:NSInternalInconsistencyException
-                                       reason:@"Invalid state machine transition occurred"
-                                     userInfo:@{SDLStateMachineExceptionInfoKeyTargetClass: NSStringFromClass([self.target class]),
+                                       reason:reasonMessage
+                                     userInfo:@{SDLStateMachineExceptionInfoKeyTargetClass: targetClassString,
                                                 SDLStateMachineExceptionInfoKeyFromState: self.currentState,
                                                 SDLStateMachineExceptionInfoKeyToClass: state}];
     }
@@ -109,12 +111,25 @@ SDLStateMachineTransitionFormat const SDLStateMachineTransitionFormatDidEnter = 
 
 #pragma mark - Helpers
 
-- (void)setToState:(SDLState *)state {
+- (void)setToState:(SDLState *)state fromOldState:(nullable SDLState *)oldState callEnterTransition:(BOOL)shouldCall {
     if (![self.states.allKeys containsObject:state]) {
         return;
     }
 
-    self.currentState = state;
+    if (oldState != nil && shouldCall) {
+        self.currentState = oldState;
+        [self transitionToState:state];
+    } else if (shouldCall) {
+        SEL didEnter = NSSelectorFromString([NSString stringWithFormat:SDLStateMachineTransitionFormatDidEnter, state]);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        if ([self.target respondsToSelector:didEnter]) {
+            [self.target performSelector:didEnter];
+#pragma clang diagnostic pop
+        }
+    } else {
+        self.currentState = state;
+    }
 }
 
 /**

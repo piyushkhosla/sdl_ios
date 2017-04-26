@@ -1,3 +1,43 @@
+# 4.5.5 Release Notes
+### Bug Fixes
+* Added a check for if `SDLManager` is already started and prevent starting it again.
+* Prevent infinite loops in IAP transport.
+
+### Example App
+* Fixed incorrectly setting button state on disconnect.
+
+# 4.5.4 Release Notes
+### Bug Fixes
+* Streaming video will not crash if data is unexpectedly NULL.
+* SDL now compiles on Xcode 8.3.
+* Lockscreen will now appear appropriately when it's remote HMI is in the background.
+* Internal state machines now throw more descriptive exceptions.
+
+
+# 4.5.3 Release Notes
+### Bug Fixes
+* `SDLManager`'s `delegate` method `hmiLevel:didChangeToLevel:` now only triggers when the HMI level changes, instead of whenever an `onHMIStatus` is received.
+* Fixed a few crashes in `SDLStreamingMediaManager` for navigation video streaming.
+
+# 4.5.2 Release Notes
+### Bug Fixes
+* Fixed unhandled Register App Interface Response warnings causing the manager to disconnect.
+* Fixed `SDLManager stop` not actually stopping SDL.
+* Fixed `SDLDebugTool` resetting its logs on disconnection.
+* Fixed `SDLManager` auto-reconnection sometimes causing a crash.
+
+### Example Project
+* Connect / Disconnect button appearance fixed.
+
+# 4.5.1 Release Notes
+### Bug Fixes
+* Fixed large file transfers not properly setting their offset.
+* Check for nil before attempting to send an RPC request.
+
+# 4.5.0 Release Notes (Since Beta 2)
+### Bug Fixes
+* Fixed an issue attempting to upload an app icon when the head unit does not support images.
+
 # 4.5.0 Beta 2 Release Notes
 ### Bug Fixes
 * Fixed an issue with printing incorrect Frame Data when logging.
