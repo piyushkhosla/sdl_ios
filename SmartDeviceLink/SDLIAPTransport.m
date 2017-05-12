@@ -24,7 +24,7 @@ NSString *const indexedProtocolStringPrefix = @"com.smartdevicelink.prot";
 int const createSessionRetries = 1;
 int const protocolIndexTimeoutSeconds = 20;
 int const streamOpenTimeoutSeconds = 2;
-
+EAAccessory *Newaccessory = nil;
 
 @interface SDLIAPTransport () {
     dispatch_queue_t _transmit_queue;
@@ -59,6 +59,14 @@ int const streamOpenTimeoutSeconds = 2;
     return self;
 }
 
+- (void) redirectConsoleLogToDocumentFolder
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                         NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *logPath = [documentsDirectory stringByAppendingPathComponent:@"console2.log"];
+    freopen([logPath fileSystemRepresentation],"a+",stderr);
+}
 
 #pragma mark - Notification Subscriptions
 
@@ -88,11 +96,18 @@ int const streamOpenTimeoutSeconds = 2;
 #pragma mark - EAAccessory Notifications
 
 - (void)sdl_accessoryConnected:(NSNotification *)notification {
-    NSMutableString *logMessage = [NSMutableString stringWithFormat:@"Accessory Connected, Opening in %0.03fs", self.retryDelay];
-    [SDLDebugTool logInfo:logMessage withType:SDLDebugType_Transport_iAP toOutput:SDLDebugOutput_All toGroup:self.debugConsoleGroupName];
-
-    self.retryCounter = 0;
-    [self performSelector:@selector(connect) withObject:nil afterDelay:self.retryDelay];
+    NSLog(@"SDLIAPTransport Got  EA Notification Fresh");
+    
+    if(self.session == nil)
+    {
+        NSLog(@"SDLIAPTransport Got New EA Notification Fresh");
+        NSMutableString *logMessage = [NSMutableString stringWithFormat:@"Accessory Connected, Opening in %0.03fs", self.retryDelay];
+        [SDLDebugTool logInfo:logMessage withType:SDLDebugType_Transport_iAP toOutput:SDLDebugOutput_All toGroup:self.debugConsoleGroupName];
+        self.protocolIndexTimer = nil;
+        self.retryCounter = 0;
+        [self performSelector:@selector(connect) withObject:nil afterDelay:self.retryDelay];
+    }
+    
 }
 
 - (void)sdl_accessoryDisconnected:(NSNotification *)notification {
@@ -101,6 +116,7 @@ int const streamOpenTimeoutSeconds = 2;
     // Only check for the data session, the control session is handled separately
     EAAccessory *accessory = [notification.userInfo objectForKey:EAAccessoryKey];
     if (accessory.connectionID == self.session.accessory.connectionID) {
+        NSLog(@"SDLIAPTransport EA DisConnect");
         self.sessionSetupInProgress = NO;
         [self disconnect];
         [self.delegate onTransportDisconnected];
@@ -109,6 +125,7 @@ int const streamOpenTimeoutSeconds = 2;
 
 - (void)sdl_applicationWillEnterForeground:(NSNotification *)notification {
     [SDLDebugTool logInfo:@"App Foregrounded Event" withType:SDLDebugType_Transport_iAP toOutput:SDLDebugOutput_All toGroup:self.debugConsoleGroupName];
+    NSLog(@"SDLIAPTransport AppForegrounded");
     self.retryCounter = 0;
     [self connect];
 }
@@ -146,31 +163,16 @@ int const streamOpenTimeoutSeconds = 2;
         // We should be attempting to connect
         self.retryCounter++;
         EAAccessory *accessory = nil;
-
-        if (self.protocolString.length == 0 || [self.protocolString isEqualToString:@"default"]) {
-            [SDLDebugTool logInfo:@"Using Default Protocol"];
-            
-            // Determine if we can start a multi-app session or a legacy (single-app) session
-            if ((accessory = [EAAccessoryManager findAccessoryForProtocol:controlProtocolString])) {
-                [self sdl_createIAPControlSessionWithAccessory:accessory];
-            } else if ((accessory = [EAAccessoryManager findAccessoryForProtocol:legacyProtocolString])) {
-                [self sdl_createIAPDataSessionWithAccessory:accessory forProtocol:legacyProtocolString];
-            } else {
-                // No compatible accessory
-                [SDLDebugTool logInfo:@"No accessory supporting a required sync protocol was found."];
-                self.sessionSetupInProgress = NO;
-            }
+        
+        // Determine if we can start a multi-app session or a legacy (single-app) session
+        if ((accessory = [EAAccessoryManager findAccessoryForProtocol:controlProtocolString])) {
+            [self sdl_createIAPControlSessionWithAccessory:accessory];
+        } else if ((accessory = [EAAccessoryManager findAccessoryForProtocol:legacyProtocolString])) {
+            [self sdl_createIAPDataSessionWithAccessory:accessory forProtocol:legacyProtocolString];
         } else {
-            NSString *stringwith = [NSString stringWithFormat:@"FindAccessoryForProtocol :%@",self.protocolString];
-            [SDLDebugTool logInfo:stringwith];
-            
-            if ((accessory = [EAAccessoryManager findAccessoryForProtocol:self.protocolString])) {
-                [SDLDebugTool logInfo:@"Accessory supporting sync protocol was found."];
-                [self sdl_createIAPDataSessionWithAccessory:accessory forProtocol:self.protocolString];
-            } else {
-                [SDLDebugTool logInfo:@"No accessory supporting a required sync protocol was found."];
-                self.sessionSetupInProgress = NO;
-            }
+            // No compatible accessory
+            [SDLDebugTool logInfo:@"No accessory supporting a required sync protocol was found."];
+            self.sessionSetupInProgress = NO;
         }
     } else {
         // We are beyond the number of retries allowed

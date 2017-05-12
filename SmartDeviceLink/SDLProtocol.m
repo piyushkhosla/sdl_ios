@@ -57,6 +57,7 @@ typedef NSNumber SDLServiceTypeBox;
         _prioritizedCollection = [[SDLPrioritizedObjectCollection alloc] init];
         _serviceHeaders = [[NSMutableDictionary alloc] init];
         _messageRouter = [[SDLProtocolReceivedMessageRouter alloc] init];
+        _receiveBuffer = nil;
         _messageRouter.delegate = self;
     }
 
@@ -617,6 +618,7 @@ typedef NSNumber SDLServiceTypeBox;
         _alreadyDestructed = YES;
         _messageRouter.delegate = nil;
         _messageRouter = nil;
+        _receiveBuffer = nil;
         self.transport = nil;
         self.protocolDelegateTable = nil;
     }
@@ -628,6 +630,7 @@ typedef NSNumber SDLServiceTypeBox;
 
 - (void)dealloc {
     [self sdl_destructObjects];
+    NSLog(@"dealloc protocol SDL");
     [SDLDebugTool logInfo:@"SDLProtocol Dealloc" withType:SDLDebugType_Transport_iAP toOutput:SDLDebugOutput_All toGroup:self.debugConsoleGroupName];
 }
 
