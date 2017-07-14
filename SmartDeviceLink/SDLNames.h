@@ -129,6 +129,7 @@
 #define NAMES_fuelLevel_State @"fuelLevel_State"
 #define NAMES_fuelMaintenanceMode @"fuelMaintenanceMode"
 #define NAMES_fuelRange @"fuelRange"
+#define NAMES_fuelType @"fuelType"
 #define NAMES_GenericResponse @"GenericResponse"
 #define NAMES_GetDTCs @"GetDTCs"
 #define NAMES_GetSettingData @"GetSettingData"

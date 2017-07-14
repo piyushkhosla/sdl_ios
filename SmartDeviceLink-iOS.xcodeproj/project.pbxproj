@@ -291,6 +291,10 @@
 		1E91F5741D2FB0F600FB9D58 /* SDLSetAudioStreamingIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E91F5721D2FB0F600FB9D58 /* SDLSetAudioStreamingIndicator.m */; };
 		1E91F5771D2FB10700FB9D58 /* SDLSetAudioStreamingIndicatorResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E91F5751D2FB10700FB9D58 /* SDLSetAudioStreamingIndicatorResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E91F5781D2FB10700FB9D58 /* SDLSetAudioStreamingIndicatorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E91F5761D2FB10700FB9D58 /* SDLSetAudioStreamingIndicatorResponse.m */; };
+		1EBEDF551F18956D00599B84 /* SDLFuelType.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EBEDF531F18956D00599B84 /* SDLFuelType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1EBEDF561F18956D00599B84 /* SDLFuelType.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBEDF541F18956D00599B84 /* SDLFuelType.m */; };
+		1EBEDF611F1899AC00599B84 /* SDLFuelRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EBEDF5F1F1899AC00599B84 /* SDLFuelRange.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1EBEDF621F1899AC00599B84 /* SDLFuelRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EBEDF601F1899AC00599B84 /* SDLFuelRange.m */; };
 		332A914F1CED9CC60043824C /* SDLAppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 332A913D1CED87F80043824C /* SDLAppInfo.m */; };
 		332A91501CED9CF10043824C /* SDLAppInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 332A913C1CED87F80043824C /* SDLAppInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5D0218F61A8E79C400D1BF62 /* ConnectionTCPTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D0218F51A8E79C400D1BF62 /* ConnectionTCPTableViewController.m */; };
@@ -1355,6 +1359,10 @@
 		1E91F5721D2FB0F600FB9D58 /* SDLSetAudioStreamingIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLSetAudioStreamingIndicator.m; sourceTree = "<group>"; };
 		1E91F5751D2FB10700FB9D58 /* SDLSetAudioStreamingIndicatorResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLSetAudioStreamingIndicatorResponse.h; sourceTree = "<group>"; };
 		1E91F5761D2FB10700FB9D58 /* SDLSetAudioStreamingIndicatorResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLSetAudioStreamingIndicatorResponse.m; sourceTree = "<group>"; };
+		1EBEDF531F18956D00599B84 /* SDLFuelType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLFuelType.h; sourceTree = "<group>"; };
+		1EBEDF541F18956D00599B84 /* SDLFuelType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLFuelType.m; sourceTree = "<group>"; };
+		1EBEDF5F1F1899AC00599B84 /* SDLFuelRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLFuelRange.h; sourceTree = "<group>"; };
+		1EBEDF601F1899AC00599B84 /* SDLFuelRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLFuelRange.m; sourceTree = "<group>"; };
 		332A913C1CED87F80043824C /* SDLAppInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLAppInfo.h; sourceTree = "<group>"; };
 		332A913D1CED87F80043824C /* SDLAppInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLAppInfo.m; sourceTree = "<group>"; };
 		5D0218F41A8E79C400D1BF62 /* ConnectionTCPTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConnectionTCPTableViewController.h; path = SmartDeviceLink_Example/Classes/ConnectionTCPTableViewController.h; sourceTree = SOURCE_ROOT; };
@@ -2978,6 +2986,8 @@
 				5D61FAAC1A84238A00846EE7 /* SDLECallInfo.m */,
 				5D61FAAD1A84238A00846EE7 /* SDLEmergencyEvent.h */,
 				5D61FAAE1A84238A00846EE7 /* SDLEmergencyEvent.m */,
+				1EBEDF5F1F1899AC00599B84 /* SDLFuelRange.h */,
+				1EBEDF601F1899AC00599B84 /* SDLFuelRange.m */,
 				5D61FACE1A84238A00846EE7 /* SDLGPSData.h */,
 				5D61FACF1A84238A00846EE7 /* SDLGPSData.m */,
 				5D61FAD01A84238A00846EE7 /* SDLHeadLampStatus.h */,
@@ -3103,6 +3113,8 @@
 				5D61FAB01A84238A00846EE7 /* SDLEmergencyEventType.m */,
 				5D61FABC1A84238A00846EE7 /* SDLFileType.h */,
 				5D61FABD1A84238A00846EE7 /* SDLFileType.m */,
+				1EBEDF531F18956D00599B84 /* SDLFuelType.h */,
+				1EBEDF541F18956D00599B84 /* SDLFuelType.m */,
 				5D61FABE1A84238A00846EE7 /* SDLFuelCutoffStatus.h */,
 				5D61FABF1A84238A00846EE7 /* SDLFuelCutoffStatus.m */,
 				5D61FACC1A84238A00846EE7 /* SDLGlobalProperty.h */,
@@ -4040,6 +4052,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DA3F35A1BC448480026F2D0 /* SDLError.h in Headers */,
+				1EBEDF611F1899AC00599B84 /* SDLFuelRange.h in Headers */,
+				1EBEDF551F18956D00599B84 /* SDLFuelType.h in Headers */,
 				5DA3F35F1BC448590026F2D0 /* SDLNotificationConstants.h in Headers */,
 				5DE5ABB71B0E38C90067BB02 /* SDLSystemRequest.h in Headers */,
 				5DA3F3701BC4489A0026F2D0 /* SDLManager.h in Headers */,
@@ -4624,6 +4638,7 @@
 				5D61FCAE1A84238C00846EE7 /* SDLFunctionID.m in Sources */,
 				5D61FC421A84238C00846EE7 /* SDLAppHMIType.m in Sources */,
 				1E91F5741D2FB0F600FB9D58 /* SDLSetAudioStreamingIndicator.m in Sources */,
+				1EBEDF561F18956D00599B84 /* SDLFuelType.m in Sources */,
 				5D61FD421A84238C00846EE7 /* SDLPRNDL.m in Sources */,
 				E9C32B921AB20BA200F283AF /* SDLIAPSession.m in Sources */,
 				5D61FD0C1A84238C00846EE7 /* SDLOnEncodedSyncPData.m in Sources */,
@@ -4857,6 +4872,7 @@
 				5D61FCF11A84238C00846EE7 /* SDLLockScreenStatusManager.m in Sources */,
 				5D61FDAC1A84238C00846EE7 /* SDLStartTime.m in Sources */,
 				5D61FDA01A84238C00846EE7 /* SDLSoftButton.m in Sources */,
+				1EBEDF621F1899AC00599B84 /* SDLFuelRange.m in Sources */,
 				1E91F5601D2FA79800FB9D58 /* SDLUnsubscribeSettingData.m in Sources */,
 				E9C32B951AB20BA200F283AF /* SDLStreamDelegate.m in Sources */,
 				5D61FCD21A84238C00846EE7 /* SDLImageFieldName.m in Sources */,

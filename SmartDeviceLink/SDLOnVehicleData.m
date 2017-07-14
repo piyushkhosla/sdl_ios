@@ -11,6 +11,7 @@
 #import "SDLDeviceStatus.h"
 #import "SDLECallInfo.h"
 #import "SDLEmergencyEvent.h"
+#import "SDLFuelRange.h"
 #import "SDLGPSData.h"
 #import "SDLHeadLampStatus.h"
 #import "SDLMyKey.h"
@@ -414,8 +415,7 @@
     }
 }
 
-
-- (void)setFuelRange:(NSNumber *)fuelRange {
+- (void)setFuelRange:(NSMutableArray *)fuelRange {
     if (fuelRange != nil) {
         [parameters setObject:fuelRange forKey:NAMES_fuelRange];
     } else {
@@ -424,9 +424,19 @@
     
 }
 
-- (NSNumber *)fuelRange {
-    return [parameters objectForKey:NAMES_fuelRange];
+- (NSMutableArray *)fuelRange {
+    NSMutableArray *array = [parameters objectForKey:NAMES_fuelRange];
+    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:SDLFuelRange.class]) {
+        return array;
+    } else {
+        NSMutableArray *newList = [NSMutableArray arrayWithCapacity:[array count]];
+        for (NSDictionary *dict in array) {
+            [newList addObject:[[SDLFuelRange alloc] initWithDictionary:(NSMutableDictionary *)dict]];
+        }
+        return newList;
+    }
 }
+
 
 - (void)setAbs_State:(SDLABS_STATE *)abs_State {
     if (abs_State != nil) {

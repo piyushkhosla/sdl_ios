@@ -11,6 +11,7 @@
 @class SDLDeviceStatus;
 @class SDLECallInfo;
 @class SDLEmergencyEvent;
+@class SDLFuelRange;
 @class SDLGPSData;
 @class SDLHeadLampStatus;
 @class SDLMyKey;
@@ -142,9 +143,11 @@
 @property (strong) NSNumber *accPedalPosition;
 
 /**
- * @abstract Range in KM based on fuel consumption/level
+ * @abstract Array of SDLFuelRange in KM based on fuel consumption/level
+ *
+ * optional, NSMutableArray of size ranging 0-100
  */
-@property (strong) NSNumber *fuelRange;
+@property (strong) NSMutableArray *fuelRange;
 
 /**
  * @abstract A SDLABS_STATE* value. The status of the abs.
