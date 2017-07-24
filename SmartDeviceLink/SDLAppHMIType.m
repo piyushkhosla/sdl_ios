@@ -14,6 +14,8 @@ SDLAppHMIType *SDLAppHMIType_SOCIAL = nil;
 SDLAppHMIType *SDLAppHMIType_BACKGROUND_PROCESS = nil;
 SDLAppHMIType *SDLAppHMIType_TESTING = nil;
 SDLAppHMIType *SDLAppHMIType_SYSTEM = nil;
+SDLAppHMIType *SDLAppHMIType_REMOTE_CONTROL = nil;
+
 
 NSArray *SDLAppHMIType_values = nil;
 
@@ -31,17 +33,18 @@ NSArray *SDLAppHMIType_values = nil;
 + (NSArray *)values {
     if (SDLAppHMIType_values == nil) {
         SDLAppHMIType_values = @[
-            SDLAppHMIType.DEFAULT,
-            SDLAppHMIType.COMMUNICATION,
-            SDLAppHMIType.MEDIA,
-            SDLAppHMIType.MESSAGING,
-            SDLAppHMIType.NAVIGATION,
-            SDLAppHMIType.INFORMATION,
-            SDLAppHMIType.SOCIAL,
-            SDLAppHMIType.BACKGROUND_PROCESS,
-            SDLAppHMIType.TESTING,
-            SDLAppHMIType.SYSTEM,
-        ];
+                                 SDLAppHMIType.DEFAULT,
+                                 SDLAppHMIType.COMMUNICATION,
+                                 SDLAppHMIType.MEDIA,
+                                 SDLAppHMIType.MESSAGING,
+                                 SDLAppHMIType.NAVIGATION,
+                                 SDLAppHMIType.INFORMATION,
+                                 SDLAppHMIType.SOCIAL,
+                                 SDLAppHMIType.BACKGROUND_PROCESS,
+                                 SDLAppHMIType.TESTING,
+                                 SDLAppHMIType.SYSTEM,
+                                 SDLAppHMIType_REMOTE_CONTROL
+                                 ];
     }
     return SDLAppHMIType_values;
 }
@@ -111,9 +114,16 @@ NSArray *SDLAppHMIType_values = nil;
 
 + (SDLAppHMIType *)SYSTEM {
     if (SDLAppHMIType_SYSTEM == nil) {
-        SDLAppHMIType_SYSTEM = [[SDLAppHMIType alloc] initWithValue:@"SYSTEM"];
+        SDLAppHMIType_REMOTE_CONTROL = [[SDLAppHMIType alloc] initWithValue:@"SYSTEM"];
     }
-    return SDLAppHMIType_SYSTEM;
+    return SDLAppHMIType_REMOTE_CONTROL;
+}
+
++ (SDLAppHMIType *)REMOTE_CONTROL {
+    if (SDLAppHMIType_REMOTE_CONTROL == nil) {
+        SDLAppHMIType_REMOTE_CONTROL = [[SDLAppHMIType alloc] initWithValue:@"REMOTE_CONTROL"];
+    }
+    return SDLAppHMIType_REMOTE_CONTROL;
 }
 
 @end

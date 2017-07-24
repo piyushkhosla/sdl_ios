@@ -37,6 +37,8 @@ SDLResult *SDLResult_SAVED = nil;
 SDLResult *SDLResult_INVALID_CERT = nil;
 SDLResult *SDLResult_EXPIRED_CERT = nil;
 SDLResult *SDLResult_RESUME_FAILED = nil;
+SDLResult *SDLResult_DATA_NOT_AVAILABLE = nil;
+
 
 NSArray *SDLResult_values = nil;
 
@@ -87,6 +89,7 @@ NSArray *SDLResult_values = nil;
             [SDLResult INVALID_CERT],
             [SDLResult EXPIRED_CERT],
             [SDLResult RESUME_FAILED],
+            [SDLResult DATA_NOT_AVAILABLE]
         ];
     }
     return SDLResult_values;
@@ -323,5 +326,13 @@ NSArray *SDLResult_values = nil;
     }
     return SDLResult_RESUME_FAILED;
 }
+
++ (SDLResult *)DATA_NOT_AVAILABLE {
+    if (SDLResult_DATA_NOT_AVAILABLE == nil) {
+        SDLResult_DATA_NOT_AVAILABLE = [[SDLResult alloc] initWithValue:@"DATA_NOT_AVAILABLE"];
+    }
+    return SDLResult_DATA_NOT_AVAILABLE;
+}
+
 
 @end

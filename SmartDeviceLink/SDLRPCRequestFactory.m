@@ -58,6 +58,7 @@
 #import "SDLUnsubscribeButton.h"
 #import "SDLUnsubscribeVehicleData.h"
 #import "SDLUpdateTurnList.h"
+#import "SDLButtonPress.h"
 
 static NSString *const SDLBundleShortVersionStringKey = @"CFBundleShortVersionString";
 
@@ -205,6 +206,14 @@ static NSString *const SDLBundleShortVersionStringKey = @"CFBundleShortVersionSt
     msg.softButtons = softButtons;
     msg.correlationID = correlationID;
     return msg;
+}
+
++ (SDLButtonPress *)buildButtonPressWithName:(SDLButtonName *)buttonName mode:(SDLButtonPressMode *)pressMode module:(SDLModuleType *)module {
+    SDLButtonPress *msg = [[SDLButtonPress alloc] init];
+    msg.buttonName = buttonName;
+    msg.buttonPressMode = pressMode;
+    msg.moduleType = module;
+    return msg;    
 }
 
 + (SDLChangeRegistration *)buildChangeRegistrationWithLanguage:(SDLLanguage *)language hmiDisplayLanguage:(SDLLanguage *)hmiDisplayLanguage correlationID:(NSNumber *)correlationID {

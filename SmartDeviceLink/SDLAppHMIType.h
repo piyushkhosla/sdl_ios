@@ -93,4 +93,10 @@
  */
 + (SDLAppHMIType *)SYSTEM;
 
+/**
+ * @abstract remote control
+ *
+ * @return SDLAppHMIType with value *REMOTE_CONTROL*
+ */
++ (SDLAppHMIType *)REMOTE_CONTROL;
 @end

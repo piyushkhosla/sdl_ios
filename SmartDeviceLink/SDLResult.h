@@ -201,4 +201,9 @@
  */
 + (SDLResult *)RESUME_FAILED;
 
+/**
+ * The requested data is not available on this vehicle or is not published for the connected app.
+ */
++ (SDLResult *)DATA_NOT_AVAILABLE;
+
 @end

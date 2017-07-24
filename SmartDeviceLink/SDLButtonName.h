@@ -160,4 +160,125 @@
  * @return a SDLButtonName with the value of *PLAY_PAUSE*
  */
 + (SDLButtonName *)PLAY_PAUSE;
+
+#pragma mark - Climate Buttons
+
+/**
+ * @abstract Represents AC max button *
+ * @return a SDLButtonName with the value of *AC_MAX*
+ */
++ (SDLButtonName *)AC_MAX;
+
+/**
+ * @abstract Represents AC button *
+ * @return a SDLButtonName with the value of *AC*
+ */
++ (SDLButtonName *)AC;
+
+/**
+ * @abstract Represents a Recirculate button
+ * @return a SDLButtonName with the value of *RECIRCULATE*
+ */
++ (SDLButtonName *)RECIRCULATE;
+
+/**
+ * @abstract Represents a Fan up button
+ * @return a SDLButtonName with the value of *FAN_UP*
+ */
++ (SDLButtonName *)FAN_UP;
+
+/**
+ * @abstract Represents a fan down button
+ * @return a SDLButtonName with the value of *FAN_DOWN*
+ */
++ (SDLButtonName *)FAN_DOWN;
+
+/**
+ * @abstract Represents a temperature up button
+ * @return a SDLButtonName with the value of *TEMP_UP*
+ */
++ (SDLButtonName *)TEMP_UP;
+
+/**
+ * @abstract Represents a temperature down button
+ * @return a SDLButtonName with the value of *TEMP_DOWN*
+ */
++ (SDLButtonName *)TEMP_DOWN;
+
+/**
+ * @abstract Represents a Defrost max button.
+ *
+ * @return a SDLButtonName with the value of *DEFROST_MAX*
+ */
++ (SDLButtonName *)DEFROST_MAX;
+
+/**
+ * @abstract Represents a Defrost button.
+ *
+ * @return a SDLButtonName with the value of *DEFROST*
+ */
++ (SDLButtonName *)DEFROST;
+
+/**
+ * @abstract Represents a Defrost rear button.
+ *
+ * @return a SDLButtonName with the value of *DEFROST_REAR*
+ */
++ (SDLButtonName *)DEFROST_REAR;
+
+/**
+ * @abstract Represents a Upper Vent button.
+ *
+ * @return a SDLButtonName with the value of *UPPER_VENT*
+ */
++ (SDLButtonName *)UPPER_VENT;
+
+/**
+ * @abstract Represents a Lower vent button.
+ *
+ * @return a SDLButtonName with the value of *LOWER_VENT*
+ */
++ (SDLButtonName *)LOWER_VENT;
+
+#pragma mark - Radio Buttons
+/**
+ * @abstract Represents a volume down button.
+ * @return a SDLButtonName with the value of *TUNEDOWN*
+ */
++ (SDLButtonName *)VOLUME_UP;
+
+/**
+ * @abstract Represents a volume down button.
+ *
+ * @return a SDLButtonName with the value of *VOLUME_DOWN*
+ */
++ (SDLButtonName *)VOLUME_DOWN;
+
+/**
+ * @abstract Represents a Eject Button.
+ *
+ * @return a SDLButtonName with the value of *EJECT*
+ */
++ (SDLButtonName *)EJECT;
+
+/**
+ * @abstract Represents a Source button.
+ *
+ * @return a SDLButtonName with the value of *SOURCE*
+ */
++ (SDLButtonName *)SOURCE;
+
+/**
+ * @abstract Represents a SHUFFLE button.
+ *
+ * @return a SDLButtonName with the value of *SHUFFLE*
+ */
++ (SDLButtonName *)SHUFFLE;
+
+/**
+ * @abstract Represents a Repeat button *
+ * @return a SDLButtonName with the value of *REPEAT*
+ */
++ (SDLButtonName *)REPEAT;
+
 @end
