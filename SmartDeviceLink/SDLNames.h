@@ -80,7 +80,7 @@
 #define NAMES_countryName @"countryName"
 #define NAMES_CreateInteractionChoiceSet @"CreateInteractionChoiceSet"
 #define NAMES_currentTemperature @"currentTemperature"
-#define NAMES_CT @"CreateInteractionChoiceSet"
+#define NAMES_CT @"CT"
 #define NAMES_customButtonID @"customButtonID"
 #define NAMES_customPresets @"customPresets"
 #define NAMES_data @"data"
