@@ -47,6 +47,7 @@ describe(@"Individual Enum Value Tests", ^ {
         expect(SDLResultInvalidCertificate).to(equal(@"INVALID_CERT"));
         expect(SDLResultExpiredCertificate).to(equal(@"EXPIRED_CERT"));
         expect(SDLResultResumeFailed).to(equal(@"RESUME_FAILED"));
+        expect(SDLResultDataNotAvailable).to(equal(@"DATA_NOT_AVAILABLE"));
     });
 });
 

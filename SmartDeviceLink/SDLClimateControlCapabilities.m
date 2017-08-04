@@ -3,7 +3,6 @@
 //
 
 #import "SDLClimateControlCapabilities.h"
-#import "SDLDefrostZone.h"
 #import "SDLNames.h"
 #import "NSMutableDictionary+Store.h"
 

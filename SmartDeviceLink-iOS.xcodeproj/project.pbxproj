@@ -272,6 +272,10 @@
 		1E5AD0991F20C0FB0029B8AF /* SDLOnInteriorVehicleData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AD0971F20C0FB0029B8AF /* SDLOnInteriorVehicleData.m */; };
 		1EE48E901F2F0EE700B98D08 /* SDLTemperatureUnit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EE48E8E1F2F0EE700B98D08 /* SDLTemperatureUnit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1EE48E911F2F0EE700B98D08 /* SDLTemperatureUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE48E8F1F2F0EE700B98D08 /* SDLTemperatureUnit.m */; };
+		1EE8C4381F347C7300FDC2CF /* SDLRadioBandSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE8C4371F347C7300FDC2CF /* SDLRadioBandSpec.m */; };
+		1EE8C43A1F347D4D00FDC2CF /* SDLRadioStateSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE8C4391F347D4D00FDC2CF /* SDLRadioStateSpec.m */; };
+		1EE8C43C1F347EAE00FDC2CF /* SDLTemperatureUnitSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE8C43B1F347EAE00FDC2CF /* SDLTemperatureUnitSpec.m */; };
+		1EE8C43E1F347F0500FDC2CF /* SDLVentilationModeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE8C43D1F347F0500FDC2CF /* SDLVentilationModeSpec.m */; };
 		332A914F1CED9CC60043824C /* SDLAppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 332A913D1CED87F80043824C /* SDLAppInfo.m */; };
 		332A91501CED9CF10043824C /* SDLAppInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 332A913C1CED87F80043824C /* SDLAppInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5D00AC671F140F0A004000D9 /* SDLSystemCapabilityType.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D00AC651F140F0A004000D9 /* SDLSystemCapabilityType.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1344,6 +1348,10 @@
 		1E5AD0971F20C0FB0029B8AF /* SDLOnInteriorVehicleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLOnInteriorVehicleData.m; sourceTree = "<group>"; };
 		1EE48E8E1F2F0EE700B98D08 /* SDLTemperatureUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLTemperatureUnit.h; sourceTree = "<group>"; };
 		1EE48E8F1F2F0EE700B98D08 /* SDLTemperatureUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLTemperatureUnit.m; sourceTree = "<group>"; };
+		1EE8C4371F347C7300FDC2CF /* SDLRadioBandSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLRadioBandSpec.m; sourceTree = "<group>"; };
+		1EE8C4391F347D4D00FDC2CF /* SDLRadioStateSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLRadioStateSpec.m; sourceTree = "<group>"; };
+		1EE8C43B1F347EAE00FDC2CF /* SDLTemperatureUnitSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLTemperatureUnitSpec.m; sourceTree = "<group>"; };
+		1EE8C43D1F347F0500FDC2CF /* SDLVentilationModeSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLVentilationModeSpec.m; sourceTree = "<group>"; };
 		332A913C1CED87F80043824C /* SDLAppInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLAppInfo.h; sourceTree = "<group>"; };
 		332A913D1CED87F80043824C /* SDLAppInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLAppInfo.m; sourceTree = "<group>"; };
 		5D00AC651F140F0A004000D9 /* SDLSystemCapabilityType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLSystemCapabilityType.h; sourceTree = "<group>"; };
@@ -2217,6 +2225,7 @@
 				162E820B1A9BDE8A00906325 /* SDLPrerecordedSpeechSpec.m */,
 				162E820C1A9BDE8A00906325 /* SDLPrimaryAudioSource.m */,
 				162E820D1A9BDE8A00906325 /* SDLPRNDLSpec.m */,
+				1EE8C4371F347C7300FDC2CF /* SDLRadioBandSpec.m */,
 				162E820E1A9BDE8A00906325 /* SDLRequestTypeSpec.m */,
 				162E820F1A9BDE8A00906325 /* SDLResultSpec.m */,
 				162E82111A9BDE8A00906325 /* SDLSamplingRateSpec.m */,
@@ -2242,6 +2251,9 @@
 				162E82241A9BDE8A00906325 /* SDLWarningLightStatusSpec.m */,
 				DA9F7E9D1DCC05B900ACAE48 /* SDLWaypointTypeSpec.m */,
 				162E82251A9BDE8A00906325 /* SDLWiperStatusSpec.m */,
+				1EE8C4391F347D4D00FDC2CF /* SDLRadioStateSpec.m */,
+				1EE8C43B1F347EAE00FDC2CF /* SDLTemperatureUnitSpec.m */,
+				1EE8C43D1F347F0500FDC2CF /* SDLVentilationModeSpec.m */,
 			);
 			path = EnumSpecs;
 			sourceTree = "<group>";
@@ -4910,6 +4922,7 @@
 				162E83041A9BDE8B00906325 /* SDLUpdateModeSpec.m in Sources */,
 				162E83801A9BDE8B00906325 /* SDLHMIPermissionsSpec.m in Sources */,
 				5D1654561D3E754F00554D93 /* SDLLifecycleManagerSpec.m in Sources */,
+				1EE8C43A1F347D4D00FDC2CF /* SDLRadioStateSpec.m in Sources */,
 				162E83021A9BDE8B00906325 /* SDLTouchTypeSpec.m in Sources */,
 				5DB92D2F1AC59F0000C15BB0 /* SDLObjectWithPrioritySpec.m in Sources */,
 				162E838A1A9BDE8B00906325 /* SDLSingleTireStatusSpec.m in Sources */,
@@ -5071,6 +5084,7 @@
 				1680B11B1A9CD7AD00DBD79E /* SDLFunctionIDSpec.m in Sources */,
 				5DB1BCDA1D243D85002FFC37 /* SDLStateMachineSpec.m in Sources */,
 				5D4346731E6F617D00B639C6 /* TestLogTarget.m in Sources */,
+				1EE8C43C1F347EAE00FDC2CF /* SDLTemperatureUnitSpec.m in Sources */,
 				162E83131A9BDE8B00906325 /* SDLOnCommandSpec.m in Sources */,
 				162E833A1A9BDE8B00906325 /* SDLSetDisplayLayoutSpec.m in Sources */,
 				162E838F1A9BDE8B00906325 /* SDLTextFieldSpec.m in Sources */,
@@ -5088,8 +5102,10 @@
 				162E83031A9BDE8B00906325 /* SDLTriggerSource.m in Sources */,
 				162E82D61A9BDE8A00906325 /* SDLComponentVolumeStatusSpec.m in Sources */,
 				162E835C1A9BDE8B00906325 /* SDLPutFileResponseSpec.m in Sources */,
+				1EE8C43E1F347F0500FDC2CF /* SDLVentilationModeSpec.m in Sources */,
 				DA9F7EAA1DCC061A00ACAE48 /* SDLSubscribeWaypointsResponseSpec.m in Sources */,
 				162E835F1A9BDE8B00906325 /* SDLResetGlobalPropertiesResponseSpec.m in Sources */,
+				1EE8C4381F347C7300FDC2CF /* SDLRadioBandSpec.m in Sources */,
 				162E835E1A9BDE8B00906325 /* SDLRegisterAppInterfaceResponseSpec.m in Sources */,
 				162E835A1A9BDE8B00906325 /* SDLPerformAudioPassThruResponseSpec.m in Sources */,
 				162E83501A9BDE8B00906325 /* SDLDeleteFileResponseSpec.m in Sources */,
