@@ -68,6 +68,14 @@ NS_ASSUME_NONNULL_BEGIN
     return [store sdl_objectForName:SDLNamePhoneCapability ofClass:SDLPhoneCapability.class];
 }
 
+- (void)setRemoteControlCapability:(nullable SDLRemoteControlCapabilities *)remoteControlCapability {
+    [store sdl_setObject:remoteControlCapability forName:SDLNameRemoteControlCapability];
+}
+
+- (nullable SDLRemoteControlCapabilities *)remoteControlCapability {
+    return [store sdl_objectForName:SDLNameRemoteControlCapability];
+}
+
 @end
 
 NS_ASSUME_NONNULL_END

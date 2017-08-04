@@ -2,11 +2,11 @@
 //
 
 #import "SDLRPCRequest.h"
+#import "SDLVrHelpItem.h"
 
 @class SDLImage;
 @class SDLKeyboardProperties;
 @class SDLTTSChunk;
-@class SDLVRHelpItem;
 
 /**
  * Sets value(s) for the specified global property(ies)

@@ -13,6 +13,7 @@
 
 @class SDLPhoneCapability;
 @class SDLNavigationCapability;
+@class SDLRemoteControlCapabilities;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -31,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, strong, nonatomic) SDLNavigationCapability *navigationCapability;
 
 @property (nullable, strong, nonatomic) SDLPhoneCapability *phoneCapability;
+
+@property (nullable, strong, nonatomic) SDLRemoteControlCapabilities *remoteControlCapability;
 
 @end
 

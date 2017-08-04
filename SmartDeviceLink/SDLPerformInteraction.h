@@ -6,9 +6,9 @@
 
 #import "SDLInteractionMode.h"
 #import "SDLLayoutMode.h"
+#import "SDLVrHelpItem.h"
 
 @class SDLTTSChunk;
-@class SDLVRHelpItem;
 
 /**
  * Performs an application-initiated interaction in which the user can select a

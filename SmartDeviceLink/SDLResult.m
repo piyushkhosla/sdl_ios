@@ -37,3 +37,4 @@ SDLResult const SDLResultSaved = @"SAVED";
 SDLResult const SDLResultInvalidCertificate = @"INVALID_CERT";
 SDLResult const SDLResultExpiredCertificate = @"EXPIRED_CERT";
 SDLResult const SDLResultResumeFailed = @"RESUME_FAILED";
+SDLResult const SDLResultDataNotAvailable = @"DATA_NOT_AVAILABLE";
