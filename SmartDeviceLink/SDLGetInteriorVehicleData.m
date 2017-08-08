@@ -31,11 +31,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 
-- (void)setSubscribe:(NSNumber *)subscribe {
+- (void)setSubscribe:(NSNumber<SDLBool> *)subscribe {
     [parameters sdl_setObject:subscribe forName:SDLNameSubscribe];
 }
 
-- (NSNumber *)subscribe {
+- (NSNumber<SDLBool> *)subscribe {
     return [parameters sdl_objectForName:SDLNameSubscribe];
 }
 

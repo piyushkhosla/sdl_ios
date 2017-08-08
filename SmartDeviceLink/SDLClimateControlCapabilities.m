@@ -18,80 +18,80 @@ NS_ASSUME_NONNULL_BEGIN
     return [store sdl_objectForName:SDLNameModuleName];
 }
 
-- (void)setFanSpeedAvailable:(nullable NSNumber *)fanSpeedAvailable {
+- (void)setFanSpeedAvailable:(nullable NSNumber<SDLBool> *)fanSpeedAvailable {
     [store sdl_setObject:fanSpeedAvailable forName:SDLNameFanSpeedAvailable];
 }
 
-- (nullable NSNumber *)fanSpeedAvailable {
+- (nullable NSNumber<SDLBool> *)fanSpeedAvailable {
     return [store sdl_objectForName:SDLNameFanSpeedAvailable];
 
 }
 
-- (void)setDesiredTemperatureAvailable:(nullable NSNumber *)desiredTemperatureAvailable {
+- (void)setDesiredTemperatureAvailable:(nullable NSNumber<SDLBool> *)desiredTemperatureAvailable {
     [store sdl_setObject:desiredTemperatureAvailable forName:SDLNameDesiredTemperatureAvailable];
 }
 
-- (nullable NSNumber *)desiredTemperatureAvailable {
+- (nullable NSNumber<SDLBool> *)desiredTemperatureAvailable {
     return [store sdl_objectForName:SDLNameDesiredTemperatureAvailable];
 
 }
 
-- (void)setAcEnableAvailable:(nullable NSNumber *)acEnableAvailable {
+- (void)setAcEnableAvailable:(nullable NSNumber<SDLBool> *)acEnableAvailable {
     [store sdl_setObject:acEnableAvailable forName:SDLNameAcEnableAvailable];
 }
 
-- (nullable NSNumber *)acEnableAvailable {
+- (nullable NSNumber<SDLBool> *)acEnableAvailable {
     return [store sdl_objectForName:SDLNameAcEnableAvailable];
 
 }
 
-- (void)setAcMaxEnableAvailable:(nullable NSNumber *)acMaxEnableAvailable {
+- (void)setAcMaxEnableAvailable:(nullable NSNumber<SDLBool> *)acMaxEnableAvailable {
     [store sdl_setObject:acMaxEnableAvailable forName:SDLNameAcMaxEnableAvailable];
 }
 
-- (nullable NSNumber *)acMaxEnableAvailable {
+- (nullable NSNumber<SDLBool> *)acMaxEnableAvailable {
     return [store sdl_objectForName:SDLNameAcMaxEnableAvailable];
 
 }
 
-- (void)setCirculateAirEnableAvailable:(nullable NSNumber *)circulateAirEnableAvailable {
+- (void)setCirculateAirEnableAvailable:(nullable NSNumber<SDLBool> *)circulateAirEnableAvailable {
     [store sdl_setObject:circulateAirEnableAvailable forName:SDLNameCirculateAirEnableAvailable];
 }
 
-- (nullable NSNumber *)circulateAirEnableAvailable {
+- (nullable NSNumber<SDLBool> *)circulateAirEnableAvailable {
     return [store sdl_objectForName:SDLNameCirculateAirEnableAvailable];
 
 }
 
-- (void)setAutoModeEnableAvailable:(nullable NSNumber *)autoModeEnableAvailable {
+- (void)setAutoModeEnableAvailable:(nullable NSNumber<SDLBool> *)autoModeEnableAvailable {
     [store sdl_setObject:autoModeEnableAvailable forName:SDLNameAutoModeEnableAvailable];
 }
 
-- (nullable NSNumber *)autoModeEnableAvailable {
+- (nullable NSNumber<SDLBool> *)autoModeEnableAvailable {
     return [store sdl_objectForName:SDLNameAutoModeEnableAvailable];
 
 }
 
-- (void)setDualModeEnableAvailable:(nullable NSNumber *)dualModeEnableAvailable {
+- (void)setDualModeEnableAvailable:(nullable NSNumber<SDLBool> *)dualModeEnableAvailable {
     [store sdl_setObject:dualModeEnableAvailable forName:SDLNameDualModeEnableAvailable];
 }
 
-- (nullable NSNumber *)dualModeEnableAvailable {
+- (nullable NSNumber<SDLBool> *)dualModeEnableAvailable {
     return [store sdl_objectForName:SDLNameDualModeEnableAvailable];
 
 }
 
-- (void)setDefrostZoneAvailable:(nullable NSNumber *)defrostZoneAvailable {
+- (void)setDefrostZoneAvailable:(nullable NSNumber<SDLBool> *)defrostZoneAvailable {
     [store sdl_setObject:defrostZoneAvailable forName:SDLNameDefrostZoneAvailable];
 }
 
-- (nullable NSNumber *)defrostZoneAvailable {
+- (nullable NSNumber<SDLBool> *)defrostZoneAvailable {
     return [store sdl_objectForName:SDLNameDefrostZoneAvailable];
 
 }
 
 - (void)setDefrostZone:(nullable NSArray <SDLDefrostZone>*)defrostZone {
-    [store sdl_setObject:SDLNameDefrostZone forName:SDLNameDefrostZone];
+    [store sdl_setObject:defrostZone forName:SDLNameDefrostZone];
 }
 
 - (nullable NSArray<SDLDefrostZone> *)defrostZone {
@@ -99,11 +99,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 }
 
-- (void)setVentilationModeAvailable:(nullable NSNumber *)ventilationModeAvailable {
+- (void)setVentilationModeAvailable:(nullable NSNumber<SDLBool> *)ventilationModeAvailable {
         [store sdl_setObject:ventilationModeAvailable forName:SDLNameVentilationModeAvailable];
 }
 
-- (nullable NSNumber *)ventilationModeAvailable {
+- (nullable NSNumber<SDLBool> *)ventilationModeAvailable {
     return [store sdl_objectForName:SDLNameVentilationModeAvailable];
 }
 

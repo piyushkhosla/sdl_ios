@@ -18,83 +18,83 @@ NS_ASSUME_NONNULL_BEGIN
     return [store sdl_objectForName:SDLNameModuleName];
 }
 
-- (void)setRadioEnableAvailable:(nullable NSNumber *)radioEnableAvailable {
+- (void)setRadioEnableAvailable:(nullable NSNumber<SDLBool> *)radioEnableAvailable {
     [store sdl_setObject:radioEnableAvailable forName:SDLNameRadioEnableAvailable];
 
 }
 
-- (nullable NSNumber *)radioEnableAvailable {
+- (nullable NSNumber<SDLBool> *)radioEnableAvailable {
     return [store sdl_objectForName:SDLNameRadioEnableAvailable];
 }
 
-- (void)setRadioBandAvailable:(nullable NSNumber *)radioBandAvailable {
+- (void)setRadioBandAvailable:(nullable NSNumber<SDLBool> *)radioBandAvailable {
     [store sdl_setObject:radioBandAvailable forName:SDLNameRadioBandAvailable];
 
 }
 
-- (nullable NSNumber *)radioBandAvailable {
+- (nullable NSNumber<SDLBool> *)radioBandAvailable {
     return [store sdl_objectForName:SDLNameRadioBandAvailable];
 }
 
-- (void)setRadioFrequencyAvailable:(nullable NSNumber *)radioFrequencyAvailable {
+- (void)setRadioFrequencyAvailable:(nullable NSNumber<SDLBool> *)radioFrequencyAvailable {
     [store sdl_setObject:radioFrequencyAvailable forName:SDLNameRadioFrequencyAvailable];
 }
 
-- (nullable NSNumber *)radioFrequencyAvailable {
+- (nullable NSNumber<SDLBool> *)radioFrequencyAvailable {
     return [store sdl_objectForName:SDLNameRadioFrequencyAvailable];
 }
 
-- (void)setHdChannelAvailable:(nullable NSNumber *)hdChannelAvailable {
+- (void)setHdChannelAvailable:(nullable NSNumber<SDLBool> *)hdChannelAvailable {
     [store sdl_setObject:hdChannelAvailable forName:SDLNameHdChannelAvailable];
 
 }
 
-- (nullable NSNumber *)hdChannelAvailable {
+- (nullable NSNumber<SDLBool> *)hdChannelAvailable {
     return [store sdl_objectForName:SDLNameHdChannelAvailable];
 }
 
-- (void)setRdsDataAvailable:(nullable NSNumber *)rdsDataAvailable {
+- (void)setRdsDataAvailable:(nullable NSNumber<SDLBool> *)rdsDataAvailable {
     [store sdl_setObject:rdsDataAvailable forName:SDLNameRdsDataAvailable];
 
 }
 
-- (nullable NSNumber *)rdsDataAvailable {
+- (nullable NSNumber<SDLBool> *)rdsDataAvailable {
     return [store sdl_objectForName:SDLNameRdsDataAvailable];
 }
 
-- (void)setAvailableHDsAvailable:(nullable NSNumber *)availableHDsAvailable {
+- (void)setAvailableHDsAvailable:(nullable NSNumber<SDLBool> *)availableHDsAvailable {
     [store sdl_setObject:availableHDsAvailable forName:SDLNameAvailableHDsAvailable];
 
 }
 
-- (nullable NSNumber *)availableHDsAvailable {
+- (nullable NSNumber<SDLBool> *)availableHDsAvailable {
     return [store sdl_objectForName:SDLNameAvailableHDsAvailable];
 }
 
-- (void)setStateAvailable:(nullable NSNumber *)stateAvailable {
+- (void)setStateAvailable:(nullable NSNumber<SDLBool> *)stateAvailable {
     [store sdl_setObject:stateAvailable forName:SDLNameStateAvailable];
 
 }
 
-- (nullable NSNumber *)stateAvailable {
+- (nullable NSNumber<SDLBool> *)stateAvailable {
     return [store sdl_objectForName:SDLNameStateAvailable];
 }
 
-- (void)setSignalStrengthAvailable:(nullable NSNumber *)signalStrengthAvailable {
+- (void)setSignalStrengthAvailable:(nullable NSNumber<SDLBool> *)signalStrengthAvailable {
     [store sdl_setObject:signalStrengthAvailable forName:SDLNameSignalStrengthAvailable];
 
 }
 
-- (nullable NSNumber *)signalStrengthAvailable {
+- (nullable NSNumber<SDLBool> *)signalStrengthAvailable {
     return [store sdl_objectForName:SDLNameSignalStrengthAvailable];
 }
 
-- (void)setSignalChangeThresholdAvailable:(nullable NSNumber *)signalChangeThresholdAvailable {
+- (void)setSignalChangeThresholdAvailable:(nullable NSNumber<SDLBool> *)signalChangeThresholdAvailable {
     [store sdl_setObject:signalChangeThresholdAvailable forName:SDLNameSignalChangeThresholdAvailable];
 
 }
 
-- (nullable NSNumber *)signalChangeThresholdAvailable {
+- (nullable NSNumber<SDLBool> *)signalChangeThresholdAvailable {
     return [store sdl_objectForName:SDLNameSignalChangeThresholdAvailable];
 }
 

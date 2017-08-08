@@ -4473,7 +4473,6 @@
 				TargetAttributes = {
 					5D4019AE1A76EC350006B0C2 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 3T2LPETG46;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -5403,11 +5402,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3T2LPETG46;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/SmartDeviceLink_Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.infosys.smartdevicelink.SDLTestApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartdevicelink.SDLTestApp;
 				PRODUCT_NAME = "SDL Example";
 			};
 			name = Debug;
@@ -5418,11 +5417,11 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = 3T2LPETG46;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/SmartDeviceLink_Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.infosys.smartdevicelink.SDLTestApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.smartdevicelink.SDLTestApp;
 				PRODUCT_NAME = "SDL Example";
 			};
 			name = Release;

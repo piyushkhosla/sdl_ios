@@ -49,7 +49,7 @@ describe(@"Initialization tests", ^{
         SDLRadioControlData* testStruct = [[SDLRadioControlData alloc] initWithDictionary:dict];
         
         expect(testStruct.frequencyInteger).to(equal(@101));
-        expect(testStruct.frequencyFraction).to(equal(7));
+        expect(testStruct.frequencyFraction).to(equal(@7));
         expect(testStruct.band).to(equal(SDLRadioBandAM));
         expect(testStruct.rdsData).to(equal(someRdsData));
         expect(testStruct.availableHDs).to(equal(@2));
@@ -74,7 +74,7 @@ describe(@"Initialization tests", ^{
         testStruct.state = SDLRadioStateNotFound;
         
         expect(testStruct.frequencyInteger).to(equal(@101));
-        expect(testStruct.frequencyFraction).to(equal(7));
+        expect(testStruct.frequencyFraction).to(equal(@7));
         expect(testStruct.band).to(equal(SDLRadioBandAM));
         expect(testStruct.rdsData).to(equal(someRdsData));
         expect(testStruct.availableHDs).to(equal(@2));

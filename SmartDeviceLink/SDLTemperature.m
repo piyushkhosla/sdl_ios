@@ -18,11 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
     return [store sdl_objectForName:SDLNameUnit];
 }
 
-- (void)setValue:(NSNumber *)value {
+- (void)setValue:(NSNumber<SDLFloat> *)value {
     [store sdl_setObject:value forName:SDLNameValue];
 }
 
-- (NSNumber *)value {
+- (NSNumber<SDLFloat> *)value {
     return [store sdl_objectForName:SDLNameValue];
 }
 

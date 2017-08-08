@@ -11,11 +11,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation SDLClimateControlData
 
-- (void)setFanSpeed:(nullable NSNumber *)fanSpeed {
+- (void)setFanSpeed:(nullable NSNumber<SDLInt> *)fanSpeed {
     [store sdl_setObject:fanSpeed forName:SDLNameFanSpeed];
 }
 
-- (nullable NSNumber *)fanSpeed {
+- (nullable NSNumber<SDLInt> *)fanSpeed {
     return [store sdl_objectForName:SDLNameFanSpeed];
 }
 
@@ -35,27 +35,27 @@ NS_ASSUME_NONNULL_BEGIN
     return [store sdl_objectForName:SDLNameDesiredTemperature];
 }
 
-- (void)setAcEnable:(nullable NSNumber *)acEnable {
+- (void)setAcEnable:(nullable NSNumber<SDLBool> *)acEnable {
     [store sdl_setObject:acEnable forName:SDLNameAcEnable];
 }
 
-- (nullable NSNumber *)acEnable {
+- (nullable NSNumber<SDLBool> *)acEnable {
     return [store sdl_objectForName:SDLNameAcEnable];
 }
 
-- (void)setCirculateAirEnable:(nullable NSNumber *)circulateAirEnable {
+- (void)setCirculateAirEnable:(nullable NSNumber<SDLBool> *)circulateAirEnable {
     [store sdl_setObject:circulateAirEnable forName:SDLNameCirculateAirEnable];
 }
 
-- (nullable NSNumber *)circulateAirEnable {
+- (nullable NSNumber<SDLBool> *)circulateAirEnable {
     return [store sdl_objectForName:SDLNameCirculateAirEnable];
 }
 
-- (void)setAutoModeEnable:(nullable NSNumber *)autoModeEnable {
+- (void)setAutoModeEnable:(nullable NSNumber<SDLBool> *)autoModeEnable {
     [store sdl_setObject:autoModeEnable forName:SDLNameAutoModeEnable];
 }
 
-- (nullable NSNumber *)autoModeEnable {
+- (nullable NSNumber<SDLBool> *)autoModeEnable {
     return [store sdl_objectForName:SDLNameAutoModeEnable];
 }
 
@@ -67,19 +67,19 @@ NS_ASSUME_NONNULL_BEGIN
     return [store sdl_objectForName:SDLNameDefrostZone];
 }
 
-- (void)setDualModeEnable:(nullable NSNumber *)dualModeEnable {
+- (void)setDualModeEnable:(nullable NSNumber<SDLBool> *)dualModeEnable {
     [store sdl_setObject:dualModeEnable forName:SDLNameDualModeEnable];
 }
 
-- (nullable NSNumber *)dualModeEnable {
+- (nullable NSNumber<SDLBool> *)dualModeEnable {
     return [store sdl_objectForName:SDLNameDualModeEnable];
 }
 
-- (void)setAcMaxEnable:(nullable NSNumber *)acMaxEnable {
+- (void)setAcMaxEnable:(nullable NSNumber<SDLBool> *)acMaxEnable {
     [store sdl_setObject:acMaxEnable forName:SDLNameAcMaxEnable];
 }
 
-- (nullable NSNumber *)acMaxEnable {
+- (nullable NSNumber<SDLBool> *)acMaxEnable {
     return [store sdl_objectForName:SDLNameAcMaxEnable];
 }
 

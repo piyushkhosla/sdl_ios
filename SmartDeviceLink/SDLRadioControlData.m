@@ -11,19 +11,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation SDLRadioControlData
 
-- (void)setFrequencyInteger:(nullable NSNumber *)frequencyInteger {
+- (void)setFrequencyInteger:(nullable NSNumber<SDLInt> *)frequencyInteger {
     [store sdl_setObject:frequencyInteger forName:SDLNameFrequencyInteger];
 }
 
-- (nullable NSNumber *)frequencyInteger {
+- (nullable NSNumber<SDLInt> *)frequencyInteger {
     return [store sdl_objectForName:SDLNameFrequencyInteger];
 }
 
-- (void)setFrequencyFraction:(nullable NSNumber *)frequencyFraction {
+- (void)setFrequencyFraction:(nullable NSNumber<SDLInt> *)frequencyFraction {
     [store sdl_setObject:frequencyFraction forName:SDLNameFrequencyFraction];
 }
 
-- (nullable NSNumber *)frequencyFraction {
+- (nullable NSNumber<SDLInt> *)frequencyFraction {
     return [store sdl_objectForName:SDLNameFrequencyFraction];
 }
 
@@ -43,43 +43,43 @@ NS_ASSUME_NONNULL_BEGIN
     return [store sdl_objectForName:SDLNameRdsData];
 }
 
-- (void)setAvailableHDs:(nullable NSNumber *)availableHDs {
+- (void)setAvailableHDs:(nullable NSNumber<SDLInt> *)availableHDs {
     [store sdl_setObject:availableHDs forName:SDLNameAvailableHDs];
 }
 
-- (nullable NSNumber *)availableHDs {
+- (nullable NSNumber<SDLInt> *)availableHDs {
     return [store sdl_objectForName:SDLNameAvailableHDs];
 }
 
-- (void)setHdChannel:(nullable NSNumber *)hdChannel {
+- (void)setHdChannel:(nullable NSNumber<SDLInt> *)hdChannel {
     [store sdl_setObject:hdChannel forName:SDLNameHdChannel];
 }
 
-- (nullable NSNumber *)hdChannel {
+- (nullable NSNumber<SDLInt> *)hdChannel {
     return [store sdl_objectForName:SDLNameHdChannel];
 }
 
-- (void)setSignalStrength:(nullable NSNumber *)signalStrength {
+- (void)setSignalStrength:(nullable NSNumber<SDLInt> *)signalStrength {
     [store sdl_setObject:signalStrength forName:SDLNameSignalStrength];
 }
 
-- (nullable NSNumber *)signalStrength {
+- (nullable NSNumber<SDLInt> *)signalStrength {
     return [store sdl_objectForName:SDLNameSignalStrength];
 }
 
-- (void)setSignalChangeThreshold:(nullable NSNumber *)signalChangeThreshold {
+- (void)setSignalChangeThreshold:(nullable NSNumber<SDLInt> *)signalChangeThreshold {
     [store sdl_setObject:signalChangeThreshold forName:SDLNameSignalChangeThreshold];
 }
 
-- (nullable NSNumber *)signalChangeThreshold {
+- (nullable NSNumber<SDLInt> *)signalChangeThreshold {
     return [store sdl_objectForName:SDLNameSignalChangeThreshold];
 }
 
-- (void)setRadioEnable:(nullable NSNumber *)radioEnable {
+- (void)setRadioEnable:(nullable NSNumber<SDLBool> *)radioEnable {
     [store sdl_setObject:radioEnable forName:SDLNameRadioEnable];
 }
 
-- (nullable NSNumber *)radioEnable {
+- (nullable NSNumber<SDLBool> *)radioEnable {
     return [store sdl_objectForName:SDLNameRadioEnable];
 }
 

@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * FLoat value
  */
-@property (strong, nonatomic) NSNumber *value;
+@property (strong, nonatomic) NSNumber<SDLFloat> *value;
 
 @end
 

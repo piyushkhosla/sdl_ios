@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *radioEnableAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *radioEnableAvailable;
 
 /**
  * @abstract  Availability of the control of radio band.
@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *radioBandAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *radioBandAvailable;
 
 /**
  * @abstract Availability of the control of radio frequency.
@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *radioFrequencyAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *radioFrequencyAvailable;
 
 /**
  * @abstract Availability of the control of HD radio channel.
@@ -49,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *hdChannelAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *hdChannelAvailable;
 
 /**
  * @abstract Availability of the getting Radio Data System (RDS) data.
@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *rdsDataAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *rdsDataAvailable;
 
 /**
  * @abstract Availability of the getting the number of available HD channels.
@@ -65,7 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *availableHDsAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *availableHDsAvailable;
 
 /**
  * @abstract Availability of the getting the Radio state.
@@ -73,7 +73,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *stateAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *stateAvailable;
 
 /**
  * @abstract Availability of the getting the signal strength.
@@ -81,7 +81,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *signalStrengthAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *signalStrengthAvailable;
 
 /**
  * @abstract Availability of the getting the signal Change Threshold
@@ -89,7 +89,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *signalChangeThresholdAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *signalChangeThresholdAvailable;
 
 @end
 

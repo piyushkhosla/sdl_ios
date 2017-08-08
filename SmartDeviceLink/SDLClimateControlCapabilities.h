@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *fanSpeedAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *fanSpeedAvailable;
 
 /**
  * @abstract Availability of the control of desired temperature.
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *desiredTemperatureAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *desiredTemperatureAvailable;
 
 /**
  * @abstract Availability of the control of turn on/off AC.
@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *acEnableAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *acEnableAvailable;
 
 /**
  * @abstract  Availability of the control of enable/disable air conditioning is ON on the maximum level.
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *acMaxEnableAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *acMaxEnableAvailable;
 
 /**
  * @abstract Availability of the control of enable/disable circulate Air mode.
@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *circulateAirEnableAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *circulateAirEnableAvailable;
 
 /**
  * @abstract Availability of the control of enable/disable auto mode.
@@ -67,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *autoModeEnableAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *autoModeEnableAvailable;
 
 /**
  * @abstract Availability of the control of enable/disable dual mode.
@@ -75,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *dualModeEnableAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *dualModeEnableAvailable;
 
 /**
  * @abstract Availability of the control of defrost zones.
@@ -83,7 +83,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *defrostZoneAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *defrostZoneAvailable;
 
 /**
  * @abstract  A set of all defrost zones that are controllable.
@@ -98,7 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *ventilationModeAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *ventilationModeAvailable;
 
 /**
  * @abstract  A set of all ventilation modes that are controllable.

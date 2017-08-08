@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, MinValue- 0 MaxValue= 100
  */
-@property (nullable, strong, nonatomic) NSNumber *fanSpeed;
+@property (nullable, strong, nonatomic) NSNumber<SDLInt> *fanSpeed;
 
 /**
  * @abstractThe Current Temperature in SDLTemperature
@@ -46,14 +46,14 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *circulateAirEnable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *circulateAirEnable;
 
 /**
  * @abstract Represents if auto mode is enabled.
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *autoModeEnable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *autoModeEnable;
 
 /**
  * @abstract Represents the kind of defrost zone
@@ -67,14 +67,14 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *dualModeEnable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *dualModeEnable;
 
 /**
  * @abstract Represents if ac max is enabled.
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *acMaxEnable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *acMaxEnable;
 
 /**
  * @abstract Represents the kind of Ventilation zone

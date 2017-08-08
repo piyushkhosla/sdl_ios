@@ -9,7 +9,7 @@ typedef SDLEnum SDLVentilationMode SDL_SWIFT_ENUM;
 /**
  * @abstract A SDLDefrostZone with the value of *UPPER*
  */
-extern SDLVentilationMode const SDLVentilationModUpper;
+extern SDLVentilationMode const SDLVentilationModeUpper;
 
 /**
  * @abstract A SDLDefrostZone with the value of *LOWER*

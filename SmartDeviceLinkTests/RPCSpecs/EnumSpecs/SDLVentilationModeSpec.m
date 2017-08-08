@@ -14,7 +14,7 @@ QuickSpecBegin(SDLVentilationModeSpec)
 
 describe(@"Individual Enum Value Tests", ^ {
     it(@"Should match internal values", ^ {
-        expect(SDLVentilationModUpper).to(equal(@"UPPER"));
+        expect(SDLVentilationModeUpper).to(equal(@"UPPER"));
         expect(SDLVentilationModeLower).to(equal(@"LOWER"));
         expect(SDLVentilationModeBoth).to(equal(@"BOTH"));
         expect(SDLVentilationModeNorth).to(equal(@"NONE"));

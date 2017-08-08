@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * optional, Boolean, default Value = false
  */
-@property (strong, nonatomic) NSNumber *subscribe;
+@property (strong, nonatomic) NSNumber<SDLBool> *subscribe;
 
 @end
 

@@ -41,23 +41,23 @@ NS_ASSUME_NONNULL_BEGIN
  * @abstract The program type - The region should be used to differentiate between EU
  * and North America program types
  *
- * optional, 0-8 length
+ * optional, 0-31 length
  */
-@property (nullable, strong, nonatomic) NSNumber *PTY;
+@property (nullable, strong, nonatomic) NSNumber<SDLInt> *PTY;
 
 /**
  * @abstract Traffic Program Identification - Identifies a station that offers traffic
  *
  * optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *TP;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *TP;
 
 /**
  * @abstract Traffic Announcement Identification - Indicates an ongoing traffic announcement
  *
  * optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *TA;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *TA;
 
 /**
  * @abstract Region

@@ -32,11 +32,11 @@ NS_ASSUME_NONNULL_BEGIN
     return [parameters sdl_objectForName:SDLNameModuleData];
 }
 
-- (void)setIsSubscribed:(nullable NSNumber *)isSubscribed {
+- (void)setIsSubscribed:(nullable NSNumber<SDLBool> *)isSubscribed {
     [parameters sdl_setObject:isSubscribed forName:SDLNameIsSubscribed];
 }
 
-- (nullable NSNumber *)isSubscribed {
+- (nullable NSNumber<SDLBool> *)isSubscribed {
     return [parameters sdl_objectForName:SDLNameIsSubscribed];
 }
 

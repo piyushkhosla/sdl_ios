@@ -42,27 +42,27 @@ NS_ASSUME_NONNULL_BEGIN
     return [store sdl_objectForName:SDLNamePI];
 }
 
-- (void)setPTY:(nullable NSNumber *)PTY {
+- (void)setPTY:(nullable NSNumber<SDLInt> *)PTY {
     [store sdl_setObject:PTY forName:SDLNamePTY];
 }
 
-- (nullable NSNumber *)PTY {
+- (nullable NSNumber<SDLInt> *)PTY {
     return [store sdl_objectForName:SDLNamePTY];
 }
 
-- (void)setTP:(nullable NSNumber *)TP {
+- (void)setTP:(nullable NSNumber<SDLBool> *)TP {
     [store sdl_setObject:TP forName:SDLNameTP];
 }
 
-- (nullable NSNumber *)TP {
+- (nullable NSNumber<SDLBool> *)TP {
     return [store sdl_objectForName:SDLNameTP];
 }
 
-- (void)setTA:(nullable NSNumber *)TA {
+- (void)setTA:(nullable NSNumber<SDLBool> *)TA {
     [store sdl_setObject:TA forName:SDLNameTA];
 }
 
-- (nullable NSNumber *)TA {
+- (nullable NSNumber<SDLBool> *)TA {
     return [store sdl_objectForName:SDLNameTA];
 }
 
