@@ -8,6 +8,7 @@
 #import "SDLNavigationCapability.h"
 #import "SDLPhoneCapability.h"
 #import "SDLSystemCapabilityType.h"
+#import "SDLRemoteControlCapabilities.h"
 #import "SDLNames.h"
 
 QuickSpecBegin(SDLSystemCapabilitySpec)
