@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithPhoneCapability:(SDLPhoneCapability *)capability;
 
+- (instancetype)initWithRemoteControlCapability:(SDLRemoteControlCapabilities *)capability;
+
 @property (strong, nonatomic) SDLSystemCapabilityType systemCapabilityType;
 
 @property (nullable, strong, nonatomic) SDLNavigationCapability *navigationCapability;

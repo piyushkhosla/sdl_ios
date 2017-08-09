@@ -12,6 +12,9 @@ describe(@"Individual Enum Value Tests", ^ {
     it(@"Should match internal values", ^ {
         expect(SDLSystemCapabilityTypeNavigation).to(equal(@"NAVIGATION"));
         expect(SDLSystemCapabilityTypePhoneCall).to(equal(@"PHONE_CALL"));
+        expect(SDLSystemCapabilityTypeVideoStreaming).to(equal(@"VIDEO_STREAMING"));
+        expect(SDLSystemCapabilityTypeAudioStreaming).to(equal(@"AUDIO_STREAMING"));
+        expect(SDLSystemCapabilityTypeRemoteControl).to(equal(@"REMOTE_CONTROL"));
     });
 });
 

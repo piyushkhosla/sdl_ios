@@ -5,6 +5,7 @@
 #import "SDLSetInteriorVehicleData.h"
 #import "SDLNames.h"
 #import "NSMutableDictionary+Store.h"
+#import "SDLModuleData.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

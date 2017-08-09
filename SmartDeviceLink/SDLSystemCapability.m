@@ -13,6 +13,7 @@
 #import "SDLNavigationCapability.h"
 #import "SDLPhoneCapability.h"
 #import "SDLSystemCapabilityType.h"
+#import "SDLRemoteControlCapabilities.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -39,6 +40,18 @@ NS_ASSUME_NONNULL_BEGIN
     self.systemCapabilityType = SDLSystemCapabilityTypeNavigation;
     self.navigationCapability = capability;
 
+    return self;
+}
+
+- (instancetype)initWithRemoteControlCapability:(SDLRemoteControlCapabilities *)capability {
+    self = [self init];
+    if (!self) {
+        return nil;
+    }
+    
+    self.systemCapabilityType = SDLSystemCapabilityTypeRemoteControl;
+    self.remoteControlCapability = capability;
+    
     return self;
 }
 

@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber *acEnable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *acEnable;
 
 /**
  * @abstract Represents if circulation of air is enabled.

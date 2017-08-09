@@ -190,3 +190,8 @@ extern SDLResult const SDLResultResumeFailed;
  * The requested data is not available on this vehicle or is not published for the connected app.
  */
 extern SDLResult const SDLResultDataNotAvailable;
+
+/**
+ * The requested data is read only thus cannot be change via remote control .
+ */
+extern SDLResult const SDLResultReadOnly;

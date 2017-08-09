@@ -77,6 +77,15 @@ describe(@"Initialization tests", ^{
         expect(testStruct.phoneCapability).to(beNil());
         expect(testStruct.remoteControlCapability).to(beNil());
     });
+    
+    it(@"should initialize correctly with initWithRemoteControlCapability:", ^{
+        SDLSystemCapability *testStruct = [[SDLSystemCapability alloc] initWithRemoteControlCapability:someRemoteControlCapabilities];
+        
+        expect(testStruct.systemCapabilityType).to(equal(SDLSystemCapabilityTypeRemoteControl));
+        expect(testStruct.navigationCapability).to(beNil());
+        expect(testStruct.phoneCapability).to(beNil());
+        expect(testStruct.remoteControlCapability).to(equal(someRemoteControlCapabilities));
+    });
 });
 
 QuickSpecEnd
