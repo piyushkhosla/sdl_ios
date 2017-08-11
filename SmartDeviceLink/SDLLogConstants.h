@@ -55,8 +55,8 @@ typedef NS_ENUM(NSInteger, SDLLogLevel) {
     SDLLogLevelOff = 0,
     SDLLogLevelError = SDLLogFlagError,
     SDLLogLevelWarning = (SDLLogFlagError | SDLLogFlagWarning),
-    SDLLogLevelDebug = (SDLLogFlagWarning | SDLLogFlagDebug),
-    SDLLogLevelVerbose = (SDLLogFlagDebug | SDLLogFlagVerbose)
+    SDLLogLevelDebug = (SDLLogFlagWarning | SDLLogFlagDebug | SDLLogLevelError),
+    SDLLogLevelVerbose = (SDLLogFlagWarning | SDLLogFlagDebug | SDLLogLevelError | SDLLogFlagVerbose)
 };
 
 /**
