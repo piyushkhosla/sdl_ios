@@ -43,7 +43,7 @@ NSArray *SDLAppHMIType_values = nil;
                                  SDLAppHMIType.BACKGROUND_PROCESS,
                                  SDLAppHMIType.TESTING,
                                  SDLAppHMIType.SYSTEM,
-                                 SDLAppHMIType_REMOTE_CONTROL
+                                 SDLAppHMIType.REMOTE_CONTROL
                                  ];
     }
     return SDLAppHMIType_values;
@@ -114,9 +114,9 @@ NSArray *SDLAppHMIType_values = nil;
 
 + (SDLAppHMIType *)SYSTEM {
     if (SDLAppHMIType_SYSTEM == nil) {
-        SDLAppHMIType_REMOTE_CONTROL = [[SDLAppHMIType alloc] initWithValue:@"SYSTEM"];
+        SDLAppHMIType_SYSTEM = [[SDLAppHMIType alloc] initWithValue:@"SYSTEM"];
     }
-    return SDLAppHMIType_REMOTE_CONTROL;
+    return SDLAppHMIType_SYSTEM;
 }
 
 + (SDLAppHMIType *)REMOTE_CONTROL {
