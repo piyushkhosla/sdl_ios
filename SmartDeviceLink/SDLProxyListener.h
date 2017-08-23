@@ -7,6 +7,7 @@
 @class SDLAddSubMenuResponse;
 @class SDLAlertManeuverResponse;
 @class SDLAlertResponse;
+@class SDLButtonPressResponse;
 @class SDLChangeRegistrationResponse;
 @class SDLCreateInteractionChoiceSetResponse;
 @class SDLDeleteCommandResponse;
@@ -19,7 +20,9 @@
 @class SDLEndAudioPassThruResponse;
 @class SDLGenericResponse;
 @class SDLGetDTCsResponse;
+@class SDLGetInteriorVehicleDataResponse;
 @class SDLGetSettingDataResponse;
+@class SDLGetSystemCapabilityResponse;
 @class SDLGetVehicleDataResponse;
 @class SDLGetWaypointsResponse;
 @class SDLListFilesResponse;
@@ -32,6 +35,7 @@
 @class SDLOnEncodedSyncPData;
 @class SDLOnHashChange;
 @class SDLOnHMIStatus;
+@class SDLOnInteriorVehicleData;
 @class SDLOnKeyboardInput;
 @class SDLOnLanguageChange;
 @class SDLOnLockScreenStatus;
@@ -58,6 +62,7 @@
 @class SDLSetDisplayLayoutResponse;
 @class SDLSetGlobalPropertiesResponse;
 @class SDLSetMediaClockTimerResponse;
+@class SDLSetInteriorVehicleDataResponse;
 @class SDLShowConstantTBTResponse;
 @class SDLShowResponse;
 @class SDLSliderResponse;
@@ -89,6 +94,7 @@
 - (void)onAddSubMenuResponse:(SDLAddSubMenuResponse *)response;
 - (void)onAlertManeuverResponse:(SDLAlertManeuverResponse *)response;
 - (void)onAlertResponse:(SDLAlertResponse *)response;
+- (void)onButtonPressResponse:(SDLButtonPressResponse *)response;
 - (void)onChangeRegistrationResponse:(SDLChangeRegistrationResponse *)response;
 - (void)onCreateInteractionChoiceSetResponse:(SDLCreateInteractionChoiceSetResponse *)response;
 - (void)onDeleteCommandResponse:(SDLDeleteCommandResponse *)response;
@@ -102,7 +108,9 @@
 - (void)onError:(NSException *)e;
 - (void)onGenericResponse:(SDLGenericResponse *)response;
 - (void)onGetDTCsResponse:(SDLGetDTCsResponse *)response;
+- (void)onGetInteriorVehicleData:(SDLGetInteriorVehicleDataResponse *)response;
 - (void)onGetSettingDataResponse:(SDLGetSettingDataResponse *)response;
+- (void)onGetSystemCapabilityResponse:(SDLGetSystemCapabilityResponse *)response;
 - (void)onGetVehicleDataResponse:(SDLGetVehicleDataResponse *)response;
 - (void)onGetWayPointsResponse:(SDLGetWaypointsResponse *)response;
 - (void)onListFilesResponse:(SDLListFilesResponse *)response;
@@ -114,6 +122,7 @@
 - (void)onOnCommand:(SDLOnCommand *)notification;
 - (void)onOnEncodedSyncPData:(SDLOnEncodedSyncPData *)notification;
 - (void)onOnHashChange:(SDLOnHashChange *)notification;
+- (void)onOnInteriorVehicleData:(SDLOnInteriorVehicleData *)notification;
 - (void)onOnKeyboardInput:(SDLOnKeyboardInput *)notification;
 - (void)onOnLanguageChange:(SDLOnLanguageChange *)notification;
 - (void)onOnLockScreenNotification:(SDLOnLockScreenStatus *)notification;
@@ -139,6 +148,7 @@
 - (void)onSetDisplayLayoutResponse:(SDLSetDisplayLayoutResponse *)response;
 - (void)onSetGlobalPropertiesResponse:(SDLSetGlobalPropertiesResponse *)response;
 - (void)onSetMediaClockTimerResponse:(SDLSetMediaClockTimerResponse *)response;
+- (void)onSetInteriorVehicleDataResponse:(SDLSetInteriorVehicleDataResponse *)response;
 - (void)onShowConstantTBTResponse:(SDLShowConstantTBTResponse *)response;
 - (void)onShowResponse:(SDLShowResponse *)response;
 - (void)onSliderResponse:(SDLSliderResponse *)response;
