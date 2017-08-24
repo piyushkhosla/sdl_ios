@@ -108,7 +108,7 @@
 - (void)onError:(NSException *)e;
 - (void)onGenericResponse:(SDLGenericResponse *)response;
 - (void)onGetDTCsResponse:(SDLGetDTCsResponse *)response;
-- (void)onGetInteriorVehicleData:(SDLGetInteriorVehicleDataResponse *)response;
+- (void)onGetInteriorVehicleDataResponse:(SDLGetInteriorVehicleDataResponse *)response;
 - (void)onGetSettingDataResponse:(SDLGetSettingDataResponse *)response;
 - (void)onGetSystemCapabilityResponse:(SDLGetSystemCapabilityResponse *)response;
 - (void)onGetVehicleDataResponse:(SDLGetVehicleDataResponse *)response;
