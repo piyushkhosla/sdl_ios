@@ -30,5 +30,6 @@
 + (SDLPredefinedLayout *)LARGE_GRAPHIC_WITH_SOFTBUTTONS;
 + (SDLPredefinedLayout *)DOUBLE_GRAPHIC_WITH_SOFTBUTTONS;
 + (SDLPredefinedLayout *)LARGE_GRAPHIC_ONLY;
++ (SDLPredefinedLayout *)REMOTE_CONTROL;
 
 @end

@@ -24,6 +24,8 @@ SDLPredefinedLayout *SDLPredefinedLayout_TEXTBUTTONS_WITH_GRAPHIC = nil;
 SDLPredefinedLayout *SDLPredefinedLayout_LARGE_GRAPHIC_WITH_SOFTBUTTONS = nil;
 SDLPredefinedLayout *SDLPredefinedLayout_DOUBLE_GRAPHIC_WITH_SOFTBUTTONS = nil;
 SDLPredefinedLayout *SDLPredefinedLayout_LARGE_GRAPHIC_ONLY = nil;
+SDLPredefinedLayout *SDLPredefinedLayout_REMOTE_CONTROL = nil;
+
 
 NSArray *SDLPredefinedLayout_values = nil;
 
@@ -61,6 +63,7 @@ NSArray *SDLPredefinedLayout_values = nil;
             SDLPredefinedLayout.LARGE_GRAPHIC_WITH_SOFTBUTTONS,
             SDLPredefinedLayout.DOUBLE_GRAPHIC_WITH_SOFTBUTTONS,
             SDLPredefinedLayout.LARGE_GRAPHIC_ONLY,
+            SDLPredefinedLayout.REMOTE_CONTROL,
         ];
     }
     return SDLPredefinedLayout_values;
@@ -204,6 +207,13 @@ NSArray *SDLPredefinedLayout_values = nil;
         SDLPredefinedLayout_LARGE_GRAPHIC_ONLY = [[SDLPredefinedLayout alloc] initWithValue:@"LARGE_GRAPHIC_ONLY"];
     }
     return SDLPredefinedLayout_LARGE_GRAPHIC_ONLY;
+}
+
++ (SDLPredefinedLayout *)REMOTE_CONTROL {
+    if (SDLPredefinedLayout_REMOTE_CONTROL == nil) {
+        SDLPredefinedLayout_REMOTE_CONTROL = [[SDLPredefinedLayout alloc] initWithValue:@"REMOTE_CONTROL"];
+    }
+    return SDLPredefinedLayout_REMOTE_CONTROL;
 }
 
 @end
