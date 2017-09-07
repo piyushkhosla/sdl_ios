@@ -173,6 +173,13 @@
  * @abstract Current angle of the steering wheel (in deg)
  */
 @property (strong) NSNumber *steeringWheelAngle;
+
+/**
+ * @abstract The estimated percentage of remaining oil life of the engine.
+ * Float 0-100
+ */
+@property (strong) NSNumber *engineOilLife;
+
 @property (strong) SDLECallInfo *eCallInfo;
 @property (strong) SDLAirbagStatus *airbagStatus;
 @property (strong) SDLEmergencyEvent *emergencyEvent;

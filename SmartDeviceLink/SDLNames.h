@@ -138,6 +138,7 @@
 #define NAMES_EndAudioPassThru @"EndAudioPassThru"
 #define NAMES_endTime @"endTime"
 #define NAMES_engineTorque @"engineTorque"
+#define NAMES_engineOilLife @"engineOilLife"
 #define NAMES_eta @"eta"
 #define NAMES_event @"event"
 #define NAMES_externalTemperature @"externalTemperature"

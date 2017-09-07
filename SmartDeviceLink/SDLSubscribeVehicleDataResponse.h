@@ -146,6 +146,12 @@
  * @abstract A SDLVehicleDataResult* value. Current angle of the steering wheel (in deg)
  */
 @property (strong) SDLVehicleDataResult *steeringWheelAngle;
+
+/**
+ * @abstract The estimated percentage of remaining oil life of the engine.
+ */
+@property (strong) SDLVehicleDataResult *engineOilLife;
+
 @property (strong) SDLVehicleDataResult *eCallInfo;
 @property (strong) SDLVehicleDataResult *airbagStatus;
 @property (strong) SDLVehicleDataResult *emergencyEvent;

@@ -181,4 +181,9 @@
  */
 + (SDLVehicleDataType *)VEHICLEDATA_TURNSIGNAL;
 
+/**
+ * @abstract SDLVehicleDataType: *VEHICLEDATA_ENGINEOILLIFE*
+ */
++ (SDLVehicleDataType *)VEHICLEDATA_ENGINEOILLIFE;
+
 @end

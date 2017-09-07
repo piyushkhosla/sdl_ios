@@ -516,5 +516,21 @@
     }
 }
 
+- (void)setEngineOilLife:(SDLVehicleDataResult *)engineOilLife {
+    if (engineOilLife != nil) {
+        [parameters setObject:engineOilLife forKey:NAMES_engineOilLife];
+    } else {
+        [parameters removeObjectForKey:NAMES_engineOilLife];
+    }
+}
+
+- (SDLVehicleDataResult *)engineOilLife {
+    NSObject *obj = [parameters objectForKey:NAMES_engineOilLife];
+    if (obj == nil || [obj isKindOfClass:SDLVehicleDataResult.class]) {
+        return (SDLVehicleDataResult *)obj;
+    } else {
+        return [[SDLVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary *)obj];
+    }
+}
 
 @end

@@ -402,4 +402,16 @@
     return [parameters objectForKey:NAMES_turnSignal];
 }
 
+- (void)setEngineOilLife:(NSNumber *)engineOilLife {
+    if (engineOilLife != nil) {
+        [parameters setObject:engineOilLife forKey:NAMES_engineOilLife];
+    } else {
+        [parameters removeObjectForKey:NAMES_engineOilLife];
+    }
+}
+
+- (NSNumber *)engineOilLife {
+    return [parameters objectForKey:NAMES_engineOilLife];
+}
+
 @end

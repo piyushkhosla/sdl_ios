@@ -162,6 +162,12 @@
  * subscribed.
  */
 @property (strong) NSNumber *steeringWheelAngle;
+
+/**
+ * @abstract A boolean value. The estimated percentage of remaining oil life of the
+ * engine.
+ */
+@property (strong) NSNumber *engineOilLife;
 @property (strong) NSNumber *eCallInfo;
 @property (strong) NSNumber *airbagStatus;
 @property (strong) NSNumber *emergencyEvent;
