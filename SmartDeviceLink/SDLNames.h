@@ -210,6 +210,7 @@
 #define NAMES_isHighlighted @"isHighlighted"
 #define NAMES_isMediaApplication @"isMediaApplication"
 #define NAMES_isSubscribed @"isSubscribed"
+#define NAMES_isTemplate @"isTemplate"
 #define NAMES_keyboardLayout @"keyboardLayout"
 #define NAMES_keyboardProperties @"keyboardProperties"
 #define NAMES_keypressMode @"keypressMode"

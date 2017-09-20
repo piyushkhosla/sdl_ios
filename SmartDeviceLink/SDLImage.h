@@ -27,6 +27,8 @@
 
 - (instancetype)initWithName:(NSString *)name ofType:(SDLImageType *)imageType;
 
+- (instancetype)initWithName:(NSString *)name ofType:(SDLImageType *)imageType isTemplate:(BOOL)isTemplate;
+
 /**
  * @abstract The static hex icon value or the binary image file name identifier (sent by SDLPutFile)
  *
@@ -40,5 +42,12 @@
  * Required
  */
 @property (strong) SDLImageType *imageType;
+
+/**
+ * @abstract If true, HMI decides the coloring for the uploaded images.
+ *
+ * Optional, Boolean
+ */
+@property (strong) NSNumber *isTemplate;
 
 @end

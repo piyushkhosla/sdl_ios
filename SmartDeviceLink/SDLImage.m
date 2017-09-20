@@ -33,6 +33,19 @@
     return self;
 }
 
+- (instancetype)initWithName:(NSString *)name ofType:(SDLImageType *)imageType isTemplate:(BOOL)isTemplate {
+    self = [self init];
+    if (!self) {
+        return nil;
+    }
+
+    self.value = name;
+    self.imageType = imageType;
+    self.isTemplate = @(isTemplate);
+
+    return self;
+}
+
 - (void)setValue:(NSString *)value {
     if (value != nil) {
         [store setObject:value forKey:NAMES_value];
@@ -60,6 +73,18 @@
     } else {
         return [SDLImageType valueOf:(NSString *)obj];
     }
+}
+
+- (void)setIsTemplate:(NSNumber *)isTemplate {
+    if (isTemplate != nil) {
+        [store setObject:isTemplate forKey:NAMES_isTemplate];
+    } else {
+        [store removeObjectForKey:NAMES_isTemplate];
+    }
+}
+
+- (NSNumber *)isTemplate {
+    return [store objectForKey:NAMES_isTemplate];
 }
 
 @end
