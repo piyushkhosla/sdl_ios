@@ -443,7 +443,7 @@
 #define NAMES_stereoAudioOutputMuted @"stereoAudioOutputMuted"
 #define NAMES_subAdministrativeArea @"subAdministrativeArea"
 #define NAMES_subLocality @"subLocality"
-#define NAMES_subMenuIcon @"subMenuIcon"
+#define NAMES_subMenuIcon @"menuIcon"
 #define NAMES_subscribe @"subscribe"
 #define NAMES_SubscribeButton @"SubscribeButton"
 #define NAMES_SubscribeSettingData @"SubscribeSettingData"
