@@ -1,22 +1,32 @@
 //
 //  SDLPhoneCapability.h
+//  SmartDeviceLink-iOS
+//
+//  Created by Joel Fischer on 7/11/17.
+//  Copyright © 2017 smartdevicelink. All rights reserved.
 //
 
-#import "SDLRPCMessage.h"
+#import "SDLRPCStruct.h"
 
-/**
- * Extended capabilities of the module's phone feature
- */
 @interface SDLPhoneCapability : SDLRPCStruct
 
 /**
- * @abstract Bool value which tells If the module has the abiulity to perform dial number
- *
- * optional, 1/0 NSNumber
+ * @abstract Constructs a newly allocated SDLPhoneCapability struct
  */
-@property (strong) NSNumber *dialNumberEnabled;
+- (instancetype)init;
 
+/**
+ * @abstract Constructs a newly allocated SDLPhoneCapability struct indicated by the dictionary parameter
+ * @param dict The dictionary to use
+ */
+- (instancetype)initWithDictionary:(NSMutableDictionary *)dict;
 
+- (instancetype)initWithDialNumber:(BOOL)dialNumberEnabled;
 
+/**
+ Whether or not the DialNumber RPC is enabled.
+ Boolean, optional
+ */
+@property (strong, nonatomic) NSNumber *dialNumberEnabled;
 
 @end

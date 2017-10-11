@@ -1,7 +1,7 @@
 //  SDLProxyListener.h
 //
 
-@import UIKit;
+#import <UIKit/UIKit.h>
 
 @class SDLAddCommandResponse;
 @class SDLAddSubMenuResponse;
@@ -56,6 +56,7 @@
 @class SDLRegisterAppInterfaceResponse;
 @class SDLResetGlobalPropertiesResponse;
 @class SDLScrollableMessageResponse;
+@class SDLSendHapticDataResponse;
 @class SDLSendLocationResponse;
 @class SDLSetAppIconResponse;
 @class SDLSetAudioStreamingIndicatorResponse;
@@ -142,6 +143,7 @@
 - (void)onRegisterAppInterfaceResponse:(SDLRegisterAppInterfaceResponse *)response;
 - (void)onResetGlobalPropertiesResponse:(SDLResetGlobalPropertiesResponse *)response;
 - (void)onScrollableMessageResponse:(SDLScrollableMessageResponse *)response;
+- (void)onSendHapticDataResponse:(SDLSendHapticDataResponse *)response;
 - (void)onSendLocationResponse:(SDLSendLocationResponse *)response;
 - (void)onSetAppIconResponse:(SDLSetAppIconResponse *)response;
 - (void)onSetAudioStreamingIndicatorResponse:(SDLSetAudioStreamingIndicatorResponse *)response;

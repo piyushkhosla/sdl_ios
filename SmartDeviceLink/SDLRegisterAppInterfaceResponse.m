@@ -113,7 +113,9 @@
 
 - (NSMutableArray *)buttonCapabilities {
     NSMutableArray *array = [parameters objectForKey:NAMES_buttonCapabilities];
-    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:SDLButtonCapabilities.class]) {
+    if ([array isEqual:[NSNull null]]) {
+        return [NSMutableArray array];
+    } else if (array.count < 1 || [array.firstObject isKindOfClass:SDLButtonCapabilities.class]) {
         return array;
     } else {
         NSMutableArray *newList = [NSMutableArray arrayWithCapacity:[array count]];
@@ -134,7 +136,9 @@
 
 - (NSMutableArray *)softButtonCapabilities {
     NSMutableArray *array = [parameters objectForKey:NAMES_softButtonCapabilities];
-    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:SDLSoftButtonCapabilities.class]) {
+    if ([array isEqual:[NSNull null]]) {
+        return [NSMutableArray array];
+    } else if (array.count < 1 || [array.firstObject isKindOfClass:SDLSoftButtonCapabilities.class]) {
         return array;
     } else {
         NSMutableArray *newList = [NSMutableArray arrayWithCapacity:[array count]];
@@ -172,7 +176,9 @@
 
 - (NSMutableArray *)hmiZoneCapabilities {
     NSMutableArray *array = [parameters objectForKey:NAMES_hmiZoneCapabilities];
-    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:SDLHMIZoneCapabilities.class]) {
+    if ([array isEqual:[NSNull null]]) {
+        return [NSMutableArray array];
+    } else if (array.count < 1 || [array.firstObject isKindOfClass:SDLHMIZoneCapabilities.class]) {
         return array;
     } else {
         NSMutableArray *newList = [NSMutableArray arrayWithCapacity:[array count]];
@@ -193,7 +199,9 @@
 
 - (NSMutableArray *)speechCapabilities {
     NSMutableArray *array = [parameters objectForKey:NAMES_speechCapabilities];
-    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:SDLSpeechCapabilities.class]) {
+    if ([array isEqual:[NSNull null]]) {
+        return [NSMutableArray array];
+    } else if (array.count < 1 || [array.firstObject isKindOfClass:SDLSpeechCapabilities.class]) {
         return array;
     } else {
         NSMutableArray *newList = [NSMutableArray arrayWithCapacity:[array count]];
@@ -214,7 +222,9 @@
 
 - (NSMutableArray *)prerecordedSpeech {
     NSMutableArray *array = [parameters objectForKey:NAMES_prerecordedSpeech];
-    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:SDLPrerecordedSpeech.class]) {
+    if ([array isEqual:[NSNull null]]) {
+        return [NSMutableArray array];
+    } else if (array.count < 1 || [array.firstObject isKindOfClass:SDLPrerecordedSpeech.class]) {
         return array;
     } else {
         NSMutableArray *newList = [NSMutableArray arrayWithCapacity:[array count]];
@@ -235,7 +245,9 @@
 
 - (NSMutableArray *)vrCapabilities {
     NSMutableArray *array = [parameters objectForKey:NAMES_vrCapabilities];
-    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:SDLVRCapabilities.class]) {
+    if ([array isEqual:[NSNull null]]) {
+        return [NSMutableArray array];
+    } else if (array.count < 1 || [array.firstObject isKindOfClass:SDLVRCapabilities.class]) {
         return array;
     } else {
         NSMutableArray *newList = [NSMutableArray arrayWithCapacity:[array count]];
@@ -256,7 +268,9 @@
 
 - (NSMutableArray *)audioPassThruCapabilities {
     NSMutableArray *array = [parameters objectForKey:NAMES_audioPassThruCapabilities];
-    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:SDLAudioPassThruCapabilities.class]) {
+    if ([array isEqual:[NSNull null]]) {
+        return [NSMutableArray array];
+    } else if (array.count < 1 || [array.firstObject isKindOfClass:SDLAudioPassThruCapabilities.class]) {
         return array;
     } else {
         NSMutableArray *newList = [NSMutableArray arrayWithCapacity:[array count]];

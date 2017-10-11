@@ -23,15 +23,9 @@
 #import "SDLOnHMIStatus.h"
 #import "SDLOnSystemRequest.h"
 #import "SDLPolicyDataParser.h"
-#import "SDLPolicyDataParser.h"
-#import "SDLPolicyDataParser.h"
 #import "SDLProtocol.h"
 #import "SDLProtocolMessage.h"
-#import "SDLProtocolMessage.h"
-#import "SDLProtocolMessage.h"
 #import "SDLPutFile.h"
-#import "SDLRPCPayload.h"
-#import "SDLRPCPayload.h"
 #import "SDLRPCPayload.h"
 #import "SDLRPCResponse.h"
 #import "SDLRegisterAppInterfaceResponse.h"
@@ -49,7 +43,7 @@ typedef NSString SDLVehicleMake;
 typedef void (^URLSessionTaskCompletionHandler)(NSData *data, NSURLResponse *response, NSError *error);
 typedef void (^URLSessionDownloadTaskCompletionHandler)(NSURL *location, NSURLResponse *response, NSError *error);
 
-NSString *const SDLProxyVersion = @"4.5.5";
+NSString *const SDLProxyVersion = @"4.7.3";
 const float startSessionTime = 10.0;
 const float notifyProxyClosedDelay = 0.1;
 const int POLICIES_CORRELATION_ID = 65535;
@@ -89,7 +83,6 @@ const int POLICIES_CORRELATION_ID = 65535;
         [self.transport connect];
 
         [SDLDebugTool logInfo:@"SDLProxy initWithTransport"];
-        [[EAAccessoryManager sharedAccessoryManager] registerForLocalNotifications];
     }
 
     return self;
@@ -100,7 +93,6 @@ const int POLICIES_CORRELATION_ID = 65535;
         _alreadyDestructed = YES;
 
         [[NSNotificationCenter defaultCenter] removeObserver:self];
-        [[EAAccessoryManager sharedAccessoryManager] unregisterForLocalNotifications];
 
         [[SDLURLSession defaultSession] cancelAllTasks];
 
@@ -181,7 +173,7 @@ const int POLICIES_CORRELATION_ID = 65535;
 }
 
 - (NSUInteger)protocolVersion {
-    return [SDLGlobals globals].protocolVersion;
+    return [[SDLGlobals globals].protocolVersion integerValue];
 }
 
 - (SDLStreamingMediaManager *)streamingMediaManager {
@@ -195,14 +187,6 @@ const int POLICIES_CORRELATION_ID = 65535;
     }
 
     return _streamingMediaManager;
-}
-
-- (void)setMTUSize:(NSUInteger)maxMTUSize {
-    [SDLGlobals globals].maxMTUSizeOverride = maxMTUSize;
-}
-
-- (void)setShouldOverrideMTUSize:(BOOL)overrideMTUSize {
-    [[SDLGlobals globals] shouldOverrideMTUSize:overrideMTUSize];
 }
 
 - (void)setPolicyUpdateURLString:(NSString *)policyURLString {
@@ -405,7 +389,7 @@ const int POLICIES_CORRELATION_ID = 65535;
         self.protocol.securityManager.appId = self.appId;
     }
 
-    if ([SDLGlobals globals].protocolVersion >= 4) {
+    if ([SDLGlobals globals].majorProtocolVersion >= 4) {
         [self sendMobileHMIState];
         // Send SDL updates to application state
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sendMobileHMIState) name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -508,9 +492,11 @@ const int POLICIES_CORRELATION_ID = 65535;
     }
 
     // Send the HTTP Request
+    __weak typeof(self) weakSelf = self;
     [self uploadForBodyDataDictionary:JSONDictionary
                             URLString:request.url
                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                        __strong typeof(weakSelf) strongSelf = weakSelf;
                         NSString *logMessage = nil;
 
                         if (error) {
@@ -520,12 +506,12 @@ const int POLICIES_CORRELATION_ID = 65535;
                         }
 
                         if (data == nil || data.length == 0) {
-                            [SDLDebugTool logInfo:@"OnSystemRequest (HTTP response) failure: no data returned" withType:SDLDebugType_RPC toOutput:SDLDebugOutput_All toGroup:self.debugConsoleGroupName];
+                            [SDLDebugTool logInfo:@"OnSystemRequest (HTTP response) failure: no data returned" withType:SDLDebugType_RPC toOutput:SDLDebugOutput_All toGroup:strongSelf.debugConsoleGroupName];
                             return;
                         }
 
                         // Show the HTTP response
-                        [SDLDebugTool logInfo:@"OnSystemRequest (HTTP response)" withType:SDLDebugType_RPC toOutput:SDLDebugOutput_All toGroup:self.debugConsoleGroupName];
+                        [SDLDebugTool logInfo:@"OnSystemRequest (HTTP response)" withType:SDLDebugType_RPC toOutput:SDLDebugOutput_All toGroup:strongSelf.debugConsoleGroupName];
 
                         // Create the SystemRequest RPC to send to module.
                         SDLSystemRequest *request = [[SDLSystemRequest alloc] init];
@@ -539,19 +525,21 @@ const int POLICIES_CORRELATION_ID = 65535;
                         if (policyData) {
                             [pdp parsePolicyData:policyData];
                             logMessage = [NSString stringWithFormat:@"Policy Data from Cloud\n%@", pdp];
-                            [SDLDebugTool logInfo:logMessage withType:SDLDebugType_RPC toOutput:SDLDebugOutput_All toGroup:self.debugConsoleGroupName];
+                            [SDLDebugTool logInfo:logMessage withType:SDLDebugType_RPC toOutput:SDLDebugOutput_All toGroup:strongSelf.debugConsoleGroupName];
                         }
 
                         // Send and log RPC Request
                         logMessage = [NSString stringWithFormat:@"SystemRequest (request)\n%@\nData length=%lu", [request serializeAsDictionary:2], (unsigned long)data.length];
-                        [SDLDebugTool logInfo:logMessage withType:SDLDebugType_RPC toOutput:SDLDebugOutput_All toGroup:self.debugConsoleGroupName];
-                        [self sendRPC:request];
+                        [SDLDebugTool logInfo:logMessage withType:SDLDebugType_RPC toOutput:SDLDebugOutput_All toGroup:strongSelf.debugConsoleGroupName];
+                        [strongSelf sendRPC:request];
                     }];
 }
 
 - (void)handleSystemRequestLockScreenIconURL:(SDLOnSystemRequest *)request {
+    __weak typeof(self) weakSelf = self;
     [[SDLURLSession defaultSession] dataFromURL:[NSURL URLWithString:request.url]
                               completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                  __strong typeof(weakSelf) strongSelf = weakSelf;
                                   if (error != nil) {
                                       NSString *logMessage = [NSString stringWithFormat:@"OnSystemRequest failure (HTTP response), download task failed: %@", error.localizedDescription];
                                       [SDLDebugTool logInfo:logMessage withType:SDLDebugType_RPC toOutput:SDLDebugOutput_All toGroup:self.debugConsoleGroupName];
@@ -559,7 +547,7 @@ const int POLICIES_CORRELATION_ID = 65535;
                                   }
 
                                   UIImage *icon = [UIImage imageWithData:data];
-                                  [self invokeMethodOnDelegates:@selector(onReceivedLockScreenIcon:) withObject:icon];
+                                  [strongSelf invokeMethodOnDelegates:@selector(onReceivedLockScreenIcon:) withObject:icon];
                               }];
 }
 
@@ -569,24 +557,26 @@ const int POLICIES_CORRELATION_ID = 65535;
         return;
     }
 
+    __weak typeof(self) weakSelf = self;
     [self sdl_uploadData:request.bulkData
               toURLString:request.url
         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+            __strong typeof(weakSelf) strongSelf = weakSelf;
             NSString *logMessage = nil;
             if (error != nil) {
                 logMessage = [NSString stringWithFormat:@"OnSystemRequest (HTTP response) = ERROR: %@", error.localizedDescription];
-                [SDLDebugTool logInfo:logMessage withType:SDLDebugType_RPC toOutput:SDLDebugOutput_All toGroup:self.debugConsoleGroupName];
+                [SDLDebugTool logInfo:logMessage withType:SDLDebugType_RPC toOutput:SDLDebugOutput_All toGroup:strongSelf.debugConsoleGroupName];
                 return;
             }
 
             if (data.length == 0) {
-                [SDLDebugTool logInfo:@"OnSystemRequest (HTTP response) failure: no data returned" withType:SDLDebugType_RPC toOutput:SDLDebugOutput_All toGroup:self.debugConsoleGroupName];
+                [SDLDebugTool logInfo:@"OnSystemRequest (HTTP response) failure: no data returned" withType:SDLDebugType_RPC toOutput:SDLDebugOutput_All toGroup:strongSelf.debugConsoleGroupName];
                 return;
             }
 
             // Show the HTTP response
             NSString *responseLogString = [NSString stringWithFormat:@"OnSystemRequest (HTTP) response: %@", response];
-            [SDLDebugTool logInfo:responseLogString withType:SDLDebugType_RPC toOutput:SDLDebugOutput_All toGroup:self.debugConsoleGroupName];
+            [SDLDebugTool logInfo:responseLogString withType:SDLDebugType_RPC toOutput:SDLDebugOutput_All toGroup:strongSelf.debugConsoleGroupName];
 
             // Create the SystemRequest RPC to send to module.
             SDLPutFile *putFile = [[SDLPutFile alloc] init];
@@ -598,7 +588,7 @@ const int POLICIES_CORRELATION_ID = 65535;
             // Send and log RPC Request
             logMessage = [NSString stringWithFormat:@"SystemRequest (request)\n%@\nData length=%lu", [request serializeAsDictionary:2], (unsigned long)data.length];
             [SDLDebugTool logInfo:logMessage withType:SDLDebugType_RPC toOutput:SDLDebugOutput_All toGroup:self.debugConsoleGroupName];
-            [self sendRPC:putFile];
+            [strongSelf sendRPC:putFile];
         }];
 }
 
@@ -745,10 +735,12 @@ const int POLICIES_CORRELATION_ID = 65535;
     }
 
     // Send the HTTP Request
+    __weak typeof(self) weakSelf = self;
     [[SDLURLSession defaultSession] uploadWithURLRequest:request
                                                     data:data
                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                           [self syncPDataNetworkRequestCompleteWithData:data response:response error:error];
+                                           __strong typeof(self) strongSelf = weakSelf;
+                                           [strongSelf syncPDataNetworkRequestCompleteWithData:data response:response error:error];
                                        }];
 
     [SDLDebugTool logInfo:@"OnEncodedSyncPData (HTTP request)" withType:SDLDebugType_RPC toOutput:SDLDebugOutput_All toGroup:self.debugConsoleGroupName];
@@ -794,7 +786,7 @@ const int POLICIES_CORRELATION_ID = 65535;
             // Grab some bytes from the stream and send them in a SDLPutFile RPC Request
             NSUInteger currentStreamOffset = [[stream propertyForKey:NSStreamFileCurrentOffsetKey] unsignedIntegerValue];
 
-            NSMutableData *buffer = [NSMutableData dataWithLength:[SDLGlobals globals].maxMTUSize];
+            NSMutableData *buffer = [NSMutableData dataWithLength:[[SDLGlobals globals] mtuSizeForServiceType:SDLServiceType_RPC]];
             NSUInteger nBytesRead = [(NSInputStream *)stream read:(uint8_t *)buffer.mutableBytes maxLength:buffer.length];
             if (nBytesRead > 0) {
                 NSData *data = [buffer subdataWithRange:NSMakeRange(0, nBytesRead)];

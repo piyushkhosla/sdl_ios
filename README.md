@@ -1,10 +1,10 @@
 
-[![Version](https://img.shields.io/cocoapods/v/SmartDeviceLink-iOS.svg?style=flat)](https://cocoapods.org/pods/SmartDeviceLink-iOS)
-[![License](https://img.shields.io/cocoapods/l/SmartDeviceLink-iOS.svg?style=flat)](https://cocoapods.org/pods/SmartDeviceLink-iOS)
+[![Version](https://img.shields.io/cocoapods/v/SmartDeviceLink.svg?style=flat)](https://cocoapods.org/pods/SmartDeviceLink)
+[![License](https://img.shields.io/cocoapods/l/SmartDeviceLink.svg?style=flat)](https://cocoapods.org/pods/SmartDeviceLink)
 [![Build Status](https://img.shields.io/travis/smartdevicelink/sdl_ios/master.svg?style=flat)](https://travis-ci.org/smartdevicelink/sdl_ios)
 [![codecov](https://codecov.io/gh/smartdevicelink/sdl_ios/branch/master/graph/badge.svg)](https://codecov.io/gh/smartdevicelink/sdl_ios)
-[![Documentation](https://img.shields.io/cocoapods/metrics/doc-percent/SmartDeviceLink-iOS.svg)](http://cocoadocs.org/docsets/SmartDeviceLink-iOS/)
-[![CocoaPods Downloads](https://img.shields.io/cocoapods/dt/SmartDeviceLink-iOS.svg?maxAge=172800)](https://cocoapods.org/pods/SmartDeviceLink-iOS)
+[![documentation](https://img.shields.io/badge/documentation-51%25-yellow.svg)]()
+[![CocoaPods Downloads](https://img.shields.io/cocoapods/dt/SmartDeviceLink.svg?maxAge=172800)](https://cocoapods.org/pods/SmartDeviceLink)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Slack Status](http://sdlslack.herokuapp.com/badge.svg)](http://slack.smartdevicelink.com)
  
@@ -16,7 +16,8 @@
 * The [Core](https://github.com/smartdevicelink/sdl_core) component is the software which Vehicle Manufacturers (OEMs)  implement in their vehicle head units. Integrating this component into their head unit and HMI based on a set of guidelines and templates enables access to various smartphone applications.
 * The optional [SDL Server](https://github.com/smartdevicelink/sdl_server) can be used by Vehicle OEMs to update application policies and gather usage information for connected applications.
 * The [iOS](https://github.com/smartdevicelink/sdl_ios) and [Android](https://github.com/smartdevicelink/sdl_android) libraries are implemented by app developers into their applications to enable command and control via the connected head unit.
-* To suggest new features to SDL, including the iOS library, go to the [SDL Evolution](https://github.com/smartdevicelink/sdl_evolution) github project
+* To suggest new features to SDL, including the iOS library, go to the [SDL Evolution](https://github.com/smartdevicelink/sdl_evolution) github project.
+* To understand if a contribution should be entered as an iOS Pull Request or Issue, or an SDL Evolution Proposal, please reference [this document](https://github.com/smartdevicelink/sdl_evolution/blob/master/proposals_versus_issues.md).
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=AzdQdSCS24M" target="_blank"><img src="http://i.imgur.com/nm8UujD.png?1" alt="SmartDeviceLink" border="10" /></a>
 
@@ -38,9 +39,9 @@ See the [roadmap](https://github.com/smartdevicelink/sdl_ios/wiki/Roadmap) to se
 
 ##### Cocoapods
 
-You can install this library using [Cocoapods](https://cocoapods.org/pods/SmartDeviceLink-iOS). You can get started with Cocoapods by [following their install guide](https://guides.cocoapods.org/using/getting-started.html#getting-started), and learn how to use Cocoapods to install dependencies [by following this guide](https://guides.cocoapods.org/using/using-cocoapods.html).
+You can install this library using [Cocoapods](https://cocoapods.org/pods/SmartDeviceLink). You can get started with Cocoapods by [following their install guide](https://guides.cocoapods.org/using/getting-started.html#getting-started), and learn how to use Cocoapods to install dependencies [by following this guide](https://guides.cocoapods.org/using/using-cocoapods.html).
 
-In your podfile, you want to add `pod 'SmartDeviceLink-iOS', '~> 4.5'`. Then run `pod install` inside your terminal. With Cocoapods, we support iOS 6.0+.
+In your podfile, you want to add `pod 'SmartDeviceLink', '~> 4.7'`. Then run `pod install` inside your terminal. With Cocoapods, we support iOS 6.0+.
 
 ##### Carthage
 
@@ -52,11 +53,13 @@ Tagged to our releases is a dynamic framework file that can be drag-and-dropped 
 
 ### Reference Documentation
 
-You can find the latest reference documentation on [Cocoadocs](http://cocoadocs.org/docsets/SmartDeviceLink-iOS). Install this documentation to [Dash](http://kapeli.com/dash) or Xcode using [Docs for Xcode](https://documancer.com/xcode/). On the [docs page](http://cocoadocs.org/docsets/SmartDeviceLink-iOS), click the 'share' button in the upper right.
+You can find the latest reference documentation on [SmartDeviceLink.com Documentation](https://smartdevicelink.com/en/docs/iOS/master/), and view guides on [SmartDeviceLink.com Guides](https://smartdevicelink.com/en/guides/iOS/getting-started/installation/).
 
 ### Getting Help
 
-If you see a bug, feel free to post an issue on the appropriate repository. Please see the [contribution guidelines](https://github.com/smartdevicelink/sdl_ios/blob/master/CONTRIBUTING.md) before proceeding. If you need general assistance, or have other questions, you can [sign up](http://slack.smartdevicelink.org) for the [SDL Slack](https://smartdevicelink.slack.com) and chat with other developers and the maintainers of the project.
+First, view our guides on [SmartDeviceLink.com](https://smartdevicelink.com/en/guides/iOS/getting-started/installation/).
+
+If you see a bug, please post an issue on the appropriate repository. Please see the [contribution guidelines](https://github.com/smartdevicelink/sdl_ios/blob/master/CONTRIBUTING.md) before proceeding. If you need general assistance, or have other questions, you can [sign up](http://slack.smartdevicelink.org) for the [SDL Slack](https://smartdevicelink.slack.com) and chat with other developers and the maintainers of the project.
 
 ### SDL iOS Getting Started
 
@@ -107,6 +110,7 @@ Your application must support a set of smartdevicelink protocol strings in order
 <string>com.smartdevicelink.prot1</string>
 <string>com.smartdevicelink.prot0</string>
 <string>com.ford.sync.prot0</string>
+<string>com.smartdevicelink.multisession</string>
 </array>
 ```
 

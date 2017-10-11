@@ -1,0 +1,63 @@
+//
+//  SDLGetSystemCapabilityResponse.m
+<<<<<<< HEAD
+//
+
+#import "SDLGetSystemCapabilityResponse.h"
+#import "SDLNames.h"
+#import "SDLSystemCapability.h"
+
+=======
+//  SmartDeviceLink-iOS
+//
+//  Created by Joel Fischer on 7/11/17.
+//  Copyright © 2017 smartdevicelink. All rights reserved.
+//
+
+#import "SDLGetSystemCapabilityResponse.h"
+
+#import "SDLNames.h"
+#import "SDLSystemCapability.h"
+
+
+>>>>>>> feature/4.7.3
+@implementation SDLGetSystemCapabilityResponse
+
+- (instancetype)init {
+    if (self = [super initWithName:NAMES_GetSystemCapability]) {
+    }
+    return self;
+}
+
+- (instancetype)initWithDictionary:(NSMutableDictionary *)dict {
+    if (self = [super initWithDictionary:dict]) {
+    }
+    return self;
+}
+
+- (void)setSystemCapability:(SDLSystemCapability *)systemCapability {
+    if (systemCapability != nil) {
+<<<<<<< HEAD
+        [parameters setObject:systemCapability forKey:NAMES_systemCapability];
+=======
+        parameters[NAMES_systemCapability] = systemCapability;
+>>>>>>> feature/4.7.3
+    } else {
+        [parameters removeObjectForKey:NAMES_systemCapability];
+    }
+}
+
+- (SDLSystemCapability *)systemCapability {
+<<<<<<< HEAD
+     return [parameters objectForKey:NAMES_systemCapability];
+=======
+    NSObject *obj = [parameters objectForKey:NAMES_systemCapability];
+    if (obj == nil || [obj isKindOfClass:SDLSystemCapability.class]) {
+        return (SDLSystemCapability *)obj;
+    } else {
+        return [[SDLSystemCapability alloc] initWithDictionary:(NSMutableDictionary *)obj];
+    }
+>>>>>>> feature/4.7.3
+}
+
+@end

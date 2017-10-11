@@ -2,7 +2,7 @@
 //  SDLUnsubscribeWayPointsResponse.m
 //
 
-#import "SDLUnsubscribeWayPointsResponse.h"
+#import "SDLUnsubscribeWaypointsResponse.h"
 #import "SDLNames.h"
 
 @implementation SDLUnsubscribeWayPointsResponse

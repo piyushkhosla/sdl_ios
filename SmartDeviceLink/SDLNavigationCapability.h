@@ -1,26 +1,27 @@
 //
 //  SDLNavigationCapability.h
+//  SmartDeviceLink-iOS
+//
+//  Created by Joel Fischer on 7/11/17.
+//  Copyright © 2017 smartdevicelink. All rights reserved.
 //
 
-#import "SDLRPCMessage.h"
+#import "SDLRPCStruct.h"
 
-/**
- * Extended capabilities for an onboard navigation system
- */
 @interface SDLNavigationCapability : SDLRPCStruct
 
-/**
- * @abstract Bool value which tells If the module has the ability to add locations to the onboard nav
- *
- * optional, 1/0 NSNumber
- */
-@property (strong) NSNumber *sendLocationEnabled;
+- (instancetype)initWithSendLocation:(BOOL)sendLocationEnabled waypoints:(BOOL)waypointsEnabled;
 
 /**
- * @abstract Bool value which tells If the module has the ability to return way points from onboard nav
- *
- * optional, 1/0 NSNumber
+ Whether or not the SendLocation RPC is enabled.
+ Boolean, optional
  */
-@property (strong) NSNumber *getWayPointsEnabled;
+@property (copy, nonatomic) NSNumber *sendLocationEnabled;
+
+/**
+ Whether or not Waypoint related RPCs are enabled.
+ Boolean, optional
+ */
+@property (copy, nonatomic) NSNumber *getWayPointsEnabled;
 
 @end

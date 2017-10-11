@@ -60,7 +60,7 @@
     self.isMediaApplication = @(isMediaApp);
     self.ttsName = [ttsName copy];
     self.vrSynonyms = [vrSynonyms copy];
-    self.syncMsgVersion = [[SDLSyncMsgVersion alloc] initWithMajorVersion:1 minorVersion:0];
+    self.syncMsgVersion = [[SDLSyncMsgVersion alloc] initWithMajorVersion:1 minorVersion:0 patchVersion:0];
     self.appInfo = [SDLAppInfo currentAppInfo];
     self.deviceInfo = [SDLDeviceInfo currentDevice];
     self.hashID = resumeHash;
@@ -108,7 +108,9 @@
 
 - (NSMutableArray *)ttsName {
     NSMutableArray *array = [parameters objectForKey:NAMES_ttsName];
-    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:SDLTTSChunk.class]) {
+    if ([array isEqual:[NSNull null]]) {
+        return [NSMutableArray array];
+    } else if (array.count < 1 || [array.firstObject isKindOfClass:SDLTTSChunk.class]) {
         return array;
     } else {
         NSMutableArray *newList = [NSMutableArray arrayWithCapacity:[array count]];
@@ -199,7 +201,9 @@
 
 - (NSMutableArray *)appHMIType {
     NSMutableArray *array = [parameters objectForKey:NAMES_appHMIType];
-    if ([array count] < 1 || [[array objectAtIndex:0] isKindOfClass:SDLAppHMIType.class]) {
+    if ([array isEqual:[NSNull null]]) {
+        return [NSMutableArray array];
+    } else if (array.count < 1 || [array.firstObject isKindOfClass:SDLAppHMIType.class]) {
         return array;
     } else {
         NSMutableArray *newList = [NSMutableArray arrayWithCapacity:[array count]];

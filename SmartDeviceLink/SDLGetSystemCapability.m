@@ -1,10 +1,15 @@
 //
 //  SDLGetSystemCapability.m
+//  SmartDeviceLink-iOS
+//
+//  Created by Joel Fischer on 7/11/17.
+//  Copyright © 2017 smartdevicelink. All rights reserved.
 //
 
 #import "SDLGetSystemCapability.h"
+
 #import "SDLNames.h"
-#import "SDLSystemCapability.h"
+#import "SDLSystemCapabilityType.h"
 
 @implementation SDLGetSystemCapability
 
@@ -20,31 +25,32 @@
     return self;
 }
 
-- (instancetype)initWithsystemCapabilityType:(SDLSystemCapabilityType *)systemCapabilityType {
+- (instancetype)initWithType:(SDLSystemCapabilityType *)type {
     self = [self init];
     if (!self) {
         return nil;
     }
-    
-    self.systemCapabilityType = systemCapabilityType;
-    return self;
 
+    self.systemCapabilityType = type;
+
+    return self;
 }
 
-
-
-- (void)setSystemCapabilityType:(SDLSystemCapabilityType *)systemCapabilityType {
-    if (systemCapabilityType != nil) {
-        [parameters setObject:systemCapabilityType forKey:NAMES_systemCapabilityType];
+- (void)setSystemCapabilityType:(SDLSystemCapabilityType *)type {
+    if (type != nil) {
+        [parameters setObject:type forKey:NAMES_systemCapabilityType];
     } else {
         [parameters removeObjectForKey:NAMES_systemCapabilityType];
     }
-    
 }
 
 - (SDLSystemCapabilityType *)systemCapabilityType {
-    return [parameters objectForKey:NAMES_systemCapabilityType];
+    id obj = parameters[NAMES_systemCapabilityType];
+    if (obj == nil || [obj isKindOfClass:SDLSystemCapabilityType.class]) {
+        return (SDLSystemCapabilityType *)obj;
+    } else {
+        return [SDLSystemCapabilityType valueOf:(NSString *)obj];
+    }
 }
-
 
 @end
