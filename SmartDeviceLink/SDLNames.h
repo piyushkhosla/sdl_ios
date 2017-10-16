@@ -133,6 +133,7 @@
 #define NAMES_eCallNotificationStatus @"eCallNotificationStatus"
 #define NAMES_ecuHeader @"ecuHeader"
 #define NAMES_ecuName @"ecuName"
+#define NAMES_electronicParkBrakeStatus @"electronicParkBrakeStatus"
 #define NAMES_emergencyEvent @"emergencyEvent"
 #define NAMES_emergencyEventType @"emergencyEventType"
 #define NAMES_EncodedSyncPData @"EncodedSyncPData"

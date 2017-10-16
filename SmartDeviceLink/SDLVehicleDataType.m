@@ -36,7 +36,7 @@ SDLVehicleDataType *SDLVehicleDataType_VEHICLEDATA_TIREPRESSURE_VALUE = nil;
 SDLVehicleDataType *SDLVehicleDataType_VEHICLEDATA_TPMS = nil;
 SDLVehicleDataType *SDLVehicleDataType_VEHICLEDATA_TURNSIGNAL = nil;
 SDLVehicleDataType *SDLVehicleDataType_VEHICLEDATA_ENGINEOILLIFE = nil;
-
+SDLVehicleDataType *SDLVehicleDataType_VEHICLEDATA_ELECTRONICPARKBRAKESTATUS = nil;
 
 NSArray *SDLVehicleDataType_values = nil;
 
@@ -85,7 +85,8 @@ NSArray *SDLVehicleDataType_values = nil;
             SDLVehicleDataType.VEHICLEDATA_TIREPRESSURE_VALUE,
             SDLVehicleDataType.VEHICLEDATA_TPMS,
             SDLVehicleDataType.VEHICLEDATA_TURNSIGNAL,
-            SDLVehicleDataType.VEHICLEDATA_ENGINEOILLIFE
+            SDLVehicleDataType.VEHICLEDATA_ENGINEOILLIFE,
+            SDLVehicleDataType_VEHICLEDATA_ELECTRONICPARKBRAKESTATUS
         ];
     }
     return SDLVehicleDataType_values;
@@ -313,5 +314,12 @@ NSArray *SDLVehicleDataType_values = nil;
         SDLVehicleDataType_VEHICLEDATA_ENGINEOILLIFE = [[SDLVehicleDataType alloc] initWithValue:@"VEHICLEDATA_ENGINEOILLIFE"];
     }
     return SDLVehicleDataType_VEHICLEDATA_ENGINEOILLIFE;
+}
+
++ (SDLVehicleDataType *)VEHICLEDATA_ELECTRONICPARKBRAKESTATUS {
+    if (SDLVehicleDataType_VEHICLEDATA_ELECTRONICPARKBRAKESTATUS== nil) {
+        SDLVehicleDataType_VEHICLEDATA_ELECTRONICPARKBRAKESTATUS = [[SDLVehicleDataType alloc] initWithValue:@"VEHICLEDATA_ELECTRONICPARKBRAKESTATUS"];
+    }
+    return SDLVehicleDataType_VEHICLEDATA_ELECTRONICPARKBRAKESTATUS;
 }
 @end

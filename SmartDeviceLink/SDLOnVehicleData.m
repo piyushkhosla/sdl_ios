@@ -24,7 +24,7 @@
 #import "SDLTirePressureValue.h"
 #import "SDLTPMS.h"
 #import "SDLTurnSignal.h"
-
+#import "SDLElectronicParkBrakeStatus.h"
 
 @implementation SDLOnVehicleData
 
@@ -516,6 +516,18 @@
 
 - (NSNumber *)engineOilLife {
     return [parameters objectForKey:NAMES_engineOilLife];
+}
+
+- (void)setElectronicParkBrakeStatus:(SDLElectronicParkBrakeStatus *)electronicParkBrakeStatus {
+    if (electronicParkBrakeStatus != nil) {
+        [parameters setObject:electronicParkBrakeStatus forKey:NAMES_electronicParkBrakeStatus];
+    } else {
+        [parameters removeObjectForKey:NAMES_electronicParkBrakeStatus];
+    }
+}
+
+- (SDLElectronicParkBrakeStatus *)electronicParkBrakeStatus {
+    return [parameters objectForKey:NAMES_electronicParkBrakeStatus];
 }
 
 @end

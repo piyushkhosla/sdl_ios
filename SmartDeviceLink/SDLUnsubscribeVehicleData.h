@@ -153,6 +153,13 @@
  */
 @property (strong) NSNumber *engineOilLife;
 
+/**
+ * @abstract The status of the park brake as provided by Electric Park Brake (EPB)
+ * system.
+ *
+ */
+@property (strong) NSNumber *electronicParkBrakeStatus;
+
 @property (strong) NSNumber *steeringWheelAngle;
 @property (strong) NSNumber *eCallInfo;
 @property (strong) NSNumber *airbagStatus;

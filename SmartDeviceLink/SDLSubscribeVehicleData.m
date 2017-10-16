@@ -414,4 +414,16 @@
     return [parameters objectForKey:NAMES_engineOilLife];
 }
 
+- (void)setElectronicParkBrakeStatus:(NSNumber *)electronicParkBrakeStatus {
+    if (electronicParkBrakeStatus != nil) {
+        [parameters setObject:electronicParkBrakeStatus forKey:NAMES_electronicParkBrakeStatus];
+    } else {
+        [parameters removeObjectForKey:NAMES_electronicParkBrakeStatus];
+    }
+}
+
+- (NSNumber *)electronicParkBrakeStatus {
+    return [parameters objectForKey:NAMES_electronicParkBrakeStatus];
+}
+
 @end

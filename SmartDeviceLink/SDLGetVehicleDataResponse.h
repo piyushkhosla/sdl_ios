@@ -23,6 +23,7 @@
 @class SDLTirePressureValue;
 @class SDLTPMS;
 @class SDLTurnSignal;
+@class SDLElectronicParkBrakeStatus;
 
 
 /**
@@ -179,6 +180,13 @@
  * Float 0-100
  */
 @property (strong) NSNumber *engineOilLife;
+
+/**
+ * @abstract The status of the park brake as provided by Electric Park Brake (EPB)
+ * system.
+ *
+ */
+@property (strong) SDLElectronicParkBrakeStatus *electronicParkBrakeStatus;
 
 @property (strong) SDLECallInfo *eCallInfo;
 @property (strong) SDLAirbagStatus *airbagStatus;

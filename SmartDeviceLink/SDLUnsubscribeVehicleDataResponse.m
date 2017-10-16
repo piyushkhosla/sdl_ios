@@ -533,4 +533,21 @@
     }
 }
 
+- (void)setElectronicParkBrakeStatus:(SDLVehicleDataResult *)electronicParkBrakeStatus {
+    if (electronicParkBrakeStatus != nil) {
+        [parameters setObject:electronicParkBrakeStatus forKey:NAMES_electronicParkBrakeStatus];
+    } else {
+        [parameters removeObjectForKey:NAMES_electronicParkBrakeStatus];
+    }
+}
+
+- (SDLVehicleDataResult *)electronicParkBrakeStatus {
+    NSObject *obj = [parameters objectForKey:NAMES_electronicParkBrakeStatus];
+    if (obj == nil || [obj isKindOfClass:SDLVehicleDataResult.class]) {
+        return (SDLVehicleDataResult *)obj;
+    } else {
+        return [[SDLVehicleDataResult alloc] initWithDictionary:(NSMutableDictionary *)obj];
+    }
+}
+
 @end

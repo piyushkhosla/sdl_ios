@@ -151,6 +151,12 @@
  */
 @property (strong) SDLVehicleDataResult *engineOilLife;
 
+/**
+ * @abstract The status of the park brake as provided by Electric Park Brake (EPB) system.
+ *
+ */
+@property (strong) SDLVehicleDataResult *electronicParkBrakeStatus;
+
 @property (strong) SDLVehicleDataResult *eCallInfo;
 @property (strong) SDLVehicleDataResult *airbagStatus;
 @property (strong) SDLVehicleDataResult *emergencyEvent;
