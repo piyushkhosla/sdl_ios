@@ -625,11 +625,9 @@ static NSString *const SDLBundleShortVersionStringKey = @"CFBundleShortVersionSt
 }
 
 + (SDLSlider *)buildSliderStaticFooterWithNumTicks:(NSNumber *)numTicks position:(NSNumber *)position sliderHeader:(NSString *)sliderHeader sliderFooter:(NSString *)sliderFooter timeout:(NSNumber *)timeout correlationID:(NSNumber *)correlationID {
-    NSArray *sliderFooters = [NSArray arrayWithObject:sliderFooter];
-
-    // Populates array with the same footer value for each position
-    for (UInt32 i = 1; i < numTicks.unsignedIntegerValue; i++) {
-        sliderFooters = [sliderFooters arrayByAddingObject:sliderFooter];
+    NSArray *sliderFooters;
+    if (sliderFooter != nil) {
+        sliderFooters = [NSArray arrayWithObject:sliderFooter];
     }
 
     return [SDLRPCRequestFactory buildSliderDynamicFooterWithNumTicks:numTicks position:position sliderHeader:sliderHeader sliderFooter:sliderFooters timeout:timeout correlationID:correlationID];
