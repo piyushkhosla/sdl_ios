@@ -2,11 +2,9 @@
 //  SDLTirePressureValue.m
 //  SmartDeviceLink-iOS
 //
-//  Created by CHDSEZ318988DADM on 07/07/16.
-//  Copyright © 2016 smartdevicelink. All rights reserved.
-//
 
 #import "SDLTirePressureValue.h"
+#import "NSMutableDictionary+Store.h"
 #import "SDLNames.h"
 
 @implementation SDLTirePressureValue
@@ -24,87 +22,68 @@
 }
 
 - (void)setLeftFront:(NSNumber *)leftFront {
-    if (leftFront != nil) {
-        [store setObject:leftFront forKey:NAMES_leftFront];
-    } else {
-        [store removeObjectForKey:NAMES_leftFront];
-    }
+    [store sdl_setObject:leftFront forName:SDLNameLeftFront];
+
 }
 
 - (NSNumber *)leftFront {
-    return [store objectForKey:NAMES_leftFront];
+    return [store sdl_objectForName:SDLNameLeftFront];
 }
 
 - (void)setRightFront:(NSNumber *)rightFront {
-    if (rightFront != nil) {
-        [store setObject:rightFront forKey:NAMES_rightFront];
-    } else {
-        [store removeObjectForKey:NAMES_rightFront];
-    }
+    [store sdl_setObject:rightFront forName:SDLNameRightFront];
 }
 
 - (NSNumber *)rightFront {
-    return [store objectForKey:NAMES_rightFront];
+    return [store sdl_objectForName:SDLNameRightFront];
 }
 
 - (void)setLeftRear:(NSNumber *)leftRear {
-    if (leftRear != nil) {
-        [store setObject:leftRear forKey:NAMES_leftRear];
-    } else {
-        [store removeObjectForKey:NAMES_leftRear];
-    }
+    [store sdl_setObject:leftRear forName:SDLNameLeftRear];
 }
 
 - (NSNumber *)leftRear {
-    return [store objectForKey:NAMES_leftRear];
+    return [store sdl_objectForName:SDLNameLeftRear];
+}
+
+- (void)setRightRear:(NSNumber *)rightRear {
+    [store sdl_setObject:rightRear forName:SDLNameRightRear];
+}
+
+-(NSNumber *)rightRear {
+    return [store sdl_objectForName:SDLNameRightRear];
 }
 
 - (void)setInnerLeftRear:(NSNumber *)innerLeftRear {
-    if (innerLeftRear != nil) {
-        [store setObject:innerLeftRear forKey:NAMES_innerLeftRear];
-    } else {
-        [store removeObjectForKey:NAMES_innerLeftRear];
-    }
+    [store sdl_setObject:innerLeftRear forName:SDLNameInnerLeftRear];
 }
 
 - (NSNumber *)innerLeftRear {
-    return [store objectForKey:NAMES_innerLeftRear];
+    return [store sdl_objectForName:SDLNameInnerLeftRear];
 }
 
 - (void)setInnerRightRear:(NSNumber *)innerRightRear {
-    if (innerRightRear != nil) {
-        [store setObject:innerRightRear forKey:NAMES_innerRightRear];
-    } else {
-        [store removeObjectForKey:NAMES_innerRightRear];
-    }
+    [store sdl_setObject:innerRightRear forName:SDLNameInnerRightRear];
 }
 
 - (NSNumber *)innerRightRear {
-    return [store objectForKey:NAMES_innerRightRear];
+    return [store sdl_objectForName:SDLNameInnerRightRear];
 }
 
 - (void)setFrontRecommended:(NSNumber *)frontRecommended {
-    if (frontRecommended != nil) {
-        [store setObject:frontRecommended forKey:NAMES_frontRecommended];
-    } else {
-        [store removeObjectForKey:NAMES_frontRecommended];
-    }
+    [store sdl_setObject:frontRecommended forName:SDLNameFrontRecommended];
 }
 
 - (NSNumber *)frontRecommended {
-    return [store objectForKey:NAMES_frontRecommended];
+    return [store sdl_objectForName:SDLNameFrontRecommended];
 }
 
 - (void)setRearRecommended:(NSNumber *)rearRecommended {
-    if (rearRecommended != nil) {
-        [store setObject:rearRecommended forKey:NAMES_rearRecommended];
-    } else {
-        [store removeObjectForKey:NAMES_rearRecommended];
-    }
+    [store sdl_setObject:rearRecommended forName:SDLNameRearRecommended];
 }
 
 - (NSNumber *)rearRecommended {
-    return [store objectForKey:NAMES_rearRecommended];
+    return [store sdl_objectForName:SDLNameRearRecommended];
 }
 
 @end

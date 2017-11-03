@@ -4,28 +4,33 @@
 
 
 /**
- SDLTurnSignal gives signal about next turn.
+ 
  */
 #import "SDLEnum.h"
 
 
-@interface SDLTurnSignal : SDLEnum
+/**
+ * Specifies  type of SDLTurnSignal, which gives signal about next turn.
+ *
+ */
+typedef SDLEnum SDLTurnSignal SDL_SWIFT_ENUM;
 
 /**
- @abstract get SDLTurnSignal according value string
- @param value NSString
- @return SDLTurnSignal object
+ * @abstract SDLTurnSignal : OFF
  */
-+ (SDLTurnSignal *)valueOf:(NSString *)value;
+extern SDLTurnSignal const SDLTurnSignalOff;
+
 /**
- @abstract declare an array to store all possible SDLTurnSignal values
- @return the array
+ * @abstract SDLTurnSignal : LEFT
  */
-+ (NSArray *)values;
+extern SDLTurnSignal const SDLTurnSignalLeft;
 
-+ (SDLTurnSignal *)OFF;
-+ (SDLTurnSignal *)LEFT;
-+ (SDLTurnSignal *)RIGHT;
-+ (SDLTurnSignal *)UNUSED;
+/**
+ * @abstract SDLTurnSignal : RIGHT
+ */
+extern SDLTurnSignal const SDLTurnSignalRight;
 
-@end
+/**
+ * @abstract SDLTurnSignal : UNUSED
+ */
+extern SDLTurnSignal const SDLTurnSignalUnused;

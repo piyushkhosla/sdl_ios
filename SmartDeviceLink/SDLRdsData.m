@@ -1,121 +1,95 @@
 //
-//  SDLRdsData.m
+//  SDLRDSData.m
 //
 
-#import "SDLRdsData.h"
+#import "SDLRDSData.h"
 #include "SDLNames.h"
+#import "NSMutableDictionary+Store.h"
 
-@implementation SDLRdsData
+NS_ASSUME_NONNULL_BEGIN
 
-- (void)setPS:(NSString *)PS {
-    if (PS != nil) {
-        [store setObject:PS forKey:NAMES_PS];
-    } else {
-        [store removeObjectForKey:NAMES_PS];
+@implementation SDLRDSData
+
+- (instancetype)initWithProgramService:(nullable NSString *)programService radioText:(nullable NSString *)radioText clockText:(nullable NSString *)clockText programIdentification:(nullable NSString *)programIdentification programType:(nullable NSNumber<SDLInt> *)programType trafficProgramIdentification:(nullable NSNumber<SDLBool> *)trafficProgramIdentification trafficAnnouncementIdentification:(nullable NSNumber<SDLBool> *)trafficAnnouncementIdentification region:(nullable NSString *)region {
+    self = [self init];
+    if (!self) {
+        return nil;
     }
-
+    self.programService = programService;
+    self.radioText = radioText;
+    self.clockText = clockText;
+    self.programIdentification = programIdentification;
+    self.programType = programType;
+    self.trafficProgramIdentification = trafficProgramIdentification;
+    self.trafficAnnouncementIdentification = trafficAnnouncementIdentification;
+    self.region = region;
+    return self;
 }
 
-- (NSString *)PS {
-    return [store objectForKey:NAMES_PS];
-
+- (void)setProgramService:(nullable NSString *)programService {
+    [store sdl_setObject:programService forName:SDLNameProgramService];
 }
 
-- (void)setRT:(NSString *)RT {
-    if (RT != nil) {
-        [store setObject:RT forKey:NAMES_RT];
-    } else {
-        [store removeObjectForKey:NAMES_RT];
-    }
-
+- (nullable NSString *)programService {
+    return [store sdl_objectForName:SDLNameProgramService];
 }
 
-- (NSString *)RT {
-    return [store objectForKey:NAMES_RT];
-
+- (void)setRadioText:(nullable NSString *)radioText {
+    [store sdl_setObject:radioText forName:SDLNameRadioText];
 }
 
-- (void)setCT:(NSString *)CT {
-    if (CT != nil) {
-        [store setObject:CT forKey:NAMES_CT];
-    } else {
-        [store removeObjectForKey:NAMES_CT];
-    }
-
+- (nullable NSString *)radioText {
+    return [store sdl_objectForName:SDLNameRadioText];
 }
 
-- (NSString *)CT {
-    return [store objectForKey:NAMES_CT];
-
+- (void)setClockText:(nullable NSString *)clockText {
+    [store sdl_setObject:clockText forName:SDLNameClockText];
 }
 
-- (void)setPI:(NSString *)PI {
-    if (PI != nil) {
-        [store setObject:PI forKey:NAMES_PI];
-    } else {
-        [store removeObjectForKey:NAMES_PI];
-    }
-
+- (nullable NSString *)clockText {
+    return [store sdl_objectForName:SDLNameClockText];
 }
 
-- (NSString *)PI {
-    return [store objectForKey:NAMES_PI];
-
+- (void)setProgramIdentification:(nullable NSString *)programIdentification {
+    [store sdl_setObject:programIdentification forName:SDLNameProgramIdentification];
 }
 
-- (void)setPTY:(NSNumber *)PTY {
-    if (PTY != nil) {
-        [store setObject:PTY forKey:NAMES_PTY];
-    } else {
-        [store removeObjectForKey:NAMES_PTY];
-    }
-
+- (nullable NSString *)programIdentification {
+    return [store sdl_objectForName:SDLNameProgramIdentification];
 }
 
-- (NSNumber *)PTY {
-    return [store objectForKey:NAMES_PTY];
-
+- (void)setProgramType:(nullable NSNumber<SDLInt> *)programType {
+    [store sdl_setObject:programType forName:SDLNameProgramType];
 }
 
-- (void)setTP:(NSNumber *)TP {
-    if (TP != nil) {
-        [store setObject:TP forKey:NAMES_TP];
-    } else {
-        [store removeObjectForKey:NAMES_TP];
-    }
-
+- (nullable NSNumber<SDLInt> *)programType {
+    return [store sdl_objectForName:SDLNameProgramType];
 }
 
-- (NSNumber *)TP {
-    return [store objectForKey:NAMES_TP];
-
+- (void)setTrafficProgramIdentification:(nullable NSNumber<SDLBool> *)trafficProgramIdentification {
+    [store sdl_setObject:trafficProgramIdentification forName:SDLNameTrafficProgramIdentification];
 }
 
-- (void)setTA:(NSNumber *)TA {
-    if (TA != nil) {
-        [store setObject:TA forKey:NAMES_TA];
-    } else {
-        [store removeObjectForKey:NAMES_TA];
-    }
-
+- (nullable NSNumber<SDLBool> *)trafficProgramIdentification {
+    return [store sdl_objectForName:SDLNameTrafficProgramIdentification];
 }
 
-- (NSNumber *)TA {
-    return [store objectForKey:NAMES_TA];
-
+- (void)setTrafficAnnouncementIdentification:(nullable NSNumber<SDLBool> *)trafficAnnouncementIdentification {
+    [store sdl_setObject:trafficAnnouncementIdentification forName:SDLNameTrafficAnnouncementIdentification];
 }
 
-- (void)setREG:(NSString *)REG {
-    if (REG != nil) {
-        [store setObject:REG forKey:NAMES_REG];
-    } else {
-        [store removeObjectForKey:NAMES_REG];
-    }
-
+- (nullable NSNumber<SDLBool> *)trafficAnnouncementIdentification {
+    return [store sdl_objectForName:SDLNameTrafficAnnouncementIdentification];
 }
 
-- (NSString *)REG {
-    return [store objectForKey:NAMES_REG];
-
+- (void)setRegion:(nullable NSString *)region {
+    [store sdl_setObject:region forName:SDLNameRegion];
 }
+
+- (nullable NSString *)region {
+    return [store sdl_objectForName:SDLNameRegion];
+}
+
 @end
+
+NS_ASSUME_NONNULL_END

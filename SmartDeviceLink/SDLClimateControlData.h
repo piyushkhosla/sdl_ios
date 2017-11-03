@@ -3,81 +3,90 @@
 //
 
 #import "SDLRPCMessage.h"
+#import "SDLDefrostZone.h"
+#import "SDLVentilationMode.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
 @class SDLTemperature;
-@class SDLDefrostZone;
-@class SDLVentilationMode;
 
 
 @interface SDLClimateControlData : SDLRPCStruct
+
+- (instancetype)initWithFanSpeed:(nullable NSNumber<SDLInt> *)fanSpeed desiredTemperature:(nullable SDLTemperature *)desiredTemperature acEnable:(nullable NSNumber<SDLBool> *)acEnable circulateAirEnable:(nullable NSNumber<SDLBool> *)circulateAirEnable autoModeEnable:(nullable NSNumber<SDLBool> *)autoModeEnable defrostZone:(nullable SDLDefrostZone)defrostZone dualModeEnable:(nullable NSNumber<SDLBool> *)dualModeEnable acMaxEnable:(nullable NSNumber<SDLBool> *)acMaxEnable ventilationMode:(nullable SDLVentilationMode)ventilationMode;
 
 /**
  * @abstract Speed of Fan in integer
  *
  * Optional, MinValue- 0 MaxValue= 100
  */
-@property (strong) NSNumber *fanSpeed;
+@property (nullable, strong, nonatomic) NSNumber<SDLInt> *fanSpeed;
 
 /**
- * @abstractThe Current Temperature in SDLTemperature
+ * @abstract The Current Temperature in SDLTemperature
+ *
+ * @warning This property is readonly and cannot be set on the module.
  *
  * Optional
  */
-@property (strong) SDLTemperature *currentTemperature;
+@property (nullable, strong, nonatomic) SDLTemperature *currentTemperature;
 
 /**
  * @abstract Desired Temperature in SDLTemperature
  *
  * Optional
  */
-@property (strong) SDLTemperature *desiredTemperature;
+@property (nullable, strong, nonatomic) SDLTemperature *desiredTemperature;
 
 /**
  * @abstract Represents if AC is enabled.
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *acEnable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *acEnable;
 
 /**
  * @abstract Represents if circulation of air is enabled.
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *circulateAirEnable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *circulateAirEnable;
 
 /**
  * @abstract Represents if auto mode is enabled.
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *autoModeEnable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *autoModeEnable;
 
 /**
  * @abstract Represents the kind of defrost zone
  *
  * Optional, SDLDefrostZone
  */
-@property (strong) SDLDefrostZone *defrostZone;
+@property (nullable, strong, nonatomic) SDLDefrostZone defrostZone;
 
 /**
  * @abstract Represents if dual mode is enabled.
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *dualModeEnable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *dualModeEnable;
 
 /**
  * @abstract Represents if ac max is enabled.
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *acMaxEnable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *acMaxEnable;
 
 /**
  * @abstract Represents the kind of Ventilation zone
  *
- * Optional, SDLDefrostZone
+ * Optional, SDLVentilationMode
  */
-@property (strong) SDLVentilationMode *ventilationMode;
+@property (nullable, strong, nonatomic) SDLVentilationMode ventilationMode;
 
 @end
+
+NS_ASSUME_NONNULL_END

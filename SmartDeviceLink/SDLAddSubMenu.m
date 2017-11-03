@@ -2,19 +2,16 @@
 
 #import "SDLAddSubMenu.h"
 
+#import "NSMutableDictionary+Store.h"
 #import "SDLNames.h"
 #import "SDLImage.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @implementation SDLAddSubMenu
 
 - (instancetype)init {
-    if (self = [super initWithName:NAMES_AddSubMenu]) {
-    }
-    return self;
-}
-
-- (instancetype)initWithDictionary:(NSMutableDictionary *)dict {
-    if (self = [super initWithDictionary:dict]) {
+    if (self = [super initWithName:SDLNameAddSubMenu]) {
     }
     return self;
 }
@@ -43,56 +40,38 @@
     return self;
 }
 
-- (void)setMenuID:(NSNumber *)menuID {
-    if (menuID != nil) {
-        [parameters setObject:menuID forKey:NAMES_menuID];
-    } else {
-        [parameters removeObjectForKey:NAMES_menuID];
-    }
+- (void)setMenuID:(NSNumber<SDLInt> *)menuID {
+    [parameters sdl_setObject:menuID forName:SDLNameMenuId];
 }
 
-- (NSNumber *)menuID {
-    return [parameters objectForKey:NAMES_menuID];
+- (NSNumber<SDLInt> *)menuID {
+    return [parameters sdl_objectForName:SDLNameMenuId];
 }
 
-- (void)setPosition:(NSNumber *)position {
-    if (position != nil) {
-        [parameters setObject:position forKey:NAMES_position];
-    } else {
-        [parameters removeObjectForKey:NAMES_position];
-    }
+- (void)setPosition:(nullable NSNumber<SDLInt> *)position {
+    [parameters sdl_setObject:position forName:SDLNamePosition];
 }
 
-- (NSNumber *)position {
-    return [parameters objectForKey:NAMES_position];
+- (nullable NSNumber<SDLInt> *)position {
+    return [parameters sdl_objectForName:SDLNamePosition];
 }
 
 - (void)setMenuName:(NSString *)menuName {
-    if (menuName != nil) {
-        [parameters setObject:menuName forKey:NAMES_menuName];
-    } else {
-        [parameters removeObjectForKey:NAMES_menuName];
-    }
+    [parameters sdl_setObject:menuName forName:SDLNameMenuName];
 }
 
 - (NSString *)menuName {
-    return [parameters objectForKey:NAMES_menuName];
+    return [parameters sdl_objectForName:SDLNameMenuName];
 }
 
 - (void)setSubMenuIcon:(SDLImage *)subMenuIcon {
-    if (subMenuIcon != nil) {
-        [parameters setObject:subMenuIcon forKey:NAMES_subMenuIcon];
-    } else {
-        [parameters removeObjectForKey:NAMES_subMenuIcon];
-    }
+    [parameters sdl_setObject:subMenuIcon forName:SDLNameSubMenuIcon];
 }
 
 - (SDLImage *)subMenuIcon {
-    NSObject *obj = [parameters objectForKey:NAMES_subMenuIcon];
-    if (obj == nil || [obj isKindOfClass:SDLImage.class]) {
-        return (SDLImage *)obj;
-    } else {
-        return [[SDLImage alloc] initWithDictionary:(NSMutableDictionary *)obj];
-    }}
+    return [parameters sdl_objectForName:SDLNameSubMenuIcon];
+}
 
 @end
+
+NS_ASSUME_NONNULL_END

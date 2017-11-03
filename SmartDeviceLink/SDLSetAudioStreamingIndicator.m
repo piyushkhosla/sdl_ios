@@ -3,13 +3,13 @@
 //
 
 #import "SDLSetAudioStreamingIndicator.h"
-#import "SDLAudioStreamingIndicator.h"
+#import "NSMutableDictionary+Store.h"
 #import "SDLNames.h"
 
 @implementation SDLSetAudioStreamingIndicator
 
 - (instancetype)init {
-    if (self = [super initWithName:NAMES_SetAudioStreamingIndicator]) {
+    if (self = [super initWithName:SDLNameSetAudioStreamingIndicator]) {
     }
     return self;
 }
@@ -20,7 +20,7 @@
     return self;
 }
 
-- (instancetype)initWithAudioStreamingIndicator:(SDLAudioStreamingIndicator*) audioStreamingIndicator  {
+- (instancetype)initWithAudioStreamingIndicator:(SDLAudioStreamingIndicator) audioStreamingIndicator  {
     self = [self init];
     if (!self) {
         return nil;
@@ -30,16 +30,12 @@
     return self;
 }
 
-- (void)setAudioStreamingIndicator:(SDLAudioStreamingIndicator *)audioStreamingIndicator {
-    if (audioStreamingIndicator != nil) {
-        [parameters setObject:audioStreamingIndicator forKey:NAMES_audioStreamingIndicator];
-    } else {
-        [parameters removeObjectForKey:NAMES_audioStreamingIndicator];
-    }
+- (void)setAudioStreamingIndicator:(SDLAudioStreamingIndicator )audioStreamingIndicator {
+    [parameters sdl_setObject:audioStreamingIndicator forName:SDLNameAudioStreamingIndicator];
 }
 
-- (SDLAudioStreamingIndicator *)audioStreamingIndicator {
-    return [parameters objectForKey:NAMES_audioStreamingIndicator];
+- (SDLAudioStreamingIndicator )audioStreamingIndicator {
+    return [parameters sdl_objectForName:SDLNameAudioStreamingIndicator];
 }
 
 @end

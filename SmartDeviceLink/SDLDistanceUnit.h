@@ -4,35 +4,19 @@
 
 
 #import "SDLEnum.h"
-
-@interface SDLDistanceUnit : SDLEnum
+/**
+ * All possible SDLDistance Units.
+ *
+ * @since SDL 2.0
+ */
+typedef SDLEnum SDLDistanceUnit SDL_SWIFT_ENUM;
 
 /**
- @abstract get SDLDistanceUnit according value string
- @param value NSString
- @return SDLDistanceUnit object
+ * @abstract SDLDistanceUnit : *IMPERIAL*.
  */
-
-+ (SDLDistanceUnit *)valueOf:(NSString *)value;
+extern SDLDistanceUnit const SDLDistanceUnitMetric;
 
 /**
- @abstract declare an array to store all possible SDLDistanceUnit values
- @return the array
+ * @abstract SDLDistanceUnit : *IMPERIAL*.
  */
-
-+ (NSArray *)values;
-
-/**
- @abstract Reflects the current HMI setting for distance unit.
- @return SDLDistanceUnit object with string value *METRIC*
- */
-
-+ (SDLDistanceUnit *)METRIC;
-
-/**
- @abstract Reflects the current HMI setting for distance unit.
- @return SDLDistanceUnit object with string value *IMPERIAL*
- */
-
-+ (SDLDistanceUnit *)IMPERIAL;
-@end
+extern SDLDistanceUnit const SDLDistanceUnitImperial;

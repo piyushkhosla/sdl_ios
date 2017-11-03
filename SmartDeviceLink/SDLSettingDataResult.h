@@ -4,9 +4,8 @@
 //
 
 #import "SDLRPCMessage.h"
-
-@class SDLSettingDataType;
-@class SDLSettingDataResultCode;
+#import "SDLSettingDataType.h"
+#import "SDLSettingDataResultCode.h"
 
 @interface SDLSettingDataResult : SDLRPCStruct {
 
@@ -14,11 +13,11 @@
 /**
  * @abstract Defined published data element type.
  */
-@property(strong)SDLSettingDataType *dataType;
+@property(nullable, strong, nonatomic) SDLSettingDataType dataType;
 
 /**
  * @abstract Published data result code.
  */
-@property(strong)SDLSettingDataResultCode *resultCode;
+@property(nullable, strong, nonatomic) SDLSettingDataResultCode resultCode;
 
 @end

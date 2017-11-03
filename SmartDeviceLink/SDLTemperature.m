@@ -4,31 +4,40 @@
 
 #import "SDLTemperature.h"
 #import "SDLNames.h"
+#import "NSMutableDictionary+Store.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @implementation SDLTemperature
 
-- (void)setUnit:(SDLTemperatureUnit *)unit {
-    if (unit != nil) {
-        [store setObject:unit forKey:NAMES_unit];
-    } else {
-        [store removeObjectForKey:NAMES_unit];
+- (instancetype)initWithUnit:(SDLTemperatureUnit)unit value:(float)value {
+    self = [self init];
+    if (!self) {
+        return nil;
     }
+    
+    self.unit = unit;
+    self.value = @(value);
+    
+    return self;
 }
 
-- (SDLTemperatureUnit *)unit {
-    return [store objectForKey:NAMES_unit];
+- (void)setUnit:(SDLTemperatureUnit)unit {
+    [store sdl_setObject:unit forName:SDLNameUnit];
 }
 
-- (void)setValue:(NSNumber *)value {
-    if (value != nil) {
-        [store setObject:value forKey:NAMES_value];
-    } else {
-        [store removeObjectForKey:NAMES_value];
-    }
+- (SDLTemperatureUnit)unit {
+    return [store sdl_objectForName:SDLNameUnit];
 }
 
-- (NSNumber *)value {
-    return [store objectForKey:NAMES_value];
+- (void)setValue:(NSNumber<SDLFloat> *)value {
+    [store sdl_setObject:value forName:SDLNameValue];
+}
+
+- (NSNumber<SDLFloat> *)value {
+    return [store sdl_objectForName:SDLNameValue];
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

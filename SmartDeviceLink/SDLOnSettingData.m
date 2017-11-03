@@ -3,74 +3,39 @@
 //
 
 #import "SDLOnSettingData.h"
-#import "SDLDisplayMode.h"
-#import "SDLDistanceUnit.h"
-#import "SDLTemperatureUnit.h"
+#import "NSMutableDictionary+Store.h"
 #import "SDLNames.h"
 
 @implementation SDLOnSettingData
 
 - (instancetype)init {
-    if (self = [super initWithName:NAMES_OnSettingData]) {
+    if (self = [super initWithName:SDLNameOnSettingData]) {
     }
     return self;
 }
 
-- (instancetype)initWithDictionary:(NSMutableDictionary *)dict {
-    if (self = [super initWithDictionary:dict]) {
-    }
-    return self;
+- (void)setSeekTime:(nullable SDLDisplayMode)seekTime {
+    [parameters sdl_setObject:seekTime forName:SDLNameSeekTime];
 }
 
-- (void)setSeekTime:(SDLDisplayMode *)seekTime {
-    if (seekTime != nil) {
-        [parameters setObject:seekTime forKey:NAMES_seekTime];
-    } else {
-        [parameters removeObjectForKey:NAMES_seekTime];
-    }
+- (nullable SDLDisplayMode)seekTime {
+    return [parameters sdl_objectForName:SDLNameSeekTime];
 }
 
-- (SDLDisplayMode *)seekTime {
-    NSObject *obj = [parameters objectForKey:NAMES_seekTime];
-    if (obj == nil || [obj isKindOfClass:SDLDisplayMode.class]) {
-        return (SDLDisplayMode *)obj;
-    } else {
-        return [SDLDisplayMode valueOf:(NSString *)obj];
-    }
+- (void)setDistanceUnit:(nullable SDLDistanceUnit)distanceUnit {
+    [parameters sdl_setObject:distanceUnit forName:SDLNameDistanceUnit];
 }
 
-- (void)setDistanceUnit:(SDLDistanceUnit *)distanceUnit {
-    if (distanceUnit != nil) {
-        [parameters setObject:distanceUnit forKey:NAMES_distanceUnit];
-    } else {
-        [parameters removeObjectForKey:NAMES_distanceUnit];
-    }
+- (nullable SDLDistanceUnit)distanceUnit {
+    return [parameters sdl_objectForName:SDLNameDistanceUnit];
 }
 
-- (SDLDistanceUnit *)distanceUnit {
-    NSObject *obj = [parameters objectForKey:NAMES_distanceUnit];
-    if (obj == nil || [obj isKindOfClass:SDLDistanceUnit.class]) {
-        return (SDLDistanceUnit *)obj;
-    } else {
-        return [SDLDistanceUnit valueOf:(NSString *)obj];
-    }
+- (void)setTemperatureUnit:(nullable SDLTemperatureUnit)temperatureUnit {
+    [parameters sdl_setObject:temperatureUnit forName:SDLNameTemperatureUnit];
 }
 
-- (void)setTemperatureUnit:(SDLTemperatureUnit *)temperatureUnit {
-    if (temperatureUnit != nil) {
-        [parameters setObject:temperatureUnit forKey:NAMES_temperatureUnit];
-    } else {
-        [parameters removeObjectForKey:NAMES_temperatureUnit];
-    }
-}
-
-- (SDLTemperatureUnit *)temperatureUnit {
-    NSObject *obj = [parameters objectForKey:NAMES_temperatureUnit];
-    if (obj == nil || [obj isKindOfClass:SDLTemperatureUnit.class]) {
-        return (SDLTemperatureUnit *)obj;
-    } else {
-        return [SDLTemperatureUnit valueOf:(NSString *)obj];
-    }
+- (nullable SDLTemperatureUnit)temperatureUnit {
+    return [parameters sdl_objectForName:SDLNameTemperatureUnit];
 }
 
 @end

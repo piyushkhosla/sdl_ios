@@ -7,23 +7,18 @@
 /**
  Describes the location of the Steering Wheel.
  **/
-@interface SDLSteeringWheelLocation : SDLEnum
+typedef SDLEnum SDLSteeringWheelLocation SDL_SWIFT_ENUM;
 
 /**
- @abstract get SDLSteeringWheelLocation according value string
- @param value NSString
- @return SDLSteeringWheelLocation object
+ * @abstract SDLSteeringWheelLocation: LEFT
  */
-+ (SDLSteeringWheelLocation *)valueOf:(NSString *)value;
+extern SDLSteeringWheelLocation const SDLSteeringWheelLocationLeft;
+/**
+ * @abstract SDLSteeringWheelLocation: RIGHT
+ */
+extern SDLSteeringWheelLocation const SDLSteeringWheelLocationRight;
 
 /**
- @abstract declare an array to store all possible SDLSteeringWheelLocation values
- @return the array
+ * @abstract SDLSteeringWheelLocation: CENTER
  */
-+ (NSArray *)values;
-
-+ (SDLSteeringWheelLocation *)LEFT;
-+ (SDLSteeringWheelLocation *)RIGHT;
-+ (SDLSteeringWheelLocation *)CENTER;
-
-@end
+extern SDLSteeringWheelLocation const SDLSteeringWheelLocationCenter;

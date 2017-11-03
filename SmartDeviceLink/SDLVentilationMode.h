@@ -4,40 +4,25 @@
 
 #import "SDLEnum.h"
 
-@interface SDLVentilationMode : SDLEnum
-
-
-/**
- * @abstract Convert String to SDLVentilationMode
- * @param value The value of the string to get an object for
- * @return SDLDefrostZone
- */
-+ (SDLVentilationMode *)valueOf:(NSString *)value;
+typedef SDLEnum SDLVentilationMode SDL_SWIFT_ENUM;
 
 /**
- * @abstract Store the enumeration of all possible SDLVentilationMode
- * @return An array that store all possible SDLVentilationMode
+ * @abstract A SDLDefrostZone with the value of *UPPER*
  */
-+ (NSArray *)values;
+extern SDLVentilationMode const SDLVentilationModeUpper;
 
 /**
- * @return A SDLDefrostZone with the value of *UPPER*
+ * @abstract A SDLDefrostZone with the value of *LOWER*
  */
-+ (SDLVentilationMode *)UPPER;
+extern SDLVentilationMode const SDLVentilationModeLower;
 
 /**
- * @return A SDLDefrostZone with the value of *LOWER*
+ * @abstract A SDLDefrostZone with the value of *BOTH*
  */
-+ (SDLVentilationMode *)LOWER;
+extern SDLVentilationMode const SDLVentilationModeBoth;
 
 /**
- * @return A SDLDefrostZone with the value of *BOTH*
+ * @abstract A SDLDefrostZone with the value of *NONE*
  */
-+ (SDLVentilationMode *)BOTH;
+extern SDLVentilationMode const SDLVentilationModeNone;
 
-/**
- * @return A SDLDefrostZone with the value of *NORTH*
- */
-+ (SDLVentilationMode *)NONE;
-
-@end

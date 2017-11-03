@@ -3,165 +3,128 @@
 //
 
 #import "SDLClimateControlCapabilities.h"
-#import "SDLDefrostZone.h"
-#import "SDLVentilationMode.h"
 #import "SDLNames.h"
+#import "NSMutableDictionary+Store.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @implementation SDLClimateControlCapabilities
 
+- (instancetype)initWithModuleName:(NSString *)moduleName fanSpeedAvailable:(BOOL)fanSpeedAvailable desiredTemperatureAvailable:(BOOL)desiredTemperatureAvailable acEnableAvailable:(BOOL)acEnableAvailable acMaxEnableAvailable:(BOOL)acMaxEnableAvailable circulateAirAvailable:(BOOL)circulateAirEnableAvailable autoModeEnableAvailable:(BOOL)autoModeEnableAvailable dualModeEnableAvailable:(BOOL)dualModeEnableAvailable defrostZoneAvailable:(BOOL)defrostZoneAvailable ventilationModeAvailable:(BOOL)ventilationModeAvailable {
+    self = [self init];
+    if (!self) {
+        return nil;
+    }
+
+    self.moduleName = moduleName;
+    self.fanSpeedAvailable = @(fanSpeedAvailable);
+    self.desiredTemperatureAvailable = @(desiredTemperatureAvailable);
+    self.acEnableAvailable = @(acEnableAvailable);
+    self.acMaxEnableAvailable = @(acMaxEnableAvailable);
+    self.circulateAirEnableAvailable = @(circulateAirEnableAvailable);
+    self.autoModeEnableAvailable = @(autoModeEnableAvailable);
+    self.dualModeEnableAvailable = @(dualModeEnableAvailable);
+    self.defrostZoneAvailable = @(defrostZoneAvailable);
+    self.ventilationModeAvailable = @(ventilationModeAvailable);
+    return self;
+}
 
 - (void)setModuleName:(NSString *)moduleName {
-    if (moduleName != nil) {
-        [store setObject:moduleName forKey:NAMES_moduleName];
-    } else {
-        [store removeObjectForKey:NAMES_moduleName];
-    }
+    [store sdl_setObject:moduleName forName:SDLNameModuleName];
 }
 
 - (NSString *)moduleName {
-    return [store objectForKey:NAMES_moduleName];
+    return [store sdl_objectForName:SDLNameModuleName];
 }
 
-- (void)setFanSpeedAvailable:(NSNumber *)fanSpeedAvailable {
-    if (fanSpeedAvailable != nil) {
-        [store setObject:fanSpeedAvailable forKey:NAMES_fanSpeedAvailable];
-    } else {
-        [store removeObjectForKey:NAMES_fanSpeedAvailable];
-    }
+- (void)setFanSpeedAvailable:(nullable NSNumber<SDLBool> *)fanSpeedAvailable {
+    [store sdl_setObject:fanSpeedAvailable forName:SDLNameFanSpeedAvailable];
 }
 
-- (NSNumber *)fanSpeedAvailable {
-    return [store objectForKey:NAMES_fanSpeedAvailable];
-
+- (nullable NSNumber<SDLBool> *)fanSpeedAvailable {
+    return [store sdl_objectForName:SDLNameFanSpeedAvailable];
 }
 
-- (void)setDesiredTemperatureAvailable:(NSNumber *)desiredTemperatureAvailable {
-    if (desiredTemperatureAvailable != nil) {
-        [store setObject:desiredTemperatureAvailable forKey:NAMES_desiredTemperatureAvailable];
-    } else {
-        [store removeObjectForKey:NAMES_desiredTemperatureAvailable];
-    }
+- (void)setDesiredTemperatureAvailable:(nullable NSNumber<SDLBool> *)desiredTemperatureAvailable {
+    [store sdl_setObject:desiredTemperatureAvailable forName:SDLNameDesiredTemperatureAvailable];
 }
 
-- (NSNumber *)desiredTemperatureAvailable {
-    return [store objectForKey:NAMES_desiredTemperatureAvailable];
-
+- (nullable NSNumber<SDLBool> *)desiredTemperatureAvailable {
+    return [store sdl_objectForName:SDLNameDesiredTemperatureAvailable];
 }
 
-- (void)setAcEnableAvailable:(NSNumber *)acEnableAvailable {
-    if (acEnableAvailable != nil) {
-        [store setObject:acEnableAvailable forKey:NAMES_acEnableAvailable];
-    } else {
-        [store removeObjectForKey:NAMES_acEnableAvailable];
-    }
+- (void)setAcEnableAvailable:(nullable NSNumber<SDLBool> *)acEnableAvailable {
+    [store sdl_setObject:acEnableAvailable forName:SDLNameACEnableAvailable];
 }
 
-- (NSNumber *)acEnableAvailable {
-    return [store objectForKey:NAMES_acEnableAvailable];
-
+- (nullable NSNumber<SDLBool> *)acEnableAvailable {
+    return [store sdl_objectForName:SDLNameACEnableAvailable];
 }
 
-- (void)setAcMaxEnableAvailable:(NSNumber *)acMaxEnableAvailable {
-    if (acMaxEnableAvailable != nil) {
-        [store setObject:acMaxEnableAvailable forKey:NAMES_acMaxEnableAvailable];
-    } else {
-        [store removeObjectForKey:NAMES_acMaxEnableAvailable];
-    }
+- (void)setAcMaxEnableAvailable:(nullable NSNumber<SDLBool> *)acMaxEnableAvailable {
+    [store sdl_setObject:acMaxEnableAvailable forName:SDLNameACMaxEnableAvailable];
 }
 
-- (NSNumber *)acMaxEnableAvailable {
-    return [store objectForKey:NAMES_acMaxEnableAvailable];
-
+- (nullable NSNumber<SDLBool> *)acMaxEnableAvailable {
+    return [store sdl_objectForName:SDLNameACMaxEnableAvailable];
 }
 
-- (void)setCirculateAirEnableAvailable:(NSNumber *)circulateAirEnableAvailable {
-    if (circulateAirEnableAvailable != nil) {
-        [store setObject:circulateAirEnableAvailable forKey:NAMES_circulateAirEnableAvailable];
-    } else {
-        [store removeObjectForKey:NAMES_circulateAirEnableAvailable];
-    }
+- (void)setCirculateAirEnableAvailable:(nullable NSNumber<SDLBool> *)circulateAirEnableAvailable {
+    [store sdl_setObject:circulateAirEnableAvailable forName:SDLNameCirculateAirEnableAvailable];
 }
 
-- (NSNumber *)circulateAirEnableAvailable {
-    return [store objectForKey:NAMES_circulateAirEnableAvailable];
-
+- (nullable NSNumber<SDLBool> *)circulateAirEnableAvailable {
+    return [store sdl_objectForName:SDLNameCirculateAirEnableAvailable];
 }
 
-- (void)setAutoModeEnableAvailable:(NSNumber *)autoModeEnableAvailable {
-    if (autoModeEnableAvailable != nil) {
-        [store setObject:autoModeEnableAvailable forKey:NAMES_autoModeEnableAvailable];
-    } else {
-        [store removeObjectForKey:NAMES_autoModeEnableAvailable];
-    }
+- (void)setAutoModeEnableAvailable:(nullable NSNumber<SDLBool> *)autoModeEnableAvailable {
+    [store sdl_setObject:autoModeEnableAvailable forName:SDLNameAutoModeEnableAvailable];
 }
 
-- (NSNumber *)autoModeEnableAvailable {
-    return [store objectForKey:NAMES_autoModeEnableAvailable];
-
+- (nullable NSNumber<SDLBool> *)autoModeEnableAvailable {
+    return [store sdl_objectForName:SDLNameAutoModeEnableAvailable];
 }
 
-- (void)setDualModeEnableAvailable:(NSNumber *)dualModeEnableAvailable {
-    if (dualModeEnableAvailable != nil) {
-        [store setObject:dualModeEnableAvailable forKey:NAMES_dualModeEnableAvailable];
-    } else {
-        [store removeObjectForKey:NAMES_dualModeEnableAvailable];
-    }
+- (void)setDualModeEnableAvailable:(nullable NSNumber<SDLBool> *)dualModeEnableAvailable {
+    [store sdl_setObject:dualModeEnableAvailable forName:SDLNameDualModeEnableAvailable];
 }
 
-- (NSNumber *)dualModeEnableAvailable {
-    return [store objectForKey:NAMES_dualModeEnableAvailable];
-
+- (nullable NSNumber<SDLBool> *)dualModeEnableAvailable {
+    return [store sdl_objectForName:SDLNameDualModeEnableAvailable];
 }
 
-- (void)setDefrostZoneAvailable:(NSNumber *)defrostZoneAvailable {
-    if (defrostZoneAvailable != nil) {
-        [store setObject:defrostZoneAvailable forKey:NAMES_defrostZoneAvailable];
-    } else {
-        [store removeObjectForKey:NAMES_defrostZoneAvailable];
-    }
+- (void)setDefrostZoneAvailable:(nullable NSNumber<SDLBool> *)defrostZoneAvailable {
+    [store sdl_setObject:defrostZoneAvailable forName:SDLNameDefrostZoneAvailable];
 }
 
-- (NSNumber *)defrostZoneAvailable {
-    return [store objectForKey:NAMES_defrostZoneAvailable];
-
+- (nullable NSNumber<SDLBool> *)defrostZoneAvailable {
+    return [store sdl_objectForName:SDLNameDefrostZoneAvailable];
 }
 
-- (void)setDefrostZone:(NSArray <SDLDefrostZone *>*)defrostZone {
-    if (defrostZone != nil) {
-        [store setObject:defrostZone forKey:NAMES_defrostZone];
-    } else {
-        [store removeObjectForKey:NAMES_defrostZone];
-    }
+- (void)setDefrostZone:(nullable NSArray <SDLDefrostZone>*)defrostZone {
+    [store sdl_setObject:defrostZone forName:SDLNameDefrostZone];
 }
 
-- (NSArray<SDLDefrostZone *> *)defrostZone {
-    return [store objectForKey:NAMES_defrostZone];
-
+- (nullable NSArray<SDLDefrostZone> *)defrostZone {
+    return [store sdl_objectForName:SDLNameDefrostZone];
 }
 
-- (void)setVentilationModeAvailable:(NSNumber *)ventilationModeAvailable {
-    if (ventilationModeAvailable != nil) {
-        [store setObject:ventilationModeAvailable forKey:NAMES_ventilationModeAvailable];
-    } else {
-        [store removeObjectForKey:NAMES_ventilationModeAvailable];
-    }
+- (void)setVentilationModeAvailable:(nullable NSNumber<SDLBool> *)ventilationModeAvailable {
+    [store sdl_setObject:ventilationModeAvailable forName:SDLNameVentilationModeAvailable];
 }
 
-- (NSNumber *)ventilationModeAvailable {
-    return [store objectForKey:NAMES_ventilationModeAvailable];
+- (nullable NSNumber<SDLBool> *)ventilationModeAvailable {
+    return [store sdl_objectForName:SDLNameVentilationModeAvailable];
 }
 
-- (void)setVentilationMode:(NSArray<SDLVentilationMode *> *)ventilationMode {
-    if (ventilationMode != nil) {
-        [store setObject:ventilationMode forKey:NAMES_ventilationMode];
-    } else {
-        [store removeObjectForKey:NAMES_ventilationMode];
-    }
+- (void)setVentilationMode:(nullable NSArray<SDLVentilationMode> *)ventilationMode {
+    [store sdl_setObject:ventilationMode forName:SDLNameVentilationMode];
 }
 
-- (NSArray<SDLVentilationMode *> *)ventilationMode {
-    return [store objectForKey:NAMES_ventilationMode];
+- (nullable NSArray<SDLVentilationMode> *)ventilationMode {
+    return [store sdl_objectForName:SDLNameVentilationMode];
 }
-
 
 @end
+
+NS_ASSUME_NONNULL_END

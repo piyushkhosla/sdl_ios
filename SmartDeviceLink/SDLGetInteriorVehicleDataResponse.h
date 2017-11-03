@@ -5,12 +5,11 @@
 #import "SDLRPCResponse.h"
 @class SDLModuleData;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface SDLGetInteriorVehicleDataResponse : SDLRPCResponse
 
-- (instancetype)init;
-- (instancetype)initWithDictionary:(NSMutableDictionary *)dict;
-
-@property (strong) SDLModuleData *moduleData;
+@property (strong, nonatomic) SDLModuleData *moduleData;
 
 /**
  * @abstract It is a conditional-mandatory parameter: must be returned in case "subscribe" parameter was present in the related request.
@@ -19,8 +18,8 @@
  *
  * Optional, Boolean
  */
-
-@property (strong) NSNumber *isSubscribed;
-
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *isSubscribed;
 
 @end
+
+NS_ASSUME_NONNULL_END

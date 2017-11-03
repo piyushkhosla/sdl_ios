@@ -3,21 +3,25 @@
 //
 
 #import "SDLRPCMessage.h"
-@class SDLDefrostZone;
-@class SDLVentilationMode;
+#import "SDLDefrostZone.h"
+#import "SDLVentilationMode.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  * Contains information about a climate control module's capabilities.
  */
 @interface SDLClimateControlCapabilities : SDLRPCStruct
 
+- (instancetype)initWithModuleName:(NSString *)moduleName fanSpeedAvailable:(BOOL)fanSpeedAvailable desiredTemperatureAvailable:(BOOL)desiredTemperatureAvailable acEnableAvailable:(BOOL)acEnableAvailable acMaxEnableAvailable:(BOOL)acMaxEnableAvailable circulateAirAvailable:(BOOL)circulateAirEnableAvailable autoModeEnableAvailable:(BOOL)autoModeEnableAvailable dualModeEnableAvailable:(BOOL)dualModeEnableAvailable defrostZoneAvailable:(BOOL)defrostZoneAvailable ventilationModeAvailable:(BOOL)ventilationModeAvailable;
+
 /**
- * @abstractThe short friendly name of the climate control module.
+ * @abstract The short friendly name of the climate control module.
  * It should not be used to identify a module by mobile application.
  *
  * Max string length 100 chars
  */
-@property (strong) NSString *moduleName;
+@property (strong, nonatomic) NSString *moduleName;
 
 /**
  * @abstract Availability of the control of fan speed.
@@ -25,7 +29,7 @@
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *fanSpeedAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *fanSpeedAvailable;
 
 /**
  * @abstract Availability of the control of desired temperature.
@@ -33,7 +37,7 @@
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *desiredTemperatureAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *desiredTemperatureAvailable;
 
 /**
  * @abstract Availability of the control of turn on/off AC.
@@ -41,7 +45,7 @@
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *acEnableAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *acEnableAvailable;
 
 /**
  * @abstract  Availability of the control of enable/disable air conditioning is ON on the maximum level.
@@ -49,7 +53,7 @@
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *acMaxEnableAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *acMaxEnableAvailable;
 
 /**
  * @abstract Availability of the control of enable/disable circulate Air mode.
@@ -57,7 +61,7 @@
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *circulateAirEnableAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *circulateAirEnableAvailable;
 
 /**
  * @abstract Availability of the control of enable/disable auto mode.
@@ -65,7 +69,7 @@
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *autoModeEnableAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *autoModeEnableAvailable;
 
 /**
  * @abstract Availability of the control of enable/disable dual mode.
@@ -73,7 +77,7 @@
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *dualModeEnableAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *dualModeEnableAvailable;
 
 /**
  * @abstract Availability of the control of defrost zones.
@@ -81,14 +85,14 @@
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *defrostZoneAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *defrostZoneAvailable;
 
 /**
  * @abstract  A set of all defrost zones that are controllable.
  *
  * Optional, NSArray of type SDLDefrostZone minsize="1" maxsize="100"
  */
-@property (strong) NSArray<SDLDefrostZone *> *defrostZone;
+@property (nullable, strong, nonatomic) NSArray<SDLDefrostZone > *defrostZone;
 
 /**
  * @abstract Availability of the control of air ventilation mode.
@@ -96,7 +100,7 @@
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *ventilationModeAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *ventilationModeAvailable;
 
 /**
  * @abstract  A set of all ventilation modes that are controllable.
@@ -104,6 +108,8 @@
  *
  * Optional, NSArray of type SDLVentilationMode minsize="1" maxsize="100"
  */
-@property (strong) NSArray<SDLVentilationMode *> *ventilationMode;
+@property (nullable, strong, nonatomic) NSArray<SDLVentilationMode> *ventilationMode;
 
 @end
+
+NS_ASSUME_NONNULL_END

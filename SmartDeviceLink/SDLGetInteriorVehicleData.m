@@ -4,46 +4,69 @@
 
 #import "SDLGetInteriorVehicleData.h"
 #import "SDLNames.h"
-#import "SDLModuleType.h"
+#import "NSMutableDictionary+Store.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @implementation SDLGetInteriorVehicleData
 
 - (instancetype)init {
-    if (self = [super initWithName:NAMES_GetInteriorVehicleData]) {
+    if (self = [super initWithName:SDLNameGetInteriorVehicleData]) {
     }
     return self;
 }
 
-- (instancetype)initWithDictionary:(NSMutableDictionary *)dict {
-    if (self = [super initWithDictionary:dict]) {
+- (instancetype)initWithModuleType:(SDLModuleType)moduleType; {
+    self = [self init];
+    if (!self) {
+        return nil;
     }
+    
+    self.moduleType = moduleType;
+    
     return self;
 }
 
-- (void)setModuleType:(SDLModuleType *)moduleType {
-    if (moduleType != nil) {
-        [parameters setObject:moduleType forKey:NAMES_moduleType];
-    } else {
-        [parameters removeObjectForKey:NAMES_moduleType];
+- (instancetype)initAndSubscribeToModuleType:(SDLModuleType)moduleType {
+    self = [self init];
+    if (!self) {
+        return nil;
     }
+
+    self.moduleType = moduleType;
+    self.subscribe = @(YES);
+
+    return self;
 }
 
-- (SDLModuleType *)moduleType {
-    return [parameters objectForKey:NAMES_moduleType];
-}
-
-
-- (void)setSubscribe:(NSNumber *)subscribe {
-    if (subscribe != nil) {
-        [parameters setObject:subscribe forKey:NAMES_subscribe];
-    } else {
-        [parameters removeObjectForKey:NAMES_subscribe];
+- (instancetype)initAndUnsubscribeToModuleType:(SDLModuleType)moduleType {
+    self = [self init];
+    if (!self) {
+        return nil;
     }
+
+    self.moduleType = moduleType;
+    self.subscribe = @(NO);
+
+    return self;
 }
 
-- (NSNumber *)subscribe {
-    return [parameters objectForKey:NAMES_subscribe];
+- (void)setModuleType:(SDLModuleType)moduleType {
+    [parameters sdl_setObject:moduleType forName:SDLNameModuleType];
 }
 
+- (SDLModuleType)moduleType {
+    return [parameters sdl_objectForName:SDLNameModuleType];
+}
+
+- (void)setSubscribe:(nullable NSNumber<SDLBool> *)subscribe {
+    [parameters sdl_setObject:subscribe forName:SDLNameSubscribe];
+}
+
+- (nullable NSNumber<SDLBool> *)subscribe {
+    return [parameters sdl_objectForName:SDLNameSubscribe];
+}
 
 @end
+
+NS_ASSUME_NONNULL_END

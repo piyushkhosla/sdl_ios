@@ -1,26 +1,21 @@
-//
-//  SDLUnsubscribeWayPointsResponse.m
+//  SDLUnsubscribeWaypointsResponse.m
 //
 
-#import "SDLUnsubscribeWaypointsResponse.h"
+#import "SDLUnsubscribeWayPointsResponse.h"
+
+#import "NSMutableDictionary+Store.h"
 #import "SDLNames.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @implementation SDLUnsubscribeWayPointsResponse
 
 - (instancetype)init {
-    if (self = [super initWithName:NAMES_UnsubscribeWaypoints]) {
-    }
-    return self;
-}
-
-- (instancetype)initWithDictionary:(NSMutableDictionary *)dict {
-    if (self = [super initWithDictionary:dict]) {
+    if (self = [super initWithName:SDLNameUnsubscribeWayPoints]) {
     }
     return self;
 }
 
 @end
 
-@implementation SDLUnsubscribeWaypointsResponse
-
-@end
+NS_ASSUME_NONNULL_END

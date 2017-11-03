@@ -2,7 +2,7 @@
 //  
 
 #import "SDLRPCMessage.h"
-@class SDLFuelType;
+#import "SDLFuelType.h"
 
 @interface SDLFuelRange : SDLRPCStruct {
 }
@@ -23,7 +23,7 @@
  *
  * Optional, FuelType
  */
-@property (strong) SDLFuelType *type;
+@property (strong) SDLFuelType type;
 
 /**
  * @abstract Describes The estimate range in KM 

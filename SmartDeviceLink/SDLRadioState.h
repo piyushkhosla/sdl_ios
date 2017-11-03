@@ -4,50 +4,32 @@
 
 #import "SDLEnum.h"
 
-@interface SDLRadioState : SDLEnum
-
 /**
- * @abstract get SDLRadioState according value string
- *
- * @param value The value of the string to get an object for
- *
- * @return SDLRadioState object
+ * List possible states of a remote control radio module.
  */
-+ (SDLRadioState *)valueOf:(NSString *)value;
 
-/**
- * @abstract declare an array to store all possible SDLRadioState values
- *
- * @return the array
- */
-+ (NSArray *)values;
+typedef SDLEnum SDLRadioState SDL_SWIFT_ENUM;
 
 /**
  *  @abstract Represents Radio state as ACQUIRING
  *
- *  @return SDLRadioState: *ACQUIRING*
  */
-+ (SDLRadioState *)ACQUIRING;
+extern SDLRadioState const SDLRadioStateAcquiring;
 
 /**
  *  @abstract Represents Radio state as ACQUIRED
  *
- *  @return SDLRadioState: *ACQUIRED*
  */
-+ (SDLRadioState *)ACQUIRED;
+extern SDLRadioState const SDLRadioStateAcquired;
 
 /**
  *  @abstract Represents Radio state as MULTICAST
  *
- *  @return SDLRadioState: *MULTICAST*
  */
-+ (SDLRadioState *)MULTICAST;
+extern SDLRadioState const SDLRadioStateMulticast;
 
 /**
  *  @abstract Represents Radio state as NOT_FOUND
  *
- *  @return SDLRadioState: *NOT_FOUND*
  */
-+ (SDLRadioState *)NOT_FOUND;
-
-@end
+extern SDLRadioState const SDLRadioStateNotFound;

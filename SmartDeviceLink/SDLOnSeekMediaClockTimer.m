@@ -3,13 +3,14 @@
 //
 
 #import "SDLOnSeekMediaClockTimer.h"
+#import "NSMutableDictionary+Store.h"
 #import "SDLNames.h"
 #import "SDLStartTime.h"
 
 @implementation SDLOnSeekMediaClockTimer
 
 - (instancetype)init {
-    if (self = [super initWithName:NAMES_OnSeekMediaClockTimer]) {
+    if (self = [super initWithName:SDLNameOnSeekMediaClockTimer]) {
     }
     return self;
 }
@@ -21,20 +22,11 @@
 }
 
 - (void)setSeekTime:(SDLStartTime *)seekTime {
-    if (seekTime != nil) {
-        [parameters setObject:seekTime forKey:NAMES_seekTime];
-    } else {
-        [parameters removeObjectForKey:NAMES_seekTime];
-    }
+    [parameters sdl_setObject:seekTime forName:SDLNameSeekTime];
 }
 
 - (SDLStartTime *)seekTime {
-    NSObject *obj = [parameters objectForKey:NAMES_seekTime];
-    if (obj == nil || [obj isKindOfClass:SDLStartTime.class]) {
-        return (SDLStartTime *)obj;
-    } else {
-        return [[SDLStartTime alloc] initWithDictionary:(NSMutableDictionary *)obj];
-    }
+    return [parameters sdl_objectForName:SDLNameSeekTime];
 }
 
 @end

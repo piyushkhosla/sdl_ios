@@ -3,11 +3,9 @@
 //
 
 #import "SDLRPCNotification.h"
-
-@class SDLDisplayMode;
-@class SDLDistanceUnit;
-@class SDLTemperatureUnit;
-
+#import "SDLDisplayMode.h"
+#import "SDLDistanceUnit.h"
+#import "SDLTemperatureUnit.h"
 
 /**
  * Callback for the setting data change notification.
@@ -16,35 +14,24 @@
 @interface SDLOnSettingData : SDLRPCNotification
 
 /**
- * Constructs a newly allocated SDLOnSettingData object
- */
-- (instancetype)init;
-
-/**
- * Constructs a newly allocated SDLOnSettingData object indicated by the dictionary parameter
- * @param dict The dictionary to use
- */
-- (instancetype)initWithDictionary:(NSMutableDictionary *)dict;
-
-/**
  *
  * @see SDLDisplayMode
  *
  */
-@property (strong) SDLDisplayMode *seekTime;
+@property (nullable, strong, nonatomic) SDLDisplayMode seekTime;
 
 /**
  *
- * @see SDLDisplayMode
+ * @see SDLDistanceUnit
  *
  */
-@property (strong) SDLDistanceUnit *distanceUnit;
+@property (nullable, strong, nonatomic) SDLDistanceUnit distanceUnit;
 
 /**
  *
- * @see SDLDisplayMode
+ * @see SDLTemperatureUnit
  *
  */
-@property (strong) SDLTemperatureUnit *temperatureUnit;
+@property (nullable, strong, nonatomic) SDLTemperatureUnit temperatureUnit;
 
 @end

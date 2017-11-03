@@ -5,21 +5,12 @@
 #import "SDLRPCNotification.h"
 @class SDLModuleData;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface SDLOnInteriorVehicleData : SDLRPCNotification
 
-/**
- *Constructs a newly allocated SDLOnInteriorVehicleData object
- */
-- (instancetype)init;
-
-/**
- * Constructs a newly allocated SDLOnInteriorVehicleData object indicated by the dictionary parameter
- * @param dict The dictionary to use
- */
-- (instancetype)initWithDictionary:(NSMutableDictionary *)dict;
-
-
-@property (strong) SDLModuleData *moduleData;
-
+@property (strong, nonatomic) SDLModuleData *moduleData;
 
 @end
+
+NS_ASSUME_NONNULL_END

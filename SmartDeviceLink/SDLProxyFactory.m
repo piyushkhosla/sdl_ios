@@ -3,21 +3,19 @@
 
 #import "SDLProxyFactory.h"
 
-#import "SDLDebugTool.h"
 #import "SDLIAPTransport.h"
 #import "SDLProtocol.h"
 #import "SDLProxy.h"
 #import "SDLTCPTransport.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
 @implementation SDLProxyFactory
 
 + (SDLProxy *)buildSDLProxyWithListener:(NSObject<SDLProxyListener> *)delegate {
     SDLIAPTransport *transport = [[SDLIAPTransport alloc] init];
     SDLProtocol *protocol = [[SDLProtocol alloc] init];
-    SDLProxy *ret = [[SDLProxy alloc] initWithTransport:transport
-                                               protocol:protocol
-                                               delegate:delegate];
+    SDLProxy *ret = [[SDLProxy alloc] initWithTransport:transport protocol:protocol delegate:delegate];
     
     return ret;
 }
@@ -25,7 +23,7 @@
 + (SDLProxy *)buildSDLProxyWithListener:(NSObject<SDLProxyListener> *)delegate
                          protocolString:(NSString *)protocolString {
     SDLIAPTransport *transport = [[SDLIAPTransport alloc] init];
-    transport.protocolString = protocolString;
+//    transport.protocolString = protocolString;
     SDLProtocol *protocol = [[SDLProtocol alloc] init];
     SDLProxy *ret = [[SDLProxy alloc] initWithTransport:transport
                                                protocol:protocol
@@ -40,14 +38,14 @@
     SDLTCPTransport *transport = [[SDLTCPTransport alloc] init];
     transport.hostName = ipaddress;
     transport.portNumber = port;
-    
+
     SDLProtocol *protocol = [[SDLProtocol alloc] init];
-    
-    SDLProxy *ret = [[SDLProxy alloc] initWithTransport:transport
-                                               protocol:protocol
-                                               delegate:delegate];
-    
+
+    SDLProxy *ret = [[SDLProxy alloc] initWithTransport:transport protocol:protocol delegate:delegate];
+
     return ret;
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

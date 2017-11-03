@@ -8,7 +8,7 @@
 @implementation SDLSetAudioStreamingIndicatorResponse
 
 - (instancetype)init {
-    if (self = [super initWithName:NAMES_SetAudioStreamingIndicator]) {
+    if (self = [super initWithName:SDLNameSetAudioStreamingIndicator]) {
     }
     return self;
 }

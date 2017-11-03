@@ -5,31 +5,15 @@
 
 #import "SDLEnum.h"
 
-@interface SDLTemperatureUnit : SDLEnum
-
-/**
- @abstract get SDLTemperatureUnit according value string
- @param value NSString
- @return SDLTemperatureUnit object
- */
-+ (SDLTemperatureUnit *)valueOf:(NSString *)value;
-
-/**
- @abstract declare an array to store all possible SDLSoftButtonType values
- @return the array
- */
-+ (NSArray *)values;
+typedef SDLEnum SDLTemperatureUnit SDL_SWIFT_ENUM;
 
 /**
  @abstract Reflects the current HMI setting for temperature unit in Celsius
- @return SDLTemperatureUnit object with string value *CELSIUS*
  **/
-+ (SDLTemperatureUnit *)CELSIUS;
+extern SDLTemperatureUnit const SDLTemperatureUnitCelsius;
+
 
 /**
  @abstract Reflects the current HMI setting for temperature unit in Fahrenheit
- @return SDLTemperatureUnit object with string value *FAHRENHEIT*
  **/
-+ (SDLTemperatureUnit *)FAHRENHEIT;
-
-@end
+extern SDLTemperatureUnit const SDLTemperatureUnitFahrenheit;

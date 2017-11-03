@@ -5,33 +5,19 @@
 
 #import "SDLEnum.h"
 
-@interface SDLDisplayMode : SDLEnum
+/**
+ * The supported dimensions of the GPS.
+ *
+ * @since SDL 2.0
+ */
+typedef SDLEnum SDLDisplayMode SDL_SWIFT_ENUM;
 
 /**
- @abstract get SDLDisplayMode according value string
- @param value NSString
- @return SDLDisplayMode object
+ @abstract Reflects the current status of  HMI display mode as Day.
  */
-
-+ (SDLDisplayMode *)valueOf:(NSString *)value;
+extern SDLDisplayMode const SDLDisplayModeDay;
 
 /**
- @abstract declare an array to store all possible SDLDisplayMode values
- @return the array
+ @abstract Reflects the current status of  HMI display mode as Night.
  */
-
-+ (NSArray *)values;
-
-/**
- @abstract Reflects the current status of  HMI display mode.
- @return SDLDisplayMode object with string value *DAY*
- */
-+ (SDLDisplayMode *)DAY;
-
-/**
- @abstract Reflects the current status of  HMI display mode.
- @return SDLDisplayMode object with string value *NIGHT*
- */
-+ (SDLDisplayMode *)NIGHT;
-
-@end
+extern SDLDisplayMode const SDLDisplayModeNight;

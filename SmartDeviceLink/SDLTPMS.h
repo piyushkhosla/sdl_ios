@@ -1,97 +1,87 @@
 //
-//  SDLTPMS.h
+//  SDLTpms.h
 //  SmartDeviceLink-iOS
 //
 
 
 #import "SDLEnum.h"
-
-@interface SDLTPMS : SDLEnum
-
 /**
- @abstract get SDLTPMS according value string
- @param value NSString
- @return SDLTPMS object
+ * Enumeration listing possible SDLTpms values.
+ *
  */
-+ (SDLTPMS *)valueOf:(NSString *)value;
+typedef SDLEnum SDLTpms SDL_SWIFT_ENUM;
+
 /**
- @abstract declare an array to store all possible SDLTPMS values
- @return the array
+ * @abstract SDLTpms state is : UNKNOWN.
  */
-+ (NSArray *)values;
+extern SDLTpms const SDLTpmsSateUnknown;
 
 /**
- State is unknown
+ * Tpms system is in a state of Fault
  **/
-+ (SDLTPMS *)UNKNOWN;
+extern SDLTpms const SDLTpmsSateSystemFault;
 
 /**
-TPMS system is in a state of Fault
+ * Sensor is faulty
  **/
-+ (SDLTPMS *)SYSTEM_FAULT;
-
-/**
-Sensor is faulty
- **/
-+ (SDLTPMS *)SENSOR_FAULT;
+extern SDLTpms const SDLTpmsSateSensorFault;
 
 /**
  Low Composite state
  **/
-+ (SDLTPMS *)LOW;
+extern SDLTpms const SDLTpmsSateLow;
 
 /**
-System Active Composite state
+ *System Active Composite state
  **/
-+ (SDLTPMS *)SYSTEM_ACTIVE;
+extern SDLTpms const SDLTpmsSateSystemActive;
 
 /**
-Train left front tire
+ *Train left front tire
  **/
-+ (SDLTPMS *)TRAIN_LF_TIRE;
+extern SDLTpms const SDLTpmsSateTrainLfTire;
 
 /**
- Train right front tire
+ * Train right front tire
  **/
-+ (SDLTPMS *)TRAIN_RF_TIRE;
+extern SDLTpms const SDLTpmsSateTrainRfTire;
 
 /**
-Train right rear tire
+ *Train right rear tire
  **/
-+ (SDLTPMS *)TRAIN_RR_TIRE;
+extern SDLTpms const SDLTpmsSateTrainRrTire;
 
 /**
-Train outer right rear tire
+ *Train outer right rear tire
  **/
-+ (SDLTPMS *)TRAIN_ORR_TIRE;
+extern SDLTpms const SDLTpmsSateTrainOrrTire;
 
 /**
-Train inner right rear tire
+ *Train inner right rear tire
  **/
-+ (SDLTPMS *)TRAIN_IRR_TIRE;
+extern SDLTpms const SDLTpmsSateTrainIrrTire;
 
 /**
-Train left rear tire
+ *Train left rear tire
  **/
-+ (SDLTPMS *)TRAIN_LR_TIRE;
+extern SDLTpms const SDLTpmsSateTrainLrTire;
 
 /**
-Train outer left rear tire
+ *Train outer left rear tire
  **/
-+ (SDLTPMS *)TRAIN_OLR_TIRE;
+extern SDLTpms const SDLTpmsSateTrainOlrTire;
 
 /**
-Train inner left rear tire
+ *Train inner left rear tire
  **/
-+ (SDLTPMS *)TRAIN_ILR_TIRE;
+extern SDLTpms const SDLTpmsSateTrainIlrTire;
 
 /**
-Training Complete
+ *Training Complete
  **/
-+ (SDLTPMS *)TRAINING_COMPLETE;
+extern SDLTpms const SDLTpmsSateTrainingComplete;
 
 /**
-Tires are not trained
+ *Tires are not trained
  **/
-+ (SDLTPMS *)TIRES_NOT_TRAINED;
-@end
+extern SDLTpms const SDLTpmsSateTiresNotTrained;

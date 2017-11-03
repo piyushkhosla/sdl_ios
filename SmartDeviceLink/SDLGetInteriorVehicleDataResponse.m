@@ -5,43 +5,36 @@
 #import "SDLGetInteriorVehicleDataResponse.h"
 #import "SDLModuleData.h"
 #import "SDLNames.h"
+#import "NSMutableDictionary+Store.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
 
 @implementation SDLGetInteriorVehicleDataResponse
 
 - (instancetype)init {
-    if (self = [super initWithName:NAMES_GetInteriorVehicleData]) {
-    }
-    return self;
-}
-
-- (instancetype)initWithDictionary:(NSMutableDictionary *)dict {
-    if (self = [super initWithDictionary:dict]) {
+    if (self = [super initWithName:SDLNameGetInteriorVehicleData]) {
     }
     return self;
 }
 
 - (void)setModuleData:(SDLModuleData *)moduleData {
-    if (moduleData != nil) {
-        [parameters setObject:moduleData forKey:NAMES_moduleData];
-    } else {
-        [parameters removeObjectForKey:NAMES_moduleData];
-    }
+    [parameters sdl_setObject:moduleData forName:SDLNameModuleData];
 }
 
 - (SDLModuleData *)moduleData {
-    return [parameters objectForKey:NAMES_moduleData];
+    return [parameters sdl_objectForName:SDLNameModuleData ofClass:SDLModuleData.class];
 }
 
-- (void)setIsSubscribed:(NSNumber *)isSubscribed {
-    if (isSubscribed != nil) {
-        [parameters setObject:isSubscribed forKey:NAMES_isSubscribed];
-    } else {
-        [parameters removeObjectForKey:NAMES_isSubscribed];
-    }
+- (void)setIsSubscribed:(nullable NSNumber<SDLBool> *)isSubscribed {
+    [parameters sdl_setObject:isSubscribed forName:SDLNameIsSubscribed];
 }
 
-- (NSNumber *)isSubscribed {
-    return [parameters objectForKey:NAMES_isSubscribed];
+- (nullable NSNumber<SDLBool> *)isSubscribed {
+    return [parameters sdl_objectForName:SDLNameIsSubscribed];
 }
 
 @end
+
+NS_ASSUME_NONNULL_END
+

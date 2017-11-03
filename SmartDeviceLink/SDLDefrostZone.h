@@ -4,39 +4,29 @@
 
 #import "SDLEnum.h"
 
-@interface SDLDefrostZone : SDLEnum
+/**
+ * Enumeration listing possible defrost zones.
+ *
+ * @since SDL 2.0
+ */
+typedef SDLEnum SDLDefrostZone SDL_SWIFT_ENUM;
 
 /**
- * @abstract Convert String to SDLDefrostZone
- * @param value The value of the string to get an object for
- * @return SDLDefrostZone
+ * @abstract A SDLDefrostZone with the value of *FRONT*
  */
-+ (SDLDefrostZone *)valueOf:(NSString *)value;
+extern SDLDefrostZone const SDLDefrostZoneFront;
 
 /**
- * @abstract Store the enumeration of all possible SDLDefrostZone
- * @return An array that store all possible SDLDefrostZone
+ * @abstract A SDLDefrostZone with the value of *REAR*
  */
-+ (NSArray *)values;
+extern SDLDefrostZone const SDLDefrostZoneRear;
 
 /**
- * @return A SDLDefrostZone with the value of *FRONT*
+ * @abstract A SDLDefrostZone with the value of *All*
  */
-+ (SDLDefrostZone *)FRONT;
+extern SDLDefrostZone const SDLDefrostZoneAll;
 
 /**
- * @return A SDLDefrostZone with the value of *FRONT*
+ * @abstract A SDLDefrostZone with the value of *None*
  */
-+ (SDLDefrostZone *)REAR;
-
-/**
- * @return A SDLDefrostZone with the value of *FRONT*
- */
-+ (SDLDefrostZone *)ALL;
-
-/**
- * @return A SDLDefrostZone with the value of *FRONT*
- */
-+ (SDLDefrostZone *)NONE;
-
-@end
+extern SDLDefrostZone const SDLDefrostZoneNone;

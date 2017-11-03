@@ -1,52 +1,35 @@
 //
 //  SDLSystemCapabilityType.h
+//  SmartDeviceLink-iOS
+//
+//  Created by Joel Fischer on 7/10/17.
+//  Copyright © 2017 smartdevicelink. All rights reserved.
 //
 
 #import "SDLEnum.h"
 
 /**
- *
- * Enumeration that describes system actions that can be triggered.
+ The type of system capability to get more information on
  */
-@interface SDLSystemCapabilityType : SDLEnum
-
-/**
- * Convert String to SDLSystemCapabilityType
- * @param value String
- * @return SDLSystemCapabilityType
- */
-+ (SDLSystemCapabilityType *)valueOf:(NSString *)value;
-
-/**
- @abstract Store the enumeration of all possible SDLSystemCapabilityType
- @return an array that store all possible SDLSystemCapabilityType
- */
-+ (NSArray *)values;
+typedef SDLEnum SDLSystemCapabilityType SDL_SWIFT_ENUM;
 
 /**
  @abstract NAVIGATION
  */
-+ (SDLSystemCapabilityType *)NAVIGATION;
+extern SDLSystemCapabilityType const SDLSystemCapabilityTypeNavigation;
 
 /**
  @abstract PHONE_CALL
  */
-+ (SDLSystemCapabilityType *)PHONE_CALL;
+extern SDLSystemCapabilityType const SDLSystemCapabilityTypePhoneCall;
 
 /**
  @abstract VIDEO_STREAMING
+ 
  */
-+ (SDLSystemCapabilityType *)VIDEO_STREAMING;
-
-/**
- @abstract AUDIO_STREAMING
- */
-+ (SDLSystemCapabilityType *)AUDIO_STREAMING;
+extern SDLSystemCapabilityType const SDLSystemCapabilityTypeVideoStreaming;
 
 /**
  @abstract REMOTE_CONTROL
  */
-+ (SDLSystemCapabilityType *)REMOTE_CONTROL;
-
-
-@end
+extern SDLSystemCapabilityType const SDLSystemCapabilityTypeRemoteControl;

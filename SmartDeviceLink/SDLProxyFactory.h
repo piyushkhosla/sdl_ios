@@ -7,8 +7,10 @@
 
 @class SDLProxy;
 
+NS_ASSUME_NONNULL_BEGIN
+
 __deprecated_msg("Use SDLManager instead")
-    @interface SDLProxyFactory : NSObject {
+@interface SDLProxyFactory : NSObject {
 }
 
 + (SDLProxy *)buildSDLProxyWithListener:(NSObject<SDLProxyListener> *)listener;
@@ -21,3 +23,5 @@ __deprecated_msg("Use SDLManager instead")
                                 tcpPort:(NSString *)port;
 
 @end
+
+NS_ASSUME_NONNULL_END

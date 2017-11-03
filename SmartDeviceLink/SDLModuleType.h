@@ -4,30 +4,14 @@
 
 #import "SDLEnum.h"
 
-@interface SDLModuleType : SDLEnum
+typedef SDLEnum SDLModuleType SDL_SWIFT_ENUM;
 
 /**
- * @abstract Convert String to SDLModuleType
- * @param value The value of the string to get an object for
- * @return SDLModuleType
+ * @abstract A SDLModuleType with the value of *CLIMATE*
  */
-+ (SDLModuleType *)valueOf:(NSString *)value;
+extern SDLModuleType const SDLModuleTypeClimate;
 
 /**
- * @abstract Store the enumeration of all possible SDLModuleType
- * @return An array that store all possible SDLModuleType
+ * @abstract A SDLModuleType with the value of *RADIO*
  */
-+ (NSArray *)values;
-
-/**
- * @return A SDLModuleType with the value of *CLIMATE*
- */
-+ (SDLModuleType *)CLIMATE;
-
-/**
- * @return A SDLModuleType with the value of *RADIO*
- */
-+ (SDLModuleType *)RADIO;
-
-
-@end
+extern SDLModuleType const SDLModuleTypeRadio;

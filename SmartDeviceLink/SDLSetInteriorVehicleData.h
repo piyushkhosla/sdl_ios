@@ -3,26 +3,26 @@
 //
 
 #import "SDLRPCRequest.h"
+
 @class SDLModuleData;
+
+/**
+ * This RPC allows a remote control type mobile application to
+ * change the settings of a specific remote control module.
+ */
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface SDLSetInteriorVehicleData : SDLRPCRequest
 
-/**
- * Constructs a new SDLSetInteriorVehicleData object
- */
-- (instancetype)init;
-/**
- * Constructs a new SDLSetInteriorVehicleData object indicated by the dictionary parameter
- * <p>
- *
- * @param dict The dictionary to use
- */
-- (instancetype)initWithDictionary:(NSMutableDictionary *)dict;
+- (instancetype)initWithModuleData:(SDLModuleData *)moduleData;
 
 /**
  * The module data to set for the requested RC module.
  *
  */
-@property (strong) SDLModuleData *moduleData;
+@property (strong, nonatomic) SDLModuleData *moduleData;
 
 @end
+
+NS_ASSUME_NONNULL_END

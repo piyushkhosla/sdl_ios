@@ -6,46 +6,49 @@
 #import "SDLClimateControlCapabilities.h"
 #import "SDLRadioControlCapabilities.h"
 #import "SDLButtonCapabilities.h"
-
+#import "NSMutableDictionary+Store.h"
 #import "SDLNames.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @implementation SDLRemoteControlCapabilities
 
-- (void)setClimateControlCapabilities:(NSArray<SDLClimateControlCapabilities *> *)climateControlCapabilities {
-    if (climateControlCapabilities != nil) {
-        store[NAMES_climateControlCapabilities] = climateControlCapabilities;
-    } else {
-        [store removeObjectForKey:NAMES_climateControlCapabilities];
+- (instancetype)initWithClimateControlCapabilities:(nullable NSArray<SDLClimateControlCapabilities *> *)climateControlCapabilities radioControlCapabilities:(nullable NSArray<SDLRadioControlCapabilities *> *)radioControlCapabilities buttonCapabilities:(nullable NSArray<SDLButtonCapabilities *> *)buttonCapabilities {
+    self = [super init];
+    if (!self) {
+        return nil;
     }
+    
+    self.climateControlCapabilities = climateControlCapabilities;
+    self.radioControlCapabilities = radioControlCapabilities;
+    self.buttonCapabilities = buttonCapabilities;
+
+    return self;
 }
 
-- (NSArray<SDLClimateControlCapabilities *> *)climateControlCapabilities {
-    return store[NAMES_climateControlCapabilities];
+- (void)setClimateControlCapabilities:(nullable NSArray<SDLClimateControlCapabilities *> *)climateControlCapabilities {
+    [store sdl_setObject:climateControlCapabilities forName:SDLNameClimateControlCapabilities];
 }
 
--(void)setRadioControlCapabilities:(NSArray<SDLRadioControlCapabilities *> *)radioControlCapabilities {
-    if (radioControlCapabilities != nil) {
-        store[NAMES_radioControlCapabilities] = radioControlCapabilities;
-    } else {
-        [store removeObjectForKey:NAMES_radioControlCapabilities];
-    }
+- (nullable NSArray<SDLClimateControlCapabilities *> *)climateControlCapabilities {
+    return [store sdl_objectsForName:SDLNameClimateControlCapabilities ofClass:SDLClimateControlCapabilities.class];
 }
 
-- (NSArray<SDLRadioControlCapabilities *> *)radioControlCapabilities {
-    return store[NAMES_radioControlCapabilities];
+-(void)setRadioControlCapabilities:(nullable NSArray<SDLRadioControlCapabilities *> *)radioControlCapabilities {
+    [store sdl_setObject:radioControlCapabilities forName:SDLNameRadioControlCapabilities ];
 }
 
-- (void)setButtonCapabilities:(NSArray *)buttonCapabilities {
-    if (buttonCapabilities != nil) {
-        store[NAMES_buttonCapabilities] = buttonCapabilities;
-    } else {
-        [store removeObjectForKey:NAMES_buttonCapabilities];
-    }
-
+- (nullable NSArray<SDLRadioControlCapabilities *> *)radioControlCapabilities {
+    return [store sdl_objectsForName:SDLNameRadioControlCapabilities ofClass:SDLRadioControlCapabilities.class];
 }
 
-- (NSArray *)buttonCapabilities {
-    return store[NAMES_buttonCapabilities];
+- (void)setButtonCapabilities:(nullable NSArray<SDLButtonCapabilities *> *)buttonCapabilities {
+    [store sdl_setObject:buttonCapabilities forName:SDLNameButtonCapabilities];}
+
+- (nullable NSArray<SDLButtonCapabilities *> *)buttonCapabilities {
+    return [store sdl_objectsForName:SDLNameButtonCapabilities ofClass:SDLButtonCapabilities.class];
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

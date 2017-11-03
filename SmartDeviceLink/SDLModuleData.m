@@ -4,46 +4,62 @@
 
 #import "SDLModuleData.h"
 #import "SDLNames.h"
-#import "SDLModuleType.h"
 #import "SDLClimateControlData.h"
 #import "SDLRadioControlData.h"
+#import "NSMutableDictionary+Store.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
 @implementation SDLModuleData
 
-- (void)setModuleType:(SDLModuleType *)moduleType {
-    if (moduleType != nil) {
-        [store setObject:moduleType forKey:NAMES_moduleType];
-    } else {
-        [store removeObjectForKey:NAMES_moduleType];
+- (instancetype)initWithRadioControlData:(SDLRadioControlData *)radioControlData  {
+    self = [self init];
+    if(!self){
+        return nil;
     }
+    
+    self.moduleType = SDLModuleTypeRadio;
+    self.radioControlData = radioControlData;
+
+    return self;
 }
 
-- (SDLModuleType *)moduleType {
-    return [store objectForKey:NAMES_moduleType];
-}
-
-- (void)setRadioControlData:(SDLRadioControlData *)radioControlData {
-    if (radioControlData != nil) {
-        [store setObject:radioControlData forKey:NAMES_radioControlData];
-    } else {
-        [store removeObjectForKey:NAMES_radioControlData];
+- (instancetype)initWithClimateControlData:(SDLClimateControlData *)climateControlData {
+    self = [self init];
+    if(!self){
+        return nil;
     }
+    
+    self.moduleType = SDLModuleTypeClimate;
+    self.climateControlData = climateControlData;
+    
+    return self;
 }
 
-- (SDLRadioControlData *)radioControlData {
-    return [store objectForKey:NAMES_radioControlData];
+- (void)setModuleType:(SDLModuleType)moduleType {
+    [store sdl_setObject:moduleType forName:SDLNameModuleType];
 }
 
-- (void)setClimateControlData:(SDLClimateControlData *)climateControlData {
-    if (climateControlData != nil) {
-        [store setObject:climateControlData forKey:NAMES_climateControlData];
-    } else {
-        [store removeObjectForKey:NAMES_climateControlData];
-    }
+- (SDLModuleType)moduleType {
+    return [store sdl_objectForName:SDLNameModuleType];
 }
 
-- (SDLClimateControlData *)climateControlData {
-    return [store objectForKey:NAMES_climateControlData];
+- (void)setRadioControlData:(nullable SDLRadioControlData *)radioControlData {
+    [store sdl_setObject:radioControlData forName:SDLNameRadioControlData];
 }
+
+- (nullable SDLRadioControlData *)radioControlData {
+    return [store sdl_objectForName:SDLNameRadioControlData ofClass:SDLRadioControlData.class];
+}
+
+- (void)setClimateControlData:(nullable SDLClimateControlData *)climateControlData {
+    [store sdl_setObject:climateControlData forName:SDLNameClimateControlData];
+}
+
+- (nullable SDLClimateControlData *)climateControlData {
+    return [store sdl_objectForName:SDLNameClimateControlData ofClass:SDLClimateControlData.class];
+}
+
 @end
 
-
+NS_ASSUME_NONNULL_END

@@ -3,7 +3,7 @@
 //
 
 #import "SDLSettingDataResult.h"
-
+#import "NSMutableDictionary+Store.h"
 #import "SDLSettingDataType.h"
 #import "SDLSettingDataResultCode.h"
 #import "SDLNames.h"
@@ -22,38 +22,20 @@
     return self;
 }
 
-- (void)setDataType:(SDLSettingDataType *)dataType {
-    if (dataType != nil) {
-        [store setObject:dataType forKey:NAMES_dataType];
-    } else {
-        [store removeObjectForKey:NAMES_dataType];
-    }
+- (void)setDataType:(nullable SDLSettingDataType)dataType {
+    [store sdl_setObject:dataType forName:SDLNameDataType];
 }
 
-- (SDLSettingDataType *)dataType {
-    NSObject *obj = [store objectForKey:NAMES_dataType];
-    if (obj == nil || [obj isKindOfClass:SDLSettingDataType.class]) {
-        return (SDLSettingDataType *)obj;
-    } else {
-        return [SDLSettingDataType valueOf:(NSString *)obj];
-    }
+- (nullable SDLSettingDataType )dataType {
+    return [store sdl_objectForName:SDLNameDataType];
 }
 
-- (void)setResultCode:(SDLSettingDataResultCode *)resultCode {
-    if (resultCode != nil) {
-        [store setObject:resultCode forKey:NAMES_resultCode];
-    } else {
-        [store removeObjectForKey:NAMES_resultCode];
-    }
+- (void)setResultCode:(nullable SDLSettingDataResultCode )resultCode {
+    [store sdl_setObject:resultCode forName:SDLNameResultCode];
 }
 
-- (SDLSettingDataResultCode *)resultCode {
-    NSObject *obj = [store objectForKey:NAMES_dataType];
-    if (obj == nil || [obj isKindOfClass:SDLSettingDataResultCode.class]) {
-        return (SDLSettingDataResultCode *)obj;
-    } else {
-        return [SDLSettingDataResultCode valueOf:(NSString *)obj];
-    }
+- (SDLSettingDataResultCode )resultCode {
+    return [store sdl_objectForName:SDLNameResultCode];
 }
 
 @end

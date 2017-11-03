@@ -3,9 +3,8 @@
 //
 
 #import "SDLRPCRequest.h"
+#import "SDLAudioStreamingIndicator.h"
 
-
-@class SDLAudioStreamingIndicator;
 
 @interface SDLSetAudioStreamingIndicator : SDLRPCRequest{
 }
@@ -24,9 +23,9 @@
  * @abstract Constructs a new SDLSetAudioStreamingIndicator object indicated by the dictionary parameter
  * @param audioStreamingIndicator audioStreamingIdicator to be set
  */
-- (instancetype)initWithAudioStreamingIndicator:(SDLAudioStreamingIndicator*) audioStreamingIndicator;
+- (instancetype)initWithAudioStreamingIndicator:(SDLAudioStreamingIndicator) audioStreamingIndicator;
 
-@property(strong)SDLAudioStreamingIndicator *audioStreamingIndicator;
+@property(strong)SDLAudioStreamingIndicator audioStreamingIndicator;
 
 
 @end

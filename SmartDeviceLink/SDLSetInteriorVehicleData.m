@@ -4,31 +4,38 @@
 
 #import "SDLSetInteriorVehicleData.h"
 #import "SDLNames.h"
+#import "NSMutableDictionary+Store.h"
+#import "SDLModuleData.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @implementation SDLSetInteriorVehicleData
 
 - (instancetype)init {
-    if (self = [super initWithName:NAMES_SetInteriorVehicleData]) {
+    if (self = [super initWithName:SDLNameSetInteriorVehicleData]) {
     }
     return self;
 }
 
-- (instancetype)initWithDictionary:(NSMutableDictionary *)dict {
-    if (self = [super initWithDictionary:dict]) {
+- (instancetype)initWithModuleData:(SDLModuleData *)moduleData {
+    self = [self init];
+    if (!self) {
+        return nil;
     }
+    
+    self.moduleData = moduleData;
+    
     return self;
 }
 
 - (void)setModuleData:(SDLModuleData *)moduleData {
-    if (moduleData != nil) {
-        [parameters setObject:moduleData forKey:NAMES_moduleData];
-    } else {
-        [parameters removeObjectForKey:NAMES_moduleData];
-    }
+    [parameters sdl_setObject:moduleData forName:SDLNameModuleData];
 }
 
-- (SDLModuleData *)moduleData {
-    return [parameters objectForKey:NAMES_moduleData];
+- (SDLModuleData *)moduleData {    
+    return [parameters sdl_objectForName:SDLNameModuleData ofClass:SDLModuleData.class];
 }
 
 @end
+
+NS_ASSUME_NONNULL_END

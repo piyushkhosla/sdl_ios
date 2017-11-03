@@ -1,38 +1,26 @@
 //
-//  SDLAudioStreamingIndicator.h
+//  SDLAudioStreamingIndicatorType.h
 //
-
 
 #import "SDLEnum.h"
 
-@interface SDLAudioStreamingIndicator : SDLEnum
-
 /**
- @abstract get SDLAudioStreamingIndicator according value string
- @param value NSString
- @return SDLAudioStreamingIndicator object
+ * @abstract get SDLAudioStreamingIndicator according value string
  */
-+ (SDLAudioStreamingIndicator *)valueOf:(NSString *)value;
-/**
- @abstract declare an array to store all possible SDLAudioStreamingIndicator values
- @return the array
- */
-+ (NSArray *)values;
+typedef SDLEnum SDLAudioStreamingIndicator SDL_SWIFT_ENUM;
+
 
 /**
- @return Indicates to use the Play/Pause icon.
+ * @abstract Indicates to use the Play/Pause icon.
  **/
-+ (SDLAudioStreamingIndicator *)PLAY_PAUSE;
+extern SDLAudioStreamingIndicator const SDLAudioStreamingIndicatorPlayPause;
 
 /**
- @return Indicates to use the Play icon.
+ * @abstract Indicates to use the Play icon.
  **/
-+ (SDLAudioStreamingIndicator *)PLAY;
+extern SDLAudioStreamingIndicator const SDLAudioStreamingIndicatorPlay;
 
 /**
- @return Indicates to use the Pause icon.
+ * @abstract Indicates to use the Pause icon.
  **/
-+ (SDLAudioStreamingIndicator *)PAUSE;
-
-
-@end
+extern SDLAudioStreamingIndicator const SDLAudioStreamingIndicatorPause;

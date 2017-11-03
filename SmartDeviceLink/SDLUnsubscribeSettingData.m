@@ -3,12 +3,13 @@
 //
 
 #import "SDLUnsubscribeSettingData.h"
+#import "NSMutableDictionary+Store.h"
 #import "SDLNames.h"
 
 @implementation SDLUnsubscribeSettingData
 
 - (instancetype)init {
-    if (self = [super initWithName:NAMES_UnsubscribeSettingData]) {
+    if (self = [super initWithName:SDLNameUnsubscribeSettingData]) {
     }
     return self;
 }
@@ -20,39 +21,27 @@
 }
 
 - (void)setDisplayMode:(NSNumber *)displayMode {
-    if (displayMode != nil) {
-        [parameters setObject:displayMode forKey:NAMES_displayMode];
-    } else {
-        [parameters removeObjectForKey:NAMES_displayMode];
-    }
+    [parameters sdl_setObject:displayMode forName:SDLNameDisplayMode];
 }
 
 - (NSNumber *)displayMode {
-    return [parameters objectForKey:NAMES_displayMode];
+    return [parameters sdl_objectForName:SDLNameDisplayMode];
 }
 
 - (void)setDistanceUnit:(NSNumber *)distanceUnit {
-    if (distanceUnit != nil) {
-        [parameters setObject:distanceUnit forKey:NAMES_distanceUnit];
-    } else {
-        [parameters removeObjectForKey:NAMES_distanceUnit];
-    }
+    [parameters sdl_setObject:distanceUnit forName:SDLNameDistanceUnit];
 }
 
 - (NSNumber *)distanceUnit {
-    return [parameters objectForKey:NAMES_distanceUnit];
+    return [parameters sdl_objectForName:SDLNameDistanceUnit];
 }
 
 - (void)setTemperatureUnit:(NSNumber *)temperatureUnit {
-    if (temperatureUnit != nil) {
-        [parameters setObject:temperatureUnit forKey:NAMES_temperatureUnit];
-    } else {
-        [parameters removeObjectForKey:NAMES_temperatureUnit];
-    }
+    [parameters sdl_setObject:temperatureUnit forName:SDLNameTemperatureUnit];
 }
 
 - (NSNumber *)temperatureUnit {
-    return [parameters objectForKey:NAMES_temperatureUnit];
+    return [parameters sdl_objectForName:SDLNameTemperatureUnit];
 }
 
 @end

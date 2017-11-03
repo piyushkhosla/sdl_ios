@@ -8,6 +8,8 @@
 
 #import "SDLRPCStruct.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface SDLNavigationCapability : SDLRPCStruct
 
 - (instancetype)initWithSendLocation:(BOOL)sendLocationEnabled waypoints:(BOOL)waypointsEnabled;
@@ -16,12 +18,14 @@
  Whether or not the SendLocation RPC is enabled.
  Boolean, optional
  */
-@property (copy, nonatomic) NSNumber *sendLocationEnabled;
+@property (nullable, copy, nonatomic) NSNumber *sendLocationEnabled;
 
 /**
  Whether or not Waypoint related RPCs are enabled.
  Boolean, optional
  */
-@property (copy, nonatomic) NSNumber *getWayPointsEnabled;
+@property (nullable, copy, nonatomic) NSNumber *getWayPointsEnabled;
 
 @end
+
+NS_ASSUME_NONNULL_END

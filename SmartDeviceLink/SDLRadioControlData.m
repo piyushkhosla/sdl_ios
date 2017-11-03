@@ -4,129 +4,108 @@
 
 #import "SDLRadioControlData.h"
 #import "SDLNames.h"
-#import "SDLRadioBand.h"
-#import "SDLRadioState.h"
-#import "SDLRdsData.h"
+#import "SDLRDSData.h"
+#import "NSMutableDictionary+Store.h"
+
+NS_ASSUME_NONNULL_BEGIN
 
 @implementation SDLRadioControlData
 
-- (void)setFrequencyInteger:(NSNumber *)frequencyInteger {
-    if (frequencyInteger != nil) {
-        [store setObject:frequencyInteger forKey:NAMES_frequencyInteger];
-    } else {
-        [store removeObjectForKey:NAMES_frequencyInteger];
+- (instancetype)initWithFrequencyInteger:(nullable NSNumber<SDLInt> *)frequencyInteger frequencyFraction:(nullable NSNumber<SDLInt> *)frequencyFraction band:(nullable SDLRadioBand)band hdChannel:(nullable NSNumber<SDLInt> *)hdChannel radioEnable:(nullable NSNumber<SDLBool> *)radioEnable {
+    self = [self init];
+    if(!self) {
+        return nil;
     }
+
+    self.frequencyInteger = frequencyInteger;
+    self.frequencyFraction = frequencyFraction;
+    self.band = band;
+    self.hdChannel = hdChannel;
+    self.radioEnable = radioEnable;
+    
+    return self;
 }
 
-- (NSNumber *)frequencyInteger {
-    return [store objectForKey:NAMES_frequencyInteger];
+- (void)setFrequencyInteger:(nullable NSNumber<SDLInt> *)frequencyInteger {
+    [store sdl_setObject:frequencyInteger forName:SDLNameFrequencyInteger];
 }
 
-- (void)setFrequencyFraction:(NSNumber *)frequencyFraction {
-    if (frequencyFraction != nil) {
-        [store setObject:frequencyFraction forKey:NAMES_frequencyFraction];
-    } else {
-        [store removeObjectForKey:NAMES_frequencyFraction];
-    }
+- (nullable NSNumber<SDLInt> *)frequencyInteger {
+    return [store sdl_objectForName:SDLNameFrequencyInteger];
 }
 
-- (NSNumber *)frequencyFraction {
-    return [store objectForKey:NAMES_frequencyFraction];
+- (void)setFrequencyFraction:(nullable NSNumber<SDLInt> *)frequencyFraction {
+    [store sdl_setObject:frequencyFraction forName:SDLNameFrequencyFraction];
 }
 
-- (void)setBand:(SDLRadioBand *)band {
-    if (band != nil) {
-        [store setObject:band forKey:NAMES_band];
-    } else {
-        [store removeObjectForKey:NAMES_band];
-    }
+- (nullable NSNumber<SDLInt> *)frequencyFraction {
+    return [store sdl_objectForName:SDLNameFrequencyFraction];
 }
 
-- (SDLRadioBand *)band{
-    return [store objectForKey:NAMES_band];
+- (void)setBand:(nullable SDLRadioBand)band {
+    [store sdl_setObject:band forName:SDLNameBand];
 }
 
-- (void)setRdsData:(SDLRdsData *)rdsData {
-    if (rdsData != nil) {
-        [store setObject:rdsData forKey:NAMES_rdsData];
-    } else {
-        [store removeObjectForKey:NAMES_rdsData];
-    }
+- (nullable SDLRadioBand)band{
+    return [store sdl_objectForName:SDLNameBand];
 }
 
-- (SDLRdsData *)rdsData {
-    return [store objectForKey:NAMES_rdsData];
+- (void)setRdsData:(nullable SDLRDSData *)rdsData {
+    [store sdl_setObject:rdsData forName:SDLNameRDSData];
 }
 
-- (void)setAvailableHDs:(NSNumber *)availableHDs {
-    if (availableHDs != nil) {
-        [store setObject:availableHDs forKey:NAMES_availableHDs];
-    } else {
-        [store removeObjectForKey:NAMES_availableHDs];
-    }
+- (nullable SDLRDSData *)rdsData {
+    return [store sdl_objectForName:SDLNameRDSData ofClass:SDLRDSData.class];
 }
 
-- (NSNumber *)availableHDs {
-    return [store objectForKey:NAMES_availableHDs];
+- (void)setAvailableHDs:(nullable NSNumber<SDLInt> *)availableHDs {
+    [store sdl_setObject:availableHDs forName:SDLNameAvailableHDs];
 }
 
-- (void)setHdChannel:(NSNumber *)hdChannel {
-    if (hdChannel != nil) {
-        [store setObject:hdChannel forKey:NAMES_hdChannel];
-    } else {
-        [store removeObjectForKey:NAMES_hdChannel];
-    }
+- (nullable NSNumber<SDLInt> *)availableHDs {
+    return [store sdl_objectForName:SDLNameAvailableHDs];
 }
 
-- (NSNumber *)hdChannel {
-    return [store objectForKey:NAMES_hdChannel];
+- (void)setHdChannel:(nullable NSNumber<SDLInt> *)hdChannel {
+    [store sdl_setObject:hdChannel forName:SDLNameHDChannel];
 }
 
-- (void)setSignalStrength:(NSNumber *)signalStrength {
-    if (signalStrength != nil) {
-        [store setObject:signalStrength forKey:NAMES_signalStrength];
-    } else {
-        [store removeObjectForKey:NAMES_signalStrength];
-    }
+- (nullable NSNumber<SDLInt> *)hdChannel {
+    return [store sdl_objectForName:SDLNameHDChannel];
 }
 
-- (NSNumber *)signalStrength {
-    return [store objectForKey:NAMES_signalStrength];
+- (void)setSignalStrength:(nullable NSNumber<SDLInt> *)signalStrength {
+    [store sdl_setObject:signalStrength forName:SDLNameSignalStrength];
 }
 
-- (void)setSignalChangeThreshold:(NSNumber *)signalChangeThreshold {
-    if (signalChangeThreshold != nil) {
-        [store setObject:signalChangeThreshold forKey:NAMES_signalChangeThreshold];
-    } else {
-        [store removeObjectForKey:NAMES_signalChangeThreshold];
-    }
+- (nullable NSNumber<SDLInt> *)signalStrength {
+    return [store sdl_objectForName:SDLNameSignalStrength];
 }
 
-- (NSNumber *)signalChangeThreshold {
-    return [store objectForKey:NAMES_signalChangeThreshold];
+- (void)setSignalChangeThreshold:(nullable NSNumber<SDLInt> *)signalChangeThreshold {
+    [store sdl_setObject:signalChangeThreshold forName:SDLNameSignalChangeThreshold];
 }
 
-- (void)setRadioEnable:(NSNumber *)radioEnable {
-    if (radioEnable != nil) {
-        [store setObject:radioEnable forKey:NAMES_radioEnable];
-    } else {
-        [store removeObjectForKey:NAMES_radioEnable];
-    }
+- (nullable NSNumber<SDLInt> *)signalChangeThreshold {
+    return [store sdl_objectForName:SDLNameSignalChangeThreshold];
 }
 
-- (NSNumber *)radioEnable {
-    return [store objectForKey:NAMES_radioEnable];
+- (void)setRadioEnable:(nullable NSNumber<SDLBool> *)radioEnable {
+    [store sdl_setObject:radioEnable forName:SDLNameRadioEnable];
 }
 
-- (void)setState:(SDLRadioState *)state {
-    if (state != nil) {
-        [store setObject:state forKey:NAMES_state];
-    } else {
-        [store removeObjectForKey:NAMES_state];
-    }
+- (nullable NSNumber<SDLBool> *)radioEnable {
+    return [store sdl_objectForName:SDLNameRadioEnable];
 }
 
-- (SDLRadioState *)state {
-    return [store objectForKey:NAMES_state];
+- (void)setState:(nullable SDLRadioState)state {
+    [store sdl_setObject:state forName:SDLNameState];
 }
+
+- (nullable SDLRadioState)state {
+    return [store sdl_objectForName:SDLNameState];
+}
+
 @end
+
+NS_ASSUME_NONNULL_END

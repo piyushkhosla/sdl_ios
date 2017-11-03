@@ -2,7 +2,7 @@
 //
 
 #import "SDLFuelRange.h"
-#import "SDLFuelType.h"
+#import "NSMutableDictionary+Store.h"
 #import "SDLNames.h"
 
 @implementation SDLFuelRange
@@ -19,33 +19,20 @@
     return self;
 }
 
-- (void)setFuelType:(SDLFuelType *)fuelType {
-    if (fuelType != nil) {
-        [store setObject:fuelType forKey:NAMES_fuelType];
-    } else {
-        [store removeObjectForKey:NAMES_fuelType];
-    }
+- (void)setFuelType:(SDLFuelType)fuelType {
+    [store sdl_setObject:fuelType forName:SDLNameFuelType];
 }
 
-- (SDLFuelType *)fuelType {
-    NSObject *obj = [store objectForKey:NAMES_fuelType];
-    if (obj == nil || [obj isKindOfClass:SDLFuelType.class]) {
-        return (SDLFuelType *)obj;
-    } else {
-        return [SDLFuelType valueOf:(NSString *)obj];
-    }
+- (SDLFuelType)fuelType {
+    return [store sdl_objectForName:SDLNameFuelType];
 }
 
 - (void)setRange:(NSNumber *)range {
-    if (range != nil) {
-        [store setObject:range forKey:NAMES_fuelRange];
-    } else {
-        [store removeObjectForKey:NAMES_fuelRange];
-    }
+    [store sdl_setObject:range forName:SDLNameFuelRange];
 }
 
 - (NSNumber *)range {
-    return [store objectForKey:NAMES_fuelRange];
+    return [store sdl_objectForName:SDLNameFuelRange];
 }
 
 

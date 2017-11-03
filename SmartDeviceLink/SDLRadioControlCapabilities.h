@@ -3,18 +3,23 @@
 //
 
 #import "SDLRPCMessage.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
 /**
  * Contains information about a radio control module's capabilities.
  */
 @interface SDLRadioControlCapabilities : SDLRPCStruct
 
+- (instancetype)initWithModuleName:(NSString *)moduleName radioEnableAvailable:(BOOL)radioEnableAvailable radioBandAvailable:(BOOL)radioBandAvailable radioFrequencyAvailable:(BOOL)radioFrequencyAvailable hdChannelAvailable:(BOOL)hdChannelAvailable rdsDataAvailable:(BOOL)rdsDataAvailable availableHDsAvailable:(BOOL)availableHDsAvailable stateAvailable:(BOOL)stateAvailable signalStrengthAvailable:(BOOL)signalStrengthAvailable signalChangeThresholdAvailable:(BOOL)signalChangeThresholdAvailable;
+
 /**
- * @abstractThe short friendly name of the climate control module.
+ * @abstract The short friendly name of the climate control module.
  * It should not be used to identify a module by mobile application.
  *
  * Max string length 100 chars
  */
-@property (strong) NSString *moduleName;
+@property (strong, nonatomic) NSString *moduleName;
 
 /**
  * @abstract Availability of the control of enable/disable radio.
@@ -22,7 +27,7 @@
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *radioEnableAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *radioEnableAvailable;
 
 /**
  * @abstract  Availability of the control of radio band.
@@ -30,7 +35,7 @@
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *radioBandAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *radioBandAvailable;
 
 /**
  * @abstract Availability of the control of radio frequency.
@@ -38,7 +43,7 @@
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *radioFrequencyAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *radioFrequencyAvailable;
 
 /**
  * @abstract Availability of the control of HD radio channel.
@@ -46,7 +51,7 @@
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *hdChannelAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *hdChannelAvailable;
 
 /**
  * @abstract Availability of the getting Radio Data System (RDS) data.
@@ -54,7 +59,7 @@
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *rdsDataAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *rdsDataAvailable;
 
 /**
  * @abstract Availability of the getting the number of available HD channels.
@@ -62,7 +67,7 @@
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *availableHDsAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *availableHDsAvailable;
 
 /**
  * @abstract Availability of the getting the Radio state.
@@ -70,7 +75,7 @@
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *stateAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *stateAvailable;
 
 /**
  * @abstract Availability of the getting the signal strength.
@@ -78,7 +83,7 @@
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *signalStrengthAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *signalStrengthAvailable;
 
 /**
  * @abstract Availability of the getting the signal Change Threshold
@@ -86,6 +91,8 @@
  *
  * Optional, Boolean
  */
-@property (strong) NSNumber *signalChangeThresholdAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *signalChangeThresholdAvailable;
 
 @end
+
+NS_ASSUME_NONNULL_END

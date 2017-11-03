@@ -2,43 +2,26 @@
 //  SDLSettingDataType.h
 //
 
-
 #import "SDLEnum.h"
+
 /**
 Defines the HMI setting data types that can be published and subscribed to
  */
-@interface SDLSettingDataType : SDLEnum
+typedef SDLEnum SDLSettingDataType SDL_SWIFT_ENUM;
+
 
 /**
- @abstract get SDLSettingDataType according value string
- @param value NSString
- @return SDLSettingDataType object
+ @abstract SDLSettingDataType : SETTING_DATA_DISPLAY_MODE
  */
-
-+ (SDLSettingDataType *)valueOf:(NSString *)value;
+extern SDLSettingDataType const SDLSettingDataTypeDisplayMode;
 
 /**
- @abstract declare an array to store all possible SDLSettingDataType values
- @return the array
+ @abstract SDLSettingDataType : SETTING_DATA_DISTANCE_UNIT
  */
-
-+ (NSArray *)values;
+extern SDLSettingDataType const SDLSettingDataDistanceUnit;
 
 /**
- @return SDLSettingDataType object with string value *SETTING_DATA_DISPLAY_MODE*
- */
-+ (SDLSettingDataType *)SETTING_DATA_DISPLAY_MODE;
-
-/**
- @return SDLSettingDataType object with string value *SETTING_DATA_DISTANCE_UNIT*
+ @abstract SDLSettingDataType : SETTING_DATA_TEMPERATURE_UNIT
  */
 
-+ (SDLSettingDataType *)SETTING_DATA_DISTANCE_UNIT;
-
-/**
- @return SDLSettingDataType object with string value *SETTING_DATA_TEMPERATURE_UNIT*
- */
-
-+ (SDLSettingDataType *)SETTING_DATA_TEMPERATURE_UNIT;
-
-@end
+extern SDLSettingDataType const SDLSettingDataTemperatureUnit;

@@ -3,35 +3,40 @@
 //
 
 #import "SDLRPCRequest.h"
-@class SDLModuleType;
+#import "SDLModuleType.h"
+
+/**
+ * Reads the current status value of specified remote control module (type).
+ * When subscribe is true, subscribes for specific remote control module data items.
+ * When subscribe is false, unsubscribes for specific remote control module data items.
+ * Once subscribed, the application will be notified by the onInteriorVehicleData RPC notification
+ * whenever new data is available for the module.
+ */
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface SDLGetInteriorVehicleData : SDLRPCRequest
 
-/**
- * Constructs a new SDLGetInteriorVehicleData object
- */
-- (instancetype)init;
-/**
- * Constructs a new SDLGetInteriorVehicleData object indicated by the dictionary parameter
- * <p>
- *
- * @param dict The dictionary to use
- */
-- (instancetype)initWithDictionary:(NSMutableDictionary *)dict;
+- (instancetype)initWithModuleType:(SDLModuleType)moduleType;
+
+- (instancetype)initAndSubscribeToModuleType:(SDLModuleType)moduleType;
+
+- (instancetype)initAndUnsubscribeToModuleType:(SDLModuleType)moduleType;
 
 /**
  * The type of a RC module to retrieve module data from the vehicle.
- * In the future, this should be the Identification of a module.
  *
  */
-@property (strong) SDLModuleType *moduleType;
+@property (strong, nonatomic) SDLModuleType moduleType;
 
 /**
  * If subscribe is true, the head unit will register onInteriorVehicleData notifications for the requested moduelType.
  * If subscribe is false, the head unit will unregister onInteriorVehicleData notifications for the requested moduelType.
  *
- * Required, Boolean, default Value = false
+ * optional, Boolean, default Value = false
  */
-@property (strong) NSNumber *subscribe;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *subscribe;
 
 @end
+
+NS_ASSUME_NONNULL_END
