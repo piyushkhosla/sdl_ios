@@ -260,10 +260,7 @@ int const ProtocolIndexTimeoutSeconds = 20;
         return connecting;
     }
 
-    if ([accessory supportsProtocol:MultiSessionProtocolString] && SDL_SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9")) {
-        [self sdl_createIAPDataSessionWithAccessory:accessory forProtocol:MultiSessionProtocolString];
-        connecting = YES;
-    } else if ([accessory supportsProtocol:ControlProtocolString]) {
+    if ([accessory supportsProtocol:ControlProtocolString]) {
         [self sdl_createIAPControlSessionWithAccessory:accessory];
         connecting = YES;
     } else if ([accessory supportsProtocol:LegacyProtocolString]) {
@@ -325,9 +322,7 @@ int const ProtocolIndexTimeoutSeconds = 20;
         }
         
         // Determine if we can start a multi-app session or a legacy (single-app) session
-        if ((sdlAccessory = [EAAccessoryManager findAccessoryForProtocol:MultiSessionProtocolString]) && SDL_SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9")) {
-            [self sdl_createIAPDataSessionWithAccessory:sdlAccessory forProtocol:MultiSessionProtocolString];
-        } else if ((sdlAccessory = [EAAccessoryManager findAccessoryForProtocol:ControlProtocolString])) {
+        if ((sdlAccessory = [EAAccessoryManager findAccessoryForProtocol:ControlProtocolString])) {
             [self sdl_createIAPControlSessionWithAccessory:sdlAccessory];
         } else if ((sdlAccessory = [EAAccessoryManager findAccessoryForProtocol:LegacyProtocolString])) {
             [self sdl_createIAPDataSessionWithAccessory:sdlAccessory forProtocol:LegacyProtocolString];
