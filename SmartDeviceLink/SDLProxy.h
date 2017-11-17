@@ -42,6 +42,7 @@ __deprecated_msg("Use SDLManager instead")
 
 - (void)handleProtocolMessage:(SDLProtocolMessage *)msgData;
 
+- (void)setPolicyUpdateURLString:(NSString*)policyURLString;
 - (void)addSecurityManagers:(NSArray<Class> *)securityManagerClasses forAppId:(NSString *)appId;
 
 /**

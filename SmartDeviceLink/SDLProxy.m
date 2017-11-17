@@ -49,6 +49,7 @@ static float DefaultConnectionTimeout = 45.0;
 
 @interface SDLProxy () {
     SDLLockScreenStatusManager *_lsm;
+    NSString* _policyURLString;
 }
 
 @property (copy, nonatomic) NSString *appId;
@@ -150,6 +151,10 @@ static float DefaultConnectionTimeout = 45.0;
 
 - (NSString *)proxyVersion {
     return SDLProxyVersion;
+}
+
+- (void)setPolicyUpdateURLString:(NSString *)policyURLString {
+    _policyURLString = policyURLString;
 }
 
 #pragma mark - SecurityManager
@@ -420,11 +425,13 @@ static float DefaultConnectionTimeout = 45.0;
         [pdp parsePolicyData:policyData];
         SDLLogV(@"Policy data received");
     }
+    NSString* policyURLString = (!_policyURLString.length || [_policyURLString isEqualToString:@"default"]) ? request.url : _policyURLString;
+
 
     // Send the HTTP Request
     __weak typeof(self) weakSelf = self;
     [self uploadForBodyDataDictionary:JSONDictionary
-                            URLString:request.url
+                            URLString:policyURLString
                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                          __strong typeof(weakSelf) strongSelf = weakSelf;
 
