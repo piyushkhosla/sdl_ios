@@ -10,16 +10,16 @@
 #import <OCMock/OCMock.h>
 
 #import "SDLFocusableItemLocator.h"
-#import "SDLSendHapticData.h"
+#import "SDLHapticRect.h"
+#import "SDLLifecycleManager.h"
 #import "SDLManager.h"
+#import "SDLRectangle.h"
+#import "SDLSendHapticData.h"
 #import "SDLTouchCoord.h"
 #import "SDLTouchEvent.h"
 #import "SDLTouch.h"
-#import "SDLRectangle.h"
-#import "SDLLifecycleManager.h"
 
-BOOL compareRectangle(SDLRectangle *sdlRectangle, CGRect cgRect)
-{
+BOOL compareRectangle(SDLRectangle *sdlRectangle, CGRect cgRect) {
     expect(sdlRectangle.x).to(equal(cgRect.origin.x));
     expect(sdlRectangle.y).to(equal(cgRect.origin.y));
     expect(sdlRectangle.width).to(equal(cgRect.size.width));
@@ -46,8 +46,8 @@ describe(@"the haptic manager", ^{
         
         uiWindow = [[UIWindow alloc] init];
         uiViewController = [[UIViewController alloc] init];
-        
-        [uiWindow addSubview:uiViewController.view];
+
+        uiWindow.rootViewController = uiViewController;
         
         OCMExpect([[sdlLifecycleManager stub] sendManagerRequest:[OCMArg checkWithBlock:^BOOL(id value){
             BOOL isFirstArg = [value isKindOfClass:[SDLSendHapticData class]];
@@ -61,10 +61,10 @@ describe(@"the haptic manager", ^{
     context(@"when disabled", ^{
         beforeEach(^{
             viewRect1 = CGRectMake(101, 101, 50, 50);
-            UITextField *textField1 = [[UITextField alloc]  initWithFrame:viewRect1];
-            [uiWindow insertSubview:textField1 aboveSubview:uiWindow];
+            UITextField *textField1 = [[UITextField alloc] initWithFrame:viewRect1];
+            [uiViewController.view addSubview:textField1];
 
-            hapticManager = [[SDLFocusableItemLocator alloc] initWithWindow:uiWindow  connectionManager:sdlLifecycleManager];
+            hapticManager = [[SDLFocusableItemLocator alloc] initWithViewController:uiViewController  connectionManager:sdlLifecycleManager];
             hapticManager.enableHapticDataRequests = NO;
             [hapticManager updateInterfaceLayout];
         });
@@ -78,7 +78,7 @@ describe(@"the haptic manager", ^{
     
     context(@"when initialized with no focusable view", ^{
         beforeEach(^{
-            hapticManager = [[SDLFocusableItemLocator alloc] initWithWindow:uiWindow connectionManager:sdlLifecycleManager];
+            hapticManager = [[SDLFocusableItemLocator alloc] initWithViewController:uiViewController  connectionManager:sdlLifecycleManager];
             [hapticManager updateInterfaceLayout];
         });
         
@@ -92,9 +92,9 @@ describe(@"the haptic manager", ^{
         beforeEach(^{
             viewRect1 = CGRectMake(101, 101, 50, 50);
             UITextField *textField1 = [[UITextField alloc]  initWithFrame:viewRect1];
-            [uiWindow insertSubview:textField1 aboveSubview:uiWindow];
+            [uiViewController.view addSubview:textField1];
             
-            hapticManager = [[SDLFocusableItemLocator alloc] initWithWindow:uiWindow  connectionManager:sdlLifecycleManager];
+            hapticManager = [[SDLFocusableItemLocator alloc] initWithViewController:uiViewController  connectionManager:sdlLifecycleManager];
             hapticManager.enableHapticDataRequests = YES;
             [hapticManager updateInterfaceLayout];
         });
@@ -118,10 +118,10 @@ describe(@"the haptic manager", ^{
     context(@"when initialized with single button view", ^{
         beforeEach(^{
             viewRect1 = CGRectMake(101, 101, 50, 50);
-            UIButton *button = [[UIButton alloc]  initWithFrame:viewRect1];
-            [uiWindow addSubview:button];
+            UIButton *button = [[UIButton alloc] initWithFrame:viewRect1];
+            [uiViewController.view addSubview:button];
             
-            hapticManager = [[SDLFocusableItemLocator alloc] initWithWindow:uiWindow  connectionManager:sdlLifecycleManager];
+            hapticManager = [[SDLFocusableItemLocator alloc] initWithViewController:uiViewController  connectionManager:sdlLifecycleManager];
             hapticManager.enableHapticDataRequests = YES;
             [hapticManager updateInterfaceLayout];
         });
@@ -144,16 +144,16 @@ describe(@"the haptic manager", ^{
     
     context(@"when initialized with no views and then updated with two additional views", ^{
         beforeEach(^{
-            hapticManager = [[SDLFocusableItemLocator alloc] initWithWindow:uiWindow  connectionManager:sdlLifecycleManager];
+            hapticManager = [[SDLFocusableItemLocator alloc] initWithViewController:uiViewController  connectionManager:sdlLifecycleManager];
             hapticManager.enableHapticDataRequests = YES;
             [hapticManager updateInterfaceLayout];
             
             viewRect1 = CGRectMake(101, 101, 50, 50);
-            UITextField *textField1 = [[UITextField alloc]  initWithFrame:viewRect1];
+            UITextField *textField1 = [[UITextField alloc] initWithFrame:viewRect1];
             [uiViewController.view addSubview:textField1];
             
             viewRect2 = CGRectMake(201, 201, 50, 50);
-            UITextField *textField2 = [[UITextField alloc]  initWithFrame:viewRect2];
+            UITextField *textField2 = [[UITextField alloc] initWithFrame:viewRect2];
             [uiViewController.view addSubview:textField2];
             
             [hapticManager updateInterfaceLayout];
@@ -173,8 +173,8 @@ describe(@"the haptic manager", ^{
                 SDLHapticRect *sdlhapticRect2 = hapticRectData[1];
                 SDLRectangle *sdlRect2 = sdlhapticRect2.rect;
                 
-                compareRectangle(sdlRect1, viewRect1);
-                compareRectangle(sdlRect2, viewRect2);
+                compareRectangle(sdlRect1, viewRect2);
+                compareRectangle(sdlRect2, viewRect1);
             }
         });
     });
@@ -192,7 +192,7 @@ describe(@"the haptic manager", ^{
             UITextField *textField2 = [[UITextField alloc]  initWithFrame:viewRect2];
             [textField addSubview:textField2];
             
-            hapticManager = [[SDLFocusableItemLocator alloc] initWithWindow:uiWindow  connectionManager:sdlLifecycleManager];
+            hapticManager = [[SDLFocusableItemLocator alloc] initWithViewController:uiViewController  connectionManager:sdlLifecycleManager];
             hapticManager.enableHapticDataRequests = YES;
             [hapticManager updateInterfaceLayout];
         });
@@ -230,7 +230,7 @@ describe(@"the haptic manager", ^{
             UITextField *textField2 = [[UITextField alloc]  initWithFrame:viewRect2];
             [button addSubview:textField2];
             
-            hapticManager = [[SDLFocusableItemLocator alloc] initWithWindow:uiWindow  connectionManager:sdlLifecycleManager];
+            hapticManager = [[SDLFocusableItemLocator alloc] initWithViewController:uiViewController  connectionManager:sdlLifecycleManager];
             hapticManager.enableHapticDataRequests = YES;
             [hapticManager updateInterfaceLayout];
         });
@@ -265,7 +265,7 @@ describe(@"the haptic manager", ^{
             UITextField *textField2 = [[UITextField alloc]  initWithFrame:viewRect2];
             [uiViewController.view addSubview:textField2];
             
-            hapticManager = [[SDLFocusableItemLocator alloc] initWithWindow:uiWindow  connectionManager:sdlLifecycleManager];
+            hapticManager = [[SDLFocusableItemLocator alloc] initWithViewController:uiViewController  connectionManager:sdlLifecycleManager];
             hapticManager.enableHapticDataRequests = YES;
             [hapticManager updateInterfaceLayout];
             
@@ -296,7 +296,7 @@ describe(@"the haptic manager", ^{
             UITextField *textField1 = [[UITextField alloc]  initWithFrame:viewRect1];
             [uiViewController.view addSubview:textField1];
             
-            hapticManager = [[SDLFocusableItemLocator alloc] initWithWindow:uiWindow  connectionManager:sdlLifecycleManager];
+            hapticManager = [[SDLFocusableItemLocator alloc] initWithViewController:uiViewController  connectionManager:sdlLifecycleManager];
             hapticManager.enableHapticDataRequests = YES;
             [hapticManager updateInterfaceLayout];
             
@@ -321,8 +321,8 @@ describe(@"the haptic manager", ^{
                 SDLHapticRect *sdlhapticRect2 = hapticRectData[1];
                 SDLRectangle *sdlRect2 = sdlhapticRect2.rect;
                 
-                compareRectangle(sdlRect1, viewRect1);
-                compareRectangle(sdlRect2, viewRect2);
+                compareRectangle(sdlRect1, viewRect2);
+                compareRectangle(sdlRect2, viewRect1);
             }
         });
     });
@@ -335,7 +335,7 @@ describe(@"the haptic manager", ^{
             UITextField *textField2 = [[UITextField alloc]  initWithFrame:CGRectMake(201, 201, 50, 50)];
             [uiViewController.view addSubview:textField2];
             
-            hapticManager = [[SDLFocusableItemLocator alloc] initWithWindow:uiWindow  connectionManager:sdlLifecycleManager];
+            hapticManager = [[SDLFocusableItemLocator alloc] initWithViewController:uiViewController  connectionManager:sdlLifecycleManager];
             hapticManager.enableHapticDataRequests = YES;
             [hapticManager updateInterfaceLayout];
         });
@@ -357,7 +357,7 @@ describe(@"the haptic manager", ^{
             UITextField *textField2 = [[UITextField alloc]  initWithFrame:CGRectMake(126, 126, 50, 50)];
             [uiViewController.view addSubview:textField2];
             
-            hapticManager = [[SDLFocusableItemLocator alloc] initWithWindow:uiWindow  connectionManager:sdlLifecycleManager];
+            hapticManager = [[SDLFocusableItemLocator alloc] initWithViewController:uiViewController  connectionManager:sdlLifecycleManager];
             hapticManager.enableHapticDataRequests = YES;
             [hapticManager updateInterfaceLayout];
         });
@@ -373,7 +373,7 @@ describe(@"the haptic manager", ^{
             UITextField *textField1 = [[UITextField alloc]  initWithFrame:CGRectMake(101, 101, 50, 50)];
             [uiWindow insertSubview:textField1 aboveSubview:uiWindow];
             
-            hapticManager = [[SDLFocusableItemLocator alloc] initWithWindow:uiWindow  connectionManager:sdlLifecycleManager];
+            hapticManager = [[SDLFocusableItemLocator alloc] initWithViewController:uiViewController  connectionManager:sdlLifecycleManager];
             hapticManager.enableHapticDataRequests = YES;
             [hapticManager updateInterfaceLayout];
         });

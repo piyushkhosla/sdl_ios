@@ -1,4 +1,4 @@
-//  SDLGetWaypointsResponse.h
+//  SDLGetWayPointsResponse.h
 //
 
 #import "SDLRPCResponse.h"

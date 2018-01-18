@@ -1,4 +1,4 @@
-//  SDLGetWaypointsResponseSpec.m
+//  SDLGetWayPointsResponseSpec.m
 //
 
 #import <Foundation/Foundation.h>
@@ -6,7 +6,7 @@
 #import <Quick/Quick.h>
 #import <Nimble/Nimble.h>
 
-#import "SDLGetWaypointsResponse.h"
+#import "SDLGetWayPointsResponse.h"
 
 #import "SDLImage.h"
 #import "SDLLocationCoordinate.h"
@@ -14,7 +14,7 @@
 #import "SDLNames.h"
 #import "SDLOasisAddress.h"
 
-QuickSpecBegin(SDLGetWaypointsResponseSpec)
+QuickSpecBegin(SDLGetWayPointsResponseSpec)
 
 describe(@"Getter/Setter Tests", ^ {
     __block SDLGetWayPointsResponse* testResponse = nil;

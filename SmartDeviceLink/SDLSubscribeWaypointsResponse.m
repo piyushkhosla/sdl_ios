@@ -2,7 +2,7 @@
 //  SDLSubscribeWaypointsResponse.m
 //
 
-#import "SDLSubscribeWayPointsResponse.h"
+#import "SDLSubscribeWaypointsResponse.h"
 
 #import "NSMutableDictionary+Store.h"
 #import "SDLNames.h"

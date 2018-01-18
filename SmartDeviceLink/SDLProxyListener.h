@@ -23,7 +23,7 @@
 @class SDLGetInteriorVehicleDataResponse;
 @class SDLGetSystemCapabilityResponse;
 @class SDLGetVehicleDataResponse;
-@class SDLGetWaypointsResponse;
+@class SDLGetWayPointsResponse;
 @class SDLListFilesResponse;
 @class SDLOnAppInterfaceUnregistered;
 @class SDLOnAudioPassThru;
@@ -106,7 +106,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onGetInteriorVehicleDataResponse:(SDLGetInteriorVehicleDataResponse *)response;
 - (void)onGetSystemCapabilityResponse:(SDLGetSystemCapabilityResponse *)response;
 - (void)onGetVehicleDataResponse:(SDLGetVehicleDataResponse *)response;
-- (void)onGetWayPointsResponse:(SDLGetWaypointsResponse *)response;
+- (void)onGetWayPointsResponse:(SDLGetWayPointsResponse *)response;
 - (void)onListFilesResponse:(SDLListFilesResponse *)response;
 - (void)onReceivedLockScreenIcon:(UIImage *)icon;
 - (void)onOnAppInterfaceUnregistered:(SDLOnAppInterfaceUnregistered *)notification;

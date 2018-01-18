@@ -24,8 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (instancetype)init {
-    if (self = [super init]) {
-            self.functionIds = @{
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+    self.functionIds = @{
                                  @0: SDLNameReserved,
                                  @1: SDLNameRegisterAppInterface,
                                  @2: SDLNameUnregisterAppInterface,
@@ -97,11 +100,10 @@ NS_ASSUME_NONNULL_BEGIN
                                  @98304: SDLNameOnEncodedSyncPData,
                                  @98305: SDLNameOnSyncPData
                                  };
-    }
     return self;
 }
 
-- (nullable SDLName)functionNameForId:(int)functionID {
+- (nullable SDLName)functionNameForId:(UInt32)functionID {
     return self.functionIds[@(functionID)];
 }
 

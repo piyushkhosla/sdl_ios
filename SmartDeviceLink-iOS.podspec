@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
 
 s.name         = "SmartDeviceLink-iOS"
-s.version      = "5.0.0"
+s.version      = "5.1.0"
 s.summary      = "Connect your app with cars!"
 s.homepage     = "https://github.com/smartdevicelink/SmartDeviceLink-iOS"
 s.license      = { :type => "New BSD", :file => "LICENSE" }
 s.author       = { "SmartDeviceLink Team" => "developer@smartdevicelink.com" }
 s.platform     = :ios, "8.0"
-s.dependency     'BiSON', '~> 1.0'
+s.dependency     'BiSON', '~> 1.1.1'
 s.source       = { :git => "https://github.com/smartdevicelink/sdl_ios.git", :tag => s.version.to_s }
 s.requires_arc = true
 s.resource_bundles = { 'SmartDeviceLink' => ['SmartDeviceLink/Assets/**/*'] }
@@ -38,6 +38,9 @@ ss.public_header_files = [
 'SmartDeviceLink/SDLArtwork.h',
 'SmartDeviceLink/SDLAudioPassThruCapabilities.h',
 'SmartDeviceLink/SDLAudioStreamingState.h',
+'SmartDeviceLink/SDLAudioStreamManager.h',
+'SmartDeviceLink/SDLAudioStreamManagerDelegate.h',
+'SmartDeviceLink/SDLStreamingAudioManagerType.h',
 'SmartDeviceLink/SDLAudioType.h',
 'SmartDeviceLink/SDLBeltStatus.h',
 'SmartDeviceLink/SDLBitsPerSample.h',
@@ -45,8 +48,10 @@ ss.public_header_files = [
 'SmartDeviceLink/SDLButtonCapabilities.h',
 'SmartDeviceLink/SDLButtonEventMode.h',
 'SmartDeviceLink/SDLButtonName.h',
+'SmartDeviceLink/SDLButtonPress.h',
 'SmartDeviceLink/SDLButtonPressMode.h',
 'SmartDeviceLink/SDLCarModeStatus.h',
+'SmartDeviceLink/SDLCarWindowViewController.h',
 'SmartDeviceLink/SDLChangeRegistration.h',
 'SmartDeviceLink/SDLChangeRegistrationResponse.h',
 'SmartDeviceLink/SDLCharacterSet.h',
@@ -107,7 +112,7 @@ ss.public_header_files = [
 'SmartDeviceLink/SDLGetVehicleData.h',
 'SmartDeviceLink/SDLGetVehicleDataResponse.h',
 'SmartDeviceLink/SDLGetWaypoints.h',
-'SmartDeviceLink/SDLGetWaypointsResponse.h',
+'SmartDeviceLink/SDLGetWayPointsResponse.h',
 'SmartDeviceLink/SDLGlobalProperty.h',
 'SmartDeviceLink/SDLGPSData.h',
 'SmartDeviceLink/SDLHapticRect.h',
@@ -155,11 +160,11 @@ ss.public_header_files = [
 'SmartDeviceLink/SDLManager.h',
 'SmartDeviceLink/SDLManagerDelegate.h',
 'SmartDeviceLink/SDLMediaClockFormat.h',
-'SmartDeviceLink/SDLModuleData.h',
-'SmartDeviceLink/SDLModuleType.h',
 'SmartDeviceLink/SDLMenuParams.h',
 'SmartDeviceLink/SDLMetadataTags.h',
 'SmartDeviceLink/SDLMetadataType.h',
+'SmartDeviceLink/SDLModuleData.h',
+'SmartDeviceLink/SDLModuleType.h',
 'SmartDeviceLink/SDLMyKey.h',
 'SmartDeviceLink/SDLNavigationCapability.h',
 'SmartDeviceLink/SDLNotificationConstants.h',
@@ -211,23 +216,24 @@ ss.public_header_files = [
 'SmartDeviceLink/SDLProxyListener.h',
 'SmartDeviceLink/SDLPutFile.h',
 'SmartDeviceLink/SDLPutFileResponse.h',
-'SmartDeviceLink/SDLReadDID.h',
-'SmartDeviceLink/SDLReadDIDResponse.h',
-'SmartDeviceLink/SDLRectangle.h',
-'SmartDeviceLink/SDLRegisterAppInterface.h',
-'SmartDeviceLink/SDLRegisterAppInterfaceResponse.h',
-'SmartDeviceLink/SDLRequestType.h',
-'SmartDeviceLink/SDLResetGlobalProperties.h',
-'SmartDeviceLink/SDLResetGlobalPropertiesResponse.h',
-'SmartDeviceLink/SDLResult.h',
-'SmartDeviceLink/SDLRPCMessage.h',
-'SmartDeviceLink/SDLRPCMessageType.h',
 'SmartDeviceLink/SDLRadioBand.h',
 'SmartDeviceLink/SDLRadioControlCapabilities.h',
 'SmartDeviceLink/SDLRadioControlData.h',
 'SmartDeviceLink/SDLRadioState.h',
-'SmartDeviceLink/SDLRDSData.h',
+'SmartDeviceLink/SDLReadDID.h',
+'SmartDeviceLink/SDLRectangle.h',
+'SmartDeviceLink/SDLReadDIDResponse.h',
+'SmartDeviceLink/SDLRectangle.h',
+'SmartDeviceLink/SDLRegisterAppInterface.h',
+'SmartDeviceLink/SDLRegisterAppInterfaceResponse.h',
 'SmartDeviceLink/SDLRemoteControlCapabilities.h',
+'SmartDeviceLink/SDLRequestType.h',
+'SmartDeviceLink/SDLResetGlobalProperties.h',
+'SmartDeviceLink/SDLResetGlobalPropertiesResponse.h',
+'SmartDeviceLink/SDLResult.h',
+'SmartDeviceLink/SDLRDSData.h',
+'SmartDeviceLink/SDLRPCMessage.h',
+'SmartDeviceLink/SDLRPCMessageType.h',
 'SmartDeviceLink/SDLRPCNotification.h',
 'SmartDeviceLink/SDLRPCNotificationNotification.h',
 'SmartDeviceLink/SDLRPCRequest.h',
@@ -299,7 +305,6 @@ ss.public_header_files = [
 'SmartDeviceLink/SDLTouchManager.h',
 'SmartDeviceLink/SDLTouchManagerDelegate.h',
 'SmartDeviceLink/SDLTouchType.h',
-'SmartDeviceLink/SDLTpms.h',
 'SmartDeviceLink/SDLTransportDelegate.h',
 'SmartDeviceLink/SDLTriggerSource.h',
 'SmartDeviceLink/SDLTTSChunk.h',
@@ -335,11 +340,6 @@ ss.public_header_files = [
 'SmartDeviceLink/SDLWiperStatus.h',
 'SmartDeviceLink/SmartDeviceLink.h',
 ]
-end
-
-s.subspec 'Swift' do |ss|
-ss.dependency 'SmartDeviceLink-iOS/Default'
-ss.source_files = 'SmartDeviceLinkSwift/*.swift'
 end
 
 end

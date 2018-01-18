@@ -12,8 +12,8 @@
 - (instancetype)init;
 - (instancetype)initWithDictionary:(NSMutableDictionary *)dict;
 
-@property (strong) NSNumber *displayMode;
-@property (strong) NSNumber *distanceUnit;
-@property (strong) NSNumber *temperatureUnit;
+@property (strong, nonatomic) NSNumber *displayMode;
+@property (strong, nonatomic) NSNumber *distanceUnit;
+@property (strong, nonatomic) NSNumber *temperatureUnit;
 
 @end

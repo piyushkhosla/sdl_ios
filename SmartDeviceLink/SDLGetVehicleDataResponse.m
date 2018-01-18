@@ -24,7 +24,7 @@
 #import "SDLAbsState.h"
 #import "SDLTurnSignal.h"
 #import "SDLTirePressureValue.h"
-#import "SDLTpms.h"
+#import "SDLTPMS.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

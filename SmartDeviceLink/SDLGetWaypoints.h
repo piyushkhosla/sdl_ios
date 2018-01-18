@@ -3,7 +3,7 @@
 
 #import "SDLRPCRequest.h"
 
-#import "SDLWayPointType.h"
+#import "SDLWaypointType.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

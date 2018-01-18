@@ -23,7 +23,7 @@
  *
  * Optional, FuelType
  */
-@property (strong) SDLFuelType type;
+@property (strong, nonatomic) SDLFuelType type;
 
 /**
  * @abstract Describes The estimate range in KM 
@@ -31,7 +31,7 @@
  *
  * Optional, Float 0 - 10000
  */
-@property (strong) NSNumber *range;
+@property (strong, nonatomic) NSNumber *range;
 
 
 @end

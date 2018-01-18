@@ -3,7 +3,7 @@
 //  SmartDeviceLink-iOS
 //
 
-#import "SDLTpms.h"
+#import "SDLTPMS.h"
 SDLTpms const SDLTpmsSateUnknown = @"UNKNOWN";
 SDLTpms const SDLTpmsSateSystemFault = @"SYSTEM_FAULT";
 SDLTpms const SDLTpmsSateSensorFault = @"SENSOR_FAULT";
