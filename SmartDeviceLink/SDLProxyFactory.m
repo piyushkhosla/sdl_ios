@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (SDLProxy *)buildSDLProxyWithListener:(NSObject<SDLProxyListener> *)delegate
                          protocolString:(NSString *)protocolString {
     SDLIAPTransport *transport = [[SDLIAPTransport alloc] init];
-//    transport.protocolString = protocolString;
+    transport.protocolString = protocolString;
     SDLProtocol *protocol = [[SDLProtocol alloc] init];
     SDLProxy *ret = [[SDLProxy alloc] initWithTransport:transport
                                                protocol:protocol

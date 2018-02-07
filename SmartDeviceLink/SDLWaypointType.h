@@ -1,4 +1,4 @@
-//  SDLWaypointType.h
+//  SDLWayPointType.h
 //
 
 #import "SDLEnum.h"

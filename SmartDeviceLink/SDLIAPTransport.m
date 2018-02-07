@@ -313,25 +313,36 @@ int const ProtocolIndexTimeoutSeconds = 10;
             // Connection underway, exit
             return;
         }
-
-        if ([self.class sdl_supportsRequiredProtocolStrings] != nil) {
-            NSString *failedString = [self.class sdl_supportsRequiredProtocolStrings];
-            SDLLogE(@"A required External Accessory protocol string is missing from the info.plist: %@", failedString);
-            NSAssert(NO, @"Some SDL protocol strings are not supported, check the README for all strings that must be included in your info.plist file. Missing string: %@", failedString);
-            return;
-        }
-        
-        // Determine if we can start a multi-app session or a legacy (single-app) session
-        if ((sdlAccessory = [EAAccessoryManager findAccessoryForProtocol:MultiSessionProtocolString]) && SDL_SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9")) {
-            [self sdl_createIAPDataSessionWithAccessory:sdlAccessory forProtocol:MultiSessionProtocolString];
-        } else if ((sdlAccessory = [EAAccessoryManager findAccessoryForProtocol:ControlProtocolString])) {
-            [self sdl_createIAPControlSessionWithAccessory:sdlAccessory];
-        } else if ((sdlAccessory = [EAAccessoryManager findAccessoryForProtocol:LegacyProtocolString])) {
-            [self sdl_createIAPDataSessionWithAccessory:sdlAccessory forProtocol:LegacyProtocolString];
+        if (self.protocolString.length == 0 || [self.protocolString isEqualToString:@"default"]) {
+            if ([self.class sdl_supportsRequiredProtocolStrings] != nil) {
+                NSString *failedString = [self.class sdl_supportsRequiredProtocolStrings];
+                SDLLogE(@"A required External Accessory protocol string is missing from the info.plist: %@", failedString);
+                NSAssert(NO, @"Some SDL protocol strings are not supported, check the README for all strings that must be included in your info.plist file. Missing string: %@", failedString);
+                return;
+            }
+            
+            // Determine if we can start a multi-app session or a legacy (single-app) session
+            if ((sdlAccessory = [EAAccessoryManager findAccessoryForProtocol:MultiSessionProtocolString]) && SDL_SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9")) {
+                [self sdl_createIAPDataSessionWithAccessory:sdlAccessory forProtocol:MultiSessionProtocolString];
+            } else if ((sdlAccessory = [EAAccessoryManager findAccessoryForProtocol:ControlProtocolString])) {
+                [self sdl_createIAPControlSessionWithAccessory:sdlAccessory];
+            } else if ((sdlAccessory = [EAAccessoryManager findAccessoryForProtocol:LegacyProtocolString])) {
+                [self sdl_createIAPDataSessionWithAccessory:sdlAccessory forProtocol:LegacyProtocolString];
+            } else {
+                // No compatible accessory
+                SDLLogV(@"No accessory supporting SDL was found, dismissing setup");
+                self.sessionSetupInProgress = NO;
+            }
         } else {
-            // No compatible accessory
-            SDLLogV(@"No accessory supporting SDL was found, dismissing setup");
-            self.sessionSetupInProgress = NO;
+           SDLLogD([NSString stringWithFormat:@"FindAccessoryForProtocol :%@",self.protocolString]);
+
+            if ((accessory = [EAAccessoryManager findAccessoryForProtocol:self.protocolString])) {
+                SDLLogD(@"Accessory supporting sync protocol was found.");
+                [self sdl_createIAPDataSessionWithAccessory:accessory forProtocol:self.protocolString];
+            } else {
+               SDLLogV(@"No accessory supporting a required sync protocol was found.");
+                self.sessionSetupInProgress = NO;
+            }
         }
         
     } else {

@@ -1,7 +1,7 @@
 //  SDLWayPointType.m
 //
 
-#import "SDLWaypointType.h"
+#import "SDLWayPointType.h"
 
 SDLWayPointType const SDLWayPointTypeAll = @"ALL";
 SDLWayPointType const SDLWayPointTypeDestination = @"DESTINATION";

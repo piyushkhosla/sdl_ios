@@ -116,6 +116,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (copy, nonatomic, nullable) NSArray<NSString *> *voiceRecognitionCommandNames;
 
+/**
+ *  A manually added protocol string, which can be used to create connection
+ */
+@property (copy, nonatomic, nullable) NSString *protocolString;
+
 @end
 
 NS_ASSUME_NONNULL_END

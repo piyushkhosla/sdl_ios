@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, strong, nonatomic) SDLIAPSession *controlSession;
 @property (nullable, strong, nonatomic) SDLIAPSession *session;
+@property (strong, atomic) NSString *protocolString;
+
 
 @end
 

@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
-
 - (instancetype)initWithUpdateMode:(SDLUpdateMode)updateMode hours:(UInt8)hours minutes:(UInt8)minutes seconds:(UInt8)seconds {
     self = [self initWithUpdateMode:updateMode];
     if (!self) {
@@ -71,6 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(nullable NSNumber *)enableSeek {
     return [parameters sdl_objectForName:SDLNameEnableSeek];
+
 }
 
 @end

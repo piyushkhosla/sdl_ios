@@ -179,7 +179,12 @@ SDLLifecycleState *const SDLLifecycleStateReady = @"Ready";
     if (self.configuration.lifecycleConfig.tcpDebugMode) {
         self.proxy = [SDLProxyFactory buildSDLProxyWithListener:self.notificationDispatcher tcpIPAddress:self.configuration.lifecycleConfig.tcpDebugIPAddress tcpPort:[@(self.configuration.lifecycleConfig.tcpDebugPort) stringValue]];
     } else {
+        if (self.configuration.lifecycleConfig.protocolString.length == 0 || [self.configuration.lifecycleConfig.protocolString isEqualToString:@"default"])
+        {
         self.proxy = [SDLProxyFactory buildSDLProxyWithListener:self.notificationDispatcher];
+        } else {
+            self.proxy = [SDLProxyFactory buildSDLProxyWithListener:self.notificationDispatcher protocolString:self.configuration.lifecycleConfig.protocolString];
+        }
     }
 #pragma clang diagnostic pop
 

@@ -222,7 +222,7 @@ FOUNDATION_EXPORT const unsigned char SmartDeviceLinkVersionString[];
 #import "SDLPresetBankCapabilities.h"
 #import "SDLRadioControlCapabilities.h"
 #import "SDLRadioControlData.h"
-#import "SDLRdsData.h"
+#import "SDLRDSData.h"
 #import "SDLRemoteControlCapabilities.h"
 #import "SDLRectangle.h"
 #import "SDLScreenParams.h"
