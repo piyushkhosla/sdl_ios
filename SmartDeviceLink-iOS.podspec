@@ -88,6 +88,7 @@ ss.public_header_files = [
 'SmartDeviceLink/SDLDisplayType.h',
 'SmartDeviceLink/SDLDriverDistractionState.h',
 'SmartDeviceLink/SDLECallConfirmationStatus.h',
+'SmartDeviceLink/SDLElectronicParkBrakeStatus.h',
 'SmartDeviceLink/SDLECallInfo.h',
 'SmartDeviceLink/SDLEmergencyEvent.h',
 'SmartDeviceLink/SDLEmergencyEventType.h',

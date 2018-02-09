@@ -112,6 +112,12 @@ NS_ASSUME_NONNULL_BEGIN
  * @abstract A boolean value. If true, unsubscribes accPedalPosition data
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *accPedalPosition;
+
+/**
+ * @abstract A boolean value. If true, unsubscribes electronicParkBrakeStatus data 
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *electronicParkBrakeStatus;
+
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *steeringWheelAngle;
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *eCallInfo;
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *airbagStatus;
