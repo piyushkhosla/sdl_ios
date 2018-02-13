@@ -15,3 +15,8 @@ extern SDLModuleType const SDLModuleTypeClimate;
  * @abstract A SDLModuleType with the value of *RADIO*
  */
 extern SDLModuleType const SDLModuleTypeRadio;
+
+/**
+ * @abstract A SDLModuleType with the value of *SEAT*
+ */
+extern SDLModuleType const SDLModuleTypeSeat;
