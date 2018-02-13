@@ -490,6 +490,7 @@ extern SDLName const SDLNameTTSChunks;
 extern SDLName const SDLNameTTSName;
 extern SDLName const SDLNameTurnIcon;
 extern SDLName const SDLNameTurnList;
+extern SDLName const SDLNameTurnSignal;
 extern SDLName const SDLNameType;
 extern SDLName const SDLNameUnit;
 extern SDLName const SDLNameUnregisterAppInterface;

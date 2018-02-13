@@ -7,6 +7,7 @@
 #import "SDLPRNDL.h"
 #import "SDLVehicleDataEventStatus.h"
 #import "SDLWiperStatus.h"
+#import "SDLTurnSignal.h"
 
 @class SDLAirbagStatus;
 @class SDLBeltStatus;
@@ -130,6 +131,12 @@ NS_ASSUME_NONNULL_BEGIN
  * @abstract Current angle of the steering wheel (in deg)
  */
 @property (nullable, strong, nonatomic) NSNumber<SDLFloat> *steeringWheelAngle;
+
+/**
+ * @abstract Current status of the turnSignal
+ */
+@property (nullable, strong, nonatomic) SDLTurnSignal turnSignal;
+
 @property (nullable, strong, nonatomic) SDLECallInfo *eCallInfo;
 @property (nullable, strong, nonatomic) SDLAirbagStatus *airbagStatus;
 @property (nullable, strong, nonatomic) SDLEmergencyEvent *emergencyEvent;

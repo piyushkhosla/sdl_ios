@@ -42,6 +42,7 @@ describe(@"Getter/Setter Tests", ^ {
         testRequest.emergencyEvent = @NO;
         testRequest.clusterModeStatus = @YES;
         testRequest.myKey = @NO;
+        testRequest.turnSignal = @YES;
         
         expect(testRequest.gps).to(equal(@NO));
         expect(testRequest.speed).to(equal(@YES));
@@ -68,6 +69,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.emergencyEvent).to(equal(@NO));
         expect(testRequest.clusterModeStatus).to(equal(@YES));
         expect(testRequest.myKey).to(equal(@NO));
+        expect(testRequest.turnSignal).to(equal(@YES));
     });
     
     it(@"Should get correctly when initialized", ^ {
@@ -97,7 +99,10 @@ describe(@"Getter/Setter Tests", ^ {
                                                                    SDLNameAirbagStatus:@YES,
                                                                    SDLNameEmergencyEvent:@NO,
                                                                    SDLNameClusterModeStatus:@YES,
-                                                                   SDLNameMyKey:@NO},
+                                                                   SDLNameMyKey:@NO,
+                                                                   SDLNameTurnSignal:@YES
+                                                                   
+                                                                   },
                                                              SDLNameOperationName:SDLNameGetVehicleData}} mutableCopy];
         SDLGetVehicleData* testRequest = [[SDLGetVehicleData alloc] initWithDictionary:dict];
         
@@ -126,6 +131,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.emergencyEvent).to(equal(@NO));
         expect(testRequest.clusterModeStatus).to(equal(@YES));
         expect(testRequest.myKey).to(equal(@NO));
+        expect(testRequest.turnSignal).to(equal(@YES));
     });
     
     it(@"Should return nil if not set", ^ {
@@ -156,6 +162,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.emergencyEvent).to(beNil());
         expect(testRequest.clusterModeStatus).to(beNil());
         expect(testRequest.myKey).to(beNil());
+        expect(testRequest.turnSignal).to(beNil());
+
     });
 });
 

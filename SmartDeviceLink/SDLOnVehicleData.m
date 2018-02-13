@@ -188,6 +188,14 @@ NS_ASSUME_NONNULL_BEGIN
     return [parameters sdl_objectForName:SDLNameSteeringWheelAngle];
 }
 
+- (void)setTurnSignal:(nullable SDLTurnSignal)turnSignal {
+    [parameters sdl_setObject:turnSignal forName:SDLNameTurnSignal];
+}
+
+- (nullable SDLTurnSignal)turnSignal {
+    return [parameters sdl_objectForName:SDLNameTurnSignal];
+}
+
 - (void)setECallInfo:(nullable SDLECallInfo *)eCallInfo {
     [parameters sdl_setObject:eCallInfo forName:SDLNameECallInfo];
 }

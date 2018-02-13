@@ -170,6 +170,14 @@ NS_ASSUME_NONNULL_BEGIN
     return [parameters sdl_objectForName:SDLNameSteeringWheelAngle ofClass:SDLVehicleDataResult.class];
 }
 
+- (void)setTurnSignal:(nullable SDLVehicleDataResult *)turnSignal {
+    [parameters sdl_setObject:turnSignal forName:SDLNameTurnSignal];
+}
+
+- (nullable SDLVehicleDataResult *)turnSignal {
+    return [parameters sdl_objectForName:SDLNameSteeringWheelAngle ofClass:SDLVehicleDataResult.class];
+}
+
 - (void)setECallInfo:(nullable SDLVehicleDataResult *)eCallInfo {
     [parameters sdl_setObject:eCallInfo forName:SDLNameECallInfo];
 }

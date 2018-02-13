@@ -122,6 +122,11 @@ NS_ASSUME_NONNULL_BEGIN
  * subscribed.
  */
 @property (nullable, strong, nonatomic) NSNumber<SDLBool> *steeringWheelAngle;
+
+/**
+ * @abstract A boolean value. If true, requests turnSignal Status data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *turnSignal;
 @property (nullable, strong, nonatomic) NSNumber<SDLBool> *eCallInfo;
 @property (nullable, strong, nonatomic) NSNumber<SDLBool> *airbagStatus;
 @property (nullable, strong, nonatomic) NSNumber<SDLBool> *emergencyEvent;
