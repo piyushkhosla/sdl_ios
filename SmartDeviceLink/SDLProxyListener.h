@@ -39,6 +39,7 @@
 @class SDLOnLanguageChange;
 @class SDLOnLockScreenStatus;
 @class SDLOnPermissionsChange;
+@class SDLOnRCStatus;
 @class SDLOnSyncPData;
 @class SDLOnSystemRequest;
 @class SDLOnVehicleData;
@@ -121,6 +122,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)onOnLanguageChange:(SDLOnLanguageChange *)notification;
 - (void)onOnLockScreenNotification:(SDLOnLockScreenStatus *)notification;
 - (void)onOnPermissionsChange:(SDLOnPermissionsChange *)notification;
+- (void)onOnRCStatus:(SDLOnRCStatus *)notification;
 - (void)onOnSyncPData:(SDLOnSyncPData *)notification;
 - (void)onOnSystemRequest:(SDLOnSystemRequest *)notification;
 - (void)onOnTBTClientState:(SDLOnTBTClientState *)notification;
