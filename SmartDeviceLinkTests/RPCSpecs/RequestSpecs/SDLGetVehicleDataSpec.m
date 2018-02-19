@@ -43,6 +43,7 @@ describe(@"Getter/Setter Tests", ^ {
         testRequest.clusterModeStatus = @YES;
         testRequest.myKey = @NO;
         testRequest.electronicParkBrakeStatus = @YES;
+        testRequest.turnSignal = @YES;
         
         expect(testRequest.gps).to(equal(@NO));
         expect(testRequest.speed).to(equal(@YES));
@@ -70,6 +71,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.clusterModeStatus).to(equal(@YES));
         expect(testRequest.myKey).to(equal(@NO));
         expect(testRequest.electronicParkBrakeStatus).to(equal(@YES));
+        expect(testRequest.turnSignal).to(equal(@YES));
     });
     
     it(@"Should get correctly when initialized", ^ {
@@ -102,6 +104,10 @@ describe(@"Getter/Setter Tests", ^ {
                                                                    SDLNameMyKey:@NO,
                                                                    SDLNameElectronicParkBrakeStatus:@YES
                                                                    },
+                                                                   SDLNameMyKey:@NO,
+                                                                   SDLNameTurnSignal:@YES
+                                                                   
+                                                                   },
                                                              SDLNameOperationName:SDLNameGetVehicleData}} mutableCopy];
         SDLGetVehicleData* testRequest = [[SDLGetVehicleData alloc] initWithDictionary:dict];
         
@@ -132,6 +138,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.myKey).to(equal(@NO));
         expect(testRequest.electronicParkBrakeStatus).to(equal(@YES));
 
+        expect(testRequest.turnSignal).to(equal(@YES));
     });
     
     it(@"Should return nil if not set", ^ {
@@ -163,6 +170,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.clusterModeStatus).to(beNil());
         expect(testRequest.myKey).to(beNil());
         expect(testRequest.electronicParkBrakeStatus).to(beNil());
+
+        expect(testRequest.turnSignal).to(beNil());
 
     });
 });

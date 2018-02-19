@@ -143,3 +143,8 @@ extern SDLVehicleDataType const SDLVehicleDataTypeSteeringWheel;
  * @abstract SDLVehicleDataType: *VEHICLEDATA_ELECTRONICPARKBRAKESTATUS*
  */
 extern SDLVehicleDataType const SDLVehicleDataTypeElectronicParkBrakeStatus;
+
+/**
+ * @abstract SDLVehicleDataType: *VEHICLEDATA_TURNSIGNAL*
+ */
+extern SDLVehicleDataType const SDLVehicleDataTypeTurnSignal;

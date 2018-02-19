@@ -219,6 +219,14 @@ NS_ASSUME_NONNULL_BEGIN
     return [parameters sdl_objectForName:SDLNameECallInfo];
 }
 
+- (void)setTurnSignal:(nullable NSNumber<SDLBool> *)turnSignal {
+    [parameters sdl_setObject:turnSignal forName:SDLNameTurnSignal];
+}
+
+- (nullable NSNumber<SDLBool> *)turnSignal {
+    return [parameters sdl_objectForName:SDLNameTurnSignal];
+}
+
 - (void)setAirbagStatus:(nullable NSNumber<SDLBool> *)airbagStatus {
     [parameters sdl_setObject:airbagStatus forName:SDLNameAirbagStatus];
 }

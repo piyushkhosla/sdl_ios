@@ -43,6 +43,8 @@ describe(@"Getter/Setter Tests", ^ {
         testRequest.myKey = @YES;
         testRequest.electronicParkBrakeStatus = @NO;
         
+        testRequest.turnSignal = @YES;
+
         expect(testRequest.gps).to(equal(@YES));
         expect(testRequest.speed).to(equal(@NO));
         expect(testRequest.rpm).to(equal(@YES));
@@ -69,6 +71,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.myKey).to(equal(@YES));
         expect(testRequest.electronicParkBrakeStatus).to(equal(NO));
 
+        expect(testRequest.turnSignal).to(equal(@YES));
     });
     
     it(@"Should get correctly when initialized", ^ {
@@ -100,6 +103,9 @@ describe(@"Getter/Setter Tests", ^ {
                                                                    SDLNameMyKey:@YES,
                                                                    SDLNameElectronicParkBrakeStatus:@NO
                                                                    },
+                                                                   SDLNameMyKey:@YES,
+                                                                   SDLNameTurnSignal:@YES
+                                                                   },
                                                              SDLNameOperationName:SDLNameSubscribeVehicleData}} mutableCopy];
         SDLSubscribeVehicleData* testRequest = [[SDLSubscribeVehicleData alloc] initWithDictionary:dict];
         
@@ -128,6 +134,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.clusterModeStatus).to(equal(@NO));
         expect(testRequest.myKey).to(equal(@YES));
         expect(testRequest.electronicParkBrakeStatus).to(equal(NO));
+        expect(testRequest.turnSignal).to(equal(@YES));
     });
     
     it(@"Should return nil if not set", ^ {
@@ -159,6 +166,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.myKey).to(beNil());
         expect(testRequest.electronicParkBrakeStatus).to(beNil());
 
+        expect(testRequest.turnSignal).to(beNil());
     });
 });
 

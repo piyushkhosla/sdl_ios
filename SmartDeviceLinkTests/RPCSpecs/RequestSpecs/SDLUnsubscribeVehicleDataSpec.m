@@ -43,6 +43,8 @@ describe(@"Getter/Setter Tests", ^ {
         testRequest.myKey = @YES;
         testRequest.electronicParkBrakeStatus = @NO;
         
+        testRequest.turnSignal = @NO;
+
         expect(testRequest.gps).to(equal(@YES));
         expect(testRequest.speed).to(equal(@YES));
         expect(testRequest.rpm).to(equal(@YES));
@@ -68,6 +70,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.clusterModeStatus).to(equal(@YES));
         expect(testRequest.myKey).to(equal(@YES));
         expect(testRequest.electronicParkBrakeStatus).to(equal(@NO));
+
+        expect(testRequest.turnSignal).to(equal(@NO));
 
     });
     
@@ -100,6 +104,9 @@ describe(@"Getter/Setter Tests", ^ {
                                                                    SDLNameMyKey:@YES,
                                                                    SDLNameElectronicParkBrakeStatus:@NO
                                                                    },
+                                                                   SDLNameMyKey:@YES,
+                                                                   SDLNameTurnSignal:@NO
+                                                                   },
                                                              SDLNameOperationName:SDLNameUnsubscribeVehicleData}} mutableCopy];
         SDLUnsubscribeVehicleData* testRequest = [[SDLUnsubscribeVehicleData alloc] initWithDictionary:dict];
         
@@ -128,6 +135,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.clusterModeStatus).to(equal(@YES));
         expect(testRequest.myKey).to(equal(@YES));
         expect(testRequest.electronicParkBrakeStatus).to(equal(@NO));
+
+        expect(testRequest.turnSignal).to(equal(@NO));
 
     });
     
@@ -159,6 +168,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.clusterModeStatus).to(beNil());
         expect(testRequest.myKey).to(beNil());
         expect(testRequest.electronicParkBrakeStatus).to(beNil());
+
+        expect(testRequest.turnSignal).to(beNil());
 
     });
 });

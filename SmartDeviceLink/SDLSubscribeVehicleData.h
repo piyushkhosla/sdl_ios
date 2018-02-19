@@ -129,6 +129,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *electronicParkBrakeStatus;
 
+
+/**
+ * @abstract A boolean value. If true, means the turnSignal data has been
+ * subscribed.
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *turnSignal;
+
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *eCallInfo;
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *airbagStatus;
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *emergencyEvent;

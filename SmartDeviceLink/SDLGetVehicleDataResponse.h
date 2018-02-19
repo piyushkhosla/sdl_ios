@@ -8,6 +8,7 @@
 #import "SDLVehicleDataEventStatus.h"
 #import "SDLWiperStatus.h"
 #import "SDLElectronicParkBrakeStatus.h"
+#import "SDLTurnSignal.h"
 
 @class SDLAirbagStatus;
 @class SDLBeltStatus;
@@ -20,7 +21,6 @@
 @class SDLHeadLampStatus;
 @class SDLMyKey;
 @class SDLTireStatus;
-
 
 
 
@@ -138,6 +138,12 @@ NS_ASSUME_NONNULL_BEGIN
  * @abstract The status of the park brake as provided by Electric Park Brake (EPB) system.
  */
 @property (nullable, strong, nonatomic) SDLElectronicParkBrakeStatus electronicParkBrakeStatus;
+
+
+/**
+ * @abstract Current status of the turnSignal 
+ */
+@property (nullable, strong, nonatomic) SDLTurnSignal turnSignal;
 
 @property (nullable, strong, nonatomic) SDLECallInfo *eCallInfo;
 @property (nullable, strong, nonatomic) SDLAirbagStatus *airbagStatus;

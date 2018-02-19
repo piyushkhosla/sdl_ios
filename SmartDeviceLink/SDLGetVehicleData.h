@@ -112,12 +112,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, strong, nonatomic) NSNumber<SDLBool> *engineTorque;
 
 /**
- * @abstract A boolean value. If true, requests accPedalPosition data
+ * @abstract A boolean value. If true, means the accPedalPosition data has been
+ * subscribed.
  */
 @property (nullable, strong, nonatomic) NSNumber<SDLBool> *accPedalPosition;
 
 /**
- * @abstract A boolean value. If true, requests steeringWheelAngle data
+ * @abstract A boolean value. If true, means the steeringWheelAngle data has been
+ * subscribed.
  */
 @property (nullable, strong, nonatomic) NSNumber<SDLBool> *steeringWheelAngle;
 
@@ -126,6 +128,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *electronicParkBrakeStatus;
 
+
+/**
+ * @abstract A boolean value. If true, requests turnSignal Status data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *turnSignal;
 @property (nullable, strong, nonatomic) NSNumber<SDLBool> *eCallInfo;
 @property (nullable, strong, nonatomic) NSNumber<SDLBool> *airbagStatus;
 @property (nullable, strong, nonatomic) NSNumber<SDLBool> *emergencyEvent;

@@ -117,6 +117,12 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *electronicParkBrakeStatus;
 
+
+/**
+ * @abstract A SDLVehicleDataResult* value. Status of the Turn Signal
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *turnSignal;
+
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *eCallInfo;
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *airbagStatus;
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *emergencyEvent;
