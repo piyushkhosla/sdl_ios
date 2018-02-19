@@ -4,10 +4,13 @@
 
 #import "SDLRPCMessage.h"
 
+@class  SDLAudioControlCapabilities;
+@class  SDLButtonCapabilities;
 @class  SDLClimateControlCapabilities;
+@class  SDLHMISettingsControlCapabilities;
+@class  SDLLightControlCapabilities;
 @class  SDLRadioControlCapabilities;
 @class  SDLSeatControlCapabilities;
-@class  SDLButtonCapabilities;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithClimateControlCapabilities:(nullable NSArray<SDLClimateControlCapabilities *> *)climateControlCapabilities radioControlCapabilities:(nullable NSArray<SDLRadioControlCapabilities *> *)radioControlCapabilities buttonCapabilities:(nullable NSArray<SDLButtonCapabilities *> *)buttonCapabilities;
 
-- (instancetype)initWithClimateControlCapabilities:(nullable NSArray<SDLClimateControlCapabilities *> *)climateControlCapabilities radioControlCapabilities:(nullable NSArray<SDLRadioControlCapabilities *> *)radioControlCapabilities buttonCapabilities:(nullable NSArray<SDLButtonCapabilities *> *)buttonCapabilities seatControlCapabilities:(nullable NSArray<SDLSeatControlCapabilities *> *)seatControlCapabilities;
+- (instancetype)initWithClimateControlCapabilities:(nullable NSArray<SDLClimateControlCapabilities *> *)climateControlCapabilities radioControlCapabilities:(nullable NSArray<SDLRadioControlCapabilities *> *)radioControlCapabilities buttonCapabilities:(nullable NSArray<SDLButtonCapabilities *> *)buttonCapabilities audioControlCapabilities:(nullable NSArray<SDLAudioControlCapabilities *> *)audioControlCapabilities hmiSettingsControlCapabilities:(nullable NSArray<SDLHMISettingsControlCapabilities *> *)hmiSettingsControlCapabilities lightControlCapabilities:(nullable NSArray<SDLLightControlCapabilities *> *)lightControlCapabilities seatControlCapabilities:(nullable NSArray<SDLSeatControlCapabilities *> *)seatControlCapabilities;
 
 /**
  * @abstract If included, the platform supports RC climate controls.
@@ -46,6 +49,27 @@ NS_ASSUME_NONNULL_BEGIN
  * Optional, Array of SDLSeatControlCapabilities, Array length 1 - 100
  */
 @property (nullable, strong, nonatomic) NSArray<SDLSeatControlCapabilities *> *seatControlCapabilities;
+
+/**
+ * @abstract If included, the platform supports audio controls.
+ *
+ * Optional, Array of SDLAudioControlCapabilities, Array length 1 - 100
+ */
+@property (nullable, strong, nonatomic) NSArray<SDLAudioControlCapabilities *> *audioControlCapabilities;
+
+/**
+ * @abstract If included, the platform supports hmi setting controls.
+ *
+ * Optional, Array of SDLHMISettingsControlCapabilities, Array length 1 - 100
+ */
+@property (nullable, strong, nonatomic) NSArray<SDLHMISettingsControlCapabilities *> *hmiSettingsControlCapabilities;
+
+/**
+ * @abstract If included, the platform supports light controls.
+ *
+ * Optional, Array of SDLLightControlCapabilities, Array length 1 - 100
+ */
+@property (nullable, strong, nonatomic) NSArray<SDLLightControlCapabilities *> *lightControlCapabilities;
 
 @end
 

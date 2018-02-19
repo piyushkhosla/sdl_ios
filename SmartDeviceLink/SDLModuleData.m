@@ -7,6 +7,9 @@
 #import "SDLClimateControlData.h"
 #import "SDLRadioControlData.h"
 #import "SDLSeatControlData.h"
+#import "SDLAudioControlData.h"
+#import "SDLLightControlData.h"
+#import "SDLHMISettingsControlData.h"
 #import "NSMutableDictionary+Store.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -49,6 +52,42 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
+- (instancetype)initWithAudioControlData:(SDLAudioControlData *)audioControlData {
+    self = [self init];
+    if(!self){
+        return nil;
+    }
+
+    self.moduleType = SDLModuleTypeAudio;
+    self.audioControlData = audioControlData;
+
+    return self;
+}
+
+- (instancetype)initWithLightControlData:(SDLLightControlData *)lightControlData {
+    self = [self init];
+    if(!self){
+        return nil;
+    }
+
+    self.moduleType = SDLModuleTypeLight;
+    self.lightControlData = lightControlData;
+
+    return self;
+}
+
+- (instancetype)initWithHMISettingsControlData:(SDLHMISettingsControlData *)hmiSettingsControlData {
+    self = [self init];
+    if(!self){
+        return nil;
+    }
+
+    self.moduleType = SDLModuleTypeHMISettings;
+    self.hmiSettingsControlData = hmiSettingsControlData;
+
+    return self;
+}
+
 - (void)setModuleType:(SDLModuleType)moduleType {
     [store sdl_setObject:moduleType forName:SDLNameModuleType];
 }
@@ -81,6 +120,30 @@ NS_ASSUME_NONNULL_BEGIN
     return [store sdl_objectForName:SDLNameSeatControlData ofClass:SDLSeatControlData.class];
 }
 
+
+- (void)setAudioControlData:(nullable SDLAudioControlData *)audioControlData {
+    [store sdl_setObject:audioControlData forName:SDLNameAudioControlData];
+}
+
+- (nullable SDLAudioControlData *)audioControlData {
+    return [store sdl_objectForName:SDLNameAudioControlData ofClass:SDLAudioControlData.class];
+}
+
+- (void)setLightControlData:(nullable SDLLightControlData *)lightControlData {
+    [store sdl_setObject:lightControlData forName:SDLNameLightControlData];
+}
+
+- (nullable SDLLightControlData *)lightControlData {
+    return [store sdl_objectForName:SDLNameLightControlData ofClass:SDLLightControlData.class];
+}
+
+- (void)setHmiSettingsControlData:(nullable SDLHMISettingsControlData *)hmiSettingsControlData {
+    [store sdl_setObject:hmiSettingsControlData forName:SDLNameHmiSettingsControlData];
+}
+
+- (nullable SDLHMISettingsControlData *)hmiSettingsControlData {
+    return [store sdl_objectForName:SDLNameHmiSettingsControlData ofClass:SDLHMISettingsControlData.class];
+}
 
 @end
 

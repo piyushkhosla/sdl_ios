@@ -8,6 +8,10 @@
 @class SDLRadioControlData;
 @class SDLClimateControlData;
 @class SDLSeatControlData;
+@class SDLAudioControlData;
+@class SDLHMISettingsControlData;
+@class SDLLightControlData;
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithRadioControlData:(SDLRadioControlData *)radioControlData;
 - (instancetype)initWithClimateControlData:(SDLClimateControlData *)climateControlData;
 - (instancetype)initWithseatControlData:(SDLSeatControlData *)seatControlData;
+- (instancetype)initWithAudioControlData:(SDLAudioControlData *)audioControlData;
+- (instancetype)initWithLightControlData:(SDLLightControlData *)lightControlData;
+- (instancetype)initWithHMISettingsControlData:(SDLHMISettingsControlData *)hmiSettingsControlData;
 
 /**
  * The moduleType indicates which type of data should be changed
@@ -29,6 +36,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, strong, nonatomic) SDLClimateControlData *climateControlData;
 
 @property (nullable, strong, nonatomic) SDLSeatControlData *seatControlData;
+
+@property (nullable, strong, nonatomic) SDLAudioControlData *audioControlData;
+
+@property (nullable, strong, nonatomic) SDLLightControlData *lightControlData;
+
+@property (nullable, strong, nonatomic) SDLHMISettingsControlData *hmiSettingsControlData;
 
 @end
 
