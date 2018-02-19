@@ -231,6 +231,9 @@
 		1680B11C1A9CD7AD00DBD79E /* SDLProtocolMessageAssemblerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 1680B1101A9CD7AD00DBD79E /* SDLProtocolMessageAssemblerSpec.m */; };
 		1680B11D1A9CD7AD00DBD79E /* SDLProtocolMessageDisassemblerSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 1680B1111A9CD7AD00DBD79E /* SDLProtocolMessageDisassemblerSpec.m */; };
 		1680B11E1A9CD7AD00DBD79E /* SDLProtocolReceivedMessageRouterSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 1680B1121A9CD7AD00DBD79E /* SDLProtocolReceivedMessageRouterSpec.m */; };
+		1E011650202C2C9100213EC4 /* SDLElectronicParkBrakeStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E01164E202C2C9000213EC4 /* SDLElectronicParkBrakeStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E011651202C2C9100213EC4 /* SDLElectronicParkBrakeStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E01164F202C2C9100213EC4 /* SDLElectronicParkBrakeStatus.m */; };
+		1E011668202C4DD800213EC4 /* SDLElectronicParkBrakeStatusSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E011667202C4DD800213EC4 /* SDLElectronicParkBrakeStatusSpec.m */; };
 		1E4920B11F6A6443008F2CC3 /* SDLRadioState.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AD05F1F207AB10029B8AF /* SDLRadioState.m */; };
 		1E4920B21F6A6455008F2CC3 /* SDLGetInteriorVehicleDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AD08B1F20BC320029B8AF /* SDLGetInteriorVehicleDataResponse.m */; };
 		1E4920B31F6A6463008F2CC3 /* SDLOnInteriorVehicleData.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AD0971F20C0FB0029B8AF /* SDLOnInteriorVehicleData.m */; };
@@ -1519,6 +1522,9 @@
 		1680B1101A9CD7AD00DBD79E /* SDLProtocolMessageAssemblerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLProtocolMessageAssemblerSpec.m; sourceTree = "<group>"; };
 		1680B1111A9CD7AD00DBD79E /* SDLProtocolMessageDisassemblerSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLProtocolMessageDisassemblerSpec.m; sourceTree = "<group>"; };
 		1680B1121A9CD7AD00DBD79E /* SDLProtocolReceivedMessageRouterSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLProtocolReceivedMessageRouterSpec.m; sourceTree = "<group>"; };
+		1E01164E202C2C9000213EC4 /* SDLElectronicParkBrakeStatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDLElectronicParkBrakeStatus.h; sourceTree = "<group>"; };
+		1E01164F202C2C9100213EC4 /* SDLElectronicParkBrakeStatus.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDLElectronicParkBrakeStatus.m; sourceTree = "<group>"; };
+		1E011667202C4DD800213EC4 /* SDLElectronicParkBrakeStatusSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDLElectronicParkBrakeStatusSpec.m; sourceTree = "<group>"; };
 		1E5AD0321F1F3AA30029B8AF /* SDLRemoteControlCapabilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLRemoteControlCapabilities.h; sourceTree = "<group>"; };
 		1E5AD0331F1F3AA30029B8AF /* SDLRemoteControlCapabilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLRemoteControlCapabilities.m; sourceTree = "<group>"; };
 		1E5AD0361F1F4E390029B8AF /* SDLClimateControlCapabilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLClimateControlCapabilities.h; sourceTree = "<group>"; };
@@ -2634,6 +2640,7 @@
 				1EAA47612035B1AE000FE74B /* SDLDistanceUnitSpec.m */,
 				162E81F21A9BDE8A00906325 /* SDLDriverDistractionStateSpec.m */,
 				162E81F31A9BDE8A00906325 /* SDLECallConfirmationStatusSpec.m */,
+				1E011667202C4DD800213EC4 /* SDLElectronicParkBrakeStatusSpec.m */,
 				162E81F41A9BDE8A00906325 /* SDLEmergencyEventTypeSpec.m */,
 				162E81F51A9BDE8A00906325 /* SDLFileTypeSpec.m */,
 				162E81F61A9BDE8A00906325 /* SDLFuelCutoffStatusSpec.m */,
@@ -3752,6 +3759,8 @@
 				5D61FAA81A84238A00846EE7 /* SDLDriverDistractionState.m */,
 				5D61FAA91A84238A00846EE7 /* SDLECallConfirmationStatus.h */,
 				5D61FAAA1A84238A00846EE7 /* SDLECallConfirmationStatus.m */,
+				1E01164E202C2C9000213EC4 /* SDLElectronicParkBrakeStatus.h */,
+				1E01164F202C2C9100213EC4 /* SDLElectronicParkBrakeStatus.m */,
 				5D61FAAF1A84238A00846EE7 /* SDLEmergencyEventType.h */,
 				5D61FAB01A84238A00846EE7 /* SDLEmergencyEventType.m */,
 				5D61FABC1A84238A00846EE7 /* SDLFileType.h */,
@@ -4897,6 +4906,7 @@
 				1EAA47112033FE80000FE74B /* SDLStationIDNumber.h in Headers */,
 				1EAA47152034052D000FE74B /* SDLGPSLocation.h in Headers */,
 				1EAA470B2032BAE5000FE74B /* SDLOnRCStatus.h in Headers */,
+				1E011650202C2C9100213EC4 /* SDLElectronicParkBrakeStatus.h in Headers */,
 				5D9FC2A61FD8815800ACA5C2 /* SDLPCMAudioConverter.h in Headers */,
 				1EAA47292034388D000FE74B /* SDLAudioControlData.h in Headers */,
 				1EAA471D203410BB000FE74B /* SDLAudioControlCapabilities.h in Headers */,
@@ -5685,6 +5695,7 @@
 				1EB59CB0202D97AC00343A61 /* SDLMassageCushionFirmness.m in Sources */,
 				5D61FDCE1A84238C00846EE7 /* SDLTimerMode.m in Sources */,
 				5D61FD701A84238C00846EE7 /* SDLRPCPayload.m in Sources */,
+				1E011651202C2C9100213EC4 /* SDLElectronicParkBrakeStatus.m in Sources */,
 				5D61FD9C1A84238C00846EE7 /* SDLSlider.m in Sources */,
 				5DCF76FA1ACDD7CD00BB647B /* SDLSendLocationResponse.m in Sources */,
 				5D9FDA8F1F2A7D3400A495C8 /* bson_array.c in Sources */,
@@ -5988,6 +5999,7 @@
 				1EB59CD8202DCCD500343A61 /* SDLMassageCushionFirmnessSpec.m in Sources */,
 				162E83661A9BDE8B00906325 /* SDLShowResponseSpec.m in Sources */,
 				5D9F50831BEA5C6100FEF399 /* SDLFileManagerSpec.m in Sources */,
+				1E011668202C4DD800213EC4 /* SDLElectronicParkBrakeStatusSpec.m in Sources */,
 				1EE8C4481F38430900FDC2CF /* SDLRadioControlCapabilitiesSpec.m in Sources */,
 				162E83221A9BDE8B00906325 /* SDLAddCommandSpec.m in Sources */,
 				162E83121A9BDE8B00906325 /* SDLOnButtonPressSpec.m in Sources */,

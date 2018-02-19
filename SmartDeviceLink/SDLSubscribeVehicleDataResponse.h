@@ -110,6 +110,13 @@ NS_ASSUME_NONNULL_BEGIN
  * @abstract A SDLVehicleDataResult* value. Current angle of the steering wheel (in deg)
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *steeringWheelAngle;
+
+/**
+ * @abstract A SDLVehicleDataResult* value. The status of the park brake as provided by
+ * Electric Park Brake (EPB) system.
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *electronicParkBrakeStatus;
+
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *eCallInfo;
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *airbagStatus;
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *emergencyEvent;

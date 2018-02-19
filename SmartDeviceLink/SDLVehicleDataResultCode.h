@@ -14,7 +14,6 @@ typedef SDLEnum SDLVehicleDataResultCode SDL_SWIFT_ENUM;
  */
 extern SDLVehicleDataResultCode const SDLVehicleDataResultCodeSuccess;
 
-
 /**
  * DTC / DID request successful, however, not all active DTCs or full contents of DID location available
  */
