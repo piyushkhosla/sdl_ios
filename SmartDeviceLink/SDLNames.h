@@ -179,7 +179,7 @@ extern SDLName const SDLNameFccFacilityId;
 extern SDLName const SDLNameFilename;
 extern SDLName const SDLNameFilenames;
 extern SDLName const SDLNameFileType;
-extern SDLName const SDLNamefirmness;
+extern SDLName const SDLNameFirmness;
 extern SDLName const SDLNameFirmwareRevision;
 extern SDLName const SDLNameFreeModules;
 extern SDLName const SDLNameFrequencyInteger;
