@@ -118,8 +118,6 @@ describe(@"Getter/Setter Tests", ^ {
                                                    SDLNameClusterModeStatus:clusterMode,
                                                    SDLNameMyKey:myKey,
                                                    SDLNameElectronicParkBrakeStatus:SDLElectronicParkBrakeStateFault,
-                                                   },
-                                                   SDLNameMyKey:myKey,
                                                    SDLNameTurnSignal:SDLTurnSignalRight
                                                    },
                                              SDLNameOperationName:SDLNameGetVehicleData}} mutableCopy];

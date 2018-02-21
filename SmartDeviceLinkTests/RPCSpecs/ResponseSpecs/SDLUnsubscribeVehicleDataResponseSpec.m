@@ -105,9 +105,7 @@ describe(@"Getter/Setter Tests", ^ {
                                                                    SDLNameEmergencyEvent:vehicleDataResult,
                                                                    SDLNameClusterModes:vehicleDataResult,
                                                                    SDLNameMyKey:vehicleDataResult,
-                                                                   SDLNameElectronicParkBrakeStatus:vehicleDataResult
-                                                                   },
-                                                                   SDLNameMyKey:vehicleDataResult,
+                                                                   SDLNameElectronicParkBrakeStatus:vehicleDataResult,
                                                                    SDLNameTurnSignal:vehicleDataResult
                                                                    },
                                                              SDLNameOperationName:SDLNameUnsubscribeVehicleData}} mutableCopy];

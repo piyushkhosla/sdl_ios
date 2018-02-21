@@ -101,9 +101,7 @@ describe(@"Getter/Setter Tests", ^ {
                                                                    SDLNameEmergencyEvent:@YES,
                                                                    SDLNameClusterModeStatus:@NO,
                                                                    SDLNameMyKey:@YES,
-                                                                   SDLNameElectronicParkBrakeStatus:@NO
-                                                                   },
-                                                                   SDLNameMyKey:@YES,
+                                                                   SDLNameElectronicParkBrakeStatus:@NO,
                                                                    SDLNameTurnSignal:@YES
                                                                    },
                                                              SDLNameOperationName:SDLNameSubscribeVehicleData}} mutableCopy];

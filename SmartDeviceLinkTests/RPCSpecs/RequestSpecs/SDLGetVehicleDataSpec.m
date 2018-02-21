@@ -102,11 +102,8 @@ describe(@"Getter/Setter Tests", ^ {
                                                                    SDLNameEmergencyEvent:@NO,
                                                                    SDLNameClusterModeStatus:@YES,
                                                                    SDLNameMyKey:@NO,
-                                                                   SDLNameElectronicParkBrakeStatus:@YES
-                                                                   },
-                                                                   SDLNameMyKey:@NO,
-                                                                   SDLNameTurnSignal:@YES
-                                                                   
+                                                                   SDLNameElectronicParkBrakeStatus:@YES,
+                                                                   SDLNameTurnSignal:@YES     
                                                                    },
                                                              SDLNameOperationName:SDLNameGetVehicleData}} mutableCopy];
         SDLGetVehicleData* testRequest = [[SDLGetVehicleData alloc] initWithDictionary:dict];
