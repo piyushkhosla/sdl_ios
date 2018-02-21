@@ -42,9 +42,8 @@ describe(@"Getter/Setter Tests", ^ {
         testRequest.clusterModeStatus = @NO;
         testRequest.myKey = @YES;
         testRequest.electronicParkBrakeStatus = @NO;
-        
         testRequest.turnSignal = @YES;
-
+        
         expect(testRequest.gps).to(equal(@YES));
         expect(testRequest.speed).to(equal(@NO));
         expect(testRequest.rpm).to(equal(@YES));
@@ -69,7 +68,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.emergencyEvent).to(equal(@YES));
         expect(testRequest.clusterModeStatus).to(equal(@NO));
         expect(testRequest.myKey).to(equal(@YES));
-        expect(testRequest.electronicParkBrakeStatus).to(equal(NO));
+        expect(testRequest.electronicParkBrakeStatus).to(equal(@NO));
 
         expect(testRequest.turnSignal).to(equal(@YES));
     });
@@ -131,7 +130,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.emergencyEvent).to(equal(@YES));
         expect(testRequest.clusterModeStatus).to(equal(@NO));
         expect(testRequest.myKey).to(equal(@YES));
-        expect(testRequest.electronicParkBrakeStatus).to(equal(NO));
+        expect(testRequest.electronicParkBrakeStatus).to(equal(@NO));
         expect(testRequest.turnSignal).to(equal(@YES));
     });
     
