@@ -1081,7 +1081,7 @@
 		5DBF062A1E64A92C00A5CF03 /* SDLLogTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DBF06291E64A92C00A5CF03 /* SDLLogTarget.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5DBF062D1E64A93A00A5CF03 /* SDLLogFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DBF062B1E64A93A00A5CF03 /* SDLLogFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5DBF062E1E64A93A00A5CF03 /* SDLLogFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DBF062C1E64A93A00A5CF03 /* SDLLogFilter.m */; };
-		5DBF06311E64A9C600A5CF03 /* SDLLogModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DBF062F1E64A9C600A5CF03 /* SDLLogModel.h */; };
+		5DBF06311E64A9C600A5CF03 /* SDLLogModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DBF062F1E64A9C600A5CF03 /* SDLLogModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5DBF06351E64A9FE00A5CF03 /* SDLLogConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DBF06331E64A9FE00A5CF03 /* SDLLogConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5DBF06391E64ABBE00A5CF03 /* SDLLogConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DBF06371E64ABBE00A5CF03 /* SDLLogConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5DBF063A1E64ABBE00A5CF03 /* SDLLogConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DBF06381E64ABBE00A5CF03 /* SDLLogConfiguration.m */; };
@@ -4892,6 +4892,7 @@
 			files = (
 				1EB59CBF202DA26000343A61 /* SDLSeatControlData.h in Headers */,
 				1EB59CB3202D9B5F00343A61 /* SDLSeatMemoryActionType.h in Headers */,
+				5DBF06311E64A9C600A5CF03 /* SDLLogModel.h in Headers */,
 				1EB59CC3202DB40400343A61 /* SDLSeatControlCapabilities.h in Headers */,
 				1EB59CB7202D9C8100343A61 /* SDLSeatMemoryAction.h in Headers */,
 				1EB59CBB202DA1B400343A61 /* SDLSupportedSeat.h in Headers */,
@@ -5300,7 +5301,6 @@
 				97E26DEC1E807AD70074A3C7 /* SDLMutableDataQueue.h in Headers */,
 				5D61FDF71A84238C00846EE7 /* SDLV1ProtocolMessage.h in Headers */,
 				5D61FDFB1A84238C00846EE7 /* SDLV2ProtocolMessage.h in Headers */,
-				5DBF06311E64A9C600A5CF03 /* SDLLogModel.h in Headers */,
 				5D7F87EB1CE3C1A1002DD7C4 /* SDLDeleteFileOperation.h in Headers */,
 				5D61FCFC1A84238C00846EE7 /* SDLNames.h in Headers */,
 				DA9F7E8F1DCC04C000ACAE48 /* SDLUnsubscribeWayPointsResponse.h in Headers */,
