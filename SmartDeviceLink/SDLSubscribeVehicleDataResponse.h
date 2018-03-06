@@ -150,6 +150,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *steeringWheelAngle;
 
 /**
+ * A SDLVehicleDataResult* value. The estimate range in KM the vehicle can travel based on fuel level and consumption
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *fuelRange;
+
+
+/**
  The result of requesting to subscribe to the emergency call info
 
  Optional

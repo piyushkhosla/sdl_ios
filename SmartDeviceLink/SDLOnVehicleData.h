@@ -19,6 +19,7 @@
 @class SDLHeadLampStatus;
 @class SDLMyKey;
 @class SDLTireStatus;
+@class SDLFuelRange;
 
 
 /**
@@ -125,6 +126,13 @@ NS_ASSUME_NONNULL_BEGIN
  Accelerator pedal position (percentage depressed)
  */
 @property (nullable, strong, nonatomic) NSNumber<SDLFloat> *accPedalPosition;
+
+/**
+ * Range in KM based on fuel consumption/level
+ *
+ * optional, NSMutableArray of size ranging 0-100
+ */
+@property (strong) NSArray<SDLFuelRange *> *fuelRange;
 
 /**
  Current angle of the steering wheel (in deg)

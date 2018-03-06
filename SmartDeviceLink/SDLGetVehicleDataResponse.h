@@ -15,6 +15,7 @@
 @class SDLDeviceStatus;
 @class SDLECallInfo;
 @class SDLEmergencyEvent;
+@class SDLFuelRange;
 @class SDLGPSData;
 @class SDLHeadLampStatus;
 @class SDLMyKey;
@@ -126,6 +127,13 @@ NS_ASSUME_NONNULL_BEGIN
  Accelerator pedal position (percentage depressed)
  */
 @property (nullable, strong, nonatomic) NSNumber<SDLFloat> *accPedalPosition;
+
+/**
+ * Array of SDLFuelRange in KM based on fuel consumption/level
+ *
+ * optional, NSMutableArray of size ranging 0-100
+ */
+@property (nullable, strong, nonatomic) NSArray<SDLFuelRange *> *fuelRange;
 
 /**
  Current angle of the steering wheel (in deg)

@@ -155,6 +155,8 @@ extern SDLName const SDLNameFuelCutoffStatus;
 extern SDLName const SDLNameFuelLevel;
 extern SDLName const SDLNameFuelLevelState;
 extern SDLName const SDLNameFuelMaintenanceMode;
+extern SDLName const SDLNameFuelRange;
+extern SDLName const SDLNameFuelType;
 extern SDLName const SDLNameGenericResponse;
 extern SDLName const SDLNameGetDTCs;
 extern SDLName const SDLNameGetInteriorVehicleData;
