@@ -11,6 +11,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation SDLFuelRange
 
+- (instancetype)initWithType:(SDLFuelType)type range:(double)range {
+    if (self = [super init]) {
+        self.type = type;
+        self.range = @(range);
+    }
+    return self;
+}
+
 - (instancetype)init {
     if (self = [super init]) {
     }
@@ -25,11 +33,11 @@ NS_ASSUME_NONNULL_BEGIN
     return [store sdl_objectForName:SDLNameFuelType];
 }
 
-- (void)setRange:(nullable NSNumber *)range {
+- (void)setRange:(nullable NSNumber<SDLFloat> *)range {
     [store sdl_setObject:range forName:SDLNameFuelRange];
 }
 
-- (nullable NSNumber *)range {
+- (nullable NSNumber<SDLFloat> *)range {
     return [store sdl_objectForName:SDLNameFuelRange];
 }
 

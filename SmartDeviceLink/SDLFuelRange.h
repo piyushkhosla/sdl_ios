@@ -11,8 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Constructs a newly allocated SDLFuelRange object
  */
-- (instancetype)init;
-
+- (instancetype)initWithType:(SDLFuelType)type range:(double)range;
 
 /**
  * @abstract Describes Kind of Fuel Type used
@@ -27,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Float 0 - 10000
  */
-@property (nullable, copy, nonatomic) NSNumber *range;
+@property (nullable, copy, nonatomic) NSNumber<SDLFloat> *range;
 
 
 @end

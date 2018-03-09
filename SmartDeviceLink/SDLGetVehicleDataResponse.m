@@ -233,7 +233,6 @@ NS_ASSUME_NONNULL_BEGIN
     [parameters sdl_setObject:fuelRange forName:SDLNameFuelRange];
 }
 
-//TODO: update
 - (nullable NSArray<SDLFuelRange *> *)fuelRange {
     return [parameters sdl_objectsForName:SDLNameFuelRange ofClass:SDLFuelRange.class];
 }
