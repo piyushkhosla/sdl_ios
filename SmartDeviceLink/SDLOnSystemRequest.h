@@ -19,6 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) SDLRequestType requestType;
 
 /**
+ The sub type of request.
+ */
+@property (nullable, strong, nonatomic) NSString *requestSubType;
+
+/**
  Optional URL for HTTP requests. If blank, the binary data shall be forwarded to the app. If not blank, the binary data shall be forwarded to the url with a provided timeout in seconds.
  */
 @property (nullable, strong, nonatomic) NSString *url;

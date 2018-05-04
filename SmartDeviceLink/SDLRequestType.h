@@ -108,3 +108,4 @@ extern SDLRequestType const SDLRequestTypeMedia;
  A firmeware over-the-air request
  */
 extern SDLRequestType const SDLRequestTypeFOTA;
+extern SDLRequestType const SDLRequestTypeOEMSpecific;

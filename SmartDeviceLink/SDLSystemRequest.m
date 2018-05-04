@@ -45,6 +45,14 @@ NS_ASSUME_NONNULL_BEGIN
     return [parameters sdl_objectForName:SDLNameFilename];
 }
 
+- (void)setRequestSubType:(nullable NSString *)requestSubType {
+    [parameters sdl_setObject:requestSubType forName:SDLNameRequestSubType];
+}
+
+- (nullable NSString *)requestSubType {
+    return [parameters sdl_objectForName:SDLNameRequestSubType];
+}
+
 @end
 
 NS_ASSUME_NONNULL_END

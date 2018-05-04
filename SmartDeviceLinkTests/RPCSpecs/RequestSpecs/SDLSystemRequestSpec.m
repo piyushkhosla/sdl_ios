@@ -19,9 +19,11 @@ describe(@"Getter/Setter Tests", ^ {
         SDLSystemRequest* testRequest = [[SDLSystemRequest alloc] init];
         
         testRequest.requestType = SDLRequestTypeAuthenticationRequest;
+        testRequest.requestSubType = @"OEM_SPECIFIC";
         testRequest.fileName = @"AnotherFile";
         
         expect(testRequest.requestType).to(equal(SDLRequestTypeAuthenticationRequest));
+        expect(testRequest.requestSubType).to(equal(@"OEM_SPECIFIC"));
         expect(testRequest.fileName).to(equal(@"AnotherFile"));
     });
     
@@ -29,11 +31,14 @@ describe(@"Getter/Setter Tests", ^ {
         NSMutableDictionary* dict = [@{SDLNameRequest:
                                            @{SDLNameParameters:
                                                  @{SDLNameRequestType:SDLRequestTypeAuthenticationRequest,
-                                                   SDLNameFilename:@"AnotherFile"},
+                                                   SDLNameFilename:@"AnotherFile",
+                                                   SDLNameRequestSubType:@"OEM_SPECIFIC"
+                                                   },
                                              SDLNameOperationName:SDLNameSystemRequest}} mutableCopy];
         SDLSystemRequest* testRequest = [[SDLSystemRequest alloc] initWithDictionary:dict];
         
         expect(testRequest.requestType).to(equal(SDLRequestTypeAuthenticationRequest));
+        expect(testRequest.requestSubType).to(equal(@"OEM_SPECIFIC"));
         expect(testRequest.fileName).to(equal(@"AnotherFile"));
     });
     
@@ -41,6 +46,7 @@ describe(@"Getter/Setter Tests", ^ {
         SDLSystemRequest* testRequest = [[SDLSystemRequest alloc] init];
         
         expect(testRequest.requestType).to(beNil());
+        expect(testRequest.requestSubType).to(beNil());
         expect(testRequest.fileName).to(beNil());
     });
 });

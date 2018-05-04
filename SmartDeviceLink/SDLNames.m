@@ -371,6 +371,7 @@ SDLName const SDLNameRegisterAppInterface = @"RegisterAppInterface";
 SDLName const SDLNameRemoteControlCapability = @"remoteControlCapability";
 SDLName const SDLNameRequest = @"request";
 SDLName const SDLNameRequestType = @"requestType";
+SDLName const SDLNameRequestSubType = @"requestSubType";
 SDLName const SDLNameReserved = @"reserved";
 SDLName const SDLNameResetGlobalProperties = @"ResetGlobalProperties";
 SDLName const SDLNameSetInteriorVehicleData = @"SetInteriorVehicleData";

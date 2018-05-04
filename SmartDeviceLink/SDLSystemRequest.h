@@ -25,6 +25,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) SDLRequestType requestType;
 
 /**
+ * @abstract This parameter is filled for supporting OEM proprietary data exchanges
+ *
+ * Required, Max length 255 chars
+ */
+@property (strong, nonatomic, nullable) NSString *requestSubType;
+
+/**
  *  Filename of HTTP data to store in predefined system staging area.
  *
  *  Required if requestType is HTTP. PROPRIETARY requestType should ignore this parameter.
