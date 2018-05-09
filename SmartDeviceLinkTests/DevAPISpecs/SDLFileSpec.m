@@ -56,6 +56,10 @@ describe(@"SDLFile", ^{
                 expect(@(testFile.overwrite)).to(equal(@NO));
             });
 
+            it(@"should correctly start as crc disabled", ^{
+                expect(@(testFile.crcEnabled)).to(equal(@NO));
+            });
+
             it(@"should correctly create an input stream", ^{
                 expect(testFile.inputStream).toNot(beNil());
             });
@@ -118,6 +122,10 @@ describe(@"SDLFile", ^{
                     expect(@(testFile.overwrite)).to(equal(@NO));
                 });
 
+                it(@"should correctly start as crc disabled", ^{
+                    expect(@(testFile.crcEnabled)).to(equal(@NO));
+                });
+
                 it(@"should correctly create an input stream", ^{
                     expect(testFile.inputStream).toNot(beNil());
                 });
@@ -158,6 +166,10 @@ describe(@"SDLFile", ^{
                 
                 it(@"should correctly start as non-overwrite", ^{
                     expect(@(testFile.overwrite)).to(equal(@NO));
+                });
+
+                it(@"should correctly start as crc disabled", ^{
+                    expect(@(testFile.crcEnabled)).to(equal(@NO));
                 });
 
                 it(@"should correctly create an input stream", ^{
