@@ -8,6 +8,7 @@
 
 #import "SDLUploadFileOperation.h"
 
+#include <zlib.h>
 #import "SDLConnectionManagerType.h"
 #import "SDLError.h"
 #import "SDLFile.h"
@@ -118,6 +119,9 @@ NS_ASSUME_NONNULL_BEGIN
         // Get a chunk of data from the input stream
         NSUInteger dataSize = [self.class sdl_getDataSizeForOffset:currentOffset fileSize:file.fileSize mtuSize:mtuSize];
         putFile.bulkData = [self.class sdl_getDataChunkWithSize:dataSize inputStream:self.inputStream];
+        if (file.isCrcEnabled) {
+            putFile.crc = [self crc32ForData:putFile.bulkData];
+        }
         currentOffset += dataSize;
 
         __weak typeof(self) weakself = self;
@@ -149,6 +153,11 @@ NS_ASSUME_NONNULL_BEGIN
         }];
     }
     dispatch_group_leave(putFileGroup);
+}
+
+- (NSNumber *)crc32ForData:(NSData *)data {
+    NSUInteger crc = crc32(0L, Z_NULL, 0);
+    return [NSNumber numberWithUnsignedInteger:crc32(crc, [data bytes], (uInt)[data length])];
 }
 
 /**

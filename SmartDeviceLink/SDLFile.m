@@ -48,6 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
     _persistent = persistent;
     _fileType = [self.class sdl_fileTypeFromFileExtension:url.pathExtension];
     _overwrite = NO;
+    _crcEnabled = NO;
 
     return self;
 }
@@ -75,6 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
     _persistent = persistent;
     _fileType = [self.class sdl_fileTypeFromFileExtension:extension];
     _overwrite = NO;
+    _crcEnabled = NO;
 
     return self;
 }

@@ -41,6 +41,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic, readonly) NSData *data;
 
 /**
+ *  Whether or not the file should send crc32 for checksome.
+ */
+@property (assign, nonatomic, getter=isCrcEnabled) BOOL crcEnabled;
+
+/**
  *  The size of the binary data of the SDLFile.
  */
 @property (nonatomic, readonly) unsigned long long fileSize;

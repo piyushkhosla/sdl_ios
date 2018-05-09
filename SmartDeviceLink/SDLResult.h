@@ -203,3 +203,8 @@ extern SDLResult const SDLResultDataNotAvailable;
  The requested data is read only thus cannot be change via remote control .
  */
 extern SDLResult const SDLResultReadOnly;
+
+/**
+ * The data sent failed to pass CRC check in receiver end.
+ */
+extern SDLResult const SDLResultCorruptedData;
