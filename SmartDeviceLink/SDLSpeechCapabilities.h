@@ -35,3 +35,5 @@ extern SDLSpeechCapabilities const SDLSpeechCapabilitiesPrerecorded;
  The SDL platform can speak Silence.
  */
 extern SDLSpeechCapabilities const SDLSpeechCapabilitiesSilence;
+
+extern SDLSpeechCapabilities const SDLSpeechCapabilitiesFile;
