@@ -41,6 +41,7 @@ describe(@"Getter/Setter Tests", ^ {
         testRequest.emergencyEvent = @YES;
         testRequest.clusterModeStatus = @YES;
         testRequest.myKey = @YES;
+        testRequest.engineOilLife = @YES;
         
         expect(testRequest.gps).to(equal(@YES));
         expect(testRequest.speed).to(equal(@YES));
@@ -66,6 +67,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.emergencyEvent).to(equal(@YES));
         expect(testRequest.clusterModeStatus).to(equal(@YES));
         expect(testRequest.myKey).to(equal(@YES));
+        expect(testRequest.engineOilLife).to(equal(@YES));
     });
     
     it(@"Should get correctly when initialized", ^ {
@@ -94,7 +96,9 @@ describe(@"Getter/Setter Tests", ^ {
                                                                    SDLNameAirbagStatus:@YES,
                                                                    SDLNameEmergencyEvent:@YES,
                                                                    SDLNameClusterModeStatus:@YES,
-                                                                   SDLNameMyKey:@YES},
+                                                                   SDLNameMyKey:@YES,
+                                                                   SDLNameEngineOilLife:@YES
+                                                                   },
                                                              SDLNameOperationName:SDLNameUnsubscribeVehicleData}} mutableCopy];
         SDLUnsubscribeVehicleData* testRequest = [[SDLUnsubscribeVehicleData alloc] initWithDictionary:dict];
         
@@ -122,6 +126,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.emergencyEvent).to(equal(@YES));
         expect(testRequest.clusterModeStatus).to(equal(@YES));
         expect(testRequest.myKey).to(equal(@YES));
+        expect(testRequest.engineOilLife).to(equal(@YES));
     });
     
     it(@"Should return nil if not set", ^ {
@@ -151,6 +156,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.emergencyEvent).to(beNil());
         expect(testRequest.clusterModeStatus).to(beNil());
         expect(testRequest.myKey).to(beNil());
+        expect(testRequest.engineOilLife).to(beNil());
+
     });
 });
 

@@ -137,4 +137,11 @@ extern SDLVehicleDataType const SDLVehicleDataTypeAccelerationPedal;
 /**
  Vehicle steering wheel data
  */
+
 extern SDLVehicleDataType const SDLVehicleDataTypeSteeringWheel;
+
+/**
+ * @abstract SDLVehicleDataType: *VEHICLEDATA_ENGINEOILLIFE*
+ */
+
+extern SDLVehicleDataType const SDLVehicleDataTypeEngineOilLife;

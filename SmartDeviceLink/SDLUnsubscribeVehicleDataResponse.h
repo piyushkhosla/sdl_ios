@@ -146,7 +146,16 @@ NS_ASSUME_NONNULL_BEGIN
 
  Optional
  */
+
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *steeringWheelAngle;
+
+/**
+ * The estimated percentage of remaining oil life of the engine.
+ 
+ Optional
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *engineOilLife;
+
 
 /**
  The result of requesting to subscribe to the emergency call info
@@ -182,6 +191,7 @@ NS_ASSUME_NONNULL_BEGIN
  Optional
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *myKey;
+
 
 @end
 

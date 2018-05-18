@@ -130,7 +130,15 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Current angle of the steering wheel (in deg)
  */
+
 @property (nullable, strong, nonatomic) NSNumber<SDLFloat> *steeringWheelAngle;
+
+/**
+ * The estimated percentage of remaining oil life of the engine.
+ * Float 0-100
+ */
+@property (nullable, strong, nonatomic) NSNumber<SDLFloat> *engineOilLife;
+
 
 /**
  Emergency Call notification and confirmation data
@@ -156,6 +164,7 @@ NS_ASSUME_NONNULL_BEGIN
  Information related to the MyKey feature
  */
 @property (nullable, strong, nonatomic) SDLMyKey *myKey;
+
 
 @end
 

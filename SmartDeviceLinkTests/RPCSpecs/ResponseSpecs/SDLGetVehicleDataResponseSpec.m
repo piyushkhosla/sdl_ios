@@ -55,6 +55,7 @@ describe(@"Getter/Setter Tests", ^ {
         testResponse.emergencyEvent = event;
         testResponse.clusterModeStatus = clusterMode;
         testResponse.myKey = myKey;
+        testResponse.engineOilLife = @12;
         
         expect(testResponse.gps).to(equal(gps));
         expect(testResponse.speed).to(equal(@100));
@@ -81,6 +82,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testResponse.emergencyEvent).to(equal(event));
         expect(testResponse.clusterModeStatus).to(equal(clusterMode));
         expect(testResponse.myKey).to(equal(myKey));
+        expect(testResponse.engineOilLife).to(equal(@12));
     });
     
     it(@"Should get correctly when initialized", ^ {
@@ -110,7 +112,9 @@ describe(@"Getter/Setter Tests", ^ {
                                                    SDLNameAirbagStatus:airbag,
                                                    SDLNameEmergencyEvent:event,
                                                    SDLNameClusterModeStatus:clusterMode,
-                                                   SDLNameMyKey:myKey},
+                                                   SDLNameMyKey:myKey,
+                                                   SDLNameEngineOilLife:@12
+                                                   },
                                              SDLNameOperationName:SDLNameGetVehicleData}} mutableCopy];
         SDLGetVehicleDataResponse* testResponse = [[SDLGetVehicleDataResponse alloc] initWithDictionary:dict];
         
@@ -139,6 +143,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testResponse.emergencyEvent).to(equal(event));
         expect(testResponse.clusterModeStatus).to(equal(clusterMode));
         expect(testResponse.myKey).to(equal(myKey));
+        expect(testResponse.engineOilLife).to(equal(@12));
     });
     
     it(@"Should return nil if not set", ^ {
@@ -169,6 +174,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testResponse.emergencyEvent).to(beNil());
         expect(testResponse.clusterModeStatus).to(beNil());
         expect(testResponse.myKey).to(beNil());
+        expect(testResponse.engineOilLife).to(beNil());
     });
 });
 

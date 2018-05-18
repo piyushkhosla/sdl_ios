@@ -153,6 +153,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *steeringWheelAngle;
 
 /**
+ * A boolean value. The estimated percentage of remaining oil life of the engine.
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *engineOilLife;
+
+/**
  Subscribe to eCallInfo
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *eCallInfo;

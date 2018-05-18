@@ -210,6 +210,14 @@ NS_ASSUME_NONNULL_BEGIN
     return [parameters sdl_objectForName:SDLNameMyKey ofClass:SDLVehicleDataResult.class];
 }
 
+- (void)setEngineOilLife:(nullable SDLVehicleDataResult *)engineOilLife {
+    [parameters sdl_setObject:engineOilLife forName:SDLNameEngineOilLife];
+}
+
+- (nullable SDLVehicleDataResult *)engineOilLife {
+    return [parameters sdl_objectForName:SDLNameEngineOilLife ofClass:SDLVehicleDataResult.class];
+
+}
 @end
 
 NS_ASSUME_NONNULL_END

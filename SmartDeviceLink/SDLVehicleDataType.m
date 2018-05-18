@@ -4,6 +4,7 @@
 
 #import "SDLVehicleDataType.h"
 
+
 SDLVehicleDataType const SDLVehicleDataTypeGPS = @"VEHICLEDATA_GPS";
 SDLVehicleDataType const SDLVehicleDataTypeSpeed = @"VEHICLEDATA_SPEED";
 SDLVehicleDataType const SDLVehicleDataTypeRPM = @"VEHICLEDATA_RPM";
@@ -30,3 +31,6 @@ SDLVehicleDataType const SDLVehicleDataTypeBatteryVoltage = @"VEHICLEDATA_BATTVO
 SDLVehicleDataType const SDLVehicleDataTypeEngineTorque = @"VEHICLEDATA_ENGINETORQUE";
 SDLVehicleDataType const SDLVehicleDataTypeAccelerationPedal = @"VEHICLEDATA_ACCPEDAL";
 SDLVehicleDataType const SDLVehicleDataTypeSteeringWheel = @"VEHICLEDATA_STEERINGWHEEL";
+SDLVehicleDataType const SDLVehicleDataTypeEngineOilLife = @"VEHICLEDATA_ENGINEOILLIFE";
+
+
