@@ -1,0 +1,13 @@
+//SDLTPMS.m
+//
+
+#import "SDLTPMS.h"
+
+SDLTPMS const SDLTPMSUnknown = @"UNKNOWN";
+SDLTPMS const SDLTPMSSystemFault = @"SYSTEM_FAULT";
+SDLTPMS const SDLTPMSSensorFault = @"SENSOR_FAULT";
+SDLTPMS const SDLTPMSLow = @"LOW";
+SDLTPMS const SDLTPMSSystemActive = @"SYSTEM_ACTIVE";
+SDLTPMS const SDLTPMSTrain = @"TRAIN";
+SDLTPMS const SDLTPMSTrainingComplete = @"TRAINING_COMPLETE";
+SDLTPMS const SDLTPMSNotTrained = @"NOT_TRAINED";

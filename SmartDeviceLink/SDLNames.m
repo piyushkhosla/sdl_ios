@@ -476,6 +476,7 @@ SDLName const SDLNameTimezoneMinuteOffset = @"tz_minute";
 SDLName const SDLNameTirePressure = @"tirePressure";
 SDLName const SDLNameTotalDistance = @"totalDistance";
 SDLName const SDLNameTouchEventAvailable = @"touchEventAvailable";
+SDLName const SDLNameTpms = @"TPMS";
 SDLName const SDLNameTrafficProgramIdentification = @"TP";
 SDLName const SDLNameTriggerSource = @"triggerSource";
 SDLName const SDLNameTrim = @"trim";
