@@ -270,6 +270,9 @@
 		1E5AD0941F20BEAD0029B8AF /* SDLSetInteriorVehicleDataResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E5AD0921F20BEAD0029B8AF /* SDLSetInteriorVehicleDataResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E5AD0951F20BEAD0029B8AF /* SDLSetInteriorVehicleDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AD0931F20BEAD0029B8AF /* SDLSetInteriorVehicleDataResponse.m */; };
 		1E5AD0981F20C0FB0029B8AF /* SDLOnInteriorVehicleData.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E5AD0961F20C0FB0029B8AF /* SDLOnInteriorVehicleData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E67F6C120B42C160010CAA6 /* SDLVideoStreamingState.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E67F6BF20B42C160010CAA6 /* SDLVideoStreamingState.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1E67F6C220B42C160010CAA6 /* SDLVideoStreamingState.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E67F6C020B42C160010CAA6 /* SDLVideoStreamingState.m */; };
+		1E67F6C620B42F9D0010CAA6 /* SDLVideoStreamingStateSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E67F6C520B42F9D0010CAA6 /* SDLVideoStreamingStateSpec.m */; };
 		1EE48E901F2F0EE700B98D08 /* SDLTemperatureUnit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EE48E8E1F2F0EE700B98D08 /* SDLTemperatureUnit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1EE48E911F2F0EE700B98D08 /* SDLTemperatureUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE48E8F1F2F0EE700B98D08 /* SDLTemperatureUnit.m */; };
 		1EE8C4381F347C7300FDC2CF /* SDLRadioBandSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE8C4371F347C7300FDC2CF /* SDLRadioBandSpec.m */; };
@@ -1611,6 +1614,9 @@
 		1E5AD0931F20BEAD0029B8AF /* SDLSetInteriorVehicleDataResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLSetInteriorVehicleDataResponse.m; sourceTree = "<group>"; };
 		1E5AD0961F20C0FB0029B8AF /* SDLOnInteriorVehicleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLOnInteriorVehicleData.h; sourceTree = "<group>"; };
 		1E5AD0971F20C0FB0029B8AF /* SDLOnInteriorVehicleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLOnInteriorVehicleData.m; sourceTree = "<group>"; };
+		1E67F6BF20B42C160010CAA6 /* SDLVideoStreamingState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDLVideoStreamingState.h; sourceTree = "<group>"; };
+		1E67F6C020B42C160010CAA6 /* SDLVideoStreamingState.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDLVideoStreamingState.m; sourceTree = "<group>"; };
+		1E67F6C520B42F9D0010CAA6 /* SDLVideoStreamingStateSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDLVideoStreamingStateSpec.m; sourceTree = "<group>"; };
 		1EE48E8E1F2F0EE700B98D08 /* SDLTemperatureUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLTemperatureUnit.h; sourceTree = "<group>"; };
 		1EE48E8F1F2F0EE700B98D08 /* SDLTemperatureUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLTemperatureUnit.m; sourceTree = "<group>"; };
 		1EE8C4371F347C7300FDC2CF /* SDLRadioBandSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLRadioBandSpec.m; sourceTree = "<group>"; };
@@ -2790,6 +2796,7 @@
 				1EE8C4391F347D4D00FDC2CF /* SDLRadioStateSpec.m */,
 				1EE8C43B1F347EAE00FDC2CF /* SDLTemperatureUnitSpec.m */,
 				1EE8C43D1F347F0500FDC2CF /* SDLVentilationModeSpec.m */,
+				1E67F6C520B42F9D0010CAA6 /* SDLVideoStreamingStateSpec.m */,
 			);
 			path = EnumSpecs;
 			sourceTree = "<group>";
@@ -4032,6 +4039,8 @@
 				8B7B31991F2F7B5700BDC38D /* SDLVideoStreamingCodec.m */,
 				8B7B319C1F2F7CF700BDC38D /* SDLVideoStreamingProtocol.h */,
 				8B7B319D1F2F7CF700BDC38D /* SDLVideoStreamingProtocol.m */,
+				1E67F6BF20B42C160010CAA6 /* SDLVideoStreamingState.h */,
+				1E67F6C020B42C160010CAA6 /* SDLVideoStreamingState.m */,
 			);
 			name = Enums;
 			sourceTree = "<group>";
@@ -5260,6 +5269,7 @@
 				5D9FC2A61FD8815800ACA5C2 /* SDLPCMAudioConverter.h in Headers */,
 				8BBEA6061F324165003EEA26 /* SDLMetadataType.h in Headers */,
 				E4139D1D1F6017770005B6EA /* SDLLifecycleConfigurationUpdate.h in Headers */,
+				1E67F6C120B42C160010CAA6 /* SDLVideoStreamingState.h in Headers */,
 				5DA3F35A1BC448480026F2D0 /* SDLError.h in Headers */,
 				5DA3F35F1BC448590026F2D0 /* SDLNotificationConstants.h in Headers */,
 				5DE5ABB71B0E38C90067BB02 /* SDLSystemRequest.h in Headers */,
@@ -6219,6 +6229,7 @@
 				5D61FC851A84238C00846EE7 /* SDLDeviceLevelStatus.m in Sources */,
 				5D9FDA981F2A7D3F00A495C8 /* emhashmap.c in Sources */,
 				5D61FD1E1A84238C00846EE7 /* SDLOnTBTClientState.m in Sources */,
+				1E67F6C220B42C160010CAA6 /* SDLVideoStreamingState.m in Sources */,
 				5DD67CBD1E661C84009CD394 /* SDLLogTargetOSLog.m in Sources */,
 				DA9F7E641DCBFAC800ACAE48 /* SDLDateTime.m in Sources */,
 				5D61FD581A84238C00846EE7 /* SDLPutFileResponse.m in Sources */,
@@ -6571,6 +6582,7 @@
 				162E83091A9BDE8B00906325 /* SDLVehicleDataStatusSpec.m in Sources */,
 				5DAD5F8D20508F220025624C /* SDLSoftButtonManagerSpec.m in Sources */,
 				162E83741A9BDE8B00906325 /* SDLBodyInformationSpec.m in Sources */,
+				1E67F6C620B42F9D0010CAA6 /* SDLVideoStreamingStateSpec.m in Sources */,
 				162E83641A9BDE8B00906325 /* SDLSetMediaClockTimerResponseSpec.m in Sources */,
 				162E839C1A9BDE8B00906325 /* SDLRPCRequestSpec.m in Sources */,
 				DA4353E31D2720A30099B8C4 /* SDLPinchGestureSpec.m in Sources */,

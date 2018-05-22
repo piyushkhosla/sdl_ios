@@ -13,6 +13,7 @@
 #import "SDLOnHMIStatus.h"
 #import "SDLNames.h"
 #import "SDLSystemContext.h"
+#import "SDLVideoStreamingState.h"
 
 
 QuickSpecBegin(SDLOnHMIStatusSpec)
@@ -24,10 +25,12 @@ describe(@"Getter/Setter Tests", ^ {
         testNotification.hmiLevel = SDLHMILevelLimited;
         testNotification.audioStreamingState = SDLAudioStreamingStateAttenuated;
         testNotification.systemContext = SDLSystemContextHMIObscured;
+        testNotification.videoStreamingState = SDLVideoStreamingStateStreamable;
         
         expect(testNotification.hmiLevel).to(equal(SDLHMILevelLimited));
         expect(testNotification.audioStreamingState).to(equal(SDLAudioStreamingStateAttenuated));
         expect(testNotification.systemContext).to(equal(SDLSystemContextHMIObscured));
+        expect(testNotification.videoStreamingState).to(equal(SDLVideoStreamingStateStreamable));
     });
     
     it(@"Should get correctly when initialized", ^ {
@@ -35,13 +38,16 @@ describe(@"Getter/Setter Tests", ^ {
                                            @{SDLNameParameters:
                                                  @{SDLNameHMILevel:SDLHMILevelLimited,
                                                    SDLNameAudioStreamingState:SDLAudioStreamingStateAttenuated,
-                                                   SDLNameSystemContext:SDLSystemContextHMIObscured},
+                                                   SDLNameSystemContext:SDLSystemContextHMIObscured,
+                                                   SDLNameVideoStreamingState : SDLVideoStreamingStateNotStreamable
+                                                   },
                                              SDLNameOperationName:SDLNameOnHMIStatus}} mutableCopy];
         SDLOnHMIStatus* testNotification = [[SDLOnHMIStatus alloc] initWithDictionary:dict];
         
         expect(testNotification.hmiLevel).to(equal(SDLHMILevelLimited));
         expect(testNotification.audioStreamingState).to(equal(SDLAudioStreamingStateAttenuated));
         expect(testNotification.systemContext).to(equal(SDLSystemContextHMIObscured));
+        expect(testNotification.videoStreamingState).to(equal(SDLVideoStreamingStateNotStreamable));
     });
     
     it(@"Should return nil if not set", ^ {
@@ -50,6 +56,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testNotification.hmiLevel).to(beNil());
         expect(testNotification.audioStreamingState).to(beNil());
         expect(testNotification.systemContext).to(beNil());
+        expect(testNotification.videoStreamingState).to(beNil());
     });
 });
 

@@ -6,6 +6,7 @@
 #import "SDLAudioStreamingState.h"
 #import "SDLHMILevel.h"
 #import "SDLSystemContext.h"
+#import "SDLVideoStreamingState.h"
 
 /**
  * Notifies an application that HMI conditions have changed for the application. This indicates whether the application can speak phrases, display text, perform interactions, receive button presses and events, stream audio, etc. This notification will be sent to the application when there has been a change in any one or several of the indicated states (<i>SDLHMILevel</i>, <i>SDLAudioStreamingState</i> or <i>SDLSystemContext</i>) for the application.
@@ -37,6 +38,12 @@ NS_ASSUME_NONNULL_BEGIN
  Whether a user-initiated interaction is in-progress (VRSESSION or MENU), or not (MAIN)
  */
 @property (strong, nonatomic) SDLSystemContext systemContext;
+
+/**
+ * @abstract See VideoStreamingState.
+ * @discussion If it is NOT_STREAMABLE, the app must stop streaming video to SDL Core(stop service)
+ */
+@property (strong, nonatomic) SDLVideoStreamingState videoStreamingState;
 
 @end
 
