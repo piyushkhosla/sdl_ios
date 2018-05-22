@@ -35,6 +35,7 @@ ss.public_header_files = [
 'SmartDeviceLink/SDLAppInterfaceUnregisteredReason.h',
 'SmartDeviceLink/SDLArtwork.h',
 'SmartDeviceLink/SDLAudioPassThruCapabilities.h',
+'SmartDeviceLink/SDLAudioStreamingIndicator.h',
 'SmartDeviceLink/SDLAudioStreamingState.h',
 'SmartDeviceLink/SDLAudioStreamManager.h',
 'SmartDeviceLink/SDLAudioStreamManagerDelegate.h',

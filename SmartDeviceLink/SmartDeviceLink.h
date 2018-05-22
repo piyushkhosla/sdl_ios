@@ -213,6 +213,7 @@ FOUNDATION_EXPORT const unsigned char SmartDeviceLinkVersionString[];
 #import "SDLAmbientLightStatus.h"
 #import "SDLAppHMIType.h"
 #import "SDLAppInterfaceUnregisteredReason.h"
+#import "SDLAudioStreamingIndicator.h"
 #import "SDLAudioStreamingState.h"
 #import "SDLAudioType.h"
 #import "SDLBitsPerSample.h"

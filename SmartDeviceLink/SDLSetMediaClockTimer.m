@@ -65,6 +65,14 @@ NS_ASSUME_NONNULL_BEGIN
     return [parameters sdl_objectForName:SDLNameUpdateMode];
 }
 
+- (void)setAudioStreamingIndicator:(nullable SDLAudioStreamingIndicator)audioStreamingIndicator {
+    [parameters sdl_setObject:audioStreamingIndicator forName:SDLNameAudioStreamingIndicator];
+}
+
+- (nullable SDLAudioStreamingIndicator)audioStreamingIndicator {
+    return [parameters sdl_objectForName:SDLNameAudioStreamingIndicator];
+}
+
 @end
 
 NS_ASSUME_NONNULL_END

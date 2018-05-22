@@ -4,7 +4,7 @@
 #import "SDLRPCRequest.h"
 
 #import "SDLUpdateMode.h"
-
+#import "SDLAudioStreamingIndicator.h"
 @class SDLStartTime;
 
 /**
@@ -59,6 +59,11 @@ NS_ASSUME_NONNULL_BEGIN
  *            </ul>
  */
 @property (strong, nonatomic) SDLUpdateMode updateMode;
+
+/**
+ *
+ */
+@property (strong, nonatomic, nullable) SDLAudioStreamingIndicator audioStreamingIndicator;
 
 @end
 

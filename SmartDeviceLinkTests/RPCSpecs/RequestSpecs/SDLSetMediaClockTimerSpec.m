@@ -12,6 +12,7 @@
 #import "SDLSetMediaClockTimer.h"
 #import "SDLStartTime.h"
 #import "SDLUpdateMode.h"
+#import "SDLAudioStreamingIndicator.h"
 
 
 QuickSpecBegin(SDLSetMediaClockTimerSpec)
@@ -26,10 +27,12 @@ describe(@"Getter/Setter Tests", ^ {
         testRequest.startTime = time1;
         testRequest.endTime = time2;
         testRequest.updateMode = SDLUpdateModeCountUp;
+        testRequest.audioStreamingIndicator = SDLAudioStreamingIndicatorPlayPause;
         
         expect(testRequest.startTime).to(equal(time1));
         expect(testRequest.endTime).to(equal(time2));
         expect(testRequest.updateMode).to(equal(SDLUpdateModeCountUp));
+        expect(testRequest.audioStreamingIndicator).to(equal(SDLAudioStreamingIndicatorPlayPause));
     });
     
     it(@"Should get correctly when initialized", ^ {
@@ -37,13 +40,18 @@ describe(@"Getter/Setter Tests", ^ {
                                            @{SDLNameParameters:
                                                  @{SDLNameStartTime:time1,
                                                    SDLNameEndTime:time2,
-                                                   SDLNameUpdateMode:SDLUpdateModeCountUp},
-                                             SDLNameOperationName:SDLNameSetMediaClockTimer}} mutableCopy];
+                                                   SDLNameUpdateMode:SDLUpdateModeCountUp,
+                                                   SDLNameAudioStreamingIndicator:SDLAudioStreamingIndicatorPlay
+                                                   },
+                                             SDLNameOperationName:SDLNameSetMediaClockTimer,
+                                             }} mutableCopy];
         SDLSetMediaClockTimer* testRequest = [[SDLSetMediaClockTimer alloc] initWithDictionary:dict];
         
         expect(testRequest.startTime).to(equal(time1));
         expect(testRequest.endTime).to(equal(time2));
         expect(testRequest.updateMode).to(equal(SDLUpdateModeCountUp));
+        expect(testRequest.audioStreamingIndicator).to(equal(SDLAudioStreamingIndicatorPlay));
+
     });
     
     it(@"Should return nil if not set", ^ {
@@ -52,6 +60,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.startTime).to(beNil());
         expect(testRequest.endTime).to(beNil());
         expect(testRequest.updateMode).to(beNil());
+        expect(testRequest.audioStreamingIndicator).to(beNil());
     });
 });
 
