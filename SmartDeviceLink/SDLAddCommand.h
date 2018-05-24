@@ -101,7 +101,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional
  */
-@property (nullable, strong, nonatomic) SDLImage *cmdIcon;
+@property (nullable, strong, nonatomic) SDLImage *cmdIcon __deprecated_msg("Deprecated parameter. Please use .menuParams.menuIcon instead.");
 
 @end
 
