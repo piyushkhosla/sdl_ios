@@ -4,19 +4,22 @@
 
 #import "SDLRPCMessage.h"
 
-
-NS_ASSUME_NONNULL_BEGIN
-
+@class SDLImage;
 /**
  * Used when adding a sub menu to an application menu or existing sub menu.
  *
  * @since SDL 1.0
  */
+
+NS_ASSUME_NONNULL_BEGIN
+
 @interface SDLMenuParams : SDLRPCStruct
 
 - (instancetype)initWithMenuName:(NSString *)menuName;
 
 - (instancetype)initWithMenuName:(NSString *)menuName parentId:(UInt32)parentId position:(UInt16)position;
+
+- (instancetype)initWithMenuName:(NSString *)menuName parentId:(UInt32)parentId position:(UInt16)position menuIcon:(SDLImage *)menuIcon;
 
 /**
  * The unique ID of an existing submenu to which a command will be added
@@ -48,6 +51,13 @@ NS_ASSUME_NONNULL_BEGIN
  * Required, max length 500 characters
  */
 @property (strong, nonatomic) NSString *menuName;
+
+/**
+ * A new optional parameter to specify an icon to be shown in the menu entry
+ *
+ * Optional, SDLImage
+ */
+@property (nullable, strong, nonatomic) SDLImage *menuIcon;
 
 @end
 

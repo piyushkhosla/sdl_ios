@@ -446,6 +446,7 @@ extern SDLName const SDLNameSteeringWheelAngle;
 extern SDLName const SDLNameStereoAudioOutputMuted;
 extern SDLName const SDLNameSubAdministrativeArea;
 extern SDLName const SDLNameSubLocality;
+extern SDLName const SDLNameSubMenuIcon;
 extern SDLName const SDLNameSubscribe;
 extern SDLName const SDLNameSubscribeButton;
 extern SDLName const SDLNameSubscribeVehicleData;

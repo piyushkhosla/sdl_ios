@@ -4,6 +4,7 @@
 
 #import "NSMutableDictionary+Store.h"
 #import "SDLNames.h"
+#import "SDLMenuParams.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,6 +16,17 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
+- (instancetype)initWithMenuParams:(SDLMenuParams *)menuParams {
+    self = [self init];
+    if (!self) {
+        return nil;
+    }
+
+    self.menuParams = menuParams;
+
+    return self;
+
+}
 
 - (instancetype)initWithId:(UInt32)menuId menuName:(NSString *)menuName position:(UInt8)position {
     self = [self initWithId:menuId menuName:menuName];
@@ -61,6 +73,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)menuName {
     return [parameters sdl_objectForName:SDLNameMenuName];
+}
+
+- (void)setMenuParams:(SDLMenuParams *)menuParams {
+    [parameters sdl_setObject:menuParams forName:SDLNameMenuParams];
+}
+
+- (SDLMenuParams *)menuParams {
+   return [parameters sdl_objectForName:SDLNameMenuParams ofClass:SDLMenuParams.class];
 }
 
 @end

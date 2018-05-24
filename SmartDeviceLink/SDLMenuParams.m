@@ -6,6 +6,7 @@
 
 #import "NSMutableDictionary+Store.h"
 #import "SDLNames.h"
+#import "SDLImage.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,6 +20,19 @@ NS_ASSUME_NONNULL_BEGIN
 
     self.parentID = @(parentId);
     self.position = @(position);
+
+    return self;
+}
+
+- (instancetype)initWithMenuName:(NSString *)menuName parentId:(UInt32)parentId position:(UInt16)position menuIcon:(SDLImage *)menuIcon {
+    self = [self initWithMenuName:menuName];
+    if (!self) {
+        return nil;
+    }
+
+    self.parentID = @(parentId);
+    self.position = @(position);
+    self.menuIcon = menuIcon;
 
     return self;
 }
@@ -56,6 +70,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)menuName {
     return [store sdl_objectForName:SDLNameMenuName];
+}
+
+- (void)setMenuIcon:(nullable SDLImage *)menuIcon {
+    [store sdl_setObject:menuIcon forName:SDLNameMenuIcon];
+}
+
+- (nullable SDLImage *)menuIcon {
+    return [store sdl_objectForName:SDLNameMenuIcon];
 }
 
 @end

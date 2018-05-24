@@ -3,6 +3,8 @@
 
 #import "SDLRPCRequest.h"
 
+@class SDLMenuParams;
+
 /**
  * Add a SDLSubMenu to the Command Menu
  * <p>
@@ -21,9 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SDLAddSubMenu : SDLRPCRequest
 
-- (instancetype)initWithId:(UInt32)menuId menuName:(NSString *)menuName;
+- (instancetype)initWithMenuParams:(SDLMenuParams *)menuParams;
 
-- (instancetype)initWithId:(UInt32)menuId menuName:(NSString *)menuName position:(UInt8)position;
+- (instancetype)initWithId:(UInt32)menuId menuName:(NSString *)menuName __deprecated_msg("Use initWithMenuParams: menuParams:");
+
+- (instancetype)initWithId:(UInt32)menuId menuName:(NSString *)menuName position:(UInt8)position __deprecated_msg("Use initWithMenuParams: menuParams:");
 
 /**
  * a Menu ID that identifies a sub menu
@@ -32,6 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
  * <p>
  */
 @property (strong, nonatomic) NSNumber<SDLInt> *menuID;
+
 /**
  * a position of menu
  * @discussion An NSNumber pointer representing the position within the items
@@ -50,12 +55,18 @@ NS_ASSUME_NONNULL_BEGIN
  *            the end of the list</li>
  *            </ul>
  */
-@property (nullable, strong, nonatomic) NSNumber<SDLInt> *position;
+@property (nullable, strong, nonatomic) NSNumber<SDLInt> *position __deprecated_msg("Deprecated parameter. Please use .menuParams.menuName instead.");
+
 /**
  * a menuName which is displayed representing this submenu item
  * @discussion NSString which will be displayed representing this submenu item
  */
-@property (strong, nonatomic) NSString *menuName;
+@property (strong, nonatomic) NSString *menuName __deprecated_msg("Deprecated parameter. Please use .menuParams.position instead.");
+
+/**
+ * @abstract A new parameter containing the data of the menu entry.
+ *  */
+@property (strong, nonatomic) SDLMenuParams *menuParams;
 
 @end
 

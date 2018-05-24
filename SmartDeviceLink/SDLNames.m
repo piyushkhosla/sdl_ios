@@ -440,6 +440,7 @@ SDLName const SDLNameSteeringWheelAngle = @"steeringWheelAngle";
 SDLName const SDLNameStereoAudioOutputMuted = @"stereoAudioOutputMuted";
 SDLName const SDLNameSubAdministrativeArea = @"subAdministrativeArea";
 SDLName const SDLNameSubLocality = @"subLocality";
+SDLName const SDLNameSubMenuIcon = @"subMenuIcon";
 SDLName const SDLNameSubscribe = @"subscribe";
 SDLName const SDLNameSubscribeButton = @"SubscribeButton";
 SDLName const SDLNameSubscribeVehicleData = @"SubscribeVehicleData";
