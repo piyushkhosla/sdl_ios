@@ -27,6 +27,11 @@ extern SDLComponentVolumeStatus const SDLComponentVolumeStatusNormal;
 extern SDLComponentVolumeStatus const SDLComponentVolumeStatusLow;
 
 /**
+ * Low SDLComponentVolumeStatus
+ */
+extern SDLComponentVolumeStatus const SDLComponentVolumeStatusVeryLow;
+
+/**
  * Fault SDLComponentVolumeStatus
  */
 extern SDLComponentVolumeStatus const SDLComponentVolumeStatusFault;

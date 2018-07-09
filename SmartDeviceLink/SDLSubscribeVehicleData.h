@@ -23,7 +23,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SDLSubscribeVehicleData : SDLRPCRequest
-
 /**
  Initialize a subscribe RPC with various possible to describe to
 
@@ -52,13 +51,24 @@ NS_ASSUME_NONNULL_BEGIN
  @param tirePressure Subcribe to tirePressure
  @param wiperStatus Subcribe to wiperStatus
  @return The RPC
- */
-- (instancetype)initWithAccelerationPedalPosition:(BOOL)accelerationPedalPosition airbagStatus:(BOOL)airbagStatus beltStatus:(BOOL)beltStatus bodyInformation:(BOOL)bodyInformation clusterModeStatus:(BOOL)clusterModeStatus deviceStatus:(BOOL)deviceStatus driverBraking:(BOOL)driverBraking eCallInfo:(BOOL)eCallInfo emergencyEvent:(BOOL)emergencyEvent engineTorque:(BOOL)engineTorque externalTemperature:(BOOL)externalTemperature fuelLevel:(BOOL)fuelLevel fuelLevelState:(BOOL)fuelLevelState gps:(BOOL)gps headLampStatus:(BOOL)headLampStatus instantFuelConsumption:(BOOL)instantFuelConsumption myKey:(BOOL)myKey odometer:(BOOL)odometer prndl:(BOOL)prndl rpm:(BOOL)rpm speed:(BOOL)speed steeringWheelAngle:(BOOL)steeringWheelAngle tirePressure:(BOOL)tirePressure wiperStatus:(BOOL)wiperStatus;
+*/
 
-/**
+ - (instancetype)initWithAccelerationPedalPosition:(BOOL)accelerationPedalPosition airbagStatus:(BOOL)airbagStatus beltStatus:(BOOL)beltStatus bodyInformation:(BOOL)bodyInformation clusterModeStatus:(BOOL)clusterModeStatus deviceStatus:(BOOL)deviceStatus driverBraking:(BOOL)driverBraking eCallInfo:(BOOL)eCallInfo emergencyEvent:(BOOL)emergencyEvent engineTorque:(BOOL)engineTorque externalTemperature:(BOOL)externalTemperature fuelLevel:(BOOL)fuelLevel fuelLevelState:(BOOL)fuelLevelState gps:(BOOL)gps headLampStatus:(BOOL)headLampStatus instantFuelConsumption:(BOOL)instantFuelConsumption myKey:(BOOL)myKey odometer:(BOOL)odometer prndl:(BOOL)prndl rpm:(BOOL)rpm speed:(BOOL)speed steeringWheelAngle:(BOOL)steeringWheelAngle tirePressure:(BOOL)tirePressure wiperStatus:(BOOL)wiperStatus;
+
+ /**
  * A boolean value. If true, subscribes Gps data
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *gps;
+
+/**
+ * A boolean value. If true, subscribes GPS data type
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool>  *gpsArray;
+
+/**
+ * A boolean value. If true, subscribes Gps Dr data type
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool>  *gpsDrArray;
 
 /**
  * A boolean value. If true, subscribes speed data
@@ -66,9 +76,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *speed;
 
 /**
+ * A boolean value. If true, subscribes speed data type
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool>  *speedArray;
+
+/**
  * A boolean value. If true, subscribes rpm data
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *rpm;
+
+/**
+ * A boolean value. If true, subscribes an array of the number of rpm data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool>  *rpmArray;
 
 /**
  * A boolean value. If true, subscribes FuelLevel data
@@ -76,9 +96,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *fuelLevel;
 
 /**
+ * A boolean value. If true, subscribes an array of the  FuelLevel data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool>  *fuelLevelArray;
+
+/**
  * A boolean value. If true, subscribes fuelLevel_State data
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *fuelLevel_State;
+
+/**
+ * A boolean value. If true, subscribes an array of the  fuelLevel_State data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *fuelLevel_StateArray;
 
 /**
  * A boolean value. If true, subscribes instantFuelConsumption data
@@ -91,14 +121,29 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *externalTemperature;
 
 /**
+ * A boolean value. If true, subscribes an array of the externalTemperature data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *externalTemperatureArray;
+
+/**
  * A boolean value. If true, subscribes Currently selected gear data
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *prndl;
 
 /**
+ * A boolean value. If true, subscribes an array of the Currently selected gear data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *prndlArray;
+
+/**
  * A boolean value. If true, subscribes tire pressure status data
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *tirePressure;
+
+/**
+ * A boolean value. If true, subscribes an array of the tire pressure status data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *tirePressureArray;
 
 /**
  * A boolean value. If true, subscribes odometer data
@@ -126,6 +171,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *driverBraking;
 
 /**
+ * A boolean value. If true, subscribes an array of vehicle's remaining range data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *fuelRemainingRangeArray;
+
+/**
+ * A boolean value. If true, subscribes an array of brake pedal position (percentage depressed)
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *brakePedalPositionArray;
+
+/**
  * A boolean value. If true, subscribes wiper Status data
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *wiperStatus;
@@ -141,10 +196,21 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *engineTorque;
 
 /**
+ * A boolean value. If true, subscribes an array of the Engine Torque data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *engineTorqueArray;
+
+/**
  * A boolean value. If true, means the accPedalPosition data has been
  * subscribed.
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *accPedalPosition;
+
+/**
+ * A boolean value. If true, means array of the accPedalPosition data has been
+ * subscribed.
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *accPedalPositionArray;
 
 /**
  * A boolean value. If true, means the steeringWheelAngle data has been
@@ -153,27 +219,51 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *steeringWheelAngle;
 
 /**
- Subscribe to eCallInfo
+ * A boolean value. If true, means an array of steeringWheelAngle data has been
+ * subscribed.
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *steeringWheelAngleArray;
+
+/**
+ * A boolean value. If true, means an array of accelerometer data has been
+ * subscribed.
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *accelerometerArray;
+
+/**
+ * A boolean value. If true, means an array of gyroscope data has been
+ * subscribed.
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *gyroscopeArray;
+
+/**
+ * A boolean value. If true, means an array of wheelSpeeds data has been
+ * subscribed.
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *wheelSpeedsArray;
+
+/**
+ * Subscribe to eCallInfo
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *eCallInfo;
 
 /**
- Subscribe to airbagStatus
+ * Subscribe to airbagStatus
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *airbagStatus;
 
 /**
- Subscribe to emergencyEvent
+ * Subscribe to emergencyEvent
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *emergencyEvent;
 
 /**
- Subscribe to clusterModeStatus
+ * Subscribe to clusterModeStatus
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *clusterModeStatus;
 
 /**
- Subscribe to myKey
+ * Subscribe to myKey
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *myKey;
 

@@ -6,179 +6,221 @@
 @class SDLVehicleDataResult;
 
 
+/**
+ * Unsubscribe Vehicle Data Response is sent, when UnsubscribeVehicleData has been called
+ *
+ * @since SmartDeviceLink 2.0
+ */
+
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- Response to UnsubscribeVehicleData
-
- since SmartDeviceLink 2.0
- */
 @interface SDLUnsubscribeVehicleDataResponse : SDLRPCResponse
 
 /**
- The result of requesting to subscribe to the GPSData.
-
- Optional
+ * A SDLVehicleDataResult* value. See GPSData.
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *gps;
 
 /**
- The result of requesting to subscribe to the vehicle speed in kilometers per hour.
+ * An array of SDLVehicleDataResult* value. See SDLGPSDataType.
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *gpsArray;
 
- Optional
+/**
+ * An array of SDLVehicleDataResult* value. See SDLGPSDrDataType.
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *gpsDrArray;
+
+/**
+ * A SDLVehicleDataResult* value. The vehicle speed in kilometers per hour.
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *speed;
 
 /**
- The result of requesting to subscribe to the number of revolutions per minute of the engine.
+ * An array of SDLVehicleDataResult* value. The vehicle speed in kilometers per hour.
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *speedArray;
 
- Optional
+/**
+ * A SDLVehicleDataResult* value. The number of revolutions per minute of the engine.
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *rpm;
 
 /**
- The result of requesting to subscribe to the fuel level in the tank (percentage)
+ * An array of SDLVehicleDataResult* value. The number of revolutions per minute of the engine.
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *rpmArray;
 
- Optional
+/**
+ * A SDLVehicleDataResult* value. The fuel level in the tank (percentage)
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *fuelLevel;
 
 /**
- The result of requesting to subscribe to the fuel level state.
+ * An array of SDLVehicleDataResult* value. The fuel level in the tank (percentage)
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *fuelLevelArray;
 
- Optional
+/**
+ * A SDLVehicleDataResult* value. The fuel level state.
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *fuelLevel_State;
 
 /**
- The result of requesting to subscribe to the instantaneous fuel consumption in microlitres.
+ * A SDLVehicleDataResult* value. The fuel level state.
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *fuelLevel_StateArray;
 
- Optional
+/**
+ * A SDLVehicleDataResult* value. The instantaneous fuel consumption in microlitres.
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *instantFuelConsumption;
 
 /**
- The result of requesting to subscribe to the external temperature in degrees celsius.
-
- Optional
+ * A SDLVehicleDataResult* value. The external temperature in degrees celsius.
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *externalTemperature;
 
 /**
- The result of requesting to subscribe to the PRNDL status.
+ * An array of SDLVehicleDataResult* value. The external temperature in degrees celsius.
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *externalTemperatureArray;
 
- Optional
+/**
+ * A SDLVehicleDataResult* value. See PRNDL.
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *prndl;
 
 /**
- The result of requesting to subscribe to the tireStatus.
+ * An array of SDLVehicleDataResult* value. See PRNDL.
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *prndlArray;
 
- Optional
+/**
+ * A SDLVehicleDataResult* value. See TireStatus.
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *tirePressure;
 
 /**
- The result of requesting to subscribe to the odometer in km.
+ * An array of SDLVehicleDataResult* value. See TireStatus.
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *tirePressureArray;
 
- Optional
+/**
+ * A SDLVehicleDataResult* value. Odometer in km.
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *odometer;
 
 /**
- The result of requesting to subscribe to the status of the seat belts.
-
- Optional
+ * A SDLVehicleDataResult* value. The status of the seat belts.
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *beltStatus;
 
 /**
- The result of requesting to subscribe to the body information including power modes.
-
- Optional
+ * A SDLVehicleDataResult* value. The body information including power modes.
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *bodyInformation;
 
 /**
- The result of requesting to subscribe to the device status including signal and battery strength.
-
- Optional
+ * A SDLVehicleDataResult* value. The device status including signal and battery strength.
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *deviceStatus;
 
 /**
- The result of requesting to subscribe to the status of the brake pedal.
-
- Optional
+ * A SDLVehicleDataResult* value. The status of the brake pedal.
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *driverBraking;
 
 /**
- The result of requesting to subscribe to the status of the wipers.
+ * An array of SDLVehicleDataResult* value. The status of vehicle's remaining range.
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *fuelRemainingRangeArray;
 
- Optional
+/**
+ * An array of SDLVehicleDataResult* value. The status of brake pedal position (percentage depressed).
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *brakePedalPositionArray;
+
+/**
+ * A SDLVehicleDataResult* value. The status of the wipers.
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *wiperStatus;
 
 /**
- The result of requesting to subscribe to the status of the head lamps.
-
- Optional
+ * A SDLVehicleDataResult* value. Status of the head lamps.
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *headLampStatus;
 
 /**
- The result of requesting to subscribe to the torque value for engine (in Nm) on non-diesel variants.
-
- Optional
+ * A SDLVehicleDataResult* value. Torque value for engine (in Nm) on non-diesel variants.
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *engineTorque;
 
 /**
- The result of requesting to subscribe to the accelerator pedal position (percentage depressed)
-
- Optional
+ * An array of SDLVehicleDataResult* value. Torque value for engine (in Nm) on non-diesel variants.
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *engineTorqueArray;
+/**
+ * A SDLVehicleDataResult* value. Accelerator pedal position (percentage depressed)
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *accPedalPosition;
 
 /**
- The result of requesting to subscribe to the current angle of the steering wheel (in deg)
+ *  An array of SDLVehicleDataResult* value. Accelerator pedal position (percentage depressed)
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *accPedalPositionArray;
 
- Optional
+/**
+ * A SDLVehicleDataResult* value. Current angle of the steering wheel (in deg)
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *steeringWheelAngle;
 
 /**
- The result of requesting to subscribe to the emergency call info
+ * An array of SDLVehicleDataResult* value. Current angle of the steering wheel (in deg)
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *steeringWheelAngleArray;
 
+/**
+ * An array of SDLVehicleDataResult* value. Current accelerometer data.
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *accelerometerArray;
+
+/**
+ * An array of SDLVehicleDataResult* value. Current Gyroscope data.
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *gyroscopeArray;
+
+/**
+ * An array of SDLVehicleDataResult* value. Current Wheel speeds data
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *wheelSpeedsArray;
+
+/**
+ The result of requesting to subscribe to the eCallInfo status
  Optional
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *eCallInfo;
 
 /**
- The result of requesting to subscribe to the airbag status
-
+ The result of requesting to subscribe to the airbagStatus status
  Optional
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *airbagStatus;
 
 /**
- The result of requesting to subscribe to the emergency event
-
+ The result of requesting to subscribe to the emergencyEvent status
  Optional
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *emergencyEvent;
 
 /**
- The result of requesting to subscribe to the cluster modes
-
+ The result of requesting to subscribe to the clusterModes status
  Optional
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *clusterModes;
 
 /**
  The result of requesting to subscribe to the myKey status
-
  Optional
  */
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *myKey;
@@ -186,3 +228,4 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+

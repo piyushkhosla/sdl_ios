@@ -29,9 +29,24 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *gps;
 
 /**
+ * A boolean value. If true, unsubscribes Gps data type
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *gpsArray;
+
+/**
+ * A boolean value. If true, subscribes Gps data type
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *gpsDrArray;
+
+/**
  * A boolean value. If true, unsubscribes speed data
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *speed;
+
+/**
+ * A boolean value. If true, unsubscribes speed data type
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *speedArray;
 
 /**
  * A boolean value. If true, unsubscribe data
@@ -39,14 +54,29 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *rpm;
 
 /**
+ * A boolean value. If true, subscribes an array of the number of rpm data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *rpmArray;
+
+/**
  * A boolean value. If true, unsubscribes FuelLevel data
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *fuelLevel;
 
 /**
+ * A boolean value. If true, subscribes an array of the  FuelLevel data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *fuelLevelArray;
+
+/**
  * A boolean value. If true, unsubscribes fuelLevel_State data
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *fuelLevel_State;
+
+/**
+ * A boolean value. If true, subscribes an array of the  fuelLevel_State data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *fuelLevel_StateArray;
 
 /**
  * A boolean value. If true, unsubscribes instantFuelConsumption data
@@ -59,14 +89,29 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *externalTemperature;
 
 /**
+ * A boolean value. If true, subscribes an array of the externalTemperature data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *externalTemperatureArray;
+
+/**
  * A boolean value. If true, unsubscribes Currently selected gear data
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *prndl;
 
 /**
+ * A boolean value. If true, subscribes an array of the Currently selected gear data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *prndlArray;
+
+/**
  * A boolean value. If true, unsubscribes tire pressure status data
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *tirePressure;
+
+/**
+ * A boolean value. If true, subscribes an array of the tire pressure status data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *tirePressureArray;
 
 /**
  * A boolean value. If true, unsubscribes odometer data
@@ -94,6 +139,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *driverBraking;
 
 /**
+ * A boolean value. If true, unsubscribes an array of vehicle's remaining range data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *fuelRemainingRangeArray;
+
+/**
+ * A boolean value. If true, unsubscribes an array of brake pedal position (percentage depressed).
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *brakePedalPositionArray;
+
+/**
  * A boolean value. If true, unsubscribes wiper Status data
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *wiperStatus;
@@ -109,9 +164,44 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *engineTorque;
 
 /**
+ * A boolean value. If true, subscribes an array of the Engine Torque data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *engineTorqueArray;
+
+/**
  * A boolean value. If true, unsubscribes accPedalPosition data
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *accPedalPosition;
+
+/**
+ * A boolean value. If true, means array of the accPedalPosition data has been
+ * subscribed.
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *accPedalPositionArray;
+
+/**
+ * A boolean value. If true, means an array of steeringWheelAngle data has been
+ * subscribed.
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *steeringWheelAngleArray;
+
+/**
+ * A boolean value. If true, means an array of accelerometer data has been
+ * subscribed.
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *accelerometerArray;
+
+/**
+ * A boolean value. If true, means an array of gyroscope data has been
+ * subscribed.
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *gyroscopeArray;
+
+/**
+ * A boolean value. If true, means an array of wheelSpeeds data has been
+ * subscribed.
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *wheelSpeedsArray;
 
 /**
  If true, unsubscribes from steeringWheelAngle

@@ -36,9 +36,6 @@
 #define SDLLOG_QUEUE    [NSString stringWithUTF8String:dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL)]
 
 #pragma mark Debug Logs
-
-#if DEBUG
-
 /**
  Log data bytes coming or going from SDL and the remote system to the console in verbose logging mode
 
@@ -61,25 +58,6 @@
  @param ... The format arguments to log
  */
 #define SDLLogD(msg, ...) [SDLLogManager logWithLevel:SDLLogLevelDebug timestamp:[NSDate date] file:SDLLOG_FILE functionName:SDLLOG_FUNC line:__LINE__ queue:SDLLOG_QUEUE formatMessage:msg, ##__VA_ARGS__]
-
-#else
-
-/**
- A stub for logging data bytes, does not exist in RELEASE builds
- */
-#define SDLLogBytes(bytes, transmissionDirection)
-
-/**
- A stub for verbose logs, does not exist in RELEASE builds
- */
-#define SDLLogV(msg, ...)
-
-/**
- A stub for debug logs, does not exist in DEBUG builds
- */
-#define SDLLogD(msg, ...)
-
-#endif
 
 
 #pragma mark Release Logs

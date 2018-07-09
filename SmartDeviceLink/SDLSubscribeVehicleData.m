@@ -59,12 +59,36 @@ NS_ASSUME_NONNULL_BEGIN
     return [parameters sdl_objectForName:SDLNameGPS];
 }
 
+- (void)setGpsArray:(nullable NSNumber<SDLBool> *)gpsArray {
+    [parameters sdl_setObject:gpsArray forName:SDLNameGPSArray];
+}
+
+- (nullable NSNumber<SDLBool> *)gpsArray {
+    return [parameters sdl_objectForName:SDLNameGPSArray];
+}
+
+- (void)setGpsDrArray:(nullable NSNumber<SDLBool> *)gpsDrArray {
+    [parameters sdl_setObject:gpsDrArray forName:SDLNameGPSDrArray];
+}
+
+- (nullable NSNumber<SDLBool> *)gpsDrArray {
+    return [parameters sdl_objectForName:SDLNameGPSDrArray];
+}
+
 - (void)setSpeed:(nullable NSNumber<SDLBool> *)speed {
     [parameters sdl_setObject:speed forName:SDLNameSpeed];
 }
 
 - (nullable NSNumber<SDLBool> *)speed {
     return [parameters sdl_objectForName:SDLNameSpeed];
+}
+
+- (void)setSpeedArray:(nullable NSNumber<SDLBool> *)speedArray {
+    [parameters sdl_setObject:speedArray forName:SDLNameSpeedArray];
+}
+
+- (nullable NSNumber<SDLBool> *)speedArray {
+    return [parameters sdl_objectForName:SDLNameSpeedArray];
 }
 
 - (void)setRpm:(nullable NSNumber<SDLBool> *)rpm {
@@ -75,6 +99,14 @@ NS_ASSUME_NONNULL_BEGIN
     return [parameters sdl_objectForName:SDLNameRPM];
 }
 
+- (void)setRpmArray:(nullable NSNumber<SDLBool> *)rpmArray {
+    [parameters sdl_setObject:rpmArray forName:SDLNameRPMArray];
+}
+
+- (nullable NSNumber<SDLBool> *)rpmArray {
+    return [parameters sdl_objectForName:SDLNameRPMArray];
+}
+
 - (void)setFuelLevel:(nullable NSNumber<SDLBool> *)fuelLevel {
     [parameters sdl_setObject:fuelLevel forName:SDLNameFuelLevel];
 }
@@ -83,12 +115,28 @@ NS_ASSUME_NONNULL_BEGIN
     return [parameters sdl_objectForName:SDLNameFuelLevel];
 }
 
+- (void)setFuelLevelArray:(nullable NSNumber<SDLBool> *)fuelLevelArray {
+    [parameters sdl_setObject:fuelLevelArray forName:SDLNameFuelLevelArray];
+}
+
+- (nullable NSNumber<SDLBool> *)fuelLevelArray {
+    return [parameters sdl_objectForName:SDLNameFuelLevelArray];
+}
+
 - (void)setFuelLevel_State:(nullable NSNumber<SDLBool> *)fuelLevel_State {
     [parameters sdl_setObject:fuelLevel_State forName:SDLNameFuelLevelState];
 }
 
 - (nullable NSNumber<SDLBool> *)fuelLevel_State {
     return [parameters sdl_objectForName:SDLNameFuelLevelState];
+}
+
+- (void)setFuelLevel_StateArray:(nullable NSNumber<SDLBool> *)fuelLevel_StateArray {
+    [parameters sdl_setObject:fuelLevel_StateArray forName:SDLNameFuelLevelStateArray];
+}
+
+- (nullable NSNumber<SDLBool> *)fuelLevel_StateArray {
+    return [parameters objectForKey:SDLNameFuelLevelStateArray];
 }
 
 - (void)setInstantFuelConsumption:(nullable NSNumber<SDLBool> *)instantFuelConsumption {
@@ -107,6 +155,14 @@ NS_ASSUME_NONNULL_BEGIN
     return [parameters sdl_objectForName:SDLNameExternalTemperature];
 }
 
+- (void)setExternalTemperatureArray:(nullable NSNumber<SDLBool> *)externalTemperatureArray {
+    [parameters sdl_setObject:externalTemperatureArray forName:SDLNameExternalTemperatureArray];
+}
+
+- (nullable NSNumber<SDLBool> *)externalTemperatureArray {
+    return [parameters sdl_objectForName:SDLNameExternalTemperatureArray];
+}
+
 - (void)setPrndl:(nullable NSNumber<SDLBool> *)prndl {
     [parameters sdl_setObject:prndl forName:SDLNamePRNDL];
 }
@@ -115,12 +171,28 @@ NS_ASSUME_NONNULL_BEGIN
     return [parameters sdl_objectForName:SDLNamePRNDL];
 }
 
+- (void)setPrndlArray:(nullable NSNumber<SDLBool> *)prndlArray {
+    [parameters sdl_setObject:prndlArray forName:SDLNamePRNDLArray];
+}
+
+- (nullable NSNumber<SDLBool> *)prndlArray {
+    return [parameters sdl_objectForName:SDLNamePRNDLArray];
+}
+
 - (void)setTirePressure:(nullable NSNumber<SDLBool> *)tirePressure {
     [parameters sdl_setObject:tirePressure forName:SDLNameTirePressure];
 }
 
 - (nullable NSNumber<SDLBool> *)tirePressure {
     return [parameters sdl_objectForName:SDLNameTirePressure];
+}
+
+- (void)setTirePressureArray:(nullable NSNumber<SDLBool> *)tirePressureArray {
+    [parameters sdl_setObject:tirePressureArray forName:SDLNameTirePressureArray];
+}
+
+- (nullable NSNumber<SDLBool> *)tirePressureArray {
+    return [parameters sdl_objectForName:SDLNameTirePressureArray];
 }
 
 - (void)setOdometer:(nullable NSNumber<SDLBool> *)odometer {
@@ -163,6 +235,22 @@ NS_ASSUME_NONNULL_BEGIN
     return [parameters sdl_objectForName:SDLNameDriverBraking];
 }
 
+- (void)setFuelRemainingRangeArray:(nullable NSNumber<SDLBool> *)fuelRemainingRangeArray {
+    [parameters sdl_setObject:fuelRemainingRangeArray forName:SDLNameFuelRemainingRangeArray];
+}
+
+- (nullable NSNumber<SDLBool> *)fuelRemainingRangeArray {
+    return [parameters sdl_objectForName:SDLNameFuelRemainingRangeArray];
+}
+
+- (void)setBrakePedalPositionArray:(nullable NSNumber<SDLBool> *)brakePedalPositionArray {
+    [parameters sdl_setObject:brakePedalPositionArray forName:SDLNameBrakePedalPositionArray];
+}
+
+- (nullable NSNumber<SDLBool> *)brakePedalPositionArray {
+    return [parameters sdl_objectForName:SDLNameBrakePedalPositionArray];
+}
+
 - (void)setWiperStatus:(nullable NSNumber<SDLBool> *)wiperStatus {
     [parameters sdl_setObject:wiperStatus forName:SDLNameWiperStatus];
 }
@@ -187,6 +275,14 @@ NS_ASSUME_NONNULL_BEGIN
     return [parameters sdl_objectForName:SDLNameEngineTorque];
 }
 
+- (void)setEngineTorqueArray:(nullable NSNumber<SDLBool> *)engineTorqueArray {
+    [parameters sdl_setObject:engineTorqueArray forName:SDLNameEngineTorqueArray];
+}
+
+- (nullable NSNumber<SDLBool> *)engineTorqueArray {
+    return [parameters sdl_objectForName:SDLNameEngineTorqueArray];
+}
+
 - (void)setAccPedalPosition:(nullable NSNumber<SDLBool> *)accPedalPosition {
     [parameters sdl_setObject:accPedalPosition forName:SDLNameAccelerationPedalPosition];
 }
@@ -195,12 +291,52 @@ NS_ASSUME_NONNULL_BEGIN
     return [parameters sdl_objectForName:SDLNameAccelerationPedalPosition];
 }
 
+- (void)setAccPedalPositionArray:(nullable NSNumber<SDLBool> *)accPedalPositionArray {
+    [parameters sdl_setObject:accPedalPositionArray forName:SDLNameAccelerationPedalPositionArray];
+}
+
+- (nullable NSNumber<SDLBool> *)accPedalPositionArray {
+    return [parameters objectForKey:SDLNameAccelerationPedalPositionArray];
+}
+
 - (void)setSteeringWheelAngle:(nullable NSNumber<SDLBool> *)steeringWheelAngle {
     [parameters sdl_setObject:steeringWheelAngle forName:SDLNameSteeringWheelAngle];
 }
 
 - (nullable NSNumber<SDLBool> *)steeringWheelAngle {
     return [parameters sdl_objectForName:SDLNameSteeringWheelAngle];
+}
+
+- (void)setSteeringWheelAngleArray:(nullable NSNumber<SDLBool> *)steeringWheelAngleArray {
+    [parameters sdl_setObject:steeringWheelAngleArray forName:SDLNameSteeringWheelAngleArray];
+}
+
+- (nullable NSNumber<SDLBool> *)steeringWheelAngleArray {
+    return [parameters sdl_objectForName:SDLNameSteeringWheelAngleArray];
+}
+
+- (void)setAccelerometerArray:(nullable NSNumber<SDLBool> *)accelerometerArray {
+    [parameters sdl_setObject:accelerometerArray forName:SDLNameAccelerometerArray];
+}
+
+- (nullable NSNumber<SDLBool> *)accelerometerArray {
+    return [parameters sdl_objectForName:SDLNameAccelerometerArray];
+}
+
+- (void)setGyroscopeArray:(nullable NSNumber<SDLBool> *)gyroscopeArray {
+    [parameters sdl_setObject:gyroscopeArray forName:SDLNameGyroscopeArray];
+}
+
+- (nullable NSNumber<SDLBool> *)gyroscopeArray {
+    return [parameters sdl_objectForName:SDLNameGyroscopeArray];
+}
+
+- (void)setWheelSpeedsArray:(nullable NSNumber<SDLBool> *)wheelSpeedsArray {
+    [parameters sdl_setObject:wheelSpeedsArray forName:SDLNameWheelSpeedsArray];
+}
+
+- (nullable NSNumber<SDLBool> *)wheelSpeedsArray {
+    return [parameters sdl_objectForName:SDLNameWheelSpeedsArray];
 }
 
 - (void)setECallInfo:(nullable NSNumber<SDLBool> *)eCallInfo {
@@ -246,3 +382,4 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
