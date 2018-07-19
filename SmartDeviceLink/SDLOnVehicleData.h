@@ -7,6 +7,7 @@
 #import "SDLPRNDL.h"
 #import "SDLVehicleDataEventStatus.h"
 #import "SDLWiperStatus.h"
+#import "SDLElectronicParkBrakeStatus.h"
 
 @class SDLAirbagStatus;
 @class SDLBeltStatus;
@@ -143,6 +144,11 @@ NS_ASSUME_NONNULL_BEGIN
  Current angle of the steering wheel (in deg)
  */
 @property (nullable, strong, nonatomic) NSNumber<SDLFloat> *steeringWheelAngle;
+
+/**
+ * The status of the park brake as provided by Electric Park Brake (EPB) system.
+ */
+@property (nullable, strong, nonatomic) SDLElectronicParkBrakeStatus electronicParkBrakeStatus;
 
 /**
  Emergency Call notification and confirmation data

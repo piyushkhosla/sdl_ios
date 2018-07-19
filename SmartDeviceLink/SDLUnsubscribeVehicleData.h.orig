@@ -186,12 +186,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *accPedalPosition;
 
 /**
+<<<<<<< ed3418d023afd7032e4790fcfcf5a81cb8931815
+ * If true, unsubscribes from Steering Wheel Angle data
+=======
  * A boolean value. If true, unsubscribes electronicParkBrakeStatus data 
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *electronicParkBrakeStatus;
 
 /**
  If true, unsubscribes from steeringWheelAngle
+>>>>>>>  Adding a new vehicle data to get the status of the Park Brake from the Electric Park Brake.
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *steeringWheelAngle;
 

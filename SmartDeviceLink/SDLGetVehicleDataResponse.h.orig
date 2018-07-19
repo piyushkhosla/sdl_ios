@@ -23,6 +23,11 @@
 @class SDLTireStatus;
 
 
+<<<<<<< ed3418d023afd7032e4790fcfcf5a81cb8931815
+=======
+
+
+>>>>>>>  Adding a new vehicle data to get the status of the Park Brake from the Electric Park Brake.
 /**
  * Response to SDLGetVehicleData
  *

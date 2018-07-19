@@ -163,6 +163,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *steeringWheelAngle;
 
 /**
+ * A SDLVehicleDataResult* value. The status of the park brake as provided by
+ * Electric Park Brake (EPB) system.
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *electronicParkBrakeStatus;
+
+/**
  The result of requesting to subscribe to the emergency call info
 
  Optional

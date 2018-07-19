@@ -225,6 +225,14 @@ NS_ASSUME_NONNULL_BEGIN
     return [parameters sdl_objectForName:SDLNameSteeringWheelAngle];
 }
 
+- (void)setElectronicParkBrakeStatus:(nullable NSNumber<SDLBool> *)electronicParkBrakeStatus {
+    [parameters sdl_setObject:electronicParkBrakeStatus forName:SDLNameElectronicParkBrakeStatus];
+}
+
+- (nullable NSNumber<SDLBool> *)electronicParkBrakeStatus {
+    return [parameters sdl_objectForName:SDLNameElectronicParkBrakeStatus];
+}
+
 - (void)setECallInfo:(nullable NSNumber<SDLBool> *)eCallInfo {
     [parameters sdl_setObject:eCallInfo forName:SDLNameECallInfo];
 }

@@ -189,6 +189,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *steeringWheelAngle;
 
 /**
+<<<<<<< ed3418d023afd7032e4790fcfcf5a81cb8931815
+ * A boolean value. If true, subscribes eCall Info data.
+=======
  * A boolean value. If true, means the electronicParkBrakeStatus data has been
  * subscribed.
  */
@@ -196,6 +199,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Subscribe to eCallInfo
+>>>>>>>  Adding a new vehicle data to get the status of the Park Brake from the Electric Park Brake.
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *eCallInfo;
 
