@@ -47,6 +47,7 @@ describe(@"Getter/Setter Tests", ^ {
         testResponse.steeringWheelAngle = vehicleDataResult;
         testResponse.tirePressure = vehicleDataResult;
         testResponse.wiperStatus = vehicleDataResult;
+        testResponse.turnSignal = vehicleDataResult;
 
         expect(testResponse.accPedalPosition).to(equal(vehicleDataResult));
         expect(testResponse.airbagStatus).to(equal(vehicleDataResult));
@@ -74,6 +75,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testResponse.steeringWheelAngle).to(equal(vehicleDataResult));
         expect(testResponse.tirePressure).to(equal(vehicleDataResult));
         expect(testResponse.wiperStatus).to(equal(vehicleDataResult));
+        expect(testResponse.turnSignal).to(equal(vehicleDataResult));
     });
     
     it(@"Should get correctly when initialized", ^ {
@@ -105,7 +107,8 @@ describe(@"Getter/Setter Tests", ^ {
                                                                    SDLNameSteeringWheelAngle:vehicleDataResult,
                                                                    SDLNameTirePressure:vehicleDataResult,
                                                                    SDLNameWiperStatus:vehicleDataResult},
-                                                             SDLNameOperationName:SDLNameSubscribeVehicleData}};
+                                                             SDLNameOperationName:SDLNameSubscribeVehicleData,
+                                                             SDLNameTurnSignal:vehicleDataResult}};
         SDLSubscribeVehicleDataResponse* testResponse = [[SDLSubscribeVehicleDataResponse alloc] initWithDictionary:dict];
         
         expect(testResponse.accPedalPosition).to(equal(vehicleDataResult));
@@ -134,6 +137,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testResponse.steeringWheelAngle).to(equal(vehicleDataResult));
         expect(testResponse.tirePressure).to(equal(vehicleDataResult));
         expect(testResponse.wiperStatus).to(equal(vehicleDataResult));
+        expect(testResponse.turnSignal).to(equal(vehicleDataResult));
     });
     
     it(@"Should return nil if not set", ^ {
@@ -165,6 +169,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testResponse.steeringWheelAngle).to(beNil());
         expect(testResponse.tirePressure).to(beNil());
         expect(testResponse.wiperStatus).to(beNil());
+        expect(testResponse.turnSignal).to(beNil());
     });
 });
 

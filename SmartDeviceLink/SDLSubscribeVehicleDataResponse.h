@@ -164,6 +164,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *steeringWheelAngle;
 
 /**
+ * A SDLVehicleDataResult* value. Status of the Turn Signal
+ */
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *turnSignal;
+
+
+/**
  The result of requesting to subscribe to the emergency call info
 
  Optional

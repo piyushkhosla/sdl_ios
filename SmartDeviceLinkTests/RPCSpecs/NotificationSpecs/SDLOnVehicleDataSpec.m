@@ -58,6 +58,7 @@ describe(@"Getter/Setter Tests", ^ {
         testNotification.tirePressure = tires;
         testNotification.vin = @"222222222722";
         testNotification.wiperStatus = SDLWiperStatusStalled;
+        testNotification.turnSignal = SDLTurnSignalOff;
 
         expect(testNotification.accPedalPosition).to(equal(@99.99999999));
         expect(testNotification.airbagStatus).to(equal(airbag));
@@ -86,6 +87,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testNotification.tirePressure).to(equal(tires));
         expect(testNotification.vin).to(equal(@"222222222722"));
         expect(testNotification.wiperStatus).to(equal(SDLWiperStatusStalled));
+        expect(testNotification.turnSignal).to(equal(SDLTurnSignalOff));
     });
     
     it(@"Should get correctly when initialized", ^ {
@@ -117,7 +119,9 @@ describe(@"Getter/Setter Tests", ^ {
                                                    SDLNameSteeringWheelAngle:@0.000000001,
                                                    SDLNameTirePressure:tires,
                                                    SDLNameVIN:@"222222222722",
-                                                   SDLNameWiperStatus:SDLWiperStatusStalled},
+                                                   SDLNameWiperStatus:SDLWiperStatusStalled,
+                                                   SDLNameTurnSignal:SDLTurnSignalOff
+                                                   },
                                              SDLNameOperationName:SDLNameOnVehicleData}};
         SDLOnVehicleData* testNotification = [[SDLOnVehicleData alloc] initWithDictionary:dict];
         
@@ -148,6 +152,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testNotification.tirePressure).to(equal(tires));
         expect(testNotification.vin).to(equal(@"222222222722"));
         expect(testNotification.wiperStatus).to(equal(SDLWiperStatusStalled));
+        expect(testNotification.turnSignal).to(equal(SDLTurnSignalOff));
     });
     
     it(@"Should return nil if not set", ^ {
@@ -180,6 +185,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testNotification.tirePressure).to(beNil());
         expect(testNotification.vin).to(beNil());
         expect(testNotification.wiperStatus).to(beNil());
+        expect(testNotification.turnSignal).to(beNil());
     });
 });
 

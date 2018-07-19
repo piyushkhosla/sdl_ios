@@ -194,7 +194,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, strong, nonatomic) NSNumber<SDLBool> *steeringWheelAngle;
 
 /**
- * A boolean value. If true, requests Emergency Call Info data.
+ * A boolean value. If true, requests turnSignal Status data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *turnSignal;
+
+/**
+ If true, the Emergency Call notification and confirmation data has been subscribed
  */
 @property (nullable, strong, nonatomic) NSNumber<SDLBool> *eCallInfo;
 

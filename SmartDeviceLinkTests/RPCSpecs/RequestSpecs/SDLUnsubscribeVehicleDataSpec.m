@@ -43,6 +43,7 @@ describe(@"Getter/Setter Tests", ^ {
         testRequest.steeringWheelAngle = @YES;
         testRequest.tirePressure = @YES;
         testRequest.wiperStatus = @YES;
+        testRequest.turnSignal = @NO;
 
         expect(testRequest.accPedalPosition).to(equal(@YES));
         expect(testRequest.airbagStatus).to(equal(@YES));
@@ -70,6 +71,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.steeringWheelAngle).to(equal(@YES));
         expect(testRequest.tirePressure).to(equal(@YES));
         expect(testRequest.wiperStatus).to(equal(@YES));
+        expect(testRequest.turnSignal).to(equal(@NO));
     });
     
     it(@"Should get correctly when initialized", ^ {
@@ -100,7 +102,8 @@ describe(@"Getter/Setter Tests", ^ {
                                                                      SDLNameSpeed:@YES,
                                                                      SDLNameSteeringWheelAngle:@YES,
                                                                      SDLNameTirePressure:@YES,
-                                                                     SDLNameWiperStatus:@YES},
+                                                                     SDLNameWiperStatus:@YES,
+                                                                   SDLNameTurnSignal:@NO},
                                                              SDLNameOperationName:SDLNameUnsubscribeVehicleData}};
         SDLUnsubscribeVehicleData* testRequest = [[SDLUnsubscribeVehicleData alloc] initWithDictionary:dict];
         
@@ -130,6 +133,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.steeringWheelAngle).to(equal(@YES));
         expect(testRequest.tirePressure).to(equal(@YES));
         expect(testRequest.wiperStatus).to(equal(@YES));
+        expect(testRequest.turnSignal).to(equal(@NO));
     });
 });
 
@@ -163,6 +167,7 @@ describe(@"initializers", ^{
         expect(testRequest.steeringWheelAngle).to(beNil());
         expect(testRequest.tirePressure).to(beNil());
         expect(testRequest.wiperStatus).to(beNil());
+        expect(testRequest.turnSignal).to(beNil());
     });
 
     context(@"initWithAccelerationPedalPosition:airbagStatus:beltStatus:bodyInformation:clusterModeStatus:deviceStatus:driverBraking:eCallInfo:emergencyEvent:engineOilLife:engineTorque:externalTemperature:fuelLevel:fuelLevelState:gps:headLampStatus:instantFuelConsumption:myKey:odometer:prndl:rpm:speed:steeringWheelAngle:tirePressure:wiperStatus:", ^{

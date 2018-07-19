@@ -191,7 +191,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *steeringWheelAngle;
 
 /**
- * If true, unsubscribes from eCallInfo
+ * A boolean value. If true, unsubscribes turnSignal data
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLBool> *turnSignal;
+
+
+/**
+ If true, unsubscribes from eCallInfo
  */
 @property (strong, nonatomic, nullable) NSNumber<SDLBool> *eCallInfo;
 
