@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface SDLKeyboardProperties : SDLRPCStruct
 
-- (instancetype)initWithLanguage:(nullable SDLLanguage)language layout:(nullable SDLKeyboardLayout)layout keypressMode:(nullable SDLKeypressMode)keypressMode limitedCharacterList:(nullable NSArray<NSString *> *)limitedCharacterList autoCompleteText:(nullable NSString *)autoCompleteText;
+- (instancetype)initWithLanguage:(nullable SDLLanguage)language layout:(nullable SDLKeyboardLayout)layout keypressMode:(nullable SDLKeypressMode)keypressMode limitedCharacterList:(nullable NSArray<NSString *> *)limitedCharacterList autoCompleteList:(nullable NSArray<NSString *> *)autoCompleteList;
 
 /**
  The keyboard language
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  Optional
  */
-@property (nullable, strong, nonatomic) NSString *autoCompleteText;
+@property (nullable, strong, nonatomic) NSArray<NSString *> *autoCompleteList;
 
 @end
 

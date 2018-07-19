@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation SDLKeyboardProperties
 
-- (instancetype)initWithLanguage:(nullable SDLLanguage)language layout:(nullable SDLKeyboardLayout)layout keypressMode:(nullable SDLKeypressMode)keypressMode limitedCharacterList:(nullable NSArray<NSString *> *)limitedCharacterList autoCompleteText:(nullable NSString *)autoCompleteText {
+- (instancetype)initWithLanguage:(nullable SDLLanguage)language layout:(nullable SDLKeyboardLayout)layout keypressMode:(nullable SDLKeypressMode)keypressMode limitedCharacterList:(nullable NSArray<NSString *> *)limitedCharacterList autoCompleteList:(nullable NSArray<NSString *> *)autoCompleteList {
     self = [self init];
     if (!self) {
         return nil;
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
     self.keyboardLayout = layout;
     self.keypressMode = keypressMode;
     self.limitedCharacterList = [limitedCharacterList mutableCopy];
-    self.autoCompleteText = autoCompleteText;
+    self.autoCompleteList = autoCompleteList;
 
     return self;
 }
@@ -57,12 +57,12 @@ NS_ASSUME_NONNULL_BEGIN
     return [store sdl_objectForName:SDLNameLimitedCharacterList];
 }
 
-- (void)setAutoCompleteText:(nullable NSString *)autoCompleteText {
-    [store sdl_setObject:autoCompleteText forName:SDLNameAutoCompleteText];
+- (void)setAutoCompleteList:(nullable NSArray<NSString *> *)autoCompleteList {
+    [store sdl_setObject:autoCompleteList forName:SDLNameAutoCompleteList];
 }
 
-- (nullable NSString *)autoCompleteText {
-    return [store sdl_objectForName:SDLNameAutoCompleteText];
+- (nullable NSArray<NSString *> *)autoCompleteList {
+    return [store sdl_objectForName:SDLNameAutoCompleteList];
 }
 
 @end

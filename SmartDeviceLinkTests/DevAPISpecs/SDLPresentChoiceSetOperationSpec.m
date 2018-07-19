@@ -47,7 +47,7 @@ describe(@"present choice operation", ^{
 
         testKeyboardDelegate = OCMProtocolMock(@protocol(SDLKeyboardDelegate));
         OCMStub([testKeyboardDelegate customKeyboardConfiguration]).andReturn(nil);
-        testKeyboardProperties = [[SDLKeyboardProperties alloc] initWithLanguage:SDLLanguageArSa layout:SDLKeyboardLayoutAZERTY keypressMode:SDLKeypressModeResendCurrentEntry limitedCharacterList:nil autoCompleteText:nil];
+        testKeyboardProperties = [[SDLKeyboardProperties alloc] initWithLanguage:SDLLanguageArSa layout:SDLKeyboardLayoutAZERTY keypressMode:SDLKeypressModeResendCurrentEntry limitedCharacterList:nil autoCompleteList:nil];
     });
 
     it(@"should have a priority of 'normal'", ^{
@@ -256,7 +256,7 @@ describe(@"present choice operation", ^{
                 expect(testConnectionManager.receivedRequests.lastObject).to(beAnInstanceOf([SDLSetGlobalProperties class]));
 
                 SDLSetGlobalProperties *setProperties = testConnectionManager.receivedRequests.lastObject;
-                expect(setProperties.keyboardProperties.autoCompleteText).to(equal(inputData));
+                expect(setProperties.keyboardProperties.autoCompleteList).to(equal(inputData));
             });
 
             it(@"should respond to text input notification with character set", ^{
