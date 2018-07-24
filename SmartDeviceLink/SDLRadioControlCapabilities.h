@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface SDLRadioControlCapabilities : SDLRPCStruct
 
+- (instancetype)initWithModuleName:(NSString *)moduleName radioEnableAvailable:(BOOL)radioEnableAvailable radioBandAvailable:(BOOL)radioBandAvailable radioFrequencyAvailable:(BOOL)radioFrequencyAvailable hdChannelAvailable:(BOOL)hdChannelAvailable rdsDataAvailable:(BOOL)rdsDataAvailable availableHDsAvailable:(BOOL)availableHDsAvailable stateAvailable:(BOOL)stateAvailable signalStrengthAvailable:(BOOL)signalStrengthAvailable signalChangeThresholdAvailable:(BOOL)signalChangeThresholdAvailable __deprecated_msg("Use initWithModuleName: radioEnableAvailable: radioBandAvailable: radioFrequencyAvailable: hdChannelAvailable: rdsDataAvailable: availableHDsAvailable: stateAvailable: signalStrengthAvailable:signalStrengthAvailable signalChangeThresholdAvailable: hdRadioEnableAvailable: siriusxmRadioAvailable: instead");
+
 - (instancetype)initWithModuleName:(NSString *)moduleName radioEnableAvailable:(BOOL)radioEnableAvailable radioBandAvailable:(BOOL)radioBandAvailable radioFrequencyAvailable:(BOOL)radioFrequencyAvailable hdChannelAvailable:(BOOL)hdChannelAvailable rdsDataAvailable:(BOOL)rdsDataAvailable availableHDsAvailable:(BOOL)availableHDsAvailable stateAvailable:(BOOL)stateAvailable signalStrengthAvailable:(BOOL)signalStrengthAvailable signalChangeThresholdAvailable:(BOOL)signalChangeThresholdAvailable hdRadioEnableAvailable:(BOOL)hdRadioEnableAvailable siriusxmRadioAvailable:(BOOL)siriusxmRadioAvailable;
 
 /**
