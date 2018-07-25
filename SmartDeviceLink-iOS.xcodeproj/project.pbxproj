@@ -270,7 +270,6 @@
 		1E5AD0941F20BEAD0029B8AF /* SDLSetInteriorVehicleDataResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E5AD0921F20BEAD0029B8AF /* SDLSetInteriorVehicleDataResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E5AD0951F20BEAD0029B8AF /* SDLSetInteriorVehicleDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5AD0931F20BEAD0029B8AF /* SDLSetInteriorVehicleDataResponse.m */; };
 		1E5AD0981F20C0FB0029B8AF /* SDLOnInteriorVehicleData.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E5AD0961F20C0FB0029B8AF /* SDLOnInteriorVehicleData.h */; settings = {ATTRIBUTES = (Public, ); }; };
-<<<<<<< HEAD
 		1E89B0DE2031636000A47992 /* SDLSeatControlDataSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E89B0DD2031636000A47992 /* SDLSeatControlDataSpec.m */; };
 		1E89B0E2203196B800A47992 /* SDLSeatControlCapabilitiesSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E89B0E1203196B800A47992 /* SDLSeatControlCapabilitiesSpec.m */; };
 		1EB59C9F202D925500343A61 /* SDLMassageZone.h in Headers */ = {isa = PBXBuildFile; fileRef = 1EB59C9D202D925500343A61 /* SDLMassageZone.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1656,7 +1655,6 @@
 		1E5AD0931F20BEAD0029B8AF /* SDLSetInteriorVehicleDataResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLSetInteriorVehicleDataResponse.m; sourceTree = "<group>"; };
 		1E5AD0961F20C0FB0029B8AF /* SDLOnInteriorVehicleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLOnInteriorVehicleData.h; sourceTree = "<group>"; };
 		1E5AD0971F20C0FB0029B8AF /* SDLOnInteriorVehicleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLOnInteriorVehicleData.m; sourceTree = "<group>"; };
-<<<<<<< HEAD
 		1E89B0DD2031636000A47992 /* SDLSeatControlDataSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDLSeatControlDataSpec.m; sourceTree = "<group>"; };
 		1E89B0E1203196B800A47992 /* SDLSeatControlCapabilitiesSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDLSeatControlCapabilitiesSpec.m; sourceTree = "<group>"; };
 		1EB59C9D202D925500343A61 /* SDLMassageZone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDLMassageZone.h; sourceTree = "<group>"; };
