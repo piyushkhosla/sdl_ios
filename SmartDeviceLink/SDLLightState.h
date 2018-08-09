@@ -5,7 +5,7 @@
 #import "SDLLightName.h"
 #import "SDLLightStatus.h"
 
-@class SDLSRGBColor;
+@class SDLRGBColor;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param sRGBColor Reflects the color of Light.
  @return An instance of the SDLLightState class
  */
-- (instancetype)initWithId:(SDLLightName)id status:(SDLLightStatus)status density:(double)density sRGBColor:(SDLSRGBColor *)sRGBColor;
+- (instancetype)initWithId:(SDLLightName)id status:(SDLLightStatus)status density:(double)density sRGBColor:(SDLRGBColor *)sRGBColor;
 
 /**
  * @abstract The name of a light or a group of lights
@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, SDLLightStatus
  */
-@property (nullable, strong, nonatomic) SDLSRGBColor *sRGBColor;
+@property (nullable, strong, nonatomic) SDLRGBColor *RGBColor;
 
 @end
 

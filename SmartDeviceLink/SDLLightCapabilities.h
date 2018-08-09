@@ -48,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Optional, Boolean
  */
-@property (nullable, strong, nonatomic) NSNumber<SDLBool> *sRGBColorSpaceAvailable;
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *RGBColorSpaceAvailable;
 
 /**
  * @abstract Indicates if the status (ON/OFF) can be set remotely.
