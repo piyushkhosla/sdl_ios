@@ -124,6 +124,14 @@ NS_ASSUME_NONNULL_BEGIN
     [self handleBytesFromTransport:receivedData];
 }
 
+- (void)onError:(NSError *)error {
+    for (id<SDLProtocolListener> listener in self.protocolDelegateTable.allObjects) {
+        if ([listener respondsToSelector:@selector(onTransportError:)]) {
+            [listener onTransportError:error];
+        }
+    }
+}
+
 #pragma mark - Start Service
 
 - (void)startServiceWithType:(SDLServiceType)serviceType payload:(nullable NSData *)payload {
@@ -231,7 +239,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - Register Secondary Transport
 
-- (void)registerSecondaryTransport:(nullable NSData *)payload {
+- (void)registerSecondaryTransport {
     SDLProtocolHeader *header = [SDLProtocolHeader headerForVersion:(UInt8)[SDLGlobals sharedGlobals].majorProtocolVersion];
     header.frameType = SDLFrameTypeControl;
     header.serviceType = SDLServiceTypeControl;
@@ -241,7 +249,7 @@ NS_ASSUME_NONNULL_BEGIN
         [((SDLV2ProtocolHeader *)header) setMessageID:++_messageID];
     }
 
-    SDLProtocolMessage *message = [SDLProtocolMessage messageWithHeader:header andPayload:payload];
+    SDLProtocolMessage *message = [SDLProtocolMessage messageWithHeader:header andPayload:nil];
     [self sdl_sendDataToTransport:message.data onService:SDLServiceTypeControl];
 }
 
@@ -637,7 +645,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)sdl_logControlNAKPayload:(SDLProtocolMessage *)nakMessage {
     switch (nakMessage.header.frameData) {
         case SDLFrameInfoStartServiceNACK: // fallthrough
-        case SDLFrameInfoEndServiceNACK:
+        case SDLFrameInfoEndServiceNACK: {
             if (nakMessage.header.version >= 5) {
                 SDLControlFramePayloadNak *endServiceNakPayload = [[SDLControlFramePayloadNak alloc] initWithData:nakMessage.payload];
                 NSArray<NSString *> *rejectedParams = endServiceNakPayload.rejectedParams;
@@ -645,7 +653,7 @@ NS_ASSUME_NONNULL_BEGIN
                     SDLLogE(@"Start Service NAK'd, service type: %@, rejectedParams: %@", @(nakMessage.header.serviceType), rejectedParams);
                 }
             }
-            break;
+        } break;
         case SDLFrameInfoRegisterSecondaryTransportNACK: {
             SDLControlFramePayloadRegisterSecondaryTransportNak *payload = [[SDLControlFramePayloadRegisterSecondaryTransportNak alloc] initWithData:nakMessage.payload];
             SDLLogE(@"Register Secondary Transport NAK'd, reason: %@", payload.reason);
