@@ -288,6 +288,7 @@ sdefault.public_header_files = [
 'SmartDeviceLink/SDLShow.h',
 'SmartDeviceLink/SDLShowConstantTBT.h',
 'SmartDeviceLink/SDLShowAppMenu.h',
+'SmartDeviceLink/SDLShowAppMenuResponse.h',
 'SmartDeviceLink/SDLShowConstantTBTResponse.h',
 'SmartDeviceLink/SDLShowResponse.h',
 'SmartDeviceLink/SDLSingleTireStatus.h',

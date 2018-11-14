@@ -60,6 +60,7 @@ SDLNotificationName const SDLDidReceiveSetDisplayLayoutResponse = @"com.sdl.resp
 SDLNotificationName const SDLDidReceiveSetGlobalPropertiesResponse = @"com.sdl.response.setGlobalProperties";
 SDLNotificationName const SDLDidReceiveSetInteriorVehicleDataResponse = @"com.sdl.response.setInteriorVehicleData";
 SDLNotificationName const SDLDidReceiveSetMediaClockTimerResponse = @"com.sdl.response.setMediaClockTimer";
+SDLNotificationName const SDLDidReceiveShowAppMenuResponse = @"com.sdl.response.showAppMenu";
 SDLNotificationName const SDLDidReceiveShowConstantTBTResponse = @"com.sdl.response.showConstantTBT";
 SDLNotificationName const SDLDidReceiveShowResponse = @"com.sdl.response.show";
 SDLNotificationName const SDLDidReceiveSliderResponse = @"com.sdl.response.slider";
@@ -137,6 +138,7 @@ SDLNotificationName const SDLDidReceiveWaypointNotification = @"com.sdl.notifica
              SDLDidReceiveSetGlobalPropertiesResponse,
              SDLDidReceiveSetInteriorVehicleDataResponse,
              SDLDidReceiveSetMediaClockTimerResponse,
+             SDLDidReceiveShowAppMenuResponse,
              SDLDidReceiveShowConstantTBTResponse,
              SDLDidReceiveShowResponse,
              SDLDidReceiveSliderResponse,

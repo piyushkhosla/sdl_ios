@@ -237,6 +237,10 @@ NS_ASSUME_NONNULL_BEGIN
     [self postRPCResponseNotification:SDLDidReceiveShowResponse response:response];
 }
 
+- (void)onShowAppMenuResponse:(SDLShowAppMenuResponse *)response {
+    [self postRPCResponseNotification:SDLDidReceiveShowAppMenuResponse response:response];
+}
+
 - (void)onSliderResponse:(SDLSliderResponse *)response {
     [self postRPCResponseNotification:SDLDidReceiveSliderResponse response:response];
 }

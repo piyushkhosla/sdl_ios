@@ -154,6 +154,7 @@ extern SDLNotificationName const SDLDidReceiveSetInteriorVehicleDataResponse;
 extern SDLNotificationName const SDLDidReceiveSetMediaClockTimerResponse;
 extern SDLNotificationName const SDLDidReceiveShowConstantTBTResponse;
 extern SDLNotificationName const SDLDidReceiveShowResponse;
+extern SDLNotificationName const SDLDidReceiveShowAppMenuResponse;
 extern SDLNotificationName const SDLDidReceiveSliderResponse;
 extern SDLNotificationName const SDLDidReceiveSpeakResponse;
 extern SDLNotificationName const SDLDidReceiveSubscribeButtonResponse;

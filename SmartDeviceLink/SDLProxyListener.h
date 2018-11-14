@@ -63,6 +63,7 @@
 @class SDLSetMediaClockTimerResponse;
 @class SDLShowConstantTBTResponse;
 @class SDLShowResponse;
+@class SDLShowAppMenuResponse;
 @class SDLSliderResponse;
 @class SDLSpeakResponse;
 @class SDLSubscribeButtonResponse;
@@ -517,6 +518,13 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param response A SDLShowResponse object
  */
 - (void)onShowResponse:(SDLShowResponse *)response;
+
+/**
+ *  Called when a Show App Menu Response is received from Core
+ *
+ *  @param response A SDLShowAppMenuResponse object
+ */
+- (void)onShowAppMenuResponse:(SDLShowAppMenuResponse *)response;
 
 /**
  *  Called when a Slider Response is received from Core
