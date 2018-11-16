@@ -89,6 +89,7 @@ SDLNotificationName const SDLDidChangeLanguageNotification = @"com.sdl.notificat
 SDLNotificationName const SDLDidChangeLockScreenStatusNotification = @"com.sdl.notification.lockScreenStatus";
 SDLNotificationName const SDLDidReceiveNewHashNotification = @"com.sdl.notification.newHash";
 SDLNotificationName const SDLDidChangePermissionsNotification = @"com.sdl.notification.changePermission";
+SDLNotificationName const SDLDidReceiveSeekMediaClockTimerNotification = @"com.sdl.notification.seekMediaClockTimer";
 SDLNotificationName const SDLDidReceiveSystemRequestNotification = @"com.sdl.notification.receiveSystemRequest";
 SDLNotificationName const SDLDidReceiveRemoteControlStatusNotification = @"com.sdl.notification.rcStatus";
 SDLNotificationName const SDLDidChangeTurnByTurnStateNotification = @"com.sdl.notification.changeTurnByTurnState";

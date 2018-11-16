@@ -56,6 +56,7 @@ FOUNDATION_EXPORT const unsigned char SmartDeviceLinkVersionString[];
 #import "SDLSetMediaClockTimer.h"
 #import "SDLShow.h"
 #import "SDLShowConstantTBT.h"
+#import "SDLShowAppMenu.h"
 #import "SDLSlider.h"
 #import "SDLSpeak.h"
 #import "SDLSubscribeButton.h"

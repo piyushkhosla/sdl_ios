@@ -505,6 +505,7 @@ SDLName const SDLNameShortPress = @"shortPress";
 SDLName const SDLNameShortPressAvailable = @"shortPressAvailable";
 SDLName const SDLNameShow = @"Show";
 SDLName const SDLNameShowConstantTBT = @"ShowConstantTBT";
+SDLName const SDLNameShowAppMenu = @"ShowAppMenu";
 SDLName const SDLNameSignalLevelStatus = @"signalLevelStatus";
 SDLName const SDLNameSignalChangeThreshold = @"signalChangeThreshold";
 SDLName const SDLNameSignalChangeThresholdAvailable = @"signalChangeThresholdAvailable";

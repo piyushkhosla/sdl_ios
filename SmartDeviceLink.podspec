@@ -287,6 +287,7 @@ sdefault.public_header_files = [
 'SmartDeviceLink/SDLSetMediaClockTimerResponse.h',
 'SmartDeviceLink/SDLShow.h',
 'SmartDeviceLink/SDLShowConstantTBT.h',
+'SmartDeviceLink/SDLShowAppMenu.h',
 'SmartDeviceLink/SDLShowConstantTBTResponse.h',
 'SmartDeviceLink/SDLShowResponse.h',
 'SmartDeviceLink/SDLSingleTireStatus.h',

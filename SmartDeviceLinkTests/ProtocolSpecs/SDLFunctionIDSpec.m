@@ -62,6 +62,7 @@ describe(@"GetFunctionName Tests", ^ {
         expect([functionID functionNameForId:47]).to(equal(SDLNameUnsubscribeWayPoints));
         expect([functionID functionNameForId:48]).to(equal(SDLNameGetSystemCapability));
         expect([functionID functionNameForId:49]).to(equal(SDLNameSendHapticData));
+        expect([functionID functionNameForId:50]).to(equal(SDLNameShowAppMenu));
         expect([functionID functionNameForId:32768]).to(equal(SDLNameOnHMIStatus));
         expect([functionID functionNameForId:32769]).to(equal(SDLNameOnAppInterfaceUnregistered));
         expect([functionID functionNameForId:32770]).to(equal(SDLNameOnButtonEvent));
@@ -136,6 +137,7 @@ describe(@"GetFunctionID Tests", ^ {
         expect([functionID functionIdForName:SDLNameUnsubscribeWayPoints]).to(equal(@47));
         expect([functionID functionIdForName:SDLNameGetSystemCapability]).to(equal(@48));
         expect([functionID functionIdForName:SDLNameSendHapticData]).to(equal(@49));
+        expect([functionID functionIdForName:SDLNameShowAppMenu]).to(equal(@50));
         expect([functionID functionIdForName:SDLNameOnHMIStatus]).to(equal(@32768));
         expect([functionID functionIdForName:SDLNameOnAppInterfaceUnregistered]).to(equal(@32769));
         expect([functionID functionIdForName:SDLNameOnButtonEvent]).to(equal(@32770));

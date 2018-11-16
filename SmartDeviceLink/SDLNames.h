@@ -511,6 +511,7 @@ extern SDLName const SDLNameShortPress;
 extern SDLName const SDLNameShortPressAvailable;
 extern SDLName const SDLNameShow;
 extern SDLName const SDLNameShowConstantTBT;
+extern SDLName const SDLNameShowAppMenu;
 extern SDLName const SDLNameSignalLevelStatus;
 extern SDLName const SDLNameSignalChangeThreshold;
 extern SDLName const SDLNameSignalChangeThresholdAvailable;
