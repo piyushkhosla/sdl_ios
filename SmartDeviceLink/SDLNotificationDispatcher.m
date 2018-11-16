@@ -341,6 +341,10 @@ NS_ASSUME_NONNULL_BEGIN
     [self postRPCNotificationNotification:SDLDidReceiveSystemRequestNotification notification:notification];
 }
 
+- (void)onOnSeekMediaClockTimer:(SDLOnSystemRequest *)notification {
+    [self postRPCNotificationNotification:SDLDidReceiveSeekMediaClockTimerNotification notification:notification];
+}
+
 - (void)onOnTBTClientState:(SDLOnTBTClientState *)notification {
     [self postRPCNotificationNotification:SDLDidChangeTurnByTurnStateNotification notification:notification];
 }

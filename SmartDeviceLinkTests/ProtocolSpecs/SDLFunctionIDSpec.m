@@ -79,7 +79,7 @@ describe(@"GetFunctionName Tests", ^ {
         expect([functionID functionNameForId:32782]).to(equal(SDLNameOnHashChange));
         expect([functionID functionNameForId:32784]).to(equal(SDLNameOnWayPointChange));
         expect([functionID functionNameForId:32785]).to(equal(SDLNameOnRCStatus));
-
+        expect([functionID functionNameForId:32786]).to(equal(SDLNameOnSeekMediaClockTimer));
         //Not listed in Spec
         expect([functionID functionNameForId:65536]).to(equal(SDLNameEncodedSyncPData));
         expect([functionID functionNameForId:65537]).to(equal(SDLNameSyncPData));
@@ -153,6 +153,7 @@ describe(@"GetFunctionID Tests", ^ {
         expect([functionID functionIdForName:SDLNameOnHashChange]).to(equal(@32782));
         expect([functionID functionIdForName:SDLNameOnWayPointChange]).to(equal(@32784));
         expect([functionID functionIdForName:SDLNameOnRCStatus]).to(equal(@32785));
+        expect([functionID functionIdForName:SDLNameOnSeekMediaClockTimer]).to(equal(@32786));
         
         //Not listed in Spec
         expect([functionID functionIdForName:SDLNameEncodedSyncPData]).to(equal(@65536));

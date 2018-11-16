@@ -209,6 +209,7 @@ sdefault.public_header_files = [
 'SmartDeviceLink/SDLOnLockScreenStatus.h',
 'SmartDeviceLink/SDLOnPermissionsChange.h',
 'SmartDeviceLink/SDLOnRCStatus.h',
+'SmartDeviceLink/SDLOnSeekMediaClockTimer.h'
 'SmartDeviceLink/SDLOnSyncPData.h',
 'SmartDeviceLink/SDLOnSystemRequest.h',
 'SmartDeviceLink/SDLOnTBTClientState.h',

@@ -97,6 +97,7 @@ NS_ASSUME_NONNULL_BEGIN
                          @32783: SDLNameOnInteriorVehicleData,
                          @32784: SDLNameOnWayPointChange,
                          @32785: SDLNameOnRCStatus,
+                         @32786: SDLNameOnSeekMediaClockTimer,
                          @65536: SDLNameEncodedSyncPData,
                          @65537: SDLNameSyncPData,
                          @98304: SDLNameOnEncodedSyncPData,

@@ -64,6 +64,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) SDLUpdateMode updateMode;
 
 /**
+ * Defines if seek media clock timer functionality will be available (when DD is off)
+ * allowing for touch input on the media clock timer from the user.
+ * If omitted, the value is set to false.
+ */
+@property (strong, nonatomic, nullable) NSNumber *enableSeek;
+
+/**
  * The audio streaming indicator used for a play/pause button.
  *
  * @discussion Set the indicator icon of a play/pause button depending on the

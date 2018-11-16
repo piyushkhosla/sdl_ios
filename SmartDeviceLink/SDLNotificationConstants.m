@@ -91,6 +91,7 @@ SDLNotificationName const SDLDidReceiveNewHashNotification = @"com.sdl.notificat
 SDLNotificationName const SDLDidChangePermissionsNotification = @"com.sdl.notification.changePermission";
 SDLNotificationName const SDLDidReceiveSystemRequestNotification = @"com.sdl.notification.receiveSystemRequest";
 SDLNotificationName const SDLDidReceiveRemoteControlStatusNotification = @"com.sdl.notification.rcStatus";
+SDLNotificationName const SDLDidReceiveSeekMediaClockTimerNotification = @"com.sdl.notification.seekMediaClockTimer";
 SDLNotificationName const SDLDidChangeTurnByTurnStateNotification = @"com.sdl.notification.changeTurnByTurnState";
 SDLNotificationName const SDLDidReceiveTouchEventNotification = @"com.sdl.notification.touchEvent";
 SDLNotificationName const SDLDidReceiveVehicleDataNotification = @"com.sdl.notification.vehicleData";

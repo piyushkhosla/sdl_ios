@@ -75,6 +75,14 @@ NS_ASSUME_NONNULL_BEGIN
     return [parameters sdl_objectForName:SDLNameUpdateMode];
 }
 
+- (void)setEnableSeek:(nullable NSNumber *)enableSeek {
+    [parameters sdl_setObject:enableSeek forName:SDLNameEnableSeek];
+}
+
+-(nullable NSNumber *)enableSeek {
+    return [parameters sdl_objectForName:SDLNameEnableSeek];
+}
+
 - (void)setAudioStreamingIndicator:(nullable SDLAudioStreamingIndicator)audioStreamingIndicator {
     [parameters sdl_setObject:audioStreamingIndicator forName:SDLNameAudioStreamingIndicator];
 }
