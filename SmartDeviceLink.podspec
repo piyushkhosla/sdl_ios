@@ -62,6 +62,8 @@ sdefault.public_header_files = [
 'SmartDeviceLink/SDLChoiceSetDelegate.h',
 'SmartDeviceLink/SDLClimateControlCapabilities.h',
 'SmartDeviceLink/SDLClimateControlData.h',
+'SmartDeviceLink/SDLCloseApplication.h',
+'SmartDeviceLink/SDLCloseApplicationResponse.h',
 'SmartDeviceLink/SDLClusterModeStatus.h',
 'SmartDeviceLink/SDLCompassDirection.h',
 'SmartDeviceLink/SDLComponentVolumeStatus.h',

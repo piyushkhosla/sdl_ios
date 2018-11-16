@@ -447,6 +447,7 @@ extern SDLName const SDLNamePutFile;
 extern SDLName const SDLNameRadioBandAvailable;
 extern SDLName const SDLNameRadioControlCapabilities;
 extern SDLName const SDLNameRadioControlData;
+extern SDLName const SDLNameCloseApplication;
 extern SDLName const SDLNameRadioEnable;
 extern SDLName const SDLNameRadioEnableAvailable;
 extern SDLName const SDLNameRadioFrequencyAvailable;

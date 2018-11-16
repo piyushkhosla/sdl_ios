@@ -30,6 +30,7 @@ SDLNotificationName const SDLDidReceiveAlertResponse = @"com.sdl.response.alert"
 SDLNotificationName const SDLDidReceiveAlertManeuverResponse = @"com.sdl.response.alertManeuver";
 SDLNotificationName const SDLDidReceiveButtonPressResponse = @"com.sdl.response.buttonPress";
 SDLNotificationName const SDLDidReceiveChangeRegistrationResponse = @"com.sdl.response.changeRegistration";
+SDLNotificationName const SDLDidReceiveCloseApplicationResponse = @"com.sdl.response.closeApplication";
 SDLNotificationName const SDLDidReceiveCreateInteractionChoiceSetResponse = @"com.sdl.response.createInteractionChoiceSet";
 SDLNotificationName const SDLDidReceiveDeleteCommandResponse = @"com.sdl.response.deleteCommand";
 SDLNotificationName const SDLDidReceiveDeleteFileResponse = @"com.sdl.response.deleteFile";

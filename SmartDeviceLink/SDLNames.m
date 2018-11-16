@@ -89,6 +89,7 @@ SDLName const SDLNameCirculateAirEnable = @"circulateAirEnable";
 SDLName const SDLNameCirculateAirEnableAvailable = @"circulateAirEnableAvailable";
 SDLName const SDLNameClimateControlData = @"climateControlData";
 SDLName const SDLNameClimateControlCapabilities = @"climateControlCapabilities";
+SDLName const SDLNameCloseApplication = @"CloseApplication";
 SDLName const SDLNameClusterModes = @"clusterModes";
 SDLName const SDLNameClusterModeStatus = @"clusterModeStatus";
 SDLName const SDLNameColor = @"color";

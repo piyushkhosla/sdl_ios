@@ -122,6 +122,7 @@ extern SDLNotificationName const SDLDidReceiveAlertResponse;
 extern SDLNotificationName const SDLDidReceiveAlertManeuverResponse;
 extern SDLNotificationName const SDLDidReceiveButtonPressResponse;
 extern SDLNotificationName const SDLDidReceiveChangeRegistrationResponse;
+extern SDLNotificationName const SDLDidReceiveCloseApplicationResponse;
 extern SDLNotificationName const SDLDidReceiveCreateInteractionChoiceSetResponse;
 extern SDLNotificationName const SDLDidReceiveDeleteCommandResponse;
 extern SDLNotificationName const SDLDidReceiveDeleteFileResponse;

@@ -83,7 +83,7 @@ describe(@"GetFunctionName Tests", ^ {
         //Not listed in Spec
         expect([functionID functionNameForId:65536]).to(equal(SDLNameEncodedSyncPData));
         expect([functionID functionNameForId:65537]).to(equal(SDLNameSyncPData));
-        
+        expect([functionID functionNameForId:65538]).to(equal(SDLNameCloseApplication));
         expect([functionID functionNameForId:98304]).to(equal(SDLNameOnEncodedSyncPData));
         expect([functionID functionNameForId:98305]).to(equal(SDLNameOnSyncPData));
     });
@@ -157,7 +157,8 @@ describe(@"GetFunctionID Tests", ^ {
         //Not listed in Spec
         expect([functionID functionIdForName:SDLNameEncodedSyncPData]).to(equal(@65536));
         expect([functionID functionIdForName:SDLNameSyncPData]).to(equal(@65537));
-        
+        expect([functionID functionIdForName:SDLNameCloseApplication]).to(equal(@65538));
+
         expect([functionID functionIdForName:SDLNameOnEncodedSyncPData]).to(equal(@98304));
         expect([functionID functionIdForName:SDLNameOnSyncPData]).to(equal(@98305));
 

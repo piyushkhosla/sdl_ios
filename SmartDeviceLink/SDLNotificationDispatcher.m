@@ -201,6 +201,10 @@ NS_ASSUME_NONNULL_BEGIN
     [self postRPCResponseNotification:SDLDidReceiveScrollableMessageResponse response:response];
 }
 
+- (void)onSDLCloseApplicationResponse:(SDLCloseApplicationResponse *)response {
+    [self postRPCResponseNotification:SDLDidReceiveCloseApplicationResponse response:response];
+}
+
 - (void)onSendHapticDataResponse:(SDLSendHapticDataResponse *)response {
     [self postRPCResponseNotification:SDLDidReceiveSendHapticDataResponse response:response];
 }

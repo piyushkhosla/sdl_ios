@@ -9,6 +9,7 @@
 @class SDLAlertResponse;
 @class SDLButtonPressResponse;
 @class SDLChangeRegistrationResponse;
+@class SDLCloseApplicationResponse;
 @class SDLCreateInteractionChoiceSetResponse;
 @class SDLDeleteCommandResponse;
 @class SDLDeleteFileResponse;
@@ -146,6 +147,13 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param response A SDLChangeRegistrationResponse object
  */
 - (void)onChangeRegistrationResponse:(SDLChangeRegistrationResponse *)response;
+
+/**
+ *  Called when a close Response is received from Core
+ *
+ *  @param response A SDLCloseApplicationResponse object
+ */
+- (void)onCloseApplicationResponse:(SDLCloseApplicationResponse *)response;
 
 /**
  *  Called when a Create Interaction Choice Set Response is received from Core

@@ -99,6 +99,7 @@ NS_ASSUME_NONNULL_BEGIN
                          @32785: SDLNameOnRCStatus,
                          @65536: SDLNameEncodedSyncPData,
                          @65537: SDLNameSyncPData,
+                         @65538:SDLNameCloseApplication,
                          @98304: SDLNameOnEncodedSyncPData,
                          @98305: SDLNameOnSyncPData
                          };
