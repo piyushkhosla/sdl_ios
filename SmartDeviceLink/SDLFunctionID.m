@@ -79,6 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
                          @47: SDLNameUnsubscribeWayPoints,
                          @48: SDLNameGetSystemCapability,
                          @49: SDLNameSendHapticData,
+                         @51:SDLNameCloseApplication,
                          @32768: SDLNameOnHMIStatus,
                          @32769: SDLNameOnAppInterfaceUnregistered,
                          @32770: SDLNameOnButtonEvent,
@@ -99,7 +100,6 @@ NS_ASSUME_NONNULL_BEGIN
                          @32785: SDLNameOnRCStatus,
                          @65536: SDLNameEncodedSyncPData,
                          @65537: SDLNameSyncPData,
-                         @65538:SDLNameCloseApplication,
                          @98304: SDLNameOnEncodedSyncPData,
                          @98305: SDLNameOnSyncPData
                          };
