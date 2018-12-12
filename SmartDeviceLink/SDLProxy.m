@@ -47,7 +47,7 @@ typedef NSString SDLVehicleMake;
 typedef void (^URLSessionTaskCompletionHandler)(NSData *data, NSURLResponse *response, NSError *error);
 typedef void (^URLSessionDownloadTaskCompletionHandler)(NSURL *location, NSURLResponse *response, NSError *error);
 
-NSString *const SDLProxyVersion = @"6.1.0";
+NSString *const SDLProxyVersion = @"6.1.2";
 const float StartSessionTime = 10.0;
 const float NotifyProxyClosedDelay = (float)0.1;
 const int PoliciesCorrelationId = 65535;
@@ -394,6 +394,9 @@ static float DefaultConnectionTimeout = 45.0;
     // From the function name, create the corresponding RPCObject and initialize it
     NSString *functionClassName = [NSString stringWithFormat:@"SDL%@", functionName];
     SDLRPCMessage *newMessage = [[NSClassFromString(functionClassName) alloc] initWithDictionary:[dict mutableCopy]];
+
+    // Log the RPC message
+    SDLLogV(@"Message received: %@", newMessage);
 
     // Intercept and handle several messages ourselves
     if ([functionName isEqualToString:SDLNameOnAppInterfaceUnregistered] || [functionName isEqualToString:SDLNameUnregisterAppInterface]) {
