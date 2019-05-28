@@ -8,6 +8,7 @@
 #import "SDLImage.h"
 #import "SDLMetadataTags.h"
 #import "SDLMetadataType.h"
+#import "SDLTemplateConfiguration.h"
 #import "SDLRPCParameterNames.h"
 #import "SDLRPCFunctionNames.h"
 #import "SDLSoftButton.h"
@@ -100,6 +101,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 }
 
+- (instancetype)initWithMainField1:(nullable NSString *)mainField1 mainField2:(nullable NSString *)mainField2 mainField3:(nullable NSString *)mainField3 mainField4:(nullable NSString *)mainField4 alignment:(nullable SDLTextAlignment)alignment statusBar:(nullable NSString *)statusBar mediaClock:(nullable NSString *)mediaClock mediaTrack:(nullable NSString *)mediaTrack graphic:(nullable SDLImage *)graphic windowID:(UInt32)windowID templateConfiguration:(SDLTemplateConfiguration *)templateConfiguration softButtons:(nullable NSArray<SDLSoftButton *> *)softButtons customPresets:(nullable NSArray<NSString *> *)customPresets textFieldMetadata:(nullable SDLMetadataTags *)metadata {
+    self = [self initWithMainField1:mainField1 mainField2:mainField2 mainField3:mainField3 mainField4:mainField4 alignment:alignment statusBar:statusBar mediaClock:mediaClock mediaTrack:mediaTrack graphic:graphic softButtons:softButtons customPresets:customPresets textFieldMetadata:metadata];
+    if (!self) {
+        return nil;
+    }
+    
+    self.windowID = @(windowID);
+    self.templateConfiguration = templateConfiguration;
+    
+    return self;
+}
+
 - (void)setMainField1:(nullable NSString *)mainField1 {
     [self.parameters sdl_setObject:mainField1 forName:SDLRPCParameterNameMainField1];
 }
@@ -172,6 +185,15 @@ NS_ASSUME_NONNULL_BEGIN
     return [self.parameters sdl_objectForName:SDLRPCParameterNameGraphic ofClass:SDLImage.class error:nil];
 }
 
+- (void)setTemplateConfiguration:(nullable SDLTemplateConfiguration *)templateConfiguration {
+    [self.parameters sdl_setObject:templateConfiguration forName:SDLRPCParameterNameTemplateConfiguration];
+}
+
+- (nullable SDLTemplateConfiguration *)templateConfiguration {
+    NSError *error = nil;
+    return [self.parameters sdl_objectForName:SDLRPCParameterNameTemplateConfiguration ofClass:SDLTemplateConfiguration.class error:&error];
+}
+
 - (void)setSecondaryGraphic:(nullable SDLImage *)secondaryGraphic {
     [self.parameters sdl_setObject:secondaryGraphic forName:SDLRPCParameterNameSecondaryGraphic];
 }
@@ -203,6 +225,16 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable SDLMetadataTags *)metadataTags {
     return [self.parameters sdl_objectForName:SDLRPCParameterNameMetadataTags ofClass:SDLMetadataTags.class error:nil];
 }
+
+- (nullable NSNumber<SDLInt> *)windowID {
+    NSError *error = nil;
+    return [self.parameters sdl_objectForName:SDLRPCParameterNameWindowID ofClass:NSNumber.class error:&error];
+}
+
+- (void)setWindowID:(nullable NSNumber<SDLInt> *)windowID {
+    [self.parameters sdl_setObject:windowID forName:SDLRPCParameterNameWindowID];
+}
+
 
 @end
 

@@ -58,28 +58,29 @@ NS_ASSUME_NONNULL_BEGIN
 
  Optional
  */
-@property (nullable, strong, nonatomic) SDLDisplayCapabilities *displayCapabilities;
+@property (nullable, strong, nonatomic) SDLDisplayCapabilities *displayCapabilities __deprecated_msg("See DisplayCapabilities. This parameter is deprecated and replaced by SystemCapability using DISPLAY.");
 
 /**
  Provides information about the capabilities of a SDL HMI button.
 
  Optional, Array of length 1 - 100, of SDLButtonCapabilities
  */
-@property (nullable, strong, nonatomic) NSArray<SDLButtonCapabilities *> *buttonCapabilities;
+@property (nullable, strong, nonatomic) NSArray<SDLButtonCapabilities *> *buttonCapabilities __deprecated_msg("See DisplayCapabilities. This parameter is deprecated and replaced by SystemCapability using DISPLAY.");
 
 /**
  Contains information about a SoftButton's capabilities.
 
  Optional, Array of length 1 - 100, of SDLSoftButtonCapabilities
  */
-@property (nullable, strong, nonatomic) NSArray<SDLSoftButtonCapabilities *> *softButtonCapabilities;
+@property (nullable, strong, nonatomic) NSArray<SDLSoftButtonCapabilities *> *softButtonCapabilities __deprecated_msg("See DisplayCapabilities. This parameter is deprecated and replaced by SystemCapability using DISPLAY.");
 
 /**
  If returned, the platform supports custom on-screen Presets
  
  Optional
  */
-@property (nullable, strong, nonatomic) SDLPresetBankCapabilities *presetBankCapabilities;
+@property (nullable, strong, nonatomic) SDLPresetBankCapabilities *presetBankCapabilities __deprecated_msg("See DisplayCapabilities. This parameter is deprecated and replaced by SystemCapability using DISPLAY.");
+
 
 /**
  Specifies HMI Zones in the vehicle.

@@ -26,11 +26,14 @@ describe(@"Getter/Setter Tests", ^ {
         testNotification.audioStreamingState = SDLAudioStreamingStateAttenuated;
         testNotification.systemContext = SDLSystemContextHMIObscured;
         testNotification.videoStreamingState = SDLVideoStreamingStateStreamable;
+        testNotification.windowID = @(1);
         
         expect(testNotification.hmiLevel).to(equal(SDLHMILevelLimited));
         expect(testNotification.audioStreamingState).to(equal(SDLAudioStreamingStateAttenuated));
         expect(testNotification.systemContext).to(equal(SDLSystemContextHMIObscured));
         expect(testNotification.videoStreamingState).to(equal(SDLVideoStreamingStateStreamable));
+        expect(testNotification.windowID).to(equal(@(1)));
+
     });
     
     it(@"Should get correctly when initialized", ^ {
@@ -38,6 +41,7 @@ describe(@"Getter/Setter Tests", ^ {
                                            @{SDLRPCParameterNameParameters:
                                                  @{SDLRPCParameterNameHMILevel: SDLHMILevelLimited,
                                                    SDLRPCParameterNameAudioStreamingState: SDLAudioStreamingStateAttenuated,
+                                                   SDLRPCParameterNameWindowID:@(1),
                                                    SDLRPCParameterNameSystemContext: SDLSystemContextHMIObscured,
                                                    SDLRPCParameterNameVideoStreamingState: SDLVideoStreamingStateStreamable},
                                              SDLRPCParameterNameOperationName:SDLRPCFunctionNameOnHMIStatus}} mutableCopy];
@@ -50,6 +54,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testNotification.audioStreamingState).to(equal(SDLAudioStreamingStateAttenuated));
         expect(testNotification.systemContext).to(equal(SDLSystemContextHMIObscured));
         expect(testNotification.videoStreamingState).to(equal(SDLVideoStreamingStateStreamable));
+        expect(testNotification.windowID).to(equal(@(1)));
+
     });
     
     it(@"Should return nil if not set", ^ {
@@ -59,6 +65,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testNotification.audioStreamingState).to(beNil());
         expect(testNotification.systemContext).to(beNil());
         expect(testNotification.videoStreamingState).to(beNil());
+        expect(testNotification.windowID).to(beNil());
+
     });
 });
 

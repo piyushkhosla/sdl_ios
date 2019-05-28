@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
  Response to SDLSetDisplayLayout
 
  Since SmartDeviceLink 2.0
+ 
+   *** DEPRECATED ***
  */
 @interface SDLSetDisplayLayoutResponse : SDLRPCResponse
 

@@ -9,6 +9,7 @@
 @class SDLImage;
 @class SDLSoftButton;
 @class SDLMetadataTags;
+@class SDLTemplateConfiguration;
 
 
 /**
@@ -49,6 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithMainField1:(nullable NSString *)mainField1 mainField2:(nullable NSString *)mainField2 alignment:(nullable SDLTextAlignment)alignment statusBar:(nullable NSString *)statusBar mediaClock:(nullable NSString *)mediaClock mediaTrack:(nullable NSString *)mediaTrack;
 
 - (instancetype)initWithMainField1:(nullable NSString *)mainField1 mainField2:(nullable NSString *)mainField2 mainField3:(nullable NSString *)mainField3 mainField4:(nullable NSString *)mainField4 alignment:(nullable SDLTextAlignment)alignment statusBar:(nullable NSString *)statusBar mediaClock:(nullable NSString *)mediaClock mediaTrack:(nullable NSString *)mediaTrack graphic:(nullable SDLImage *)graphic softButtons:(nullable NSArray<SDLSoftButton *> *)softButtons customPresets:(nullable NSArray<NSString *> *)customPresets textFieldMetadata:(nullable SDLMetadataTags *)metadata;
+
+- (instancetype)initWithMainField1:(nullable NSString *)mainField1 mainField2:(nullable NSString *)mainField2 mainField3:(nullable NSString *)mainField3 mainField4:(nullable NSString *)mainField4 alignment:(nullable SDLTextAlignment)alignment statusBar:(nullable NSString *)statusBar mediaClock:(nullable NSString *)mediaClock mediaTrack:(nullable NSString *)mediaTrack graphic:(nullable SDLImage *)graphic windowID:(UInt32)windowID templateConfiguration:(SDLTemplateConfiguration *)templateConfiguration softButtons:(nullable NSArray<SDLSoftButton *> *)softButtons customPresets:(nullable NSArray<NSString *> *)customPresets textFieldMetadata:(nullable SDLMetadataTags *)metadata;
 
 /**
  * The text displayed in a single-line display, or in the upper display
@@ -245,6 +248,20 @@ NS_ASSUME_NONNULL_BEGIN
  @since SmartDeviceLink 2.0
  */
 @property (strong, nonatomic, nullable) SDLMetadataTags *metadataTags;
+
+/**
+ * This is the unique ID assigned to the window that this RPC is intended.
+ * If this param is not included, it will be assumed that this request is specifically for the main window on the main display. See PredefinedWindows enum.
+ *
+ */
+@property (strong, nonatomic, nullable) NSNumber<SDLInt> *windowID;
+
+/**
+ *
+ * Used to set an alternate template layout to a window.
+ * @since SmartDeviceLink 2.0
+ */
+@property (strong, nonatomic, nullable) SDLTemplateConfiguration *templateConfiguration;
 
 @end
 

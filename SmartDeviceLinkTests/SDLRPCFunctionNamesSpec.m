@@ -91,6 +91,8 @@ describe(@"Individual Enum Value Tests", ^ {
         expect(SDLRPCFunctionNameUnsubscribeVehicleData).to(equal(@"UnsubscribeVehicleData"));
         expect(SDLRPCFunctionNameUnsubscribeWayPoints).to(equal(@"UnsubscribeWayPoints"));
         expect(SDLRPCFunctionNameUpdateTurnList).to(equal(@"UpdateTurnList"));
+        expect(SDLRPCFunctionNameCreateWindow).to(equal(@"CreateWindow"));
+        expect(SDLRPCFunctionNameDeleteWindow).to(equal(@"DeleteWindow"));
     });
 });
 

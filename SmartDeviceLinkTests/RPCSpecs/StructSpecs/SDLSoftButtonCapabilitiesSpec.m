@@ -21,18 +21,23 @@ describe(@"Getter/Setter Tests", ^ {
         testStruct.longPressAvailable = @YES;
         testStruct.upDownAvailable = @NO;
         testStruct.imageSupported = @NO;
+        testStruct.textSupported = @NO;
         
         expect(testStruct.shortPressAvailable).to(equal(@NO));
         expect(testStruct.longPressAvailable).to(equal(@YES));
         expect(testStruct.upDownAvailable).to(equal(@NO));
         expect(testStruct.imageSupported).to(equal(@NO));
+        expect(testStruct.textSupported).to(equal(@NO));
+
     });
     
     it(@"Should get correctly when initialized", ^ {
         NSMutableDictionary<NSString *, id> *dict = [@{SDLRPCParameterNameShortPressAvailable:@NO,
                                                        SDLRPCParameterNameLongPressAvailable:@YES,
                                                        SDLRPCParameterNameUpDownAvailable:@NO,
-                                                       SDLRPCParameterNameImageSupported:@NO} mutableCopy];
+                                                       SDLRPCParameterNameImageSupported:@NO,
+                                                       SDLRPCParameterNameTextSupported:@NO
+                                                       } mutableCopy];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         SDLSoftButtonCapabilities* testStruct = [[SDLSoftButtonCapabilities alloc] initWithDictionary:dict];
@@ -42,6 +47,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.longPressAvailable).to(equal(@YES));
         expect(testStruct.upDownAvailable).to(equal(@NO));
         expect(testStruct.imageSupported).to(equal(@NO));
+        expect(testStruct.textSupported).to(equal(@NO));
+
     });
     
     it(@"Should return nil if not set", ^ {
@@ -51,6 +58,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.longPressAvailable).to(beNil());
         expect(testStruct.upDownAvailable).to(beNil());
         expect(testStruct.imageSupported).to(beNil());
+        expect(testStruct.textSupported).to(beNil());
+
     });
 });
 

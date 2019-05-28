@@ -13,6 +13,8 @@
  * given platform will be shown
  *
  * Since SmartDeviceLink 2.0
+ *
+ *   *** DEPRECATED ***
  */
 
 NS_ASSUME_NONNULL_BEGIN

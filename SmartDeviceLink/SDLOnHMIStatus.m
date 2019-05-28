@@ -58,6 +58,15 @@ NS_ASSUME_NONNULL_BEGIN
     return [self.parameters sdl_enumForName:SDLRPCParameterNameSystemContext error:&error];
 }
 
+- (NSNumber<SDLInt> *)windowID {
+    NSError *error = nil;
+    return [self.parameters sdl_objectForName:SDLRPCParameterNameWindowID ofClass:NSNumber.class error:&error];
+}
+
+- (void)setWindowID:(NSNumber<SDLInt> *)windowID {
+    [self.parameters sdl_setObject:windowID forName:SDLRPCParameterNameWindowID];
+}
+
 @end
 
 NS_ASSUME_NONNULL_END

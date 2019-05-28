@@ -16,6 +16,7 @@
 #import "SDLSystemCapabilityType.h"
 #import "SDLVideoStreamingCapability.h"
 #import "SDLRemoteControlCapabilities.h"
+#import "SDLDisplayCapability.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -81,6 +82,18 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
+- (instancetype)initWithDisplayCapability:(NSArray<SDLDisplayCapability *> *)capability {
+    self = [self init];
+    if (!self) {
+        return nil;
+    }
+    
+    self.systemCapabilityType = SDLSystemCapabilityTypeDisplay;
+    self.displayCapabilities = capability;
+    
+    return self;
+}
+
 - (void)setSystemCapabilityType:(SDLSystemCapabilityType)type {
     [self.store sdl_setObject:type forName:SDLRPCParameterNameSystemCapabilityType];
 }
@@ -128,6 +141,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable SDLRemoteControlCapabilities *)remoteControlCapability {
     return [self.store sdl_objectForName:SDLRPCParameterNameRemoteControlCapability ofClass:SDLRemoteControlCapabilities.class error:nil];
+}
+
+- (void)setDisplayCapabilities:(nullable NSArray<SDLDisplayCapability *> *)displayCapabilities {
+    [self.store sdl_setObject:displayCapabilities forName:SDLRPCParameterNameDisplayCapabilities];
+}
+
+- (nullable NSArray<SDLDisplayCapability *> *)displayCapabilities {
+    return [self.store sdl_objectsForName:SDLRPCParameterNameDisplayCapabilities ofClass:SDLDisplayCapability.class error:nil];
 }
 
 @end

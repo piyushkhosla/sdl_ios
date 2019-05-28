@@ -16,12 +16,14 @@
 #import "SDLShow.h"
 #import "SDLSoftButton.h"
 #import "SDLTextAlignment.h"
+#import "SDLTemplateConfiguration.h"
 
 QuickSpecBegin(SDLShowSpec)
 
 SDLImage* image1 = [[SDLImage alloc] init];
 SDLImage* image2 = [[SDLImage alloc] init];
 SDLSoftButton* button = [[SDLSoftButton alloc] init];
+SDLTemplateConfiguration *colorScheme = [[SDLTemplateConfiguration alloc] initWithTemplate:@"temp1"];
 
 NSArray<SDLMetadataType> *formatArray = @[SDLMetadataTypeMediaArtist,SDLMetadataTypeMediaTitle];
 SDLMetadataTags* testMetadata = [[SDLMetadataTags alloc] initWithTextFieldTypes:formatArray mainField2:formatArray mainField3:formatArray mainField4:formatArray];
@@ -43,6 +45,8 @@ describe(@"Getter/Setter Tests", ^ {
         testRequest.softButtons = [@[button] mutableCopy];
         testRequest.customPresets = [@[@"preset1", @"preset2"] mutableCopy];
         testRequest.metadataTags = testMetadata;
+        testRequest.windowID = @(1);
+        testRequest.templateConfiguration = colorScheme;
 
         expect(testRequest.mainField1).to(equal(@"field1"));
         expect(testRequest.mainField2).to(equal(@"field2"));
@@ -57,6 +61,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.softButtons).to(equal([@[button] mutableCopy]));
         expect(testRequest.customPresets).to(equal([@[@"preset1", @"preset2"] mutableCopy]));
         expect(testRequest.metadataTags).to(equal(testMetadata));
+        expect(testRequest.windowID).to(equal(@(1)));
+        expect(testRequest.templateConfiguration).to(equal(colorScheme));
 
     });
 
@@ -76,6 +82,9 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.softButtons).to(beNil());
         expect(testRequest.customPresets).to(beNil());
         expect(testRequest.metadataTags).to(beNil());
+        expect(testRequest.windowID).to(beNil());
+        expect(testRequest.templateConfiguration).to(beNil());
+
     });
 
     describe(@"initializing", ^{
@@ -120,6 +129,10 @@ describe(@"Getter/Setter Tests", ^ {
             expect(testShow.softButtons).to(beNil());
             expect(testShow.customPresets).to(beNil());
             expect(testShow.metadataTags).to(beNil());
+            expect(testShow.windowID).to(beNil());
+            expect(testShow.templateConfiguration).to(beNil());
+
+
 
             testShow = [[SDLShow alloc] initWithMainField1:nil mainField2:nil alignment:nil];
             expect(testShow.mainField1).to(beNil());
@@ -135,6 +148,9 @@ describe(@"Getter/Setter Tests", ^ {
             expect(testShow.softButtons).to(beNil());
             expect(testShow.customPresets).to(beNil());
             expect(testShow.metadataTags).to(beNil());
+            expect(testShow.windowID).to(beNil());
+            expect(testShow.templateConfiguration).to(beNil());
+
         });
 
         it(@"should initialize correctly with initWithMainField1:mainField1Type:mainField2:mainField2Type:alignment:", ^{
@@ -155,6 +171,8 @@ describe(@"Getter/Setter Tests", ^ {
             expect(testShow.metadataTags.mainField2).to(contain(testType2));
             expect(testShow.metadataTags.mainField3).to(beNil());
             expect(testShow.metadataTags.mainField4).to(beNil());
+            expect(testShow.templateConfiguration).to(beNil());
+
 
             testShow = [[SDLShow alloc] initWithMainField1:nil mainField1Type:nil mainField2:nil mainField2Type:nil alignment:nil];
             expect(testShow.mainField1).to(beNil());
@@ -170,6 +188,10 @@ describe(@"Getter/Setter Tests", ^ {
             expect(testShow.softButtons).to(beNil());
             expect(testShow.customPresets).to(beNil());
             expect(testShow.metadataTags).to(beNil());
+            expect(testShow.windowID).to(beNil());
+            expect(testShow.templateConfiguration).to(beNil());
+
+
         });
 
         it(@"should initialize correctly with initWithMainField1:mainField2:mainField3:mainField4:alignment:", ^{
@@ -190,6 +212,8 @@ describe(@"Getter/Setter Tests", ^ {
             expect(testShow.metadataTags.mainField2).to(beNil());
             expect(testShow.metadataTags.mainField3).to(beNil());
             expect(testShow.metadataTags.mainField4).to(beNil());
+            expect(testShow.templateConfiguration).to(beNil());
+
 
             testShow = [[SDLShow alloc] initWithMainField1:nil mainField2:nil mainField3:nil mainField4:nil alignment:nil];
             expect(testShow.mainField1).to(beNil());
@@ -205,6 +229,9 @@ describe(@"Getter/Setter Tests", ^ {
             expect(testShow.softButtons).to(beNil());
             expect(testShow.customPresets).to(beNil());
             expect(testShow.metadataTags).to(beNil());
+            expect(testShow.windowID).to(beNil());
+            expect(testShow.templateConfiguration).to(beNil());
+
         });
 
         it(@"should initialize correctly with initWithMainField1:mainField1Type:mainField2:mainField2Type:mainField3:mainField3Type:mainField4:mainField4Type:alignment:", ^{
@@ -225,6 +252,7 @@ describe(@"Getter/Setter Tests", ^ {
             expect(testShow.metadataTags.mainField2).to(contain(testType2));
             expect(testShow.metadataTags.mainField3).to(contain(testType3));
             expect(testShow.metadataTags.mainField4).to(contain(testType4));
+            expect(testShow.templateConfiguration).to(beNil());
 
             testShow = [[SDLShow alloc] initWithMainField1:nil mainField1Type:nil mainField2:nil mainField2Type:nil mainField3:nil mainField3Type:nil mainField4:nil mainField4Type:nil alignment:nil];
             expect(testShow.mainField1).to(beNil());
@@ -240,6 +268,10 @@ describe(@"Getter/Setter Tests", ^ {
             expect(testShow.softButtons).to(beNil());
             expect(testShow.customPresets).to(beNil());
             expect(testShow.metadataTags).to(beNil());
+            expect(testShow.windowID).to(beNil());
+            expect(testShow.templateConfiguration).to(beNil());
+
+
         });
 
         it(@"should initialize correctly with initWithMainField1:mainField2:alignment:statusBar:mediaClock:mediaTrack:", ^{
@@ -260,6 +292,8 @@ describe(@"Getter/Setter Tests", ^ {
             expect(testShow.metadataTags.mainField2).to(beNil());
             expect(testShow.metadataTags.mainField3).to(beNil());
             expect(testShow.metadataTags.mainField4).to(beNil());
+            expect(testShow.templateConfiguration).to(beNil());
+
 
             testShow = [[SDLShow alloc] initWithMainField1:nil mainField2:nil alignment:nil statusBar:nil mediaClock:nil mediaTrack:nil];
             expect(testShow.mainField1).to(beNil());
@@ -275,6 +309,9 @@ describe(@"Getter/Setter Tests", ^ {
             expect(testShow.softButtons).to(beNil());
             expect(testShow.customPresets).to(beNil());
             expect(testShow.metadataTags).to(beNil());
+            expect(testShow.windowID).to(beNil());
+            expect(testShow.templateConfiguration).to(beNil());
+
         });
 
         it(@"should initialize correctly with initWithMainField1:mainField2:mainField3:mainField4:alignment:statusBar:mediaClock:mediaTrack:graphic:softButtons:customPresets:textFieldMetadata:", ^{
@@ -295,7 +332,26 @@ describe(@"Getter/Setter Tests", ^ {
             expect(testShow.metadataTags.mainField2).to(contain(testType2));
             expect(testShow.metadataTags.mainField3).to(contain(testType3));
             expect(testShow.metadataTags.mainField4).to(contain(testType4));
-
+            expect(testShow.templateConfiguration).to(beNil());
+            expect(testShow.windowID).to(beNil());
+            
+            testShow = [[SDLShow alloc] initWithMainField1:testString1 mainField2:testString2 mainField3:testString3 mainField4:testString4 alignment:testAlignment statusBar:testStatusBarString mediaClock:testMediaClockString mediaTrack:testMediaTrackString graphic:testGraphic windowID:12 templateConfiguration:colorScheme softButtons:testSoftButtons customPresets:nil textFieldMetadata:nil];
+            
+            expect(testShow.mainField1).to(equal(testString1));
+            expect(testShow.mainField2).to(equal(testString2));
+            expect(testShow.mainField3).to(equal(testString3));
+            expect(testShow.mainField4).to(equal(testString4));
+            expect(testShow.alignment).to(equal(testAlignment));
+            expect(testShow.statusBar).to(equal(testStatusBarString));
+            expect(testShow.mediaClock).to(equal(testMediaClockString));
+            expect(testShow.mediaTrack).to(equal(testMediaTrackString));
+            expect(testShow.graphic).to(equal(testGraphic));
+            expect(testShow.secondaryGraphic).to(beNil());
+            expect(testShow.softButtons).to(contain(testButton));
+            expect(testShow.customPresets).to(beNil());
+            expect(testShow.templateConfiguration).to(equal(colorScheme));
+            expect(testShow.windowID).to(equal(@(12)));
+            
             testShow = [[SDLShow alloc] initWithMainField1:nil mainField2:nil mainField3:nil mainField4:nil alignment:nil statusBar:nil mediaClock:nil mediaTrack:nil graphic:nil softButtons:nil customPresets:nil textFieldMetadata:nil];
             expect(testShow.mainField1).to(beNil());
             expect(testShow.mainField2).to(beNil());
@@ -310,7 +366,11 @@ describe(@"Getter/Setter Tests", ^ {
             expect(testShow.softButtons).to(beNil());
             expect(testShow.customPresets).to(beNil());
             expect(testShow.metadataTags).to(beNil());
+            expect(testShow.windowID).to(beNil());
+            expect(testShow.templateConfiguration).to(beNil());
+
         });
+        
 
         it(@"Should get correctly when initialized with a dictionary", ^ {
             NSMutableDictionary* dict = [@{SDLRPCParameterNameRequest:
@@ -325,6 +385,8 @@ describe(@"Getter/Setter Tests", ^ {
                                                        SDLRPCParameterNameMediaTrack:@"In The Clear",
                                                        SDLRPCParameterNameGraphic:image1,
                                                        SDLRPCParameterNameSecondaryGraphic:image2,
+                                                       SDLRPCParameterNameWindowID:@(1),
+                                                       SDLRPCParameterNameTemplateConfiguration:colorScheme,
                                                        SDLRPCParameterNameSoftButtons:[@[button] mutableCopy],
                                                        SDLRPCParameterNameCustomPresets:[@[@"preset1", @"preset2"] mutableCopy],
                                                        SDLRPCParameterNameMetadataTags:testMetadata},
@@ -347,6 +409,9 @@ describe(@"Getter/Setter Tests", ^ {
             expect(testRequest.softButtons).to(equal([@[button] mutableCopy]));
             expect(testRequest.customPresets).to(equal([@[@"preset1", @"preset2"] mutableCopy]));
             expect(testRequest.metadataTags).to(equal(testMetadata));
+            expect(testRequest.windowID).to(equal(@(1)));
+            expect(testRequest.templateConfiguration).to(equal(colorScheme));
+
         });
     });
 });

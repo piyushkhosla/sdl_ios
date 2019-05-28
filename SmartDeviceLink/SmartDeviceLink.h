@@ -8,7 +8,7 @@ FOUNDATION_EXPORT double SmartDeviceLinkVersionNumber;
 
 //! Project version string for SmartDeviceLink.
 FOUNDATION_EXPORT const unsigned char SmartDeviceLinkVersionString[];
-
+   
 /***** RPCs *****/
 // Superclasses
 #import "SDLEnum.h"
@@ -26,10 +26,12 @@ FOUNDATION_EXPORT const unsigned char SmartDeviceLinkVersionString[];
 #import "SDLButtonPress.h"
 #import "SDLChangeRegistration.h"
 #import "SDLCreateInteractionChoiceSet.h"
+#import "SDLCreateWindow.h"
 #import "SDLDeleteCommand.h"
 #import "SDLDeleteFile.h"
 #import "SDLDeleteInteractionChoiceSet.h"
 #import "SDLDeleteSubMenu.h"
+#import "SDLDeleteWindow.h"
 #import "SDLDiagnosticMessage.h"
 #import "SDLDialNumber.h"
 #import "SDLEncodedSyncPData.h"
@@ -83,10 +85,12 @@ FOUNDATION_EXPORT const unsigned char SmartDeviceLinkVersionString[];
 #import "SDLButtonPressResponse.h"
 #import "SDLChangeRegistrationResponse.h"
 #import "SDLCreateInteractionChoiceSetResponse.h"
+#import "SDLCreateWindowResponse.h"
 #import "SDLDeleteCommandResponse.h"
 #import "SDLDeleteFileResponse.h"
 #import "SDLDeleteInteractionChoiceSetResponse.h"
 #import "SDLDeleteSubMenuResponse.h"
+#import "SDLDeleteWindowResponse.h"
 #import "SDLDiagnosticMessageResponse.h"
 #import "SDLDialNumberResponse.h"
 #import "SDLEncodedSyncPDataResponse.h"
@@ -181,6 +185,7 @@ FOUNDATION_EXPORT const unsigned char SmartDeviceLinkVersionString[];
 #import "SDLDeviceInfo.h"
 #import "SDLDeviceStatus.h"
 #import "SDLDisplayCapabilities.h"
+#import "SDLDisplayCapability.h"
 #import "SDLECallInfo.h"
 #import "SDLEmergencyEvent.h"
 #import "SDLFuelRange.h"
@@ -240,6 +245,7 @@ FOUNDATION_EXPORT const unsigned char SmartDeviceLinkVersionString[];
 #import "SDLTTSChunk.h"
 #import "SDLTemperature.h"
 #import "SDLTemplateColorScheme.h"
+#import "SDLTemplateConfiguration.h"
 #import "SDLTextField.h"
 #import "SDLTireStatus.h"
 #import "SDLTouchCoord.h"
@@ -255,6 +261,8 @@ FOUNDATION_EXPORT const unsigned char SmartDeviceLinkVersionString[];
 #import "SDLWeatherData.h"
 #import "SDLWeatherServiceData.h"
 #import "SDLWeatherServiceManifest.h"
+#import "SDLWindowCapability.h"
+#import "SDLWindowTypeCapabilities.h"
 
 // Enums
 #import "SDLAmbientLightStatus.h"
@@ -320,6 +328,7 @@ FOUNDATION_EXPORT const unsigned char SmartDeviceLinkVersionString[];
 #import "SDLPowerModeStatus.h"
 #import "SDLPredefinedLayout.h"
 #import "SDLPrerecordedSpeech.h"
+#import "SDLPredefinedWindows.h"
 #import "SDLPrimaryAudioSource.h"
 #import "SDLRadioBand.h"
 #import "SDLRadioState.h"
@@ -360,6 +369,7 @@ FOUNDATION_EXPORT const unsigned char SmartDeviceLinkVersionString[];
 #import "SDLWarningLightStatus.h"
 #import "SDLWayPointType.h"
 #import "SDLWiperStatus.h"
+#import "SDLWindowType.h"
 
 // Developer API
 // Configurations
