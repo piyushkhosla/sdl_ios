@@ -88,6 +88,8 @@ NS_ASSUME_NONNULL_BEGIN
                          @53: SDLRPCFunctionNameGetAppServiceData,
                          @54: SDLRPCFunctionNameGetFile,
                          @55: SDLRPCFunctionNamePerformAppServiceInteraction,
+                         @56: SDLRPCFunctionNameCreateWindow,
+                         @57: SDLRPCFunctionNameDeleteWindow,
                          @32768: SDLRPCFunctionNameOnHMIStatus,
                          @32769: SDLRPCFunctionNameOnAppInterfaceUnregistered,
                          @32770: SDLRPCFunctionNameOnButtonEvent,

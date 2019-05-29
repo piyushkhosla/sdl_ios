@@ -34,9 +34,11 @@ describe(@"a notification dispatcher", ^{
         expect(@([testDispatcher respondsToSelector:@selector(onButtonPressResponse:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onChangeRegistrationResponse:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onCreateInteractionChoiceSetResponse:)])).to(beTruthy());
+        expect(@([testDispatcher respondsToSelector:@selector(onCreateWindowResponse:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onDeleteCommandResponse:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onDeleteInteractionChoiceSetResponse:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onDeleteSubMenuResponse:)])).to(beTruthy());
+        expect(@([testDispatcher respondsToSelector:@selector(onDeleteWindowResponse:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onDiagnosticMessageResponse:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onDialNumberResponse:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onEncodedSyncPDataResponse:)])).to(beTruthy());
@@ -89,10 +91,12 @@ describe(@"a notification dispatcher", ^{
         expect(@([testDispatcher respondsToSelector:@selector(onButtonPress:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onChangeRegistration:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onCreateInteractionChoiceSet:)])).to(beTruthy());
+        expect(@([testDispatcher respondsToSelector:@selector(onCreateWindow:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onDeleteCommand:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onDeleteFile:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onDeleteInteractionChoiceSet:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onDeleteSubMenu:)])).to(beTruthy());
+        expect(@([testDispatcher respondsToSelector:@selector(onDeleteWindow:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onDiagnosticMessage:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onDialNumber:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onEncodedSyncPData:)])).to(beTruthy());

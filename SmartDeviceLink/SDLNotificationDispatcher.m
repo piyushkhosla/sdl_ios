@@ -123,6 +123,10 @@ NS_ASSUME_NONNULL_BEGIN
     [self postRPCResponseNotification:SDLDidReceiveCreateInteractionChoiceSetResponse response:response];
 }
 
+- (void)onCreateWindowResponse:(SDLCreateWindowResponse *)response {
+    [self postRPCResponseNotification:SDLDidReceiveCreateWindowResponse response:response];
+}
+
 - (void)onDeleteCommandResponse:(SDLDeleteCommandResponse *)response {
     [self postRPCResponseNotification:SDLDidReceiveDeleteCommandResponse response:response];
 }
@@ -137,6 +141,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)onDeleteSubMenuResponse:(SDLDeleteSubMenuResponse *)response {
     [self postRPCResponseNotification:SDLDidReceiveDeleteSubmenuResponse response:response];
+}
+
+- (void)onDeleteWindowResponse:(SDLDeleteWindowResponse *)response {
+    [self postRPCResponseNotification:SDLDidReceiveDeleteWindowResponse response:response];
 }
 
 - (void)onDiagnosticMessageResponse:(SDLDiagnosticMessageResponse *)response {
@@ -345,6 +353,10 @@ NS_ASSUME_NONNULL_BEGIN
     [self postRPCRequestNotification:SDLDidReceiveCreateInteractionChoiceSetRequest request:request];
 }
 
+- (void)onCreateWindow:(SDLCreateWindow *)request {
+    [self postRPCRequestNotification:SDLDidReceiveCreateWindowRequest request:request];
+}
+
 - (void)onDeleteCommand:(SDLDeleteCommand *)request {
     [self postRPCRequestNotification:SDLDidReceiveDeleteCommandRequest request:request];
 }
@@ -359,6 +371,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)onDeleteSubMenu:(SDLDeleteSubMenu *)request {
     [self postRPCRequestNotification:SDLDidReceiveDeleteSubMenuRequest request:request];
+}
+
+- (void)onDeleteWindow:(SDLDeleteWindow *)request {
+    [self postRPCRequestNotification:SDLDidReceiveDeleteWindowRequest request:request];
 }
 
 - (void)onDiagnosticMessage:(SDLDiagnosticMessage *)request {
