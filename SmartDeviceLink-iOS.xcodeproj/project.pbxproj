@@ -1482,7 +1482,7 @@
 		DA9F7E9A1DCC052C00ACAE48 /* SDLLocationCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9F7E961DCC052C00ACAE48 /* SDLLocationCoordinate.m */; };
 		DA9F7E9B1DCC052C00ACAE48 /* SDLLocationDetails.h in Headers */ = {isa = PBXBuildFile; fileRef = DA9F7E971DCC052C00ACAE48 /* SDLLocationDetails.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA9F7E9C1DCC052C00ACAE48 /* SDLLocationDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9F7E981DCC052C00ACAE48 /* SDLLocationDetails.m */; };
-		DA9F7E9E1DCC05B900ACAE48 /* SDLWayPointTypeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9F7E9D1DCC05B900ACAE48 /* SDLWayPointTypeSpec.m */; };
+		DA9F7E9E1DCC05B900ACAE48 /* SDLWaypointTypeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9F7E9D1DCC05B900ACAE48 /* SDLWaypointTypeSpec.m */; };
 		DA9F7EA01DCC05D200ACAE48 /* SDLOnWaypointChangeSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9F7E9F1DCC05D200ACAE48 /* SDLOnWaypointChangeSpec.m */; };
 		DA9F7EA21DCC05E100ACAE48 /* SDLGetWaypointsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9F7EA11DCC05E100ACAE48 /* SDLGetWaypointsSpec.m */; };
 		DA9F7EA41DCC05EE00ACAE48 /* SDLSubscribeWaypointsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = DA9F7EA31DCC05EE00ACAE48 /* SDLSubscribeWaypointsSpec.m */; };
@@ -3145,7 +3145,7 @@
 		DA9F7E961DCC052C00ACAE48 /* SDLLocationCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLLocationCoordinate.m; sourceTree = "<group>"; };
 		DA9F7E971DCC052C00ACAE48 /* SDLLocationDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLLocationDetails.h; sourceTree = "<group>"; };
 		DA9F7E981DCC052C00ACAE48 /* SDLLocationDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLLocationDetails.m; sourceTree = "<group>"; };
-		DA9F7E9D1DCC05B900ACAE48 /* SDLWayPointTypeSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLWayPointTypeSpec.m; sourceTree = "<group>"; };
+		DA9F7E9D1DCC05B900ACAE48 /* SDLWaypointTypeSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLWaypointTypeSpec.m; sourceTree = "<group>"; };
 		DA9F7E9F1DCC05D200ACAE48 /* SDLOnWaypointChangeSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLOnWaypointChangeSpec.m; sourceTree = "<group>"; };
 		DA9F7EA11DCC05E100ACAE48 /* SDLGetWaypointsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLGetWaypointsSpec.m; sourceTree = "<group>"; };
 		DA9F7EA31DCC05EE00ACAE48 /* SDLSubscribeWaypointsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLSubscribeWaypointsSpec.m; sourceTree = "<group>"; };
@@ -3365,7 +3365,7 @@
 				162E82221A9BDE8A00906325 /* SDLVehicleDataTypeSpec.m */,
 				162E82231A9BDE8A00906325 /* SDLVrCapabilitiesSpec.m */,
 				162E82241A9BDE8A00906325 /* SDLWarningLightStatusSpec.m */,
-				DA9F7E9D1DCC05B900ACAE48 /* SDLWayPointTypeSpec.m */,
+				DA9F7E9D1DCC05B900ACAE48 /* SDLWaypointTypeSpec.m */,
 				241F50BD229D0E2100DB85A8 /* SDLWindowTypeSpec.m */,
 				162E82251A9BDE8A00906325 /* SDLWiperStatusSpec.m */,
 				8B7B31A81F2FB8BC00BDC38D /* SDLVideoStreamingProtocolSpec.m */,
@@ -7637,7 +7637,7 @@
 				1680B11D1A9CD7AD00DBD79E /* SDLProtocolMessageDisassemblerSpec.m in Sources */,
 				8BBEA6091F324832003EEA26 /* SDLMetadataTypeSpec.m in Sources */,
 				5DAD5F8B20508F140025624C /* SDLSoftButtonObjectSpec.m in Sources */,
-				DA9F7E9E1DCC05B900ACAE48 /* SDLWayPointTypeSpec.m in Sources */,
+				DA9F7E9E1DCC05B900ACAE48 /* SDLWaypointTypeSpec.m in Sources */,
 				162E838E1A9BDE8B00906325 /* SDLSyncMsgVersionSpec.m in Sources */,
 				5D76E31C1D3805FF00647CFA /* SDLLockScreenManagerSpec.m in Sources */,
 				162E82DA1A9BDE8B00906325 /* SDLDriverDistractionStateSpec.m in Sources */,

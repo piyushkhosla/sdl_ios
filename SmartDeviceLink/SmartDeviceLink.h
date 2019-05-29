@@ -8,7 +8,6 @@ FOUNDATION_EXPORT double SmartDeviceLinkVersionNumber;
 
 //! Project version string for SmartDeviceLink.
 FOUNDATION_EXPORT const unsigned char SmartDeviceLinkVersionString[];
-   
 /***** RPCs *****/
 // Superclasses
 #import "SDLEnum.h"
