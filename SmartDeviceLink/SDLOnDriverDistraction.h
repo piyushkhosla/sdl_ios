@@ -24,9 +24,16 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SDLOnDriverDistraction : SDLRPCNotification
 
 /**
- The driver distraction state (i.e. whether driver distraction rules are in effect, or not)
+ * The driver distraction state (i.e. whether driver distraction rules are in effect, or not)
  */
 @property (strong, nonatomic) SDLDriverDistractionState state;
+
+/**
+ * If enabled, the lock screen will be able to be dismissed while connected to SDL, allowing users
+ * the ability to interact with the app. Dismissals should include a warning to the user and ensure
+ * that they are not the driver.
+ */
+@property (nullable, strong, nonatomic) NSNumber<SDLBool> *lockScreenDismissalEnabled;
 
 @end
 

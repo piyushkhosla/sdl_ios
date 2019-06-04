@@ -20,14 +20,19 @@ describe(@"Getter/Setter Tests", ^ {
         SDLOnDriverDistraction* testNotification = [[SDLOnDriverDistraction alloc] init];
         
         testNotification.state = SDLDriverDistractionStateOn;
+        testNotification.lockScreenDismissalEnabled = @(NO);
         
         expect(testNotification.state).to(equal(SDLDriverDistractionStateOn));
+        expect(testNotification.lockScreenDismissalEnabled).to(equal(@(NO)));
+
     });
     
     it(@"Should get correctly when initialized", ^ {
         NSMutableDictionary* dict = [@{SDLRPCParameterNameNotification:
                                            @{SDLRPCParameterNameParameters:
-                                                 @{SDLRPCParameterNameState:SDLDriverDistractionStateOn},
+                                                 @{SDLRPCParameterNameState:SDLDriverDistractionStateOn,
+                                                   SDLRPCParameterNameLockScreenDismissalEnabled:@(YES)
+                                                   },
                                              SDLRPCParameterNameOperationName:SDLRPCFunctionNameOnDriverDistraction}} mutableCopy];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -35,12 +40,14 @@ describe(@"Getter/Setter Tests", ^ {
 #pragma clang diagnostic pop
         
         expect(testNotification.state).to(equal(SDLDriverDistractionStateOn));
+        expect(testNotification.lockScreenDismissalEnabled).to(equal(@(YES)));
     });
     
     it(@"Should return nil if not set", ^ {
         SDLOnDriverDistraction* testNotification = [[SDLOnDriverDistraction alloc] init];
         
         expect(testNotification.state).to(beNil());
+        expect(testNotification.lockScreenDismissalEnabled).to(beNil());
     });
 });
 
