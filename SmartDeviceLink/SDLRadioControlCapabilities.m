@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
     return [self initWithModuleName:moduleName radioEnableAvailable:radioEnableAvailable radioBandAvailable:radioBandAvailable radioFrequencyAvailable:radioFrequencyAvailable hdChannelAvailable:hdChannelAvailable rdsDataAvailable:rdsDataAvailable availableHDsAvailable:availableHDsAvailable stateAvailable:stateAvailable signalStrengthAvailable:signalStrengthAvailable signalChangeThresholdAvailable:signalChangeThresholdAvailable hdRadioEnableAvailable:NO siriusXMRadioAvailable:NO sisDataAvailable:NO];
 }
 
-- (instancetype)initWithModuleName:(NSString *)moduleName radioEnableAvailable:(BOOL)radioEnableAvailable radioBandAvailable:(BOOL)radioBandAvailable radioFrequencyAvailable:(BOOL)radioFrequencyAvailable hdChannelAvailable:(BOOL)hdChannelAvailable rdsDataAvailable:(BOOL)rdsDataAvailable availableHDsAvailable:(BOOL)availableHDsAvailable stateAvailable:(BOOL)stateAvailable signalStrengthAvailable:(BOOL)signalStrengthAvailable signalChangeThresholdAvailable:(BOOL)signalChangeThresholdAvailable hdRadioEnableAvailable:(BOOL)hdRadioEnableAvailable siriusXMRadioAvailable:(BOOL)siriusXMRadioAvailable sisDataAvailable:(BOOL)sisDataAvailable {
+- (instancetype)initWithModuleName:(NSString *)moduleName radioEnableAvailable:(BOOL)radioEnableAvailable radioBandAvailable:(BOOL)radioBandAvailable radioFrequencyAvailable:(BOOL)radioFrequencyAvailable hdChannelAvailable:(BOOL)hdChannelAvailable rdsDataAvailable:(BOOL)rdsDataAvailable availableHDChannelsAvailable:(BOOL)availableHDChannelsAvailable stateAvailable:(BOOL)stateAvailable signalStrengthAvailable:(BOOL)signalStrengthAvailable signalChangeThresholdAvailable:(BOOL)signalChangeThresholdAvailable hdRadioEnableAvailable:(BOOL)hdRadioEnableAvailable siriusXMRadioAvailable:(BOOL)siriusXMRadioAvailable sisDataAvailable:(BOOL)sisDataAvailable {
     self = [self init];
     if(!self){
         return nil;
@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
     self.radioFrequencyAvailable = @(radioFrequencyAvailable);
     self.hdChannelAvailable = @(hdChannelAvailable);
     self.rdsDataAvailable = @(rdsDataAvailable);
-    self.availableHDsAvailable = @(availableHDsAvailable);
+    self.availableHdChannelsAvailable = @(availableHDChannelsAvailable);
     self.stateAvailable = @(stateAvailable);
     self.signalStrengthAvailable = @(signalStrengthAvailable);
     self.signalChangeThresholdAvailable = @(signalChangeThresholdAvailable);
@@ -35,6 +35,10 @@ NS_ASSUME_NONNULL_BEGIN
     self.sisDataAvailable = @(sisDataAvailable);
     
     return self;
+}
+
+- (instancetype)initWithModuleName:(NSString *)moduleName radioEnableAvailable:(BOOL)radioEnableAvailable radioBandAvailable:(BOOL)radioBandAvailable radioFrequencyAvailable:(BOOL)radioFrequencyAvailable hdChannelAvailable:(BOOL)hdChannelAvailable rdsDataAvailable:(BOOL)rdsDataAvailable availableHDsAvailable:(BOOL)availableHDsAvailable stateAvailable:(BOOL)stateAvailable signalStrengthAvailable:(BOOL)signalStrengthAvailable signalChangeThresholdAvailable:(BOOL)signalChangeThresholdAvailable hdRadioEnableAvailable:(BOOL)hdRadioEnableAvailable siriusXMRadioAvailable:(BOOL)siriusXMRadioAvailable sisDataAvailable:(BOOL)sisDataAvailable {
+    return [self initWithModuleName:moduleName radioEnableAvailable:radioEnableAvailable radioBandAvailable:radioBandAvailable radioFrequencyAvailable:radioFrequencyAvailable hdChannelAvailable:hdChannelAvailable rdsDataAvailable:rdsDataAvailable availableHDChannelsAvailable:NO stateAvailable:stateAvailable signalStrengthAvailable:signalStrengthAvailable signalChangeThresholdAvailable:signalChangeThresholdAvailable hdRadioEnableAvailable:hdRadioEnableAvailable siriusXMRadioAvailable:siriusXMRadioAvailable sisDataAvailable:sisDataAvailable];
 }
 
 - (void)setModuleName:(NSString *)moduleName {
@@ -91,6 +95,14 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (nullable NSNumber<SDLBool> *)availableHDsAvailable {
+    return [self.store sdl_objectForName:SDLRPCParameterNameAvailableHDsAvailable ofClass:NSNumber.class error:nil];
+}
+
+- (void)setAvailableHdChannelsAvailable:(nullable NSNumber<SDLBool> *)availableHdChannelsAvailable {
+    [self.store sdl_setObject:availableHdChannelsAvailable forName:SDLRPCParameterNameAvailableHDsAvailable];
+}
+
+- (nullable NSNumber<SDLBool> *)availableHdChannelsAvailable {
     return [self.store sdl_objectForName:SDLRPCParameterNameAvailableHDsAvailable ofClass:NSNumber.class error:nil];
 }
 

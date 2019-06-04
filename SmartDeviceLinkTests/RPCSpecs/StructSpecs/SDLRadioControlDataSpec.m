@@ -28,6 +28,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.band).to(beNil());
         expect(testStruct.rdsData).to(beNil());
         expect(testStruct.availableHDs).to(beNil());
+        expect(testStruct.availableHdChannels).to(beNil());
         expect(testStruct.hdChannel).to(beNil());
         expect(testStruct.signalStrength).to(beNil());
         expect(testStruct.signalChangeThreshold).to(beNil());
@@ -42,6 +43,7 @@ describe(@"Initialization tests", ^{
                                        SDLRPCParameterNameBand : SDLRadioBandAM,
                                        SDLRPCParameterNameRDSData : someRdsData,
                                        SDLRPCParameterNameAvailableHDs : @2,
+                                       SDLRPCParameterNameAvailableHDChannels : @2,
                                        SDLRPCParameterNameHDChannel : @2,
                                        SDLRPCParameterNameSignalStrength : @54,
                                        SDLRPCParameterNameSignalChangeThreshold : @76,
@@ -59,6 +61,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.band).to(equal(SDLRadioBandAM));
         expect(testStruct.rdsData).to(equal(someRdsData));
         expect(testStruct.availableHDs).to(equal(@2));
+        expect(testStruct.availableHdChannels).to(equal(@2));
         expect(testStruct.hdChannel).to(equal(@2));
         expect(testStruct.signalStrength).to(equal(@54));
         expect(testStruct.signalChangeThreshold).to(equal(@76));
@@ -74,6 +77,7 @@ describe(@"Initialization tests", ^{
         testStruct.band = SDLRadioBandAM;
         testStruct.rdsData = someRdsData;
         testStruct.availableHDs = @2;
+        testStruct.availableHdChannels = @2;
         testStruct.hdChannel = @2;
         testStruct.signalStrength = @54;
         testStruct.signalChangeThreshold = @76;
@@ -86,6 +90,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.band).to(equal(SDLRadioBandAM));
         expect(testStruct.rdsData).to(equal(someRdsData));
         expect(testStruct.availableHDs).to(equal(@2));
+        expect(testStruct.availableHdChannels).to(equal(@2));
         expect(testStruct.hdChannel).to(equal(@2));
         expect(testStruct.signalStrength).to(equal(@54));
         expect(testStruct.signalChangeThreshold).to(equal(@76));
