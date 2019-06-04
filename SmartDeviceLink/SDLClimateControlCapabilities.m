@@ -3,6 +3,8 @@
 //
 
 #import "SDLClimateControlCapabilities.h"
+#import "SDLModuleInfo.h"
+
 #import "SDLRPCParameterNames.h"
 #import "NSMutableDictionary+Store.h"
 
@@ -40,6 +42,31 @@ NS_ASSUME_NONNULL_BEGIN
     self.heatedRearWindowAvailable = @(rearWindowAvailable);
     self.heatedMirrorsAvailable = @(mirrorsAvailable);
     self.climateEnableAvailable = @(climateEnableAvailable);
+    return self;
+}
+
+- (instancetype)initWithModuleName:(NSString *)moduleName fanSpeedAvailable:(BOOL)fanSpeedAvailable desiredTemperatureAvailable:(BOOL)desiredTemperatureAvailable acEnableAvailable:(BOOL)acEnableAvailable acMaxEnableAvailable:(BOOL)acMaxEnableAvailable circulateAirAvailable:(BOOL)circulateAirEnableAvailable autoModeEnableAvailable:(BOOL)autoModeEnableAvailable dualModeEnableAvailable:(BOOL)dualModeEnableAvailable defrostZoneAvailable:(BOOL)defrostZoneAvailable ventilationModeAvailable:(BOOL)ventilationModeAvailable heatedSteeringWheelAvailable:(BOOL)steeringWheelAvailable heatedWindshieldAvailable:(BOOL)windshieldAvailable heatedRearWindowAvailable:(BOOL)rearWindowAvailable heatedMirrorsAvailable:(BOOL)mirrorsAvailable moduleInfo:(SDLModuleInfo *)moduleInfo climateEnableAvailable:(BOOL)climateEnableAvailable{
+    self = [self init];
+    if (!self) {
+        return nil;
+    }
+
+    self.moduleName = moduleName;
+    self.fanSpeedAvailable = @(fanSpeedAvailable);
+    self.desiredTemperatureAvailable = @(desiredTemperatureAvailable);
+    self.acEnableAvailable = @(acEnableAvailable);
+    self.acMaxEnableAvailable = @(acMaxEnableAvailable);
+    self.circulateAirEnableAvailable = @(circulateAirEnableAvailable);
+    self.autoModeEnableAvailable = @(autoModeEnableAvailable);
+    self.dualModeEnableAvailable = @(dualModeEnableAvailable);
+    self.defrostZoneAvailable = @(defrostZoneAvailable);
+    self.ventilationModeAvailable = @(ventilationModeAvailable);
+    self.heatedSteeringWheelAvailable = @(steeringWheelAvailable);
+    self.heatedWindshieldAvailable = @(windshieldAvailable);
+    self.heatedRearWindowAvailable = @(rearWindowAvailable);
+    self.heatedMirrorsAvailable = @(mirrorsAvailable);
+    self.climateEnableAvailable = @(climateEnableAvailable);
+    self.moduleInfo = moduleInfo;
     return self;
 }
 
@@ -178,6 +205,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable NSNumber<SDLBool> *)climateEnableAvailable {
     return [self.store sdl_objectForName:SDLRPCParameterNameClimateEnableAvailable ofClass:NSNumber.class error:nil];
+}
+
+- (void)setModuleInfo:(nullable SDLModuleInfo *)moduleInfo {
+    [self.store sdl_setObject:moduleInfo forName:SDLRPCParameterNameModuleInfo];
+}
+
+- (nullable SDLModuleInfo *)moduleInfo {
+    return [self.store sdl_objectForName:SDLRPCParameterNameModuleInfo ofClass:SDLModuleInfo.class error:nil];
 }
 
 @end

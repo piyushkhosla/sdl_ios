@@ -4,6 +4,8 @@
 
 #import "SDLRPCMessage.h"
 
+@class SDLModuleInfo;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -37,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param radioFrequencyAvailable Availability of the control of radio frequency.
  @param hdChannelAvailable Availability of the control of HD radio channel.
  @param rdsDataAvailable Availability of the getting Radio Data System (RDS) data.
- @param availableHDChannelsAvailable Availability of the list of available HD sub-channel indexes.
+ @param availableHdChannelsAvailable Availability of the list of available HD sub-channel indexes.
  @param stateAvailable Availability of the getting the Radio state.
  @param signalStrengthAvailable Availability of the getting the signal strength.
  @param signalChangeThresholdAvailable Availability of the getting the signal Change Threshold.
@@ -46,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param sisDataAvailable Availability of sis data.
  @return An instance of the SDLRadioControlCapabilities class
  */
-- (instancetype)initWithModuleName:(NSString *)moduleName radioEnableAvailable:(BOOL)radioEnableAvailable radioBandAvailable:(BOOL)radioBandAvailable radioFrequencyAvailable:(BOOL)radioFrequencyAvailable hdChannelAvailable:(BOOL)hdChannelAvailable rdsDataAvailable:(BOOL)rdsDataAvailable availableHDChannelsAvailable:(BOOL)availableHDChannelsAvailable stateAvailable:(BOOL)stateAvailable signalStrengthAvailable:(BOOL)signalStrengthAvailable signalChangeThresholdAvailable:(BOOL)signalChangeThresholdAvailable hdRadioEnableAvailable:(BOOL)hdRadioEnableAvailable siriusXMRadioAvailable:(BOOL)siriusXMRadioAvailable sisDataAvailable:(BOOL)sisDataAvailable;
+- (instancetype)initWithModuleName:(NSString *)moduleName radioEnableAvailable:(BOOL)radioEnableAvailable radioBandAvailable:(BOOL)radioBandAvailable radioFrequencyAvailable:(BOOL)radioFrequencyAvailable hdChannelAvailable:(BOOL)hdChannelAvailable rdsDataAvailable:(BOOL)rdsDataAvailable availableHdChannelsAvailable:(BOOL)availableHdChannelsAvailable stateAvailable:(BOOL)stateAvailable signalStrengthAvailable:(BOOL)signalStrengthAvailable signalChangeThresholdAvailable:(BOOL)signalChangeThresholdAvailable hdRadioEnableAvailable:(BOOL)hdRadioEnableAvailable siriusXMRadioAvailable:(BOOL)siriusXMRadioAvailable sisDataAvailable:(BOOL)sisDataAvailable moduleInfo:(nullable SDLModuleInfo *)moduleInfo;
 
 /**
  Constructs a newly allocated SDLRadioControlCapabilities object with given parameters.
@@ -190,6 +192,13 @@ NS_ASSUME_NONNULL_BEGIN
  * Optional, Boolean
  */
 @property (nullable, strong, nonatomic) NSNumber<SDLBool> *sisDataAvailable;
+
+/**
+ * @abstract Information about a RC module, including its id.
+ *
+ * Optional, SDLModuleInf o
+ */
+@property (nullable, strong, nonatomic) SDLModuleInfo *moduleInfo;
 
 @end
 
