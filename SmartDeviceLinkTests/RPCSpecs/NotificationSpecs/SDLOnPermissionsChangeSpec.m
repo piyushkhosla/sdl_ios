@@ -22,14 +22,19 @@ describe(@"Getter/Setter Tests", ^ {
         SDLOnPermissionsChange* testNotification = [[SDLOnPermissionsChange alloc] init];
         
         testNotification.permissionItem = [@[item] mutableCopy];
+        testNotification.requireEncryption = @(NO);
         
         expect(testNotification.permissionItem).to(equal([@[item] mutableCopy]));
+        expect(testNotification.requireEncryption).to(equal(@(NO)));
+
     });
     
     it(@"Should get correctly when initialized", ^ {
         NSMutableDictionary<NSString *, id> *dict = [@{SDLRPCParameterNameNotification:
                                                            @{SDLRPCParameterNameParameters:
-                                                                 @{SDLRPCParameterNamePermissionItem:[@[item] mutableCopy]},
+                                                                 @{SDLRPCParameterNamePermissionItem:[@[item] mutableCopy],
+                                                                   SDLRPCParameterNameRequireEncryption:@(YES)
+                                                                   },
                                                              SDLRPCParameterNameOperationName:SDLRPCFunctionNameOnPermissionsChange}} mutableCopy];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -37,12 +42,15 @@ describe(@"Getter/Setter Tests", ^ {
 #pragma clang diagnostic pop
         
         expect(testNotification.permissionItem).to(equal([@[item] mutableCopy]));
+        expect(testNotification.requireEncryption).to(equal(@(YES)));
     });
     
     it(@"Should return nil if not set", ^ {
         SDLOnPermissionsChange* testNotification = [[SDLOnPermissionsChange alloc] init];
         
         expect(testNotification.permissionItem).to(beNil());
+        expect(testNotification.requireEncryption).to(beNil());
+
     });
 });
 

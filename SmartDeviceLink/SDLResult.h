@@ -208,3 +208,8 @@ extern SDLResult const SDLResultDataNotAvailable;
  The requested data is read only thus cannot be change via remote control .
  */
 extern SDLResult const SDLResultReadOnly;
+
+/**
+ SDL receives an un-encrypted PRC request that needs protection.
+ */
+extern SDLResult const SDLResultEncryptionNeeded;

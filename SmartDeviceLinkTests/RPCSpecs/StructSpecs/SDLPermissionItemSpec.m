@@ -25,16 +25,21 @@ describe(@"Getter/Setter Tests", ^ {
         testStruct.rpcName = @"RPCNameThing";
         testStruct.hmiPermissions = hmiPermissions;
         testStruct.parameterPermissions = parameterPermissions;
+        testStruct.requireEncryption = @(YES);
         
         expect(testStruct.rpcName).to(equal(@"RPCNameThing"));
         expect(testStruct.hmiPermissions).to(equal(hmiPermissions));
         expect(testStruct.parameterPermissions).to(equal(parameterPermissions));
+        expect(testStruct.requireEncryption).to(equal(@(YES)));
+
     });
     
     it(@"Should get correctly when initialized", ^ {
         NSMutableDictionary<NSString *, id> *dict = [@{SDLRPCParameterNameRPCName:@"RPCNameThing",
                                                        SDLRPCParameterNameHMIPermissions:hmiPermissions,
-                                                       SDLRPCParameterNameParameterPermissions:parameterPermissions} mutableCopy];
+                                                       SDLRPCParameterNameParameterPermissions:parameterPermissions,
+                                                       SDLRPCParameterNameRequireEncryption:@(NO)
+                                                       } mutableCopy];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         SDLPermissionItem* testStruct = [[SDLPermissionItem alloc] initWithDictionary:dict];
@@ -43,6 +48,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.rpcName).to(equal(@"RPCNameThing"));
         expect(testStruct.hmiPermissions).to(equal(hmiPermissions));
         expect(testStruct.parameterPermissions).to(equal(parameterPermissions));
+        expect(testStruct.requireEncryption).to(equal(@(NO)));
+
     });
     
     it(@"Should return nil if not set", ^ {
@@ -51,6 +58,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.rpcName).to(beNil());
         expect(testStruct.hmiPermissions).to(beNil());
         expect(testStruct.parameterPermissions).to(beNil());
+        expect(testStruct.requireEncryption).to(beNil());
+
     });
 });
 
