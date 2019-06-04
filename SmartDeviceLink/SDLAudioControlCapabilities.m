@@ -4,6 +4,9 @@
 #import "SDLAudioControlCapabilities.h"
 #import "SDLRPCParameterNames.h"
 #import "NSMutableDictionary+Store.h"
+#import "SDLModuleInfo.h"
+
+@class SDLModuleInfo;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -30,6 +33,22 @@ NS_ASSUME_NONNULL_BEGIN
     self.volumeAvailable = volumeAvailable;
     self.equalizerAvailable = equalizerAvailable;
     self.equalizerMaxChannelId = equalizerMaxChannelID;
+
+    return self;
+}
+
+- (instancetype)initWithModuleName:(NSString *)name sourceAvailable:(nullable NSNumber<SDLBool> *)sourceAvailable keepContextAvailable:(nullable NSNumber<SDLBool> *)keepContextAvailable volumeAvailable:(nullable NSNumber<SDLBool> *)volumeAvailable equalizerAvailable:(nullable NSNumber<SDLBool> *)equalizerAvailable equalizerMaxChannelID:(nullable NSNumber<SDLInt> *)equalizerMaxChannelID moduleInfo:(nullable SDLModuleInfo *)moduleInfo {
+    self = [self init];
+    if (!self) {
+        return nil;
+    }
+    self.moduleName = name;
+    self.sourceAvailable = sourceAvailable;
+    self.keepContextAvailable = keepContextAvailable;
+    self.volumeAvailable = volumeAvailable;
+    self.equalizerAvailable = equalizerAvailable;
+    self.equalizerMaxChannelId = equalizerMaxChannelID;
+    self.moduleInfo = moduleInfo;
 
     return self;
 }
@@ -81,6 +100,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable NSNumber<SDLInt> *)equalizerMaxChannelId {
     return [self.store sdl_objectForName:SDLRPCParameterNameEqualizerMaxChannelId ofClass:NSNumber.class error:nil];
+}
+
+- (void)setModuleInfo:(nullable SDLModuleInfo *)moduleInfo {
+    [self.store sdl_setObject:moduleInfo forName:SDLRPCParameterNameModuleInfo];
+}
+
+- (nullable SDLModuleInfo *)moduleInfo {
+    return [self.store sdl_objectForName:SDLRPCParameterNameModuleInfo ofClass:SDLModuleInfo.class error:nil];
 }
 
 @end

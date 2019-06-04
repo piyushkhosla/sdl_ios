@@ -10,10 +10,13 @@
 #import <Nimble/Nimble.h>
 
 #import "SDLRPCParameterNames.h"
+#import "SDLModuleInfo.h"
 #import "SDLSeatControlCapabilities.h"
 
 
 QuickSpecBegin(SDLSeatControlCapabilitiesSpec)
+
+SDLModuleInfo *moduleInfo = [[SDLModuleInfo alloc] init];
 
 describe(@"Getter/Setter Tests", ^ {
     it(@"Should set and get correctly", ^ {
@@ -35,6 +38,7 @@ describe(@"Getter/Setter Tests", ^ {
         testStruct.massageModeAvailable = @YES;
         testStruct.massageCushionFirmnessAvailable = @NO;
         testStruct.memoryAvailable = @NO;
+        testStruct.moduleInfo = moduleInfo;
 
         expect(testStruct.moduleName).to(equal(@"moduleName"));
         expect(testStruct.heatingEnabledAvailable).to(equal(@YES));
@@ -52,6 +56,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.massageModeAvailable).to(equal(@YES));
         expect(testStruct.massageCushionFirmnessAvailable).to(equal(@NO));
         expect(testStruct.memoryAvailable).to(equal(@NO));
+        expect(testStruct.moduleInfo).to(equal(moduleInfo));
 
     });
 
@@ -78,6 +83,29 @@ describe(@"Getter/Setter Tests", ^ {
     });
 
     it(@"Should set and get correctly", ^ {
+        SDLSeatControlCapabilities* testStruct = [[SDLSeatControlCapabilities alloc] initWithName:@"moduleName" heatingEnabledAvailable:YES coolingEnabledAvailable:NO heatingLevelAvailable:YES coolingLevelAvailable:NO horizontalPositionAvailable:NO verticalPositionAvailable:NO frontVerticalPositionAvailable:NO backVerticalPositionAvailable:NO backTiltAngleAvailable:YES headSupportHorizontalPositionAvailable:NO headSupportVerticalPositionAvailable:YES massageEnabledAvailable:NO massageModeAvailable:YES massageCushionFirmnessAvailable:NO memoryAvailable:YES  moduleinfo:moduleInfo];
+
+        expect(testStruct.moduleName).to(equal(@"moduleName"));
+        expect(testStruct.heatingEnabledAvailable).to(equal(@YES));
+        expect(testStruct.coolingEnabledAvailable).to(equal(@NO));
+        expect(testStruct.heatingLevelAvailable).to(equal(@YES));
+        expect(testStruct.coolingLevelAvailable).to(equal(@NO));
+        expect(testStruct.horizontalPositionAvailable).to(equal(@NO));
+        expect(testStruct.verticalPositionAvailable).to(equal(@NO));
+        expect(testStruct.frontVerticalPositionAvailable).to(equal(@NO));
+        expect(testStruct.backVerticalPositionAvailable).to(equal(@NO));
+        expect(testStruct.backTiltAngleAvailable).to(equal(@YES));
+        expect(testStruct.headSupportHorizontalPositionAvailable).to(equal(@NO));
+        expect(testStruct.headSupportVerticalPositionAvailable).to(equal(@YES));
+        expect(testStruct.massageEnabledAvailable).to(equal(@NO));
+        expect(testStruct.massageModeAvailable).to(equal(@YES));
+        expect(testStruct.massageCushionFirmnessAvailable).to(equal(@NO));
+        expect(testStruct.memoryAvailable).to(equal(@YES));
+        expect(testStruct.moduleInfo).to(equal(moduleInfo));
+
+    });
+
+    it(@"Should set and get correctly", ^ {
         SDLSeatControlCapabilities* testStruct = [[SDLSeatControlCapabilities alloc] initWithName:@"moduleName"];
 
         expect(testStruct.moduleName).to(equal(@"moduleName"));
@@ -96,7 +124,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.massageModeAvailable).to(beNil());
         expect(testStruct.massageCushionFirmnessAvailable).to(beNil());
         expect(testStruct.memoryAvailable).to(beNil());
-
+        expect(testStruct.moduleInfo).to(beNil());
     });
 
     it(@"Should get correctly when initialized", ^ {
@@ -115,7 +143,8 @@ describe(@"Getter/Setter Tests", ^ {
                                        SDLRPCParameterNameMassageEnabledAvailable:@NO,
                                        SDLRPCParameterNameMassageModeAvailable:@YES,
                                        SDLRPCParameterNameMassageCushionFirmnessAvailable:@NO,
-                                       SDLRPCParameterNameMemoryAvailable:@NO
+                                       SDLRPCParameterNameMemoryAvailable:@NO,
+                                       SDLRPCParameterNameModuleInfo:moduleInfo
                                        } mutableCopy];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -138,6 +167,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.massageModeAvailable).to(equal(@YES));
         expect(testStruct.massageCushionFirmnessAvailable).to(equal(@NO));
         expect(testStruct.memoryAvailable).to(equal(@NO));
+        expect(testStruct.moduleInfo).to(equal(moduleInfo));
+
     });
 
     it(@"Should return nil if not set", ^ {
@@ -159,6 +190,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.massageModeAvailable).to(beNil());
         expect(testStruct.massageCushionFirmnessAvailable).to(beNil());
         expect(testStruct.memoryAvailable).to(beNil());
+        expect(testStruct.moduleInfo).to(beNil());
+
     });
 });
 

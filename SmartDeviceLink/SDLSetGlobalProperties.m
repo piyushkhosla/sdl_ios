@@ -9,6 +9,8 @@
 #import "SDLKeyboardProperties.h"
 #import "SDLRPCParameterNames.h"
 #import "SDLRPCFunctionNames.h"
+#import "SDLSeatLocation.h"
+#import "SDLSeatLocation.h"
 #import "SDLTTSChunk.h"
 #import "SDLVrHelpItem.h"
 
@@ -48,6 +50,32 @@ NS_ASSUME_NONNULL_BEGIN
     self.keyboardProperties = keyboardProperties;
 
     return self;
+}
+
+- (instancetype)initWithHelpText:(nullable NSString *)helpText timeoutText:(nullable NSString *)timeoutText vrHelpTitle:(nullable NSString *)vrHelpTitle vrHelp:(nullable NSArray<SDLVRHelpItem *> *)vrHelp menuTitle:(nullable NSString *)menuTitle menuIcon:(nullable SDLImage *)menuIcon keyboardProperties:(nullable SDLKeyboardProperties *)keyboardProperties userLocation:(SDLSeatLocation *)userLocation {
+    self = [self init];
+    if (!self) {
+        return nil;
+    }
+
+    self.helpPrompt = [SDLTTSChunk textChunksFromString:helpText];
+    self.timeoutPrompt = [SDLTTSChunk textChunksFromString:timeoutText];
+    self.vrHelpTitle = vrHelpTitle;
+    self.vrHelp = [vrHelp mutableCopy];
+    self.menuTitle = menuTitle;
+    self.menuIcon = menuIcon;
+    self.keyboardProperties = keyboardProperties;
+    self.userLocation = userLocation;
+
+    return self;
+}
+
+- (void)setUserLocation:(nullable SDLSeatLocation *)userLocation {
+    [self.parameters sdl_setObject:userLocation forName:SDLRPCParameterNameUserLocation];
+}
+
+- (nullable SDLSeatLocation *)userLocation {
+    return [self.parameters sdl_objectForName:SDLRPCParameterNameUserLocation ofClass:SDLSeatLocation.class error:nil];
 }
 
 - (void)setHelpPrompt:(nullable NSArray<SDLTTSChunk *> *)helpPrompt {

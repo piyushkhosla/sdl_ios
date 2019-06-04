@@ -24,10 +24,12 @@ describe(@"Getter/Setter Tests", ^ {
         testRequest.moduleType = SDLModuleTypeClimate;
         testRequest.buttonName = SDLButtonNameAC;
         testRequest.buttonPressMode = SDLButtonPressModeShort;
+        testRequest.moduleId = @"moduleId";
         
         expect(testRequest.moduleType).to(equal(SDLModuleTypeClimate));
         expect(testRequest.buttonName).to(equal(SDLButtonNameAC));
         expect(testRequest.buttonPressMode).to(equal(SDLButtonPressModeShort));
+        expect(testRequest.moduleId).to(equal(@"moduleId"));
 
     });
     
@@ -36,7 +38,9 @@ describe(@"Getter/Setter Tests", ^ {
                                                            @{SDLRPCParameterNameParameters:
                                                                  @{SDLRPCParameterNameModuleType : SDLModuleTypeClimate,
                                                                    SDLRPCParameterNameButtonName : SDLButtonNameAC,
-                                                                   SDLRPCParameterNameButtonPressMode : SDLButtonPressModeShort},
+                                                                   SDLRPCParameterNameButtonPressMode : SDLButtonPressModeShort,
+                                                                   SDLRPCParameterNameModuleId : @"moduleId"
+                                                                   },
                                                              SDLRPCParameterNameOperationName:SDLRPCFunctionNameButtonPress}} mutableCopy];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -46,6 +50,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.moduleType).to(equal(SDLModuleTypeClimate));
         expect(testRequest.buttonName).to(equal(SDLButtonNameAC));
         expect(testRequest.buttonPressMode).to(equal(SDLButtonPressModeShort));
+        expect(testRequest.moduleId).to(equal(@"moduleId"));
+
     });
 
     it(@"Should get correctly when initialized with button name and module type properties", ^ {
@@ -55,12 +61,23 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testRequest.moduleType).to(equal(SDLModuleTypeClimate));
     });
 
+    it(@"Should get correctly when initialized with button name and module type properties", ^ {
+        SDLButtonPress* testRequest = [[SDLButtonPress alloc] initWithButtonName:SDLButtonNameAC moduleType:SDLModuleTypeClimate moduleId:@"moduleId"];
+
+        expect(testRequest.buttonName).to(equal(SDLButtonNameAC));
+        expect(testRequest.moduleType).to(equal(SDLModuleTypeClimate));
+        expect(testRequest.moduleId).to(equal(@"moduleId"));
+
+    });
+
     it(@"Should return nil if not set", ^ {
         SDLButtonPress* testRequest = [[SDLButtonPress alloc] init];
         
         expect(testRequest.moduleType).to(beNil());
         expect(testRequest.buttonName).to(beNil());
         expect(testRequest.buttonPressMode).to(beNil());
+        expect(testRequest.moduleId).to(beNil());
+
     });
 });
 

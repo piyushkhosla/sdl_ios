@@ -88,6 +88,14 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
+- (nullable NSString *)moduleId {
+    return [self.store sdl_objectForName:SDLRPCParameterNameModuleId ofClass:NSString.class error:nil];
+}
+
+- (void)setModuleId:(nullable NSString *)moduleId {
+    [self.store sdl_setObject:moduleId forName:SDLRPCParameterNameModuleId];
+}
+
 - (void)setModuleType:(SDLModuleType)moduleType {
     [self.store sdl_setObject:moduleType forName:SDLRPCParameterNameModuleType];
 }

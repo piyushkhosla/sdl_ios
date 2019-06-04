@@ -32,6 +32,27 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
+- (instancetype)initWithButtonName:(SDLButtonName)buttonName moduleType:(SDLModuleType)moduleType moduleId:(NSString *)moduleId {
+    self = [self init];
+    if (!self) {
+        return nil;
+    }
+
+    self.buttonName = buttonName;
+    self.moduleType = moduleType;
+    self.moduleId = moduleId;
+
+    return self;
+}
+
+- (nullable NSString *)moduleId {
+    return [self.parameters sdl_objectForName:SDLRPCParameterNameModuleId ofClass:NSString.class error:nil];
+}
+
+- (void)setModuleId:(nullable NSString *)moduleId {
+    [self.parameters sdl_setObject:moduleId forName:SDLRPCParameterNameModuleId];
+}
+
 - (void)setModuleType:(SDLModuleType)moduleType {
     [self.parameters sdl_setObject:moduleType forName:SDLRPCParameterNameModuleType];
 }

@@ -2,6 +2,7 @@
 //
 
 #import "SDLButtonCapabilities.h"
+#import "SDLModuleInfo.h"
 
 #import "NSMutableDictionary+Store.h"
 #import "SDLRPCParameterNames.h"
@@ -44,6 +45,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSNumber<SDLBool> *)upDownAvailable {
     NSError *error = nil;
     return [self.store sdl_objectForName:SDLRPCParameterNameUpDownAvailable ofClass:NSNumber.class error:&error];
+}
+
+- (void)setModuleInfo:(nullable SDLModuleInfo *)moduleInfo {
+    [self.store sdl_setObject:moduleInfo forName:SDLRPCParameterNameModuleInfo];
+}
+
+- (nullable SDLModuleInfo *)moduleInfo {
+    return [self.store sdl_objectForName:SDLRPCParameterNameModuleInfo ofClass:SDLModuleInfo.class error:nil];
 }
 
 @end

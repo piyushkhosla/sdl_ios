@@ -3,6 +3,8 @@
 
 #import "SDLRPCMessage.h"
 
+@class SDLModuleInfo;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SDLAudioControlCapabilities : SDLRPCStruct
@@ -25,7 +27,20 @@ NS_ASSUME_NONNULL_BEGIN
  @param equalizerMaxChannelID Equalizer channel ID (between 1-100).
  @return An instance of the SDLAudioControlCapabilities class.
  */
-- (instancetype)initWithModuleName:(NSString *)name sourceAvailable:(nullable NSNumber<SDLBool> *)sourceAvailable keepContextAvailable:(nullable NSNumber<SDLBool> *)keepContextAvailable volumeAvailable:(nullable NSNumber<SDLBool> *)volumeAvailable equalizerAvailable:(nullable NSNumber<SDLBool> *)equalizerAvailable equalizerMaxChannelID:(nullable NSNumber<SDLInt> *)equalizerMaxChannelID;
+- (instancetype)initWithModuleName:(NSString *)name sourceAvailable:(nullable NSNumber<SDLBool> *)sourceAvailable keepContextAvailable:(nullable NSNumber<SDLBool> *)keepContextAvailable volumeAvailable:(nullable NSNumber<SDLBool> *)volumeAvailable equalizerAvailable:(nullable NSNumber<SDLBool> *)equalizerAvailable equalizerMaxChannelID:(nullable NSNumber<SDLInt> *)equalizerMaxChannelID __deprecated_msg(("Use initWithModuleName: sourceAvailable:keepContextAvailable:volumeAvailable:equalizerAvailable:equalizerMaxChannelID:moduleInfo: instead"));;
+
+/**
+ Constructs a newly allocated SDLAudioControlCapabilities object with given parameters
+
+ @param name The short friendly name of the audio control module.
+ @param sourceAvailable Availability of the control of audio source.
+ @param volumeAvailable Availability of the volume of audio source.
+ @param equalizerAvailable Availability of the equalizer of audio source.
+ @param equalizerMaxChannelID Equalizer channel ID (between 1-100).
+ @param moduleInfo Information about a RC module, including its id.
+ @return An instance of the SDLAudioControlCapabilities class.
+ */
+- (instancetype)initWithModuleName:(NSString *)name sourceAvailable:(nullable NSNumber<SDLBool> *)sourceAvailable keepContextAvailable:(nullable NSNumber<SDLBool> *)keepContextAvailable volumeAvailable:(nullable NSNumber<SDLBool> *)volumeAvailable equalizerAvailable:(nullable NSNumber<SDLBool> *)equalizerAvailable equalizerMaxChannelID:(nullable NSNumber<SDLInt> *)equalizerMaxChannelID moduleInfo:(nullable SDLModuleInfo *)moduleInfo;
 
 /**
  * @abstract The short friendly name of the audio control module.
@@ -70,6 +85,13 @@ NS_ASSUME_NONNULL_BEGIN
  * Optional, Integer 1 - 100
  */
 @property (nullable, strong, nonatomic) NSNumber<SDLInt> *equalizerMaxChannelId;
+
+/**
+ * @abstract Information about a RC module, including its id.
+ *
+ * Optional, SDLModuleInf o
+ */
+@property (nullable, strong, nonatomic) SDLModuleInfo *moduleInfo;
 
 @end
 

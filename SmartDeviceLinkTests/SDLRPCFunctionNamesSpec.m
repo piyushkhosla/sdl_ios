@@ -34,6 +34,7 @@ describe(@"Individual Enum Value Tests", ^ {
         expect(SDLRPCFunctionNameGetDTCs).to(equal(@"GetDTCs"));
         expect(SDLRPCFunctionNameGetFile).to(equal(@"GetFile"));
         expect(SDLRPCFunctionNameGetInteriorVehicleData).to(equal(@"GetInteriorVehicleData"));
+        expect(SDLRPCFunctionNameGetInteriorVehicleDataConsent).to(equal(@"GetInteriorVehicleDataConsent"));
         expect(SDLRPCFunctionNameGetSystemCapability).to(equal(@"GetSystemCapability"));
         expect(SDLRPCFunctionNameGetVehicleData).to(equal(@"GetVehicleData"));
         expect(SDLRPCFunctionNameGetWayPoints).to(equal(@"GetWayPoints"));
@@ -67,6 +68,7 @@ describe(@"Individual Enum Value Tests", ^ {
         expect(SDLRPCFunctionNamePutFile).to(equal(@"PutFile"));
         expect(SDLRPCFunctionNameReadDID).to(equal(@"ReadDID"));
         expect(SDLRPCFunctionNameRegisterAppInterface).to(equal(@"RegisterAppInterface"));
+        expect(SDLRPCFunctionNameReleaseInteriorVehicleDataModule).to(equal(@"ReleaseInteriorVehicleDataModule"));
         expect(SDLRPCFunctionNameReserved).to(equal(@"reserved"));
         expect(SDLRPCFunctionNameResetGlobalProperties).to(equal(@"ResetGlobalProperties"));
         expect(SDLRPCFunctionNameScrollableMessage).to(equal(@"ScrollableMessage"));

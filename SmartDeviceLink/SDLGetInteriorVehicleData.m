@@ -20,6 +20,17 @@ NS_ASSUME_NONNULL_BEGIN
 }
 #pragma clang diagnostic pop
 
+- (instancetype)initWithModuleId:(NSString *)moduleId {
+    self = [self init];
+    if (!self) {
+        return nil;
+    }
+
+    self.moduleId = moduleId;
+
+    return self;
+}
+
 - (instancetype)initWithModuleType:(SDLModuleType)moduleType; {
     self = [self init];
     if (!self) {
@@ -53,6 +64,14 @@ NS_ASSUME_NONNULL_BEGIN
     self.subscribe = @(NO);
 
     return self;
+}
+
+- (nullable NSString *)moduleId {
+    return [self.parameters sdl_objectForName:SDLRPCParameterNameModuleId ofClass:NSString.class error:nil];
+}
+
+- (void)setModuleId:(nullable NSString *)moduleId {
+    [self.parameters sdl_setObject:moduleId forName:SDLRPCParameterNameModuleId];
 }
 
 - (void)setModuleType:(SDLModuleType)moduleType {

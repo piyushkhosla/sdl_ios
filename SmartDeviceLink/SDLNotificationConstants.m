@@ -43,6 +43,7 @@ SDLNotificationName const SDLDidReceiveGenericResponse = @"com.sdl.response.gene
 SDLNotificationName const SDLDidReceiveGetCloudAppPropertiesResponse = @"com.sdl.response.getCloudAppProperties";
 SDLNotificationName const SDLDidReceiveGetAppServiceDataResponse = @"com.sdl.response.getAppServiceData";
 SDLNotificationName const SDLDidReceiveGetDTCsResponse = @"com.sdl.response.getDTCs";
+SDLNotificationName const SDLDidReceiveGetInteriorVehicleDataConsentResponse = @"com.sdl.response.getInteriorVehicleDataConsent";
 SDLNotificationName const SDLDidReceiveGetFileResponse = @"com.sdl.response.getFile";
 SDLNotificationName const SDLDidReceiveGetInteriorVehicleDataResponse = @"com.sdl.response.getInteriorVehicleData";
 SDLNotificationName const SDLDidReceiveGetSystemCapabilitiesResponse = @"com.sdl.response.getSystemCapabilities";
@@ -56,6 +57,7 @@ SDLNotificationName const SDLDidReceivePublishAppServiceResponse = @"com.sdl.res
 SDLNotificationName const SDLDidReceivePutFileResponse = @"com.sdl.response.putFile";
 SDLNotificationName const SDLDidReceiveReadDIDResponse = @"com.sdl.response.readDID";
 SDLNotificationName const SDLDidReceiveRegisterAppInterfaceResponse = @"com.sdl.response.registerAppInterface";
+SDLNotificationName const SDLDidReceiveReleaseInteriorVehicleDataModuleResponse = @"com.sdl.response.releaseInteriorVehicleDataModule";
 SDLNotificationName const SDLDidReceiveResetGlobalPropertiesResponse = @"com.sdl.response.resetGlobalProperties";
 SDLNotificationName const SDLDidReceiveScrollableMessageResponse = @"com.sdl.response.scrollableMessage";
 SDLNotificationName const SDLDidReceiveSendHapticDataResponse = @"com.sdl.response.sendHapticData";
@@ -99,6 +101,7 @@ SDLNotificationName const SDLDidReceiveEndAudioPassThruRequest = @"com.sdl.reque
 SDLNotificationName const SDLDidReceiveGetAppServiceDataRequest = @"com.sdl.request.getAppServiceData";
 SDLNotificationName const SDLDidReceiveGetCloudAppPropertiesRequest = @"com.sdl.request.getCloudAppProperties";
 SDLNotificationName const SDLDidReceiveGetDTCsRequest = @"com.sdl.request.getDTCs";
+SDLNotificationName const SDLDidReceiveGetInteriorVehicleDataConsentRequest = @"com.sdl.request.getInteriorVehicleDataConsent";
 SDLNotificationName const SDLDidReceiveGetFileRequest = @"com.sdl.request.getFile";
 SDLNotificationName const SDLDidReceiveGetInteriorVehicleDataRequest = @"com.sdl.request.getInteriorVehicleData";
 SDLNotificationName const SDLDidReceiveGetSystemCapabilityRequest = @"com.sdl.request.getSystemCapability";
@@ -112,6 +115,7 @@ SDLNotificationName const SDLDidReceivePublishAppServiceRequest = @"com.sdl.requ
 SDLNotificationName const SDLDidReceivePutFileRequest = @"com.sdl.request.putFile";
 SDLNotificationName const SDLDidReceiveReadDIDRequest = @"com.sdl.request.readDID";
 SDLNotificationName const SDLDidReceiveRegisterAppInterfaceRequest = @"com.sdl.request.registerAppInterface";
+SDLNotificationName const SDLDidReceiveReleaseInteriorVehicleDataModuleRequest = @"com.sdl.request.releaseInteriorVehicleDataModule";
 SDLNotificationName const SDLDidReceiveResetGlobalPropertiesRequest = @"com.sdl.request.resetGlobalProperties";
 SDLNotificationName const SDLDidReceiveScrollableMessageRequest = @"com.sdl.request.scrollableMessage";
 SDLNotificationName const SDLDidReceiveSendHapticDataRequest = @"com.sdl.request.sendHapticData";
@@ -184,6 +188,7 @@ SDLNotificationName const SDLDidReceiveWaypointNotification = @"com.sdl.notifica
              SDLDidReceiveGetCloudAppPropertiesResponse,
              SDLDidReceiveGetAppServiceDataResponse,
              SDLDidReceiveGetDTCsResponse,
+             SDLDidReceiveGetInteriorVehicleDataConsentResponse,
              SDLDidReceiveGetFileResponse,
              SDLDidReceiveGetInteriorVehicleDataResponse,
              SDLDidReceiveGetSystemCapabilitiesResponse,
@@ -197,6 +202,7 @@ SDLNotificationName const SDLDidReceiveWaypointNotification = @"com.sdl.notifica
              SDLDidReceivePutFileResponse,
              SDLDidReceiveReadDIDResponse,
              SDLDidReceiveRegisterAppInterfaceResponse,
+             SDLDidReceiveReleaseInteriorVehicleDataModuleResponse,
              SDLDidReceiveResetGlobalPropertiesResponse,
              SDLDidReceiveScrollableMessageResponse,
              SDLDidReceiveSendHapticDataResponse,

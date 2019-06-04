@@ -17,11 +17,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SDLGetInteriorVehicleData : SDLRPCRequest
 
+- (instancetype)initWithModuleId:(NSString *)moduleId;
+
 - (instancetype)initWithModuleType:(SDLModuleType)moduleType;
 
 - (instancetype)initAndSubscribeToModuleType:(SDLModuleType)moduleType;
 
 - (instancetype)initAndUnsubscribeToModuleType:(SDLModuleType)moduleType;
+
+/**
+ * Id of a module, published by System Capability.
+ *
+ * Optional, Max length 100 chars
+ */
+@property (nullable, strong, nonatomic) NSString *moduleId;
 
 /**
  * The type of a RC module to retrieve module data from the vehicle.
@@ -30,8 +39,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) SDLModuleType moduleType;
 
 /**
- * If subscribe is true, the head unit will register onInteriorVehicleData notifications for the requested moduelType.
- * If subscribe is false, the head unit will unregister onInteriorVehicleData notifications for the requested moduelType.
+ * If subscribe is true, the head unit will register OnInteriorVehicleData notifications for the requested module (moduleId and moduleType).
+ * If subscribe is false, the head unit will unregister OnInteriorVehicleData notifications for the requested module (moduleId and moduleType).
+ *If subscribe is not included, the subscription status of the app for the requested module (moduleId and moduleType) will remain unchanged.
  *
  * optional, Boolean, default Value = false
  */

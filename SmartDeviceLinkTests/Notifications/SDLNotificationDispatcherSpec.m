@@ -45,6 +45,7 @@ describe(@"a notification dispatcher", ^{
         expect(@([testDispatcher respondsToSelector:@selector(onGenericResponse:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onGetAppServiceDataResponse:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onGetDTCsResponse:)])).to(beTruthy());
+        expect(@([testDispatcher respondsToSelector:@selector(onGetInteriorVehicleDataConsentResponse:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onGetFileResponse:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onGetInteriorVehicleDataResponse:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onGetSystemCapabilityResponse:)])).to(beTruthy());
@@ -57,6 +58,7 @@ describe(@"a notification dispatcher", ^{
         expect(@([testDispatcher respondsToSelector:@selector(onPublishAppServiceResponse:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onPutFileResponse:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onReadDIDResponse:)])).to(beTruthy());
+        expect(@([testDispatcher respondsToSelector:@selector(onReleaseInteriorVehicleDataModuleResponse:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onRegisterAppInterfaceResponse:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onResetGlobalPropertiesResponse:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onScrollableMessageResponse:)])).to(beTruthy());
@@ -99,6 +101,7 @@ describe(@"a notification dispatcher", ^{
         expect(@([testDispatcher respondsToSelector:@selector(onEndAudioPassThru:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onGetAppServiceData:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onGetDTCs:)])).to(beTruthy());
+        expect(@([testDispatcher respondsToSelector:@selector(onGetInteriorVehicleDataConsent:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onGetFile:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onGetInteriorVehicleData:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onGetSystemCapability:)])).to(beTruthy());
@@ -112,6 +115,7 @@ describe(@"a notification dispatcher", ^{
         expect(@([testDispatcher respondsToSelector:@selector(onPutFile:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onReadDID:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onRegisterAppInterface:)])).to(beTruthy());
+        expect(@([testDispatcher respondsToSelector:@selector(onReleaseInteriorVehicleDataModule:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onResetGlobalProperties:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onScrollableMessage:)])).to(beTruthy());
         expect(@([testDispatcher respondsToSelector:@selector(onSendHapticData:)])).to(beTruthy());

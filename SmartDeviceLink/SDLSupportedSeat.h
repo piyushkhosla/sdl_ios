@@ -2,12 +2,11 @@
 //
 
 #import "SDLEnum.h"
-
 /**
  * List possible seats that is a remote controllable seat.
  *
  */
-typedef SDLEnum SDLSupportedSeat SDL_SWIFT_ENUM;
+typedef SDLEnum SDLSupportedSeat SDL_SWIFT_ENUM __deprecated ;
 
 /**
  * @abstract Save current seat postions and settings to seat memory.

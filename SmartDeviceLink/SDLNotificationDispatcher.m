@@ -171,6 +171,10 @@ NS_ASSUME_NONNULL_BEGIN
     [self postRPCResponseNotification:SDLDidReceiveGetDTCsResponse response:response];
 }
 
+- (void)onGetInteriorVehicleDataConsentResponse:(SDLGetInteriorVehicleDataConsentResponse *)response {
+    [self postRPCResponseNotification:SDLDidReceiveGetInteriorVehicleDataConsentResponse response:response];
+}
+
 - (void)onGetFileResponse:(SDLGetFileResponse *)response {
     [self postRPCResponseNotification:SDLDidReceiveGetFileResponse response:response];
 }
@@ -221,6 +225,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)onRegisterAppInterfaceResponse:(SDLRegisterAppInterfaceResponse *)response {
     [self postRPCResponseNotification:SDLDidReceiveRegisterAppInterfaceResponse response:response];
+}
+
+- (void)onReleaseInteriorVehicleDataModuleResponse:(SDLReleaseInteriorVehicleDataModuleResponse *)response {
+    [self postRPCResponseNotification:SDLDidReceiveReleaseInteriorVehicleDataModuleResponse response:response];
 }
 
 - (void)onResetGlobalPropertiesResponse:(SDLResetGlobalPropertiesResponse *)response {
@@ -393,6 +401,10 @@ NS_ASSUME_NONNULL_BEGIN
     [self postRPCRequestNotification:SDLDidReceiveGetFileRequest request:request];
 }
 
+- (void)onGetInteriorVehicleDataConsent:(SDLGetInteriorVehicleDataConsent *)request {
+    [self postRPCRequestNotification:SDLDidReceiveGetInteriorVehicleDataConsentRequest request:request];
+}
+
 - (void)onGetInteriorVehicleData:(SDLGetInteriorVehicleData *)request {
     [self postRPCRequestNotification:SDLDidReceiveGetInteriorVehicleDataRequest request:request];
 }
@@ -435,6 +447,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)onReadDID:(SDLReadDID *)request {
     [self postRPCRequestNotification:SDLDidReceiveReadDIDRequest request:request];
+}
+
+- (void)onReleaseInteriorVehicleDataModule:(SDLReleaseInteriorVehicleDataModule *)request {
+    [self postRPCRequestNotification:SDLDidReceiveReleaseInteriorVehicleDataModuleRequest request:request];
 }
 
 - (void)onRegisterAppInterface:(SDLRegisterAppInterface *)request {

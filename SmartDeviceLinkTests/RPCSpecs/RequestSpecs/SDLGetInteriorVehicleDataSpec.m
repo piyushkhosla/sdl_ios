@@ -20,16 +20,21 @@ describe(@"Getter/Setter Tests", ^ {
         SDLGetInteriorVehicleData* testRequest = [[SDLGetInteriorVehicleData alloc] init];
         testRequest.moduleType = SDLModuleTypeRadio;
         testRequest.subscribe = @YES;
+        testRequest.moduleId = @"moduleID";
 
         expect(testRequest.moduleType).to(equal(SDLModuleTypeRadio));
         expect(testRequest.subscribe).to(equal(@YES));
+        expect(testRequest.moduleId).to(equal(@"moduleID"));
+
     });
 
     it(@"Should get correctly when initialized with a dictionary", ^ {
         NSMutableDictionary<NSString *, id> *dict = [@{SDLRPCParameterNameRequest:
                                                            @{SDLRPCParameterNameParameters:
                                                                  @{SDLRPCParameterNameModuleType : SDLModuleTypeRadio,
-                                                                   SDLRPCParameterNameSubscribe : @YES},
+                                                                   SDLRPCParameterNameSubscribe : @YES,
+                                                                   SDLRPCParameterNameModuleId : @"moduleID"
+                                                                   },
                                                              SDLRPCParameterNameOperationName:SDLRPCFunctionNameGetInteriorVehicleData}} mutableCopy];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -38,6 +43,8 @@ describe(@"Getter/Setter Tests", ^ {
 
         expect(testRequest.moduleType).to(equal(SDLModuleTypeRadio));
         expect(testRequest.subscribe).to(equal(@YES));
+        expect(testRequest.moduleId).to(equal(@"moduleID"));
+
     });
 
     it(@"Should get correctly when initialized with module type", ^ {
@@ -45,6 +52,13 @@ describe(@"Getter/Setter Tests", ^ {
 
         expect(testRequest.moduleType).to(equal(SDLModuleTypeRadio));
     });
+
+    it(@"Should get correctly when initialized with module ID", ^ {
+        SDLGetInteriorVehicleData* testRequest = [[SDLGetInteriorVehicleData alloc] initWithModuleId:@"moduleID"];
+
+        expect(testRequest.moduleId).to(equal(@"moduleID"));
+    });
+
 
     it(@"Should get correctly when initialized with module type and subscribe", ^ {
         SDLGetInteriorVehicleData* testRequest = [[SDLGetInteriorVehicleData alloc] initAndSubscribeToModuleType:SDLModuleTypeRadio];
@@ -66,6 +80,8 @@ describe(@"Getter/Setter Tests", ^ {
 
         expect(testRequest.moduleType).to(beNil());
         expect(testRequest.subscribe).to(beNil());
+        expect(testRequest.moduleId).to(beNil());
+
     });
 });
 

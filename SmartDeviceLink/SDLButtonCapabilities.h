@@ -5,6 +5,8 @@
 
 #import "SDLButtonName.h"
 
+@class SDLModuleInfo;
+
 
 /**
  * Provides information about the capabilities of a SDL HMI button.
@@ -43,6 +45,13 @@ NS_ASSUME_NONNULL_BEGIN
  * Required, Boolean
  */
 @property (strong, nonatomic) NSNumber<SDLBool> *upDownAvailable;
+
+/**
+ * @abstract Information about a RC module, including its id.
+ *
+ * Optional, SDLModuleInf
+ */
+@property (nullable, strong, nonatomic) SDLModuleInfo *moduleInfo;
 
 @end
 
