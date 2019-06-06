@@ -19,15 +19,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithPreferredResolution:(nullable SDLImageResolution *)preferredResolution maxBitrate:(int32_t)maxBitrate supportedFormats:(nullable NSArray<SDLVideoStreamingFormat *> *)supportedFormats hapticDataSupported:(BOOL)hapticDataSupported {
     self = [self init];
+    return [self initWithPreferredResolution:preferredResolution maxBitrate:maxBitrate supportedFormats:supportedFormats hapticDataSupported:hapticDataSupported diagonalScreenSize:4.7 pixelPerInch:283.0 scale:0.6];
+}
+
+- (instancetype)initWithPreferredResolution:(nullable SDLImageResolution *)preferredResolution maxBitrate:(int32_t)maxBitrate supportedFormats:(nullable NSArray<SDLVideoStreamingFormat *> *)supportedFormats hapticDataSupported:(BOOL)hapticDataSupported diagonalScreenSize:(double)diagonalScreenSize pixelPerInch:(double)pixelPerInch scale:(double)scale {
+    self = [self init];
     if (!self) {
         return self;
     }
-
+    
     self.maxBitrate = @(maxBitrate);
     self.preferredResolution = preferredResolution;
     self.supportedFormats = supportedFormats;
     self.hapticSpatialDataSupported = @(hapticDataSupported);
-
+    self.diagonalScreenSize = @(diagonalScreenSize);
+    self.pixelPerInch = @(pixelPerInch);
+    self.scale = @(scale);
+    
     return self;
 }
 
@@ -61,6 +69,28 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable NSNumber<SDLBool> *)hapticSpatialDataSupported {
     return [self.store sdl_objectForName:SDLRPCParameterNameHapticSpatialDataSupported ofClass:NSNumber.class error:nil];
+}
+
+- (void)setDiagonalScreenSize:(nullable NSNumber<SDLFloat> *)diagonalScreenSize {
+    [self.store sdl_setObject:diagonalScreenSize forName:SDLRPCParameterNameDiagonalScreenSize];
+}
+
+- (nullable NSNumber<SDLFloat> *)diagonalScreenSize {
+    return [self.store sdl_objectForName:SDLRPCParameterNameDiagonalScreenSize ofClass:NSNumber.class error:nil];
+}
+- (void)setPixelPerInch:(nullable NSNumber<SDLFloat> *)pixelPerInch {
+    [self.store sdl_setObject:pixelPerInch forName:SDLRPCParameterNamePixelPerInch];
+}
+
+- (nullable NSNumber<SDLFloat> *)pixelPerInch {
+    return [self.store sdl_objectForName:SDLRPCParameterNamePixelPerInch ofClass:NSNumber.class error:nil];
+}
+- (void)setScale:(nullable NSNumber<SDLFloat> *)scale {
+    [self.store sdl_setObject:scale forName:SDLRPCParameterNameScale];
+}
+
+- (nullable NSNumber<SDLFloat> *)scale {
+    return [self.store sdl_objectForName:SDLRPCParameterNameScale ofClass:NSNumber.class error:nil];
 }
 
 @end
