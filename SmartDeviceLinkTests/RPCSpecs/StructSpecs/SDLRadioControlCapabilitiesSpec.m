@@ -28,6 +28,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.hdChannelAvailable).to(beNil());
         expect(testStruct.rdsDataAvailable).to(beNil());
         expect(testStruct.availableHDsAvailable).to(beNil());
+        expect(testStruct.availableHdChannelsAvailable).to(beNil());
         expect(testStruct.stateAvailable).to(beNil());
         expect(testStruct.signalStrengthAvailable).to(beNil());
         expect(testStruct.signalChangeThresholdAvailable).to(beNil());
@@ -47,6 +48,7 @@ describe(@"Initialization tests", ^{
                                        SDLRPCParameterNameHDChannelAvailable : @NO,
                                        SDLRPCParameterNameRDSDataAvailable : @NO,
                                        SDLRPCParameterNameAvailableHDsAvailable : @NO,
+                                       SDLRPCParameterNameAvailableHdChannelsAvailable : @NO,
                                        SDLRPCParameterNameStateAvailable : @YES,
                                        SDLRPCParameterNameSignalStrengthAvailable : @YES,
                                        SDLRPCParameterNameSignalChangeThresholdAvailable : @NO,
@@ -67,6 +69,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.hdChannelAvailable).to(equal(@NO));
         expect(testStruct.rdsDataAvailable).to(equal(@NO));
         expect(testStruct.availableHDsAvailable).to(equal(@NO));
+        expect(testStruct.availableHdChannelsAvailable).to(equal(@NO));
         expect(testStruct.stateAvailable).to(equal(@YES));
         expect(testStruct.signalStrengthAvailable).to(equal(@YES));
         expect(testStruct.signalChangeThresholdAvailable).to(equal(@NO));
@@ -87,6 +90,7 @@ describe(@"Initialization tests", ^{
         testStruct.hdChannelAvailable = @NO;
         testStruct.rdsDataAvailable = @NO;
         testStruct.availableHDsAvailable = @NO;
+        testStruct.availableHdChannelsAvailable = @NO;
         testStruct.stateAvailable = @YES;
         testStruct.signalStrengthAvailable = @YES;
         testStruct.signalChangeThresholdAvailable = @NO;
@@ -102,6 +106,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.hdChannelAvailable).to(equal(@NO));
         expect(testStruct.rdsDataAvailable).to(equal(@NO));
         expect(testStruct.availableHDsAvailable).to(equal(@NO));
+        expect(testStruct.availableHdChannelsAvailable).to(equal(@NO));
         expect(testStruct.stateAvailable).to(equal(@YES));
         expect(testStruct.signalStrengthAvailable).to(equal(@YES));
         expect(testStruct.signalChangeThresholdAvailable).to(equal(@NO));
@@ -112,6 +117,25 @@ describe(@"Initialization tests", ^{
 
     });
 
+    it(@"Should get correctly when initialized with Module Name and other radio control capabilite's parameters", ^ {
+        SDLRadioControlCapabilities* testStruct = [[SDLRadioControlCapabilities alloc] initWithModuleName:@"someName" radioEnableAvailable:YES radioBandAvailable:NO radioFrequencyAvailable:YES hdChannelAvailable:NO rdsDataAvailable:NO availableHDChannelsAvailable:NO stateAvailable:YES signalStrengthAvailable:YES signalChangeThresholdAvailable:NO hdRadioEnableAvailable:YES siriusXMRadioAvailable:YES sisDataAvailable:YES];
+        
+        expect(testStruct.moduleName).to(equal(@"someName"));
+        expect(testStruct.radioEnableAvailable).to(equal(@YES));
+        expect(testStruct.radioBandAvailable).to(equal(@NO));
+        expect(testStruct.radioFrequencyAvailable).to(equal(@YES));
+        expect(testStruct.hdChannelAvailable).to(equal(@NO));
+        expect(testStruct.rdsDataAvailable).to(equal(@NO));
+        expect(testStruct.availableHdChannelsAvailable).to(equal(@NO));
+        expect(testStruct.stateAvailable).to(equal(@YES));
+        expect(testStruct.signalStrengthAvailable).to(equal(@YES));
+        expect(testStruct.signalChangeThresholdAvailable).to(equal(@NO));
+        expect(testStruct.hdRadioEnableAvailable).to(equal(YES));
+        expect(testStruct.siriusXMRadioAvailable).to(equal(@YES));
+        expect(testStruct.sisDataAvailable).to(equal(@YES));
+        
+    });
+    
     it(@"Should get correctly when initialized with Module Name and other radio control capability parameters", ^ {
         #pragma clang diagnostic push
         #pragma clang diagnostic ignored "-Wdeprecated-declarations"
