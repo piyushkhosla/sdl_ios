@@ -11,10 +11,12 @@
 #import "SDLLightControlCapabilities.h"
 #import "SDLRPCParameterNames.h"
 #import "SDLLightCapabilities.h"
+#import "SDLModuleInfo.h"
 
 QuickSpecBegin( SDLLightControlCapabilitiesSpec)
 
 SDLLightCapabilities* somelightCapabilities = [[SDLLightCapabilities alloc] init];
+SDLModuleInfo *moduleInfo = [[SDLModuleInfo alloc] init];
 
 describe(@"Getter/Setter Tests", ^ {
     it(@"Should set and get correctly", ^ {
@@ -22,8 +24,10 @@ describe(@"Getter/Setter Tests", ^ {
 
         testStruct.moduleName = @"moduleName";
         testStruct.supportedLights = [@[somelightCapabilities] copy];
+        testStruct.moduleInfo = moduleInfo;
 
         expect(testStruct.moduleName).to(equal(@"moduleName"));
+        expect(testStruct.moduleInfo).to(equal(moduleInfo));
         expect(testStruct.supportedLights).to(equal([@[somelightCapabilities] copy]));
 
     });
@@ -38,7 +42,8 @@ describe(@"Getter/Setter Tests", ^ {
 
     it(@"Should get correctly when initialized", ^ {
         NSMutableDictionary* dict = [@{SDLRPCParameterNameModuleName:@"moduleName",
-                                       SDLRPCParameterNameSupportedLights:[@[somelightCapabilities] copy]
+                                       SDLRPCParameterNameSupportedLights:[@[somelightCapabilities] copy],
+                                       SDLRPCParameterNameModuleInfo:moduleInfo
                                        } mutableCopy];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -46,6 +51,7 @@ describe(@"Getter/Setter Tests", ^ {
 #pragma clang diagnostic pop
 
         expect(testStruct.moduleName).to(equal(@"moduleName"));
+        expect(testStruct.moduleInfo).to(equal(moduleInfo));
         expect(testStruct.supportedLights).to(equal([@[somelightCapabilities] copy]));
     });
 
@@ -53,6 +59,7 @@ describe(@"Getter/Setter Tests", ^ {
         SDLLightControlCapabilities* testStruct = [[SDLLightControlCapabilities alloc] init];
 
         expect(testStruct.moduleName).to(beNil());
+        expect(testStruct.moduleInfo).to(beNil());
         expect(testStruct.supportedLights).to(beNil());
     });
 });

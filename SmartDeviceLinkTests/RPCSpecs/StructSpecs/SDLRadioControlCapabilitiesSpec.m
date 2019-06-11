@@ -9,9 +9,12 @@
 #import <Nimble/Nimble.h>
 
 #import "SDLRadioControlCapabilities.h"
+#import "SDLModuleInfo.h"
 #import "SDLRPCParameterNames.h"
 
 QuickSpecBegin(SDLRadioControlCapabilitiesSpec)
+
+SDLModuleInfo *moduleInfo = [[SDLModuleInfo alloc] init];
 
 describe(@"Initialization tests", ^{
     
@@ -31,6 +34,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.hdRadioEnableAvailable).to(beNil());
         expect(testStruct.siriusXMRadioAvailable).to(beNil());
         expect(testStruct.sisDataAvailable).to(beNil());
+        expect(testStruct.moduleInfo).to(beNil());
 
     });
     
@@ -48,7 +52,8 @@ describe(@"Initialization tests", ^{
                                        SDLRPCParameterNameSignalChangeThresholdAvailable : @NO,
                                        SDLRPCParameterNameHDRadioEnableAvailable : @YES,
                                        SDLRPCParameterNameSiriusXMRadioAvailable : @NO,
-                                       SDLRPCParameterNameSISDataAvailable:@YES
+                                       SDLRPCParameterNameSISDataAvailable:@YES,
+                                       SDLRPCParameterNameModuleInfo: moduleInfo
                                        } mutableCopy];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -68,6 +73,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.hdRadioEnableAvailable).to(equal(@YES));
         expect(testStruct.siriusXMRadioAvailable).to(equal(@NO));
         expect(testStruct.sisDataAvailable).to(equal(@YES));
+        expect(testStruct.moduleInfo).to(equal(moduleInfo));
 
     });
     
@@ -87,6 +93,7 @@ describe(@"Initialization tests", ^{
         testStruct.hdRadioEnableAvailable = @YES;
         testStruct.siriusXMRadioAvailable = @YES;
         testStruct.sisDataAvailable = @YES;
+        testStruct.moduleInfo = moduleInfo;
         
         expect(testStruct.moduleName).to(equal(@"someName"));
         expect(testStruct.radioEnableAvailable).to(equal(@YES));
@@ -101,6 +108,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.hdRadioEnableAvailable).to(equal(@YES));
         expect(testStruct.siriusXMRadioAvailable).to(equal(@YES));
         expect(testStruct.sisDataAvailable).to(equal(@YES));
+        expect(testStruct.moduleInfo).to(equal(moduleInfo));
 
     });
 
@@ -140,6 +148,25 @@ describe(@"Initialization tests", ^{
         expect(testStruct.hdRadioEnableAvailable).to(equal(YES));
         expect(testStruct.siriusXMRadioAvailable).to(equal(@YES));
         expect(testStruct.sisDataAvailable).to(equal(@YES));
+
+    });
+    it(@"Should get correctly when initialized with Module Name and other radio control capabilite's parameters", ^ {
+        SDLRadioControlCapabilities* testStruct = [[SDLRadioControlCapabilities alloc] initWithModuleName:@"someName" radioEnableAvailable:YES radioBandAvailable:NO radioFrequencyAvailable:YES hdChannelAvailable:NO rdsDataAvailable:NO availableHDsAvailable:NO stateAvailable:YES signalStrengthAvailable:YES signalChangeThresholdAvailable:NO hdRadioEnableAvailable:YES siriusXMRadioAvailable:YES sisDataAvailable:YES moduleInfo:moduleInfo];
+
+        expect(testStruct.moduleName).to(equal(@"someName"));
+        expect(testStruct.radioEnableAvailable).to(equal(@YES));
+        expect(testStruct.radioBandAvailable).to(equal(@NO));
+        expect(testStruct.radioFrequencyAvailable).to(equal(@YES));
+        expect(testStruct.hdChannelAvailable).to(equal(@NO));
+        expect(testStruct.rdsDataAvailable).to(equal(@NO));
+        expect(testStruct.availableHDsAvailable).to(equal(@NO));
+        expect(testStruct.stateAvailable).to(equal(@YES));
+        expect(testStruct.signalStrengthAvailable).to(equal(@YES));
+        expect(testStruct.signalChangeThresholdAvailable).to(equal(@NO));
+        expect(testStruct.hdRadioEnableAvailable).to(equal(YES));
+        expect(testStruct.siriusXMRadioAvailable).to(equal(@YES));
+        expect(testStruct.sisDataAvailable).to(equal(@YES));
+        expect(testStruct.moduleInfo).to(equal(moduleInfo));
 
     });
 });

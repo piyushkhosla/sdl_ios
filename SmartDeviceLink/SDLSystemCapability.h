@@ -15,6 +15,7 @@
 @class SDLVideoStreamingCapability;
 @class SDLRemoteControlCapabilities;
 @class SDLDisplayCapability;
+@class SDLSeatLocationCapability;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -74,6 +75,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDisplayCapability:(NSArray <SDLDisplayCapability *> *)capability;
 
 /**
+ *  @param capability   Describes the extended capabilities of the module's sear location feature
+ *  @return             A SDLSystemCapability object
+ */
+- (instancetype)initWithSeatLocationCapability:(SDLSeatLocationCapability *)capability;
+
+/**
  *  Used as a descriptor of what data to expect in this struct. The corresponding param to this enum should be included and the only other parameter included.
  */
 @property (strong, nonatomic) SDLSystemCapabilityType systemCapabilityType;
@@ -119,6 +126,14 @@ NS_ASSUME_NONNULL_BEGIN
  *  Optional
  */
 @property (nullable, strong, nonatomic) NSArray <SDLDisplayCapability *> *displayCapabilities;
+
+/**
+ *
+ *  Describes the extended capabilities of the module's remote control feature
+ *
+ *  Optional
+ */
+@property (nullable, strong, nonatomic) SDLSeatLocationCapability *seatLocationCapability;
 
 @end
 

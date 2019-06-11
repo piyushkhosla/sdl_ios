@@ -16,6 +16,8 @@ describe(@"Individual Enum Value Tests", ^ {
         expect(SDLSystemCapabilityTypeVideoStreaming).to(equal(@"VIDEO_STREAMING"));
         expect(SDLSystemCapabilityTypeRemoteControl).to(equal(@"REMOTE_CONTROL"));
         expect(SDLSystemCapabilityTypeDisplay).to(equal(@"DISPLAY"));
+        expect(SDLSystemCapabilityTypeSeatLocation).to(equal(@"SEAT_LOCATION"));
+
     });
 });
 

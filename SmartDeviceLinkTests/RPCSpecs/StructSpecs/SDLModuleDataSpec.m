@@ -38,6 +38,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.audioControlData).to(beNil());
         expect(testStruct.hmiSettingsControlData).to(beNil());
         expect(testStruct.lightControlData).to(beNil());
+        expect(testStruct.moduleId).to(beNil());
 
     });
     
@@ -49,7 +50,9 @@ describe(@"Initialization tests", ^{
                                        SDLRPCParameterNameSeatControlData:someSeatData,
                                        SDLRPCParameterNameAudioControlData:someAudioData,
                                        SDLRPCParameterNameLightControlData:someLightData,
-                                       SDLRPCParameterNameHmiSettingsControlData:someHMISettingsData} mutableCopy];
+                                       SDLRPCParameterNameHmiSettingsControlData:someHMISettingsData,
+                                       SDLRPCParameterNameModuleId:@"moduleId"
+                                       } mutableCopy];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         SDLModuleData* testStruct = [[SDLModuleData alloc] initWithDictionary:dict];
@@ -62,6 +65,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.audioControlData).to(equal(someAudioData));
         expect(testStruct.hmiSettingsControlData).to(equal(someHMISettingsData));
         expect(testStruct.lightControlData).to(equal(someLightData));
+        expect(testStruct.moduleId).to(equal(@"moduleId"));
 
     });
 
@@ -74,6 +78,7 @@ describe(@"Initialization tests", ^{
         testStruct.audioControlData = someAudioData;
         testStruct.lightControlData = someLightData;
         testStruct.hmiSettingsControlData = someHMISettingsData;
+        testStruct.moduleId = @"moduleId";
         
         expect(testStruct.moduleType).to(equal(SDLModuleTypeRadio));
         expect(testStruct.seatControlData).to(equal(someSeatData));
@@ -82,6 +87,8 @@ describe(@"Initialization tests", ^{
         expect(testStruct.audioControlData).to(equal(someAudioData));
         expect(testStruct.hmiSettingsControlData).to(equal(someHMISettingsData));
         expect(testStruct.lightControlData).to(equal(someLightData));
+        expect(testStruct.moduleId).to(equal(@"moduleId"));
+
     });
 
     it(@"Should get correctly when initialized with RadioControlData", ^ {
@@ -91,6 +98,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.radioControlData).to(equal(someRadioData));
         expect(testStruct.climateControlData).to(beNil());
         expect(testStruct.seatControlData).to(beNil());
+        expect(testStruct.moduleId).to(beNil());
     });
 
     it(@"Should get correctly when initialized with ClimateControlData", ^ {
@@ -100,6 +108,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.climateControlData).to(equal(someClimateData));
         expect(testStruct.radioControlData).to(beNil());
         expect(testStruct.seatControlData).to(beNil());
+        expect(testStruct.moduleId).to(beNil());
     });
 
     it(@"Should get correctly when initialized with ClimateControlData", ^ {
@@ -109,6 +118,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.seatControlData).to(equal(someSeatData));
         expect(testStruct.radioControlData).to(beNil());
         expect(testStruct.climateControlData).to(beNil());
+        expect(testStruct.moduleId).to(beNil());
     });
 
     it(@"Should get correctly when initialized with ClimateControlData", ^ {
@@ -119,6 +129,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.radioControlData).to(beNil());
         expect(testStruct.audioControlData).to(beNil());
         expect(testStruct.lightControlData).to(beNil());
+        expect(testStruct.moduleId).to(beNil());
         expect(testStruct.hmiSettingsControlData).to(equal(someHMISettingsData));
     });
 
@@ -131,6 +142,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.audioControlData).to(beNil());
         expect(testStruct.lightControlData).to(equal(someLightData));
         expect(testStruct.hmiSettingsControlData).to(beNil());
+        expect(testStruct.moduleId).to(beNil());
     });
 
     it(@"Should get correctly when initialized with ClimateControlData", ^ {
@@ -142,6 +154,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.audioControlData).to(equal(someAudioData));
         expect(testStruct.lightControlData).to(beNil());
         expect(testStruct.hmiSettingsControlData).to(beNil());
+        expect(testStruct.moduleId).to(beNil());
     });
 });
 

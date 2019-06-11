@@ -10,9 +10,12 @@
 
 #import "SDLAudioControlCapabilities.h"
 #import "SDLRPCParameterNames.h"
+#import "SDLModuleInfo.h"
 
 
 QuickSpecBegin( SDLAudioControlCapabilitiesSpec)
+
+SDLModuleInfo *moduleInfo = [[SDLModuleInfo alloc] init];
 
 describe(@"Getter/Setter Tests", ^ {
     it(@"Should set and get correctly", ^ {
@@ -24,6 +27,7 @@ describe(@"Getter/Setter Tests", ^ {
         testStruct.volumeAvailable = @(NO);
         testStruct.equalizerAvailable = @(NO);
         testStruct.equalizerMaxChannelId = @56;
+        testStruct.moduleInfo = moduleInfo;
 
         expect(testStruct.moduleName).to(equal(@"module"));
         expect(testStruct.keepContextAvailable).to(equal(@YES));
@@ -31,6 +35,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.volumeAvailable).to(equal(@(NO)));
         expect(testStruct.equalizerAvailable).to(equal(@(NO)));
         expect(testStruct.equalizerMaxChannelId).to(equal(@56));
+        expect(testStruct.moduleInfo).to(equal(moduleInfo));
+
     });
 
     it(@"Should set and get correctly", ^ {
@@ -42,6 +48,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.volumeAvailable).to(beNil());
         expect(testStruct.equalizerAvailable).to(beNil());
         expect(testStruct.equalizerMaxChannelId).to(beNil());
+        expect(testStruct.moduleInfo).to(beNil());
+
     });
 
     it(@"Should set and get correctly", ^ {
@@ -53,7 +61,23 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.volumeAvailable).to(equal(@(YES)));
         expect(testStruct.equalizerAvailable).to(equal(@(NO)));
         expect(testStruct.equalizerMaxChannelId).to(equal(@34));
+        expect(testStruct.moduleInfo).to(beNil());
+
     });
+
+    it(@"Should set and get correctly", ^ {
+        SDLAudioControlCapabilities* testStruct = [[SDLAudioControlCapabilities alloc] initWithModuleName:@"module" sourceAvailable:@NO keepContextAvailable:@NO volumeAvailable:@YES equalizerAvailable:@NO equalizerMaxChannelID:@34 moduleInfo:moduleInfo];
+
+        expect(testStruct.moduleName).to(equal(@"module"));
+        expect(testStruct.sourceAvailable).to(equal(@(NO)));
+        expect(testStruct.keepContextAvailable).to(equal(@NO));
+        expect(testStruct.volumeAvailable).to(equal(@(YES)));
+        expect(testStruct.equalizerAvailable).to(equal(@(NO)));
+        expect(testStruct.equalizerMaxChannelId).to(equal(@34));
+        expect(testStruct.moduleInfo).to(equal(moduleInfo));
+
+    });
+
 
     it(@"Should get correctly when initialized", ^ {
         NSMutableDictionary* dict = [@{SDLRPCParameterNameModuleName:@"module",
@@ -61,7 +85,8 @@ describe(@"Getter/Setter Tests", ^ {
                                        SDLRPCParameterNameKeepContextAvailable: @YES,
                                        SDLRPCParameterNameVolumeAvailable:@(YES),
                                        SDLRPCParameterNameEqualizerAvailable:@(NO),
-                                       SDLRPCParameterNameEqualizerMaxChannelId:@12
+                                       SDLRPCParameterNameEqualizerMaxChannelId:@12,
+                                       SDLRPCParameterNameModuleInfo:moduleInfo
                                        } mutableCopy];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -74,6 +99,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.volumeAvailable).to(equal(@(YES)));
         expect(testStruct.equalizerAvailable).to(equal(@(NO)));
         expect(testStruct.equalizerMaxChannelId).to(equal(@12));
+        expect(testStruct.moduleInfo).to(equal(moduleInfo));
+
 
     });
 
@@ -86,6 +113,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.volumeAvailable).to(beNil());
         expect(testStruct.equalizerAvailable).to(beNil());
         expect(testStruct.equalizerMaxChannelId).to(beNil());
+        expect(testStruct.moduleInfo).to(beNil());
+
 
     });
 });

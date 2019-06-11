@@ -4,6 +4,8 @@
 
 #import "SDLRPCStruct.h"
 
+@class SDLModuleInfo;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -14,7 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithName:(NSString *)moduleName;
 
 - (instancetype)initWithName:(NSString *)moduleName heatingEnabledAvailable:(BOOL)heatingEnabledAvail
- coolingEnabledAvailable:(BOOL)coolingEnabledAvail heatingLevelAvailable:(BOOL)heatingLevelAvail coolingLevelAvailable:(BOOL)coolingLevelAvail horizontalPositionAvailable:(BOOL)horizontalPositionAvail verticalPositionAvailable:(BOOL)verticalPositionAvail frontVerticalPositionAvailable:(BOOL)frontVerticalPositionAvail backVerticalPositionAvailable:(BOOL)backVerticalPositionAvail backTiltAngleAvailable:(BOOL)backTitlAngleAvail headSupportHorizontalPositionAvailable:(BOOL)headSupportHorizontalPositionAvail headSupportVerticalPositionAvailable:(BOOL)headSupportVerticalPositionAvail massageEnabledAvailable:(BOOL)massageEnabledAvail massageModeAvailable:(BOOL)massageModeAvail massageCushionFirmnessAvailable:(BOOL)massageCushionFirmnessAvail memoryAvailable:(BOOL)memoryAvail;
+     coolingEnabledAvailable:(BOOL)coolingEnabledAvail heatingLevelAvailable:(BOOL)heatingLevelAvail coolingLevelAvailable:(BOOL)coolingLevelAvail horizontalPositionAvailable:(BOOL)horizontalPositionAvail verticalPositionAvailable:(BOOL)verticalPositionAvail frontVerticalPositionAvailable:(BOOL)frontVerticalPositionAvail backVerticalPositionAvailable:(BOOL)backVerticalPositionAvail backTiltAngleAvailable:(BOOL)backTitlAngleAvail headSupportHorizontalPositionAvailable:(BOOL)headSupportHorizontalPositionAvail headSupportVerticalPositionAvailable:(BOOL)headSupportVerticalPositionAvail massageEnabledAvailable:(BOOL)massageEnabledAvail massageModeAvailable:(BOOL)massageModeAvail massageCushionFirmnessAvailable:(BOOL)massageCushionFirmnessAvail memoryAvailable:(BOOL)memoryAvail __deprecated_msg(("Use iinitWithName:heatingEnabledAvailable:coolingEnabledAvailable:heatingLevelAvailable: coolingLevelAvailable:horizontalPositionAvailable:verticalPositionAvailable:frontVerticalPositionAvailable:backVerticalPositionAvailable:backTiltAngleAvailable:headSupportHorizontalPositionAvailable:headSupportVerticalPositionAvailable:massageEnabledAvailable:massageModeAvailable:massageCushionFirmnessAvailable:memoryAvailable:moduleinfo: instead"));;
+
+- (instancetype)initWithName:(NSString *)moduleName heatingEnabledAvailable:(BOOL)heatingEnabledAvail
+     coolingEnabledAvailable:(BOOL)coolingEnabledAvail heatingLevelAvailable:(BOOL)heatingLevelAvail coolingLevelAvailable:(BOOL)coolingLevelAvail horizontalPositionAvailable:(BOOL)horizontalPositionAvail verticalPositionAvailable:(BOOL)verticalPositionAvail frontVerticalPositionAvailable:(BOOL)frontVerticalPositionAvail backVerticalPositionAvailable:(BOOL)backVerticalPositionAvail backTiltAngleAvailable:(BOOL)backTitlAngleAvail headSupportHorizontalPositionAvailable:(BOOL)headSupportHorizontalPositionAvail headSupportVerticalPositionAvailable:(BOOL)headSupportVerticalPositionAvail massageEnabledAvailable:(BOOL)massageEnabledAvail massageModeAvailable:(BOOL)massageModeAvail massageCushionFirmnessAvailable:(BOOL)massageCushionFirmnessAvail memoryAvailable:(BOOL)memoryAvail moduleinfo:(nullable SDLModuleInfo *)moduleInfo;
 /**
  * @abstract The short friendly name of the light control module.
  * It should not be used to identify a module by mobile application.
@@ -127,6 +132,13 @@ NS_ASSUME_NONNULL_BEGIN
  * Optional
  */
 @property (nullable, strong, nonatomic) NSNumber<SDLBool> *memoryAvailable;
+
+/**
+ * @abstract Information about a RC module, including its id.
+ *
+ * Optional, SDLModuleInf o
+ */
+@property (nullable, strong, nonatomic) SDLModuleInfo *moduleInfo;
 
 
 @end

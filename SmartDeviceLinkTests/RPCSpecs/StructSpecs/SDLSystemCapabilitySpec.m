@@ -12,6 +12,7 @@
 #import "SDLSystemCapabilityType.h"
 #import "SDLDisplayCapability.h"
 #import "SDLRemoteControlCapabilities.h"
+#import "SDLSeatLocationCapability.h"
 #import "SDLRPCParameterNames.h"
 #import "SDLVideoStreamingCapability.h"
 #import "SDLVideoStreamingCodec.h"
@@ -29,6 +30,7 @@ describe(@"Getter/Setter Tests", ^ {
     __block SDLRemoteControlCapabilities *testRemoteControlCapabilities = nil;
     __block SDLVideoStreamingCapability *testVideoStreamingCapability = nil;
     __block SDLDisplayCapability *testDisplayCapability = nil;
+    __block SDLSeatLocationCapability *seatLocationCapability = nil;
 
     beforeEach(^{
         testAppServicesCapabilities = [[SDLAppServicesCapabilities alloc] initWithAppServices:nil];
@@ -37,6 +39,7 @@ describe(@"Getter/Setter Tests", ^ {
         testRemoteControlCapabilities = [[SDLRemoteControlCapabilities alloc] initWithClimateControlCapabilities:nil radioControlCapabilities:nil buttonCapabilities:nil seatControlCapabilities:nil audioControlCapabilities:nil hmiSettingsControlCapabilities:nil lightControlCapabilities:nil];
         testVideoStreamingCapability = [[SDLVideoStreamingCapability alloc] initWithPreferredResolution:[[SDLImageResolution alloc] initWithWidth:50 height:50] maxBitrate:5 supportedFormats:@[] hapticDataSupported:false];
         testDisplayCapability = [[SDLDisplayCapability alloc] initWithDisplayName:@"testDisplay" windowTypeSupported:nil windowCapabilities:nil];
+        seatLocationCapability = [[SDLSeatLocationCapability alloc] init];
     });
 
     it(@"Should set and get correctly", ^ {
@@ -48,6 +51,7 @@ describe(@"Getter/Setter Tests", ^ {
         testStruct.videoStreamingCapability = testVideoStreamingCapability;
         testStruct.remoteControlCapability = testRemoteControlCapabilities;
         testStruct.displayCapabilities = [@[testDisplayCapability] copy];
+        testStruct.seatLocationCapability = seatLocationCapability;
 
         expect(testStruct.systemCapabilityType).to(equal(SDLSystemCapabilityTypeNavigation));
         expect(testStruct.appServicesCapabilities).to(equal(testAppServicesCapabilities));
@@ -56,6 +60,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.videoStreamingCapability).to(equal(testVideoStreamingCapability));
         expect(testStruct.remoteControlCapability).to(equal(testRemoteControlCapabilities));
         expect(testStruct.displayCapabilities).to(equal([@[testDisplayCapability] copy]));
+        expect(testStruct.seatLocationCapability).to(equal(seatLocationCapability));
 
     });
 
@@ -68,6 +73,7 @@ describe(@"Getter/Setter Tests", ^ {
                                SDLRPCParameterNameRemoteControlCapability:testRemoteControlCapabilities,
                                SDLRPCParameterNameVideoStreamingCapability:testVideoStreamingCapability,
                                SDLRPCParameterNameDisplayCapabilities:[@[testDisplayCapability] copy]
+                               SDLRPCParameterNameSeatLocationCapability:seatLocationCapability
                                };
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -81,6 +87,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.remoteControlCapability).to(equal(testRemoteControlCapabilities));
         expect(testStruct.videoStreamingCapability).to(equal(testVideoStreamingCapability));
         expect(testStruct.displayCapabilities).to(equal([@[testDisplayCapability] copy]));
+        expect(testStruct.seatLocationCapability).to(equal(seatLocationCapability));
 
     });
 
@@ -94,6 +101,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.videoStreamingCapability).to(beNil());
         expect(testStruct.remoteControlCapability).to(beNil());
         expect(testStruct.displayCapabilities).to(beNil());
+        expect(testStruct.seatLocationCapability).to(beNil());
 
     });
 
@@ -107,6 +115,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.remoteControlCapability).to(beNil());
         expect(testStruct.videoStreamingCapability).to(beNil());
         expect(testStruct.displayCapabilities).to(beNil());
+        expect(testStruct.seatLocationCapability).to(beNil());
 
     });
 
@@ -121,7 +130,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.remoteControlCapability).to(beNil());
         expect(testStruct.videoStreamingCapability).to(beNil());
         expect(testStruct.displayCapabilities).to(beNil());
-        
+        expect(testStruct.seatLocationCapability).to(beNil());
+
     });
 
     it(@"should initialize correctly with initWithNavigationCapability:", ^{
@@ -135,6 +145,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.remoteControlCapability).to(beNil());
         expect(testStruct.videoStreamingCapability).to(beNil());
         expect(testStruct.displayCapabilities).to(beNil());
+        expect(testStruct.seatLocationCapability).to(beNil());
 
     });
 
@@ -166,6 +177,8 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.remoteControlCapability).to(beNil());
         expect(testStruct.displayCapabilities).to(beNil());
         expect(testStruct.videoStreamingCapability).to(equal(testVidStruct));
+        expect(testStruct.seatLocationCapability).to(beNil());
+
     });
     
     it(@"should initialize correctly with initWithRemoteControlCapability:", ^{
@@ -178,6 +191,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.remoteControlCapability).to(equal(testRemoteControlCapabilities));
         expect(testStruct.videoStreamingCapability).to(beNil());
         expect(testStruct.displayCapabilities).to(beNil());
+        expect(testStruct.seatLocationCapability).to(beNil());
 
     });
     
@@ -192,6 +206,21 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.remoteControlCapability).to(beNil());
         expect(testStruct.videoStreamingCapability).to(beNil());
         expect(testStruct.displayCapabilities).to(equal([@[testDisplayCapability] copy]));
+        expect(testStruct.seatLocationCapability).to(beNil());
+
+    });
+
+    it(@"should initialize correctly with initWithRemoteControlCapability:", ^{
+        SDLSystemCapability *testStruct = [[SDLSystemCapability alloc] initWithSeatLocationCapability:seatLocationCapability];
+
+        expect(testStruct.systemCapabilityType).to(equal(SDLSystemCapabilityTypeSeatLocation));
+        expect(testStruct.appServicesCapabilities).to(beNil());
+        expect(testStruct.navigationCapability).to(beNil());
+        expect(testStruct.phoneCapability).to(beNil());
+        expect(testStruct.seatLocationCapability).to(equal(seatLocationCapability));
+        expect(testStruct.videoStreamingCapability).to(beNil());
+        expect(testStruct.remoteControlCapability).to(beNil());
+        expect(testStruct.displayCapabilities).to(beNil());
 
     });
 });

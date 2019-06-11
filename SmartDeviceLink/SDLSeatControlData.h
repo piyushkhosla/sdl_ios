@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param supportedSeat id of remote controllable seat.
  @return An instance of the SDLSeatControlData class
  */
-- (instancetype)initWithId:(SDLSupportedSeat)supportedSeat;
+- (instancetype)initWithId:(SDLSupportedSeat)supportedSeat __deprecated;
 
 /**
   Constructs a newly allocated SDLSeatControlData object with cushion and firmness
@@ -46,15 +46,36 @@ NS_ASSUME_NONNULL_BEGIN
  @param memoryAction type of action to be performed.
  @return An instance of the SDLSeatControlData class
  */
-- (instancetype)initWithId:(SDLSupportedSeat)supportedSeat heatingEnabled:(BOOL)heatingEnable coolingEnable:(BOOL)coolingEnable heatingLevel:(UInt8)heatingLevel coolingLevel:(UInt8)coolingLevel horizontalPostion:(UInt8)horizontal verticalPostion:(UInt8)vertical frontVerticalPostion:(UInt8)frontVertical backVerticalPostion:(UInt8)backVertical backTiltAngle:(UInt8)backAngle headSupportedHorizontalPostion:(UInt8)headSupportedHorizontal headSupportedVerticalPostion:(UInt8)headSupportedVertical massageEnabled:(BOOL)massageEnable massageMode:(NSArray<SDLMassageModeData *> *)massageMode massageCussionFirmness:(NSArray<SDLMassageCushionFirmness *> *)firmness memory:(SDLSeatMemoryAction *)memoryAction;
+- (instancetype)initWithId:(SDLSupportedSeat)supportedSeat heatingEnabled:(BOOL)heatingEnable coolingEnable:(BOOL)coolingEnable heatingLevel:(UInt8)heatingLevel coolingLevel:(UInt8)coolingLevel horizontalPostion:(UInt8)horizontal verticalPostion:(UInt8)vertical frontVerticalPostion:(UInt8)frontVertical backVerticalPostion:(UInt8)backVertical backTiltAngle:(UInt8)backAngle headSupportedHorizontalPostion:(UInt8)headSupportedHorizontal headSupportedVerticalPostion:(UInt8)headSupportedVertical massageEnabled:(BOOL)massageEnable massageMode:(NSArray<SDLMassageModeData *> *)massageMode massageCussionFirmness:(NSArray<SDLMassageCushionFirmness *> *)firmness memory:(SDLSeatMemoryAction *)memoryAction __deprecated_msg("Use initWithHeatingEnabled:coolingEnable:heatingLevel:coolingLevel:horizontalPostion:verticalPostion: frontVerticalPostion: backVerticalPostion: backTiltAngle: headSupportedHorizontalPostion: headSupportedVerticalPostion: massageEnabled: massageMode: massageCussionFirmness: memory: instead");
+
+/**
+ Constructs a newly allocated SDLSeatControlData object with cushion and firmness
+
+ @param heatingEnable Whether or not heating is enabled.
+ @param coolingEnable Whether or not cooling is enabled.
+ @param heatingLevel heating level
+ @param coolingLevel cooling Level
+ @param horizontal horizontal Position
+ @param vertical vertical Position
+ @param frontVertical frontVertical Position
+ @param backVertical backVertical Position
+ @param backAngle backAngle Position
+ @param headSupportedHorizontal headSupportedHorizontal Position
+ @param headSupportedVertical headSupportedVertical Position
+ @param massageEnable Whether or not massage is enabled.
+ @param massageMode Array of massage mode data.
+ @param firmness Array of firmness data.
+ @param memoryAction type of action to be performed.
+ @return An instance of the SDLSeatControlData class
+ */
+- (instancetype)initWithHeatingEnabled:(BOOL)heatingEnable coolingEnable:(BOOL)coolingEnable heatingLevel:(UInt8)heatingLevel coolingLevel:(UInt8)coolingLevel horizontalPostion:(UInt8)horizontal verticalPostion:(UInt8)vertical frontVerticalPostion:(UInt8)frontVertical backVerticalPostion:(UInt8)backVertical backTiltAngle:(UInt8)backAngle headSupportedHorizontalPostion:(UInt8)headSupportedHorizontal headSupportedVerticalPostion:(UInt8)headSupportedVertical massageEnabled:(BOOL)massageEnable massageMode:(NSArray<SDLMassageModeData *> *)massageMode massageCussionFirmness:(NSArray<SDLMassageCushionFirmness *> *)firmness memory:(SDLSeatMemoryAction *)memoryAction;
 
 /**
  * @abstract id of seat that is a remote controllable seat.
  *
- * Required
+ * Deprecated
  */
-@property (strong, nonatomic) SDLSupportedSeat id;
-
+@property (strong, nonatomic) SDLSupportedSeat id __deprecated;
 /**
  * @abstract Whether or not heating is enabled.
 

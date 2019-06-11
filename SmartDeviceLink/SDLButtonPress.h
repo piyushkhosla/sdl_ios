@@ -17,6 +17,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithButtonName:(SDLButtonName)buttonName moduleType:(SDLModuleType) moduleType;
 
+- (instancetype)initWithButtonName:(SDLButtonName)buttonName moduleType:(SDLModuleType) moduleType moduleId:(NSString *)moduleId;
+
+/**
+ * Id of a module, published by System Capability.
+ *
+ * Optional, Max length 100 chars
+ */
+@property (nullable, strong, nonatomic) NSString *moduleId;
+
 /**
  * The module where the button should be pressed.
  *

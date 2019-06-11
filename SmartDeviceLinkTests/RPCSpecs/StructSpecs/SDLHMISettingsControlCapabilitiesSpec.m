@@ -10,9 +10,12 @@
 
 #import "SDLHMISettingsControlCapabilities.h"
 #import "SDLRPCParameterNames.h"
+#import "SDLModuleInfo.h"
 
 
 QuickSpecBegin(SDLHMISettingsControlCapabilitiesSpec)
+
+SDLModuleInfo *moduleInfo = [[SDLModuleInfo alloc] init];
 
 describe(@"Getter/Setter Tests", ^ {
     it(@"Should set and get correctly", ^ {
@@ -22,11 +25,13 @@ describe(@"Getter/Setter Tests", ^ {
         testStruct.distanceUnitAvailable = @(NO);
         testStruct.temperatureUnitAvailable = @(NO);
         testStruct.displayModeUnitAvailable = @(YES);
+        testStruct.moduleInfo = moduleInfo;
 
         expect(testStruct.moduleName).to(equal(@"displayMode"));
         expect(testStruct.distanceUnitAvailable).to(equal(@(NO)));
         expect(testStruct.temperatureUnitAvailable).to(equal(@(NO)));
         expect(testStruct.displayModeUnitAvailable).to(equal(@(YES)));
+        expect(testStruct.moduleInfo).to(equal(moduleInfo));
     });
 
     it(@"Should set and get correctly", ^ {
@@ -36,6 +41,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.distanceUnitAvailable).to(beNil());
         expect(testStruct.temperatureUnitAvailable).to(beNil());
         expect(testStruct.displayModeUnitAvailable).to(beNil());
+        expect(testStruct.moduleInfo).to(beNil());
     });
 
     it(@"Should set and get correctly", ^ {
@@ -45,13 +51,15 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.distanceUnitAvailable).to(equal(@(NO)));
         expect(testStruct.temperatureUnitAvailable).to(equal(@(YES)));
         expect(testStruct.displayModeUnitAvailable).to(equal(@(NO)));
+        expect(testStruct.moduleInfo).to(beNil());
     });
 
     it(@"Should get correctly when initialized", ^ {
         NSMutableDictionary* dict = [@{SDLRPCParameterNameModuleName:@"temperatureUnit",
                                        SDLRPCParameterNameTemperatureUnitAvailable:@(YES),
                                        SDLRPCParameterNameDistanceUnitAvailable:@(YES),
-                                       SDLRPCParameterNameDisplayModeUnitAvailable:@(NO)
+                                       SDLRPCParameterNameDisplayModeUnitAvailable:@(NO),
+                                       SDLRPCParameterNameModuleInfo: moduleInfo
                                        } mutableCopy];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -62,6 +70,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.distanceUnitAvailable).to(equal(@(YES)));
         expect(testStruct.temperatureUnitAvailable).to(equal(@(YES)));
         expect(testStruct.displayModeUnitAvailable).to(equal(@(NO)));
+        expect(testStruct.moduleInfo).to(equal(moduleInfo));
 
     });
 
@@ -72,6 +81,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.distanceUnitAvailable).to(beNil());
         expect(testStruct.temperatureUnitAvailable).to(beNil());
         expect(testStruct.displayModeUnitAvailable).to(beNil());
+        expect(testStruct.moduleInfo).to(beNil());
 
     });
 });

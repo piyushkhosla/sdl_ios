@@ -87,6 +87,27 @@ describe(@"Getter/Setter Tests", ^ {
     });
 
     it(@"Should set and get correctly", ^ {
+        SDLSeatControlData* testStruct = [[SDLSeatControlData alloc] initWithHeatingEnabled:NO coolingEnable:YES heatingLevel:25 coolingLevel:10 horizontalPostion:23 verticalPostion:25 frontVerticalPostion:12 backVerticalPostion:25 backTiltAngle:2 headSupportedHorizontalPostion:3 headSupportedVerticalPostion:43 massageEnabled:YES massageMode:[@[massageModeData] copy] massageCussionFirmness:[@[massageCushionFirmness] copy] memory:seatMemoryAction];
+
+        expect(testStruct.heatingEnabled).to(equal(@NO));
+        expect(testStruct.coolingEnabled).to(equal(@YES));
+        expect(testStruct.heatingLevel).to(equal(@25));
+        expect(testStruct.coolingLevel).to(equal(@10));
+        expect(testStruct.horizontalPosition).to(equal(@23));
+        expect(testStruct.verticalPosition).to(equal(@25));
+        expect(testStruct.frontVerticalPosition).to(equal(@12));
+        expect(testStruct.backVerticalPosition).to(equal(@25));
+        expect(testStruct.backTiltAngle).to(equal(@2));
+        expect(testStruct.headSupportHorizontalPosition).to(equal(@3));
+        expect(testStruct.headSupportVerticalPosition).to(equal(@43));
+        expect(testStruct.massageEnabled).to(equal(@YES));
+        expect(testStruct.massageMode).to(equal([@[massageModeData] copy]));
+        expect(testStruct.massageCushionFirmness).to(equal([@[massageCushionFirmness] copy]));
+        expect(testStruct.memory).to(equal(seatMemoryAction));
+
+    });
+
+    it(@"Should set and get correctly", ^ {
         SDLSeatControlData* testStruct = [[SDLSeatControlData alloc] initWithId:SDLSupportedSeatDriver];
 
         expect(testStruct.id).to(equal(SDLSupportedSeatDriver));

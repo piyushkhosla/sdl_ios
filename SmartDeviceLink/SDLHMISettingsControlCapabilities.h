@@ -3,6 +3,8 @@
 
 #import "SDLRPCMessage.h"
 
+@class SDLModuleInfo;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SDLHMISettingsControlCapabilities : SDLRPCStruct
@@ -26,7 +28,20 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return An instance of the SDLHMISettingsControlCapabilities class
  */
-- (instancetype)initWithModuleName:(NSString *)moduleName distanceUnitAvailable:(BOOL)distanceUnitAvailable temperatureUnitAvailable:(BOOL)temperatureUnitAvailable displayModeUnitAvailable:(BOOL)displayModeUnitAvailable;
+- (instancetype)initWithModuleName:(NSString *)moduleName distanceUnitAvailable:(BOOL)distanceUnitAvailable temperatureUnitAvailable:(BOOL)temperatureUnitAvailable displayModeUnitAvailable:(BOOL)displayModeUnitAvailable __deprecated_msg("initWithModuleName:distanceUnitAvailable:temperatureUnitAvailable:displayModeUnitAvailable:moduleInfo: instead");
+
+/**
+ Constructs a newly allocated SDLHMISettingsControlCapabilities object with given parameters
+
+ @param moduleName The short friendly name of the hmi setting module
+ @param distanceUnitAvailable Availability of the control of distance unit.
+ @param temperatureUnitAvailable Availability of the control of temperature unit.
+ @param displayModeUnitAvailable Availability of the control of displayMode unit.
+ @param moduleInfo Information about a RC module, including its id.
+
+ @return An instance of the SDLHMISettingsControlCapabilities class
+ */
+- (instancetype)initWithModuleName:(NSString *)moduleName distanceUnitAvailable:(BOOL)distanceUnitAvailable temperatureUnitAvailable:(BOOL)temperatureUnitAvailable displayModeUnitAvailable:(BOOL)displayModeUnitAvailable moduleInfo:(SDLModuleInfo *)moduleInfo;
 
 /**
  * @abstract The short friendly name of the hmi setting module.
@@ -56,6 +71,13 @@ NS_ASSUME_NONNULL_BEGIN
  * Optional, Boolean
  */
 @property (nullable, strong, nonatomic) NSNumber<SDLBool> *displayModeUnitAvailable;
+
+/**
+ * @abstract Information about a RC module, including its id.
+ *
+ * Optional, SDLModuleInf o
+ */
+@property (nullable, strong, nonatomic) SDLModuleInfo *moduleInfo;
 
 @end
 
