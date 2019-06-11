@@ -39,10 +39,18 @@ describe(@"Initialization tests", ^{
 
         NSArray<SDLVideoStreamingFormat *> *formatArray = @[format1, format2];
 
+        NSNumber *diagonalScreenSize = @4.7;
+        NSNumber *pixelPerInch = @283.0;
+        NSNumber *scale = @0.5;
+        
         NSMutableDictionary* dict = [@{SDLRPCParameterNamePreferredResolution: resolution,
                                        SDLRPCParameterNameMaxBitrate: maxBitrate,
                                        SDLRPCParameterNameSupportedFormats: formatArray,
-                                       SDLRPCParameterNameHapticSpatialDataSupported: hapticDataSupported} mutableCopy];
+                                       SDLRPCParameterNameHapticSpatialDataSupported: hapticDataSupported,
+                                       SDLRPCParameterNameDiagonalScreenSize: diagonalScreenSize,
+                                       SDLRPCParameterNamePixelPerInch: pixelPerInch,
+                                       SDLRPCParameterNameScale: scale
+                                       } mutableCopy];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         SDLVideoStreamingCapability* testStruct = [[SDLVideoStreamingCapability alloc] initWithDictionary:dict];
@@ -52,6 +60,9 @@ describe(@"Initialization tests", ^{
         expect(testStruct.maxBitrate).to(equal(maxBitrate));
         expect(testStruct.supportedFormats).to(equal(formatArray));
         expect(testStruct.hapticSpatialDataSupported).to(equal(hapticDataSupported));
+        expect(testStruct.diagonalScreenSize).to(equal(diagonalScreenSize));
+        expect(testStruct.pixelPerInch).to(equal(pixelPerInch));
+        expect(testStruct.scale).to(equal(scale));
     });
 
     it(@"Should return nil if not set", ^ {
@@ -60,6 +71,9 @@ describe(@"Initialization tests", ^{
         expect(testStruct.preferredResolution).to(beNil());
         expect(testStruct.maxBitrate).to(beNil());
         expect(testStruct.supportedFormats).to(beNil());
+        expect(testStruct.diagonalScreenSize).to(beNil());
+        expect(testStruct.pixelPerInch).to(beNil());
+        expect(testStruct.scale).to(beNil());
     });
 
     it(@"Should initialize correctly with initWithVideoStreaming:maxBitrate:suportedFormats", ^ {
@@ -80,12 +94,19 @@ describe(@"Initialization tests", ^{
 
         NSArray<SDLVideoStreamingFormat *> *formatArray = @[format1, format2];
 
+        NSNumber *diagonalScreenSize = @4.7;
+        NSNumber *pixelPerInch = @283.0;
+        NSNumber *scale = @0.6;
+        
         SDLVideoStreamingCapability *testStruct = [[SDLVideoStreamingCapability alloc] initWithPreferredResolution:resolution maxBitrate:maxBitrate supportedFormats:formatArray hapticDataSupported:hapticDataSupported];
 
         expect(testStruct.preferredResolution).to(equal(resolution));
         expect(testStruct.maxBitrate).to(equal(maxBitrate));
         expect(testStruct.supportedFormats).to(equal(formatArray));
-        expect(testStruct.hapticSpatialDataSupported).to(equal(hapticDataSupported));
+        expect(testStruct.hapticSpatialDataSupported).to(equal(hapticDataSupported))
+        expect(testStruct.diagonalScreenSize).to(equal(diagonalScreenSize));
+        expect(testStruct.pixelPerInch).to(equal(pixelPerInch));
+        expect(testStruct.scale).to(equal(scale));
     });
     
 });
