@@ -87,7 +87,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Integer value Min Value - 0 Max Value -7
  */
-@property (nullable, strong, nonatomic) NSNumber<SDLInt> *availableHdChannels;
+@property (nullable, strong, nonatomic) NSArray<NSNumber<SDLInt> *> *availableHdChannels;
 
 /**
  * Current HD sub-channel if available

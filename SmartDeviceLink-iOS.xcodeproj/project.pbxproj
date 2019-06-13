@@ -409,21 +409,21 @@
 		2BF2F85220ED068200A26EF2 /* SDLAudioStreamingIndicatorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2F85120ED068200A26EF2 /* SDLAudioStreamingIndicatorSpec.m */; };
 		332A914F1CED9CC60043824C /* SDLAppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 332A913D1CED87F80043824C /* SDLAppInfo.m */; };
 		332A91501CED9CF10043824C /* SDLAppInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 332A913C1CED87F80043824C /* SDLAppInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3393654822AF9EAD00393944 /* SDLReleaseInteriorVehicleDataModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 3393653C22AF9EAA00393944 /* SDLReleaseInteriorVehicleDataModule.h */; };
+		3393654822AF9EAD00393944 /* SDLReleaseInteriorVehicleDataModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 3393653C22AF9EAA00393944 /* SDLReleaseInteriorVehicleDataModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3393654922AF9EAD00393944 /* SDLSeatLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3393653D22AF9EAB00393944 /* SDLSeatLocation.m */; };
-		3393654A22AF9EAD00393944 /* SDLGetInteriorVehicleDataConsent.h in Headers */ = {isa = PBXBuildFile; fileRef = 3393653E22AF9EAB00393944 /* SDLGetInteriorVehicleDataConsent.h */; };
+		3393654A22AF9EAD00393944 /* SDLGetInteriorVehicleDataConsent.h in Headers */ = {isa = PBXBuildFile; fileRef = 3393653E22AF9EAB00393944 /* SDLGetInteriorVehicleDataConsent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3393654B22AF9EAD00393944 /* SDLGetInteriorVehicleDataConsent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3393653F22AF9EAB00393944 /* SDLGetInteriorVehicleDataConsent.m */; };
 		3393654C22AF9EAD00393944 /* SDLGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = 3393654022AF9EAB00393944 /* SDLGrid.m */; };
-		3393654D22AF9EAD00393944 /* SDLSeatLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 3393654122AF9EAC00393944 /* SDLSeatLocation.h */; };
-		3393654E22AF9EAD00393944 /* SDLSeatLocationCapability.h in Headers */ = {isa = PBXBuildFile; fileRef = 3393654222AF9EAC00393944 /* SDLSeatLocationCapability.h */; };
+		3393654D22AF9EAD00393944 /* SDLSeatLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 3393654122AF9EAC00393944 /* SDLSeatLocation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3393654E22AF9EAD00393944 /* SDLSeatLocationCapability.h in Headers */ = {isa = PBXBuildFile; fileRef = 3393654222AF9EAC00393944 /* SDLSeatLocationCapability.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3393654F22AF9EAD00393944 /* SDLModuleInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3393654322AF9EAC00393944 /* SDLModuleInfo.m */; };
 		3393655022AF9EAD00393944 /* SDLSeatLocationCapability.m in Sources */ = {isa = PBXBuildFile; fileRef = 3393654422AF9EAC00393944 /* SDLSeatLocationCapability.m */; };
-		3393655122AF9EAD00393944 /* SDLGrid.h in Headers */ = {isa = PBXBuildFile; fileRef = 3393654522AF9EAC00393944 /* SDLGrid.h */; };
+		3393655122AF9EAD00393944 /* SDLGrid.h in Headers */ = {isa = PBXBuildFile; fileRef = 3393654522AF9EAC00393944 /* SDLGrid.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3393655222AF9EAD00393944 /* SDLReleaseInteriorVehicleDataModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 3393654622AF9EAC00393944 /* SDLReleaseInteriorVehicleDataModule.m */; };
-		3393655322AF9EAD00393944 /* SDLModuleInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3393654722AF9EAD00393944 /* SDLModuleInfo.h */; };
-		3393655822AF9EDE00393944 /* SDLReleaseInteriorVehicleDataModuleResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3393655422AF9EDD00393944 /* SDLReleaseInteriorVehicleDataModuleResponse.h */; };
+		3393655322AF9EAD00393944 /* SDLModuleInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 3393654722AF9EAD00393944 /* SDLModuleInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3393655822AF9EDE00393944 /* SDLReleaseInteriorVehicleDataModuleResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3393655422AF9EDD00393944 /* SDLReleaseInteriorVehicleDataModuleResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3393655922AF9EDE00393944 /* SDLReleaseInteriorVehicleDataModuleResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3393655522AF9EDE00393944 /* SDLReleaseInteriorVehicleDataModuleResponse.m */; };
-		3393655A22AF9EDE00393944 /* SDLGetInteriorVehicleDataConsentResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3393655622AF9EDE00393944 /* SDLGetInteriorVehicleDataConsentResponse.h */; };
+		3393655A22AF9EDE00393944 /* SDLGetInteriorVehicleDataConsentResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 3393655622AF9EDE00393944 /* SDLGetInteriorVehicleDataConsentResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3393655B22AF9EDE00393944 /* SDLGetInteriorVehicleDataConsentResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3393655722AF9EDE00393944 /* SDLGetInteriorVehicleDataConsentResponse.m */; };
 		3393656222AF9FB900393944 /* SDLGetInteriorVehicleDataConsentSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 3393656022AF9FB900393944 /* SDLGetInteriorVehicleDataConsentSpec.m */; };
 		3393656322AF9FB900393944 /* SDLReleaseInteriorVehicleDataModuleSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 3393656122AF9FB900393944 /* SDLReleaseInteriorVehicleDataModuleSpec.m */; };
@@ -1138,7 +1138,7 @@
 		5D9FC29E1FD8813900ACA5C2 /* SDLAudioStreamManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D9FC29C1FD8813900ACA5C2 /* SDLAudioStreamManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5D9FC29F1FD8813900ACA5C2 /* SDLAudioStreamManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D9FC29D1FD8813900ACA5C2 /* SDLAudioStreamManager.m */; };
 		5D9FC2A21FD8814A00ACA5C2 /* SDLAudioFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D9FC2A01FD8814A00ACA5C2 /* SDLAudioFile.m */; };
-		5D9FC2A31FD8814A00ACA5C2 /* SDLAudioFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D9FC2A11FD8814A00ACA5C2 /* SDLAudioFile.h */; };
+		5D9FC2A31FD8814A00ACA5C2 /* SDLAudioFile.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D9FC2A11FD8814A00ACA5C2 /* SDLAudioFile.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5D9FC2A61FD8815800ACA5C2 /* SDLPCMAudioConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D9FC2A41FD8815800ACA5C2 /* SDLPCMAudioConverter.h */; };
 		5D9FC2A71FD8815800ACA5C2 /* SDLPCMAudioConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D9FC2A51FD8815800ACA5C2 /* SDLPCMAudioConverter.m */; };
 		5D9FDA8F1F2A7D3400A495C8 /* bson_array.c in Sources */ = {isa = PBXBuildFile; fileRef = 5D9FDA891F2A7D3400A495C8 /* bson_array.c */; };
@@ -6275,8 +6275,17 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D9FC2A31FD8814A00ACA5C2 /* SDLAudioFile.h in Headers */,
+				3393654E22AF9EAD00393944 /* SDLSeatLocationCapability.h in Headers */,
+				3393654D22AF9EAD00393944 /* SDLSeatLocation.h in Headers */,
+				3393655322AF9EAD00393944 /* SDLModuleInfo.h in Headers */,
+				3393655122AF9EAD00393944 /* SDLGrid.h in Headers */,
+				3393655822AF9EDE00393944 /* SDLReleaseInteriorVehicleDataModuleResponse.h in Headers */,
+				3393654822AF9EAD00393944 /* SDLReleaseInteriorVehicleDataModule.h in Headers */,
 				2444E8A42297F65E008AAE3C /* SDLDisplayCapability.h in Headers */,
 				1EB59CBF202DA26000343A61 /* SDLSeatControlData.h in Headers */,
+				3393654A22AF9EAD00393944 /* SDLGetInteriorVehicleDataConsent.h in Headers */,
+				3393655A22AF9EDE00393944 /* SDLGetInteriorVehicleDataConsentResponse.h in Headers */,
 				2444E8942296B91D008AAE3C /* SDLTemplateConfiguration.h in Headers */,
 				1EB59CB3202D9B5F00343A61 /* SDLSeatMemoryActionType.h in Headers */,
 				2444E89C2297F03F008AAE3C /* SDLWindowTypeCapabilities.h in Headers */,
@@ -6324,7 +6333,6 @@
 				5DA3F35F1BC448590026F2D0 /* SDLNotificationConstants.h in Headers */,
 				5DE5ABB71B0E38C90067BB02 /* SDLSystemRequest.h in Headers */,
 				5DA3F3701BC4489A0026F2D0 /* SDLManager.h in Headers */,
-				3393654D22AF9EAD00393944 /* SDLSeatLocation.h in Headers */,
 				5DE5ABB81B0E38C90067BB02 /* SDLSystemRequestResponse.h in Headers */,
 				5D61FCA51A84238C00846EE7 /* SDLEndAudioPassThruResponse.h in Headers */,
 				5D3E48CB1D7722FE0000BFEF /* NSBundle+SDLBundle.h in Headers */,
@@ -6369,7 +6377,6 @@
 				5D61FDE71A84238C00846EE7 /* SDLUnsubscribeButton.h in Headers */,
 				5DD8406220FCD6C10082CE04 /* SDLElectronicParkBrakeStatus.h in Headers */,
 				5D61FCAB1A84238C00846EE7 /* SDLFuelCutoffStatus.h in Headers */,
-				5D9FC2A31FD8814A00ACA5C2 /* SDLAudioFile.h in Headers */,
 				5DB9965C1F268F97002D8795 /* SDLControlFramePayloadVideoStartService.h in Headers */,
 				5D1665C81CF8CA3D00CC4CA1 /* SDLPermissionFilter.h in Headers */,
 				E9C32B911AB20BA200F283AF /* SDLIAPSession.h in Headers */,
@@ -6411,7 +6418,6 @@
 				3393657F22AFA9E500393944 /* SDLIAPControlSessionDelegate.h in Headers */,
 				5D61FD811A84238C00846EE7 /* SDLSetAppIconResponse.h in Headers */,
 				5D61FC551A84238C00846EE7 /* SDLButtonName.h in Headers */,
-				3393655122AF9EAD00393944 /* SDLGrid.h in Headers */,
 				5D616B531D59044400553F6B /* SDLErrorConstants.h in Headers */,
 				5DADA7751F4DFED60084D17D /* SDLRectangle.h in Headers */,
 				5D61FD9F1A84238C00846EE7 /* SDLSoftButton.h in Headers */,
@@ -6455,7 +6461,6 @@
 				5D61FDC71A84238C00846EE7 /* SDLTextAlignment.h in Headers */,
 				5D61FD051A84238C00846EE7 /* SDLOnButtonPress.h in Headers */,
 				5DA150C72271FDC20032928D /* SDLSoftButtonTransitionOperation.h in Headers */,
-				3393655822AF9EDE00393944 /* SDLReleaseInteriorVehicleDataModuleResponse.h in Headers */,
 				5D61FCC51A84238C00846EE7 /* SDLHMIZoneCapabilities.h in Headers */,
 				884AF94F220B488900E22928 /* SDLOnSystemCapabilityUpdated.h in Headers */,
 				880D267D220DE5DF00B3F496 /* SDLWeatherServiceManifest.h in Headers */,
@@ -6521,7 +6526,6 @@
 				5D019276214994AC003500F6 /* NSMutableArray+Safe.h in Headers */,
 				5D61FDE11A84238C00846EE7 /* SDLTurn.h in Headers */,
 				5D9FC29B1FD8812F00ACA5C2 /* SDLAudioStreamManagerDelegate.h in Headers */,
-				3393654822AF9EAD00393944 /* SDLReleaseInteriorVehicleDataModule.h in Headers */,
 				5D61FC801A84238C00846EE7 /* SDLDeleteSubMenuResponse.h in Headers */,
 				5D00AC731F151CFE004000D9 /* SDLGetSystemCapabilityResponse.h in Headers */,
 				5D61FDBD1A84238C00846EE7 /* SDLSystemContext.h in Headers */,
@@ -6607,7 +6611,6 @@
 				5D92934D20AF4BEF00FCC775 /* SDLRGBColor.h in Headers */,
 				5D61FC471A84238C00846EE7 /* SDLAudioStreamingState.h in Headers */,
 				5D61FE071A84238C00846EE7 /* SDLVehicleDataStatus.h in Headers */,
-				3393655322AF9EAD00393944 /* SDLModuleInfo.h in Headers */,
 				5D61FD2D1A84238C00846EE7 /* SDLPermissionItem.h in Headers */,
 				5D61FCD11A84238C00846EE7 /* SDLImageFieldName.h in Headers */,
 				88B3BF9820DA859800943565 /* SDLFuelType.h in Headers */,
@@ -6667,7 +6670,6 @@
 				5D61FD2B1A84238C00846EE7 /* SDLPerformInteractionResponse.h in Headers */,
 				5D61FDA11A84238C00846EE7 /* SDLSoftButtonCapabilities.h in Headers */,
 				5D61FDB51A84238C00846EE7 /* SDLSyncMsgVersion.h in Headers */,
-				3393654E22AF9EAD00393944 /* SDLSeatLocationCapability.h in Headers */,
 				1E5AD08C1F20BC320029B8AF /* SDLGetInteriorVehicleDataResponse.h in Headers */,
 				1E5AD0701F209C880029B8AF /* SDLModuleData.h in Headers */,
 				8815D0EF22330753000F24E6 /* SDLRPCRequestNotification.h in Headers */,
@@ -6723,7 +6725,6 @@
 				5D61FDC31A84238C00846EE7 /* SDLTBTState.h in Headers */,
 				5D61FD951A84238C00846EE7 /* SDLShowResponse.h in Headers */,
 				5D61FCA31A84238C00846EE7 /* SDLEndAudioPassThru.h in Headers */,
-				3393655A22AF9EDE00393944 /* SDLGetInteriorVehicleDataConsentResponse.h in Headers */,
 				88A795D22106787400056542 /* SDLStaticIconName.h in Headers */,
 				5D61FCB11A84238C00846EE7 /* SDLGetDTCs.h in Headers */,
 				5D61FDFF1A84238C00846EE7 /* SDLVehicleDataEventStatus.h in Headers */,
@@ -6759,7 +6760,6 @@
 				5D0A7374203F0C730001595D /* SDLTextAndGraphicManager.h in Headers */,
 				5D61FD691A84238C00846EE7 /* SDLRPCMessage.h in Headers */,
 				5D61FCA71A84238C00846EE7 /* SDLEnum.h in Headers */,
-				3393654A22AF9EAD00393944 /* SDLGetInteriorVehicleDataConsent.h in Headers */,
 				5D8B174F1AC9D266006A6E1C /* SDLDialNumber.h in Headers */,
 				5D4631101F2135850092EFDC /* SDLControlFramePayloadConstants.h in Headers */,
 				5D7F87EF1CE3C294002DD7C4 /* SDLFileManagerConstants.h in Headers */,
