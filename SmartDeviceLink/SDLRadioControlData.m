@@ -80,7 +80,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (nullable NSArray<NSNumber<SDLInt> *>*)availableHdChannels {
-    return [self.store sdl_objectForName:SDLRPCParameterNameAvailableHDChannels ofClass:NSNumber.class error:nil];
+    return [self.store sdl_objectsForName:SDLRPCParameterNameAvailableHDChannels ofClass:NSNumber.class error:nil];
 }
 
 - (void)setAvailableHDs:(nullable NSNumber<SDLInt> *)availableHDs {
