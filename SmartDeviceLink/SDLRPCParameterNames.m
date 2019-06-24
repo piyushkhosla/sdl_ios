@@ -250,6 +250,7 @@ SDLRPCParameterName const SDLRPCParameterNameHeatedSteeringWheelEnable = @"heate
 SDLRPCParameterName const SDLRPCParameterNameHeatedWindshieldEnable = @"heatedWindshieldEnable";
 SDLRPCParameterName const SDLRPCParameterNameHeatedRearWindowEnable = @"heatedRearWindowEnable";
 SDLRPCParameterName const SDLRPCParameterNameHeatedMirrorsEnable = @"heatedMirrorsEnable";
+SDLRPCParameterName const SDLRPCParameterNameClimateEnable = @"climateEnable";
 SDLRPCParameterName const SDLRPCParameterNameHeight = @"height";
 SDLRPCParameterName const SDLRPCParameterNameHelpPrompt = @"helpPrompt";
 SDLRPCParameterName const SDLRPCParameterNameHighBeamsOn = @"highBeamsOn";

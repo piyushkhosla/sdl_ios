@@ -232,6 +232,7 @@ extern SDLRPCParameterName const SDLRPCParameterNameHashId;
 extern SDLRPCParameterName const SDLRPCParameterNameHDOP;
 extern SDLRPCParameterName const SDLRPCParameterNameHDChannel;
 extern SDLRPCParameterName const SDLRPCParameterNameHDChannelAvailable;
+extern SDLRPCParameterName const SDLRPCParameterNameClimateEnable;
 extern SDLRPCParameterName const SDLRPCParameterNameHDRadioEnable;
 extern SDLRPCParameterName const SDLRPCParameterNameHDRadioEnableAvailable;
 extern SDLRPCParameterName const SDLRPCParameterNameHeading;
