@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @warning This property is readonly and cannot be set on the module.
  *
- * Integer value Min Value - 0 Max Value -7
+ * Integer value Min Value - 1 Max Value -7
  */
 @property (nullable, strong, nonatomic) NSNumber<SDLInt> *availableHDs __deprecated_msg("Use availableHdChannels instead");
 
