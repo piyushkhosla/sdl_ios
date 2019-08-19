@@ -44,6 +44,11 @@ extern SDLSystemCapabilityType const SDLSystemCapabilityTypeRemoteControl;
 extern SDLSystemCapabilityType const SDLSystemCapabilityTypeDisplay;
 
 /**
+ The displays capability
+ */
+extern SDLSystemCapabilityType const SDLSystemCapabilityTypeDisplays;
+
+/**
  The remote control capability
  */
 extern SDLSystemCapabilityType const SDLSystemCapabilityTypeSeatLocation;
