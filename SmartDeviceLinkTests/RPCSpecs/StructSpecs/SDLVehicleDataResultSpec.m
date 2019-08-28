@@ -16,36 +16,36 @@
 QuickSpecBegin(SDLVehicleDataResultSpec)
 
 describe(@"Getter/Setter Tests", ^ {
-    it(@"Should set and get correctly", ^ {
+    it(@"should correctly initialize with init", ^ {
         SDLVehicleDataResult* testStruct = [[SDLVehicleDataResult alloc] init];
         
         testStruct.dataType = SDLVehicleDataTypeAirbagStatus;
-        testStruct.oemCustomDataType = SDLVehicleDataTypeAirbagStatus;
+        testStruct.customOEMDataType = @"CustomOEMData";
         testStruct.resultCode = SDLVehicleDataResultCodeDisallowed;
         
         expect(testStruct.dataType).to(equal(SDLVehicleDataTypeAirbagStatus));
-        expect(testStruct.customDataType).to(equal(SDLVehicleDataTypeAirbagStatus));
+        expect(testStruct.customOEMDataType).to(equal(@"CustomOEMData"));
         expect(testStruct.resultCode).to(equal(SDLVehicleDataResultCodeDisallowed));
     });
 
-    it(@"Should set and get correctly", ^ {
-        SDLVehicleDataResult* testStruct = [[SDLVehicleDataResult alloc] initWithDataType:SDLVehicleDataTypeAirbagStatus SDLVehicleDataResultCode:SDLVehicleDataResultCodeDisallowed];
+    it(@"should correctly initialize with initWithDataType", ^ {
+        SDLVehicleDataResult* testStruct = [[SDLVehicleDataResult alloc] initWithDataType:SDLVehicleDataTypeAirbagStatus resultCode:SDLVehicleDataResultCodeDisallowed];
 
         expect(testStruct.dataType).to(equal(SDLVehicleDataTypeAirbagStatus));
         expect(testStruct.resultCode).to(equal(SDLVehicleDataResultCodeDisallowed));
     });
 
-    it(@"Should set and get correctly", ^ {
-        SDLVehicleDataResult* testStruct = [[SDLVehicleDataResult alloc] initWithCustomDataType:@"CustomOEMData" SDLVehicleDataResultCode:SDLVehicleDataResultCodeDisallowed];
+    it(@"should correctly initialize with initWithCustomOEMDataType", ^ {
+        SDLVehicleDataResult* testStruct = [[SDLVehicleDataResult alloc] initWithCustomOEMDataType:@"CustomOEMData" resultCode:SDLVehicleDataResultCodeDisallowed];
 
-        expect(testStruct.oemCustomDataType).to(equal(@"CustomOEMData"));
+        expect(testStruct.customOEMDataType).to(equal(@"CustomOEMData"));
         expect(testStruct.resultCode).to(equal(SDLVehicleDataResultCodeDisallowed));
     });
     
     it(@"Should get correctly when initialized", ^ {
-        NSMutableDictionary* dict = [@{SDLRPCParameterNameDataType:SDLVehicleDataTypeAirbagStatus,
+        NSDictionary* dict = [@{SDLRPCParameterNameDataType:SDLVehicleDataTypeAirbagStatus,
                                        SDLRPCParameterNameResultCode:SDLVehicleDataResultCodeDisallowed,
-                                       SDLRPCParameterNameCustomDataType:SDLVehicleDataTypeRPM
+                                       SDLRPCParameterNameOEMCustomDataType:@"CustomOEMData"
                                        } mutableCopy];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -53,7 +53,7 @@ describe(@"Getter/Setter Tests", ^ {
 #pragma clang diagnostic pop
         
         expect(testStruct.dataType).to(equal(SDLVehicleDataTypeAirbagStatus));
-        expect(testStruct.oemCustomDataType).to(equal(SDLVehicleDataTypeRPM));
+        expect(testStruct.customOEMDataType).to(equal(@"CustomOEMData"));
         expect(testStruct.resultCode).to(equal(SDLVehicleDataResultCodeDisallowed));
     });
     
@@ -61,7 +61,7 @@ describe(@"Getter/Setter Tests", ^ {
         SDLVehicleDataResult* testStruct = [[SDLVehicleDataResult alloc] init];
         
         expect(testStruct.dataType).to(beNil());
-        expect(testStruct.oemCustomDataType).to(beNil());
+        expect(testStruct.customOEMDataType).to(beNil());
         expect(testStruct.resultCode).to(beNil());
     });
 });

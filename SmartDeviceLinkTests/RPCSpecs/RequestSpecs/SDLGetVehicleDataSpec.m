@@ -291,12 +291,14 @@ describe(@"initializers", ^{
         expect(testRequest.wiperStatus).to(equal(@YES));
     });
 
-    context(@"should set and get generic Network data", ^{
+    context(@"Should set and get Generic Network Signal Data", ^{
         SDLGetVehicleData *testRequest = [[SDLGetVehicleData alloc] init];
 
         [testRequest setOEMCustomVehicleData:@"OEMCustomVehicleData" withVehicleDataState:NO];
+        [testRequest setOEMCustomVehicleData:@"OEMCustomVehicleData1" withVehicleDataState:YES];
 
-        expect([testRequest getOEMCustomVehicleData:@"OEMCustomVehicleData"]).to(equal(@NO));
+        expect([testRequest getOEMCustomVehicleData:@"OEMCustomVehicleData"]).to(beFalse());
+        expect([testRequest getOEMCustomVehicleData:@"OEMCustomVehicleData1"]).to(beTrue());
 
     });
 

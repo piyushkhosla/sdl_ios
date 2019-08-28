@@ -13,9 +13,21 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface SDLVehicleDataResult : SDLRPCStruct
 
-- (instancetype)initWithDataType:(SDLVehicleDataType)dataType SDLVehicleDataResultCode:(SDLVehicleDataResultCode)resultCode;
+/**
+ *  Convenience init for creating a SDLVehicleDataResult with a dataType
+ *
+ *  @param dataType The Vehicle DataType data
+ *  @param resultCode The VehicleData ResultCode data
+ */
+- (instancetype)initWithDataType:(SDLVehicleDataType)dataType resultCode:(SDLVehicleDataResultCode)resultCode;
 
-- (instancetype)initWithCustomDataType:(NSString *)customDataType SDLVehicleDataResultCode:(SDLVehicleDataResultCode)resultCode;
+/**
+ *  Convenience init for creating a SDLVehicleDataResult with a customDataType
+ *
+ *  @param customDataType The custom dataType data
+ *  @param resultCode The VehicleData ResultCode data
+ */
+- (instancetype)initWithCustomOEMDataType:(NSString *)customDataType resultCode:(SDLVehicleDataResultCode)resultCode;
 
 /**
  Defined published data element type
@@ -23,9 +35,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) SDLVehicleDataType dataType;
 
 /**
- Defined published data element type
+ OEM custom defined published data element type
+ 
+ Added SmartDeviceLink 6.0
  */
-@property (nullable, strong, nonatomic) NSString *oemCustomDataType;
+@property (nullable, strong, nonatomic) NSString *customOEMDataType;
 
 /**
  Published data result code

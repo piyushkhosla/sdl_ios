@@ -291,14 +291,14 @@ describe(@"initializers", ^{
         #pragma clang diagnostic pop
     });
 
-    context(@"should set and get generic Network data", ^{
+    context(@"Should set and get Generic Network Signal Data", ^{
         SDLSubscribeVehicleData *testRequest = [[SDLSubscribeVehicleData alloc] init];
 
-        [testRequest setOEMCustomVehicleData:@"GPS" withVehicleDataState:NO];
-        [testRequest setOEMCustomVehicleData:@"turnSignal" withVehicleDataState:YES];
+        [testRequest setOEMCustomVehicleData:@"customVehicleData" withVehicleDataState:NO];
+        [testRequest setOEMCustomVehicleData:@"customVehicleData1" withVehicleDataState:YES];
 
-        expect([testRequest getOEMCustomVehicleData:@"GPS"]).to(equal(NO));
-        expect([testRequest getOEMCustomVehicleData:@"turnSignal"]).to(equal(@YES));
+        expect([testRequest getOEMCustomVehicleData:@"customVehicleData"]).to(beFalse());
+        expect([testRequest getOEMCustomVehicleData:@"customVehicleData1"]).to(beTrue());
 
     });
 });

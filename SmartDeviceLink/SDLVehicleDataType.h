@@ -165,6 +165,8 @@ extern SDLVehicleDataType const SDLVehicleDataTypeTurnSignal;
 extern SDLVehicleDataType const SDLVehicleDataTypeCloudAppVehicleID;
 
 /**
- vehicle OEM data
+ Custom OEM Vehicle data
+ 
+ Added in SDL 6.0
  */
-extern SDLVehicleDataType const SDLVehicleDataTypeOEMVehicle;
+extern SDLVehicleDataType const SDLVehicleDataTypeOEMVehicleDataType;

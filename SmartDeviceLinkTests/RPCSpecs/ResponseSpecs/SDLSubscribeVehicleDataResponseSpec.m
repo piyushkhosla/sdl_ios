@@ -18,7 +18,7 @@
 QuickSpecBegin(SDLSubscribeVehicleDataResponseSpec)
 
 SDLVehicleDataResult* vehicleDataResult = [[SDLVehicleDataResult alloc] init];
-SDLVehicleDataResult* customOEMvehicleDataResult = [[SDLVehicleDataResult alloc] initWithCustomDataType:@"customOEMVehicleData" SDLVehicleDataResultCode:SDLVehicleDataResultCodeSuccess];
+SDLVehicleDataResult* customOEMvehicleDataResult = [[SDLVehicleDataResult alloc] initWithCustomOEMDataType:@"customOEMVehicleData" resultCode:SDLVehicleDataResultCodeSuccess];
 
 
 describe(@"Getter/Setter Tests", ^ {
@@ -189,14 +189,12 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testResponse.wiperStatus).to(beNil());
     });
 
-    it(@"should set and get generic Network data", ^{
+    it(@"Should set and get Generic Network Signal Data", ^{
         SDLSubscribeVehicleDataResponse *testRequest = [[SDLSubscribeVehicleDataResponse alloc] init];
-
 
         [testRequest setOEMCustomVehicleData:@"customOEMVehicleData" withVehicleDataState:customOEMvehicleDataResult];
 
         expect([testRequest getOEMCustomVehicleData:@"customOEMVehicleData"]).to(equal(customOEMvehicleDataResult));
-
     });
 });
 

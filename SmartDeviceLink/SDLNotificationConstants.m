@@ -30,6 +30,7 @@ SDLNotificationName const SDLDidReceiveAlertResponse = @"com.sdl.response.alert"
 SDLNotificationName const SDLDidReceiveAlertManeuverResponse = @"com.sdl.response.alertManeuver";
 SDLNotificationName const SDLDidReceiveButtonPressResponse = @"com.sdl.response.buttonPress";
 SDLNotificationName const SDLDidReceiveChangeRegistrationResponse = @"com.sdl.response.changeRegistration";
+SDLNotificationName const SDLDidReceiveCloseApplicationResponse = @"com.sdl.response.closeApplication";
 SDLNotificationName const SDLDidReceiveCreateInteractionChoiceSetResponse = @"com.sdl.response.createInteractionChoiceSet";
 SDLNotificationName const SDLDidReceiveCreateWindowResponse = @"com.sdl.response.createWindow";
 SDLNotificationName const SDLDidReceiveDeleteCommandResponse = @"com.sdl.response.deleteCommand";
@@ -91,6 +92,7 @@ SDLNotificationName const SDLDidReceiveAlertRequest = @"com.sdl.request.alert";
 SDLNotificationName const SDLDidReceiveAlertManeuverRequest = @"com.sdl.request.alertManeuver";
 SDLNotificationName const SDLDidReceiveButtonPressRequest = @"com.sdl.request.buttonPress";
 SDLNotificationName const SDLDidReceiveChangeRegistrationRequest = @"com.sdl.request.changeRegistration";
+SDLNotificationName const SDLDidReceiveCloseApplicationRequest = @"com.sdl.request.closeApplication";
 SDLNotificationName const SDLDidReceiveCreateInteractionChoiceSetRequest = @"com.sdl.request.createInteractionChoiceSet";
 SDLNotificationName const SDLDidReceiveCreateWindowRequest = @"com.sdl.request.createWindow";
 SDLNotificationName const SDLDidReceiveDeleteCommandRequest = @"com.sdl.request.deleteCommand";
@@ -179,6 +181,7 @@ SDLNotificationName const SDLDidReceiveWaypointNotification = @"com.sdl.notifica
              SDLDidReceiveAlertManeuverResponse,
              SDLDidReceiveButtonPressResponse,
              SDLDidReceiveChangeRegistrationResponse,
+             SDLDidReceiveCloseApplicationResponse,
              SDLDidReceiveCreateInteractionChoiceSetResponse,
              SDLDidReceiveCreateWindowResponse,
              SDLDidReceiveDeleteCommandResponse,

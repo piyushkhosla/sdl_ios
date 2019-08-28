@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation SDLVehicleDataResult
 
-- (instancetype)initWithDataType:(SDLVehicleDataType)dataType SDLVehicleDataResultCode:(SDLVehicleDataResultCode)resultCode {
+- (instancetype)initWithDataType:(SDLVehicleDataType)dataType resultCode:(SDLVehicleDataResultCode)resultCode {
     self = [self init];
     if (!self) {
         return nil;
@@ -22,13 +22,13 @@ NS_ASSUME_NONNULL_BEGIN
     return self;
 }
 
-- (instancetype)initWithCustomDataType:(NSString *)customDataType SDLVehicleDataResultCode:(SDLVehicleDataResultCode)resultCode{
+- (instancetype)initWithCustomOEMDataType:(NSString *)customDataType resultCode:(SDLVehicleDataResultCode)resultCode{
     self = [self init];
     if (!self) {
         return nil;
     }
 
-    self.customDataType = customDataType;
+    self.customOEMDataType = customDataType;
     self.resultCode = resultCode;
 
     return self;
@@ -52,13 +52,13 @@ NS_ASSUME_NONNULL_BEGIN
     return [self.store sdl_enumForName:SDLRPCParameterNameResultCode error:&error];
 }
 
-- (NSString *)customDataType {
+- (nullable NSString *)customOEMDataType {
     NSError *error = nil;
-    return [self.store sdl_enumForName:SDLRPCParameterNameCustomDataType error:&error];
+    return [self.store sdl_enumForName:SDLRPCParameterNameOEMCustomDataType error:&error];
 }
 
-- (void)setCustomDataType:(NSString *)customDataType {
-    [self.store sdl_setObject:customDataType forName:SDLRPCParameterNameCustomDataType];
+- (void)setCustomOEMDataType:(nullable NSString *)oemCustomDataType {
+    [self.store sdl_setObject:oemCustomDataType forName:SDLRPCParameterNameOEMCustomDataType];
 }
 
 @end

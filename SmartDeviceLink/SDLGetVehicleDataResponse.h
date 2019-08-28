@@ -186,9 +186,25 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nullable, strong, nonatomic) NSString *cloudAppVehicleID;
 
-- (void)setOEMCustomVehicleData:(NSString *)vehicleDataName withVehicleDataState:(id)vehicleDataState;
+/**
+ Sets the OEM custom vehicle data state for any given OEM custom vehicle data name.
+ 
+ @param vehicleDataName The name of the OEM custom vehicle data item.
+ @param vehicleDataState An object containing the OEM custom vehicle data item.
 
-- (id)getOEMCustomVehicleData:(NSString *)vehicleDataName;
+  Added in SmartDeviceLink 6.0
+ */
+- (void)setOEMCustomVehicleData:(NSString *)vehicleDataName withVehicleDataState:(NSObject *)vehicleDataState;
+
+/**
+ Gets the OEM custom vehicle data item for any given OEM custom vehicle data name.
+ 
+ @param vehicleDataName The name of the OEM custom vehicle data item.
+ @return An OEM custom vehicle data object for the given vehicle data name.
+
+  Added in SmartDeviceLink 6.0
+ */
+- (NSObject *)getOEMCustomVehicleData:(NSString *)vehicleDataName;
 
 @end
 
