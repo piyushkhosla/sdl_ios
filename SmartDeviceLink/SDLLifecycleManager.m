@@ -322,12 +322,32 @@ NSString *const BackgroundTaskTransportName = @"com.sdl.transport.backgroundTask
         [self.proxy addSecurityManagers:self.configuration.encryptionConfig.securityManagers forAppId:appId];
     }
 
+    SDLVersion *protocolVersion = [[SDLGlobals sharedGlobals] protocolVersion];
     // If the negotiated protocol version is greater than the minimum allowable version, we need to end service and disconnect
-    if ([self.configuration.lifecycleConfig.minimumProtocolVersion isGreaterThanVersion:[SDLGlobals sharedGlobals].protocolVersion]) {
-        SDLLogW(@"Disconnecting from head unit, protocol version %@ is less than configured minimum version %@", [SDLGlobals sharedGlobals].protocolVersion.stringVersion, self.configuration.lifecycleConfig.minimumProtocolVersion.stringVersion);
+    if ([self.configuration.lifecycleConfig.minimumProtocolVersion isGreaterThanVersion:protocolVersion]) {
+        SDLLogW(@"Disconnecting from head unit, protocol version %@ is less than configured minimum version %@", protocolVersion.stringVersion, self.configuration.lifecycleConfig.minimumProtocolVersion.stringVersion);
         [self.proxy.protocol endServiceWithType:SDLServiceTypeRPC];
         [self sdl_transitionToState:SDLLifecycleStateStopped];
         return;
+    }
+
+    if ((protocolVersion != NULL) && (protocolVersion.major <5)) {
+        NSMutableArray * tempArray = [NSMutableArray arrayWithArray:self.configuration.lifecycleConfig.additionalAppTypes];
+        [tempArray addObject:self.configuration.lifecycleConfig.appType];
+        if ([tempArray containsObject:SDLAppHMITypeRemoteControl]) {
+            [tempArray removeObject:SDLAppHMITypeRemoteControl];
+        }
+        if ([self.configuration.lifecycleConfig.appType isEqualToString:SDLAppHMITypeRemoteControl]) {
+            if (tempArray.count) {
+                self.configuration.lifecycleConfig.appType = tempArray.firstObject;
+                [tempArray removeObject:tempArray.firstObject];
+            } else {
+                self.configuration.lifecycleConfig.appType = nil;
+            }
+        } else {
+            [tempArray removeObject:self.configuration.lifecycleConfig.appType];
+        }
+        self.configuration.lifecycleConfig.additionalAppTypes = tempArray;
     }
 
     // Build a register app interface request with the configuration data
