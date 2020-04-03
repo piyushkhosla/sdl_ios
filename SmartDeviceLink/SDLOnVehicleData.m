@@ -18,6 +18,8 @@
 #import "SDLRPCParameterNames.h"
 #import "SDLRPCFunctionNames.h"
 #import "SDLTireStatus.h"
+#import "SDLWiperStatus.h"
+#import "SDLWindowStatus.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -270,6 +272,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable NSString *)cloudAppVehicleID {
     return [self.parameters sdl_objectForName:SDLRPCParameterNameCloudAppVehicleID ofClass:NSString.class error:nil];
+}
+
+- (void)setWindowStatus:(nullable NSArray<SDLWindowStatus *> *)windowStatus {
+    [self.parameters sdl_setObject:windowStatus forName:SDLRPCParameterNameWindowStatus];
+}
+
+- (nullable NSArray<SDLWindowStatus *> *)windowStatus {
+    return [self.parameters sdl_objectsForName:SDLRPCParameterNameWindowStatus ofClass:SDLWindowStatus.class error:nil];
 }
 
 - (void)setOEMCustomVehicleData:(NSString *)vehicleDataName withVehicleDataState:(NSObject *)vehicleDataState {

@@ -22,6 +22,7 @@
 @class SDLHeadLampStatus;
 @class SDLMyKey;
 @class SDLTireStatus;
+@class SDLWindowStatus;
 
 
 /**
@@ -185,6 +186,11 @@ NS_ASSUME_NONNULL_BEGIN
  The cloud app vehicle ID
  */
 @property (nullable, strong, nonatomic) NSString *cloudAppVehicleID;
+
+/**
+ * See WindowStatus
+ */
+@property (nullable, strong, nonatomic) NSArray<SDLWindowStatus *> *windowStatus;
 
 /**
  Sets the OEM custom vehicle data state for any given OEM custom vehicle data name.
