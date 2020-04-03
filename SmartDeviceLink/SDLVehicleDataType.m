@@ -11,6 +11,7 @@ SDLVehicleDataType const SDLVehicleDataTypeFuelLevel = @"VEHICLEDATA_FUELLEVEL";
 SDLVehicleDataType const SDLVehicleDataTypeFuelLevelState = @"VEHICLEDATA_FUELLEVEL_STATE";
 SDLVehicleDataType const SDLVehicleDataTypeFuelConsumption = @"VEHICLEDATA_FUELCONSUMPTION";
 SDLVehicleDataType const SDLVehicleDataTypeFuelRange = @"VEHICLEDATA_FUELRANGE";
+SDLVehicleDataType const SDLVehicleDataTypeClimatedata = @"VEHICLEDATA_CLIMATEDATA";
 SDLVehicleDataType const SDLVehicleDataTypeExternalTemperature = @"VEHICLEDATA_EXTERNTEMP";
 SDLVehicleDataType const SDLVehicleDataTypeVIN = @"VEHICLEDATA_VIN";
 SDLVehicleDataType const SDLVehicleDataTypePRNDL = @"VEHICLEDATA_PRNDL";

@@ -86,6 +86,14 @@ NS_ASSUME_NONNULL_BEGIN
     return [self.parameters sdl_objectForName:SDLRPCParameterNameExternalTemperature ofClass:SDLVehicleDataResult.class error:nil];
 }
 
+- (void)setClimateData:(nullable SDLVehicleDataResult *)climateData {
+    [self.parameters sdl_setObject:climateData forName:SDLRPCParameterNameClimateData];
+}
+
+- (nullable SDLVehicleDataResult *)climateData {
+    return [self.parameters sdl_objectForName:SDLRPCParameterNameClimateData ofClass:SDLVehicleDataResult.class error:nil];
+}
+
 - (void)setPrndl:(nullable SDLVehicleDataResult *)prndl {
     [self.parameters sdl_setObject:prndl forName:SDLRPCParameterNamePRNDL];
 }

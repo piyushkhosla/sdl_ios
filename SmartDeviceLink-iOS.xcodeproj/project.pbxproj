@@ -411,6 +411,8 @@
 		2BF2F85220ED068200A26EF2 /* SDLAudioStreamingIndicatorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2F85120ED068200A26EF2 /* SDLAudioStreamingIndicatorSpec.m */; };
 		332A914F1CED9CC60043824C /* SDLAppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 332A913D1CED87F80043824C /* SDLAppInfo.m */; };
 		332A91501CED9CF10043824C /* SDLAppInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 332A913C1CED87F80043824C /* SDLAppInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		444B9D2024349EDE00E11C54 /* SDLClimateData.m in Sources */ = {isa = PBXBuildFile; fileRef = 444B9D1E24349EDE00E11C54 /* SDLClimateData.m */; };
+		444B9D2124349EDE00E11C54 /* SDLClimateData.h in Headers */ = {isa = PBXBuildFile; fileRef = 444B9D1F24349EDE00E11C54 /* SDLClimateData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5D00AC671F140F0A004000D9 /* SDLSystemCapabilityType.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D00AC651F140F0A004000D9 /* SDLSystemCapabilityType.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5D00AC681F140F0A004000D9 /* SDLSystemCapabilityType.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D00AC661F140F0A004000D9 /* SDLSystemCapabilityType.m */; };
 		5D00AC6B1F141339004000D9 /* SDLSystemCapability.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D00AC691F141339004000D9 /* SDLSystemCapability.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -2117,6 +2119,8 @@
 		2BF2F85120ED068200A26EF2 /* SDLAudioStreamingIndicatorSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDLAudioStreamingIndicatorSpec.m; sourceTree = "<group>"; };
 		332A913C1CED87F80043824C /* SDLAppInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLAppInfo.h; sourceTree = "<group>"; };
 		332A913D1CED87F80043824C /* SDLAppInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLAppInfo.m; sourceTree = "<group>"; };
+		444B9D1E24349EDE00E11C54 /* SDLClimateData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLClimateData.m; sourceTree = "<group>"; };
+		444B9D1F24349EDE00E11C54 /* SDLClimateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLClimateData.h; sourceTree = "<group>"; };
 		5D00AC651F140F0A004000D9 /* SDLSystemCapabilityType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLSystemCapabilityType.h; sourceTree = "<group>"; };
 		5D00AC661F140F0A004000D9 /* SDLSystemCapabilityType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLSystemCapabilityType.m; sourceTree = "<group>"; };
 		5D00AC691F141339004000D9 /* SDLSystemCapability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLSystemCapability.h; sourceTree = "<group>"; };
@@ -4691,6 +4695,8 @@
 				1E5AD0371F1F4E390029B8AF /* SDLClimateControlCapabilities.m */,
 				1E5AD06A1F208BAB0029B8AF /* SDLClimateControlData.h */,
 				1E5AD06B1F208BAB0029B8AF /* SDLClimateControlData.m */,
+				444B9D1F24349EDE00E11C54 /* SDLClimateData.h */,
+				444B9D1E24349EDE00E11C54 /* SDLClimateData.m */,
 				885468332225C1F800994D8D /* SDLCloudAppProperties.h */,
 				885468342225C1F800994D8D /* SDLCloudAppProperties.m */,
 				5D61FA761A84238A00846EE7 /* SDLClusterModeStatus.h */,
@@ -6524,6 +6530,7 @@
 			files = (
 				9F425AD222DD980200BE3245 /* SDLWindowCapability.h in Headers */,
 				9F425ADA22DD983500BE3245 /* SDLDisplayCapability.h in Headers */,
+				444B9D2124349EDE00E11C54 /* SDLClimateData.h in Headers */,
 				9F425ACE22DD97DE00BE3245 /* SDLTemplateConfiguration.h in Headers */,
 				9F425AD622DD981E00BE3245 /* SDLWindowTypeCapabilities.h in Headers */,
 				9FE2471522D77AD500F8D2FC /* SDLWindowType.h in Headers */,
@@ -7538,6 +7545,7 @@
 				5D61FC4E1A84238C00846EE7 /* SDLBitsPerSample.m in Sources */,
 				880723EC23A2CFB4003D0489 /* SDLLockScreenRootViewController.m in Sources */,
 				5D00AC701F1511B9004000D9 /* SDLGetSystemCapability.m in Sources */,
+				444B9D2024349EDE00E11C54 /* SDLClimateData.m in Sources */,
 				5D61FDEA1A84238C00846EE7 /* SDLUnsubscribeButtonResponse.m in Sources */,
 				7538765022D8CEDB00FE8484 /* SDLShowAppMenu.m in Sources */,
 				1E5AD05D1F2064A80029B8AF /* SDLRDSData.m in Sources */,

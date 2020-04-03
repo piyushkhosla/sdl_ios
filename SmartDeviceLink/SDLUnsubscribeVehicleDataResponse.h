@@ -65,11 +65,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *instantFuelConsumption;
 
 /**
- The result of requesting to unsubscribe to the external temperature in degrees celsius.
+* The external temperature in degrees celsius. This parameter is deprecated starting RPC Spec 6.5.0, please see
+* climateData.
+*
+* @deprecated
+* @since SDL 6.5.0
+*/
+@property (strong, nonatomic, nullable) SDLVehicleDataResult *externalTemperature __deprecated;
 
- Optional
+/**
+ * See ClimateData
+ *
+ * @since SDL 6.5.0
  */
-@property (strong, nonatomic, nullable) SDLVehicleDataResult *externalTemperature;
+@property (nullable, strong, nonatomic) SDLVehicleDataResult *climateData;
 
 /**
  The result of requesting to unsubscribe to the PRNDL status.

@@ -8,6 +8,7 @@
 #import "SDLAirbagStatus.h"
 #import "SDLBeltStatus.h"
 #import "SDLBodyInformation.h"
+#import "SDLClimateData.h"
 #import "SDLClusterModeStatus.h"
 #import "SDLDeviceStatus.h"
 #import "SDLECallInfo.h"
@@ -96,6 +97,15 @@ NS_ASSUME_NONNULL_BEGIN
 - (nullable NSNumber<SDLFloat> *)externalTemperature {
     return [self.parameters sdl_objectForName:SDLRPCParameterNameExternalTemperature ofClass:NSNumber.class error:nil];
 }
+
+- (void)setClimateData:(nullable SDLClimateData *)climateData {
+    [self.parameters sdl_setObject:climateData forName:SDLRPCParameterNameClimateData];
+}
+
+- (nullable SDLClimateData *)climateData {
+    return [self.parameters sdl_objectForName:SDLRPCParameterNameClimateData ofClass:SDLClimateData.class error:nil];
+}
+
 
 - (void)setVin:(nullable NSString *)vin {
     [self.parameters sdl_setObject:vin forName:SDLRPCParameterNameVIN];

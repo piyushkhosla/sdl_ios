@@ -40,9 +40,16 @@ extern SDLVehicleDataType const SDLVehicleDataTypeFuelLevelState;
 extern SDLVehicleDataType const SDLVehicleDataTypeFuelConsumption;
 
 /**
+ * Vehicle fuel Climate data
+ * @since SDL 6.5.0
+ */
+
+extern SDLVehicleDataType const SDLVehicleDataTypeClimatedata;
+
+/**
  Vehicle external temperature data
  */
-extern SDLVehicleDataType const SDLVehicleDataTypeExternalTemperature;
+extern SDLVehicleDataType const SDLVehicleDataTypeExternalTemperature __deprecated;
 
 /**
  Vehicle VIN data

@@ -13,6 +13,7 @@
 @class SDLAirbagStatus;
 @class SDLBeltStatus;
 @class SDLBodyInformation;
+@class SDLClimateData;
 @class SDLClusterModeStatus;
 @class SDLDeviceStatus;
 @class SDLECallInfo;
@@ -72,9 +73,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, strong, nonatomic) NSNumber<SDLFloat> *instantFuelConsumption;
 
 /**
- The external temperature in degrees celsius.
+* The external temperature in degrees celsius. This parameter is deprecated starting RPC Spec 6.5.0, please see
+* climateData.
+*
+* @deprecated
+* @since SDL 6.5.0
+*/
+@property (nullable, strong, nonatomic) NSNumber<SDLFloat> *externalTemperature __deprecated;
+
+/**
+ * See ClimateData
  */
-@property (nullable, strong, nonatomic) NSNumber<SDLFloat> *externalTemperature;
+@property (nullable, strong, nonatomic) SDLClimateData *climateData;
 
 /**
  The Vehicle Identification Number
