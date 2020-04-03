@@ -30,7 +30,7 @@ describe(@"Getter/Setter Tests", ^ {
         testResponse.fuelLevel_State = vehicleDataResult;
         testResponse.fuelRange = vehicleDataResult;
         testResponse.instantFuelConsumption = vehicleDataResult;
-        testResponse.externalTemperature = vehicleDataResult;
+        testResponse.climateData = vehicleDataResult;
         testResponse.prndl = vehicleDataResult;
         testResponse.tirePressure = vehicleDataResult;
         testResponse.odometer = vehicleDataResult;
@@ -60,7 +60,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testResponse.fuelLevel_State).to(equal(vehicleDataResult));
         expect(testResponse.fuelRange).to(equal(vehicleDataResult));
         expect(testResponse.instantFuelConsumption).to(equal(vehicleDataResult));
-        expect(testResponse.externalTemperature).to(equal(vehicleDataResult));
+        expect(testResponse.climateData).to(equal(vehicleDataResult));
         expect(testResponse.prndl).to(equal(vehicleDataResult));
         expect(testResponse.tirePressure).to(equal(vehicleDataResult));
         expect(testResponse.odometer).to(equal(vehicleDataResult));
@@ -94,7 +94,7 @@ describe(@"Getter/Setter Tests", ^ {
                                                                    SDLRPCParameterNameFuelLevelState:vehicleDataResult,
                                                                    SDLRPCParameterNameFuelRange:vehicleDataResult,
                                                                    SDLRPCParameterNameInstantFuelConsumption:vehicleDataResult,
-                                                                   SDLRPCParameterNameExternalTemperature:vehicleDataResult,
+                                                                   SDLRPCParameterNameClimateData:vehicleDataResult,
                                                                    SDLRPCParameterNamePRNDL:vehicleDataResult,
                                                                    SDLRPCParameterNameTirePressure:vehicleDataResult,
                                                                    SDLRPCParameterNameOdometer:vehicleDataResult,
@@ -130,7 +130,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testResponse.fuelLevel_State).to(equal(vehicleDataResult));
         expect(testResponse.fuelRange).to(equal(vehicleDataResult));
         expect(testResponse.instantFuelConsumption).to(equal(vehicleDataResult));
-        expect(testResponse.externalTemperature).to(equal(vehicleDataResult));
+        expect(testResponse.climateData).to(equal(vehicleDataResult));
         expect(testResponse.prndl).to(equal(vehicleDataResult));
         expect(testResponse.tirePressure).to(equal(vehicleDataResult));
         expect(testResponse.odometer).to(equal(vehicleDataResult));
@@ -164,7 +164,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testResponse.fuelLevel_State).to(beNil());
         expect(testResponse.fuelRange).to(beNil());
         expect(testResponse.instantFuelConsumption).to(beNil());
-        expect(testResponse.externalTemperature).to(beNil());
+        expect(testResponse.climateData).to(beNil());
         expect(testResponse.prndl).to(beNil());
         expect(testResponse.tirePressure).to(beNil());
         expect(testResponse.odometer).to(beNil());

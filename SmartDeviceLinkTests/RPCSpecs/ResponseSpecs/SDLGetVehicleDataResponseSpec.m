@@ -20,6 +20,7 @@ describe(@"Getter/Setter Tests", ^ {
     __block SDLTireStatus* tires = nil;
     __block SDLBeltStatus* belt = nil;
     __block SDLBodyInformation* body = nil;
+    __block SDLClimateData* climateData = nil;
     __block SDLDeviceStatus* device = nil;
     __block SDLHeadLampStatus* headLamp = nil;
     __block SDLECallInfo* eCall = nil;
@@ -36,6 +37,7 @@ describe(@"Getter/Setter Tests", ^ {
         tires = [[SDLTireStatus alloc] init];
         belt = [[SDLBeltStatus alloc] init];
         body = [[SDLBodyInformation alloc] init];
+        climateData  = [[SDLClimateData alloc] init];
         device = [[SDLDeviceStatus alloc] init];
         headLamp = [[SDLHeadLampStatus alloc] init];
         eCall = [[SDLECallInfo alloc] init];
@@ -55,6 +57,7 @@ describe(@"Getter/Setter Tests", ^ {
         testResponse.airbagStatus = airbag;
         testResponse.beltStatus = belt;
         testResponse.bodyInformation = body;
+        testResponse.climateData = climateData;
         testResponse.cloudAppVehicleID = cloudAppVehicleID;
         testResponse.clusterModeStatus = clusterMode;
         testResponse.deviceStatus = device;
@@ -64,7 +67,6 @@ describe(@"Getter/Setter Tests", ^ {
         testResponse.emergencyEvent = event;
         testResponse.engineOilLife = @56.3;
         testResponse.engineTorque = @630.4;
-        testResponse.externalTemperature = @0;
         testResponse.fuelLevel = @99.9999;
         testResponse.fuelLevel_State = SDLComponentVolumeStatusFault;
         testResponse.fuelRange = @[fuelRange, fuelRange];
@@ -95,7 +97,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testResponse.emergencyEvent).to(equal(event));
         expect(testResponse.engineOilLife).to(equal(@56.3));
         expect(testResponse.engineTorque).to(equal(@630.4));
-        expect(testResponse.externalTemperature).to(equal(@0));
+        expect(testResponse.climateData).to(equal(climateData));
         expect(testResponse.fuelLevel).to(equal(@99.9999));
         expect(testResponse.fuelLevel_State).to(equal(SDLComponentVolumeStatusFault));
         expect(testResponse.fuelRange).to(equal(@[fuelRange, fuelRange]));
@@ -131,7 +133,7 @@ describe(@"Getter/Setter Tests", ^ {
                                                      SDLRPCParameterNameEmergencyEvent:event,
                                                      SDLRPCParameterNameEngineOilLife:@23.22,
                                                      SDLRPCParameterNameEngineTorque:@630.4,
-                                                     SDLRPCParameterNameExternalTemperature:@0,
+                                                     SDLRPCParameterNameClimateData:climateData,
                                                      SDLRPCParameterNameFuelLevel:@99.9999,
                                                      SDLRPCParameterNameFuelLevelState:SDLComponentVolumeStatusFault,
                                                      SDLRPCParameterNameFuelRange:@[fuelRange],
@@ -167,7 +169,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testResponse.emergencyEvent).to(equal(event));
         expect(testResponse.engineOilLife).to(equal(@23.22));
         expect(testResponse.engineTorque).to(equal(@630.4));
-        expect(testResponse.externalTemperature).to(equal(@0));
+        expect(testResponse.climateData).to(equal(climateData));
         expect(testResponse.fuelLevel).to(equal(@99.9999));
         expect(testResponse.fuelLevel_State).to(equal(SDLComponentVolumeStatusFault));
         expect(testResponse.fuelRange).to(equal(@[fuelRange]));
@@ -202,7 +204,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testResponse.emergencyEvent).to(beNil());
         expect(testResponse.engineOilLife).to(beNil());
         expect(testResponse.engineTorque).to(beNil());
-        expect(testResponse.externalTemperature).to(beNil());
+        expect(testResponse.climateData).to(beNil());
         expect(testResponse.fuelLevel).to(beNil());
         expect(testResponse.fuelLevel_State).to(beNil());
         expect(testResponse.fuelRange).to(beNil());

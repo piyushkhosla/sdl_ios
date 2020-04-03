@@ -20,6 +20,7 @@ describe(@"Getter/Setter Tests", ^ {
     __block SDLTireStatus* tires = nil;
     __block SDLBeltStatus* belt = nil;
     __block SDLBodyInformation* body = nil;
+    __block SDLClimateData* climateData = nil;
     __block SDLDeviceStatus* device = nil;
     __block SDLHeadLampStatus* headLamp = nil;
     __block SDLECallInfo* eCall = nil;
@@ -35,6 +36,7 @@ describe(@"Getter/Setter Tests", ^ {
         tires = [[SDLTireStatus alloc] init];
         belt = [[SDLBeltStatus alloc] init];
         body = [[SDLBodyInformation alloc] init];
+        climateData = [[SDLClimateData alloc] init];
         device = [[SDLDeviceStatus alloc] init];
         headLamp = [[SDLHeadLampStatus alloc] init];
         eCall = [[SDLECallInfo alloc] init];
@@ -53,6 +55,7 @@ describe(@"Getter/Setter Tests", ^ {
         testNotification.airbagStatus = airbag;
         testNotification.beltStatus = belt;
         testNotification.bodyInformation = body;
+        testNotification.climateData = climateData;
         testNotification.cloudAppVehicleID = cloudAppVehicleID;
         testNotification.clusterModeStatus = clusterMode;
         testNotification.deviceStatus = device;
@@ -62,7 +65,6 @@ describe(@"Getter/Setter Tests", ^ {
         testNotification.emergencyEvent = event;
         testNotification.engineOilLife = @34.45;
         testNotification.engineTorque = @-200.124;
-        testNotification.externalTemperature = @-10;
         testNotification.fuelLevel = @10.3;
         testNotification.fuelLevel_State = SDLComponentVolumeStatusAlert;
         testNotification.fuelRange = @[fuelRange, fuelRange];
@@ -84,6 +86,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testNotification.airbagStatus).to(equal(airbag));
         expect(testNotification.beltStatus).to(equal(belt));
         expect(testNotification.bodyInformation).to(equal(body));
+        expect(testNotification.climateData).to(equal(climateData));
         expect(testNotification.cloudAppVehicleID).to(equal(cloudAppVehicleID));
         expect(testNotification.clusterModeStatus).to(equal(clusterMode));
         expect(testNotification.deviceStatus).to(equal(device));
@@ -93,7 +96,6 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testNotification.emergencyEvent).to(equal(event));
         expect(testNotification.engineOilLife).to(equal(@34.45));
         expect(testNotification.engineTorque).to(equal(@-200.124));
-        expect(testNotification.externalTemperature).to(equal(@-10));
         expect(testNotification.fuelLevel).to(equal(@10.3));
         expect(testNotification.fuelLevel_State).to(equal(SDLComponentVolumeStatusAlert));
         expect(testNotification.fuelRange).to(equal(@[fuelRange, fuelRange]));
@@ -119,6 +121,7 @@ describe(@"Getter/Setter Tests", ^ {
                                            SDLRPCParameterNameAirbagStatus:airbag,
                                            SDLRPCParameterNameBeltStatus:belt,
                                            SDLRPCParameterNameBodyInformation:body,
+                                           SDLRPCParameterNameClimateData:climateData,
                                            SDLRPCParameterNameCloudAppVehicleID:cloudAppVehicleID,
                                            SDLRPCParameterNameClusterModeStatus:clusterMode,
                                            SDLRPCParameterNameDeviceStatus:device,
@@ -128,7 +131,6 @@ describe(@"Getter/Setter Tests", ^ {
                                            SDLRPCParameterNameEmergencyEvent:event,
                                            SDLRPCParameterNameEngineOilLife:@45.1,
                                            SDLRPCParameterNameEngineTorque:@-200.124,
-                                           SDLRPCParameterNameExternalTemperature:@-10,
                                            SDLRPCParameterNameFuelLevel:@10.3,
                                            SDLRPCParameterNameFuelLevelState:SDLComponentVolumeStatusAlert,
                                            SDLRPCParameterNameFuelRange:@[fuelRange],
@@ -155,6 +157,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testNotification.airbagStatus).to(equal(airbag));
         expect(testNotification.beltStatus).to(equal(belt));
         expect(testNotification.bodyInformation).to(equal(body));
+        expect(testNotification.climateData).to(equal(climateData));
         expect(testNotification.cloudAppVehicleID).to(equal(cloudAppVehicleID));
         expect(testNotification.clusterModeStatus).to(equal(clusterMode));
         expect(testNotification.deviceStatus).to(equal(device));
@@ -164,7 +167,6 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testNotification.emergencyEvent).to(equal(event));
         expect(testNotification.engineOilLife).to(equal(@45.1));
         expect(testNotification.engineTorque).to(equal(@-200.124));
-        expect(testNotification.externalTemperature).to(equal(@-10));
         expect(testNotification.fuelLevel).to(equal(@10.3));
         expect(testNotification.fuelLevel_State).to(equal(SDLComponentVolumeStatusAlert));
         expect(testNotification.fuelRange).to(equal(@[fuelRange]));
@@ -190,6 +192,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testNotification.airbagStatus).to(beNil());
         expect(testNotification.beltStatus).to(beNil());
         expect(testNotification.bodyInformation).to(beNil());
+        expect(testNotification.climateData).to(beNil());
         expect(testNotification.cloudAppVehicleID).to(beNil());
         expect(testNotification.clusterModeStatus).to(beNil());
         expect(testNotification.deviceStatus).to(beNil());
@@ -199,7 +202,6 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testNotification.emergencyEvent).to(beNil());
         expect(testNotification.engineOilLife).to(beNil());
         expect(testNotification.engineTorque).to(beNil());
-        expect(testNotification.externalTemperature).to(beNil());
         expect(testNotification.fuelLevel).to(beNil());
         expect(testNotification.fuelLevel_State).to(beNil());
         expect(testNotification.fuelRange).to(beNil());
