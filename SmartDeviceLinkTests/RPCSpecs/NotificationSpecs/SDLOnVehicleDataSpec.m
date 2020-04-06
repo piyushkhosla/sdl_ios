@@ -29,6 +29,7 @@ describe(@"Getter/Setter Tests", ^ {
     __block SDLMyKey* myKey = nil;
     __block SDLFuelRange* fuelRange = nil;
     __block NSString* cloudAppVehicleID = nil;
+    __block SDLGearStatus *gearStatus = nil;
 
     beforeEach(^{
         gps = [[SDLGPSData alloc] init];
@@ -44,6 +45,7 @@ describe(@"Getter/Setter Tests", ^ {
         myKey = [[SDLMyKey alloc] init];
         fuelRange = [[SDLFuelRange alloc] init];
         cloudAppVehicleID = @"testCloudAppVehicleID";
+        gearStatus = [[SDLGearStatus alloc] init];
     });
 
     it(@"should correctly initialize with init", ^ {
@@ -71,7 +73,11 @@ describe(@"Getter/Setter Tests", ^ {
         testNotification.instantFuelConsumption = @4000.63;
         testNotification.myKey = myKey;
         testNotification.odometer = @100050;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         testNotification.prndl = SDLPRNDLDrive;
+#pragma clang diagnostic pops
+        testNotification.gearStatus = gearStatus;
         testNotification.rpm = @4242;
         testNotification.speed = @70.1;
         testNotification.steeringWheelAngle = @0.000000001;
@@ -102,7 +108,11 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testNotification.instantFuelConsumption).to(equal(@4000.63));
         expect(testNotification.myKey).to(equal(myKey));
         expect(testNotification.odometer).to(equal(@100050));
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         expect(testNotification.prndl).to(equal(SDLPRNDLDrive));
+#pragma clang diagnostic pop
+        expect(testNotification.gearStatus).to(equal(gearStatus));
         expect(testNotification.rpm).to(equal(@4242));
         expect(testNotification.speed).to(equal(@70.1));
         expect(testNotification.steeringWheelAngle).to(equal(@0.000000001));
@@ -144,7 +154,9 @@ describe(@"Getter/Setter Tests", ^ {
                                            SDLRPCParameterNameTirePressure:tires,
                                            SDLRPCParameterNameTurnSignal:SDLTurnSignalOff,
                                            SDLRPCParameterNameVIN:@"222222222722",
-                                           SDLRPCParameterNameWiperStatus:SDLWiperStatusStalled},
+                                           SDLRPCParameterNameWiperStatus:SDLWiperStatusStalled,
+                                           SDLRPCParameterNameGearStatus:gearStatus
+                                         },
                                      SDLRPCParameterNameOperationName:SDLRPCFunctionNameOnVehicleData}};
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -173,7 +185,11 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testNotification.instantFuelConsumption).to(equal(@4000.63));
         expect(testNotification.myKey).to(equal(myKey));
         expect(testNotification.odometer).to(equal(@100050));
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         expect(testNotification.prndl).to(equal(SDLPRNDLDrive));
+#pragma clang diagnostic pop
+        expect(testNotification.gearStatus).to(equal(gearStatus));
         expect(testNotification.rpm).to(equal(@4242));
         expect(testNotification.speed).to(equal(@70.1));
         expect(testNotification.steeringWheelAngle).to(equal(@0.000000001));
@@ -208,7 +224,11 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testNotification.instantFuelConsumption).to(beNil());
         expect(testNotification.myKey).to(beNil());
         expect(testNotification.odometer).to(beNil());
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         expect(testNotification.prndl).to(beNil());
+#pragma clang diagnostic pop
+        expect(testNotification.gearStatus).to(beNil());
         expect(testNotification.rpm).to(beNil());
         expect(testNotification.speed).to(beNil());
         expect(testNotification.steeringWheelAngle).to(beNil());

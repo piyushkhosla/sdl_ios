@@ -47,13 +47,17 @@ describe(@"Getter/Setter Tests", ^ {
         testResponse.instantFuelConsumption = vehicleDataResult;
         testResponse.myKey = vehicleDataResult;
         testResponse.odometer = vehicleDataResult;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         testResponse.prndl = vehicleDataResult;
+#pragma clang diagnostic pop
         testResponse.rpm = vehicleDataResult;
         testResponse.speed = vehicleDataResult;
         testResponse.steeringWheelAngle = vehicleDataResult;
         testResponse.tirePressure = vehicleDataResult;
         testResponse.turnSignal = vehicleDataResult;
         testResponse.wiperStatus = vehicleDataResult;
+        testResponse.gearStatus = vehicleDataResult;
 
         expect(testResponse.accPedalPosition).to(equal(vehicleDataResult));
         expect(testResponse.airbagStatus).to(equal(vehicleDataResult));
@@ -77,13 +81,17 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testResponse.instantFuelConsumption).to(equal(vehicleDataResult));
         expect(testResponse.myKey).to(equal(vehicleDataResult));
         expect(testResponse.odometer).to(equal(vehicleDataResult));
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         expect(testResponse.prndl).to(equal(vehicleDataResult));
+#pragma clang diagnostic pop
         expect(testResponse.rpm).to(equal(vehicleDataResult));
         expect(testResponse.speed).to(equal(vehicleDataResult));
         expect(testResponse.steeringWheelAngle).to(equal(vehicleDataResult));
         expect(testResponse.tirePressure).to(equal(vehicleDataResult));
         expect(testResponse.turnSignal).to(equal(vehicleDataResult));
         expect(testResponse.wiperStatus).to(equal(vehicleDataResult));
+        expect(testResponse.gearStatus).to(equal(vehicleDataResult));
     });
     
     it(@"Should get correctly when initialized", ^ {
@@ -117,7 +125,9 @@ describe(@"Getter/Setter Tests", ^ {
                                                                    SDLRPCParameterNameSteeringWheelAngle:vehicleDataResult,
                                                                    SDLRPCParameterNameTirePressure:vehicleDataResult,
                                                                    SDLRPCParameterNameTurnSignal:vehicleDataResult,
-                                                                   SDLRPCParameterNameWiperStatus:vehicleDataResult},
+                                                                   SDLRPCParameterNameWiperStatus:vehicleDataResult,
+                                                                   SDLRPCParameterNameGearStatus:vehicleDataResult
+                                                                 },
                                                              SDLRPCParameterNameOperationName:SDLRPCFunctionNameSubscribeVehicleData}};
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -146,13 +156,17 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testResponse.instantFuelConsumption).to(equal(vehicleDataResult));
         expect(testResponse.myKey).to(equal(vehicleDataResult));
         expect(testResponse.odometer).to(equal(vehicleDataResult));
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         expect(testResponse.prndl).to(equal(vehicleDataResult));
+#pragma clang diagnostic pop
         expect(testResponse.rpm).to(equal(vehicleDataResult));
         expect(testResponse.speed).to(equal(vehicleDataResult));
         expect(testResponse.steeringWheelAngle).to(equal(vehicleDataResult));
         expect(testResponse.tirePressure).to(equal(vehicleDataResult));
         expect(testResponse.turnSignal).to(equal(vehicleDataResult));
         expect(testResponse.wiperStatus).to(equal(vehicleDataResult));
+        expect(testResponse.gearStatus).to(equal(vehicleDataResult));
     });
     
     it(@"Should return nil if not set", ^ {
@@ -180,13 +194,18 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testResponse.instantFuelConsumption).to(beNil());
         expect(testResponse.myKey).to(beNil());
         expect(testResponse.odometer).to(beNil());
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         expect(testResponse.prndl).to(beNil());
+#pragma clang diagnostic pop
         expect(testResponse.rpm).to(beNil());
         expect(testResponse.speed).to(beNil());
         expect(testResponse.steeringWheelAngle).to(beNil());
         expect(testResponse.tirePressure).to(beNil());
         expect(testResponse.turnSignal).to(beNil());
         expect(testResponse.wiperStatus).to(beNil());
+        expect(testResponse.gearStatus).to(beNil());
+
     });
 
     it(@"Should set and get Generic Network Signal Data", ^{
