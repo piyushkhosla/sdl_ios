@@ -94,6 +94,14 @@ NS_ASSUME_NONNULL_BEGIN
     return [self.parameters sdl_objectForName:SDLRPCParameterNamePRNDL ofClass:SDLVehicleDataResult.class error:nil];
 }
 
+- (void)setGearStatus:(nullable SDLVehicleDataResult *)gearStatus {
+    [self.parameters sdl_setObject:gearStatus forName:SDLRPCParameterNameGearStatus];
+}
+
+- (nullable SDLVehicleDataResult *)gearStatus {
+    return [self.parameters sdl_objectForName:SDLRPCParameterNameGearStatus ofClass:SDLVehicleDataResult.class error:nil];
+}
+
 - (void)setTirePressure:(nullable SDLVehicleDataResult *)tirePressure {
     [self.parameters sdl_setObject:tirePressure forName:SDLRPCParameterNameTirePressure];
 }

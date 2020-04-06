@@ -18,6 +18,7 @@
 @class SDLECallInfo;
 @class SDLEmergencyEvent;
 @class SDLFuelRange;
+@class SDLGearStatus;
 @class SDLGPSData;
 @class SDLHeadLampStatus;
 @class SDLMyKey;
@@ -82,9 +83,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, strong, nonatomic) NSString *vin;
 
 /**
- The current gear shift state of the user's vehicle
+* See PRNDL. This parameter is deprecated starting RPC Spec 6.5.0, please see gearStatus.
+*
+* @deprecated
+* @since SDL 6.5.0
+*/
+@property (nullable, strong, nonatomic) SDLPRNDL prndl __deprecated;
+
+/**
+ * See GearStatus
+ *
+ * @since SDL 6.5.0
  */
-@property (nullable, strong, nonatomic) SDLPRNDL prndl;
+@property (nullable, strong, nonatomic) SDLGearStatus *gearStatus;
 
 /**
  The current pressure warnings for the user's vehicle

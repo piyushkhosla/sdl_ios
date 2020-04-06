@@ -73,11 +73,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic, nullable) SDLVehicleDataResult *externalTemperature;
 
 /**
- The result of requesting to subscribe to the PRNDL status.
+* See PRNDL. This parameter is deprecated starting RPC Spec 6.5.0, please see gearStatus.
+*
+* @deprecated
+* @since SDL 6.5.0
+*/
+@property (nullable, strong, nonatomic) SDLVehicleDataResult *prndl __deprecated;
 
- Optional
+/**
+ *  The result of requesting to subscribe to the gearStatus.
+ *
+ * @since SDL 6.5.0
  */
-@property (strong, nonatomic, nullable) SDLVehicleDataResult *prndl;
+@property (nullable, strong, nonatomic) SDLVehicleDataResult *gearStatus;
 
 /**
  The result of requesting to subscribe to the tireStatus.

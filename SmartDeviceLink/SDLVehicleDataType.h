@@ -50,9 +50,15 @@ extern SDLVehicleDataType const SDLVehicleDataTypeExternalTemperature;
 extern SDLVehicleDataType const SDLVehicleDataTypeVIN;
 
 /**
- Vehicle PRNDL data
+ * Vehicle PRNDL data
+ *  @since SDL 6.5.0
  */
-extern SDLVehicleDataType const SDLVehicleDataTypePRNDL;
+extern SDLVehicleDataType const SDLVehicleDataTypePRNDL  __deprecated;
+
+/**
+ * @since SDL 6.5.0
+ */
+extern SDLVehicleDataType const SDLVehicleDataTypeGearstatus;
 
 /**
  Vehicle tire pressure data

@@ -82,6 +82,16 @@ extern SDLPRNDL const SDLPRNDLSeventh;
 extern SDLPRNDL const SDLPRNDLEighth;
 
 /**
+ * @since SDL 6.5.0
+ */
+extern SDLPRNDL const SDLPRNDLNinth;
+
+/**
+ * @since SDL 6.5.0
+ */
+extern SDLPRNDL const SDLPRNDLTenth;
+
+/**
  * Unknown
  */
 extern SDLPRNDL const SDLPRNDLUnknown;

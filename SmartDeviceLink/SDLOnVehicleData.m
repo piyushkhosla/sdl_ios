@@ -12,6 +12,7 @@
 #import "SDLECallInfo.h"
 #import "SDLEmergencyEvent.h"
 #import "SDLFuelRange.h"
+#import "SDLGearStatus.h"
 #import "SDLGPSData.h"
 #import "SDLHeadLampStatus.h"
 #import "SDLMyKey.h"
@@ -110,6 +111,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable SDLPRNDL)prndl {
     return [self.parameters sdl_enumForName:SDLRPCParameterNamePRNDL error:nil];
+}
+
+- (void)setGearStatus:(nullable SDLGearStatus *)gearStatus {
+    [self.parameters sdl_setObject:gearStatus forName:SDLRPCParameterNameGearStatus];
+}
+
+- (nullable SDLGearStatus *)gearStatus {
+    return [self.parameters sdl_objectForName:SDLRPCParameterNameGearStatus ofClass:SDLGearStatus.class error:nil];
 }
 
 - (void)setTirePressure:(nullable SDLTireStatus *)tirePressure {
