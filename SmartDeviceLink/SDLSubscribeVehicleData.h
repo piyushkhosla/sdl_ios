@@ -126,7 +126,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param speed - @(speed)
  * @param rpm - @(rpm)
  * @param fuelLevel - @(fuelLevel)
- * @param fuelLevel_State - @(fuelLevel_State)
+ * @param fuelLevelState - @(fuelLevel_State)
  * @param instantFuelConsumption - @(instantFuelConsumption)
  * @param fuelRange - @(fuelRange)
  * @param climateData - @(climateData)
@@ -141,7 +141,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @param wiperStatus - @(wiperStatus)
  * @param headLampStatus - @(headLampStatus)
  * @param engineTorque - @(engineTorque)
- * @param accPedalPosition - @(accPedalPosition)
+ * @param accelerationPedalPosition - @(accPedalPosition)
  * @param steeringWheelAngle - @(steeringWheelAngle)
  * @param engineOilLife - @(engineOilLife)
  * @param electronicParkBrakeStatus - @(electronicParkBrakeStatus)
@@ -153,7 +153,6 @@ NS_ASSUME_NONNULL_BEGIN
  * @param myKey - @(myKey)
  * @return A SDLSubscribeVehicleData object
  */
-#pragma clang diagnostic push
 - (instancetype)initWithAccelerationPedalPosition:(BOOL)accelerationPedalPosition airbagStatus:(BOOL)airbagStatus beltStatus:(BOOL)beltStatus bodyInformation:(BOOL)bodyInformation climateData:(BOOL)climateData cloudAppVehicleID:(BOOL)cloudAppVehicleID clusterModeStatus:(BOOL)clusterModeStatus deviceStatus:(BOOL)deviceStatus driverBraking:(BOOL)driverBraking eCallInfo:(BOOL)eCallInfo electronicParkBrakeStatus:(BOOL)electronicParkBrakeStatus emergencyEvent:(BOOL)emergencyEvent engineOilLife:(BOOL)engineOilLife engineTorque:(BOOL)engineTorque fuelLevel:(BOOL)fuelLevel fuelLevelState:(BOOL)fuelLevelState fuelRange:(BOOL)fuelRange gps:(BOOL)gps headLampStatus:(BOOL)headLampStatus instantFuelConsumption:(BOOL)instantFuelConsumption myKey:(BOOL)myKey odometer:(BOOL)odometer prndl:(BOOL)prndl rpm:(BOOL)rpm speed:(BOOL)speed steeringWheelAngle:(BOOL)steeringWheelAngle tirePressure:(BOOL)tirePressure turnSignal:(BOOL)turnSignal wiperStatus:(BOOL)wiperStatus;
 
 /**
