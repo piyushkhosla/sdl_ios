@@ -411,6 +411,8 @@
 		2BF2F85220ED068200A26EF2 /* SDLAudioStreamingIndicatorSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BF2F85120ED068200A26EF2 /* SDLAudioStreamingIndicatorSpec.m */; };
 		332A914F1CED9CC60043824C /* SDLAppInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 332A913D1CED87F80043824C /* SDLAppInfo.m */; };
 		332A91501CED9CF10043824C /* SDLAppInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 332A913C1CED87F80043824C /* SDLAppInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		44461189243722BA00767D1E /* SDLWindowStateSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 44461188243722BA00767D1E /* SDLWindowStateSpec.m */; };
+		4446118B243725FB00767D1E /* SDLWindowStatusSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 4446118A243725FB00767D1E /* SDLWindowStatusSpec.m */; };
 		448E20BE2435F64200A4D38B /* SDLWindowStatus.h in Headers */ = {isa = PBXBuildFile; fileRef = 448E20BA2435F64100A4D38B /* SDLWindowStatus.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		448E20BF2435F64200A4D38B /* SDLWindowState.m in Sources */ = {isa = PBXBuildFile; fileRef = 448E20BB2435F64100A4D38B /* SDLWindowState.m */; };
 		448E20C02435F64200A4D38B /* SDLWindowStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 448E20BC2435F64200A4D38B /* SDLWindowStatus.m */; };
@@ -2121,6 +2123,8 @@
 		2BF2F85120ED068200A26EF2 /* SDLAudioStreamingIndicatorSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDLAudioStreamingIndicatorSpec.m; sourceTree = "<group>"; };
 		332A913C1CED87F80043824C /* SDLAppInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLAppInfo.h; sourceTree = "<group>"; };
 		332A913D1CED87F80043824C /* SDLAppInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLAppInfo.m; sourceTree = "<group>"; };
+		44461188243722BA00767D1E /* SDLWindowStateSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDLWindowStateSpec.m; sourceTree = "<group>"; };
+		4446118A243725FB00767D1E /* SDLWindowStatusSpec.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDLWindowStatusSpec.m; sourceTree = "<group>"; };
 		448E20BA2435F64100A4D38B /* SDLWindowStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDLWindowStatus.h; sourceTree = "<group>"; };
 		448E20BB2435F64100A4D38B /* SDLWindowState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLWindowState.m; sourceTree = "<group>"; };
 		448E20BC2435F64200A4D38B /* SDLWindowStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDLWindowStatus.m; sourceTree = "<group>"; };
@@ -3891,6 +3895,8 @@
 				000DD56B22EEF8E4005AB7A7 /* SDLSeatLocationCapabilitySpec.m */,
 				000DD56D22EF01FC005AB7A7 /* SDLSeatLocationSpec.m */,
 				9FA0CFFF22DF06A0009CF344 /* SDLWindowCapabilitySpec.m */,
+				44461188243722BA00767D1E /* SDLWindowStateSpec.m */,
+				4446118A243725FB00767D1E /* SDLWindowStatusSpec.m */,
 				9FA0D00222DF06B9009CF344 /* SDLWindowTypeCapabilitiesSpec.m */,
 			);
 			path = StructSpecs;
@@ -7956,6 +7962,7 @@
 				162E82E11A9BDE8B00906325 /* SDLHMIZoneCapabilitiesSpec.m in Sources */,
 				5D75960D22972F830013207C /* TestSystemCapabilityObserver.m in Sources */,
 				88B58DBD222042500011B063 /* SDLDirectionSpec.m in Sources */,
+				4446118B243725FB00767D1E /* SDLWindowStatusSpec.m in Sources */,
 				162E83721A9BDE8B00906325 /* SDLAudioPassThruCapabilitiesSpec.m in Sources */,
 				162E83681A9BDE8B00906325 /* SDLSpeakResponseSpec.m in Sources */,
 				1EB59CD8202DCCD500343A61 /* SDLMassageCushionFirmnessSpec.m in Sources */,
@@ -8126,6 +8133,7 @@
 				162E832C1A9BDE8B00906325 /* SDLDiagnosticMessageSpec.m in Sources */,
 				162E83381A9BDE8B00906325 /* SDLScrollableMessageSpec.m in Sources */,
 				162E82E81A9BDE8B00906325 /* SDLKeyboardLayoutSpec.m in Sources */,
+				44461189243722BA00767D1E /* SDLWindowStateSpec.m in Sources */,
 				5D64FE6F20DA9E4300792F9F /* SDLStreamingVideoLifecycleManagerSpec.m in Sources */,
 				DA9F7EA41DCC05EE00ACAE48 /* SDLSubscribeWaypointsSpec.m in Sources */,
 				DA4353EB1D2721680099B8C4 /* SDLTouchSpec.m in Sources */,
