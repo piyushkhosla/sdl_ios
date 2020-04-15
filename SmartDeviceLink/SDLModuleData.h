@@ -6,6 +6,7 @@
 #import "SDLModuleType.h"
 
 @class SDLRadioControlData;
+@class SDLObsshControlData;
 @class SDLClimateControlData;
 @class SDLSeatControlData;
 @class SDLAudioControlData;
@@ -69,6 +70,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithSeatControlData:(SDLSeatControlData *)seatControlData;
 
 /**
+ Constructs a newly allocated SDLModuleData object with tlc control data
+
+ @param obsshControlData The On Board Scale control data
+ @return An instance of the SDLModuleData class
+ */
+- (instancetype)initWithObsshControlData:(nullable SDLObsshControlData *)obsshControlData;
+
+/**
  The moduleType indicates which type of data should be changed and identifies which data object exists in this struct.
 
  For example, if the moduleType is CLIMATE then a "climateControlData" should exist
@@ -125,6 +134,12 @@ NS_ASSUME_NONNULL_BEGIN
  Optional
  */
 @property (nullable, strong, nonatomic) SDLHMISettingsControlData *hmiSettingsControlData;
+
+/**
+ * @since SDL 6.5.0
+ */
+@property (nullable, strong, nonatomic) SDLObsshControlData *obsshControlData;
+
 
 @end
 

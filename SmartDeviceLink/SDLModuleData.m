@@ -6,6 +6,7 @@
 #import "SDLRPCParameterNames.h"
 #import "SDLClimateControlData.h"
 #import "SDLRadioControlData.h"
+#import "SDLObsshControlData.h"
 #import "SDLSeatControlData.h"
 #import "SDLAudioControlData.h"
 #import "SDLLightControlData.h"
@@ -84,6 +85,18 @@ NS_ASSUME_NONNULL_BEGIN
 
     self.moduleType = SDLModuleTypeSeat;
     self.seatControlData = seatControlData;
+    
+    return self;
+}
+
+- (instancetype)initWithObsshControlData:(nullable SDLObsshControlData *)obsshControlData {
+    self = [self init];
+    if(!self){
+        return nil;
+    }
+
+    self.moduleType = SDLModuleTypeObssh;
+    self.obsshControlData = obsshControlData;
 
     return self;
 }
@@ -152,6 +165,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable SDLHMISettingsControlData *)hmiSettingsControlData {
     return [self.store sdl_objectForName:SDLRPCParameterNameHmiSettingsControlData ofClass:SDLHMISettingsControlData.class error:nil];
+}
+
+- (void)setObsshControlData:(nullable SDLObsshControlData *)obsshControlData {
+    [self.store sdl_setObject:obsshControlData forName:SDLRPCParameterNameObsshControlData];
+}
+
+- (nullable SDLObsshControlData *)obsshControlData {
+    return [self.store sdl_objectForName:SDLRPCParameterNameObsshControlData ofClass:SDLObsshControlData.class error:nil];
 }
 
 @end

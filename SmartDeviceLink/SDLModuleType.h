@@ -39,3 +39,8 @@ extern SDLModuleType const SDLModuleTypeLight;
  */
 extern SDLModuleType const SDLModuleTypeHMISettings;
 
+/**
+ * @since SDL 6.5.0
+ */
+extern SDLModuleType const SDLModuleTypeObssh;
+

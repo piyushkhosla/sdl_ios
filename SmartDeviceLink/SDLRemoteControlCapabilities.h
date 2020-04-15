@@ -8,6 +8,7 @@
 @class  SDLButtonCapabilities;
 @class  SDLClimateControlCapabilities;
 @class  SDLHMISettingsControlCapabilities;
+@class  SDLObsshControlCapabilities;
 @class  SDLLightControlCapabilities;
 @class  SDLRadioControlCapabilities;
 @class  SDLSeatControlCapabilities;
@@ -25,21 +26,23 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param radioControlCapabilities Array of SDLRadioControlCapabilities
 /// @param buttonCapabilities Array of SDLButtonCapabilities
 /// @return An instance of the SDLRemoteControlCapabilities class
-- (instancetype)initWithClimateControlCapabilities:(nullable NSArray<SDLClimateControlCapabilities *> *)climateControlCapabilities radioControlCapabilities:(nullable NSArray<SDLRadioControlCapabilities *> *)radioControlCapabilities buttonCapabilities:(nullable NSArray<SDLButtonCapabilities *> *)buttonCapabilities __deprecated_msg("Use initWithClimateControlCapabilities:climateControlCapabilities:radioControlCapabilities:buttonCapabilities:seatControlCapabilities:audioControlCapabilities:hmiSettingsControlCapabilities:lightControlCapabilities: instead");
+- (instancetype)initWithClimateControlCapabilities:(nullable NSArray<SDLClimateControlCapabilities *> *)climateControlCapabilities radioControlCapabilities:(nullable NSArray<SDLRadioControlCapabilities *> *)radioControlCapabilities buttonCapabilities:(nullable NSArray<SDLButtonCapabilities *> *)buttonCapabilities __deprecated_msg("UseinitWithClimateControlCapabilities:climateControlCapabilities:radioControlCapabilities:buttonCapabilities:seatControlCapabilities:audioControlCapabilities:hmiSettingsControlCapabilities:lightControlCapabilities:tlcControlCapabilities:obsshControlCapabilities: instead");
 
 /**
  Constructs a newly allocated SDLRemoteControlCapabilities object with given parameters
  
- @param climateControlCapabilities Array of SDLClimateControlCapabilities
- @param radioControlCapabilities Array of SDLRadioControlCapabilities
- @param buttonCapabilities Array of SDLButtonCapabilities
- @param lightControlCapabilities Array of SDLLightControlCapabilities
- @param seatControlCapabilities Array of SDLSeatControlCapabilities
-
+ @param climateControlCapabilities       Array of SDLClimateControlCapabilities
+ @param radioControlCapabilities         Array of SDLRadioControlCapabilities
+ @param buttonCapabilities               Array of SDLButtonCapabilities
+ @param lightControlCapabilities         Array of SDLLightControlCapabilities
+ @param seatControlCapabilities          Array of SDLSeatControlCapabilities
+ @param hmiSettingsControlCapabilities   Array of SDLHmiSettingsControlCapabilities
+ @param audioControlCapabilities         Array of SDLAudioControlCapabilities
+  @param obsshControlCapabilities - obsshControlCapabilities
  @return An instance of the SDLRemoteControlCapabilities class
 
  */
-- (instancetype)initWithClimateControlCapabilities:(nullable NSArray<SDLClimateControlCapabilities *> *)climateControlCapabilities radioControlCapabilities:(nullable NSArray<SDLRadioControlCapabilities *> *)radioControlCapabilities buttonCapabilities:(nullable NSArray<SDLButtonCapabilities *> *)buttonCapabilities seatControlCapabilities:(nullable NSArray<SDLSeatControlCapabilities *> *)seatControlCapabilities audioControlCapabilities:(nullable NSArray<SDLAudioControlCapabilities *> *)audioControlCapabilities hmiSettingsControlCapabilities:(nullable NSArray<SDLHMISettingsControlCapabilities *> *)hmiSettingsControlCapabilities lightControlCapabilities:(nullable NSArray<SDLLightControlCapabilities *> *)lightControlCapabilities;
+- (instancetype)initWithClimateControlCapabilities:(nullable NSArray<SDLClimateControlCapabilities *> *)climateControlCapabilities radioControlCapabilities:(nullable NSArray<SDLRadioControlCapabilities *> *)radioControlCapabilities buttonCapabilities:(nullable NSArray<SDLButtonCapabilities *> *)buttonCapabilities seatControlCapabilities:(nullable NSArray<SDLSeatControlCapabilities *> *)seatControlCapabilities audioControlCapabilities:(nullable NSArray<SDLAudioControlCapabilities *> *)audioControlCapabilities hmiSettingsControlCapabilities:(nullable NSArray<SDLHMISettingsControlCapabilities *> *)hmiSettingsControlCapabilities lightControlCapabilities:(nullable NSArray<SDLLightControlCapabilities *> *)lightControlCapabilities obsshControlCapabilities:(nullable NSArray<SDLObsshControlCapabilities *> *)obsshControlCapabilities;
 
 /**
  * If included, the platform supports RC climate controls.
@@ -91,6 +94,13 @@ NS_ASSUME_NONNULL_BEGIN
  * Optional, Array of SDLLightControlCapabilities, Array length 1 - 100
  */
 @property (nullable, strong, nonatomic) NSArray<SDLLightControlCapabilities *> *lightControlCapabilities;
+
+/** If included, the platform supports OBSSH controls.
+ *
+ * @since SDL 6.5.0
+ */
+@property (nullable, strong, nonatomic) NSArray<SDLObsshControlCapabilities *> *obsshControlCapabilities;
+
 
 @end
 
