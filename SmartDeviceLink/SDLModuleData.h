@@ -11,6 +11,7 @@
 @class SDLAudioControlData;
 @class SDLHMISettingsControlData;
 @class SDLLightControlData;
+@class SDLPttbControlData;
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -69,6 +70,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithSeatControlData:(SDLSeatControlData *)seatControlData;
 
 /**
+ Constructs a newly allocated SDLModuleData object with pttb control data
+ 
+ @param pttbControlData The seat control data
+ @return An instance of the SDLModuleData class
+ */
+- (instancetype)initWithPttbControlData:(SDLPttbControlData *)pttbControlData;
+
+/**
  The moduleType indicates which type of data should be changed and identifies which data object exists in this struct.
 
  For example, if the moduleType is CLIMATE then a "climateControlData" should exist
@@ -125,6 +134,13 @@ NS_ASSUME_NONNULL_BEGIN
  Optional
  */
 @property (nullable, strong, nonatomic) SDLHMISettingsControlData *hmiSettingsControlData;
+
+/**
+ * @since SDL 5.0.0
+ 
+  Optional
+ */
+@property (nullable, strong, nonatomic) SDLPttbControlData *pttbControlData;
 
 @end
 
