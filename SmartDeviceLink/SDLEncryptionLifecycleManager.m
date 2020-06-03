@@ -76,7 +76,7 @@ NS_ASSUME_NONNULL_BEGIN
     _currentHMILevel = nil;
     _requiresEncryption = NO;
     _delegate = nil;
-
+    [self.encryptionStateMachine transitionToState:SDLEncryptionLifecycleManagerStateStopped];
     SDLLogD(@"Stopping encryption manager");
 }
 
