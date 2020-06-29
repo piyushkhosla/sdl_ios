@@ -104,8 +104,9 @@ NS_ASSUME_NONNULL_BEGIN
  * Parses a dictionary object and notifies the subscribed delegates of the messages sent by Core. Some messages are also intercepted and handled by the library.
  *
  *  @param dictionary The message data
+ *  @param encrypted If Message was payload protected or not
  */
-- (void)handleRPCDictionary:(NSDictionary<NSString *, id> *)dictionary;
+- (void)handleRPCDictionary:(NSDictionary<NSString *, id> *)dictionary encrypted:(BOOL)encrypted ;
 
 /**
  *  Parses a SDLProtocolMessage object and notifies the subscribed delegates of the messages sent by Core. Some messages are also intercepted and handled by the library.

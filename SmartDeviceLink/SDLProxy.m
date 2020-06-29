@@ -438,13 +438,14 @@ static float DefaultConnectionTimeout = 45.0;
 - (void)handleProtocolMessage:(SDLProtocolMessage *)incomingMessage {
     // Convert protocol message to dictionary
     NSDictionary<NSString *, id> *rpcMessageAsDictionary = [incomingMessage rpcDictionary];
-    [self handleRPCDictionary:rpcMessageAsDictionary];
+    [self handleRPCDictionary:rpcMessageAsDictionary encrypted:incomingMessage.header.encrypted];
 }
 
-- (void)handleRPCDictionary:(NSDictionary<NSString *, id> *)dict {
+- (void)handleRPCDictionary:(NSDictionary<NSString *, id> *)dict encrypted:(BOOL)encrypted {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     SDLRPCMessage *message = [[SDLRPCMessage alloc] initWithDictionary:[dict mutableCopy]];
+    message.payloadProtected = encrypted;
 #pragma clang diagnostic pop
     NSString *functionName = message.name;
     NSString *messageType = message.messageType;
@@ -460,7 +461,7 @@ static float DefaultConnectionTimeout = 45.0;
     // From the function name, create the corresponding RPCObject and initialize it
     NSString *functionClassName = [NSString stringWithFormat:@"SDL%@", functionName];
     SDLRPCMessage *newMessage = [[NSClassFromString(functionClassName) alloc] initWithDictionary:[dict mutableCopy]];
-
+    newMessage.payloadProtected = encrypted;
     // Log the RPC message
     SDLLogV(@"Message received: %@", newMessage);
 
