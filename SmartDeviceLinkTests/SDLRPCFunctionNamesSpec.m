@@ -43,6 +43,7 @@ describe(@"Individual Enum Value Tests", ^ {
         expect(SDLRPCFunctionNameGetVehicleData).to(equal(@"GetVehicleData"));
         expect(SDLRPCFunctionNameGetWayPoints).to(equal(@"GetWayPoints"));
         expect(SDLRPCFunctionNameListFiles).to(equal(@"ListFiles"));
+        expect(SDLRPCFunctionNameOnAppCapabilityUpdated).to(equal(@"OnAppCapabilityUpdated"));
         expect(SDLRPCFunctionNameOnAppInterfaceUnregistered).to(equal(@"OnAppInterfaceUnregistered"));
         expect(SDLRPCFunctionNameOnAppServiceData).to(equal(@"OnAppServiceData"));
         expect(SDLRPCFunctionNameOnAudioPassThru).to(equal(@"OnAudioPassThru"));

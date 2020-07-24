@@ -28,6 +28,8 @@ describe(@"Initialization tests", ^{
      __block float testDiagonalScreenSize = 22.45;
      __block float testPixelPerInch = 96.122;
      __block float testScale = 2.1;
+    SDLVideoStreamingCapability *vsCapablity = [[SDLVideoStreamingCapability alloc] init];
+    NSArray *additionalVSCapabilities = [NSArray arrayWithObject:vsCapablity];
 
     beforeEach(^{
         testPreferredResolution = [[SDLImageResolution alloc] initWithWidth:600 height:500];
@@ -41,6 +43,7 @@ describe(@"Initialization tests", ^{
         format2.protocol = SDLVideoStreamingProtocolRTSP;
 
         testVideoStreamingFormats = @[format1, format2];
+        
     });
 
     it(@"Should get correctly when initialized with a dictionary", ^ {
@@ -50,6 +53,7 @@ describe(@"Initialization tests", ^{
                                SDLRPCParameterNameHapticSpatialDataSupported: @(testHapticDataSupported),
                                SDLRPCParameterNameDiagonalScreenSize: @(testDiagonalScreenSize),
                                SDLRPCParameterNamePixelPerInch: @(testPixelPerInch),
+                               SDLRPCParameterNameAdditionalVideoStreamingCapabilities: additionalVSCapabilities,
                                SDLRPCParameterNameScale: @(testScale)};
 
         #pragma clang diagnostic push
@@ -64,6 +68,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.diagonalScreenSize).to(equal(testDiagonalScreenSize));
         expect(testStruct.pixelPerInch).to(equal(testPixelPerInch));
         expect(testStruct.scale).to(equal(testScale));
+        expect(testStruct.additionalVideoStreamingCapabilities).to(equal(additionalVSCapabilities));
     });
 
     it(@"Should return nil if not set", ^ {
@@ -76,6 +81,8 @@ describe(@"Initialization tests", ^{
         expect(testStruct.diagonalScreenSize).to(beNil());
         expect(testStruct.pixelPerInch).to(beNil());
         expect(testStruct.scale).to(beNil());
+        expect(testStruct.additionalVideoStreamingCapabilities).to(beNil());
+
     });
 
     it(@"Should initialize correctly with initWithPreferredResolution:maxBitrate:supportedFormats:hapticDataSupported:diagonalScreenSize:pixelPerInch:scale", ^ {
@@ -90,6 +97,19 @@ describe(@"Initialization tests", ^{
         expect(testStruct.scale).to(equal(testScale));
     });
 
+    it(@"Should initialize correctly initWithPreferredResolution:maxBitrate:supportedFormats:hapticDataSupported:diagonalScreenSize:pixelPerInch:scale:additionalVideoStreamingCapabilities", ^ {
+        SDLVideoStreamingCapability *testStruct = [[SDLVideoStreamingCapability alloc] initWithPreferredResolution:testPreferredResolution maxBitrate:testMaxBitrate supportedFormats:testVideoStreamingFormats hapticDataSupported:testHapticDataSupported diagonalScreenSize:testDiagonalScreenSize pixelPerInch:testPixelPerInch scale:testScale additionalVideoStreamingCapabilities:additionalVSCapabilities];
+
+        expect(testStruct.preferredResolution).to(equal(testPreferredResolution));
+        expect(testStruct.maxBitrate).to(equal(testMaxBitrate));
+        expect(testStruct.supportedFormats).to(equal(testVideoStreamingFormats));
+        expect(testStruct.hapticSpatialDataSupported).to(equal(testHapticDataSupported));
+        expect(testStruct.diagonalScreenSize).to(equal(testDiagonalScreenSize));
+        expect(testStruct.pixelPerInch).to(equal(testPixelPerInch));
+        expect(testStruct.scale).to(equal(testScale));
+        expect(testStruct.additionalVideoStreamingCapabilities).to(equal(additionalVSCapabilities));
+
+    });
     it(@"Should initialize correctly with deprecated initWithPreferredResolution:maxBitrate:supportedFormats:hapticDataSupported", ^ {
         #pragma clang diagnostic push
         #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -103,6 +123,7 @@ describe(@"Initialization tests", ^{
         expect(testStruct.diagonalScreenSize).to(beNil());
         expect(testStruct.pixelPerInch).to(beNil());
         expect(testStruct.scale).to(beNil());
+        expect(testStruct.additionalVideoStreamingCapabilities).to(beNil());
     });
 });
 
