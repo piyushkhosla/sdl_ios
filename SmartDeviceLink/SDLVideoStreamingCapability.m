@@ -18,14 +18,14 @@ NS_ASSUME_NONNULL_BEGIN
 @implementation SDLVideoStreamingCapability
 
 - (instancetype)initWithPreferredResolution:(nullable SDLImageResolution *)preferredResolution maxBitrate:(int32_t)maxBitrate supportedFormats:(nullable NSArray<SDLVideoStreamingFormat *> *)supportedFormats hapticDataSupported:(BOOL)hapticDataSupported {
-    return [self initWithPreferredResolution:preferredResolution maxBitrate:@(maxBitrate) supportedFormats:supportedFormats hapticDataSupported:@(hapticDataSupported) diagonalScreenSize:nil ppi:nil scale:nil];
+    return [self initWithPreferredResolution:preferredResolution maxBitrate:@(maxBitrate) supportedFormats:supportedFormats hapticDataSupported:@(hapticDataSupported) diagonalScreenSize:nil ppi:nil scale:nil additionalVideoStreamingCapabilities:nil];
 }
 
 - (instancetype)initWithPreferredResolution:(nullable SDLImageResolution *)preferredResolution maxBitrate:(int32_t)maxBitrate supportedFormats:(nullable NSArray<SDLVideoStreamingFormat *> *)supportedFormats hapticDataSupported:(BOOL)hapticDataSupported diagonalScreenSize:(float)diagonalScreenSize pixelPerInch:(float)pixelPerInch scale:(float)scale {
-    return [self initWithPreferredResolution:preferredResolution maxBitrate:@(maxBitrate) supportedFormats:supportedFormats hapticDataSupported:@(hapticDataSupported) diagonalScreenSize:@(diagonalScreenSize) ppi:@(pixelPerInch) scale:@(scale)];
+    return [self initWithPreferredResolution:preferredResolution maxBitrate:@(maxBitrate) supportedFormats:supportedFormats hapticDataSupported:@(hapticDataSupported) diagonalScreenSize:@(diagonalScreenSize) ppi:@(pixelPerInch) scale:@(scale) additionalVideoStreamingCapabilities:nil];
 }
 
-- (instancetype)initWithPreferredResolution:(nullable SDLImageResolution *)preferredResolution maxBitrate:(nullable NSNumber *)maxBitrate supportedFormats:(nullable NSArray<SDLVideoStreamingFormat *> *)supportedFormats hapticDataSupported:(nullable NSNumber *)hapticDataSupported diagonalScreenSize:(nullable NSNumber *)diagonalScreenSize ppi:(nullable NSNumber *)pixelPerInch scale:(nullable NSNumber *)scale {
+- (instancetype)initWithPreferredResolution:(nullable SDLImageResolution *)preferredResolution maxBitrate:(nullable NSNumber *)maxBitrate supportedFormats:(nullable NSArray<SDLVideoStreamingFormat *> *)supportedFormats hapticDataSupported:(nullable NSNumber *)hapticDataSupported diagonalScreenSize:(nullable NSNumber *)diagonalScreenSize ppi:(nullable NSNumber *)pixelPerInch scale:(nullable NSNumber *)scale additionalVideoStreamingCapabilities:(nullable NSArray<SDLVideoStreamingCapability *> *)additionalVideoStreamingCapabilities {
     self = [self init];
     if (!self) {
         return self;
@@ -38,8 +38,13 @@ NS_ASSUME_NONNULL_BEGIN
     self.diagonalScreenSize = diagonalScreenSize;
     self.pixelPerInch = pixelPerInch;
     self.scale = scale;
+    self.additionalVideoStreamingCapabilities = additionalVideoStreamingCapabilities;
 
     return self;
+}
+
+- (instancetype)initWithPreferredResolution:(nullable SDLImageResolution *)preferredResolution maxBitrate:(int32_t)maxBitrate supportedFormats:(nullable NSArray<SDLVideoStreamingFormat *> *)supportedFormats hapticDataSupported:(BOOL)hapticDataSupported diagonalScreenSize:(float)diagonalScreenSize pixelPerInch:(float)pixelPerInch scale:(float)scale additionalVideoStreamingCapabilities:(nullable NSArray<SDLVideoStreamingCapability *> *)additionalVideoStreamingCapabilities {
+    return [self initWithPreferredResolution:preferredResolution maxBitrate:@(maxBitrate) supportedFormats:supportedFormats hapticDataSupported:@(hapticDataSupported) diagonalScreenSize:@(diagonalScreenSize) ppi:@(pixelPerInch) scale:@(scale) additionalVideoStreamingCapabilities:additionalVideoStreamingCapabilities];
 }
 
 - (void)setPreferredResolution:(nullable SDLImageResolution *)preferredResolution {
@@ -96,6 +101,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable NSNumber<SDLFloat> *)scale {
     return [self.store sdl_objectForName:SDLRPCParameterNameScale ofClass:NSNumber.class error:nil];
+}
+
+- (void)setAdditionalVideoStreamingCapabilities:(nullable NSArray<SDLVideoStreamingCapability *> *)additionalVideoStreamingCapabilities {
+    [self.store sdl_setObject:additionalVideoStreamingCapabilities forName:SDLRPCParameterNameAdditionalVideoStreamingCapabilities];
+}
+
+- (nullable NSArray<SDLVideoStreamingCapability *> *)additionalVideoStreamingCapabilities {
+    return [self.store sdl_objectsForName:SDLRPCParameterNameAdditionalVideoStreamingCapabilities ofClass:SDLVideoStreamingCapability.class error:nil];
 }
 
 @end

@@ -149,6 +149,7 @@ FOUNDATION_EXPORT const unsigned char SmartDeviceLinkVersionString[];
 #import "SDLUpdateTurnListResponse.h"
 
 // Notifications
+#import "SDLOnAppCapabilityUpdated.h"
 #import "SDLOnAppInterfaceUnregistered.h"
 #import "SDLOnAppServiceData.h"
 #import "SDLOnAudioPassThru.h"
@@ -175,6 +176,7 @@ FOUNDATION_EXPORT const unsigned char SmartDeviceLinkVersionString[];
 
 // Structs
 #import "SDLAirbagStatus.h"
+#import "SDLAppCapability.h"
 #import "SDLAppInfo.h"
 #import "SDLAppServiceCapability.h"
 #import "SDLAppServiceData.h"
@@ -283,6 +285,7 @@ FOUNDATION_EXPORT const unsigned char SmartDeviceLinkVersionString[];
 
 // Enums
 #import "SDLAmbientLightStatus.h"
+#import "SDLAppCapabilityType.h"
 #import "SDLAppHMIType.h"
 #import "SDLAppInterfaceUnregisteredReason.h"
 #import "SDLAppServiceType.h"
