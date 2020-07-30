@@ -22,7 +22,7 @@
     return self;
 }
 
--(instancetype)initWithAppCapabilityType:(SDLAppCapabilityType)appCapabilityType videoStreamingCapability:(SDLVideoStreamingCapability *)videoStreamingCapability {
+-(instancetype)initWithAppCapabilityType:(SDLAppCapabilityType)appCapabilityType videoStreamingCapability:(nullable SDLVideoStreamingCapability *)videoStreamingCapability {
     self = [self initWithAppCapabilityType:appCapabilityType];
     if (!self) {
         return self;

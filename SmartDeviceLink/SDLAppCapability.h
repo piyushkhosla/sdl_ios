@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param videoStreamingCapability   supported capabilities for app Capability Type
  *  @return                         A SDLAppCapability object
  */
-- (instancetype)initWithAppCapabilityType:(SDLAppCapabilityType)appCapabilityType videoStreamingCapability:(SDLVideoStreamingCapability *)videoStreamingCapability;
+- (instancetype)initWithAppCapabilityType:(SDLAppCapabilityType)appCapabilityType videoStreamingCapability:(nullable SDLVideoStreamingCapability *)videoStreamingCapability;
 
 /**
  *  Used as a descriptor of what data to expect in this struct.

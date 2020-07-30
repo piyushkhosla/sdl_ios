@@ -31,7 +31,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.videoStreamingCapability).to(equal(videoStreamingCapability));
     });
     it(@"Should initialize correctly with initWithAppCapabilityType:videoStreamingCapability:", ^ {
-        SDLAppCapability* testStruct = [[SDLAppCapability alloc] initWithAppCapabilityType:SDLAppCapabilityTypeVideoStreaming ];
+        SDLAppCapability* testStruct = [[SDLAppCapability alloc] initWithAppCapabilityType:SDLAppCapabilityTypeVideoStreaming];
     
         expect(testStruct.appCapabilityType).to(equal(SDLAppCapabilityTypeVideoStreaming));
         expect(testStruct.videoStreamingCapability).to(beNil());
