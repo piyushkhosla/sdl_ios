@@ -156,6 +156,7 @@ NS_ASSUME_NONNULL_BEGIN
     // From the function name, create the corresponding RPCObject and initialize it
     NSString *functionClassName = [NSString stringWithFormat:@"SDL%@", fullName];
     SDLRPCMessage *newMessage = [[NSClassFromString(functionClassName) alloc] initWithDictionary:rpcMessageAsDictionary];
+    newMessage.payloadProtected = msg.header.encrypted;
 
     // If we were unable to create the message, it's an unknown type; discard it
     if (newMessage == nil) {
