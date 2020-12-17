@@ -17,6 +17,8 @@ describe(@"Individual Enum Value Tests", ^ {
         expect(SDLKeyboardLayoutQWERTY).to(equal(@"QWERTY"));
         expect(SDLKeyboardLayoutQWERTZ).to(equal(@"QWERTZ"));
         expect(SDLKeyboardLayoutAZERTY).to(equal(@"AZERTY"));
+        expect(SDLKeyboardLayoutNumeric).to(equal(@"NUMERIC"));
+
     });
 });
 

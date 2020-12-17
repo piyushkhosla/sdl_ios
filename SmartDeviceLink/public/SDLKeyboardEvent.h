@@ -37,3 +37,7 @@ extern SDLKeyboardEvent const SDLKeyboardEventAborted;
  @since SDL 4.0
  */
 extern SDLKeyboardEvent const SDLKeyboardEventVoice;
+
+extern SDLKeyboardEvent const SDLKeyboardEventInputKeyMaskEnabled;
+
+extern SDLKeyboardEvent const SDLKeyboardEventInputKeyMaskDisabled;
