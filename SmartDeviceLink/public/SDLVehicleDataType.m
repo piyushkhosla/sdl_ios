@@ -37,6 +37,7 @@ SDLVehicleDataType const SDLVehicleDataTypeStabilityControlsStatus = @"VEHICLEDA
 SDLVehicleDataType const SDLVehicleDataTypeSteeringWheel = @"VEHICLEDATA_STEERINGWHEEL";
 SDLVehicleDataType const SDLVehicleDataTypeTirePressure = @"VEHICLEDATA_TIREPRESSURE";
 SDLVehicleDataType const SDLVehicleDataTypeTurnSignal = @"VEHICLEDATA_TURNSIGNAL";
+SDLVehicleDataType const SDLVehicleDataTypeVehicledataClimatedata = @"VEHICLEDATA_CLIMATEDATA";
 SDLVehicleDataType const SDLVehicleDataTypeVIN = @"VEHICLEDATA_VIN";
 SDLVehicleDataType const SDLVehicleDataTypeVehicledataSeatoccupancy = @"VEHICLEDATA_SEATOCCUPANCY";
 SDLVehicleDataType const SDLVehicleDataTypeWindowStatus = @"VEHICLEDATA_WINDOWSTATUS";

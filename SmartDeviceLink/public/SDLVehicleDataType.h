@@ -53,7 +53,12 @@ extern SDLVehicleDataType const SDLVehicleDataTypeFuelConsumption;
 /**
  Vehicle external temperature data
  */
-extern SDLVehicleDataType const SDLVehicleDataTypeExternalTemperature;
+extern SDLVehicleDataType const SDLVehicleDataTypeExternalTemperature __deprecated_msg("Use SDLVehicleDataTypeVehicledataClimatedata instead on 7.1+ RPC version connections");
+
+/**
+ * @added in SmartDeviceLink 7.1.0
+ */
+extern SDLVehicleDataType const SDLVehicleDataTypeVehicledataClimatedata;
 
 /**
  Vehicle VIN data
