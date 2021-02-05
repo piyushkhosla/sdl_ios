@@ -33,7 +33,7 @@
 #import "SDLKeyboardLayout.h"
 #import "SDLRPCStruct.h"
 
-@class SDLConfigurableKeyboards;
+@class SDLKeyboardLayoutCapability;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -44,11 +44,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  * @param maskInputCharactersSupported - maskInputCharactersSupported
- * @param supportedKeyboardLayouts - supportedKeyboardLayouts
- * @param configurableKeys - configurableKeys
+ * @param supportedKeyboards - supportedKeyboards
  * @return A SDLKeyboardCapabilities object
  */
-- (instancetype)initWithMaskInputCharactersSupported:(nullable NSNumber<SDLBool> *)maskInputCharactersSupported supportedKeyboardLayouts:(nullable NSArray<SDLKeyboardLayout> *)supportedKeyboardLayouts configurableKeys:(nullable NSArray<SDLConfigurableKeyboards *> *)configurableKeys;
+- (instancetype)initWithMaskInputCharactersSupported:(nullable NSNumber<SDLBool> *)maskInputCharactersSupported supportedKeyboards:(nullable NSArray<SDLKeyboardLayoutCapability *> *)supportedKeyboards;
 
 /**
  * Availability of capability to mask input characters using keyboard. True: Available, False: Not Available
@@ -61,15 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @added in SmartDeviceLink 7.1.0
  */
-@property (nullable, strong, nonatomic) NSArray<SDLKeyboardLayout> *supportedKeyboardLayouts;
-
-/**
- * Get Number of Keys for Special characters, App can customize as per their needs.
- * {"array_min_size": 1, "array_max_size": 1000}
- *
- * @added in SmartDeviceLink 7.1.0
- */
-@property (nullable, strong, nonatomic) NSArray<SDLConfigurableKeyboards *> *configurableKeys;
+@property (nullable, strong, nonatomic) NSArray<SDLKeyboardLayoutCapability *> *supportedKeyboards;
 
 @end
 

@@ -23,7 +23,7 @@ describe(@"Getter/Setter Tests", ^ {
     __block SDLKeyboardLayout testLayout = SDLKeyboardLayoutAZERTY;
     __block SDLKeypressMode testMode = SDLKeypressModeSingleKeypress;
     __block NSArray<NSString *> *testLimitedCharacterList = @[@"s", @"r", @"f"];
-    __block NSArray<NSString *> *testCustomizeKeys = @[@"₹", @"£", @"$"];
+    __block NSArray<NSString *> *testCustomKeys = @[@"₹", @"£", @"$"];
 
     __block NSString *testAutoCompleteText = @"Auto Carrot";
     __block NSArray<NSString *> *testAutoCompleteList = @[@"Hello World", @"How are you"];
@@ -41,7 +41,7 @@ describe(@"Getter/Setter Tests", ^ {
         testStruct.autoCompleteText = testAutoCompleteText;
 #pragma clang diagnostic pop
         testStruct.maskInputCharacters = SDLKeyboardInputMaskDisableInputKeyMask;
-        testStruct.customizeKeys = testCustomizeKeys;
+        testStruct.customKeys = testCustomKeys;
         
         expect(testStruct.language).to(equal(testLanguage));
         expect(testStruct.keyboardLayout).to(equal(testLayout));
@@ -49,7 +49,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.limitedCharacterList).to(equal(testLimitedCharacterList));
         expect(testStruct.autoCompleteList).to(equal(testAutoCompleteList));
         expect(testStruct.maskInputCharacters).to(equal(SDLKeyboardInputMaskDisableInputKeyMask));
-        expect(testStruct.customizeKeys).to(equal(testCustomizeKeys));
+        expect(testStruct.customKeys).to(equal(testCustomKeys));
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         expect(testStruct.autoCompleteText).to(equal(testAutoCompleteText));
@@ -64,7 +64,7 @@ describe(@"Getter/Setter Tests", ^ {
                                SDLRPCParameterNameAutoCompleteList: testAutoCompleteList,
                                SDLRPCParameterNameAutoCompleteText: testAutoCompleteText,
                                SDLRPCParameterNameMaskInputCharacters:SDLKeyboardInputMaskDisableInputKeyMask,
-                               SDLRPCParameterNameCustomizeKeys:testCustomizeKeys
+                               SDLRPCParameterNameCustomKeys:testCustomKeys
                             };
         SDLKeyboardProperties* testStruct = [[SDLKeyboardProperties alloc] initWithDictionary:dict];
 
@@ -74,7 +74,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.limitedCharacterList).to(equal(testLimitedCharacterList));
         expect(testStruct.autoCompleteList).to(equal(testAutoCompleteList));
         expect(testStruct.maskInputCharacters).to(equal(SDLKeyboardInputMaskDisableInputKeyMask));
-        expect(testStruct.customizeKeys).to(equal(testCustomizeKeys));
+        expect(testStruct.customKeys).to(equal(testCustomKeys));
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
@@ -97,7 +97,7 @@ describe(@"Getter/Setter Tests", ^ {
 #pragma clang diagnostic pop
         expect(testStruct.autoCompleteList).to(equal(testAutoCompleteList));
         expect(testStruct.maskInputCharacters).to(beNil());
-        expect(testStruct.customizeKeys).to(beNil());
+        expect(testStruct.customKeys).to(beNil());
     });
 
     it(@"Should get correctly when initialized with initWithLanguage:keyboardLayout:keypressMode:limitedCharacterList:autoCompleteList:", ^ {
@@ -108,22 +108,22 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.limitedCharacterList).to(equal(testLimitedCharacterList));
         expect(testStruct.autoCompleteList).to(equal(testAutoCompleteList));
         expect(testStruct.maskInputCharacters).to(beNil());
-        expect(testStruct.customizeKeys).to(beNil());
+        expect(testStruct.customKeys).to(beNil());
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         expect(testStruct.autoCompleteText).to(beNil());
 #pragma clang diagnostic pop
     });
 
-    it(@"Should get correctly when initialized with initWithLanguage:keyboardLayout:keypressMode:limitedCharacterList:autoCompleteList:maskInputCharacters:customizeKeys:(", ^ {
-        SDLKeyboardProperties *testStruct = [[SDLKeyboardProperties alloc] initWithLanguage:testLanguage keyboardLayout:testLayout keypressMode:testMode limitedCharacterList:testLimitedCharacterList autoCompleteList:testAutoCompleteList maskInputCharacters:SDLKeyboardInputMaskDisableInputKeyMask customizeKeys:testCustomizeKeys];
+    it(@"Should get correctly when initialized with initWithLanguage:keyboardLayout:keypressMode:limitedCharacterList:autoCompleteList:maskInputCharacters:customKeys:(", ^ {
+        SDLKeyboardProperties *testStruct = [[SDLKeyboardProperties alloc] initWithLanguage:testLanguage keyboardLayout:testLayout keypressMode:testMode limitedCharacterList:testLimitedCharacterList autoCompleteList:testAutoCompleteList maskInputCharacters:SDLKeyboardInputMaskDisableInputKeyMask customKeys:testCustomKeys];
         expect(testStruct.language).to(equal(testLanguage));
         expect(testStruct.keyboardLayout).to(equal(testLayout));
         expect(testStruct.keypressMode).to(equal(testMode));
         expect(testStruct.limitedCharacterList).to(equal(testLimitedCharacterList));
         expect(testStruct.autoCompleteList).to(equal(testAutoCompleteList));
         expect(testStruct.maskInputCharacters).to(equal(SDLKeyboardInputMaskDisableInputKeyMask));
-        expect(testStruct.customizeKeys).to(equal(testCustomizeKeys));
+        expect(testStruct.customKeys).to(equal(testCustomKeys));
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         expect(testStruct.autoCompleteText).to(beNil());
@@ -139,7 +139,7 @@ describe(@"Getter/Setter Tests", ^ {
         expect(testStruct.limitedCharacterList).to(beNil());
         expect(testStruct.autoCompleteList).to(beNil());
         expect(testStruct.maskInputCharacters).to(beNil());
-        expect(testStruct.customizeKeys).to(beNil());
+        expect(testStruct.customKeys).to(beNil());
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
         expect(testStruct.autoCompleteText).to(beNil());

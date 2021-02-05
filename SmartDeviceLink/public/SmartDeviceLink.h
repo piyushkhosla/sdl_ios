@@ -197,7 +197,7 @@ FOUNDATION_EXPORT const unsigned char SmartDeviceLinkVersionString[];
 #import "SDLClimateControlCapabilities.h"
 #import "SDLClimateControlData.h"
 #import "SDLCloudAppProperties.h"
-#import "SDLConfigurableKeyboards.h"
+#import "SDLKeyboardLayoutCapability.h"
 #import "SDLDIDResult.h"
 #import "SDLDateTime.h"
 #import "SDLDeviceInfo.h"

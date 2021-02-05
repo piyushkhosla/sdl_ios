@@ -30,41 +30,31 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "NSMutableDictionary+Store.h"
-#import "SDLConfigurableKeyboards.h"
 #import "SDLKeyboardLayout.h"
-#import "SDLRPCParameterNames.h"
+#import "SDLRPCStruct.h"
 
 NS_ASSUME_NONNULL_BEGIN
-@implementation SDLConfigurableKeyboards
 
-- (instancetype)initWithKeyboardLayout:(SDLKeyboardLayout)keyboardLayout numConfigurableKeys:(UInt32)numConfigurableKeys {
-    self = [self init];
-    if (!self) {
-        return nil;
-    }
-    self.keyboardLayout = keyboardLayout;
-    self.numConfigurableKeys = @(numConfigurableKeys);
-    return self;
-}
+/**
+ * Describes number of cofigurable Keys for Special characters.
+ *
+ * @added in SmartDeviceLink 7.1.0
+ */
+@interface SDLKeyboardLayoutCapability : SDLRPCStruct
 
-- (void)setKeyboardLayout:(SDLKeyboardLayout)keyboardLayout {
-    [self.store sdl_setObject:keyboardLayout forName:SDLRPCParameterNameKeyboardLayout];
-}
+/**
+ * @param keyboardLayout - keyboardLayout
+ * @param numConfigurableKeys - @(numConfigurableKeys)
+ * @return A SDLKeyboardLayoutCapability object
+ */
+- (instancetype)initWithKeyboardLayout:(SDLKeyboardLayout)keyboardLayout numConfigurableKeys:(UInt32)numConfigurableKeys;
 
-- (SDLKeyboardLayout)keyboardLayout {
-    NSError *error = nil;
-    return [self.store sdl_enumForName:SDLRPCParameterNameKeyboardLayout error:&error];
-}
+@property (strong, nonatomic) SDLKeyboardLayout keyboardLayout;
 
-- (void)setNumConfigurableKeys:(NSNumber<SDLInt> *)numConfigurableKeys {
-    [self.store sdl_setObject:numConfigurableKeys forName:SDLRPCParameterNameNumConfigurableKeys];
-}
-
-- (NSNumber<SDLInt> *)numConfigurableKeys {
-    NSError *error = nil;
-    return [self.store sdl_objectForName:SDLRPCParameterNameNumConfigurableKeys ofClass:NSNumber.class error:&error];
-}
+/**
+ * {"num_min_value": null, "num_max_value": null}
+ */
+@property (strong, nonatomic) NSNumber<SDLInt> *numConfigurableKeys;
 
 @end
 

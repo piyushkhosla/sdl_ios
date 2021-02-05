@@ -46,10 +46,10 @@ NS_ASSUME_NONNULL_BEGIN
  * @param limitedCharacterList - limitedCharacterList
  * @param autoCompleteList - autoCompleteList
  * @param maskInputCharacters - maskInputCharacters
- * @param customizeKeys - customizeKeys
+ * @param customKeys - customKeys
  * @return A SDLKeyboardProperties object
  */
-- (instancetype)initWithLanguage:(nullable SDLLanguage)language keyboardLayout:(nullable SDLKeyboardLayout)keyboardLayout keypressMode:(nullable SDLKeypressMode)keypressMode limitedCharacterList:(nullable NSArray<NSString *> *)limitedCharacterList autoCompleteList:(nullable NSArray<NSString *> *)autoCompleteList maskInputCharacters:(nullable SDLKeyboardInputMask)maskInputCharacters customizeKeys:(nullable NSArray<NSString *> *)customizeKeys;
+- (instancetype)initWithLanguage:(nullable SDLLanguage)language keyboardLayout:(nullable SDLKeyboardLayout)keyboardLayout keypressMode:(nullable SDLKeypressMode)keypressMode limitedCharacterList:(nullable NSArray<NSString *> *)limitedCharacterList autoCompleteList:(nullable NSArray<NSString *> *)autoCompleteList maskInputCharacters:(nullable SDLKeyboardInputMask)maskInputCharacters customKeys:(nullable NSArray<NSString *> *)customKeys;
 
 /**
  The keyboard language
@@ -109,7 +109,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * @added in SmartDeviceLink 7.1.0
  */
-@property (nullable, strong, nonatomic) NSArray<NSString *> *customizeKeys;
+@property (nullable, strong, nonatomic) NSArray<NSString *> *customKeys;
 
 @end
 
